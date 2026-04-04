@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<VisioraService>();
 builder.Services.AddScoped<OpenAIService>();
 builder.Services.AddScoped<AudioService>();
+builder.Services.AddSingleton<AzureSpeechService>();
 
 var app = builder.Build();
 app.MapControllers();

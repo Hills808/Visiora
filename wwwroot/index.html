@@ -1,72 +1,1818 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Visiora AI</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visiora AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111827;
+            color: #f9fafb;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 28px;
+        }
+
+        p {
+            color: #d1d5db;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: #1f2937;
+            border-radius: 14px;
+            padding: 16px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+        }
+
+        video, canvas {
+            width: 100%;
+            border-radius: 12px;
+            background: #000;
+        }
+
+        canvas {
+            display: none;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        button, input, textarea, select {
+            border: none;
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-size: 14px;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        button.secondary {
+            background: #374151;
+        }
+
+        button.secondary:hover {
+            background: #4b5563;
+        }
+
+        button.danger {
+            background: #b91c1c;
+        }
+
+        button.danger:hover {
+            background: #991b1b;
+        }
+
+        button.voice {
+            background: #059669;
+            font-size: 16px;
+            font-weight: bold;
+            min-height: 52px;
+        }
+
+        button.voice:hover {
+            background: #047857;
+        }
+
+        button.voice.off {
+            background: #6b7280;
+        }
+
+        textarea, input, select {
+            width: 100%;
+            box-sizing: border-box;
+            background: #111827;
+            color: #f9fafb;
+            border: 1px solid #374151;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .field {
+            margin-top: 14px;
+        }
+
+        .status {
+            margin-top: 14px;
+            padding: 12px;
+            border-radius: 10px;
+            background: #111827;
+            border: 1px solid #374151;
+            line-height: 1.6;
+        }
+
+        .status strong {
+            color: #93c5fd;
+        }
+
+        .result {
+            margin-top: 14px;
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 10px;
+            padding: 14px;
+        }
+
+        .result h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        .result-item {
+            margin-bottom: 10px;
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .chip {
+            background: #374151;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 13px;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .row > div {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .small {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .voice-help {
+            margin-top: 14px;
+            padding: 14px;
+            border-radius: 10px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            line-height: 1.6;
+        }
+
+        .voice-help strong {
+            color: #86efac;
+        }
+
+        .mono {
+            font-family: Consolas, monospace;
+            font-size: 13px;
+        }
+
+        .listening-box {
+            margin-top: 14px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .listening-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .mic-indicator {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #6b7280;
+            box-shadow: 0 0 0 0 rgba(107, 114, 128, 0.5);
+        }
+
+        .mic-indicator.active {
+            background: #22c55e;
+            animation: pulse 1.2s infinite;
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+        }
+
+        .mic-indicator.hearing {
+            background: #f59e0b;
+            animation: pulse 0.7s infinite;
+            box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+        }
+
+        .listening-state {
+            font-weight: bold;
+        }
+
+        .heard-text {
+            min-height: 40px;
+            padding: 10px;
+            border-radius: 10px;
+            background: #111827;
+            border: 1px solid #374151;
+            color: #e5e7eb;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 12px rgba(34, 197, 94, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+            }
+        }
+
+        @media (max-width: 860px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Visiora AI - Teste em tempo real</h1>
+    <div class="container">
+        <h1>Visiora AI</h1>
+        <p>Assistente visual com IA para orientação, acessibilidade e apoio à locomoção.</p>
 
-  <video id="video" autoplay playsinline width="400"></video>
-  <canvas id="canvas" width="400" height="300" style="display:none;"></canvas>
+        <div class="grid">
+            <div class="card">
+                <video id="video" autoplay playsinline muted></video>
+                <canvas id="canvas"></canvas>
 
-  <pre id="resultado">Aguardando análise...</pre>
+                <div class="controls">
+                    <button id="btnVoz" class="voice off">Segure para falar</button>
+                    <button id="btnFalarAjuda" class="secondary">Falar instruções</button>
+                </div>
 
-  <script>
-    const video = document.getElementById("video");
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-    const resultado = document.getElementById("resultado");
+                <div class="listening-box">
+                    <div class="listening-header">
+                        <div id="micIndicator" class="mic-indicator"></div>
+                        <div class="listening-state" id="listeningState">Pronto para gravar</div>
+                    </div>
+                    <div id="statusEscuta">🎙️ Pressione e segure para falar...</div>
+                    <div class="small">Use o botão e segure enquanto fala. Ao soltar, o áudio será transcrito pelo Azure Speech.</div>
+                    <div class="field">
+                        <label>Último comando transcrito</label>
+                        <div id="heardText" class="heard-text">Nenhuma fala detectada.</div>
+                    </div>
+                </div>
 
-    let analisando = false;
-    let ultimoAudio = null;
+                <div class="controls">
+                    <button id="btnIniciarCamera">Iniciar câmera</button>
+                    <button id="btnPararCamera" class="secondary">Parar câmera</button>
+                    <button id="btnIniciarAuto">Iniciar automático</button>
+                    <button id="btnPararAuto" class="danger">Parar automático</button>
+                </div>
 
-    async function iniciarCamera() {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      video.srcObject = stream;
+                <div class="controls">
+                    <button id="btnPausarAudio" class="secondary">Pausar áudio</button>
+                    <button id="btnRetomarAudio" class="secondary">Retomar áudio</button>
+                    <button id="btnPararAudio" class="danger">Parar áudio</button>
+                </div>
+
+                <div class="field">
+                    <label for="modoConsulta">Consulta manual</label>
+                    <textarea id="modoConsulta" rows="3" placeholder="Ex.: O que tem à minha frente? Tem alguém por perto?"></textarea>
+                    <div class="controls">
+                        <button id="btnConsultar">Perguntar ao ambiente</button>
+                    </div>
+                </div>
+
+                <div class="status">
+                    <div><strong>Câmera:</strong> <span id="statusCamera">desligada</span></div>
+                    <div><strong>Modo automático:</strong> <span id="statusAuto">desligado</span></div>
+                    <div><strong>Áudio:</strong> <span id="statusAudio">parado</span></div>
+                    <div><strong>Escuta por voz:</strong> <span id="statusVoz">desligada</span></div>
+                    <div><strong>Reconhecimento:</strong> <span id="statusReconhecimento">inativo</span></div>
+                    <div><strong>Último comando:</strong> <span id="statusComando">nenhum</span></div>
+                    <div><strong>Última decisão do loop:</strong> <span id="statusDecision">nenhuma</span></div>
+                </div>
+
+                <div class="voice-help">
+                    <div><strong>Comandos por voz recomendados</strong></div>
+                    <div class="small">Para reduzir erros, o sistema usa gravação por botão com transcrição no backend.</div>
+                    <div class="mono">
+                        <br />
+                        descrever ambiente<br />
+                        o que tem à minha frente<br />
+                        tem alguém por perto<br />
+                        tem obstáculo à frente<br />
+                        iniciar modo automático<br />
+                        parar modo automático<br />
+                        pausar áudio<br />
+                        retomar áudio<br />
+                        parar áudio
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="row">
+                    <div>
+                        <label for="qualidadeImagem">Qualidade JPEG</label>
+                        <select id="qualidadeImagem">
+                            <option value="0.55">0.55</option>
+                            <option value="0.65" selected>0.65</option>
+                            <option value="0.75">0.75</option>
+                            <option value="0.85">0.85</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="larguraCaptura">Largura da captura</label>
+                        <select id="larguraCaptura">
+                            <option value="480">480</option>
+                            <option value="640" selected>640</option>
+                            <option value="800">800</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="result">
+                    <h3>Diagnóstico do loop</h3>
+                    <div class="result-item"><strong>Requisição em andamento:</strong> <span id="diagAnalisando">não</span></div>
+                    <div class="result-item"><strong>Áudio tocando:</strong> <span id="diagAudioTocando">não</span></div>
+                    <div class="result-item"><strong>Diferença visual:</strong> <span id="diagMudanca">0</span></div>
+                    <div class="result-item"><strong>Intervalo atual:</strong> <span id="diagIntervalo">1800 ms</span></div>
+                    <div class="result-item"><strong>Último envio:</strong> <span id="diagUltimoEnvio">nunca</span></div>
+                    <div class="result-item"><strong>Última fala importante:</strong> <span id="diagUltimaFala">nenhuma</span></div>
+                    <div class="result-item"><strong>Última frase reconhecida:</strong> <span id="diagReconhecido">nenhuma</span></div>
+                </div>
+
+                <div class="result">
+                    <h3>Última resposta</h3>
+
+                    <div class="result-item">
+                        <strong>Descrição:</strong>
+                        <div id="resDescricao" class="small">-</div>
+                    </div>
+
+                    <div class="result-item">
+                        <strong>Pessoa:</strong>
+                        <div id="resPessoa" class="small">-</div>
+                    </div>
+
+                    <div class="result-item">
+                        <strong>Sugestão:</strong>
+                        <div id="resSugestao" class="small">-</div>
+                    </div>
+
+                    <div class="result-item">
+                        <strong>Direção:</strong>
+                        <div id="resDirecao" class="small">-</div>
+                    </div>
+
+                    <div class="result-item">
+                        <strong>Importância:</strong>
+                        <div id="resImportancia" class="small">-</div>
+                    </div>
+
+                    <div class="result-item">
+                        <strong>Objetos:</strong>
+                        <div id="resObjetos" class="chips"></div>
+                    </div>
+
+                    <div class="result-item">
+                        <strong>Alertas:</strong>
+                        <div id="resAlertas" class="chips"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById("video");
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d", { willReadFrequently: true });
+
+        const btnVoz = document.getElementById("btnVoz");
+        const btnFalarAjuda = document.getElementById("btnFalarAjuda");
+        const btnIniciarCamera = document.getElementById("btnIniciarCamera");
+        const btnPararCamera = document.getElementById("btnPararCamera");
+        const btnIniciarAuto = document.getElementById("btnIniciarAuto");
+        const btnPararAuto = document.getElementById("btnPararAuto");
+        const btnConsultar = document.getElementById("btnConsultar");
+        const btnPausarAudio = document.getElementById("btnPausarAudio");
+        const btnRetomarAudio = document.getElementById("btnRetomarAudio");
+        const btnPararAudio = document.getElementById("btnPararAudio");
+
+        const modoConsulta = document.getElementById("modoConsulta");
+        const qualidadeImagem = document.getElementById("qualidadeImagem");
+        const larguraCaptura = document.getElementById("larguraCaptura");
+
+        const statusCamera = document.getElementById("statusCamera");
+        const statusAuto = document.getElementById("statusAuto");
+        const statusAudio = document.getElementById("statusAudio");
+        const statusVoz = document.getElementById("statusVoz");
+        const statusReconhecimento = document.getElementById("statusReconhecimento");
+        const statusComando = document.getElementById("statusComando");
+        const statusDecision = document.getElementById("statusDecision");
+
+        const diagAnalisando = document.getElementById("diagAnalisando");
+        const diagAudioTocando = document.getElementById("diagAudioTocando");
+        const diagMudanca = document.getElementById("diagMudanca");
+        const diagIntervalo = document.getElementById("diagIntervalo");
+        const diagUltimoEnvio = document.getElementById("diagUltimoEnvio");
+        const diagUltimaFala = document.getElementById("diagUltimaFala");
+        const diagReconhecido = document.getElementById("diagReconhecido");
+
+        const resDescricao = document.getElementById("resDescricao");
+        const resPessoa = document.getElementById("resPessoa");
+        const resSugestao = document.getElementById("resSugestao");
+        const resDirecao = document.getElementById("resDirecao");
+        const resImportancia = document.getElementById("resImportancia");
+        const resObjetos = document.getElementById("resObjetos");
+        const resAlertas = document.getElementById("resAlertas");
+
+        const micIndicator = document.getElementById("micIndicator");
+        const listeningState = document.getElementById("listeningState");
+        const heardText = document.getElementById("heardText");
+
+        let streamAtual = null;
+        let modoAutomaticoAtivo = false;
+        let analisando = false;
+        let audioAtual = null;
+        let aguardandoComando = false;
+        let timeoutComando = null;
+        let ultimaAtivacao = 0;
+
+        let loopTimeout = null;
+        let ultimoEnvioEm = 0;
+        let ultimaFalaImportanteEm = 0;
+
+        let intervaloAtual = 1800;
+        let miniFrameAnterior = null;
+
+        let ultimoResultado = null;
+        let ultimoAudioTocando = false;
+
+        let reconhecimento = null;
+        let escutaVozAtiva = false;
+        let suporteReconhecimento = true;
+        let ultimoComandoExecutadoEm = 0;
+        let ultimaFraseReconhecida = "";
+        let ultimaFraseReconhecidaEm = 0;
+        let microfoneOuvindo = false;
+        let aguardandoPermissaoAudio = false;
+        let gravandoComando = false;
+        let mediaStreamVoz = null;
+        let audioContextVoz = null;
+        let mediaSourceVoz = null;
+        let processorVoz = null;
+        let buffersAudioVoz = [];
+        let sampleRateVoz = 16000;
+        let pointerVozAtivo = false;
+        let transcrevendoComando = false;
+        let timeoutSegurancaVoz = null;
+        let ultimoInicioGravacaoEm = 0;
+        let IA_FALANDO = false;
+        let retornoEscutaTimeout = null;
+
+        const ENDPOINT = "/Teste/analisar";
+        const PALAVRA_ATIVACAO = "guia";
+        const COOLDOWN_COMANDO_MS = 2200;
+        const COOLDOWN_REPETICAO_FALA_MS = 3500;
+
+        function atualizarTexto(el, texto) {
+            el.textContent = texto;
+        }
+
+        function atualizarStatus(texto) {
+            document.getElementById("statusEscuta").innerText = texto;
+        }
+
+        function ehAtivacao(texto) {
+            return texto.includes(PALAVRA_ATIVACAO);
+        }
+
+        function formatarHora(timestamp) {
+            if (!timestamp) return "nunca";
+            return new Date(timestamp).toLocaleTimeString("pt-BR");
+        }
+
+        function atualizarDiagnostico() {
+            atualizarTexto(diagAnalisando, analisando ? "sim" : "não");
+            atualizarTexto(diagAudioTocando, ultimoAudioTocando ? "sim" : "não");
+            atualizarTexto(diagIntervalo, `${intervaloAtual} ms`);
+            atualizarTexto(diagUltimoEnvio, formatarHora(ultimoEnvioEm));
+            atualizarTexto(diagUltimaFala, ultimaFalaImportanteEm ? formatarHora(ultimaFalaImportanteEm) : "nenhuma");
+            atualizarTexto(diagReconhecido, ultimaFraseReconhecida || "nenhuma");
+        }
+
+        function setStatusDecision(texto) {
+            statusDecision.textContent = texto;
+        }
+
+        function preencherListaChips(container, items) {
+            container.innerHTML = "";
+
+            if (!items || items.length === 0) {
+                const span = document.createElement("span");
+                span.className = "small";
+                span.textContent = "-";
+                container.appendChild(span);
+                return;
+            }
+
+            for (const item of items) {
+                const chip = document.createElement("span");
+                chip.className = "chip";
+                chip.textContent = item;
+                container.appendChild(chip);
+            }
+        }
+
+        function mostrarResultado(data) {
+            ultimoResultado = data;
+
+            atualizarTexto(resDescricao, data.descricao || "-");
+            atualizarTexto(resPessoa, data.pessoa || "-");
+            atualizarTexto(resSugestao, data.sugestao || "-");
+            atualizarTexto(resDirecao, data.direcao || "-");
+            atualizarTexto(resImportancia, data.importancia || "-");
+
+            preencherListaChips(resObjetos, data.objetos || []);
+            preencherListaChips(resAlertas, data.alertas || []);
+        }
+
+        function atualizarMarcadorEscuta() {
+            micIndicator.classList.remove("active", "hearing");
+
+            if (!escutaVozAtiva) {
+                listeningState.textContent = "Pronto para gravar";
+                return;
+            }
+
+            if (microfoneOuvindo) {
+                micIndicator.classList.add("hearing");
+                listeningState.textContent = "Ouvindo comando agora";
+                return;
+            }
+
+            micIndicator.classList.add("active");
+            listeningState.textContent = "Escuta ativada";
+        }
+
+        function normalizarTexto(texto) {
+            return (texto || "")
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^\w\s]/g, " ")
+                .replace(/\s+/g, " ")
+                .trim();
+        }
+
+        function contemAlgum(texto, termos) {
+            return termos.some(t => texto.includes(t));
+        }
+
+        function limparRetornoEscuta() {
+            if (retornoEscutaTimeout) {
+                clearTimeout(retornoEscutaTimeout);
+                retornoEscutaTimeout = null;
+            }
+        }
+
+        function pausarReconhecimentoDuranteFala(tempoMs = 700) {
+            limparRetornoEscuta();
+            microfoneOuvindo = false;
+            atualizarMarcadorEscuta();
+
+            if (escutaVozAtiva) {
+                atualizarTexto(statusReconhecimento, "pausado durante fala");
+                pararReconhecimentoInterno();
+
+                retornoEscutaTimeout = setTimeout(() => {
+                    retornoEscutaTimeout = null;
+
+                    if (!escutaVozAtiva || IA_FALANDO) {
+                        return;
+                    }
+
+                    atualizarTexto(statusReconhecimento, "ouvindo");
+                    atualizarStatus("🎙️ Pressione e segure para falar...");
+                    iniciarReconhecimentoInterno();
+                }, tempoMs);
+            }
+        }
+
+        function pararSinteseLocal() {
+            try {
+                if ("speechSynthesis" in window) {
+                    window.speechSynthesis.cancel();
+                }
+            } catch (error) {
+                console.error("Erro ao parar síntese local:", error);
+            }
+        }
+
+        function falarLocal(texto, prioridade = false) {
+            if (!texto || !("speechSynthesis" in window)) {
+                return;
+            }
+
+            try {
+                IA_FALANDO = true;
+                pausarReconhecimentoDuranteFala(1200);
+
+                if (prioridade) {
+                    window.speechSynthesis.cancel();
+                }
+
+                const utterance = new SpeechSynthesisUtterance(texto);
+                utterance.lang = "pt-BR";
+                utterance.rate = 1.0;
+                utterance.pitch = 1.0;
+                utterance.volume = 1.0;
+
+                utterance.onstart = () => {
+                    IA_FALANDO = true;
+                    atualizarTexto(statusAudio, "falando local");
+                    atualizarStatus("🔊 Visiora falando...");
+                };
+
+                utterance.onend = () => {
+                    IA_FALANDO = false;
+                    atualizarTexto(statusAudio, "parado");
+                    pausarReconhecimentoDuranteFala(600);
+                };
+
+                utterance.onerror = () => {
+                    IA_FALANDO = false;
+                    atualizarTexto(statusAudio, "erro");
+                    pausarReconhecimentoDuranteFala(600);
+                };
+
+                window.speechSynthesis.speak(utterance);
+            } catch (error) {
+                IA_FALANDO = false;
+                console.error("Erro ao falar localmente:", error);
+            }
+        }
+
+        function falar(texto) {
+            falarLocal(texto, true);
+        }
+
+        function limparTimeoutComando() {
+            if (timeoutComando) {
+                clearTimeout(timeoutComando);
+                timeoutComando = null;
+            }
+        }
+
+        function iniciarTimeoutComando() {
+            limparTimeoutComando();
+
+            timeoutComando = setTimeout(() => {
+                aguardandoComando = false;
+                timeoutComando = null;
+                atualizarStatus("🎙️ Pressione e segure para falar...");
+                falar("N\u00e3o entendi, tente novamente");
+            }, 5000);
+        }
+
+        async function iniciarCamera() {
+            try {
+                if (streamAtual) return;
+
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        facingMode: "environment",
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    },
+                    audio: false
+                });
+
+                streamAtual = stream;
+                video.srcObject = stream;
+
+                atualizarTexto(statusCamera, "ligada");
+                setStatusDecision("câmera iniciada");
+            } catch (error) {
+                console.error(error);
+                atualizarTexto(statusCamera, "erro ao iniciar");
+                setStatusDecision("falha ao iniciar câmera");
+                alert("Não foi possível acessar a câmera.");
+            }
+        }
+
+        function pararCamera() {
+            if (streamAtual) {
+                streamAtual.getTracks().forEach(track => track.stop());
+                streamAtual = null;
+            }
+
+            video.srcObject = null;
+            atualizarTexto(statusCamera, "desligada");
+            setStatusDecision("câmera parada");
+        }
+
+        function pausarAudio() {
+            if (audioAtual && !audioAtual.paused) {
+                audioAtual.pause();
+                ultimoAudioTocando = false;
+                atualizarTexto(statusAudio, "pausado");
+                atualizarDiagnostico();
+            }
+        }
+
+        function retomarAudio() {
+            if (audioAtual && audioAtual.paused) {
+                audioAtual.play().catch(console.error);
+            }
+        }
+
+        function pararAudio() {
+            if (audioAtual) {
+                audioAtual.pause();
+                audioAtual.currentTime = 0;
+                audioAtual = null;
+            }
+
+            pararSinteseLocal();
+            IA_FALANDO = false;
+            ultimoAudioTocando = false;
+            atualizarTexto(statusAudio, "parado");
+            atualizarDiagnostico();
+            pausarReconhecimentoDuranteFala(500);
+        }
+
+        function configurarEventosAudio(audio) {
+            audio.addEventListener("play", () => {
+                if (audioAtual !== audio) return;
+
+                IA_FALANDO = true;
+                ultimoAudioTocando = true;
+                atualizarTexto(statusAudio, "tocando");
+                atualizarStatus("🔊 Visiora falando...");
+                pausarReconhecimentoDuranteFala(5000);
+                atualizarDiagnostico();
+            });
+
+            audio.addEventListener("pause", () => {
+                if (audioAtual !== audio) return;
+
+                if (!audio.ended) {
+                    IA_FALANDO = false;
+                    ultimoAudioTocando = false;
+                    atualizarTexto(statusAudio, "pausado");
+                    atualizarDiagnostico();
+                    pausarReconhecimentoDuranteFala(700);
+                }
+            });
+
+            audio.addEventListener("ended", () => {
+                if (audioAtual !== audio) return;
+
+                IA_FALANDO = false;
+                ultimoAudioTocando = false;
+                atualizarTexto(statusAudio, "parado");
+                atualizarDiagnostico();
+                pausarReconhecimentoDuranteFala(600);
+            });
+
+            audio.addEventListener("error", () => {
+                if (audioAtual !== audio) return;
+
+                IA_FALANDO = false;
+                ultimoAudioTocando = false;
+                atualizarTexto(statusAudio, "erro");
+                atualizarDiagnostico();
+                pausarReconhecimentoDuranteFala(700);
+            });
+        }
+
+        async function tocarAudioBase64(audioBase64, importancia) {
+    if (!audioBase64) return;
+
+    try {
+        if (IA_FALANDO) return;
+
+        IA_FALANDO = true;
+
+        if (audioAtual && !audioAtual.paused) {
+            audioAtual.pause();
+            audioAtual.currentTime = 0;
+        }
+
+        const audio = new Audio(`data:audio/mp3;base64,${audioBase64}`);
+        audioAtual = audio;
+        configurarEventosAudio(audio);
+
+        if (importancia === "alta" || importancia === "media") {
+            ultimaFalaImportanteEm = Date.now();
+        }
+
+        atualizarEstadoBotaoVoz();
+        await audio.play();
+
+        audio.onended = () => {
+            IA_FALANDO = false;
+            ultimoAudioTocando = false;
+            atualizarTexto(statusAudio, "parado");
+            atualizarDiagnostico();
+            atualizarEstadoBotaoVoz();
+        };
+
+        audio.onerror = () => {
+            IA_FALANDO = false;
+            ultimoAudioTocando = false;
+            atualizarTexto(statusAudio, "erro");
+            atualizarDiagnostico();
+            atualizarEstadoBotaoVoz();
+        };
+
+        atualizarDiagnostico();
+    } catch (error) {
+        console.error("Erro no áudio:", error);
+        IA_FALANDO = false;
+        atualizarEstadoBotaoVoz();
+    }
+}
+
+        function capturarFrameBase64() {
+            if (!video.videoWidth || !video.videoHeight) {
+                return "";
+            }
+
+            const largura = parseInt(larguraCaptura.value, 10);
+            const proporcao = video.videoHeight / video.videoWidth;
+            const altura = Math.round(largura * proporcao);
+
+            canvas.width = largura;
+            canvas.height = altura;
+
+            ctx.drawImage(video, 0, 0, largura, altura);
+
+            const qualidade = parseFloat(qualidadeImagem.value);
+            return canvas.toDataURL("image/jpeg", qualidade).split(",")[1];
+        }
+
+        function capturarMiniFrame() {
+            if (!video.videoWidth || !video.videoHeight) {
+                return null;
+            }
+
+            const miniCanvas = document.createElement("canvas");
+            const miniCtx = miniCanvas.getContext("2d", { willReadFrequently: true });
+
+            miniCanvas.width = 32;
+            miniCanvas.height = 24;
+
+            miniCtx.drawImage(video, 0, 0, miniCanvas.width, miniCanvas.height);
+
+            const imageData = miniCtx.getImageData(0, 0, miniCanvas.width, miniCanvas.height).data;
+            const cinza = [];
+
+            for (let i = 0; i < imageData.length; i += 4) {
+                const r = imageData[i];
+                const g = imageData[i + 1];
+                const b = imageData[i + 2];
+                cinza.push((r + g + b) / 3);
+            }
+
+            return cinza;
+        }
+
+        function calcularMudancaVisual(frameA, frameB) {
+            if (!frameA || !frameB || frameA.length !== frameB.length) {
+                return 100;
+            }
+
+            let soma = 0;
+            for (let i = 0; i < frameA.length; i++) {
+                soma += Math.abs(frameA[i] - frameB[i]);
+            }
+
+            return soma / frameA.length;
+        }
+
+        function definirIntervaloDinamico(mudancaVisualAlta) {
+            if (ultimoAudioTocando) {
+                intervaloAtual = 2600;
+            } else if (mudancaVisualAlta) {
+                intervaloAtual = 900;
+            } else if (ultimoResultado?.importancia === "alta") {
+                intervaloAtual = 1200;
+            } else if (ultimoResultado?.importancia === "media") {
+                intervaloAtual = 1500;
+            } else {
+                intervaloAtual = 2200;
+            }
+
+            atualizarDiagnostico();
+        }
+
+        function precisaEsperarCooldown(mudancaVisualAlta) {
+            const agora = Date.now();
+            const tempoDesdeUltimaFala = agora - ultimaFalaImportanteEm;
+
+            if (!ultimaFalaImportanteEm) return false;
+            if (mudancaVisualAlta) return false;
+
+            return tempoDesdeUltimaFala < 2500;
+        }
+
+        async function enviarParaAnalise(modo, pergunta = "") {
+            if (analisando) {
+                setStatusDecision("requisição ignorada: análise já em andamento");
+                return null;
+            }
+
+            const imagemBase64 = capturarFrameBase64();
+
+            if (!imagemBase64) {
+                setStatusDecision("sem frame disponível");
+                return null;
+            }
+
+            analisando = true;
+            ultimoEnvioEm = Date.now();
+            atualizarDiagnostico();
+
+            try {
+                const response = await fetch(ENDPOINT, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        imagemBase64,
+                        modo,
+                        pergunta
+                    })
+                });
+
+                if (!response.ok) {
+                    const textoErro = await response.text();
+                    throw new Error(textoErro || "Erro ao chamar API.");
+                }
+
+                const data = await response.json();
+
+                mostrarResultado(data);
+
+                if (data.audioBase64) {
+                    await tocarAudioBase64(data.audioBase64, data.importancia || "");
+                }
+
+                setStatusDecision(`análise concluída (${modo})`);
+                return data;
+            } catch (error) {
+                console.error(error);
+                setStatusDecision("erro ao analisar");
+                alert("Erro ao analisar ambiente.");
+                return null;
+            } finally {
+                analisando = false;
+                atualizarDiagnostico();
+            }
+        }
+
+        async function executarLoopAutomatico() {
+            if (!modoAutomaticoAtivo) return;
+
+            if (!streamAtual) {
+                setStatusDecision("loop aguardando câmera");
+                agendarProximoLoop(1200);
+                return;
+            }
+
+            const miniFrameAtual = capturarMiniFrame();
+            const diferenca = calcularMudancaVisual(miniFrameAnterior, miniFrameAtual);
+            miniFrameAnterior = miniFrameAtual;
+
+            const mudancaVisualAlta = diferenca >= 12;
+            const mudancaVisualModerada = diferenca >= 6;
+
+            atualizarTexto(diagMudanca, diferenca.toFixed(2));
+            definirIntervaloDinamico(mudancaVisualAlta);
+
+            const agora = Date.now();
+            const tempoDesdeUltimoEnvio = agora - ultimoEnvioEm;
+
+            if (analisando) {
+                setStatusDecision("esperando análise terminar");
+                agendarProximoLoop(700);
+                return;
+            }
+
+            if (ultimoAudioTocando && !mudancaVisualAlta) {
+                setStatusDecision("segurando envio: áudio tocando");
+                agendarProximoLoop(intervaloAtual);
+                return;
+            }
+
+            if (precisaEsperarCooldown(mudancaVisualAlta)) {
+                setStatusDecision("cooldown após fala importante");
+                agendarProximoLoop(900);
+                return;
+            }
+
+            if (!mudancaVisualModerada && tempoDesdeUltimoEnvio < intervaloAtual) {
+                setStatusDecision("cena estável: aguardando novo ciclo");
+                agendarProximoLoop(600);
+                return;
+            }
+
+            if (mudancaVisualAlta) {
+                setStatusDecision("mudança visual alta: análise antecipada");
+            } else if (mudancaVisualModerada) {
+                setStatusDecision("mudança visual moderada: nova checagem");
+            } else {
+                setStatusDecision("checagem periódica de estabilidade");
+            }
+
+            await enviarParaAnalise("automatico", "");
+            agendarProximoLoop(intervaloAtual);
+        }
+
+        function agendarProximoLoop(delay) {
+            clearTimeout(loopTimeout);
+            loopTimeout = setTimeout(executarLoopAutomatico, delay);
+        }
+
+        function iniciarModoAutomatico() {
+            if (!streamAtual) {
+                alert("Inicie a câmera antes.");
+                return;
+            }
+
+            if (modoAutomaticoAtivo) return;
+
+            modoAutomaticoAtivo = true;
+            atualizarTexto(statusAuto, "ligado");
+            setStatusDecision("modo automático iniciado");
+            executarLoopAutomatico();
+        }
+
+        function pararModoAutomatico() {
+            modoAutomaticoAtivo = false;
+            clearTimeout(loopTimeout);
+            atualizarTexto(statusAuto, "desligado");
+            setStatusDecision("modo automático parado");
+        }
+
+        async function enviarConsultaManual() {
+            if (!streamAtual) {
+                alert("Inicie a câmera antes.");
+                return;
+            }
+
+            const pergunta = modoConsulta.value.trim();
+
+            if (!pergunta) {
+                alert("Digite uma pergunta.");
+                return;
+            }
+
+            await enviarParaAnalise("consulta", pergunta);
+        }
+
+        function obterSpeechRecognition() {
+            return window.SpeechRecognition || window.webkitSpeechRecognition || null;
+        }
+
+        function atualizarEstadoBotaoVoz() {
+    const ocupado = IA_FALANDO || transcrevendoComando;
+    btnVoz.textContent = gravandoComando
+        ? "Solte para enviar o comando"
+        : (transcrevendoComando ? "Processando comando..." : "Segure para falar");
+
+    btnVoz.disabled = ocupado && !gravandoComando;
+    btnVoz.classList.toggle("off", ocupado && !gravandoComando);
+
+    atualizarTexto(
+        statusVoz,
+        gravandoComando
+            ? "gravando"
+            : (transcrevendoComando ? "processando" : "pronta")
+    );
+
+    atualizarMarcadorEscuta();
+}
+
+        function iniciarReconhecimentoInterno() {
+            return;
+        }
+
+        function pararReconhecimentoInterno() {
+            return;
+        }
+
+        function configurarReconhecimento() {
+    suporteReconhecimento = true;
+    escutaVozAtiva = true;
+    atualizarTexto(statusReconhecimento, "botão pressionar para falar");
+    atualizarEstadoBotaoVoz();
+}
+
+function floatTo16BitPCM(output, offset, input) {
+    for (let i = 0; i < input.length; i++, offset += 2) {
+        let s = Math.max(-1, Math.min(1, input[i]));
+        output.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+    }
+}
+
+function escreverString(view, offset, string) {
+    for (let i = 0; i < string.length; i++) {
+        view.setUint8(offset + i, string.charCodeAt(i));
+    }
+}
+
+function mesclarBuffers(buffers) {
+    let tamanhoTotal = 0;
+
+    for (const buffer of buffers) {
+        tamanhoTotal += buffer.length;
     }
 
-    async function capturarEAnalisar() {
-      if (analisando) return;
-      analisando = true;
+    const resultado = new Float32Array(tamanhoTotal);
+    let offset = 0;
 
-      try {
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const base64 = canvas.toDataURL("image/jpeg").split(",")[1];
+    for (const buffer of buffers) {
+        resultado.set(buffer, offset);
+        offset += buffer.length;
+    }
 
-        const response = await fetch("/Teste/analisar", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            imagemBase64: base64
-          })
+    return resultado;
+}
+
+function reduzirParaMono(samples) {
+    return samples;
+}
+
+function reamostrarBuffer(samples, inputSampleRate, outputSampleRate) {
+    if (inputSampleRate === outputSampleRate) {
+        return samples;
+    }
+
+    const taxa = inputSampleRate / outputSampleRate;
+    const novoTamanho = Math.round(samples.length / taxa);
+    const resultado = new Float32Array(novoTamanho);
+
+    let offsetResultado = 0;
+    let offsetBuffer = 0;
+
+    while (offsetResultado < resultado.length) {
+        const proximoOffsetBuffer = Math.round((offsetResultado + 1) * taxa);
+        let acumulado = 0;
+        let contagem = 0;
+
+        for (let i = offsetBuffer; i < proximoOffsetBuffer && i < samples.length; i++) {
+            acumulado += samples[i];
+            contagem++;
+        }
+
+        resultado[offsetResultado] = contagem > 0 ? (acumulado / contagem) : 0;
+        offsetResultado++;
+        offsetBuffer = proximoOffsetBuffer;
+    }
+
+    return resultado;
+}
+
+function criarWavBlob(samples, sampleRate) {
+    const buffer = new ArrayBuffer(44 + samples.length * 2);
+    const view = new DataView(buffer);
+
+    escreverString(view, 0, "RIFF");
+    view.setUint32(4, 36 + samples.length * 2, true);
+    escreverString(view, 8, "WAVE");
+    escreverString(view, 12, "fmt ");
+    view.setUint32(16, 16, true);
+    view.setUint16(20, 1, true);
+    view.setUint16(22, 1, true);
+    view.setUint32(24, sampleRate, true);
+    view.setUint32(28, sampleRate * 2, true);
+    view.setUint16(32, 2, true);
+    view.setUint16(34, 16, true);
+    escreverString(view, 36, "data");
+    view.setUint32(40, samples.length * 2, true);
+
+    floatTo16BitPCM(view, 44, samples);
+
+    return new Blob([view], { type: "audio/wav" });
+}
+
+
+function limparRecursosGravacao() {
+    try {
+        if (processorVoz) {
+            processorVoz.disconnect();
+            processorVoz.onaudioprocess = null;
+            processorVoz = null;
+        }
+    } catch {}
+
+    try {
+        if (mediaSourceVoz) {
+            mediaSourceVoz.disconnect();
+            mediaSourceVoz = null;
+        }
+    } catch {}
+
+    try {
+        if (mediaStreamVoz) {
+            mediaStreamVoz.getTracks().forEach(track => track.stop());
+            mediaStreamVoz = null;
+        }
+    } catch {}
+
+    try {
+        if (audioContextVoz) {
+            audioContextVoz.close();
+            audioContextVoz = null;
+        }
+    } catch {}
+}
+
+function resetarEstadoVoz(statusTexto = "🎙️ Pressione e segure para falar...") {
+    gravandoComando = false;
+    microfoneOuvindo = false;
+    pointerVozAtivo = false;
+    transcrevendoComando = false;
+
+    if (timeoutSegurancaVoz) {
+        clearTimeout(timeoutSegurancaVoz);
+        timeoutSegurancaVoz = null;
+    }
+
+    limparRecursosGravacao();
+    atualizarStatus(statusTexto);
+    atualizarTexto(statusReconhecimento, "pronta");
+    atualizarMarcadorEscuta();
+    atualizarEstadoBotaoVoz();
+}
+
+function iniciarTimeoutSegurancaVoz() {
+    if (timeoutSegurancaVoz) {
+        clearTimeout(timeoutSegurancaVoz);
+    }
+
+    timeoutSegurancaVoz = setTimeout(() => {
+        console.warn("Reset de segurança da voz acionado.");
+        resetarEstadoVoz("🎙️ Pressione e segure para falar...");
+    }, 15000);
+}
+
+async function iniciarGravacaoComando() {
+    if (IA_FALANDO || gravandoComando || transcrevendoComando) {
+        return;
+    }
+
+    try {
+        mediaStreamVoz = await navigator.mediaDevices.getUserMedia({
+            audio: {
+                echoCancellation: true,
+                noiseSuppression: true,
+                autoGainControl: true
+            }
+        });
+
+        audioContextVoz = new (window.AudioContext || window.webkitAudioContext)();
+        sampleRateVoz = audioContextVoz.sampleRate;
+
+        mediaSourceVoz = audioContextVoz.createMediaStreamSource(mediaStreamVoz);
+        processorVoz = audioContextVoz.createScriptProcessor(4096, 1, 1);
+
+        buffersAudioVoz = [];
+        gravandoComando = true;
+        microfoneOuvindo = true;
+        ultimoInicioGravacaoEm = Date.now();
+
+        processorVoz.onaudioprocess = (event) => {
+            if (!gravandoComando) return;
+            const canal = event.inputBuffer.getChannelData(0);
+            buffersAudioVoz.push(new Float32Array(canal));
+        };
+
+        mediaSourceVoz.connect(processorVoz);
+        processorVoz.connect(audioContextVoz.destination);
+
+        iniciarTimeoutSegurancaVoz();
+        atualizarStatus("🔴 Gravando comando...");
+        atualizarTexto(statusReconhecimento, "gravando comando");
+        atualizarMarcadorEscuta();
+        atualizarEstadoBotaoVoz();
+
+        if (audioAtual && !audioAtual.paused) {
+            pausarAudio();
+        }
+    } catch (error) {
+        console.error("Erro ao iniciar gravação:", error);
+        resetarEstadoVoz("🎤 Não foi possível acessar o microfone.");
+        atualizarTexto(statusReconhecimento, "erro de microfone");
+    }
+}
+
+async function pararGravacaoComando() {
+    if (!gravandoComando || transcrevendoComando) {
+        return;
+    }
+
+    gravandoComando = false;
+    microfoneOuvindo = false;
+    transcrevendoComando = true;
+
+    try {
+        const duracaoMs = Date.now() - ultimoInicioGravacaoEm;
+
+        if (timeoutSegurancaVoz) {
+            clearTimeout(timeoutSegurancaVoz);
+            timeoutSegurancaVoz = null;
+        }
+
+        try {
+            if (processorVoz) {
+                processorVoz.disconnect();
+                processorVoz.onaudioprocess = null;
+                processorVoz = null;
+            }
+        } catch {}
+
+        try {
+            if (mediaSourceVoz) {
+                mediaSourceVoz.disconnect();
+                mediaSourceVoz = null;
+            }
+        } catch {}
+
+        try {
+            if (mediaStreamVoz) {
+                mediaStreamVoz.getTracks().forEach(track => track.stop());
+                mediaStreamVoz = null;
+            }
+        } catch {}
+
+        if (audioContextVoz) {
+            await audioContextVoz.close();
+            audioContextVoz = null;
+        }
+
+        atualizarStatus("🧠 Transcrevendo comando...");
+        atualizarTexto(statusReconhecimento, "transcrevendo");
+        atualizarMarcadorEscuta();
+        atualizarEstadoBotaoVoz();
+
+        if (duracaoMs < 350 || buffersAudioVoz.length === 0) {
+            heardText.textContent = "Áudio muito curto.";
+            falarLocal("Fale um pouco mais devagar e segure o botão por mais tempo.", true);
+            resetarEstadoVoz("🎙️ Pressione e segure para falar...");
+            return;
+        }
+
+        const mono = reduzirParaMono(mesclarBuffers(buffersAudioVoz));
+        const reamostrado = reamostrarBuffer(mono, sampleRateVoz, 16000);
+        const wavBlob = criarWavBlob(reamostrado, 16000);
+
+        await enviarAudioParaTranscricao(wavBlob);
+    } catch (error) {
+        console.error("Erro ao finalizar gravação:", error);
+        heardText.textContent = "Erro ao processar áudio.";
+        resetarEstadoVoz("🎤 Erro ao processar áudio.");
+        atualizarTexto(statusReconhecimento, "erro ao processar");
+    } finally {
+        buffersAudioVoz = [];
+    }
+}
+
+async function enviarAudioParaTranscricao(wavBlob) {
+    try {
+        const formData = new FormData();
+        formData.append("audioFile", wavBlob, "comando.wav");
+
+        const response = await fetch("/api/voz/transcrever", {
+            method: "POST",
+            body: formData
         });
 
         const data = await response.json();
-        resultado.textContent = JSON.stringify(data, null, 2);
 
-        if (data.audioBase64) {
-          if (ultimoAudio) {
-            ultimoAudio.pause();
-            ultimoAudio.currentTime = 0;
-          }
-
-          ultimoAudio = new Audio("data:audio/mpeg;base64," + data.audioBase64);
-          ultimoAudio.play();
+        if (!response.ok || !data.sucesso) {
+            throw new Error(data.erro || "Falha ao transcrever áudio.");
         }
-      } catch (error) {
-        resultado.textContent = "Erro: " + error;
-      } finally {
-        analisando = false;
-      }
+
+        const texto = (data.texto || "").trim();
+
+        ultimaFraseReconhecida = texto;
+        ultimaFraseReconhecidaEm = Date.now();
+        heardText.textContent = texto || "Nenhum comando entendido.";
+        atualizarTexto(diagReconhecido, texto || "nenhum");
+
+        if (!texto) {
+            atualizarStatus("🎙️ Não entendi. Tente de novo.");
+            atualizarTexto(statusReconhecimento, "sem entendimento");
+            falarLocal("Não entendi. Tente novamente.", true);
+            resetarEstadoVoz("🎙️ Pressione e segure para falar...");
+            return;
+        }
+
+        atualizarStatus("🧠 Processando comando...");
+        atualizarTexto(statusReconhecimento, "comando recebido");
+        await interpretarComando(texto);
+
+        resetarEstadoVoz("🎙️ Pressione e segure para falar...");
+    } catch (error) {
+        console.error("Erro na transcrição:", error);
+        heardText.textContent = "Erro ao transcrever comando.";
+        atualizarTexto(statusReconhecimento, "erro na transcrição");
+        resetarEstadoVoz("🎤 Falha ao transcrever. Tente de novo.");
+    }
+}
+
+        async function interpretarComando(texto) {
+            const textoNormalizado = normalizarTexto(texto);
+
+            if (!textoNormalizado) {
+                return;
+            }
+
+            ultimaFraseReconhecida = textoNormalizado;
+            ultimaFraseReconhecidaEm = Date.now();
+
+            if (textoNormalizado.includes("descrever") || textoNormalizado.includes("ambiente")) {
+                atualizarTexto(statusComando, "descrever ambiente");
+                setStatusDecision("comando de voz: descrever ambiente");
+                await enviarParaAnalise("consulta", "Descreva o ambiente.");
+                return;
+            }
+
+            if (textoNormalizado.includes("frente")) {
+                atualizarTexto(statusComando, "frente");
+                setStatusDecision("comando de voz: frente");
+                await enviarParaAnalise("consulta", "O que tem à minha frente?");
+                return;
+            }
+
+            if (textoNormalizado.includes("tem alguem")) {
+                atualizarTexto(statusComando, "tem alguem");
+                setStatusDecision("comando de voz: tem alguem");
+                await enviarParaAnalise("consulta", "Tem alguém por perto?");
+                return;
+            }
+
+            if (textoNormalizado.includes("pausar")) {
+                atualizarTexto(statusComando, "pausar áudio");
+                pausarAudio();
+                falar("Áudio pausado");
+                return;
+            }
+
+            if (textoNormalizado.includes("iniciar")) {
+                atualizarTexto(statusComando, "iniciar modo automático");
+                iniciarModoAutomatico();
+                falar("Modo automático ativado");
+                return;
+            }
+
+            atualizarTexto(statusComando, "comando não reconhecido");
+            setStatusDecision("comando de voz não reconhecido");
+            falar("Não entendi o comando. Tente falar novamente.");
+        }
+
+        function extrairComandoFalado(texto) {
+    const textoNormalizado = normalizarTexto(texto);
+
+    if (!textoNormalizado) return null;
+
+    // aceita variações naturais de ativação
+    if (!ehAtivacao(textoNormalizado)) {
+        return null;
     }
 
-    iniciarCamera().then(() => {
-      setInterval(capturarEAnalisar, 4000);
-    });
-  </script>
+    // remove "guia" do começo
+    let comandoTexto = textoNormalizado.replace(/^.*?guia\s*/, "");
+
+    if (!comandoTexto) {
+        return { tipo: "ajuda", nomeExibicao: "ajuda por voz" };
+    }
+
+    // comandos operacionais
+    if (contemAlgum(comandoTexto, ["pausar audio"])) {
+        return { tipo: "pausar-audio", nomeExibicao: "pausar áudio" };
+    }
+
+    if (contemAlgum(comandoTexto, ["retomar audio", "continuar audio"])) {
+        return { tipo: "retomar-audio", nomeExibicao: "retomar áudio" };
+    }
+
+    if (contemAlgum(comandoTexto, ["parar audio"])) {
+        return { tipo: "parar-audio", nomeExibicao: "parar áudio" };
+    }
+
+    if (contemAlgum(comandoTexto, ["iniciar modo automatico"])) {
+        return { tipo: "iniciar-auto", nomeExibicao: "iniciar modo automático" };
+    }
+
+    if (contemAlgum(comandoTexto, ["parar modo automatico"])) {
+        return { tipo: "parar-auto", nomeExibicao: "parar modo automático" };
+    }
+
+    // consultas inteligentes
+    if (contemAlgum(comandoTexto, ["o que tem a minha frente"])) {
+        return {
+            tipo: "consulta",
+            nomeExibicao: "frente",
+            pergunta: "O que tem à minha frente?"
+        };
+    }
+
+    if (contemAlgum(comandoTexto, ["tem alguem por perto"])) {
+        return {
+            tipo: "consulta",
+            nomeExibicao: "pessoas",
+            pergunta: "Tem alguém por perto?"
+        };
+    }
+
+    if (contemAlgum(comandoTexto, ["tem obstaculo a frente"])) {
+        return {
+            tipo: "consulta",
+            nomeExibicao: "obstáculo",
+            pergunta: "Tem obstáculo à frente?"
+        };
+    }
+
+    if (contemAlgum(comandoTexto, ["descrever ambiente"])) {
+        return {
+            tipo: "consulta",
+            nomeExibicao: "descrever",
+            pergunta: "Descreva o ambiente."
+        };
+    }
+
+    if (contemAlgum(comandoTexto, ["ajuda", "o que posso falar"])) {
+        return { tipo: "ajuda", nomeExibicao: "ajuda por voz" };
+    }
+
+    return null;
+}
+
+        async function executarComandoVoz(comando) {
+            try {
+                if (!comando) return false;
+
+                switch (comando.tipo) {
+                    case "pausar-audio":
+                        pausarAudio();
+                        falarLocal("Áudio pausado.", true);
+                        setStatusDecision("comando de voz: pausar áudio");
+                        return true;
+
+                    case "retomar-audio":
+                        retomarAudio();
+                        falarLocal("Retomando áudio.", true);
+                        setStatusDecision("comando de voz: retomar áudio");
+                        return true;
+
+                    case "parar-audio":
+                        pararAudio();
+                        falarLocal("Áudio parado.", true);
+                        setStatusDecision("comando de voz: parar áudio");
+                        return true;
+
+                    case "iniciar-auto":
+                        if (!streamAtual) {
+                            await iniciarCamera();
+                        }
+                        iniciarModoAutomatico();
+                        falarLocal("Modo automático ativado.", true);
+                        setStatusDecision("comando de voz: iniciar automático");
+                        return true;
+
+                    case "parar-auto":
+                        pararModoAutomatico();
+                        falarLocal("Modo automático desativado.", true);
+                        setStatusDecision("comando de voz: parar automático");
+                        return true;
+
+                    case "iniciar-camera":
+                        await iniciarCamera();
+                        falarLocal("Câmera iniciada.", true);
+                        setStatusDecision("comando de voz: iniciar câmera");
+                        return true;
+
+                    case "parar-camera":
+                        pararCamera();
+                        falarLocal("Câmera desligada.", true);
+                        setStatusDecision("comando de voz: parar câmera");
+                        return true;
+
+                    case "consulta":
+                        if (!streamAtual) {
+                            await iniciarCamera();
+                        }
+                        modoConsulta.value = comando.pergunta || "";
+                        falarLocal("Consultando o ambiente.", true);
+                        setStatusDecision(`comando de voz: ${comando.nomeExibicao}`);
+                        await enviarParaAnalise("consulta", comando.pergunta || "");
+                        return true;
+
+                    case "ajuda":
+                        falarAjuda();
+                        setStatusDecision("comando de voz: ajuda");
+                        return true;
+
+                    default:
+                        return false;
+                }
+            } catch (error) {
+                console.error("Erro ao executar comando de voz:", error);
+                return false;
+            }
+        }
+
+        function falarAjuda() {
+    const texto = "Visiora pronto. Segure o botão de voz enquanto fala. Você pode dizer: descrever ambiente, o que tem à minha frente, tem alguém por perto, iniciar modo automático, pausar áudio.";
+    falarLocal(texto, true);
+}
+
+        async function garantirPermissaoMicrofone() {
+            if (aguardandoPermissaoAudio) return false;
+
+            try {
+                aguardandoPermissaoAudio = true;
+
+                const tempStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                tempStream.getTracks().forEach(track => track.stop());
+
+                return true;
+            } catch (error) {
+                console.error("Permissão de microfone negada:", error);
+                heardText.textContent = "Permissão do microfone negada.";
+                alert("Permita o uso do microfone no navegador para usar os comandos por voz.");
+                return false;
+            } finally {
+                aguardandoPermissaoAudio = false;
+            }
+        }
+
+        async function alternarEscutaVoz() {
+    if (gravandoComando) {
+        await pararGravacaoComando();
+        return;
+    }
+
+    await iniciarGravacaoComando();
+}
+
+        function configurarAtalhosTeclado() {
+            document.addEventListener("keydown", async (event) => {
+                const tag = (event.target && event.target.tagName) ? event.target.tagName.toLowerCase() : "";
+
+                if (tag === "textarea" || tag === "input" || tag === "select") {
+                    return;
+                }
+
+                const tecla = event.key.toLowerCase();
+
+                if (tecla === " ") {
+                    event.preventDefault();
+                    if (audioAtual && !audioAtual.paused) {
+                        pausarAudio();
+                    } else {
+                        retomarAudio();
+                    }
+                }
+
+                if (tecla === "a") {
+                    event.preventDefault();
+                    if (modoAutomaticoAtivo) {
+                        pararModoAutomatico();
+                    } else {
+                        if (!streamAtual) {
+                            await iniciarCamera();
+                        }
+                        iniciarModoAutomatico();
+                    }
+                }
+
+                if (tecla === "d") {
+                    event.preventDefault();
+                    if (!streamAtual) {
+                        await iniciarCamera();
+                    }
+                    await enviarParaAnalise("consulta", "Descreva o ambiente.");
+                }
+
+                if (tecla === "o") {
+                    event.preventDefault();
+                    if (!streamAtual) {
+                        await iniciarCamera();
+                    }
+                    await enviarParaAnalise("consulta", "O que tem à minha frente?");
+                }
+
+                if (tecla === "v") {
+                    event.preventDefault();
+                    await alternarEscutaVoz();
+                }
+            });
+        }
+
+btnVoz.addEventListener("pointerdown", async (event) => {
+    event.preventDefault();
+    pointerVozAtivo = true;
+    await iniciarGravacaoComando();
+});
+
+window.addEventListener("pointerup", async () => {
+    if (!pointerVozAtivo) return;
+    pointerVozAtivo = false;
+    await pararGravacaoComando();
+});
+
+btnVoz.addEventListener("pointercancel", async () => {
+    if (!pointerVozAtivo) return;
+    pointerVozAtivo = false;
+    await pararGravacaoComando();
+});
+
+window.addEventListener("blur", async () => {
+    if (!pointerVozAtivo && !gravandoComando) return;
+    pointerVozAtivo = false;
+    await pararGravacaoComando();
+});
+btnVoz.addEventListener("touchend", (event) => {
+    event.preventDefault();
+    pararGravacaoComando();
+}, { passive: false });
+
+        btnFalarAjuda.addEventListener("click", falarAjuda);
+        btnIniciarCamera.addEventListener("click", iniciarCamera);
+        btnPararCamera.addEventListener("click", pararCamera);
+        btnIniciarAuto.addEventListener("click", iniciarModoAutomatico);
+        btnPararAuto.addEventListener("click", pararModoAutomatico);
+        btnConsultar.addEventListener("click", enviarConsultaManual);
+        btnPausarAudio.addEventListener("click", pausarAudio);
+        btnRetomarAudio.addEventListener("click", retomarAudio);
+        btnPararAudio.addEventListener("click", pararAudio);
+
+window.addEventListener("beforeunload", async () => {
+    pararReconhecimentoInterno();
+    clearTimeout(loopTimeout);
+    limparTimeoutComando();
+    pararAudio();
+    pararCamera();
+
+    try {
+        resetarEstadoVoz("🎙️ Pressione e segure para falar...");
+    } catch {
+    }
+});
+
+        configurarReconhecimento();
+        configurarAtalhosTeclado();
+        atualizarEstadoBotaoVoz();
+        atualizarMarcadorEscuta();
+        atualizarDiagnostico();
+    </script>
 </body>
 </html>

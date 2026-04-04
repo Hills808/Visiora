@@ -8,30 +8,22 @@ namespace VisioraAPI.Controllers;
 [Route("[controller]")]
 public class TesteController : ControllerBase
 {
-    private readonly VisioraService _service;
+    private readonly VisioraService _visioraService;
 
-    public TesteController(VisioraService service)
+    public TesteController(VisioraService visioraService)
     {
-        _service = service;
-    }
-
-    [HttpGet]
-    public IActionResult Get()
-    {
-        return Ok(new
-        {
-            descricao = "Endpoint funcionando",
-            objetos = new[] { "mesa" },
-            alertas = new[] { "nenhum" },
-            pessoa = "não identificada",
-            sugestao = "teste"
-        });
+        _visioraService = visioraService;
     }
 
     [HttpPost("analisar")]
     public async Task<IActionResult> Analisar([FromBody] ImagemRequest request)
     {
-        var resposta = await _service.AnalisarAmbiente(request.ImagemBase64);
+        var resposta = await _visioraService.AnalisarAmbiente(
+            request.ImagemBase64,
+            request.Modo,
+            request.Pergunta
+        );
+
         return Ok(resposta);
     }
 }

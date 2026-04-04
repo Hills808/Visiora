@@ -1,13 +1,12 @@
 namespace VisioraAPI.Models;
 
-public class RespostaComAudio
+public class RespostaIA
 {
     public string Descricao { get; set; } = "";
-    public IEnumerable<string> Objetos { get; set; } = Array.Empty<string>();
-    public IEnumerable<string> Alertas { get; set; } = Array.Empty<string>();
+    public List<string> Objetos { get; set; } = new();
+    public List<string> Alertas { get; set; } = new();
     public string Pessoa { get; set; } = "";
     public string Sugestao { get; set; } = "";
     public string Direcao { get; set; } = "";
     public string Importancia { get; set; } = "";
-    public string AudioBase64 { get; set; } = "";
 }
