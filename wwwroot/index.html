@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visiora AI</title>
+</head>
+<body>
+  <h1>Visiora AI - Teste em tempo real</h1>
+
+  <video id="video" autoplay playsinline width="400"></video>
+  <canvas id="canvas" width="400" height="300" style="display:none;"></canvas>
+
+  <pre id="resultado">Aguardando análise...</pre>
+
+  <script>
+    const video = document.getElementById("video");
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const resultado = document.getElementById("resultado");
+
+    let analisando = false;
+    let ultimoAudio = null;
+
+    async function iniciarCamera() {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      video.srcObject = stream;
+    }
+
+    async function capturarEAnalisar() {
+      if (analisando) return;
+      analisando = true;
+
+      try {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const base64 = canvas.toDataURL("image/jpeg").split(",")[1];
+
+        const response = await fetch("/Teste/analisar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            imagemBase64: base64
+          })
+        });
+
+        const data = await response.json();
+        resultado.textContent = JSON.stringify(data, null, 2);
+
+        if (data.audioBase64) {
+          if (ultimoAudio) {
+            ultimoAudio.pause();
+            ultimoAudio.currentTime = 0;
+          }
+
+          ultimoAudio = new Audio("data:audio/mpeg;base64," + data.audioBase64);
+          ultimoAudio.play();
+        }
+      } catch (error) {
+        resultado.textContent = "Erro: " + error;
+      } finally {
+        analisando = false;
+      }
+    }
+
+    iniciarCamera().then(() => {
+      setInterval(capturarEAnalisar, 4000);
+    });
+  </script>
+</body>
+</html>

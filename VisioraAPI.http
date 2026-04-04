@@ -1,0 +1,6 @@
+@VisioraAPI_HostAddress = http://localhost:5224
+
+GET {{VisioraAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
