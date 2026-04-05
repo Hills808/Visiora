@@ -5,49 +5,199 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Visiora AI</title>
     <style>
+        :root {
+            --bg: #0b1220;
+            --panel: #111827;
+            --panel-2: #172033;
+            --soft: #1f2937;
+            --line: #2b3648;
+            --line-2: #334155;
+            --text: #f8fafc;
+            --muted: #9ca3af;
+            --accent: #2563eb;
+            --accent-2: #60a5fa;
+            --good: #22c55e;
+            --warn: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #111827;
-            color: #f9fafb;
             margin: 0;
-            padding: 20px;
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(circle at top, rgba(37, 99, 235, 0.14), transparent 30%),
+                linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 24px;
         }
 
         .container {
-            max-width: 1150px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        h1 {
-            margin-top: 0;
-            font-size: 28px;
+        .hero {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 22px;
+            padding: 22px;
+            border: 1px solid rgba(96, 165, 250, 0.18);
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.96), rgba(15, 23, 42, 0.96));
+            border-radius: 22px;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.26);
         }
 
-        p {
-            color: #d1d5db;
+        .hero h1 {
+            margin: 0 0 8px 0;
+            font-size: 34px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            margin: 0;
+            color: #cbd5e1;
+            line-height: 1.6;
+            max-width: 760px;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-end;
+            min-width: 260px;
+        }
+
+        .hero-badge {
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(96, 165, 250, 0.18);
+            background: rgba(15, 23, 42, 0.76);
+            color: #dbeafe;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: 1.2fr 1fr;
+            grid-template-columns: minmax(0, 1.28fr) minmax(360px, 0.92fr);
+            gap: 20px;
+        }
+
+        .main-column,
+        .side-column {
+            display: flex;
+            flex-direction: column;
             gap: 20px;
         }
 
         .card {
-            background: #1f2937;
-            border-radius: 14px;
-            padding: 16px;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+            background: linear-gradient(180deg, rgba(17, 24, 39, 0.98), rgba(15, 23, 42, 0.98));
+            border: 1px solid rgba(148, 163, 184, 0.14);
+            border-radius: 22px;
+            padding: 18px;
+            box-shadow: 0 16px 42px rgba(0, 0, 0, 0.22);
+        }
+
+        .card h2,
+        .card h3 {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: -0.01em;
+        }
+
+        .card-subtitle {
+            margin-top: 6px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .camera-frame {
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            background: #020617;
+            min-height: 360px;
         }
 
         video, canvas {
             width: 100%;
-            border-radius: 12px;
+            border-radius: 18px;
             background: #000;
+            display: block;
         }
 
         canvas {
             display: none;
+        }
+
+        .camera-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            pointer-events: none;
+            padding: 16px;
+            background: linear-gradient(180deg, rgba(2, 6, 23, 0.34), transparent 28%, transparent 68%, rgba(2, 6, 23, 0.44));
+        }
+
+        .overlay-top,
+        .overlay-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .overlay-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 12px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            color: #e2e8f0;
+            font-size: 13px;
+            font-weight: bold;
+            backdrop-filter: blur(8px);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-2);
+            box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.6);
+        }
+
+        .dot.live {
+            background: var(--good);
+            animation: pulse 1.3s infinite;
+        }
+
+        .dot.warn {
+            background: var(--warn);
+            animation: pulseWarm 1.1s infinite;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 16px;
         }
 
         .controls {
@@ -59,99 +209,158 @@
 
         button, input, textarea, select {
             border: none;
-            border-radius: 10px;
+            border-radius: 14px;
             padding: 12px 14px;
             font-size: 14px;
         }
 
         button {
-            background: #2563eb;
+            background: linear-gradient(180deg, #2563eb, #1d4ed8);
             color: white;
             cursor: pointer;
-            transition: 0.2s;
+            transition: transform 0.18s ease, opacity 0.18s ease, background 0.2s ease;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.18);
         }
 
         button:hover {
-            background: #1d4ed8;
+            transform: translateY(-1px);
+            background: linear-gradient(180deg, #2d6df6, #1e40af);
+        }
+
+        button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            transform: none;
         }
 
         button.secondary {
-            background: #374151;
+            background: linear-gradient(180deg, #334155, #1f2937);
+            box-shadow: none;
         }
 
         button.secondary:hover {
-            background: #4b5563;
+            background: linear-gradient(180deg, #475569, #334155);
         }
 
         button.danger {
-            background: #b91c1c;
+            background: linear-gradient(180deg, #dc2626, #b91c1c);
+            box-shadow: none;
         }
 
         button.danger:hover {
-            background: #991b1b;
+            background: linear-gradient(180deg, #ef4444, #b91c1c);
         }
 
         button.voice {
-            background: #059669;
+            background: linear-gradient(180deg, #059669, #047857);
             font-size: 16px;
-            font-weight: bold;
-            min-height: 52px;
+            min-height: 54px;
+            flex: 1 1 240px;
         }
 
         button.voice:hover {
-            background: #047857;
+            background: linear-gradient(180deg, #10b981, #047857);
         }
 
         button.voice.off {
-            background: #6b7280;
+            background: linear-gradient(180deg, #475569, #334155);
         }
 
         textarea, input, select {
             width: 100%;
-            box-sizing: border-box;
-            background: #111827;
-            color: #f9fafb;
-            border: 1px solid #374151;
+            background: rgba(11, 18, 32, 0.96);
+            color: var(--text);
+            border: 1px solid var(--line);
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
         }
 
         label {
             display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #e2e8f0;
+        }
+
+        .field {
+            margin-top: 16px;
+        }
+
+        .pill-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .pill-status {
+            padding: 14px;
+            border-radius: 16px;
+            background: rgba(11, 18, 32, 0.9);
+            border: 1px solid var(--line);
+        }
+
+        .pill-status-title {
+            color: #93c5fd;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
             margin-bottom: 6px;
             font-weight: bold;
         }
 
-        .field {
-            margin-top: 14px;
-        }
-
-        .status {
-            margin-top: 14px;
-            padding: 12px;
-            border-radius: 10px;
-            background: #111827;
-            border: 1px solid #374151;
-            line-height: 1.6;
-        }
-
-        .status strong {
-            color: #93c5fd;
+        .pill-status-value {
+            font-size: 15px;
+            font-weight: bold;
+            color: #f8fafc;
+            line-height: 1.4;
         }
 
         .result {
-            margin-top: 14px;
-            background: #111827;
-            border: 1px solid #374151;
-            border-radius: 10px;
-            padding: 14px;
+            background: rgba(11, 18, 32, 0.9);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 16px;
         }
 
-        .result h3 {
-            margin-top: 0;
-            margin-bottom: 12px;
+        .result + .result {
+            margin-top: 16px;
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .result-badge {
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, 0.12);
+            border: 1px solid rgba(96, 165, 250, 0.18);
+            color: #bfdbfe;
+            font-size: 12px;
+            font-weight: bold;
         }
 
         .result-item {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+        }
+
+        .result-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .result-item strong {
+            display: block;
+            margin-bottom: 6px;
+            color: #cbd5e1;
         }
 
         .chips {
@@ -162,34 +371,26 @@
         }
 
         .chip {
-            background: #374151;
-            padding: 6px 10px;
+            background: rgba(51, 65, 85, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            padding: 7px 11px;
             border-radius: 999px;
             font-size: 13px;
-        }
-
-        .row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .row > div {
-            flex: 1;
-            min-width: 180px;
+            color: #e2e8f0;
         }
 
         .small {
             font-size: 13px;
-            color: #9ca3af;
+            color: var(--muted);
+            line-height: 1.6;
         }
 
         .voice-help {
-            margin-top: 14px;
-            padding: 14px;
-            border-radius: 10px;
-            background: #0f172a;
-            border: 1px solid #334155;
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 18px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(96, 165, 250, 0.14);
             line-height: 1.6;
         }
 
@@ -200,14 +401,15 @@
         .mono {
             font-family: Consolas, monospace;
             font-size: 13px;
+            color: #d1fae5;
         }
 
         .listening-box {
-            margin-top: 14px;
-            background: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 14px;
+            margin-top: 16px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(96, 165, 250, 0.14);
+            border-radius: 18px;
+            padding: 16px;
         }
 
         .listening-header {
@@ -233,7 +435,7 @@
 
         .mic-indicator.hearing {
             background: #f59e0b;
-            animation: pulse 0.7s infinite;
+            animation: pulseWarm 0.7s infinite;
             box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
         }
 
@@ -242,12 +444,131 @@
         }
 
         .heard-text {
-            min-height: 40px;
-            padding: 10px;
-            border-radius: 10px;
-            background: #111827;
-            border: 1px solid #374151;
+            min-height: 44px;
+            padding: 12px;
+            border-radius: 14px;
+            background: rgba(11, 18, 32, 0.92);
+            border: 1px solid var(--line);
             color: #e5e7eb;
+        }
+
+        .stack {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .mini-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .section-kicker {
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #93c5fd;
+            font-weight: bold;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.2), transparent);
+            margin: 4px 0;
+        }
+
+
+        .cognitive-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .cognitive-card {
+            padding: 14px;
+            border-radius: 16px;
+            background: rgba(11, 18, 32, 0.9);
+            border: 1px solid var(--line);
+            min-height: 92px;
+        }
+
+        .cognitive-title {
+            color: #93c5fd;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .cognitive-value {
+            font-size: 15px;
+            font-weight: bold;
+            color: #f8fafc;
+            line-height: 1.4;
+        }
+
+        .confidence-wrap {
+            margin-top: 8px;
+        }
+
+        .confidence-bar {
+            width: 100%;
+            height: 10px;
+            border-radius: 999px;
+            background: rgba(51, 65, 85, 0.9);
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.12);
+        }
+
+        .confidence-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #2563eb, #60a5fa);
+            transition: width 0.35s ease;
+        }
+
+        .timeline-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 14px;
+            background: rgba(11, 18, 32, 0.78);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+        }
+
+        .timeline-dot {
+            width: 10px;
+            height: 10px;
+            margin-top: 5px;
+            border-radius: 50%;
+            background: var(--accent-2);
+            flex: 0 0 10px;
+        }
+
+        .timeline-text {
+            color: #e2e8f0;
+            font-size: 13px;
+            line-height: 1.5;
         }
 
         @keyframes pulse {
@@ -256,7 +577,7 @@
                 box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
             }
             70% {
-                transform: scale(1.05);
+                transform: scale(1.06);
                 box-shadow: 0 0 0 12px rgba(34, 197, 94, 0);
             }
             100% {
@@ -265,160 +586,440 @@
             }
         }
 
-        @media (max-width: 860px) {
+        @keyframes pulseWarm {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+            }
+            70% {
+                transform: scale(1.06);
+                box-shadow: 0 0 0 12px rgba(245, 158, 11, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+            }
+        }
+
+        @media (max-width: 1120px) {
             .grid {
                 grid-template-columns: 1fr;
+            }
+
+            .hero {
+                flex-direction: column;
+            }
+
+            .hero-badges {
+                justify-content: flex-start;
+                min-width: auto;
+            }
+        }
+
+        @media (max-width: 760px) {
+            body {
+                padding: 14px;
+            }
+
+            .hero {
+                padding: 18px;
+                border-radius: 18px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .section-grid,
+            .mini-grid,
+            .pill-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .camera-frame {
+                min-height: 240px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Visiora AI</h1>
-        <p>Assistente visual com IA para orientação, acessibilidade e apoio à locomoção.</p>
+        <section class="hero">
+            <div>
+                <div class="section-kicker">Sistema principal</div>
+                <h1>Visiora AI</h1>
+                <p>Assistente visual com IA para orientação, contexto de ambiente, acessibilidade real e apoio contínuo para pessoas com deficiência visual.</p>
+            </div>
+            <div class="hero-badges">
+                <div class="hero-badge">Visão computacional assistiva</div>
+                <div class="hero-badge">Comando por voz com Azure Speech</div>
+                <div class="hero-badge">Análise contínua do ambiente</div>
+            </div>
+        </section>
 
         <div class="grid">
-            <div class="card">
-                <video id="video" autoplay playsinline muted></video>
-                <canvas id="canvas"></canvas>
-
-                <div class="controls">
-                    <button id="btnVoz" class="voice off">Segure para falar</button>
-                    <button id="btnFalarAjuda" class="secondary">Falar instruções</button>
-                </div>
-
-                <div class="listening-box">
-                    <div class="listening-header">
-                        <div id="micIndicator" class="mic-indicator"></div>
-                        <div class="listening-state" id="listeningState">Pronto para gravar</div>
+            <div class="main-column">
+                <section class="card">
+                    <div class="section-title">
+                        <div>
+                            <div class="section-kicker">Captura em tempo real</div>
+                            <h2>Monitoramento do ambiente</h2>
+                        </div>
+                        <div class="result-badge">Frontend operacional</div>
                     </div>
-                    <div id="statusEscuta">🎙️ Pressione e segure para falar...</div>
-                    <div class="small">Use o botão e segure enquanto fala. Ao soltar, o áudio será transcrito pelo Azure Speech.</div>
-                    <div class="field">
-                        <label>Último comando transcrito</label>
-                        <div id="heardText" class="heard-text">Nenhuma fala detectada.</div>
+                    <div class="card-subtitle">Visual principal da câmera, com comandos de voz, controle de captura e operação automática.</div>
+
+                    <div class="camera-frame">
+                        <video id="video" autoplay playsinline muted></video>
+                        <canvas id="canvas"></canvas>
+
+                        <div class="camera-overlay">
+                            <div class="overlay-top">
+                                <div class="overlay-label">
+                                    <span class="dot live" id="cameraDot"></span>
+                                    Captura ativa
+                                </div>
+                                <div class="overlay-label">
+                                    <span class="dot" id="autoDot"></span>
+                                    Modo automático
+                                </div>
+                            </div>
+                            <div class="overlay-bottom">
+                                <div class="overlay-label">
+                                    <span class="dot warn" id="voiceDot"></span>
+                                    Comando por voz
+                                </div>
+                                <div class="overlay-label">Assistente visual contínuo</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="controls">
-                    <button id="btnIniciarCamera">Iniciar câmera</button>
-                    <button id="btnPararCamera" class="secondary">Parar câmera</button>
-                    <button id="btnIniciarAuto">Iniciar automático</button>
-                    <button id="btnPararAuto" class="danger">Parar automático</button>
-                </div>
-
-                <div class="controls">
-                    <button id="btnPausarAudio" class="secondary">Pausar áudio</button>
-                    <button id="btnRetomarAudio" class="secondary">Retomar áudio</button>
-                    <button id="btnPararAudio" class="danger">Parar áudio</button>
-                </div>
-
-                <div class="field">
-                    <label for="modoConsulta">Consulta manual</label>
-                    <textarea id="modoConsulta" rows="3" placeholder="Ex.: O que tem à minha frente? Tem alguém por perto?"></textarea>
                     <div class="controls">
-                        <button id="btnConsultar">Perguntar ao ambiente</button>
+                        <button id="btnVoz" class="voice off">Segure para falar</button>
+                        <button id="btnFalarAjuda" class="secondary">Falar instruções</button>
                     </div>
-                </div>
 
-                <div class="status">
-                    <div><strong>Câmera:</strong> <span id="statusCamera">desligada</span></div>
-                    <div><strong>Modo automático:</strong> <span id="statusAuto">desligado</span></div>
-                    <div><strong>Áudio:</strong> <span id="statusAudio">parado</span></div>
-                    <div><strong>Escuta por voz:</strong> <span id="statusVoz">desligada</span></div>
-                    <div><strong>Reconhecimento:</strong> <span id="statusReconhecimento">inativo</span></div>
-                    <div><strong>Último comando:</strong> <span id="statusComando">nenhum</span></div>
-                    <div><strong>Última decisão do loop:</strong> <span id="statusDecision">nenhuma</span></div>
-                </div>
+                    <div class="listening-box">
+                        <div class="section-title">
+                            <div>
+                                <div class="section-kicker">Entrada de voz</div>
+                                <h3>Escuta e transcrição</h3>
+                            </div>
+                            <div class="result-badge">Push-to-talk</div>
+                        </div>
 
-                <div class="voice-help">
-                    <div><strong>Comandos por voz recomendados</strong></div>
-                    <div class="small">Para reduzir erros, o sistema usa gravação por botão com transcrição no backend.</div>
-                    <div class="mono">
-                        <br />
-                        descrever ambiente<br />
-                        o que tem à minha frente<br />
-                        tem alguém por perto<br />
-                        tem obstáculo à frente<br />
-                        iniciar modo automático<br />
-                        parar modo automático<br />
-                        pausar áudio<br />
-                        retomar áudio<br />
-                        parar áudio
+                        <div class="listening-header">
+                            <div id="micIndicator" class="mic-indicator"></div>
+                            <div class="listening-state" id="listeningState">Pronto para gravar</div>
+                        </div>
+                        <div id="statusEscuta">🎙️ Pressione e segure para falar...</div>
+                        <div class="small">Use o botão e segure enquanto fala. Ao soltar, o áudio será enviado como WAV para transcrição no Azure Speech.</div>
+
+                        <div class="field">
+                            <label>Último comando transcrito</label>
+                            <div id="heardText" class="heard-text">Nenhuma fala detectada.</div>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="section-grid">
+                        <div class="result">
+                            <div class="section-title">
+                                <div>
+                                    <div class="section-kicker">Operação</div>
+                                    <h3>Controle da câmera</h3>
+                                </div>
+                            </div>
+                            <div class="controls">
+                                <button id="btnIniciarCamera">Iniciar câmera</button>
+                                <button id="btnPararCamera" class="secondary">Parar câmera</button>
+                            </div>
+                        </div>
+
+                        <div class="result">
+                            <div class="section-title">
+                                <div>
+                                    <div class="section-kicker">Automação</div>
+                                    <h3>Loop inteligente</h3>
+                                </div>
+                            </div>
+                            <div class="controls">
+                                <button id="btnIniciarAuto">Iniciar automático</button>
+                                <button id="btnPararAuto" class="danger">Parar automático</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result">
+                        <div class="section-title">
+                            <div>
+                                <div class="section-kicker">Áudio</div>
+                                <h3>Controle de reprodução</h3>
+                            </div>
+                        </div>
+                        <div class="controls">
+                            <button id="btnPausarAudio" class="secondary">Pausar áudio</button>
+                            <button id="btnRetomarAudio" class="secondary">Retomar áudio</button>
+                            <button id="btnPararAudio" class="danger">Parar áudio</button>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="modoConsulta">Consulta manual ao ambiente</label>
+                        <textarea id="modoConsulta" rows="3" placeholder="Ex.: O que tem à minha frente? Esse ambiente parece um quarto? Tem alguém por perto?"></textarea>
+                        <div class="controls">
+                            <button id="btnConsultar">Perguntar ao ambiente</button>
+                        </div>
+                    </div>
+
+                    <div class="voice-help">
+                        <div><strong>Comandos por voz recomendados</strong></div>
+                        <div class="small">Para reduzir erros, o sistema usa gravação por botão com transcrição no backend.</div>
+                        <div class="mono">
+                            <br />
+                            descrever ambiente<br />
+                            o que tem à minha frente<br />
+                            tem alguém por perto<br />
+                            tem obstáculo à frente<br />
+                            iniciar modo automático<br />
+                            parar modo automático<br />
+                            pausar áudio<br />
+                            retomar áudio<br />
+                            parar áudio
+                        </div>
+                    </div>
+                </section>
             </div>
 
-            <div class="card">
-                <div class="row">
-                    <div>
-                        <label for="qualidadeImagem">Qualidade JPEG</label>
-                        <select id="qualidadeImagem">
-                            <option value="0.55">0.55</option>
-                            <option value="0.65" selected>0.65</option>
-                            <option value="0.75">0.75</option>
-                            <option value="0.85">0.85</option>
-                        </select>
+            <div class="side-column">
+                <section class="card">
+                    <div class="section-title">
+                        <div>
+                            <div class="section-kicker">Estado do sistema</div>
+                            <h2>Status em tempo real</h2>
+                        </div>
+                        <div class="result-badge">Monitoramento</div>
                     </div>
-                    <div>
-                        <label for="larguraCaptura">Largura da captura</label>
-                        <select id="larguraCaptura">
-                            <option value="480">480</option>
-                            <option value="640" selected>640</option>
-                            <option value="800">800</option>
-                        </select>
-                    </div>
-                </div>
+                    <div class="card-subtitle">Indicadores principais para acompanhar o funcionamento da captura, do áudio, da escuta e da lógica do loop.</div>
 
-                <div class="result">
-                    <h3>Diagnóstico do loop</h3>
-                    <div class="result-item"><strong>Requisição em andamento:</strong> <span id="diagAnalisando">não</span></div>
-                    <div class="result-item"><strong>Áudio tocando:</strong> <span id="diagAudioTocando">não</span></div>
-                    <div class="result-item"><strong>Diferença visual:</strong> <span id="diagMudanca">0</span></div>
-                    <div class="result-item"><strong>Intervalo atual:</strong> <span id="diagIntervalo">1800 ms</span></div>
-                    <div class="result-item"><strong>Último envio:</strong> <span id="diagUltimoEnvio">nunca</span></div>
-                    <div class="result-item"><strong>Última fala importante:</strong> <span id="diagUltimaFala">nenhuma</span></div>
-                    <div class="result-item"><strong>Última frase reconhecida:</strong> <span id="diagReconhecido">nenhuma</span></div>
-                </div>
-
-                <div class="result">
-                    <h3>Última resposta</h3>
-
-                    <div class="result-item">
-                        <strong>Descrição:</strong>
-                        <div id="resDescricao" class="small">-</div>
+                    <div class="pill-grid">
+                        <div class="pill-status">
+                            <div class="pill-status-title">Câmera</div>
+                            <div class="pill-status-value" id="statusCamera">desligada</div>
+                        </div>
+                        <div class="pill-status">
+                            <div class="pill-status-title">Modo automático</div>
+                            <div class="pill-status-value" id="statusAuto">desligado</div>
+                        </div>
+                        <div class="pill-status">
+                            <div class="pill-status-title">Áudio</div>
+                            <div class="pill-status-value" id="statusAudio">parado</div>
+                        </div>
+                        <div class="pill-status">
+                            <div class="pill-status-title">Escuta por voz</div>
+                            <div class="pill-status-value" id="statusVoz">desligada</div>
+                        </div>
+                        <div class="pill-status">
+                            <div class="pill-status-title">Reconhecimento</div>
+                            <div class="pill-status-value" id="statusReconhecimento">inativo</div>
+                        </div>
+                        <div class="pill-status">
+                            <div class="pill-status-title">Último comando</div>
+                            <div class="pill-status-value" id="statusComando">nenhum</div>
+                        </div>
                     </div>
 
-                    <div class="result-item">
-                        <strong>Pessoa:</strong>
-                        <div id="resPessoa" class="small">-</div>
+                    <div class="result" style="margin-top: 16px;">
+                        <div class="result-item">
+                            <strong>Última decisão do loop</strong>
+                            <div id="statusDecision" class="small">nenhuma</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card">
+                    <div class="section-title">
+                        <div>
+                            <div class="section-kicker">Percepção cognitiva</div>
+                            <h2>Estado Cognitivo</h2>
+                        </div>
+                        <div class="result-badge">Estado interno</div>
+                    </div>
+                    <div class="card-subtitle">Mostra o que a Visiora está entendendo sobre o ambiente, movimento, atenção e continuidade em tempo real.</div>
+
+                    <div class="cognitive-grid">
+                        <div class="cognitive-card">
+                            <div class="cognitive-title">Ambiente atual</div>
+                            <div class="cognitive-value" id="estadoAmbiente">-</div>
+                        </div>
+
+                        <div class="cognitive-card">
+                            <div class="cognitive-title">Tipo do ambiente</div>
+                            <div class="cognitive-value" id="estadoTipoAmbiente">-</div>
+                        </div>
+
+                        <div class="cognitive-card">
+                            <div class="cognitive-title">Evento dominante</div>
+                            <div class="cognitive-value" id="estadoEventoAtual">-</div>
+                        </div>
+
+                        <div class="cognitive-card">
+                            <div class="cognitive-title">Nível de atenção</div>
+                            <div class="cognitive-value" id="estadoNivelAtencao">-</div>
+                        </div>
+
+                        <div class="cognitive-card">
+                            <div class="cognitive-title">Tendência de movimento</div>
+                            <div class="cognitive-value" id="estadoTendenciaMovimento">-</div>
+                        </div>
+
+                        <div class="cognitive-card">
+                            <div class="cognitive-title">Status do caminho</div>
+                            <div class="cognitive-value" id="estadoCaminhoStatus">-</div>
+                        </div>
+
+                        <div class="cognitive-card">
+                            <div class="cognitive-title">Referência principal</div>
+                            <div class="cognitive-value" id="estadoReferenciaPrincipal">-</div>
+                        </div>
+
+                        <div class="cognitive-card">
+                            <div class="cognitive-title">Tempo no ambiente</div>
+                            <div class="cognitive-value" id="estadoTempoNoAmbiente">-</div>
+                        </div>
                     </div>
 
-                    <div class="result-item">
-                        <strong>Sugestão:</strong>
-                        <div id="resSugestao" class="small">-</div>
+                    <div class="result" style="margin-top: 16px;">
+                        <div class="result-item">
+                            <strong>Confiança do ambiente</strong>
+                            <div id="estadoConfiancaTexto" class="small">-</div>
+                            <div class="confidence-wrap">
+                                <div class="confidence-bar">
+                                    <div id="estadoConfiancaBarra" class="confidence-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="result-item">
+                            <strong>Mudança detectada</strong>
+                            <div id="estadoMudancaDetectada" class="small">-</div>
+                        </div>
+
+                        <div class="result-item">
+                            <strong>Alerta principal</strong>
+                            <div id="estadoAlertaPrincipal" class="small">-</div>
+                        </div>
+
+                        <div class="result-item">
+                            <strong>Pessoa por perto</strong>
+                            <div id="estadoPessoaPorPerto" class="small">-</div>
+                        </div>
                     </div>
 
-                    <div class="result-item">
-                        <strong>Direção:</strong>
-                        <div id="resDirecao" class="small">-</div>
+                    <div class="result" style="margin-top: 16px;">
+                        <div class="result-header">
+                            <h3>Memória recente</h3>
+                            <div class="result-badge">Continuidade</div>
+                        </div>
+                        <div id="estadoTimeline" class="timeline-list">
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-text">Aguardando leituras do estado cognitivo.</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card">
+                    <div class="section-title">
+                        <div>
+                            <div class="section-kicker">Parâmetros</div>
+                            <h2>Qualidade da captura</h2>
+                        </div>
                     </div>
 
-                    <div class="result-item">
-                        <strong>Importância:</strong>
-                        <div id="resImportancia" class="small">-</div>
+                    <div class="mini-grid">
+                        <div>
+                            <label for="qualidadeImagem">Qualidade JPEG</label>
+                            <select id="qualidadeImagem">
+                                <option value="0.55">0.55</option>
+                                <option value="0.65">0.65</option>
+                                <option value="0.75" selected>0.75</option>
+                                <option value="0.85">0.85</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="larguraCaptura">Largura da captura</label>
+                            <select id="larguraCaptura">
+                                <option value="480">480</option>
+                                <option value="640">640</option>
+                                <option value="800" selected>800</option>
+                            </select>
+                        </div>
                     </div>
+                </section>
 
-                    <div class="result-item">
-                        <strong>Objetos:</strong>
-                        <div id="resObjetos" class="chips"></div>
-                    </div>
+                <section class="card">
+                    <div class="result">
+                        <div class="result-header">
+                            <h3>Diagnóstico do loop</h3>
+                            <div class="result-badge">Telemetria</div>
+                        </div>
 
-                    <div class="result-item">
-                        <strong>Alertas:</strong>
-                        <div id="resAlertas" class="chips"></div>
+                        <div class="result-item"><strong>Requisição em andamento</strong><div id="diagAnalisando" class="small">não</div></div>
+                        <div class="result-item"><strong>Áudio tocando</strong><div id="diagAudioTocando" class="small">não</div></div>
+                        <div class="result-item"><strong>Diferença visual</strong><div id="diagMudanca" class="small">0</div></div>
+                        <div class="result-item"><strong>Intervalo atual</strong><div id="diagIntervalo" class="small">1800 ms</div></div>
+                        <div class="result-item"><strong>Último envio</strong><div id="diagUltimoEnvio" class="small">nunca</div></div>
+                        <div class="result-item"><strong>Última fala importante</strong><div id="diagUltimaFala" class="small">nenhuma</div></div>
+                        <div class="result-item"><strong>Última frase reconhecida</strong><div id="diagReconhecido" class="small">nenhuma</div></div>
                     </div>
-                </div>
+                </section>
+
+                <section class="card">
+                    <div class="result">
+                        <div class="result-header">
+                            <h3>Última resposta da IA</h3>
+                            <div class="result-badge">Saída atual</div>
+                        </div>
+
+                        <div class="result-item">
+                            <strong>Descrição</strong>
+                            <div id="resDescricao" class="small">-</div>
+                        </div>
+
+                        <div class="result-item">
+                            <strong>Pessoa</strong>
+                            <div id="resPessoa" class="small">-</div>
+                        </div>
+
+                        <div class="result-item">
+                            <strong>Sugestão</strong>
+                            <div id="resSugestao" class="small">-</div>
+                        </div>
+
+                        <div class="result-item">
+                            <strong>Direção</strong>
+                            <div id="resDirecao" class="small">-</div>
+                        </div>
+
+                        <div class="result-item">
+                            <strong>Importância</strong>
+                            <div id="resImportancia" class="small">-</div>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="result-item">
+                            <strong>Objetos</strong>
+                            <div id="resObjetos" class="chips"></div>
+                        </div>
+
+                        <div class="result-item">
+                            <strong>Alertas</strong>
+                            <div id="resAlertas" class="chips"></div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
@@ -467,6 +1068,21 @@
         const resObjetos = document.getElementById("resObjetos");
         const resAlertas = document.getElementById("resAlertas");
 
+        const estadoAmbiente = document.getElementById("estadoAmbiente");
+        const estadoTipoAmbiente = document.getElementById("estadoTipoAmbiente");
+        const estadoEventoAtual = document.getElementById("estadoEventoAtual");
+        const estadoNivelAtencao = document.getElementById("estadoNivelAtencao");
+        const estadoTendenciaMovimento = document.getElementById("estadoTendenciaMovimento");
+        const estadoCaminhoStatus = document.getElementById("estadoCaminhoStatus");
+        const estadoReferenciaPrincipal = document.getElementById("estadoReferenciaPrincipal");
+        const estadoTempoNoAmbiente = document.getElementById("estadoTempoNoAmbiente");
+        const estadoConfiancaTexto = document.getElementById("estadoConfiancaTexto");
+        const estadoConfiancaBarra = document.getElementById("estadoConfiancaBarra");
+        const estadoMudancaDetectada = document.getElementById("estadoMudancaDetectada");
+        const estadoAlertaPrincipal = document.getElementById("estadoAlertaPrincipal");
+        const estadoPessoaPorPerto = document.getElementById("estadoPessoaPorPerto");
+        const estadoTimeline = document.getElementById("estadoTimeline");
+
         const micIndicator = document.getElementById("micIndicator");
         const listeningState = document.getElementById("listeningState");
         const heardText = document.getElementById("heardText");
@@ -487,6 +1103,8 @@
         let miniFrameAnterior = null;
 
         let ultimoResultado = null;
+        let ultimoEstadoCognitivo = null;
+        let historicoEstadoCognitivo = [];
         let ultimoAudioTocando = false;
 
         let reconhecimento = null;
@@ -565,6 +1183,176 @@
             }
         }
 
+
+        function formatarRotuloEstado(valor) {
+            if (valor === null || valor === undefined || valor === "") return "-";
+
+            return String(valor)
+                .replace(/_/g, " ")
+                .replace(/\b\w/g, letra => letra.toUpperCase());
+        }
+
+        function formatarPercentualConfianca(valor) {
+            if (valor === null || valor === undefined || valor === "") return "-";
+
+            const numero = typeof valor === "number" ? valor : parseFloat(valor);
+
+            if (Number.isNaN(numero)) return "-";
+
+            const percentual = numero <= 1 ? numero * 100 : numero;
+            return `${Math.max(0, Math.min(100, percentual)).toFixed(0)}%`;
+        }
+
+        function formatarTempoAmbiente(valor) {
+            if (valor === null || valor === undefined || valor === "") return "-";
+
+            if (typeof valor === "number") {
+                if (valor < 60) return `${Math.round(valor)}s`;
+                const minutos = Math.floor(valor / 60);
+                const segundos = Math.round(valor % 60);
+                return segundos > 0 ? `${minutos}m ${segundos}s` : `${minutos}m`;
+            }
+
+            return String(valor);
+        }
+
+        function preencherTimelineEstado() {
+            estadoTimeline.innerHTML = "";
+
+            if (!historicoEstadoCognitivo.length) {
+                const item = document.createElement("div");
+                item.className = "timeline-item";
+                item.innerHTML = '<div class="timeline-dot"></div><div class="timeline-text">Aguardando leituras do estado cognitivo.</div>';
+                estadoTimeline.appendChild(item);
+                return;
+            }
+
+            for (const entrada of historicoEstadoCognitivo.slice().reverse()) {
+                const item = document.createElement("div");
+                item.className = "timeline-item";
+
+                const ambiente = formatarRotuloEstado(entrada.ambienteAtual || "ambiente indefinido");
+                const evento = formatarRotuloEstado(entrada.eventoAtual || "sem evento");
+                const caminho = formatarRotuloEstado(entrada.caminhoStatus || "sem status de caminho");
+
+                item.innerHTML = `
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-text">
+                        <strong>${ambiente}</strong><br />
+                        Evento: ${evento}<br />
+                        Caminho: ${caminho}
+                    </div>
+                `;
+
+                estadoTimeline.appendChild(item);
+            }
+        }
+
+
+        function normalizarEstadoCognitivo(raw) {
+            if (!raw || typeof raw !== "object") return null;
+
+            const pick = (...keys) => {
+                for (const key of keys) {
+                    const valor = raw[key];
+                    if (valor !== undefined && valor !== null && valor !== "") return valor;
+                }
+                return null;
+            };
+
+            return {
+                ambienteAtual: pick("ambienteAtual", "ambiente", "ambienteConfirmado", "localAtual", "nomeAmbiente"),
+                tipoAmbiente: pick("tipoAmbiente", "perfilAmbiente", "categoriaAmbiente", "classeAmbiente"),
+                eventoAtual: pick("eventoAtual", "eventoDominante", "eventoPrincipal", "evento"),
+                nivelAtencao: pick("nivelAtencao", "atencao", "prioridadeAtencao"),
+                tendenciaMovimento: pick("tendenciaMovimento", "movimento", "direcaoMovimento", "estadoMovimento"),
+                caminhoStatus: pick("caminhoStatus", "statusCaminho", "situacaoCaminho", "estadoCaminho"),
+                referenciaPrincipal: pick("referenciaPrincipal", "referenciaAtual", "referenciaDominante", "marcoPrincipal"),
+                tempoNoAmbiente: pick("tempoNoAmbiente", "duracaoAmbiente", "tempoAmbiente", "permanenciaAmbiente"),
+                confiancaAmbiente: pick("confiancaAmbiente", "confianca", "confiancaDoAmbiente", "nivelConfianca"),
+                mudancaDetectada: pick("mudancaDetectada", "houveMudanca", "transicaoDetectada", "mudanca"),
+                alertaPrincipal: pick("alertaPrincipal", "alertaAtual", "alertaDominante", "alerta"),
+                pessoaPorPerto: pick("pessoaPorPerto", "haPessoaPorPerto", "pessoaProxima", "pessoaDetectada")
+            };
+        }
+
+        function atualizarEstadoCognitivo(estado) {
+            ultimoEstadoCognitivo = estado || null;
+
+            if (!estado) {
+                atualizarTexto(estadoAmbiente, "-");
+                atualizarTexto(estadoTipoAmbiente, "-");
+                atualizarTexto(estadoEventoAtual, "-");
+                atualizarTexto(estadoNivelAtencao, "-");
+                atualizarTexto(estadoTendenciaMovimento, "-");
+                atualizarTexto(estadoCaminhoStatus, "-");
+                atualizarTexto(estadoReferenciaPrincipal, "-");
+                atualizarTexto(estadoTempoNoAmbiente, "-");
+                atualizarTexto(estadoConfiancaTexto, "-");
+                atualizarTexto(estadoMudancaDetectada, "-");
+                atualizarTexto(estadoAlertaPrincipal, "-");
+                atualizarTexto(estadoPessoaPorPerto, "-");
+                estadoConfiancaBarra.style.width = "0%";
+                preencherTimelineEstado();
+                return;
+            }
+
+            atualizarTexto(estadoAmbiente, formatarRotuloEstado(estado.ambienteAtual));
+            atualizarTexto(estadoTipoAmbiente, formatarRotuloEstado(estado.tipoAmbiente));
+            atualizarTexto(estadoEventoAtual, formatarRotuloEstado(estado.eventoAtual));
+            atualizarTexto(estadoNivelAtencao, formatarRotuloEstado(estado.nivelAtencao));
+            atualizarTexto(estadoTendenciaMovimento, formatarRotuloEstado(estado.tendenciaMovimento));
+            atualizarTexto(estadoCaminhoStatus, formatarRotuloEstado(estado.caminhoStatus));
+            atualizarTexto(estadoReferenciaPrincipal, formatarRotuloEstado(estado.referenciaPrincipal));
+            atualizarTexto(estadoTempoNoAmbiente, formatarTempoAmbiente(estado.tempoNoAmbiente));
+
+            const confiancaTexto = formatarPercentualConfianca(estado.confiancaAmbiente);
+            atualizarTexto(estadoConfiancaTexto, confiancaTexto);
+            estadoConfiancaBarra.style.width = confiancaTexto === "-" ? "0%" : confiancaTexto;
+
+            atualizarTexto(
+                estadoMudancaDetectada,
+                estado.mudancaDetectada === true ? "sim" : (estado.mudancaDetectada === false ? "não" : "-")
+            );
+
+            atualizarTexto(estadoAlertaPrincipal, formatarRotuloEstado(estado.alertaPrincipal));
+            atualizarTexto(
+                estadoPessoaPorPerto,
+                estado.pessoaPorPerto === true ? "sim" : (estado.pessoaPorPerto === false ? "não" : formatarRotuloEstado(estado.pessoaPorPerto))
+            );
+
+            const assinatura = JSON.stringify({
+                ambienteAtual: estado.ambienteAtual || "",
+                eventoAtual: estado.eventoAtual || "",
+                caminhoStatus: estado.caminhoStatus || "",
+                referenciaPrincipal: estado.referenciaPrincipal || ""
+            });
+
+            const ultimaAssinatura = historicoEstadoCognitivo.length
+                ? JSON.stringify({
+                    ambienteAtual: historicoEstadoCognitivo[historicoEstadoCognitivo.length - 1].ambienteAtual || "",
+                    eventoAtual: historicoEstadoCognitivo[historicoEstadoCognitivo.length - 1].eventoAtual || "",
+                    caminhoStatus: historicoEstadoCognitivo[historicoEstadoCognitivo.length - 1].caminhoStatus || "",
+                    referenciaPrincipal: historicoEstadoCognitivo[historicoEstadoCognitivo.length - 1].referenciaPrincipal || ""
+                })
+                : "";
+
+            if (assinatura !== ultimaAssinatura) {
+                historicoEstadoCognitivo.push({
+                    ambienteAtual: estado.ambienteAtual || "",
+                    eventoAtual: estado.eventoAtual || "",
+                    caminhoStatus: estado.caminhoStatus || "",
+                    referenciaPrincipal: estado.referenciaPrincipal || ""
+                });
+
+                if (historicoEstadoCognitivo.length > 5) {
+                    historicoEstadoCognitivo.shift();
+                }
+            }
+
+            preencherTimelineEstado();
+        }
+
         function mostrarResultado(data) {
             ultimoResultado = data;
 
@@ -576,6 +1364,15 @@
 
             preencherListaChips(resObjetos, data.objetos || []);
             preencherListaChips(resAlertas, data.alertas || []);
+
+            const estadoBruto =
+                data.estadoCognitivo ||
+                data.estado ||
+                data.cognitiveState ||
+                data.estadoInterno ||
+                null;
+
+            atualizarEstadoCognitivo(normalizarEstadoCognitivo(estadoBruto));
         }
 
         function atualizarMarcadorEscuta() {
@@ -1812,6 +2609,7 @@ window.addEventListener("beforeunload", async () => {
         configurarAtalhosTeclado();
         atualizarEstadoBotaoVoz();
         atualizarMarcadorEscuta();
+        atualizarEstadoCognitivo(null);
         atualizarDiagnostico();
     </script>
 </body>

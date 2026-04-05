@@ -1,0 +1,11 @@
+  Determinando os projetos a serem restaurados...
+  Todos os projetos estão atualizados para restauração.
+C:\Users\henri\OneDrive\Área de Trabalho\visiora-ai\backend\VisioraAPI\Services\AzureSpeechService.cs.cs(3,7): error CS0138: Uma diretiva de 'usando namespace' pode apenas ser aplicada a namespaces; 'Grammar' é um tipo, não um namespace. Considere uma diretiva 'usando estático' [C:\Users\henri\OneDrive\Área de Trabalho\visiora-ai\backend\VisioraAPI\VisioraAPI.csproj]
+
+FALHA da compilação.
+
+C:\Users\henri\OneDrive\Área de Trabalho\visiora-ai\backend\VisioraAPI\Services\AzureSpeechService.cs.cs(3,7): error CS0138: Uma diretiva de 'usando namespace' pode apenas ser aplicada a namespaces; 'Grammar' é um tipo, não um namespace. Considere uma diretiva 'usando estático' [C:\Users\henri\OneDrive\Área de Trabalho\visiora-ai\backend\VisioraAPI\VisioraAPI.csproj]
+    0 Aviso(s)
+    1 Erro(s)
+
+Tempo Decorrido 00:00:01.42
