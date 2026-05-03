@@ -7,6 +7,11 @@ namespace VisioraAPI.Services;
 
 public class AudioService
 {
+    private static readonly HttpClient _httpClient = new()
+    {
+        Timeout = TimeSpan.FromSeconds(18)
+    };
+
     private readonly string _apiKey;
     private const int LIMITE_PADRAO = 240;
 
@@ -23,11 +28,6 @@ public class AudioService
 
     public async Task<string> GerarAudioBase64(string texto)
     {
-        using var client = new HttpClient();
-
-        client.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Bearer", _apiKey);
-
         var textoAjustado = AjustarTextoParaFalaNatural(texto);
 
         if (string.IsNullOrWhiteSpace(textoAjustado))
@@ -42,10 +42,11 @@ public class AudioService
 
         var json = JsonSerializer.Serialize(body);
 
-        using var response = await client.PostAsync(
-            "https://api.openai.com/v1/audio/speech",
-            new StringContent(json, Encoding.UTF8, "application/json")
-        );
+        using var request = new HttpRequestMessage(HttpMethod.Post, "https://api.openai.com/v1/audio/speech");
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _apiKey);
+        request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        using var response = await _httpClient.SendAsync(request);
 
         var bytes = await response.Content.ReadAsByteArrayAsync();
 
@@ -125,10 +126,10 @@ public class AudioService
         if (string.IsNullOrWhiteSpace(texto))
             return "";
 
-        texto = texto.Replace("mova-se", "siga", StringComparison.OrdinalIgnoreCase);
-        texto = texto.Replace("desloque-se", "vá", StringComparison.OrdinalIgnoreCase);
-        texto = texto.Replace("prossiga", "pode seguir", StringComparison.OrdinalIgnoreCase);
-        texto = texto.Replace("avance", "pode avançar", StringComparison.OrdinalIgnoreCase);
+        texto = texto.Replace("mova-se", "ajuste sua posição", StringComparison.OrdinalIgnoreCase);
+        texto = texto.Replace("desloque-se", "mude de posição", StringComparison.OrdinalIgnoreCase);
+        texto = texto.Replace("prossiga", "a passagem parece possível", StringComparison.OrdinalIgnoreCase);
+        texto = texto.Replace("avance", "a passagem parece livre", StringComparison.OrdinalIgnoreCase);
         texto = texto.Replace("reposicione-se", "ajuste sua posição", StringComparison.OrdinalIgnoreCase);
         texto = texto.Replace("mantenha-se", "fique", StringComparison.OrdinalIgnoreCase);
 
@@ -208,7 +209,7 @@ public class AudioService
 
         texto = texto.Replace("vale manter atenção porque", "vale atenção porque", StringComparison.OrdinalIgnoreCase);
         texto = texto.Replace("o caminho parece livre à frente", "parece livre à frente", StringComparison.OrdinalIgnoreCase);
-        texto = texto.Replace("pode seguir com cuidado", "siga com cuidado", StringComparison.OrdinalIgnoreCase);
+        texto = texto.Replace("pode seguir com cuidado", "vá com cuidado se for se mover", StringComparison.OrdinalIgnoreCase);
         texto = texto.Replace("mantenha atenção nesse lado", "atenção nesse lado", StringComparison.OrdinalIgnoreCase);
         texto = texto.Replace("use a porta à direita como referência", "use a porta à direita como referência", StringComparison.OrdinalIgnoreCase);
         texto = texto.Replace("use a porta à esquerda como referência", "use a porta à esquerda como referência", StringComparison.OrdinalIgnoreCase);

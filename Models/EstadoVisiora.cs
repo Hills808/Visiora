@@ -18,5 +18,6 @@ public class EstadoVisiora
     public int LeiturasConsistentesAmbiente { get; set; } = 0;
     public int LeiturasSuspeitaTransicao { get; set; } = 0;
     public int TempoNoAmbienteSegundos { get; set; } = 0;
+    public string ModoGuiaStatus { get; set; } = "observando";
     public DateTime AtualizadoEmUtc { get; set; } = DateTime.UtcNow;
 }

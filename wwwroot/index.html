@@ -486,89 +486,24 @@
             margin: 4px 0;
         }
 
-
-        .cognitive-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
-            margin-top: 16px;
+        .voice-hidden,
+        .voice-help,
+        .listening-box,
+        #btnVoz,
+        #btnFalarAjuda {
+            display: none !important;
         }
 
-        .cognitive-card {
-            padding: 14px;
-            border-radius: 16px;
-            background: rgba(11, 18, 32, 0.9);
-            border: 1px solid var(--line);
-            min-height: 92px;
-        }
 
-        .cognitive-title {
-            color: #93c5fd;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
 
-        .cognitive-value {
-            font-size: 15px;
-            font-weight: bold;
-            color: #f8fafc;
-            line-height: 1.4;
-        }
-
-        .confidence-wrap {
-            margin-top: 8px;
-        }
-
-        .confidence-bar {
-            width: 100%;
-            height: 10px;
-            border-radius: 999px;
-            background: rgba(51, 65, 85, 0.9);
-            overflow: hidden;
-            border: 1px solid rgba(148, 163, 184, 0.12);
-        }
-
-        .confidence-fill {
-            height: 100%;
-            width: 0%;
-            border-radius: 999px;
-            background: linear-gradient(90deg, #2563eb, #60a5fa);
-            transition: width 0.35s ease;
-        }
-
-        .timeline-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 14px;
-        }
-
-        .timeline-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 10px 12px;
-            border-radius: 14px;
-            background: rgba(11, 18, 32, 0.78);
-            border: 1px solid rgba(148, 163, 184, 0.12);
-        }
-
-        .timeline-dot {
-            width: 10px;
-            height: 10px;
-            margin-top: 5px;
-            border-radius: 50%;
-            background: var(--accent-2);
-            flex: 0 0 10px;
-        }
-
-        .timeline-text {
-            color: #e2e8f0;
-            font-size: 13px;
-            line-height: 1.5;
+        /* Modo feira/produto: foco em locomoção, câmera e guia automático.
+           A estrutura antiga de voz permanece no código para não quebrar compatibilidade,
+           mas fica oculta na interface principal. */
+        #btnVoz,
+        #btnFalarAjuda,
+        .listening-box,
+        .voice-help {
+            display: none !important;
         }
 
         @keyframes pulse {
@@ -601,6 +536,281 @@
             }
         }
 
+
+        .hero-visual {
+            position: relative;
+            min-width: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .core-shell {
+            position: relative;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background:
+                radial-gradient(circle at 50% 50%, rgba(96, 165, 250, 0.16), rgba(15, 23, 42, 0.02) 58%, transparent 72%);
+        }
+
+        .core-shell::before,
+        .core-shell::after {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border-radius: 50%;
+            border: 1px solid rgba(96, 165, 250, 0.18);
+            box-shadow: 0 0 30px rgba(37, 99, 235, 0.08);
+        }
+
+        .core-shell::after {
+            inset: 42px;
+            border-color: rgba(34, 197, 94, 0.12);
+        }
+
+        .core-orb {
+            position: relative;
+            width: 112px;
+            height: 112px;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 35% 35%, #dbeafe 0%, #60a5fa 24%, #2563eb 60%, #0f172a 100%);
+            box-shadow:
+                0 0 0 10px rgba(96, 165, 250, 0.08),
+                0 0 40px rgba(37, 99, 235, 0.34),
+                inset 0 0 22px rgba(255, 255, 255, 0.15);
+            animation: orbPulse 4.8s ease-in-out infinite;
+        }
+
+        .core-ring {
+            position: absolute;
+            inset: -34px;
+            border-radius: 50%;
+            border: 1px dashed rgba(148, 163, 184, 0.25);
+            animation: spinSlow 16s linear infinite;
+        }
+
+        .core-ring.inner {
+            inset: -16px;
+            border-style: solid;
+            border-color: rgba(34, 197, 94, 0.16);
+            animation-direction: reverse;
+            animation-duration: 10s;
+        }
+
+        .core-caption {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.78);
+            border: 1px solid rgba(96, 165, 250, 0.18);
+            color: #dbeafe;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .cognition-rail {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .insight-panel,
+        .ambient-panel {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .insight-panel::before,
+        .ambient-panel::before {
+            content: "";
+            position: absolute;
+            inset: auto -100px -120px auto;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.16), transparent 66%);
+            pointer-events: none;
+        }
+
+        .semantic-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .semantic-tile {
+            padding: 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.14);
+            background: rgba(11, 18, 32, 0.82);
+            min-height: 108px;
+        }
+
+        .semantic-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: #93c5fd;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .semantic-value {
+            font-size: 16px;
+            line-height: 1.45;
+            font-weight: bold;
+            color: #f8fafc;
+        }
+
+        .semantic-note {
+            margin-top: 6px;
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .thinking-flow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .thinking-chip {
+            padding: 9px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(96, 165, 250, 0.16);
+            background: rgba(15, 23, 42, 0.8);
+            color: #dbeafe;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .ambient-matrix {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .ambient-block {
+            padding: 16px;
+            border-radius: 18px;
+            background: rgba(11, 18, 32, 0.82);
+            border: 1px solid rgba(148, 163, 184, 0.14);
+        }
+
+        .ambient-block strong {
+            display: block;
+            margin-bottom: 6px;
+            color: #cbd5e1;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .ambient-big {
+            font-size: 22px;
+            line-height: 1.3;
+            font-weight: bold;
+            color: #f8fafc;
+        }
+
+        .ambient-sub {
+            margin-top: 6px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .camera-shell {
+            position: relative;
+        }
+
+        .camera-intelligence-bar {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin: 0 0 16px 0;
+        }
+
+        .camera-intelligence-pill {
+            padding: 14px 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(96, 165, 250, 0.14);
+            background: rgba(11, 18, 32, 0.88);
+        }
+
+        .camera-intelligence-pill .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: #93c5fd;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .camera-intelligence-pill .value {
+            font-size: 15px;
+            font-weight: bold;
+            color: #f8fafc;
+            line-height: 1.4;
+        }
+
+        .camera-frame::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            pointer-events: none;
+            border: 1px solid rgba(96, 165, 250, 0.08);
+            box-shadow: inset 0 0 80px rgba(15, 23, 42, 0.18);
+        }
+
+        .status-emphasis {
+            color: #f8fafc;
+            font-weight: bold;
+        }
+
+        .presence-card {
+            background:
+                linear-gradient(180deg, rgba(17, 24, 39, 0.96), rgba(15, 23, 42, 0.98)),
+                radial-gradient(circle at top right, rgba(37, 99, 235, 0.12), transparent 32%);
+        }
+
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes orbPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow:
+                    0 0 0 10px rgba(96, 165, 250, 0.08),
+                    0 0 40px rgba(37, 99, 235, 0.34),
+                    inset 0 0 22px rgba(255, 255, 255, 0.15);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow:
+                    0 0 0 14px rgba(96, 165, 250, 0.06),
+                    0 0 62px rgba(37, 99, 235, 0.42),
+                    inset 0 0 24px rgba(255, 255, 255, 0.18);
+            }
+        }
+
         @media (max-width: 1120px) {
             .grid {
                 grid-template-columns: 1fr;
@@ -613,6 +823,20 @@
             .hero-badges {
                 justify-content: flex-start;
                 min-width: auto;
+            }
+
+            .hero-visual {
+                min-width: auto;
+                width: 100%;
+            }
+
+            .cognition-rail {
+                grid-template-columns: 1fr;
+            }
+
+            .semantic-grid,
+            .camera-intelligence-bar {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
 
@@ -632,7 +856,9 @@
 
             .section-grid,
             .mini-grid,
-            .pill-grid {
+            .pill-grid,
+            .semantic-grid,
+            .camera-intelligence-bar {
                 grid-template-columns: 1fr;
             }
 
@@ -649,11 +875,86 @@
                 <div class="section-kicker">Sistema principal</div>
                 <h1>Visiora AI</h1>
                 <p>Assistente visual com IA para orientação, contexto de ambiente, acessibilidade real e apoio contínuo para pessoas com deficiência visual.</p>
+
+                <div class="hero-badges" style="justify-content:flex-start; margin-top:16px; min-width:auto;">
+                    <div class="hero-badge">Visão computacional assistiva</div>
+                    <div class="hero-badge">Orientação por áudio com Azure Speech</div>
+                    <div class="hero-badge">Análise contínua do ambiente</div>
+                </div>
             </div>
-            <div class="hero-badges">
-                <div class="hero-badge">Visão computacional assistiva</div>
-                <div class="hero-badge">Comando por voz com Azure Speech</div>
-                <div class="hero-badge">Análise contínua do ambiente</div>
+
+            <div class="hero-visual">
+                <div class="core-shell">
+                    <div class="core-ring"></div>
+                    <div class="core-ring inner"></div>
+                    <div class="core-orb"></div>
+                    <div class="core-caption" id="heroCoreStatus">Percepção ativa</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cognition-rail">
+            <div class="card insight-panel presence-card">
+                <div class="section-title">
+                    <div>
+                        <div class="section-kicker">Centro cognitivo</div>
+                        <h2>Leitura viva do ambiente</h2>
+                    </div>
+                    <div class="result-badge">Identidade Visiora</div>
+                </div>
+                <div class="card-subtitle">A interface agora destaca o estado mental da IA: percepção, estabilidade, mudança e orientação útil, sem perder compatibilidade com a base que já está funcionando.</div>
+
+                <div class="semantic-grid">
+                    <div class="semantic-tile">
+                        <div class="semantic-label">Ambiente atual</div>
+                        <div class="semantic-value" id="envStateText">Aguardando primeira leitura</div>
+                        <div class="semantic-note">A IA vai mostrar aqui a leitura dominante da cena.</div>
+                    </div>
+                    <div class="semantic-tile">
+                        <div class="semantic-label">Perfil da cena</div>
+                        <div class="semantic-value" id="envProfileText">Não definido</div>
+                        <div class="semantic-note">Estável, dinâmico, social ou de passagem.</div>
+                    </div>
+                    <div class="semantic-tile">
+                        <div class="semantic-label">Confiança contextual</div>
+                        <div class="semantic-value" id="envConfidenceText">Inicial</div>
+                        <div class="semantic-note">Sobe quando a leitura se repete com coerência.</div>
+                    </div>
+                    <div class="semantic-tile">
+                        <div class="semantic-label">Referência principal</div>
+                        <div class="semantic-value" id="envReferenceText">Nenhuma ainda</div>
+                        <div class="semantic-note">Objeto ou pista útil para orientação espacial.</div>
+                    </div>
+                </div>
+
+                <div class="thinking-flow">
+                    <div class="thinking-chip" id="thinkingChip1">Observando continuidade</div>
+                    <div class="thinking-chip" id="thinkingChip2">Avaliando passagem</div>
+                    <div class="thinking-chip" id="thinkingChip3">Priorizando segurança</div>
+                    <div class="thinking-chip" id="thinkingChip4">Preparando orientação útil</div>
+                </div>
+            </div>
+
+            <div class="card ambient-panel">
+                <div class="section-title">
+                    <div>
+                        <div class="section-kicker">Presença da IA</div>
+                        <h2>Estado perceptivo</h2>
+                    </div>
+                    <div class="result-badge" id="presenceBadge">Em espera</div>
+                </div>
+                <div class="ambient-matrix">
+                    <div class="ambient-block">
+                        <strong>Estado atual</strong>
+                        <div class="ambient-big" id="semanticSystemState">Pronta para observar</div>
+                        <div class="ambient-sub" id="semanticSystemSub">Inicie a câmera para ativar a percepção contínua do ambiente.</div>
+                    </div>
+                    <div class="ambient-block">
+                        <strong>Última decisão da IA</strong>
+                        <div class="ambient-big" id="semanticDecisionState">Nenhuma</div>
+                        <div class="ambient-sub">Este bloco traduz a telemetria em linguagem mais humana para a apresentação.</div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -669,6 +970,22 @@
                     </div>
                     <div class="card-subtitle">Visual principal da câmera, com comandos de voz, controle de captura e operação automática.</div>
 
+                    <div class="camera-intelligence-bar">
+                        <div class="camera-intelligence-pill">
+                            <div class="label">Modo de atenção</div>
+                            <div class="value" id="cameraSemanticMode">Observação assistida</div>
+                        </div>
+                        <div class="camera-intelligence-pill">
+                            <div class="label">Leitura espacial</div>
+                            <div class="value" id="cameraSemanticSpace">Sem leitura ainda</div>
+                        </div>
+                        <div class="camera-intelligence-pill">
+                            <div class="label">Tendência do ambiente</div>
+                            <div class="value" id="cameraSemanticTrend">Aguardando cena</div>
+                        </div>
+                    </div>
+
+                    <div class="camera-shell">
                     <div class="camera-frame">
                         <video id="video" autoplay playsinline muted></video>
                         <canvas id="canvas"></canvas>
@@ -687,37 +1004,38 @@
                             <div class="overlay-bottom">
                                 <div class="overlay-label">
                                     <span class="dot warn" id="voiceDot"></span>
-                                    Comando por voz
+                                    Orientação por áudio
                                 </div>
                                 <div class="overlay-label">Assistente visual contínuo</div>
                             </div>
                         </div>
                     </div>
+                    </div>
 
                     <div class="controls">
-                        <button id="btnVoz" class="voice off">Segure para falar</button>
-                        <button id="btnFalarAjuda" class="secondary">Falar instruções</button>
+                        <button id="btnVoz" class="voice off" aria-hidden="true" tabindex="-1">Comando de voz desativado</button>
+                        <button id="btnFalarAjuda" class="secondary" aria-hidden="true" tabindex="-1">Instruções</button>
                     </div>
 
                     <div class="listening-box">
                         <div class="section-title">
                             <div>
-                                <div class="section-kicker">Entrada de voz</div>
-                                <h3>Escuta e transcrição</h3>
+                                <div class="section-kicker">Guia por áudio</div>
+                                <h3>Orientação automática</h3>
                             </div>
-                            <div class="result-badge">Push-to-talk</div>
+                            <div class="result-badge">Automático</div>
                         </div>
 
                         <div class="listening-header">
                             <div id="micIndicator" class="mic-indicator"></div>
                             <div class="listening-state" id="listeningState">Pronto para gravar</div>
                         </div>
-                        <div id="statusEscuta">🎙️ Pressione e segure para falar...</div>
-                        <div class="small">Use o botão e segure enquanto fala. Ao soltar, o áudio será enviado como WAV para transcrição no Azure Speech.</div>
+                        <div id="statusEscuta">🎙️ Loop inteligente em percepção ativa</div>
+                        <div class="small">O guia fala automaticamente quando o loop inteligente identifica contexto, risco, pessoa, objeto relevante ou mudança útil.</div>
 
                         <div class="field">
-                            <label>Último comando transcrito</label>
-                            <div id="heardText" class="heard-text">Nenhuma fala detectada.</div>
+                            <label>Última orientação falada</label>
+                            <div id="heardText" class="heard-text">Aguardando primeira orientação do ambiente.</div>
                         </div>
                     </div>
 
@@ -772,8 +1090,8 @@
                     </div>
 
                     <div class="voice-help">
-                        <div><strong>Comandos por voz recomendados</strong></div>
-                        <div class="small">Para reduzir erros, o sistema usa gravação por botão com transcrição no backend.</div>
+                        <div><strong>Descrição e locomoção</strong></div>
+                        <div class="small">A orientação automática usa câmera e loop inteligente, sem depender de comando por voz.</div>
                         <div class="mono">
                             <br />
                             descrever ambiente<br />
@@ -791,6 +1109,30 @@
             </div>
 
             <div class="side-column">
+                <section class="card presence-card">
+                    <div class="section-title">
+                        <div>
+                            <div class="section-kicker">Memória de ambiente</div>
+                            <h2>Continuidade contextual</h2>
+                        </div>
+                        <div class="result-badge">Próxima fase</div>
+                    </div>
+                    <div class="card-subtitle">Este painel já prepara o front para a evolução da memória em RAM no VisioraService, sem alterar o que já funciona agora.</div>
+
+                    <div class="ambient-matrix">
+                        <div class="ambient-block">
+                            <strong>Leitura consolidada</strong>
+                            <div class="ambient-big" id="memoryConfirmedState">Ainda sem consolidação</div>
+                            <div class="ambient-sub">Vai refletir o ambiente mais consistente ao longo das leituras.</div>
+                        </div>
+                        <div class="ambient-block">
+                            <strong>Transição percebida</strong>
+                            <div class="ambient-big" id="memoryTransitionState">Nenhum indício forte</div>
+                            <div class="ambient-sub">Ajuda a diferenciar movimento de câmera de mudança real de espaço.</div>
+                        </div>
+                    </div>
+                </section>
+
                 <section class="card">
                     <div class="section-title">
                         <div>
@@ -815,7 +1157,7 @@
                             <div class="pill-status-value" id="statusAudio">parado</div>
                         </div>
                         <div class="pill-status">
-                            <div class="pill-status-title">Escuta por voz</div>
+                            <div class="pill-status-title">Guia por áudio</div>
                             <div class="pill-status-value" id="statusVoz">desligada</div>
                         </div>
                         <div class="pill-status">
@@ -823,7 +1165,7 @@
                             <div class="pill-status-value" id="statusReconhecimento">inativo</div>
                         </div>
                         <div class="pill-status">
-                            <div class="pill-status-title">Último comando</div>
+                            <div class="pill-status-title">Última orientação</div>
                             <div class="pill-status-value" id="statusComando">nenhum</div>
                         </div>
                     </div>
@@ -832,99 +1174,6 @@
                         <div class="result-item">
                             <strong>Última decisão do loop</strong>
                             <div id="statusDecision" class="small">nenhuma</div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="card">
-                    <div class="section-title">
-                        <div>
-                            <div class="section-kicker">Percepção cognitiva</div>
-                            <h2>Estado Cognitivo</h2>
-                        </div>
-                        <div class="result-badge">Estado interno</div>
-                    </div>
-                    <div class="card-subtitle">Mostra o que a Visiora está entendendo sobre o ambiente, movimento, atenção e continuidade em tempo real.</div>
-
-                    <div class="cognitive-grid">
-                        <div class="cognitive-card">
-                            <div class="cognitive-title">Ambiente atual</div>
-                            <div class="cognitive-value" id="estadoAmbiente">-</div>
-                        </div>
-
-                        <div class="cognitive-card">
-                            <div class="cognitive-title">Tipo do ambiente</div>
-                            <div class="cognitive-value" id="estadoTipoAmbiente">-</div>
-                        </div>
-
-                        <div class="cognitive-card">
-                            <div class="cognitive-title">Evento dominante</div>
-                            <div class="cognitive-value" id="estadoEventoAtual">-</div>
-                        </div>
-
-                        <div class="cognitive-card">
-                            <div class="cognitive-title">Nível de atenção</div>
-                            <div class="cognitive-value" id="estadoNivelAtencao">-</div>
-                        </div>
-
-                        <div class="cognitive-card">
-                            <div class="cognitive-title">Tendência de movimento</div>
-                            <div class="cognitive-value" id="estadoTendenciaMovimento">-</div>
-                        </div>
-
-                        <div class="cognitive-card">
-                            <div class="cognitive-title">Status do caminho</div>
-                            <div class="cognitive-value" id="estadoCaminhoStatus">-</div>
-                        </div>
-
-                        <div class="cognitive-card">
-                            <div class="cognitive-title">Referência principal</div>
-                            <div class="cognitive-value" id="estadoReferenciaPrincipal">-</div>
-                        </div>
-
-                        <div class="cognitive-card">
-                            <div class="cognitive-title">Tempo no ambiente</div>
-                            <div class="cognitive-value" id="estadoTempoNoAmbiente">-</div>
-                        </div>
-                    </div>
-
-                    <div class="result" style="margin-top: 16px;">
-                        <div class="result-item">
-                            <strong>Confiança do ambiente</strong>
-                            <div id="estadoConfiancaTexto" class="small">-</div>
-                            <div class="confidence-wrap">
-                                <div class="confidence-bar">
-                                    <div id="estadoConfiancaBarra" class="confidence-fill"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="result-item">
-                            <strong>Mudança detectada</strong>
-                            <div id="estadoMudancaDetectada" class="small">-</div>
-                        </div>
-
-                        <div class="result-item">
-                            <strong>Alerta principal</strong>
-                            <div id="estadoAlertaPrincipal" class="small">-</div>
-                        </div>
-
-                        <div class="result-item">
-                            <strong>Pessoa por perto</strong>
-                            <div id="estadoPessoaPorPerto" class="small">-</div>
-                        </div>
-                    </div>
-
-                    <div class="result" style="margin-top: 16px;">
-                        <div class="result-header">
-                            <h3>Memória recente</h3>
-                            <div class="result-badge">Continuidade</div>
-                        </div>
-                        <div id="estadoTimeline" class="timeline-list">
-                            <div class="timeline-item">
-                                <div class="timeline-dot"></div>
-                                <div class="timeline-text">Aguardando leituras do estado cognitivo.</div>
-                            </div>
                         </div>
                     </div>
                 </section>
@@ -951,8 +1200,8 @@
                             <label for="larguraCaptura">Largura da captura</label>
                             <select id="larguraCaptura">
                                 <option value="480">480</option>
-                                <option value="640">640</option>
-                                <option value="800" selected>800</option>
+                                <option value="640" selected>640</option>
+                                <option value="800">800</option>
                             </select>
                         </div>
                     </div>
@@ -1068,24 +1317,25 @@
         const resObjetos = document.getElementById("resObjetos");
         const resAlertas = document.getElementById("resAlertas");
 
-        const estadoAmbiente = document.getElementById("estadoAmbiente");
-        const estadoTipoAmbiente = document.getElementById("estadoTipoAmbiente");
-        const estadoEventoAtual = document.getElementById("estadoEventoAtual");
-        const estadoNivelAtencao = document.getElementById("estadoNivelAtencao");
-        const estadoTendenciaMovimento = document.getElementById("estadoTendenciaMovimento");
-        const estadoCaminhoStatus = document.getElementById("estadoCaminhoStatus");
-        const estadoReferenciaPrincipal = document.getElementById("estadoReferenciaPrincipal");
-        const estadoTempoNoAmbiente = document.getElementById("estadoTempoNoAmbiente");
-        const estadoConfiancaTexto = document.getElementById("estadoConfiancaTexto");
-        const estadoConfiancaBarra = document.getElementById("estadoConfiancaBarra");
-        const estadoMudancaDetectada = document.getElementById("estadoMudancaDetectada");
-        const estadoAlertaPrincipal = document.getElementById("estadoAlertaPrincipal");
-        const estadoPessoaPorPerto = document.getElementById("estadoPessoaPorPerto");
-        const estadoTimeline = document.getElementById("estadoTimeline");
-
         const micIndicator = document.getElementById("micIndicator");
         const listeningState = document.getElementById("listeningState");
         const heardText = document.getElementById("heardText");
+
+        const heroCoreStatus = document.getElementById("heroCoreStatus");
+        const envStateText = document.getElementById("envStateText");
+        const envProfileText = document.getElementById("envProfileText");
+        const envConfidenceText = document.getElementById("envConfidenceText");
+        const envReferenceText = document.getElementById("envReferenceText");
+        const semanticSystemState = document.getElementById("semanticSystemState");
+        const semanticSystemSub = document.getElementById("semanticSystemSub");
+        const semanticDecisionState = document.getElementById("semanticDecisionState");
+        const presenceBadge = document.getElementById("presenceBadge");
+        const cameraSemanticMode = document.getElementById("cameraSemanticMode");
+        const cameraSemanticSpace = document.getElementById("cameraSemanticSpace");
+        const cameraSemanticTrend = document.getElementById("cameraSemanticTrend");
+        const memoryConfirmedState = document.getElementById("memoryConfirmedState");
+        const memoryTransitionState = document.getElementById("memoryTransitionState");
+
 
         let streamAtual = null;
         let modoAutomaticoAtivo = false;
@@ -1103,8 +1353,6 @@
         let miniFrameAnterior = null;
 
         let ultimoResultado = null;
-        let ultimoEstadoCognitivo = null;
-        let historicoEstadoCognitivo = [];
         let ultimoAudioTocando = false;
 
         let reconhecimento = null;
@@ -1128,6 +1376,20 @@
         let ultimoInicioGravacaoEm = 0;
         let IA_FALANDO = false;
         let retornoEscutaTimeout = null;
+        let ciclosEstaveisSemAnalise = 0;
+        let ultimaAnaliseEstavelEm = 0;
+        let ultimaFalaGuiaLocal = "";
+        let ultimaFalaGuiaLocalEm = 0;
+        let ultimaMudancaVisualAltaEm = 0;
+        let modoGuiaRapidoAtivo = true;
+        let primeiraLeituraPendente = true;
+        let ultimaDiferencaVisualCalculada = 0;
+        let nivelMovimentoAtual = "indefinido";
+
+        const INTERVALO_MAXIMO_ANALISE_ESTAVEL_MS = 9200;
+        const COOLDOWN_FALA_GUIA_LOCAL_MS = 2200;
+        const DIFERENCA_VISUAL_ALTA = 10;
+        const DIFERENCA_VISUAL_MODERADA = 4.5;
 
         const ENDPOINT = "/Teste/analisar";
         const PALAVRA_ATIVACAO = "guia";
@@ -1151,6 +1413,107 @@
             return new Date(timestamp).toLocaleTimeString("pt-BR");
         }
 
+
+        function primeiraLetraMaiuscula(texto) {
+            if (!texto) return "";
+            return texto.charAt(0).toUpperCase() + texto.slice(1);
+        }
+
+        function inferirPerfilAmbiente(data) {
+            const descricao = normalizarTexto(data?.descricao || "");
+            const objetos = (data?.objetos || []).map(normalizarTexto);
+            const pessoa = normalizarTexto(data?.pessoa || "");
+            const alertas = (data?.alertas || []).map(normalizarTexto);
+
+            if (descricao.includes("mercado") || descricao.includes("loja") || descricao.includes("recepcao") || descricao.includes("comercial") || alertas.some(a => a.includes("circulacao"))) {
+                return "Dinâmico";
+            }
+
+            if (descricao.includes("corredor") || descricao.includes("passagem")) {
+                return "De passagem";
+            }
+
+            if (pessoa || objetos.includes("pessoa")) {
+                return "Social";
+            }
+
+            if (descricao.includes("quarto") || descricao.includes("sala") || descricao.includes("cozinha") || descricao.includes("banheiro") || descricao.includes("domestico") || objetos.includes("cama") || objetos.includes("guarda-roupa") || objetos.includes("sofa")) {
+                return "Estável";
+            }
+
+            return "Em avaliação";
+        }
+
+        function inferirConfiancaContextual(data) {
+            const importancia = normalizarTexto(data?.importancia || "");
+            const descricao = normalizarTexto(data?.descricao || "");
+
+            if (importancia === "alta") return "Alta atenção";
+            if (descricao.includes("parece")) return "Moderada";
+            if (descricao) return "Em consolidação";
+            return "Inicial";
+        }
+
+        function extrairReferenciaPrincipal(data) {
+            const objetos = (data?.objetos || []).map(item => item || "");
+            const prioridade = ["porta", "cama", "guarda-roupa", "mesa", "cadeira", "balcao", "prateleira", "sofa", "geladeira", "pia"];
+
+            for (const item of prioridade) {
+                const encontrado = objetos.find(obj => normalizarTexto(obj) === item);
+                if (encontrado) return primeiraLetraMaiuscula(encontrado);
+            }
+
+            if (objetos.length > 0) return primeiraLetraMaiuscula(objetos[0]);
+            return "Nenhuma ainda";
+        }
+
+        function atualizarCamadaSemantica(data) {
+            if (!data) return;
+
+            const estado = data.estadoCognitivo || data.EstadoCognitivo || {};
+            const memoria = data.memoriaRecente || data.MemoriaRecente || [];
+
+            const descricao = data.descricao || data.Descricao || "Sem leitura útil";
+            const ambiente = estado.ambienteAtual || estado.AmbienteAtual || descricao;
+            const perfil = estado.tipoAmbiente || estado.TipoAmbiente || inferirPerfilAmbiente(data);
+            const confiancaValor = estado.confiancaAmbiente ?? estado.ConfiancaAmbiente ?? data.confiancaAmbiente ?? data.ConfiancaAmbiente;
+            const confianca = typeof confiancaValor === "number" ? `${Math.round(confiancaValor)}%` : inferirConfiancaContextual(data);
+            const referencia = estado.referenciaPrincipal || estado.ReferenciaPrincipal || extrairReferenciaPrincipal(data);
+            const alerta = estado.alertaPrincipal || estado.AlertaPrincipal || data.alertaPrincipal || ((data.alertas && data.alertas.length > 0) ? data.alertas[0] : "");
+            const evento = estado.eventoAtual || estado.EventoAtual || "Observando";
+            const tendencia = estado.tendenciaMovimento || estado.TendenciaMovimento || (alerta ? "Atenção imediata" : (perfil === "Dinâmico" || perfil === "De passagem" ? "Mudança frequente" : "Cena mais estável"));
+
+            envStateText.textContent = ambiente || descricao;
+            envProfileText.textContent = perfil || "Em avaliação";
+            envConfidenceText.textContent = confianca || "Inicial";
+            envReferenceText.textContent = referencia || "Nenhuma ainda";
+
+            cameraSemanticSpace.textContent = alerta && alerta !== "-" ? primeiraLetraMaiuscula(alerta) : (ambiente || descricao);
+            cameraSemanticTrend.textContent = tendencia;
+            cameraSemanticMode.textContent = modoAutomaticoAtivo ? "Modo guia rápido" : "Consulta assistida";
+
+            if (memoria.length > 0) {
+                const ultimo = memoria[0];
+                const ambienteMemoria = ultimo.ambiente || ultimo.Ambiente || ambiente;
+                const eventoMemoria = ultimo.evento || ultimo.Evento || evento;
+                const caminhoMemoria = ultimo.caminho || ultimo.Caminho || estado.caminhoStatus || estado.CaminhoStatus || "desconhecido";
+
+                memoryConfirmedState.textContent = `${ambienteMemoria} • ${caminhoMemoria}`;
+                memoryTransitionState.textContent = eventoMemoria;
+            } else {
+                memoryConfirmedState.textContent = ambiente || descricao;
+                memoryTransitionState.textContent = evento || "Sem transição relevante";
+            }
+
+            heroCoreStatus.textContent = alerta && alerta !== "-" ? "Atenção ativa" : "Percepção ativa";
+        }
+
+        function atualizarPresencaIA(estado, subtitulo = "") {
+            semanticSystemState.textContent = estado;
+            if (subtitulo) semanticSystemSub.textContent = subtitulo;
+            presenceBadge.textContent = estado;
+        }
+
         function atualizarDiagnostico() {
             atualizarTexto(diagAnalisando, analisando ? "sim" : "não");
             atualizarTexto(diagAudioTocando, ultimoAudioTocando ? "sim" : "não");
@@ -1162,6 +1525,7 @@
 
         function setStatusDecision(texto) {
             statusDecision.textContent = texto;
+            semanticDecisionState.textContent = primeiraLetraMaiuscula(texto || "nenhuma");
         }
 
         function preencherListaChips(container, items) {
@@ -1183,176 +1547,6 @@
             }
         }
 
-
-        function formatarRotuloEstado(valor) {
-            if (valor === null || valor === undefined || valor === "") return "-";
-
-            return String(valor)
-                .replace(/_/g, " ")
-                .replace(/\b\w/g, letra => letra.toUpperCase());
-        }
-
-        function formatarPercentualConfianca(valor) {
-            if (valor === null || valor === undefined || valor === "") return "-";
-
-            const numero = typeof valor === "number" ? valor : parseFloat(valor);
-
-            if (Number.isNaN(numero)) return "-";
-
-            const percentual = numero <= 1 ? numero * 100 : numero;
-            return `${Math.max(0, Math.min(100, percentual)).toFixed(0)}%`;
-        }
-
-        function formatarTempoAmbiente(valor) {
-            if (valor === null || valor === undefined || valor === "") return "-";
-
-            if (typeof valor === "number") {
-                if (valor < 60) return `${Math.round(valor)}s`;
-                const minutos = Math.floor(valor / 60);
-                const segundos = Math.round(valor % 60);
-                return segundos > 0 ? `${minutos}m ${segundos}s` : `${minutos}m`;
-            }
-
-            return String(valor);
-        }
-
-        function preencherTimelineEstado() {
-            estadoTimeline.innerHTML = "";
-
-            if (!historicoEstadoCognitivo.length) {
-                const item = document.createElement("div");
-                item.className = "timeline-item";
-                item.innerHTML = '<div class="timeline-dot"></div><div class="timeline-text">Aguardando leituras do estado cognitivo.</div>';
-                estadoTimeline.appendChild(item);
-                return;
-            }
-
-            for (const entrada of historicoEstadoCognitivo.slice().reverse()) {
-                const item = document.createElement("div");
-                item.className = "timeline-item";
-
-                const ambiente = formatarRotuloEstado(entrada.ambienteAtual || "ambiente indefinido");
-                const evento = formatarRotuloEstado(entrada.eventoAtual || "sem evento");
-                const caminho = formatarRotuloEstado(entrada.caminhoStatus || "sem status de caminho");
-
-                item.innerHTML = `
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-text">
-                        <strong>${ambiente}</strong><br />
-                        Evento: ${evento}<br />
-                        Caminho: ${caminho}
-                    </div>
-                `;
-
-                estadoTimeline.appendChild(item);
-            }
-        }
-
-
-        function normalizarEstadoCognitivo(raw) {
-            if (!raw || typeof raw !== "object") return null;
-
-            const pick = (...keys) => {
-                for (const key of keys) {
-                    const valor = raw[key];
-                    if (valor !== undefined && valor !== null && valor !== "") return valor;
-                }
-                return null;
-            };
-
-            return {
-                ambienteAtual: pick("ambienteAtual", "ambiente", "ambienteConfirmado", "localAtual", "nomeAmbiente"),
-                tipoAmbiente: pick("tipoAmbiente", "perfilAmbiente", "categoriaAmbiente", "classeAmbiente"),
-                eventoAtual: pick("eventoAtual", "eventoDominante", "eventoPrincipal", "evento"),
-                nivelAtencao: pick("nivelAtencao", "atencao", "prioridadeAtencao"),
-                tendenciaMovimento: pick("tendenciaMovimento", "movimento", "direcaoMovimento", "estadoMovimento"),
-                caminhoStatus: pick("caminhoStatus", "statusCaminho", "situacaoCaminho", "estadoCaminho"),
-                referenciaPrincipal: pick("referenciaPrincipal", "referenciaAtual", "referenciaDominante", "marcoPrincipal"),
-                tempoNoAmbiente: pick("tempoNoAmbiente", "duracaoAmbiente", "tempoAmbiente", "permanenciaAmbiente"),
-                confiancaAmbiente: pick("confiancaAmbiente", "confianca", "confiancaDoAmbiente", "nivelConfianca"),
-                mudancaDetectada: pick("mudancaDetectada", "houveMudanca", "transicaoDetectada", "mudanca"),
-                alertaPrincipal: pick("alertaPrincipal", "alertaAtual", "alertaDominante", "alerta"),
-                pessoaPorPerto: pick("pessoaPorPerto", "haPessoaPorPerto", "pessoaProxima", "pessoaDetectada")
-            };
-        }
-
-        function atualizarEstadoCognitivo(estado) {
-            ultimoEstadoCognitivo = estado || null;
-
-            if (!estado) {
-                atualizarTexto(estadoAmbiente, "-");
-                atualizarTexto(estadoTipoAmbiente, "-");
-                atualizarTexto(estadoEventoAtual, "-");
-                atualizarTexto(estadoNivelAtencao, "-");
-                atualizarTexto(estadoTendenciaMovimento, "-");
-                atualizarTexto(estadoCaminhoStatus, "-");
-                atualizarTexto(estadoReferenciaPrincipal, "-");
-                atualizarTexto(estadoTempoNoAmbiente, "-");
-                atualizarTexto(estadoConfiancaTexto, "-");
-                atualizarTexto(estadoMudancaDetectada, "-");
-                atualizarTexto(estadoAlertaPrincipal, "-");
-                atualizarTexto(estadoPessoaPorPerto, "-");
-                estadoConfiancaBarra.style.width = "0%";
-                preencherTimelineEstado();
-                return;
-            }
-
-            atualizarTexto(estadoAmbiente, formatarRotuloEstado(estado.ambienteAtual));
-            atualizarTexto(estadoTipoAmbiente, formatarRotuloEstado(estado.tipoAmbiente));
-            atualizarTexto(estadoEventoAtual, formatarRotuloEstado(estado.eventoAtual));
-            atualizarTexto(estadoNivelAtencao, formatarRotuloEstado(estado.nivelAtencao));
-            atualizarTexto(estadoTendenciaMovimento, formatarRotuloEstado(estado.tendenciaMovimento));
-            atualizarTexto(estadoCaminhoStatus, formatarRotuloEstado(estado.caminhoStatus));
-            atualizarTexto(estadoReferenciaPrincipal, formatarRotuloEstado(estado.referenciaPrincipal));
-            atualizarTexto(estadoTempoNoAmbiente, formatarTempoAmbiente(estado.tempoNoAmbiente));
-
-            const confiancaTexto = formatarPercentualConfianca(estado.confiancaAmbiente);
-            atualizarTexto(estadoConfiancaTexto, confiancaTexto);
-            estadoConfiancaBarra.style.width = confiancaTexto === "-" ? "0%" : confiancaTexto;
-
-            atualizarTexto(
-                estadoMudancaDetectada,
-                estado.mudancaDetectada === true ? "sim" : (estado.mudancaDetectada === false ? "não" : "-")
-            );
-
-            atualizarTexto(estadoAlertaPrincipal, formatarRotuloEstado(estado.alertaPrincipal));
-            atualizarTexto(
-                estadoPessoaPorPerto,
-                estado.pessoaPorPerto === true ? "sim" : (estado.pessoaPorPerto === false ? "não" : formatarRotuloEstado(estado.pessoaPorPerto))
-            );
-
-            const assinatura = JSON.stringify({
-                ambienteAtual: estado.ambienteAtual || "",
-                eventoAtual: estado.eventoAtual || "",
-                caminhoStatus: estado.caminhoStatus || "",
-                referenciaPrincipal: estado.referenciaPrincipal || ""
-            });
-
-            const ultimaAssinatura = historicoEstadoCognitivo.length
-                ? JSON.stringify({
-                    ambienteAtual: historicoEstadoCognitivo[historicoEstadoCognitivo.length - 1].ambienteAtual || "",
-                    eventoAtual: historicoEstadoCognitivo[historicoEstadoCognitivo.length - 1].eventoAtual || "",
-                    caminhoStatus: historicoEstadoCognitivo[historicoEstadoCognitivo.length - 1].caminhoStatus || "",
-                    referenciaPrincipal: historicoEstadoCognitivo[historicoEstadoCognitivo.length - 1].referenciaPrincipal || ""
-                })
-                : "";
-
-            if (assinatura !== ultimaAssinatura) {
-                historicoEstadoCognitivo.push({
-                    ambienteAtual: estado.ambienteAtual || "",
-                    eventoAtual: estado.eventoAtual || "",
-                    caminhoStatus: estado.caminhoStatus || "",
-                    referenciaPrincipal: estado.referenciaPrincipal || ""
-                });
-
-                if (historicoEstadoCognitivo.length > 5) {
-                    historicoEstadoCognitivo.shift();
-                }
-            }
-
-            preencherTimelineEstado();
-        }
-
         function mostrarResultado(data) {
             ultimoResultado = data;
 
@@ -1364,15 +1558,7 @@
 
             preencherListaChips(resObjetos, data.objetos || []);
             preencherListaChips(resAlertas, data.alertas || []);
-
-            const estadoBruto =
-                data.estadoCognitivo ||
-                data.estado ||
-                data.cognitiveState ||
-                data.estadoInterno ||
-                null;
-
-            atualizarEstadoCognitivo(normalizarEstadoCognitivo(estadoBruto));
+            atualizarCamadaSemantica(data);
         }
 
         function atualizarMarcadorEscuta() {
@@ -1431,7 +1617,7 @@
                     }
 
                     atualizarTexto(statusReconhecimento, "ouvindo");
-                    atualizarStatus("🎙️ Pressione e segure para falar...");
+                    atualizarStatus("🎙️ Loop inteligente em percepção ativa");
                     iniciarReconhecimentoInterno();
                 }, tempoMs);
             }
@@ -1444,6 +1630,22 @@
                 }
             } catch (error) {
                 console.error("Erro ao parar síntese local:", error);
+            }
+        }
+
+        function selecionarVozPortugues() {
+            try {
+                if (!("speechSynthesis" in window)) return null;
+
+                const vozes = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+                if (!vozes || vozes.length === 0) return null;
+
+                return vozes.find(v => normalizarTexto(v.lang || "").startsWith("pt br"))
+                    || vozes.find(v => normalizarTexto(v.lang || "").startsWith("pt"))
+                    || vozes.find(v => normalizarTexto(v.name || "").includes("portugu"))
+                    || null;
+            } catch {
+                return null;
             }
         }
 
@@ -1461,10 +1663,17 @@
                 }
 
                 const utterance = new SpeechSynthesisUtterance(texto);
+                const textoNormalizado = normalizarTexto(texto);
+                const falaUrgente = textoNormalizado.includes("cuidado") || textoNormalizado.includes("pare") || textoNormalizado.includes("atencao") || textoNormalizado.includes("atenção");
                 utterance.lang = "pt-BR";
-                utterance.rate = 1.0;
+                utterance.rate = falaUrgente ? 1.05 : (texto.length > 150 ? 0.96 : 0.98);
                 utterance.pitch = 1.0;
                 utterance.volume = 1.0;
+
+                const vozPtBr = selecionarVozPortugues();
+                if (vozPtBr) {
+                    utterance.voice = vozPtBr;
+                }
 
                 utterance.onstart = () => {
                     IA_FALANDO = true;
@@ -1491,6 +1700,47 @@
             }
         }
 
+        function obterTextoFalaGuia(data) {
+            if (!data) return "";
+
+            return (data.falaGuia || data.FalaGuia || "").trim();
+        }
+
+        function deveFalarGuiaLocal(texto, importancia) {
+            if (!texto) return false;
+
+            const agora = Date.now();
+            const normalizado = normalizarTexto(texto);
+            const ultima = normalizarTexto(ultimaFalaGuiaLocal);
+            const importanciaNormalizada = normalizarTexto(importancia || "");
+
+            if (normalizado === ultima && importanciaNormalizada !== "alta") {
+                return false;
+            }
+
+            if (ultimaFalaGuiaLocalEm && (agora - ultimaFalaGuiaLocalEm) < COOLDOWN_FALA_GUIA_LOCAL_MS && importanciaNormalizada !== "alta") {
+                return false;
+            }
+
+            return true;
+        }
+
+        function falarGuiaLocal(texto, importancia = "") {
+            if (!deveFalarGuiaLocal(texto, importancia)) {
+                return;
+            }
+
+            ultimaFalaGuiaLocal = texto;
+            ultimaFalaGuiaLocalEm = Date.now();
+
+            if (importancia === "alta" || importancia === "media") {
+                ultimaFalaImportanteEm = Date.now();
+            }
+
+            falarLocal(texto, true);
+            setStatusDecision("fala local do modo guia");
+        }
+
         function falar(texto) {
             falarLocal(texto, true);
         }
@@ -1508,7 +1758,7 @@
             timeoutComando = setTimeout(() => {
                 aguardandoComando = false;
                 timeoutComando = null;
-                atualizarStatus("🎙️ Pressione e segure para falar...");
+                atualizarStatus("🎙️ Loop inteligente em percepção ativa");
                 falar("N\u00e3o entendi, tente novamente");
             }, 5000);
         }
@@ -1530,6 +1780,7 @@
                 video.srcObject = stream;
 
                 atualizarTexto(statusCamera, "ligada");
+                atualizarPresencaIA("Observando ambiente", "A câmera está ativa e pronta para captar o contexto espacial.");
                 setStatusDecision("câmera iniciada");
             } catch (error) {
                 console.error(error);
@@ -1547,6 +1798,7 @@
 
             video.srcObject = null;
             atualizarTexto(statusCamera, "desligada");
+            atualizarPresencaIA("Pronta para observar", "Inicie a câmera para ativar a percepção contínua do ambiente.");
             setStatusDecision("câmera parada");
         }
 
@@ -1556,6 +1808,7 @@
                 ultimoAudioTocando = false;
                 atualizarTexto(statusAudio, "pausado");
                 atualizarDiagnostico();
+        atualizarPresencaIA("Pronta para observar", "Inicie a câmera para ativar a percepção contínua do ambiente.");
             }
         }
 
@@ -1673,12 +1926,13 @@
     }
 }
 
-        function capturarFrameBase64() {
+        function capturarFrameBase64(modoCaptura = "consulta") {
             if (!video.videoWidth || !video.videoHeight) {
                 return "";
             }
 
-            const largura = parseInt(larguraCaptura.value, 10);
+            const larguraSelecionada = parseInt(larguraCaptura.value, 10);
+            const largura = modoCaptura === "guia" ? Math.min(larguraSelecionada, 640) : larguraSelecionada;
             const proporcao = video.videoHeight / video.videoWidth;
             const altura = Math.round(largura * proporcao);
 
@@ -1730,17 +1984,19 @@
             return soma / frameA.length;
         }
 
-        function definirIntervaloDinamico(mudancaVisualAlta) {
+        function definirIntervaloDinamico(mudancaVisualAlta, mudancaVisualModerada = false) {
             if (ultimoAudioTocando) {
                 intervaloAtual = 2600;
             } else if (mudancaVisualAlta) {
-                intervaloAtual = 900;
-            } else if (ultimoResultado?.importancia === "alta") {
+                intervaloAtual = 850;
+            } else if (mudancaVisualModerada) {
                 intervaloAtual = 1200;
+            } else if (ultimoResultado?.importancia === "alta") {
+                intervaloAtual = 1100;
             } else if (ultimoResultado?.importancia === "media") {
-                intervaloAtual = 1500;
+                intervaloAtual = 1600;
             } else {
-                intervaloAtual = 2200;
+                intervaloAtual = 2600;
             }
 
             atualizarDiagnostico();
@@ -1756,13 +2012,62 @@
             return tempoDesdeUltimaFala < 2500;
         }
 
-        async function enviarParaAnalise(modo, pergunta = "") {
+        function inferirNivelMovimento(diferenca) {
+            if (diferenca >= DIFERENCA_VISUAL_ALTA) return "forte";
+            if (diferenca >= DIFERENCA_VISUAL_MODERADA) return "moderado";
+            if (diferenca >= 2.0) return "leve";
+            return "parado";
+        }
+
+        function montarTelemetriaAnalise(modo, opcoes = {}) {
+            const agora = Date.now();
+            const mudancaVisual = typeof opcoes.mudancaVisual === "number"
+                ? opcoes.mudancaVisual
+                : (parseFloat(diagMudanca.textContent || "0") || 0);
+
+            const nivelMovimento = opcoes.nivelMovimento || inferirNivelMovimento(mudancaVisual);
+            const cenaEstavel = typeof opcoes.cenaEstavel === "boolean"
+                ? opcoes.cenaEstavel
+                : mudancaVisual < DIFERENCA_VISUAL_MODERADA;
+
+            return {
+                mudancaVisual,
+                preferirAudioLocal: modo === "guia",
+                primeiraLeitura: !!opcoes.primeiraLeitura,
+                forcarDescricaoInicial: !!opcoes.forcarDescricaoInicial,
+                forcarAnalise: !!opcoes.forcarAnalise,
+                loopAtivo: modoAutomaticoAtivo,
+                cenaEstavel,
+                audioTocando: IA_FALANDO || ultimoAudioTocando,
+                nivelMovimento,
+                tempoDesdeUltimaAnaliseMs: ultimoEnvioEm ? Math.max(0, agora - ultimoEnvioEm) : 0,
+                tempoDesdeUltimaFalaMs: ultimaFalaGuiaLocalEm ? Math.max(0, agora - ultimaFalaGuiaLocalEm) : 0
+            };
+        }
+
+        function montarPerguntaPercepcaoAtiva(tipoEvento) {
+            if (tipoEvento === "inicio") {
+                return "Primeira leitura do Visiora. Descreva o ambiente de forma útil para uma pessoa com deficiência visual se situar. Não presuma que ela quer andar. Informe tipo provável de ambiente, organização geral, pontos de interesse como porta ou passagem, pessoas, obstáculos e objetos úteis.";
+            }
+
+            if (tipoEvento === "movimento-forte") {
+                return "Percepção ativa: a câmera mudou bastante. Verifique se é outro ambiente, se apareceu pessoa, obstáculo, porta, passagem ou ponto útil. Não dê comando de direção sem necessidade; informe possibilidades e riscos.";
+            }
+
+            if (tipoEvento === "movimento-moderado") {
+                return "Percepção ativa: a câmera mudou de direção. Informe apenas o que apareceu, mudou ou ficou útil para a pessoa compreender o espaço: porta, passagem, pessoa, obstáculo, cadeira, mesa ou referência importante.";
+            }
+
+            return "Verificação silenciosa de prontidão. Se nada útil mudou, retorne silêncio. Fale apenas se houver risco, pessoa, mudança de ambiente, porta, passagem ou ponto de interesse novo.";
+        }
+
+        async function enviarParaAnalise(modo, pergunta = "", opcoes = {}) {
             if (analisando) {
                 setStatusDecision("requisição ignorada: análise já em andamento");
                 return null;
             }
 
-            const imagemBase64 = capturarFrameBase64();
+            const imagemBase64 = capturarFrameBase64(modo === "guia" ? "guia" : "consulta");
 
             if (!imagemBase64) {
                 setStatusDecision("sem frame disponível");
@@ -1771,6 +2076,7 @@
 
             analisando = true;
             ultimoEnvioEm = Date.now();
+            atualizarPresencaIA("Interpretando cena", modo === "guia" ? "Percepção ativa analisando ambiente, pontos úteis, riscos e mudanças." : (modo === "automatico" ? "A IA está avaliando continuidade, risco e contexto do ambiente." : "A IA está respondendo a uma consulta direcionada do usuário."));
             atualizarDiagnostico();
 
             try {
@@ -1782,7 +2088,8 @@
                     body: JSON.stringify({
                         imagemBase64,
                         modo,
-                        pergunta
+                        pergunta,
+                        ...montarTelemetriaAnalise(modo, opcoes)
                     })
                 });
 
@@ -1795,14 +2102,21 @@
 
                 mostrarResultado(data);
 
+                const textoGuia = obterTextoFalaGuia(data);
+
                 if (data.audioBase64) {
                     await tocarAudioBase64(data.audioBase64, data.importancia || "");
+                } else if (modo === "guia" && textoGuia) {
+                    falarGuiaLocal(textoGuia, data.importancia || data.Importancia || "");
                 }
 
+                const tempoResposta = data.tempoProcessamentoMs || data.TempoProcessamentoMs || 0;
+                atualizarPresencaIA("Leitura atualizada", tempoResposta ? `Guia atualizado em ${tempoResposta} ms.` : "A percepção foi renovada com base no frame mais recente.");
                 setStatusDecision(`análise concluída (${modo})`);
                 return data;
             } catch (error) {
                 console.error(error);
+                atualizarPresencaIA("Falha de leitura", "Houve um problema temporário ao interpretar o ambiente.");
                 setStatusDecision("erro ao analisar");
                 alert("Erro ao analisar ambiente.");
                 return null;
@@ -1825,11 +2139,20 @@
             const diferenca = calcularMudancaVisual(miniFrameAnterior, miniFrameAtual);
             miniFrameAnterior = miniFrameAtual;
 
-            const mudancaVisualAlta = diferenca >= 12;
-            const mudancaVisualModerada = diferenca >= 6;
+            const mudancaVisualAlta = diferenca >= DIFERENCA_VISUAL_ALTA;
+            const mudancaVisualModerada = diferenca >= DIFERENCA_VISUAL_MODERADA;
+            ultimaDiferencaVisualCalculada = diferenca;
+            nivelMovimentoAtual = inferirNivelMovimento(diferenca);
+
+            if (mudancaVisualAlta) {
+                ultimaMudancaVisualAltaEm = Date.now();
+                ciclosEstaveisSemAnalise = 0;
+            } else if (!mudancaVisualModerada) {
+                ciclosEstaveisSemAnalise++;
+            }
 
             atualizarTexto(diagMudanca, diferenca.toFixed(2));
-            definirIntervaloDinamico(mudancaVisualAlta);
+            definirIntervaloDinamico(mudancaVisualAlta, mudancaVisualModerada);
 
             const agora = Date.now();
             const tempoDesdeUltimoEnvio = agora - ultimoEnvioEm;
@@ -1852,21 +2175,42 @@
                 return;
             }
 
-            if (!mudancaVisualModerada && tempoDesdeUltimoEnvio < intervaloAtual) {
-                setStatusDecision("cena estável: aguardando novo ciclo");
-                agendarProximoLoop(600);
-                return;
+            if (!mudancaVisualModerada) {
+                const precisaAtualizacaoDeSeguranca = tempoDesdeUltimoEnvio >= INTERVALO_MAXIMO_ANALISE_ESTAVEL_MS;
+
+                if (!precisaAtualizacaoDeSeguranca) {
+                    setStatusDecision("cena estável: IA em espera inteligente");
+                    atualizarPresencaIA("Observando localmente", "Sem mudança suficiente para chamar análise pesada.");
+                    agendarProximoLoop(650);
+                    return;
+                }
+
+                ultimaAnaliseEstavelEm = agora;
             }
+
+            let perguntaGuia = "";
+            let tipoEvento = "verificacao";
 
             if (mudancaVisualAlta) {
-                setStatusDecision("mudança visual alta: análise antecipada");
+                tipoEvento = "movimento-forte";
+                perguntaGuia = montarPerguntaPercepcaoAtiva(tipoEvento);
+                setStatusDecision("movimento forte: percepção ativa avaliando mudança");
             } else if (mudancaVisualModerada) {
-                setStatusDecision("mudança visual moderada: nova checagem");
+                tipoEvento = "movimento-moderado";
+                perguntaGuia = montarPerguntaPercepcaoAtiva(tipoEvento);
+                setStatusDecision("movimento moderado: procurando ponto útil");
             } else {
-                setStatusDecision("checagem periódica de estabilidade");
+                tipoEvento = "verificacao";
+                perguntaGuia = montarPerguntaPercepcaoAtiva(tipoEvento);
+                setStatusDecision("checagem de prontidão em silêncio inteligente");
             }
 
-            await enviarParaAnalise("automatico", "");
+            await enviarParaAnalise(modoGuiaRapidoAtivo ? "guia" : "automatico", perguntaGuia, {
+                mudancaVisual: diferenca,
+                nivelMovimento: nivelMovimentoAtual,
+                cenaEstavel: !mudancaVisualModerada,
+                forcarAnalise: mudancaVisualAlta
+            });
             agendarProximoLoop(intervaloAtual);
         }
 
@@ -1884,15 +2228,36 @@
             if (modoAutomaticoAtivo) return;
 
             modoAutomaticoAtivo = true;
+            ciclosEstaveisSemAnalise = 0;
+            ultimaAnaliseEstavelEm = 0;
+            miniFrameAnterior = capturarMiniFrame();
             atualizarTexto(statusAuto, "ligado");
-            setStatusDecision("modo automático iniciado");
-            executarLoopAutomatico();
+            atualizarPresencaIA("Primeira leitura do ambiente", "A Visiora vai situar o espaço, apontar pontos de interesse e permanecer pronta para avisar mudanças relevantes.");
+            cameraSemanticMode.textContent = "Percepção ativa";
+            setStatusDecision("modo automático iniciado: primeira leitura do ambiente");
+
+            primeiraLeituraPendente = false;
+            enviarParaAnalise("guia", montarPerguntaPercepcaoAtiva("inicio"), {
+                primeiraLeitura: true,
+                forcarDescricaoInicial: true,
+                forcarAnalise: true,
+                mudancaVisual: 100,
+                nivelMovimento: "inicio",
+                cenaEstavel: false
+            })
+                .finally(() => {
+                    if (modoAutomaticoAtivo) {
+                        agendarProximoLoop(900);
+                    }
+                });
         }
 
         function pararModoAutomatico() {
             modoAutomaticoAtivo = false;
             clearTimeout(loopTimeout);
             atualizarTexto(statusAuto, "desligado");
+            atualizarPresencaIA("Consulta assistida", "O loop automático foi pausado, mas a leitura manual continua disponível.");
+            cameraSemanticMode.textContent = "Consulta assistida";
             setStatusDecision("modo automático parado");
         }
 
@@ -1946,7 +2311,7 @@
         function configurarReconhecimento() {
     suporteReconhecimento = true;
     escutaVozAtiva = true;
-    atualizarTexto(statusReconhecimento, "botão pressionar para falar");
+    atualizarTexto(statusReconhecimento, "guia automático");
     atualizarEstadoBotaoVoz();
 }
 
@@ -2070,7 +2435,7 @@ function limparRecursosGravacao() {
     } catch {}
 }
 
-function resetarEstadoVoz(statusTexto = "🎙️ Pressione e segure para falar...") {
+function resetarEstadoVoz(statusTexto = "🎙️ Loop inteligente em percepção ativa") {
     gravandoComando = false;
     microfoneOuvindo = false;
     pointerVozAtivo = false;
@@ -2095,7 +2460,7 @@ function iniciarTimeoutSegurancaVoz() {
 
     timeoutSegurancaVoz = setTimeout(() => {
         console.warn("Reset de segurança da voz acionado.");
-        resetarEstadoVoz("🎙️ Pressione e segure para falar...");
+        resetarEstadoVoz("🎙️ Loop inteligente em percepção ativa");
     }, 15000);
 }
 
@@ -2201,7 +2566,7 @@ async function pararGravacaoComando() {
         if (duracaoMs < 350 || buffersAudioVoz.length === 0) {
             heardText.textContent = "Áudio muito curto.";
             falarLocal("Fale um pouco mais devagar e segure o botão por mais tempo.", true);
-            resetarEstadoVoz("🎙️ Pressione e segure para falar...");
+            resetarEstadoVoz("🎙️ Loop inteligente em percepção ativa");
             return;
         }
 
@@ -2247,7 +2612,7 @@ async function enviarAudioParaTranscricao(wavBlob) {
             atualizarStatus("🎙️ Não entendi. Tente de novo.");
             atualizarTexto(statusReconhecimento, "sem entendimento");
             falarLocal("Não entendi. Tente novamente.", true);
-            resetarEstadoVoz("🎙️ Pressione e segure para falar...");
+            resetarEstadoVoz("🎙️ Loop inteligente em percepção ativa");
             return;
         }
 
@@ -2255,7 +2620,7 @@ async function enviarAudioParaTranscricao(wavBlob) {
         atualizarTexto(statusReconhecimento, "comando recebido");
         await interpretarComando(texto);
 
-        resetarEstadoVoz("🎙️ Pressione e segure para falar...");
+        resetarEstadoVoz("🎙️ Loop inteligente em percepção ativa");
     } catch (error) {
         console.error("Erro na transcrição:", error);
         heardText.textContent = "Erro ao transcrever comando.";
@@ -2468,6 +2833,7 @@ async function enviarAudioParaTranscricao(wavBlob) {
 
         function falarAjuda() {
     const texto = "Visiora pronto. Segure o botão de voz enquanto fala. Você pode dizer: descrever ambiente, o que tem à minha frente, tem alguém por perto, iniciar modo automático, pausar áudio.";
+    atualizarPresencaIA("Assistente disponível", "A voz está pronta para receber comandos e iniciar novas leituras.");
     falarLocal(texto, true);
 }
 
@@ -2600,7 +2966,7 @@ window.addEventListener("beforeunload", async () => {
     pararCamera();
 
     try {
-        resetarEstadoVoz("🎙️ Pressione e segure para falar...");
+        resetarEstadoVoz("🎙️ Loop inteligente em percepção ativa");
     } catch {
     }
 });
@@ -2609,7 +2975,6 @@ window.addEventListener("beforeunload", async () => {
         configurarAtalhosTeclado();
         atualizarEstadoBotaoVoz();
         atualizarMarcadorEscuta();
-        atualizarEstadoCognitivo(null);
         atualizarDiagnostico();
     </script>
 </body>

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using VisioraAPI.Models;
 
 namespace VisioraAPI.Services;
@@ -44,24 +45,61 @@ public partial class VisioraService
 
     public async Task<RespostaComAudio> AnalisarAmbiente(string imagemBase64, string? modo = "automatico", string? pergunta = "")
     {
+        return await AnalisarAmbiente(new ImagemRequest
+        {
+            ImagemBase64 = imagemBase64,
+            Modo = modo ?? "automatico",
+            Pergunta = pergunta ?? ""
+        });
+    }
+
+    public async Task<RespostaComAudio> AnalisarAmbiente(ImagemRequest request)
+    {
+        var cronometro = Stopwatch.StartNew();
+
         try
         {
-            var modoNormalizado = NormalizarModo(modo);
-            var contextoParaPrompt = ObterContextoRecenteTexto();
+            request ??= new ImagemRequest();
 
-            var respostaIA = await _openAI.AnalisarImagem(imagemBase64, modoNormalizado, pergunta, contextoParaPrompt);
+            var modoNormalizado = NormalizarModo(request.Modo);
+            var modoGuia = modoNormalizado == "guia";
+            var primeiraLeitura = request.PrimeiraLeitura || request.ForcarDescricaoInicial || DeveForcarDescricaoInicialGuia(request.Pergunta);
+            var forcarDescricaoInicialGuia = modoGuia && primeiraLeitura;
+            var forcarFalaPorMovimentoGuia = modoGuia && (request.MudancaVisual >= 4.2 || !request.CenaEstavel || DeveForcarFalaPorMovimentoGuia(request.Pergunta));
+            var estadoOperacional = ObterEstadoOperacional(request);
+
+            if (modoGuia && PodeResponderSemAnalisePesada(request))
+            {
+                cronometro.Stop();
+                return MontarRespostaSemNovaAnalise(request, cronometro.ElapsedMilliseconds);
+            }
+
+            var contextoParaPrompt = ObterContextoRecenteTexto();
+            var perguntaComContextoOperacional = MontarPerguntaOperacional(request, estadoOperacional, primeiraLeitura);
+
+            var respostaIA = await _openAI.AnalisarImagem(
+                request.ImagemBase64,
+                modoNormalizado,
+                perguntaComContextoOperacional,
+                contextoParaPrompt);
 
             AtualizarMemoriaAmbiente(respostaIA);
             AtualizarMotorTemporal(respostaIA);
 
             var textoAudio = modoNormalizado == "consulta"
-                ? MontarTextoAudioConsulta(respostaIA, pergunta)
+                ? MontarTextoAudioConsulta(respostaIA, request.Pergunta)
                 : MontarTextoAudioAutomatico(respostaIA);
+
+            if (modoGuia)
+            {
+                textoAudio = PrepararFalaParaModoGuia(textoAudio, respostaIA, forcarDescricaoInicialGuia, forcarFalaPorMovimentoGuia);
+                textoAudio = AplicarPoliticaDeComunicacaoAssistiva(textoAudio, respostaIA, request, primeiraLeitura);
+            }
 
             AtualizarContextoRecente(respostaIA, textoAudio);
 
             var audioBase64 = "";
-            if (!string.IsNullOrWhiteSpace(textoAudio))
+            if (DeveUsarTtsExterno(modoNormalizado, textoAudio))
                 audioBase64 = await _audioService.GerarAudioBase64(textoAudio);
 
             var estadoCognitivo = ConstruirEstadoCognitivo(respostaIA);
@@ -70,6 +108,14 @@ public partial class VisioraService
             var pessoaPorPerto = !string.IsNullOrWhiteSpace(respostaIA.Pessoa)
                 ? respostaIA.Pessoa.Trim()
                 : (_estadoTemporal.PessoaPersistente ? "Pessoa ainda por perto" : "-");
+            var eventoGuiaFinal = ObterEventoGuiaFinal(respostaIA, textoAudio, modoGuia);
+            var tipoFalaFinal = ClassificarTipoFalaGuia(eventoGuiaFinal, textoAudio, modoGuia);
+            var caminhoStatusFinal = ObterCaminhoStatusFinal(respostaIA);
+
+            if (modoGuia)
+                RegistrarFalaGuiaRapidaSeNecessario(textoAudio, respostaIA);
+
+            cronometro.Stop();
 
             return new RespostaComAudio
             {
@@ -81,16 +127,30 @@ public partial class VisioraService
                 Direcao = respostaIA.Direcao,
                 Importancia = respostaIA.Importancia,
                 AudioBase64 = audioBase64,
+                FalaGuia = modoGuia ? textoAudio : "",
+                UsarFalaLocal = modoGuia && !string.IsNullOrWhiteSpace(textoAudio),
+                ModoGuia = modoGuia,
+                TempoProcessamentoMs = (int)Math.Min(int.MaxValue, cronometro.ElapsedMilliseconds),
+                TipoFala = tipoFalaFinal,
+                EventoGuia = eventoGuiaFinal,
+                CaminhoStatus = caminhoStatusFinal,
+                DeveFalar = !string.IsNullOrWhiteSpace(textoAudio),
+                MotivoFala = string.IsNullOrWhiteSpace(respostaIA.MotivoFala) ? DeterminarMotivoFala(eventoGuiaFinal, primeiraLeitura) : respostaIA.MotivoFala,
+                EstadoOperacional = estadoOperacional,
+                ResumoAmbiente = string.IsNullOrWhiteSpace(respostaIA.ResumoAmbiente) ? respostaIA.Descricao : respostaIA.ResumoAmbiente,
+                PontosInteresse = (respostaIA.PontosInteresse ?? new List<string>()).ToArray(),
                 EstadoCognitivo = estadoCognitivo,
                 MemoriaRecente = memoriaRecente,
                 ConfiancaAmbiente = (int)Math.Round(estadoCognitivo.ConfiancaAmbiente),
-                MudancaDetectada = estadoCognitivo.MudancaDetectada,
+                MudancaDetectada = estadoCognitivo.MudancaDetectada || request.MudancaVisual >= 4.2,
                 AlertaPrincipal = string.IsNullOrWhiteSpace(alertaPrincipal) ? "-" : alertaPrincipal,
                 PessoaPorPerto = string.IsNullOrWhiteSpace(pessoaPorPerto) ? "-" : pessoaPorPerto
             };
         }
         catch (Exception ex)
         {
+            cronometro.Stop();
+
             return new RespostaComAudio
             {
                 Descricao = $"Erro: {ex.Message}",
@@ -101,6 +161,18 @@ public partial class VisioraService
                 Direcao = "",
                 Importancia = "alta",
                 AudioBase64 = "",
+                FalaGuia = "",
+                UsarFalaLocal = false,
+                ModoGuia = NormalizarModo(request?.Modo) == "guia",
+                TempoProcessamentoMs = (int)Math.Min(int.MaxValue, cronometro.ElapsedMilliseconds),
+                TipoFala = "erro",
+                EventoGuia = "risco",
+                CaminhoStatus = "desconhecido",
+                DeveFalar = false,
+                MotivoFala = "falha no processamento",
+                EstadoOperacional = "erro",
+                ResumoAmbiente = "",
+                PontosInteresse = Array.Empty<string>(),
                 EstadoCognitivo = ConstruirEstadoFalha(ex.Message),
                 MemoriaRecente = new List<MemoriaRecenteItem>(),
                 ConfiancaAmbiente = 0,
