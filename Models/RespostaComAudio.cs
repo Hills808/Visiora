@@ -27,6 +27,8 @@ public class RespostaComAudio
 
     public EstadoVisiora EstadoCognitivo { get; set; } = new();
     public List<MemoriaRecenteItem> MemoriaRecente { get; set; } = new();
+    public MemoriaPersistenteAmbiente MemoriaPersistenteAtual { get; set; } = new();
+    public List<MemoriaPersistenteAmbiente> AmbientesPersistidos { get; set; } = new();
     public int ConfiancaAmbiente { get; set; } = 0;
     public bool MudancaDetectada { get; set; } = false;
     public string AlertaPrincipal { get; set; } = "-";

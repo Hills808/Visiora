@@ -286,7 +286,8 @@ public partial class VisioraService
                 "Descrição do evento temporal recente: " + ValorOuPadrao(_estadoTemporal.EventoAtual?.Descricao, "nenhuma") + ". " +
                 "Direção dominante recente: " + ValorOuPadrao(_estadoTemporal.DirecaoDominante, "sem-direcao") + ". " +
                 "Continuidade do lugar: " + (_estadoTemporal.ContinuaNoMesmoLugar ? "continua no mesmo ambiente" : "sem continuidade confirmada") + ". " +
-                "Último texto falado: " + ValorOuPadrao(_contextoRecente.UltimoTextoFalado, "nenhum") + ".";
+                "Último texto falado: " + ValorOuPadrao(_contextoRecente.UltimoTextoFalado, "nenhum") + ". " +
+                MontarContextoMemoriaPersistente();
         }
     }
 
@@ -526,7 +527,7 @@ private string CriarFalaInicialDoGuia(RespostaIA atual, bool exigirDescricaoUtil
     if (!string.IsNullOrWhiteSpace(descricaoEspacial))
         partes.Add(descricaoEspacial);
     else
-        partes.Add("Estou analisando o espaço à frente para orientar sua locomoção");
+        partes.Add("Estou analisando o espaço ao seu redor para te situar com mais clareza");
 
     if (!string.IsNullOrWhiteSpace(alertaPrincipal))
     {
@@ -595,6 +596,14 @@ private string CriarDescricaoEspacialInicial(RespostaIA atual, string ambiente, 
     {
         partes.Add($"A referência mais clara parece ser {referencia.ToLowerInvariant()}");
     }
+
+    var referenciasPersistentes = ObterReferenciasPersistentesDoAmbienteAtual()
+        .Where(x => !NormalizarTexto(string.Join(". ", partes)).Contains(NormalizarTexto(x)))
+        .Take(2)
+        .ToList();
+
+    if (referenciasPersistentes.Count > 0)
+        partes.Add($"As referências que mais se repetem aqui são {JuntarListaNatural(referenciasPersistentes)}");
 
     return string.Join(". ", partes.Where(x => !string.IsNullOrWhiteSpace(x)));
 }
@@ -1100,6 +1109,8 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
 
         var estado = ConstruirEstadoCognitivo(resposta);
         var memoria = ConstruirMemoriaRecente();
+        var memoriaPersistenteAtual = ObterMemoriaPersistenteAtual();
+        var ambientesPersistidos = ObterAmbientesPersistidos();
         var alerta = ObterAlertaPrincipal(resposta);
         var estadoOperacional = ObterEstadoOperacional(request);
 
@@ -1127,6 +1138,8 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
             PontosInteresse = (resposta.PontosInteresse ?? new List<string>()).ToArray(),
             EstadoCognitivo = estado,
             MemoriaRecente = memoria,
+            MemoriaPersistenteAtual = memoriaPersistenteAtual,
+            AmbientesPersistidos = ambientesPersistidos,
             ConfiancaAmbiente = (int)Math.Round(estado.ConfiancaAmbiente),
             MudancaDetectada = false,
             AlertaPrincipal = string.IsNullOrWhiteSpace(alerta) ? "-" : alerta,
@@ -1955,6 +1968,358 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
         return char.ToUpperInvariant(valor[0]) + valor[1..];
     }
 
+    private async Task GarantirMemoriaPersistenteInicializadaAsync()
+    {
+        lock (_lockMemoria)
+        {
+            if (_painelPersistenteInicializado)
+                return;
+        }
+
+        var painel = await _memoriaPersistenteService.ObterPainelAsync();
+
+        lock (_lockMemoria)
+        {
+            if (_painelPersistenteInicializado)
+                return;
+
+            _painelMemoriaPersistente = painel ?? new PainelMemoriaPersistente();
+            _painelPersistenteInicializado = true;
+        }
+    }
+
+    private async Task AtualizarMemoriaPersistenteAsync(RespostaIA resposta, bool primeiraLeitura)
+    {
+        var snapshot = CriarSnapshotPersistencia(resposta, primeiraLeitura);
+        if (snapshot == null)
+            return;
+
+        PainelMemoriaPersistente? painel = null;
+
+        if (snapshot.DevePersistir)
+        {
+            painel = await _memoriaPersistenteService.RegistrarAmbienteAsync(
+                new RegistroMemoriaPersistenteInput
+                {
+                    Assinatura = snapshot.Assinatura,
+                    Ambiente = snapshot.Ambiente,
+                    Perfil = snapshot.Perfil,
+                    DescricaoConsolidada = snapshot.DescricaoConsolidada,
+                    Referencias = snapshot.Referencias,
+                    IncrementoLeitura = snapshot.IncrementoLeitura,
+                    Evento = snapshot.Evento,
+                    ReconhecidoEmUtc = snapshot.ReconhecidoEmUtc
+                });
+        }
+        else if (snapshot.DeveAtualizarPainel)
+        {
+            painel = await _memoriaPersistenteService.ObterPainelAsync(snapshot.Assinatura, snapshot.Ambiente);
+        }
+
+        lock (_lockMemoria)
+        {
+            if (snapshot.DevePersistir)
+            {
+                _controlePersistenciaAmbientes[snapshot.Assinatura] = new ControlePersistenciaAmbiente
+                {
+                    UltimoRegistroUtc = snapshot.ReconhecidoEmUtc,
+                    LeiturasPersistidas = snapshot.TotalLeiturasObservadas,
+                    UltimoEvento = snapshot.Evento
+                };
+            }
+
+            if (painel != null)
+            {
+                _painelMemoriaPersistente = painel;
+                _painelPersistenteInicializado = true;
+            }
+        }
+    }
+
+    private PersistenciaMemoriaSnapshot? CriarSnapshotPersistencia(RespostaIA resposta, bool primeiraLeitura)
+    {
+        lock (_lockMemoria)
+        {
+            var ambienteAtual = _memoriaAmbiente.AmbienteConfirmado;
+            if (string.IsNullOrWhiteSpace(ambienteAtual))
+                return null;
+
+            if (!_ambientesMemorizados.TryGetValue(ambienteAtual, out var ambienteMemorizado))
+                return null;
+
+            var referencias = ExtrairReferenciasPersistencia(resposta, ambienteMemorizado.UltimaReferencia);
+            var ambiente = LimparTextoBasico(ambienteAtual);
+            var perfil = LimparTextoBasico(_memoriaAmbiente.PerfilAtual);
+            var assinatura = CriarAssinaturaPersistente(ambiente, referencias);
+
+            if (string.IsNullOrWhiteSpace(assinatura))
+                return null;
+
+            var evento = DeterminarEventoPersistente(primeiraLeitura, resposta);
+            var eventoPrioritario =
+                _memoriaAmbiente.HouveEntradaEmNovoAmbiente ||
+                _memoriaAmbiente.HouveTransicaoConfirmada ||
+                _memoriaAmbiente.HouveMudancaEstruturalRecente;
+
+            var temInformacaoUtil =
+                referencias.Count > 0 ||
+                !string.IsNullOrWhiteSpace(ObterAlertaPrincipal(resposta)) ||
+                !string.IsNullOrWhiteSpace(resposta.Pessoa) ||
+                (resposta.PontosInteresse?.Count ?? 0) > 0;
+
+            _controlePersistenciaAmbientes.TryGetValue(assinatura, out var controle);
+
+            var agora = DateTime.UtcNow;
+            var ultimoRegistroUtc = controle == null ? DateTime.MinValue : controle.UltimoRegistroUtc;
+            var tempoDesdeUltimoRegistro = ultimoRegistroUtc == DateTime.MinValue
+                ? double.MaxValue
+                : (agora - ultimoRegistroUtc).TotalSeconds;
+
+            var totalLeiturasObservadas = Math.Max(1, ambienteMemorizado.TotalLeituras);
+            var incrementoLeitura = Math.Max(1, totalLeiturasObservadas - (controle?.LeiturasPersistidas ?? 0));
+            var mudouEvento = !string.Equals(controle?.UltimoEvento, evento, StringComparison.OrdinalIgnoreCase);
+
+            var devePersistir =
+                eventoPrioritario ||
+                (temInformacaoUtil &&
+                 totalLeiturasObservadas >= MINIMO_LEITURAS_PERSISTENCIA &&
+                 incrementoLeitura >= LEITURAS_MINIMAS_NOVA_CONSOLIDACAO &&
+                 tempoDesdeUltimoRegistro >= INTERVALO_MINIMO_PERSISTENCIA_SEGUNDOS) ||
+                (temInformacaoUtil &&
+                 mudouEvento &&
+                 tempoDesdeUltimoRegistro >= INTERVALO_MINIMO_PERSISTENCIA_SEGUNDOS);
+
+            var deveAtualizarPainel =
+                primeiraLeitura ||
+                eventoPrioritario ||
+                !_painelPersistenteInicializado ||
+                (string.IsNullOrWhiteSpace(_painelMemoriaPersistente.Atual?.Ambiente) ||
+                 !LabelsParecidos(_painelMemoriaPersistente.Atual.Ambiente, ambiente));
+
+            if (!devePersistir && !deveAtualizarPainel)
+                return null;
+
+            return new PersistenciaMemoriaSnapshot
+            {
+                Assinatura = assinatura,
+                Ambiente = ambiente,
+                Perfil = string.IsNullOrWhiteSpace(perfil) ? "indefinido" : perfil,
+                DescricaoConsolidada = CriarDescricaoPersistente(resposta, ambiente, referencias),
+                Referencias = referencias,
+                Evento = evento,
+                DevePersistir = devePersistir,
+                DeveAtualizarPainel = deveAtualizarPainel,
+                IncrementoLeitura = incrementoLeitura,
+                ReconhecidoEmUtc = agora,
+                TotalLeiturasObservadas = totalLeiturasObservadas
+            };
+        }
+    }
+
+    private string MontarContextoMemoriaPersistente()
+    {
+        var atual = _painelMemoriaPersistente.Atual;
+        if (!string.IsNullOrWhiteSpace(atual.Ambiente))
+        {
+            var referencias = atual.Referencias?.Any() == true
+                ? JuntarListaNatural(atual.Referencias.Take(3).ToList())
+                : "nenhuma";
+
+            return
+                "Memória persistente atual: ambiente " + atual.Ambiente +
+                ", leituras úteis acumuladas " + atual.Leituras +
+                ", referências frequentes " + referencias +
+                ", descrição consolidada " + ValorOuPadrao(atual.DescricaoConsolidada, "nenhuma") + ".";
+        }
+
+        if (_painelMemoriaPersistente.Recentes.Count > 0)
+        {
+            var recente = _painelMemoriaPersistente.Recentes[0];
+            return "Memória persistente disponível, último ambiente salvo: " +
+                   ValorOuPadrao(recente.Ambiente, "nenhum") + ".";
+        }
+
+        return "Memória persistente: sem registros úteis salvos.";
+    }
+
+    private MemoriaPersistenteAmbiente ObterMemoriaPersistenteAtual()
+    {
+        lock (_lockMemoria)
+        {
+            return CopiarMemoriaPersistente(_painelMemoriaPersistente.Atual);
+        }
+    }
+
+    private List<MemoriaPersistenteAmbiente> ObterAmbientesPersistidos()
+    {
+        lock (_lockMemoria)
+        {
+            return _painelMemoriaPersistente.Recentes
+                .Select(CopiarMemoriaPersistente)
+                .ToList();
+        }
+    }
+
+    private IEnumerable<string> ObterReferenciasPersistentesDoAmbienteAtual()
+    {
+        lock (_lockMemoria)
+        {
+            var atual = _painelMemoriaPersistente.Atual;
+            if (!string.IsNullOrWhiteSpace(atual.Ambiente) && atual.Referencias?.Count > 0)
+                return atual.Referencias.ToList();
+
+            var ambienteAtual = _memoriaAmbiente.AmbienteConfirmado;
+            if (string.IsNullOrWhiteSpace(ambienteAtual))
+                return new List<string>();
+
+            return _painelMemoriaPersistente.Recentes
+                .FirstOrDefault(x => LabelsParecidos(x.Ambiente, ambienteAtual))
+                ?.Referencias
+                ?.ToList() ?? new List<string>();
+        }
+    }
+
+    private MemoriaPersistenteAmbiente CopiarMemoriaPersistente(MemoriaPersistenteAmbiente? origem)
+    {
+        origem ??= new MemoriaPersistenteAmbiente();
+
+        return new MemoriaPersistenteAmbiente
+        {
+            Assinatura = origem.Assinatura,
+            Ambiente = origem.Ambiente,
+            Perfil = origem.Perfil,
+            DescricaoConsolidada = origem.DescricaoConsolidada,
+            UltimoEvento = origem.UltimoEvento,
+            Leituras = origem.Leituras,
+            UltimoReconhecimentoUtc = origem.UltimoReconhecimentoUtc,
+            CorrespondeAoAmbienteAtual = origem.CorrespondeAoAmbienteAtual,
+            Referencias = origem.Referencias?.ToList() ?? new List<string>()
+        };
+    }
+
+    private List<string> ExtrairReferenciasPersistencia(RespostaIA resposta, string referenciaAtual)
+    {
+        var direcaoNatural = TextoDirecaoNatural(resposta.Direcao);
+        var referencias = new List<string>();
+
+        if (!string.IsNullOrWhiteSpace(referenciaAtual) && ReferenciaEhPersistenteUtil(referenciaAtual))
+            referencias.Add(PrimeiraLetraMaiuscula(referenciaAtual));
+
+        foreach (var ponto in resposta.PontosInteresse ?? new List<string>())
+        {
+            if (ReferenciaEhPersistenteUtil(ponto))
+                referencias.Add(PrimeiraLetraMaiuscula(LimparTextoBasico(ponto)));
+        }
+
+        foreach (var objeto in NormalizarLista(resposta.Objetos)
+                     .Where(ReferenciaEhPersistenteUtil)
+                     .Take(4))
+        {
+            if ((objeto is "porta" or "mesa" or "cadeira" or "cama" or "passagem") &&
+                !string.IsNullOrWhiteSpace(direcaoNatural))
+            {
+                referencias.Add(PrimeiraLetraMaiuscula($"{objeto} {direcaoNatural}"));
+            }
+            else
+            {
+                referencias.Add(PrimeiraLetraMaiuscula(objeto));
+            }
+        }
+
+        return referencias
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .Take(5)
+            .ToList();
+    }
+
+    private bool ReferenciaEhPersistenteUtil(string? texto)
+    {
+        var normalizado = NormalizarTexto(texto);
+        if (string.IsNullOrWhiteSpace(normalizado))
+            return false;
+
+        return normalizado.Contains("porta") ||
+               normalizado.Contains("passagem") ||
+               normalizado.Contains("corredor") ||
+               normalizado.Contains("mesa") ||
+               normalizado.Contains("cadeira") ||
+               normalizado.Contains("cama") ||
+               normalizado.Contains("quadro") ||
+               normalizado.Contains("lousa") ||
+               normalizado.Contains("escada") ||
+               normalizado.Contains("elevador") ||
+               normalizado.Contains("balcao") ||
+               normalizado.Contains("balcão") ||
+               normalizado.Contains("prateleira");
+    }
+
+    private string CriarAssinaturaPersistente(string ambiente, IEnumerable<string> referencias)
+    {
+        var chaveAmbiente = NormalizarTexto(ambiente);
+        if (string.IsNullOrWhiteSpace(chaveAmbiente))
+            return "";
+
+        var partes = referencias
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .Select(NormalizarTexto)
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(x => x)
+            .Take(3)
+            .ToList();
+
+        return partes.Count == 0
+            ? chaveAmbiente
+            : $"{chaveAmbiente}::{string.Join("|", partes)}";
+    }
+
+    private string CriarDescricaoPersistente(RespostaIA resposta, string ambiente, IEnumerable<string> referencias)
+    {
+        var resumo = LimparTextoBasico(string.IsNullOrWhiteSpace(resposta.ResumoAmbiente) ? resposta.Descricao : resposta.ResumoAmbiente);
+        var referenciasTexto = referencias
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .Take(3)
+            .ToList();
+
+        if (string.IsNullOrWhiteSpace(resumo))
+            resumo = $"Ambiente reconhecido como {AdicionarArtigoAoAmbiente(ambiente)}";
+
+        if (referenciasTexto.Count > 0 &&
+            !NormalizarTexto(resumo).Contains(NormalizarTexto(referenciasTexto[0])))
+        {
+            resumo += $". Referências mais consistentes: {JuntarListaNatural(referenciasTexto)}";
+        }
+
+        return LimparTextoParaAudio(resumo, 320);
+    }
+
+    private string DeterminarEventoPersistente(bool primeiraLeitura, RespostaIA resposta)
+    {
+        if (_memoriaAmbiente.HouveTransicaoConfirmada)
+            return "transição confirmada";
+
+        if (_memoriaAmbiente.HouveEntradaEmNovoAmbiente)
+            return "novo ambiente confirmado";
+
+        if (_memoriaAmbiente.HouveMudancaEstruturalRecente)
+            return "mudança estrutural";
+
+        if (!string.IsNullOrWhiteSpace(ObterAlertaPrincipal(resposta)))
+            return "risco observado";
+
+        if (!string.IsNullOrWhiteSpace(resposta.Pessoa))
+            return "pessoa por perto";
+
+        if ((resposta.PontosInteresse?.Count ?? 0) > 0)
+            return "ponto de interesse estável";
+
+        if (primeiraLeitura)
+            return "primeira consolidação";
+
+        return "reconhecimento estável";
+    }
+
     private class ContextoRecenteIA
     {
         public string UltimaDescricao { get; set; } = "";
@@ -2050,5 +2415,27 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
         public string Label { get; set; } = "";
         public string Perfil { get; set; } = "";
         public string Referencia { get; set; } = "";
+    }
+
+    private class ControlePersistenciaAmbiente
+    {
+        public DateTime UltimoRegistroUtc { get; set; } = DateTime.MinValue;
+        public int LeiturasPersistidas { get; set; } = 0;
+        public string UltimoEvento { get; set; } = "";
+    }
+
+    private class PersistenciaMemoriaSnapshot
+    {
+        public string Assinatura { get; set; } = "";
+        public string Ambiente { get; set; } = "";
+        public string Perfil { get; set; } = "";
+        public string DescricaoConsolidada { get; set; } = "";
+        public List<string> Referencias { get; set; } = new();
+        public string Evento { get; set; } = "";
+        public bool DevePersistir { get; set; } = false;
+        public bool DeveAtualizarPainel { get; set; } = false;
+        public int IncrementoLeitura { get; set; } = 1;
+        public int TotalLeiturasObservadas { get; set; } = 0;
+        public DateTime ReconhecidoEmUtc { get; set; } = DateTime.UtcNow;
     }
 }

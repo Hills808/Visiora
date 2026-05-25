@@ -7,6 +7,7 @@ public partial class VisioraService
 {
     private readonly OpenAIService _openAI;
     private readonly AudioService _audioService;
+    private readonly MemoriaPersistenteService _memoriaPersistenteService;
 
     private static readonly object _lockMemoria = new();
 
@@ -24,6 +25,9 @@ public partial class VisioraService
     private static readonly Dictionary<string, AmbienteMemorizado> _ambientesMemorizados = new(StringComparer.OrdinalIgnoreCase);
     private static readonly List<LeituraTemporal> _historicoTemporal = new();
     private static readonly EstadoTemporalNavegacao _estadoTemporal = new();
+    private static readonly Dictionary<string, ControlePersistenciaAmbiente> _controlePersistenciaAmbientes = new(StringComparer.OrdinalIgnoreCase);
+    private static PainelMemoriaPersistente _painelMemoriaPersistente = new();
+    private static bool _painelPersistenteInicializado = false;
     private static EventoNavegacaoInterno? _eventoNavegacaoAtual;
     private static string _ultimoEventoNavegacaoFalado = "";
     private static DateTime _ultimoEventoNavegacaoFaladoEm = DateTime.MinValue;
@@ -36,11 +40,17 @@ public partial class VisioraService
     private const int JANELA_TEMPORAL_MAXIMA = 8;
     private const int MINIMO_LEITURAS_PERSISTENCIA = 3;
     private const int INTERVALO_MINIMO_ENTRE_EVENTOS_REPETIDOS_SEGUNDOS = 6;
+    private const int INTERVALO_MINIMO_PERSISTENCIA_SEGUNDOS = 16;
+    private const int LEITURAS_MINIMAS_NOVA_CONSOLIDACAO = 3;
 
-    public VisioraService(OpenAIService openAI, AudioService audioService)
+    public VisioraService(
+        OpenAIService openAI,
+        AudioService audioService,
+        MemoriaPersistenteService memoriaPersistenteService)
     {
         _openAI = openAI;
         _audioService = audioService;
+        _memoriaPersistenteService = memoriaPersistenteService;
     }
 
     public async Task<RespostaComAudio> AnalisarAmbiente(string imagemBase64, string? modo = "automatico", string? pergunta = "")
@@ -60,6 +70,7 @@ public partial class VisioraService
         try
         {
             request ??= new ImagemRequest();
+            await GarantirMemoriaPersistenteInicializadaAsync();
 
             var modoNormalizado = NormalizarModo(request.Modo);
             var modoGuia = modoNormalizado == "guia";
@@ -85,6 +96,7 @@ public partial class VisioraService
 
             AtualizarMemoriaAmbiente(respostaIA);
             AtualizarMotorTemporal(respostaIA);
+            await AtualizarMemoriaPersistenteAsync(respostaIA, primeiraLeitura);
 
             var textoAudio = modoNormalizado == "consulta"
                 ? MontarTextoAudioConsulta(respostaIA, request.Pergunta)
@@ -104,6 +116,8 @@ public partial class VisioraService
 
             var estadoCognitivo = ConstruirEstadoCognitivo(respostaIA);
             var memoriaRecente = ConstruirMemoriaRecente();
+            var memoriaPersistenteAtual = ObterMemoriaPersistenteAtual();
+            var ambientesPersistidos = ObterAmbientesPersistidos();
             var alertaPrincipal = ObterAlertaPrincipal(respostaIA);
             var pessoaPorPerto = !string.IsNullOrWhiteSpace(respostaIA.Pessoa)
                 ? respostaIA.Pessoa.Trim()
@@ -141,6 +155,8 @@ public partial class VisioraService
                 PontosInteresse = (respostaIA.PontosInteresse ?? new List<string>()).ToArray(),
                 EstadoCognitivo = estadoCognitivo,
                 MemoriaRecente = memoriaRecente,
+                MemoriaPersistenteAtual = memoriaPersistenteAtual,
+                AmbientesPersistidos = ambientesPersistidos,
                 ConfiancaAmbiente = (int)Math.Round(estadoCognitivo.ConfiancaAmbiente),
                 MudancaDetectada = estadoCognitivo.MudancaDetectada || request.MudancaVisual >= 4.2,
                 AlertaPrincipal = string.IsNullOrWhiteSpace(alertaPrincipal) ? "-" : alertaPrincipal,

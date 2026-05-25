@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Visiora AI</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap');
+
         :root {
             --bg: #0b1220;
             --panel: #111827;
@@ -866,328 +868,1163 @@
                 min-height: 240px;
             }
         }
+
+        body {
+            padding: 0;
+            font-family: "Segoe UI Variable Text", "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 24%),
+                linear-gradient(180deg, #f5f7fb 0%, #edf2f8 100%);
+            color: #102033;
+        }
+
+        .app-shell {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 28px 24px 40px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 24px 28px;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+            backdrop-filter: blur(12px);
+        }
+
+        .eyebrow {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #3157a6;
+        }
+
+        .topbar h1 {
+            margin: 8px 0 10px;
+            font-size: clamp(28px, 3vw, 42px);
+            line-height: 1.08;
+            color: #0f172a;
+        }
+
+        .topbar p {
+            margin: 0;
+            max-width: 760px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #46566d;
+        }
+
+        .topbar-status {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+            min-width: 220px;
+        }
+
+        .status-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: #e6eefc;
+            color: #21457b;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .core-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 999px;
+            background: #0f172a;
+            color: #eff6ff;
+            font-weight: 700;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+        }
+
+        .pulse-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45);
+            animation: pulse 1.3s infinite;
+        }
+
+        .summary-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 22px;
+        }
+
+        .summary-card,
+        .panel-surface {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            border-radius: 24px;
+            box-shadow: 0 18px 48px rgba(15, 23, 42, 0.07);
+            backdrop-filter: blur(12px);
+        }
+
+        .summary-card {
+            padding: 22px;
+            min-height: 164px;
+        }
+
+        .summary-label,
+        .panel-label {
+            display: inline-block;
+            margin-bottom: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #4b6cb7;
+        }
+
+        .summary-card h2,
+        .guide-body,
+        .memory-hero,
+        .metric-strong {
+            margin: 0;
+            color: #0f172a;
+        }
+
+        .summary-card h2 {
+            font-size: 26px;
+            line-height: 1.2;
+        }
+
+        .summary-copy,
+        .metric-meta,
+        .panel-copy,
+        .subtle-text {
+            color: #526276;
+            line-height: 1.6;
+        }
+
+        .summary-copy {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .metric-strong {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .metric-meta {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .focus-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(350px, 0.8fr);
+            gap: 20px;
+            margin-top: 22px;
+        }
+
+        .camera-panel,
+        .guide-card,
+        .memory-card,
+        .status-card,
+        .advanced-panel {
+            padding: 22px;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .panel-header h2,
+        .panel-header h3 {
+            margin: 4px 0 0;
+            color: #0f172a;
+        }
+
+        .camera-intelligence-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .camera-intelligence-pill {
+            padding: 14px 16px;
+            border-radius: 18px;
+            background: #eef4ff;
+            border: 1px solid rgba(96, 165, 250, 0.16);
+        }
+
+        .camera-intelligence-pill .label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #4b6cb7;
+            margin-bottom: 6px;
+        }
+
+        .camera-intelligence-pill .value {
+            font-size: 15px;
+            color: #183256;
+            font-weight: 700;
+            line-height: 1.45;
+        }
+
+        .camera-frame {
+            min-height: 440px;
+            border: none;
+            border-radius: 24px;
+            box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.14);
+        }
+
+        .camera-overlay {
+            background: linear-gradient(180deg, rgba(2, 6, 23, 0.38), transparent 28%, transparent 72%, rgba(2, 6, 23, 0.48));
+        }
+
+        .primary-controls {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .control-group {
+            padding: 16px;
+            border-radius: 20px;
+            background: #f6f9ff;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .control-title {
+            margin: 0 0 10px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #1d3557;
+        }
+
+        .consult-box {
+            margin-top: 18px;
+            padding: 18px;
+            border-radius: 22px;
+            background: #f8fbff;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .consult-box textarea,
+        .advanced-panel select {
+            background: #ffffff;
+            color: #102033;
+            border: 1px solid #cdd8ea;
+        }
+
+        .side-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .guide-body {
+            font-size: 22px;
+            line-height: 1.55;
+            font-weight: 600;
+        }
+
+        .guide-grid,
+        .status-grid,
+        .advanced-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .guide-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            margin-top: 16px;
+        }
+
+        .guide-block,
+        .status-pill,
+        .advanced-block,
+        .memory-subcard {
+            padding: 16px;
+            border-radius: 18px;
+            background: #f8fbff;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .guide-block strong,
+        .memory-subcard strong,
+        .advanced-block strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #4b6cb7;
+        }
+
+        .guide-value,
+        .memory-hero {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #102033;
+        }
+
+        .memory-hero {
+            font-weight: 700;
+        }
+
+        .memory-copy {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #526276;
+            line-height: 1.65;
+        }
+
+        .memory-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .memory-item {
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: #f8fbff;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        .memory-item-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #102033;
+        }
+
+        .memory-item-meta {
+            margin-top: 6px;
+            font-size: 13px;
+            color: #526276;
+            line-height: 1.5;
+        }
+
+        .compact-status {
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            background: #0f172a;
+            color: #eff6ff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .compact-status .mic-indicator {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        .status-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            margin-top: 14px;
+        }
+
+        .status-pill {
+            background: #ffffff;
+        }
+
+        .status-pill-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #4b6cb7;
+        }
+
+        .status-pill-value {
+            margin-top: 6px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #102033;
+        }
+
+        .advanced-panel {
+            background: rgba(255, 255, 255, 0.88);
+        }
+
+        .advanced-panel summary {
+            cursor: pointer;
+            font-weight: 700;
+            color: #1d3557;
+            list-style: none;
+        }
+
+        .advanced-panel summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .advanced-panel[open] summary {
+            margin-bottom: 16px;
+        }
+
+        .advanced-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .advanced-block .small {
+            color: #526276;
+        }
+
+        .hidden-voice-controls {
+            display: none;
+        }
+
+        .plain-output .result-item + .result-item {
+            margin-top: 10px;
+        }
+
+        .plain-output .chips {
+            margin-top: 8px;
+        }
+
+        @media (max-width: 1080px) {
+            .summary-row,
+            .focus-grid,
+            .primary-controls,
+            .guide-grid,
+            .advanced-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                flex-direction: column;
+            }
+
+            .topbar-status {
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .app-shell {
+                padding: 18px 14px 32px;
+            }
+
+            .topbar,
+            .summary-card,
+            .camera-panel,
+            .guide-card,
+            .memory-card,
+            .status-card,
+            .advanced-panel {
+                padding: 18px;
+                border-radius: 22px;
+            }
+
+            .camera-frame {
+                min-height: 300px;
+            }
+
+            .guide-body {
+                font-size: 18px;
+            }
+        }
+
+        body {
+            padding: 26px 20px 40px;
+            font-family: "Atkinson Hyperlegible Next", "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(210, 224, 245, 0.72), transparent 30%),
+                linear-gradient(180deg, #f4f7fb 0%, #edf2f7 100%);
+            color: #10233f;
+        }
+
+        .panel-surface {
+            border: 1px solid rgba(131, 151, 181, 0.18);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 18px 36px rgba(15, 35, 63, 0.08);
+            backdrop-filter: blur(12px);
+        }
+
+        .app-shell {
+            max-width: 1240px;
+            padding-top: 16px;
+        }
+
+        .eyebrow,
+        .panel-label {
+            color: #4f6585;
+        }
+
+        .status-chip {
+            border-color: rgba(105, 125, 154, 0.18);
+            background: rgba(244, 247, 251, 0.92);
+            color: #1f3555;
+            box-shadow: none;
+        }
+
+        .hero-minimal {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 26px;
+            padding: 24px 26px;
+        }
+
+        .hero-copy h1 {
+            margin: 8px 0 12px;
+            max-width: 760px;
+            font-size: clamp(30px, 3vw, 42px);
+            line-height: 1.04;
+            letter-spacing: -0.035em;
+            color: #10233f;
+        }
+
+        .hero-copy p {
+            margin: 0;
+            max-width: 690px;
+            color: #5c6f87;
+            font-size: 15px;
+            line-height: 1.72;
+        }
+
+        .hero-status {
+            min-width: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+        }
+
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .hero-metric {
+            padding: 2px 0 2px 16px;
+            border-radius: 0;
+            background: transparent;
+            border: none;
+            border-left: 3px solid rgba(113, 140, 181, 0.22);
+        }
+
+        .hero-metric strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #5a7398;
+        }
+
+        .hero-metric .metric-title {
+            font-size: 19px;
+            font-weight: 700;
+            line-height: 1.28;
+            color: #11243f;
+        }
+
+        .hero-metric .metric-text {
+            margin-top: 6px;
+            font-size: 14px;
+            line-height: 1.58;
+            color: #617387;
+        }
+
+        .clean-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.38fr) minmax(330px, 0.82fr);
+            gap: 18px;
+            margin-top: 18px;
+            align-items: start;
+        }
+
+        .camera-stage,
+        .insight-card,
+        .memory-focus,
+        .advanced-panel {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .camera-stage,
+        .insight-card,
+        .memory-focus {
+            padding: 22px;
+        }
+
+        .camera-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .camera-header h2,
+        .stack-title {
+            margin: 4px 0 0;
+            color: #10233f;
+        }
+
+        .signal-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .signal-pill {
+            padding: 14px 15px;
+            border-radius: 16px;
+            background: #f6f9fd;
+            border: 1px solid rgba(120, 146, 184, 0.14);
+        }
+
+        .signal-pill .label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #5a7398;
+        }
+
+        .signal-pill .value {
+            font-size: 14px;
+            line-height: 1.45;
+            font-weight: 700;
+            color: #15304f;
+        }
+
+        .camera-frame {
+            min-height: 540px;
+            border-radius: 28px;
+            box-shadow: inset 0 0 0 1px rgba(129, 146, 177, 0.18), 0 16px 34px rgba(18, 34, 58, 0.10);
+        }
+
+        video,
+        canvas {
+            border-radius: 28px;
+        }
+
+        .camera-overlay {
+            padding: 18px;
+            background: linear-gradient(180deg, rgba(5, 14, 28, 0.16), transparent 26%, transparent 74%, rgba(5, 14, 28, 0.3));
+        }
+
+        .overlay-label {
+            background: rgba(11, 22, 37, 0.6);
+            border-color: rgba(255, 255, 255, 0.08);
+            font-weight: 600;
+        }
+
+        .command-strip {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .command-group {
+            padding: 16px;
+            border-radius: 18px;
+            background: #f8fbff;
+            border: 1px solid rgba(120, 146, 184, 0.14);
+        }
+
+        .command-group h3 {
+            margin: 0;
+            font-size: 15px;
+            color: #17314d;
+        }
+
+        .command-note {
+            margin: 6px 0 0;
+            font-size: 13px;
+            line-height: 1.55;
+            color: #67768a;
+        }
+
+        .controls {
+            gap: 8px;
+        }
+
+        button {
+            min-height: 48px;
+            border-radius: 14px;
+            box-shadow: 0 10px 22px rgba(37, 99, 235, 0.12);
+        }
+
+        .query-panel {
+            margin-top: 14px;
+            padding: 16px;
+            border-radius: 18px;
+            background: #f8fbff;
+            border: 1px solid rgba(120, 146, 184, 0.14);
+        }
+
+        .query-panel label {
+            color: #17314d;
+        }
+
+        .query-panel textarea,
+        .advanced-panel select {
+            background: #ffffff;
+            color: #0f1f34;
+            border: 1px solid #d6e0ef;
+        }
+
+        .right-rail {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-self: start;
+        }
+
+        .readout-text {
+            font-size: 25px;
+            line-height: 1.58;
+            font-weight: 600;
+            color: #10233f;
+        }
+
+        .insight-grid {
+            display: grid;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .insight-block {
+            padding-top: 12px;
+            border-top: 1px solid rgba(130, 150, 178, 0.18);
+        }
+
+        .insight-block strong,
+        .memory-panel strong,
+        .system-decision strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #5a7398;
+        }
+
+        .insight-value {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #16304d;
+        }
+
+        .compact-audio {
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: #10233f;
+            color: #eef5ff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .memory-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .memory-primary {
+            font-size: 21px;
+            line-height: 1.35;
+            font-weight: 700;
+            color: #10233f;
+        }
+
+        .memory-secondary {
+            margin-top: 8px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #627287;
+        }
+
+        .memory-panel {
+            padding: 16px;
+            border-radius: 16px;
+            background: #f8fbff;
+            border: 1px solid rgba(120, 146, 184, 0.14);
+        }
+
+        .memory-list {
+            margin-top: 12px;
+        }
+
+        .memory-item {
+            background: #f8fbff;
+        }
+
+        .system-inline {
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(130, 150, 178, 0.18);
+        }
+
+        .system-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .system-pill {
+            padding: 14px 15px;
+            border-radius: 14px;
+            background: #f8fbff;
+            border: 1px solid rgba(120, 146, 184, 0.14);
+        }
+
+        .system-pill strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #5a7398;
+        }
+
+        .system-pill span {
+            font-size: 14px;
+            line-height: 1.45;
+            font-weight: 700;
+            color: #17314d;
+        }
+
+        .system-decision {
+            margin-top: 12px;
+            padding: 16px;
+            border-radius: 16px;
+            background: #f8fbff;
+            border: 1px solid rgba(120, 146, 184, 0.14);
+        }
+
+        .advanced-panel {
+            padding: 18px 20px;
+        }
+
+        .advanced-panel summary {
+            font-size: 14px;
+        }
+
+        .advanced-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .advanced-block {
+            background: #f8fbff;
+        }
+
+        .plain-output .chips {
+            margin-top: 4px;
+        }
+
+        @media (max-width: 1100px) {
+            .hero-minimal,
+            .clean-layout {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
+
+            .hero-status {
+                align-items: flex-start;
+            }
+
+            .hero-metrics,
+            .signal-row,
+            .command-strip,
+            .system-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 18px 14px 30px;
+            }
+
+            .hero-minimal,
+            .camera-stage,
+            .insight-card,
+            .memory-focus,
+            .advanced-panel {
+                padding: 18px;
+                border-radius: 20px;
+            }
+
+            .readout-text {
+                font-size: 19px;
+            }
+
+            .camera-frame {
+                min-height: 320px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <section class="hero">
-            <div>
-                <div class="section-kicker">Sistema principal</div>
-                <h1>Visiora AI</h1>
-                <p>Assistente visual com IA para orientação, contexto de ambiente, acessibilidade real e apoio contínuo para pessoas com deficiência visual.</p>
+    <div class="app-shell">
+        <header class="panel-surface hero-minimal">
+            <div class="hero-copy">
+                <div class="eyebrow">Visiora AI</div>
+                <h1>Leitura assistiva do ambiente, com foco no que realmente importa</h1>
+                <p>A interface foi reorganizada para priorizar entendimento rápido: câmera em destaque, descrição atual clara, memória do espaço e controles essenciais sem competir pela atenção do usuário.</p>
 
-                <div class="hero-badges" style="justify-content:flex-start; margin-top:16px; min-width:auto;">
-                    <div class="hero-badge">Visão computacional assistiva</div>
-                    <div class="hero-badge">Orientação por áudio com Azure Speech</div>
-                    <div class="hero-badge">Análise contínua do ambiente</div>
+                <div class="hero-metrics">
+                    <div class="hero-metric">
+                        <strong>Ambiente atual</strong>
+                        <div id="envStateText" class="metric-title">Aguardando primeira leitura útil</div>
+                        <div id="semanticSystemSub" class="metric-text">Inicie a câmera para ativar a percepção contínua.</div>
+                    </div>
+                    <div class="hero-metric">
+                        <strong>Estado perceptivo</strong>
+                        <div id="semanticSystemState" class="metric-title">Pronta para observar</div>
+                        <div class="metric-text">Última decisão: <span id="semanticDecisionState">Nenhuma</span></div>
+                    </div>
+                    <div class="hero-metric">
+                        <strong>Contexto consolidado</strong>
+                        <div id="envProfileText" class="metric-title">Não definido</div>
+                        <div class="metric-text">Confiança: <span id="envConfidenceText">Inicial</span><br />Referência: <span id="envReferenceText">Nenhuma ainda</span></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="hero-visual">
-                <div class="core-shell">
-                    <div class="core-ring"></div>
-                    <div class="core-ring inner"></div>
-                    <div class="core-orb"></div>
-                    <div class="core-caption" id="heroCoreStatus">Percepção ativa</div>
+            <div class="hero-status">
+                <div id="presenceBadge" class="status-chip">Em espera</div>
+                <div class="core-pill">
+                    <span id="cameraDot" class="pulse-dot"></span>
+                    <span id="heroCoreStatus">Percepção ativa</span>
                 </div>
             </div>
-        </section>
+        </header>
 
-        <section class="cognition-rail">
-            <div class="card insight-panel presence-card">
-                <div class="section-title">
+        <div class="clean-layout">
+            <main class="panel-surface camera-stage">
+                <div class="camera-header">
                     <div>
-                        <div class="section-kicker">Centro cognitivo</div>
-                        <h2>Leitura viva do ambiente</h2>
+                        <div class="panel-label">Câmera em tempo real</div>
+                        <h2>Visual principal do ambiente</h2>
                     </div>
-                    <div class="result-badge">Identidade Visiora</div>
+                    <div class="status-chip">Assistência ao vivo</div>
                 </div>
-                <div class="card-subtitle">A interface agora destaca o estado mental da IA: percepção, estabilidade, mudança e orientação útil, sem perder compatibilidade com a base que já está funcionando.</div>
 
-                <div class="semantic-grid">
-                    <div class="semantic-tile">
-                        <div class="semantic-label">Ambiente atual</div>
-                        <div class="semantic-value" id="envStateText">Aguardando primeira leitura</div>
-                        <div class="semantic-note">A IA vai mostrar aqui a leitura dominante da cena.</div>
+                <div class="signal-row">
+                    <div class="signal-pill">
+                        <span class="label">Modo de atenção</span>
+                        <span id="cameraSemanticMode" class="value">Observação assistida</span>
                     </div>
-                    <div class="semantic-tile">
-                        <div class="semantic-label">Perfil da cena</div>
-                        <div class="semantic-value" id="envProfileText">Não definido</div>
-                        <div class="semantic-note">Estável, dinâmico, social ou de passagem.</div>
+                    <div class="signal-pill">
+                        <span class="label">Leitura espacial</span>
+                        <span id="cameraSemanticSpace" class="value">Sem leitura ainda</span>
                     </div>
-                    <div class="semantic-tile">
-                        <div class="semantic-label">Confiança contextual</div>
-                        <div class="semantic-value" id="envConfidenceText">Inicial</div>
-                        <div class="semantic-note">Sobe quando a leitura se repete com coerência.</div>
-                    </div>
-                    <div class="semantic-tile">
-                        <div class="semantic-label">Referência principal</div>
-                        <div class="semantic-value" id="envReferenceText">Nenhuma ainda</div>
-                        <div class="semantic-note">Objeto ou pista útil para orientação espacial.</div>
+                    <div class="signal-pill">
+                        <span class="label">Tendência do ambiente</span>
+                        <span id="cameraSemanticTrend" class="value">Aguardando cena</span>
                     </div>
                 </div>
 
-                <div class="thinking-flow">
-                    <div class="thinking-chip" id="thinkingChip1">Observando continuidade</div>
-                    <div class="thinking-chip" id="thinkingChip2">Avaliando passagem</div>
-                    <div class="thinking-chip" id="thinkingChip3">Priorizando segurança</div>
-                    <div class="thinking-chip" id="thinkingChip4">Preparando orientação útil</div>
-                </div>
-            </div>
+                <div class="camera-frame">
+                    <video id="video" autoplay playsinline muted></video>
+                    <canvas id="canvas"></canvas>
 
-            <div class="card ambient-panel">
-                <div class="section-title">
-                    <div>
-                        <div class="section-kicker">Presença da IA</div>
-                        <h2>Estado perceptivo</h2>
-                    </div>
-                    <div class="result-badge" id="presenceBadge">Em espera</div>
-                </div>
-                <div class="ambient-matrix">
-                    <div class="ambient-block">
-                        <strong>Estado atual</strong>
-                        <div class="ambient-big" id="semanticSystemState">Pronta para observar</div>
-                        <div class="ambient-sub" id="semanticSystemSub">Inicie a câmera para ativar a percepção contínua do ambiente.</div>
-                    </div>
-                    <div class="ambient-block">
-                        <strong>Última decisão da IA</strong>
-                        <div class="ambient-big" id="semanticDecisionState">Nenhuma</div>
-                        <div class="ambient-sub">Este bloco traduz a telemetria em linguagem mais humana para a apresentação.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="grid">
-            <div class="main-column">
-                <section class="card">
-                    <div class="section-title">
-                        <div>
-                            <div class="section-kicker">Captura em tempo real</div>
-                            <h2>Monitoramento do ambiente</h2>
-                        </div>
-                        <div class="result-badge">Frontend operacional</div>
-                    </div>
-                    <div class="card-subtitle">Visual principal da câmera, com comandos de voz, controle de captura e operação automática.</div>
-
-                    <div class="camera-intelligence-bar">
-                        <div class="camera-intelligence-pill">
-                            <div class="label">Modo de atenção</div>
-                            <div class="value" id="cameraSemanticMode">Observação assistida</div>
-                        </div>
-                        <div class="camera-intelligence-pill">
-                            <div class="label">Leitura espacial</div>
-                            <div class="value" id="cameraSemanticSpace">Sem leitura ainda</div>
-                        </div>
-                        <div class="camera-intelligence-pill">
-                            <div class="label">Tendência do ambiente</div>
-                            <div class="value" id="cameraSemanticTrend">Aguardando cena</div>
-                        </div>
-                    </div>
-
-                    <div class="camera-shell">
-                    <div class="camera-frame">
-                        <video id="video" autoplay playsinline muted></video>
-                        <canvas id="canvas"></canvas>
-
-                        <div class="camera-overlay">
-                            <div class="overlay-top">
-                                <div class="overlay-label">
-                                    <span class="dot live" id="cameraDot"></span>
-                                    Captura ativa
-                                </div>
-                                <div class="overlay-label">
-                                    <span class="dot" id="autoDot"></span>
-                                    Modo automático
-                                </div>
-                            </div>
-                            <div class="overlay-bottom">
-                                <div class="overlay-label">
-                                    <span class="dot warn" id="voiceDot"></span>
-                                    Orientação por áudio
-                                </div>
-                                <div class="overlay-label">Assistente visual contínuo</div>
+                    <div class="camera-overlay">
+                        <div class="overlay-top">
+                            <div class="overlay-label">Captura contínua</div>
+                            <div class="overlay-label">
+                                <span class="dot" id="autoDot"></span>
+                                Loop inteligente
                             </div>
                         </div>
+                        <div class="overlay-bottom">
+                            <div class="overlay-label">
+                                <span class="dot warn" id="voiceDot"></span>
+                                Áudio assistivo
+                            </div>
+                            <div class="overlay-label">Silêncio quando nada muda</div>
+                        </div>
                     </div>
-                    </div>
+                </div>
 
+                <div class="command-strip">
+                    <section class="command-group">
+                        <h3>Câmera</h3>
+                        <p class="command-note">Liga ou encerra a visualização principal.</p>
+                        <div class="controls">
+                            <button id="btnIniciarCamera">Iniciar câmera</button>
+                            <button id="btnPararCamera" class="secondary">Parar câmera</button>
+                        </div>
+                    </section>
+
+                    <section class="command-group">
+                        <h3>Percepção contínua</h3>
+                        <p class="command-note">Mantém a IA observando e falando só o que importa.</p>
+                        <div class="controls">
+                            <button id="btnIniciarAuto">Iniciar automático</button>
+                            <button id="btnPararAuto" class="danger">Parar automático</button>
+                        </div>
+                    </section>
+
+                    <section class="command-group">
+                        <h3>Áudio</h3>
+                        <p class="command-note">Controle rápido da fala do assistente.</p>
+                        <div class="controls">
+                            <button id="btnPausarAudio" class="secondary">Pausar</button>
+                            <button id="btnRetomarAudio" class="secondary">Retomar</button>
+                            <button id="btnPararAudio" class="danger">Parar</button>
+                        </div>
+                    </section>
+                </div>
+
+                <section class="query-panel">
+                    <label for="modoConsulta">Consulta manual ao ambiente</label>
+                    <textarea id="modoConsulta" rows="3" placeholder="Ex.: o que tem à minha frente? tem alguém por perto? há uma saída visível?"></textarea>
                     <div class="controls">
-                        <button id="btnVoz" class="voice off" aria-hidden="true" tabindex="-1">Comando de voz desativado</button>
-                        <button id="btnFalarAjuda" class="secondary" aria-hidden="true" tabindex="-1">Instruções</button>
+                        <button id="btnConsultar">Perguntar ao ambiente</button>
+                    </div>
+                </section>
+            </main>
+
+            <aside class="right-rail">
+                <section class="panel-surface insight-card">
+                    <div class="panel-label">Leitura atual</div>
+                    <h2 class="stack-title">O que o usuário precisa saber agora</h2>
+                    <div id="guideDescriptionText" class="readout-text" aria-live="polite">A descrição útil do ambiente aparecerá aqui assim que a primeira leitura for concluída.</div>
+
+                    <div class="insight-grid">
+                        <div class="insight-block">
+                            <strong>Risco imediato</strong>
+                            <div id="guideAlertText" class="insight-value">Nenhum risco imediato detectado.</div>
+                        </div>
+                        <div class="insight-block">
+                            <strong>Pontos úteis agora</strong>
+                            <div id="guideFocusText" class="insight-value">Portas, passagens, pessoas e obstáculos importantes aparecerão aqui.</div>
+                        </div>
+                        <div class="insight-block">
+                            <strong>Última orientação falada</strong>
+                            <div id="heardText" class="insight-value">Aguardando primeira orientação do ambiente.</div>
+                        </div>
                     </div>
 
-                    <div class="listening-box">
-                        <div class="section-title">
-                            <div>
-                                <div class="section-kicker">Guia por áudio</div>
-                                <h3>Orientação automática</h3>
-                            </div>
-                            <div class="result-badge">Automático</div>
-                        </div>
-
-                        <div class="listening-header">
-                            <div id="micIndicator" class="mic-indicator"></div>
-                            <div class="listening-state" id="listeningState">Pronto para gravar</div>
+                    <div class="compact-audio">
+                        <div>
+                            <span id="micIndicator" class="mic-indicator"></span>
+                            <span id="listeningState">Pronto para gravar</span>
                         </div>
                         <div id="statusEscuta">🎙️ Loop inteligente em percepção ativa</div>
-                        <div class="small">O guia fala automaticamente quando o loop inteligente identifica contexto, risco, pessoa, objeto relevante ou mudança útil.</div>
-
-                        <div class="field">
-                            <label>Última orientação falada</label>
-                            <div id="heardText" class="heard-text">Aguardando primeira orientação do ambiente.</div>
-                        </div>
-                    </div>
-
-                    <div class="section-grid">
-                        <div class="result">
-                            <div class="section-title">
-                                <div>
-                                    <div class="section-kicker">Operação</div>
-                                    <h3>Controle da câmera</h3>
-                                </div>
-                            </div>
-                            <div class="controls">
-                                <button id="btnIniciarCamera">Iniciar câmera</button>
-                                <button id="btnPararCamera" class="secondary">Parar câmera</button>
-                            </div>
-                        </div>
-
-                        <div class="result">
-                            <div class="section-title">
-                                <div>
-                                    <div class="section-kicker">Automação</div>
-                                    <h3>Loop inteligente</h3>
-                                </div>
-                            </div>
-                            <div class="controls">
-                                <button id="btnIniciarAuto">Iniciar automático</button>
-                                <button id="btnPararAuto" class="danger">Parar automático</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="result">
-                        <div class="section-title">
-                            <div>
-                                <div class="section-kicker">Áudio</div>
-                                <h3>Controle de reprodução</h3>
-                            </div>
-                        </div>
-                        <div class="controls">
-                            <button id="btnPausarAudio" class="secondary">Pausar áudio</button>
-                            <button id="btnRetomarAudio" class="secondary">Retomar áudio</button>
-                            <button id="btnPararAudio" class="danger">Parar áudio</button>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label for="modoConsulta">Consulta manual ao ambiente</label>
-                        <textarea id="modoConsulta" rows="3" placeholder="Ex.: O que tem à minha frente? Esse ambiente parece um quarto? Tem alguém por perto?"></textarea>
-                        <div class="controls">
-                            <button id="btnConsultar">Perguntar ao ambiente</button>
-                        </div>
-                    </div>
-
-                    <div class="voice-help">
-                        <div><strong>Descrição e locomoção</strong></div>
-                        <div class="small">A orientação automática usa câmera e loop inteligente, sem depender de comando por voz.</div>
-                        <div class="mono">
-                            <br />
-                            descrever ambiente<br />
-                            o que tem à minha frente<br />
-                            tem alguém por perto<br />
-                            tem obstáculo à frente<br />
-                            iniciar modo automático<br />
-                            parar modo automático<br />
-                            pausar áudio<br />
-                            retomar áudio<br />
-                            parar áudio
-                        </div>
                     </div>
                 </section>
-            </div>
 
-            <div class="side-column">
-                <section class="card presence-card">
-                    <div class="section-title">
+                <section class="panel-surface memory-focus">
+                    <div class="memory-header">
                         <div>
-                            <div class="section-kicker">Memória de ambiente</div>
-                            <h2>Continuidade contextual</h2>
+                            <div class="panel-label">Memória do ambiente</div>
+                            <h2 class="stack-title">Continuidade sem excesso de informação</h2>
                         </div>
-                        <div class="result-badge">Próxima fase</div>
+                        <div class="status-chip">SQLite ativo</div>
                     </div>
-                    <div class="card-subtitle">Este painel já prepara o front para a evolução da memória em RAM no VisioraService, sem alterar o que já funciona agora.</div>
 
-                    <div class="ambient-matrix">
-                        <div class="ambient-block">
-                            <strong>Leitura consolidada</strong>
-                            <div class="ambient-big" id="memoryConfirmedState">Ainda sem consolidação</div>
-                            <div class="ambient-sub">Vai refletir o ambiente mais consistente ao longo das leituras.</div>
+                    <div id="memoryConfirmedState" class="memory-primary">Ainda sem consolidação</div>
+                    <div id="memoryTransitionState" class="memory-secondary">Nenhuma transição relevante registrada.</div>
+                    <div id="guideMemoryText" class="memory-secondary">A memória persistente será consolidada após confirmações úteis do ambiente.</div>
+
+                    <div class="memory-panel" style="margin-top: 14px;">
+                        <strong>Ambiente lembrado</strong>
+                        <div id="persistentCurrentSummary" class="insight-value">Nenhum ambiente persistido ainda.</div>
+                        <div id="persistentCurrentMeta" class="memory-secondary">Leituras úteis e referências frequentes aparecerão aqui sem gravar cada frame do loop.</div>
+                        <div id="persistentReferences" class="chips"></div>
+                    </div>
+
+                    <div class="memory-panel" style="margin-top: 12px;">
+                        <strong>Ambientes recentes</strong>
+                        <div id="persistentHistoryList" class="memory-list">
+                            <div class="memory-item">
+                                <div class="memory-item-title">Sem memória persistida ainda</div>
+                                <div class="memory-item-meta">Assim que o Visiora confirmar ambientes ou eventos úteis, este histórico começará a ser preenchido.</div>
+                            </div>
                         </div>
-                        <div class="ambient-block">
-                            <strong>Transição percebida</strong>
-                            <div class="ambient-big" id="memoryTransitionState">Nenhum indício forte</div>
-                            <div class="ambient-sub">Ajuda a diferenciar movimento de câmera de mudança real de espaço.</div>
+                    </div>
+
+                    <div class="system-inline">
+                        <div class="panel-label">Estado do sistema</div>
+                        <div class="system-grid">
+                            <div class="system-pill">
+                                <strong>Câmera</strong>
+                                <span id="statusCamera">desligada</span>
+                            </div>
+                            <div class="system-pill">
+                                <strong>Modo automático</strong>
+                                <span id="statusAuto">desligado</span>
+                            </div>
+                            <div class="system-pill">
+                                <strong>Áudio</strong>
+                                <span id="statusAudio">parado</span>
+                            </div>
+                            <div class="system-pill">
+                                <strong>Guia por áudio</strong>
+                                <span id="statusVoz">desligada</span>
+                            </div>
+                            <div class="system-pill">
+                                <strong>Reconhecimento</strong>
+                                <span id="statusReconhecimento">inativo</span>
+                            </div>
+                            <div class="system-pill">
+                                <strong>Última orientação</strong>
+                                <span id="statusComando">nenhum</span>
+                            </div>
+                        </div>
+
+                        <div class="system-decision">
+                            <strong>Decisão do loop</strong>
+                            <div id="statusDecision" class="insight-value">nenhuma</div>
                         </div>
                     </div>
                 </section>
 
-                <section class="card">
-                    <div class="section-title">
-                        <div>
-                            <div class="section-kicker">Estado do sistema</div>
-                            <h2>Status em tempo real</h2>
-                        </div>
-                        <div class="result-badge">Monitoramento</div>
-                    </div>
-                    <div class="card-subtitle">Indicadores principais para acompanhar o funcionamento da captura, do áudio, da escuta e da lógica do loop.</div>
+                <details class="panel-surface advanced-panel">
+                    <summary>Painel técnico</summary>
 
-                    <div class="pill-grid">
-                        <div class="pill-status">
-                            <div class="pill-status-title">Câmera</div>
-                            <div class="pill-status-value" id="statusCamera">desligada</div>
-                        </div>
-                        <div class="pill-status">
-                            <div class="pill-status-title">Modo automático</div>
-                            <div class="pill-status-value" id="statusAuto">desligado</div>
-                        </div>
-                        <div class="pill-status">
-                            <div class="pill-status-title">Áudio</div>
-                            <div class="pill-status-value" id="statusAudio">parado</div>
-                        </div>
-                        <div class="pill-status">
-                            <div class="pill-status-title">Guia por áudio</div>
-                            <div class="pill-status-value" id="statusVoz">desligada</div>
-                        </div>
-                        <div class="pill-status">
-                            <div class="pill-status-title">Reconhecimento</div>
-                            <div class="pill-status-value" id="statusReconhecimento">inativo</div>
-                        </div>
-                        <div class="pill-status">
-                            <div class="pill-status-title">Última orientação</div>
-                            <div class="pill-status-value" id="statusComando">nenhum</div>
-                        </div>
-                    </div>
-
-                    <div class="result" style="margin-top: 16px;">
-                        <div class="result-item">
-                            <strong>Última decisão do loop</strong>
-                            <div id="statusDecision" class="small">nenhuma</div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="card">
-                    <div class="section-title">
-                        <div>
-                            <div class="section-kicker">Parâmetros</div>
-                            <h2>Qualidade da captura</h2>
-                        </div>
-                    </div>
-
-                    <div class="mini-grid">
-                        <div>
+                    <div class="advanced-grid">
+                        <div class="advanced-block">
+                            <strong>Qualidade da captura</strong>
                             <label for="qualidadeImagem">Qualidade JPEG</label>
                             <select id="qualidadeImagem">
                                 <option value="0.55">0.55</option>
@@ -1196,7 +2033,9 @@
                                 <option value="0.85">0.85</option>
                             </select>
                         </div>
-                        <div>
+
+                        <div class="advanced-block">
+                            <strong>Resolução da análise</strong>
                             <label for="larguraCaptura">Largura da captura</label>
                             <select id="larguraCaptura">
                                 <option value="480">480</option>
@@ -1204,72 +2043,57 @@
                                 <option value="800">800</option>
                             </select>
                         </div>
-                    </div>
-                </section>
 
-                <section class="card">
-                    <div class="result">
-                        <div class="result-header">
-                            <h3>Diagnóstico do loop</h3>
-                            <div class="result-badge">Telemetria</div>
+                        <div class="advanced-block">
+                            <strong>Telemetria do loop</strong>
+                            <div class="result-item"><span class="small">Requisição em andamento:</span> <div id="diagAnalisando" class="small">não</div></div>
+                            <div class="result-item"><span class="small">Áudio tocando:</span> <div id="diagAudioTocando" class="small">não</div></div>
+                            <div class="result-item"><span class="small">Diferença visual:</span> <div id="diagMudanca" class="small">0</div></div>
+                            <div class="result-item"><span class="small">Intervalo atual:</span> <div id="diagIntervalo" class="small">1800 ms</div></div>
+                            <div class="result-item"><span class="small">Último envio:</span> <div id="diagUltimoEnvio" class="small">nunca</div></div>
+                            <div class="result-item"><span class="small">Última fala importante:</span> <div id="diagUltimaFala" class="small">nenhuma</div></div>
+                            <div class="result-item"><span class="small">Última frase reconhecida:</span> <div id="diagReconhecido" class="small">nenhuma</div></div>
                         </div>
 
-                        <div class="result-item"><strong>Requisição em andamento</strong><div id="diagAnalisando" class="small">não</div></div>
-                        <div class="result-item"><strong>Áudio tocando</strong><div id="diagAudioTocando" class="small">não</div></div>
-                        <div class="result-item"><strong>Diferença visual</strong><div id="diagMudanca" class="small">0</div></div>
-                        <div class="result-item"><strong>Intervalo atual</strong><div id="diagIntervalo" class="small">1800 ms</div></div>
-                        <div class="result-item"><strong>Último envio</strong><div id="diagUltimoEnvio" class="small">nunca</div></div>
-                        <div class="result-item"><strong>Última fala importante</strong><div id="diagUltimaFala" class="small">nenhuma</div></div>
-                        <div class="result-item"><strong>Última frase reconhecida</strong><div id="diagReconhecido" class="small">nenhuma</div></div>
-                    </div>
-                </section>
-
-                <section class="card">
-                    <div class="result">
-                        <div class="result-header">
-                            <h3>Última resposta da IA</h3>
-                            <div class="result-badge">Saída atual</div>
-                        </div>
-
-                        <div class="result-item">
-                            <strong>Descrição</strong>
-                            <div id="resDescricao" class="small">-</div>
-                        </div>
-
-                        <div class="result-item">
-                            <strong>Pessoa</strong>
-                            <div id="resPessoa" class="small">-</div>
-                        </div>
-
-                        <div class="result-item">
-                            <strong>Sugestão</strong>
-                            <div id="resSugestao" class="small">-</div>
-                        </div>
-
-                        <div class="result-item">
-                            <strong>Direção</strong>
-                            <div id="resDirecao" class="small">-</div>
-                        </div>
-
-                        <div class="result-item">
-                            <strong>Importância</strong>
-                            <div id="resImportancia" class="small">-</div>
-                        </div>
-
-                        <div class="divider"></div>
-
-                        <div class="result-item">
-                            <strong>Objetos</strong>
-                            <div id="resObjetos" class="chips"></div>
-                        </div>
-
-                        <div class="result-item">
-                            <strong>Alertas</strong>
-                            <div id="resAlertas" class="chips"></div>
+                        <div class="advanced-block plain-output">
+                            <strong>Saída crua da IA</strong>
+                            <div class="result-item">
+                                <span class="small">Descrição</span>
+                                <div id="resDescricao" class="small">-</div>
+                            </div>
+                            <div class="result-item">
+                                <span class="small">Pessoa</span>
+                                <div id="resPessoa" class="small">-</div>
+                            </div>
+                            <div class="result-item">
+                                <span class="small">Sugestão</span>
+                                <div id="resSugestao" class="small">-</div>
+                            </div>
+                            <div class="result-item">
+                                <span class="small">Direção</span>
+                                <div id="resDirecao" class="small">-</div>
+                            </div>
+                            <div class="result-item">
+                                <span class="small">Importância</span>
+                                <div id="resImportancia" class="small">-</div>
+                            </div>
+                            <div class="result-item">
+                                <span class="small">Objetos</span>
+                                <div id="resObjetos" class="chips"></div>
+                            </div>
+                            <div class="result-item">
+                                <span class="small">Alertas</span>
+                                <div id="resAlertas" class="chips"></div>
+                            </div>
                         </div>
                     </div>
-                </section>
-            </div>
+                </details>
+
+                <div class="hidden-voice-controls">
+                    <button id="btnVoz" class="voice off" aria-hidden="true" tabindex="-1">Comando de voz desativado</button>
+                    <button id="btnFalarAjuda" class="secondary" aria-hidden="true" tabindex="-1">Instruções</button>
+                </div>
+            </aside>
         </div>
     </div>
 
@@ -1335,6 +2159,14 @@
         const cameraSemanticTrend = document.getElementById("cameraSemanticTrend");
         const memoryConfirmedState = document.getElementById("memoryConfirmedState");
         const memoryTransitionState = document.getElementById("memoryTransitionState");
+        const guideDescriptionText = document.getElementById("guideDescriptionText");
+        const guideAlertText = document.getElementById("guideAlertText");
+        const guideFocusText = document.getElementById("guideFocusText");
+        const guideMemoryText = document.getElementById("guideMemoryText");
+        const persistentCurrentSummary = document.getElementById("persistentCurrentSummary");
+        const persistentCurrentMeta = document.getElementById("persistentCurrentMeta");
+        const persistentReferences = document.getElementById("persistentReferences");
+        const persistentHistoryList = document.getElementById("persistentHistoryList");
 
 
         let streamAtual = null;
@@ -1547,6 +2379,101 @@
             }
         }
 
+        function formatarDataMemoria(valor) {
+            if (!valor) return "sem data";
+
+            const data = new Date(valor);
+            if (Number.isNaN(data.getTime())) return "sem data";
+
+            return data.toLocaleString("pt-BR", {
+                day: "2-digit",
+                month: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+        }
+
+        function renderizarHistoricoPersistente(ambientes = []) {
+            persistentHistoryList.innerHTML = "";
+
+            if (!ambientes || ambientes.length === 0) {
+                persistentHistoryList.innerHTML = `
+                    <div class="memory-item">
+                        <div class="memory-item-title">Sem memória persistida ainda</div>
+                        <div class="memory-item-meta">Assim que o Visiora confirmar ambientes ou eventos úteis, este histórico começará a ser preenchido.</div>
+                    </div>
+                `;
+                return;
+            }
+
+            ambientes.slice(0, 4).forEach((item) => {
+                const ambiente = item.ambiente || item.Ambiente || "Ambiente";
+                const perfil = item.perfil || item.Perfil || "indefinido";
+                const leituras = item.leituras ?? item.Leituras ?? 0;
+                const evento = item.ultimoEvento || item.UltimoEvento || "reconhecimento estável";
+                const referencias = item.referencias || item.Referencias || [];
+                const quando = item.ultimoReconhecimentoUtc || item.UltimoReconhecimentoUtc || "";
+
+                const bloco = document.createElement("div");
+                bloco.className = "memory-item";
+                bloco.innerHTML = `
+                    <div class="memory-item-title">${primeiraLetraMaiuscula(ambiente)}</div>
+                    <div class="memory-item-meta">${primeiraLetraMaiuscula(perfil)} • ${leituras} leituras úteis • ${evento}</div>
+                    <div class="memory-item-meta">${referencias.length ? `Referências: ${referencias.join(", ")}` : "Sem referências persistidas ainda."}</div>
+                    <div class="memory-item-meta">Último reconhecimento: ${formatarDataMemoria(quando)}</div>
+                `;
+                persistentHistoryList.appendChild(bloco);
+            });
+        }
+
+        function atualizarPainelAssistivo(data) {
+            const descricao = data.descricao || data.Descricao || "Sem leitura útil no momento.";
+            const resumo = data.resumoAmbiente || data.ResumoAmbiente || descricao;
+            const alerta = data.alertaPrincipal || data.AlertaPrincipal || ((data.alertas || []).length ? data.alertas[0] : "");
+            const pessoa = data.pessoaPorPerto || data.PessoaPorPerto || data.pessoa || data.Pessoa || "";
+            const pontosInteresse = data.pontosInteresse || data.PontosInteresse || [];
+            const memoriaAtual = data.memoriaPersistenteAtual || data.MemoriaPersistenteAtual || {};
+            const ambientesPersistidos = data.ambientesPersistidos || data.AmbientesPersistidos || [];
+            const referenciasPersistentes = memoriaAtual.referencias || memoriaAtual.Referencias || [];
+            const descricaoPersistente = memoriaAtual.descricaoConsolidada || memoriaAtual.DescricaoConsolidada || "";
+            const ambientePersistente = memoriaAtual.ambiente || memoriaAtual.Ambiente || "";
+            const leiturasPersistentes = memoriaAtual.leituras ?? memoriaAtual.Leituras ?? 0;
+            const ultimoReconhecimento = memoriaAtual.ultimoReconhecimentoUtc || memoriaAtual.UltimoReconhecimentoUtc || "";
+
+            guideDescriptionText.textContent = resumo || descricao;
+            guideAlertText.textContent = alerta && alerta !== "-" ? primeiraLetraMaiuscula(alerta) : "Nenhum risco imediato detectado.";
+
+            if (pontosInteresse.length > 0) {
+                guideFocusText.textContent = pontosInteresse.map(primeiraLetraMaiuscula).join(" • ");
+            } else if (pessoa && pessoa !== "-") {
+                guideFocusText.textContent = pessoa;
+            } else {
+                guideFocusText.textContent = "Sem nova mudança importante nesta leitura.";
+            }
+
+            if (descricaoPersistente) {
+                guideMemoryText.textContent = descricaoPersistente;
+            } else if (ambientesPersistidos.length > 0) {
+                const ultimo = ambientesPersistidos[0];
+                guideMemoryText.textContent = ultimo.descricaoConsolidada || ultimo.DescricaoConsolidada || "Memória recente disponível.";
+            } else {
+                guideMemoryText.textContent = "A memória persistente será consolidada após confirmações úteis do ambiente.";
+            }
+
+            if (ambientePersistente) {
+                persistentCurrentSummary.textContent = `${primeiraLetraMaiuscula(ambientePersistente)} • ${leiturasPersistentes} leituras úteis`;
+                persistentCurrentMeta.textContent = ultimoReconhecimento
+                    ? `Último reconhecimento em ${formatarDataMemoria(ultimoReconhecimento)}.`
+                    : "Esse ambiente já começou a ser consolidado na memória local.";
+            } else {
+                persistentCurrentSummary.textContent = "Nenhum ambiente persistido ainda.";
+                persistentCurrentMeta.textContent = "Leituras úteis e referências frequentes aparecerão aqui sem gravar cada frame do loop.";
+            }
+
+            preencherListaChips(persistentReferences, referenciasPersistentes);
+            renderizarHistoricoPersistente(ambientesPersistidos);
+        }
+
         function mostrarResultado(data) {
             ultimoResultado = data;
 
@@ -1559,6 +2486,7 @@
             preencherListaChips(resObjetos, data.objetos || []);
             preencherListaChips(resAlertas, data.alertas || []);
             atualizarCamadaSemantica(data);
+            atualizarPainelAssistivo(data);
         }
 
         function atualizarMarcadorEscuta() {
