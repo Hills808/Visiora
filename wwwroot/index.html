@@ -270,9 +270,105 @@
             100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
         }
 
+
+        .libras-panel {
+            border-color: rgba(34, 197, 94, .24);
+            background:
+                radial-gradient(circle at top right, rgba(34, 197, 94, .10), transparent 34%),
+                linear-gradient(180deg, rgba(17,24,39,.98), rgba(15,23,42,.98));
+        }
+
+        .libras-text-box {
+            margin-top: 12px;
+            padding: 16px;
+            min-height: 118px;
+            border-radius: 18px;
+            border: 1px solid rgba(96, 165, 250, .20);
+            background: rgba(11, 18, 32, .94);
+            color: #f8fafc;
+            font-size: 18px;
+            line-height: 1.65;
+            outline: none;
+        }
+
+        .libras-text-box:focus {
+            border-color: rgba(34, 197, 94, .65);
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, .12);
+        }
+
+        .libras-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .libras-actions button {
+            box-shadow: none;
+        }
+
+        .libras-note {
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        [vw] {
+            z-index: 999999 !important;
+        }
+
         @media (max-width: 1120px) {
             .grid, .hero { grid-template-columns: 1fr; }
             .controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+
+        .libras-panel {
+            border-color: rgba(34, 197, 94, .24);
+            background:
+                radial-gradient(circle at top right, rgba(34, 197, 94, .10), transparent 34%),
+                linear-gradient(180deg, rgba(17,24,39,.98), rgba(15,23,42,.98));
+        }
+
+        .libras-text-box {
+            margin-top: 12px;
+            padding: 16px;
+            min-height: 118px;
+            border-radius: 18px;
+            border: 1px solid rgba(96, 165, 250, .20);
+            background: rgba(11, 18, 32, .94);
+            color: #f8fafc;
+            font-size: 18px;
+            line-height: 1.65;
+            outline: none;
+        }
+
+        .libras-text-box:focus {
+            border-color: rgba(34, 197, 94, .65);
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, .12);
+        }
+
+        .libras-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .libras-actions button {
+            box-shadow: none;
+        }
+
+        .libras-note {
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        [vw] {
+            z-index: 999999 !important;
         }
 
         @media (max-width: 720px) {
@@ -327,24 +423,24 @@
                             <label for="captureWidth">Largura da captura</label>
                             <select id="captureWidth">
                                 <option value="800">800</option>
-                                <option value="720" selected>720</option>
-                                <option value="640">640</option>
+                                <option value="720">720</option>
+                                <option value="640" selected>640</option>
                             </select>
                         </div>
                         <div>
                             <label for="jpegQuality">Qualidade JPEG</label>
                             <select id="jpegQuality">
                                 <option value="0.78">0.78</option>
-                                <option value="0.72" selected>0.72</option>
-                                <option value="0.66">0.66</option>
+                                <option value="0.72">0.72</option>
+                                <option value="0.66" selected>0.66</option>
                             </select>
                         </div>
                         <div>
                             <label for="baseInterval">Intervalo base</label>
                             <select id="baseInterval">
+                                <option value="850">850 ms</option>
+                                <option value="1100" selected>1100 ms</option>
                                 <option value="1400">1400 ms</option>
-                                <option value="1700" selected>1700 ms</option>
-                                <option value="2100">2100 ms</option>
                             </select>
                         </div>
                     </div>
@@ -364,6 +460,29 @@
                     </div>
                     <div class="spatial-grid" id="spatialItems"></div>
                 </section>
+
+                <section class="panel libras-panel">
+                    <div class="panel-head">
+                        <div>
+                            <div class="kicker">Acessibilidade em Libras</div>
+                            <h2>Descrição traduzível</h2>
+                        </div>
+                        <span class="status-pill" id="librasStatus">texto pronto</span>
+                    </div>
+                    <div class="sub">Texto simplificado da leitura espacial para apoio ao widget VLibras. A descrição abaixo acompanha a última percepção do Visiora.</div>
+                    <div id="librasText" class="libras-text-box" tabindex="0" aria-live="polite">
+                        Aguardando uma descrição do ambiente para exibir em texto acessível.
+                    </div>
+                    <div class="chips" id="librasTopics">
+                        <span class="chip">aguardando leitura</span>
+                    </div>
+                    <div class="libras-actions">
+                        <button type="button" class="secondary" id="btnFocusLibras">Focar texto para VLibras</button>
+                        <button type="button" class="secondary" id="btnCopyLibras">Copiar descrição</button>
+                    </div>
+                    <div class="libras-note">Use o botão flutuante do VLibras no canto da tela para traduzir o conteúdo textual. O recurso depende de internet.</div>
+                </section>
+
             </div>
 
             <aside class="column">
@@ -434,7 +553,16 @@
         let ultimoTextoFalado = "";
         let ultimaAssinaturaFront = "";
         let ultimaAssinaturaFrontEm = 0;
-        let intervaloAtual = 1700;
+        let intervaloAtual = 1100;
+        let analisePendentePorMovimento = null;
+        let ultimoDisparoPorMudanca = 0;
+        let ultimaDiferencaComMovimento = 0;
+
+        const LIMIAR_MOVIMENTO_LEVE = 2.4;
+        const LIMIAR_MOVIMENTO_MODERADO = 3.4;
+        const LIMIAR_MOVIMENTO_FORTE = 7.0;
+        const LIMIAR_MOVIMENTO_MUITO_FORTE = 11.0;
+        const MINIMO_ENTRE_ANALISES_MOVIMENTO_MS = 850;
 
         function setText(id, text) { el(id).textContent = text ?? ""; }
         function nowTime(ts) { return ts ? new Date(ts).toLocaleTimeString("pt-BR") : "nenhuma"; }
@@ -544,12 +672,114 @@
             });
         }
 
+
+
+        function uniqueList(items) {
+            const out = [];
+            const seen = new Set();
+            (items || []).forEach(item => {
+                const value = (item || "").toString().trim();
+                const key = normalize(value);
+                if (value && !seen.has(key)) {
+                    seen.add(key);
+                    out.push(value);
+                }
+            });
+            return out;
+        }
+
+        function buildLibrasText(data) {
+            const state = data.estadoCognitivo || {};
+            const parts = [];
+            const speech = data.mapaVerbal || state.mapaVerbal || data.resumoAmbiente || data.falaGuia || data.descricao;
+            if (speech) parts.push(speech);
+
+            const itens = Array.isArray(data.itensEspaciais) ? data.itensEspaciais : [];
+            if (itens.length) {
+                const descricoes = itens.slice(0, 6).map(item => {
+                    const nome = item.nome || "item";
+                    const pos = item.posicao && item.posicao !== "indefinido" ? ` em ${item.posicao}` : "";
+                    const dist = item.distanciaAproximada && item.distanciaAproximada !== "indefinida" ? `, ${item.distanciaAproximada}` : "";
+                    return `${nome}${pos}${dist}`;
+                });
+                parts.push(`Pontos importantes: ${descricoes.join("; ")}.`);
+            }
+
+            if (data.alertaPrincipal && data.alertaPrincipal !== "-") parts.push(`Alerta: ${data.alertaPrincipal}.`);
+            if (data.pessoaPorPerto && data.pessoaPorPerto !== "-") parts.push(`Pessoa por perto: ${data.pessoaPorPerto}.`);
+
+            const mem = data.memoriaPersistenteAtual || {};
+            if (mem.ambiente && mem.leituras > 0) {
+                const refs = Array.isArray(mem.referencias) && mem.referencias.length ? ` Referências lembradas: ${mem.referencias.slice(0, 4).join(", ")}.` : "";
+                parts.push(`Memória do ambiente: ${mem.ambiente}, com ${mem.leituras} leituras.${refs}`);
+            }
+
+            return parts.filter(Boolean).join(" ").replace(/\s+/g, " ").trim() || "Aguardando uma descrição do ambiente.";
+        }
+
+        function renderLibras(data) {
+            const text = buildLibrasText(data);
+            setText("librasText", text);
+            setText("librasStatus", text.length > 45 ? "texto atualizado" : "aguardando");
+
+            const topicBox = el("librasTopics");
+            topicBox.innerHTML = "";
+            const itens = Array.isArray(data.itensEspaciais) ? data.itensEspaciais : [];
+            const topics = uniqueList([
+                data.estadoCognitivo?.ambienteAtual,
+                data.caminhoStatus,
+                data.alertaPrincipal && data.alertaPrincipal !== "-" ? data.alertaPrincipal : "",
+                ...itens.slice(0, 6).map(x => [x.nome, x.posicao].filter(Boolean).join(" - "))
+            ]).slice(0, 8);
+
+            if (!topics.length) {
+                topicBox.innerHTML = `<span class="chip">aguardando leitura</span>`;
+                return;
+            }
+
+            topics.forEach(topic => {
+                const chip = document.createElement("span");
+                chip.className = "chip";
+                chip.textContent = topic;
+                topicBox.appendChild(chip);
+            });
+        }
+
+        function classificarMovimento(diff) {
+            if (diff >= LIMIAR_MOVIMENTO_MUITO_FORTE) return "alto";
+            if (diff >= LIMIAR_MOVIMENTO_FORTE) return "alto";
+            if (diff >= LIMIAR_MOVIMENTO_MODERADO) return "medio";
+            if (diff >= LIMIAR_MOVIMENTO_LEVE) return "leve";
+            return "baixo";
+        }
+
+        function montarPerguntaMovimento(diff, stable, motion) {
+            if (primeiraLeitura) {
+                return "Primeira leitura do Visiora. Descreva o ambiente de forma útil para uma pessoa com deficiência visual formar um mapa mental: ambiente provável, organização geral, mesa, cadeira, estante, porta, passagem, pessoa ou obstáculo quando visíveis, sempre com posição aproximada.";
+            }
+
+            if (diff >= LIMIAR_MOVIMENTO_FORTE || motion === "alto") {
+                return "A câmera mudou bastante. Analise imediatamente o novo enquadramento. Informe o que apareceu, sumiu ou mudou de posição. Priorize porta, passagem, pessoa, obstáculo, mesa, cadeira, estante ou saída provável. Dê posição aproximada: esquerda, centro, direita, frente ou fundo. Não presuma destino.";
+            }
+
+            if (diff >= LIMIAR_MOVIMENTO_MODERADO || motion === "medio") {
+                return "A câmera mudou de direção. Compare com a leitura anterior e informe o que ficou relevante agora, com posição aproximada. Se nada realmente útil mudou, retorne silêncio.";
+            }
+
+            if (!stable) {
+                return "Houve pequena mudança visual. Verifique se apareceu pessoa, obstáculo, porta, passagem ou referência útil. Se não houver novidade importante, retorne silêncio.";
+            }
+
+            return "Verificação de continuidade. Se nada útil mudou, retorne silêncio.";
+        }
+
         function renderResponse(data) {
             const state = data.estadoCognitivo || {};
             const speech = data.falaGuia || data.descricao || "Sem descrição disponível.";
             setText("mainSpeech", speech);
             setText("mapText", data.mapaVerbal || state.mapaVerbal || data.resumoAmbiente || data.descricao || "Sem mapa verbal disponível.");
             renderSpatialItems(data.itensEspaciais || []);
+            renderLibras(data);
 
             setText("envName", state.ambienteAtual || "Indefinido");
             setText("envType", state.tipoAmbiente || "Sem perfil");
@@ -564,25 +794,41 @@
         }
 
         async function analyze(options = {}) {
-            if (!streamAtual || analisando) return null;
+            if (!streamAtual) return null;
+
+            if (analisando) {
+                if (options.force || options.movement) {
+                    analisePendentePorMovimento = {
+                        ...options,
+                        force: true,
+                        movement: true,
+                        question: options.question || "A câmera mudou enquanto a análise anterior ainda estava em andamento. Assim que possível, reanalise o enquadramento atual e informe o que apareceu, sumiu ou ficou relevante para orientação espacial."
+                    };
+                    setText("decisionStatus", "mudança detectada: próxima análise preparada");
+                }
+                return null;
+            }
+
             analisando = true;
-            setText("decisionStatus", "analisando");
+            setText("decisionStatus", options.movement ? "mudança detectada: analisando" : "analisando");
             el("systemDot").classList.add("live");
             const now = Date.now();
+            const motion = options.motion || classificarMovimento(options.diff || 0);
+            const stable = typeof options.stable === "boolean" ? options.stable : (options.diff || 0) < LIMIAR_MOVIMENTO_MODERADO;
 
             const payload = {
                 imagemBase64: captureBase64(),
                 modo: "guia",
-                pergunta: "",
+                pergunta: options.question || montarPerguntaMovimento(options.diff || 0, stable, motion),
                 mudancaVisual: options.diff || 0,
                 forcarAnalise: !!options.force,
                 preferirAudioLocal: true,
                 primeiraLeitura: primeiraLeitura,
                 forcarDescricaoInicial: primeiraLeitura || !!options.describe,
                 loopAtivo: loopAtivo,
-                cenaEstavel: !!options.stable,
+                cenaEstavel: stable,
                 audioTocando: false,
-                nivelMovimento: options.motion || "indefinido",
+                nivelMovimento: motion,
                 tempoDesdeUltimaAnaliseMs: ultimoEnvio ? (now - ultimoEnvio) : 0,
                 tempoDesdeUltimaFalaMs: ultimaFala ? (now - ultimaFala) : 0
             };
@@ -598,8 +844,8 @@
                 ultimoEnvio = Date.now();
                 primeiraLeitura = false;
                 renderResponse(data);
-                setText("decisionStatus", data.deveFalar ? "resposta útil" : "observando");
-                if (data.usarFalaLocal && data.falaGuia && data.deveFalar) speakLocal(data.falaGuia, true);
+                setText("decisionStatus", data.deveFalar ? "resposta útil" : (options.movement ? "mudança analisada" : "observando"));
+                if (data.usarFalaLocal && data.falaGuia && (data.deveFalar || options.movement || options.force)) speakLocal(data.falaGuia, true);
                 return data;
             } catch (err) {
                 console.error(err);
@@ -607,6 +853,11 @@
                 return null;
             } finally {
                 analisando = false;
+                if (analisePendentePorMovimento && loopAtivo && streamAtual) {
+                    const pendente = analisePendentePorMovimento;
+                    analisePendentePorMovimento = null;
+                    setTimeout(() => analyze(pendente), 120);
+                }
             }
         }
 
@@ -622,24 +873,41 @@
             miniFrameAnterior = current;
             setText("visualDiff", diff.toFixed(2));
 
-            const base = Number(el("baseInterval").value || 1700);
-            intervaloAtual = diff >= 12 ? Math.max(1050, base - 450) : diff >= 6 ? Math.max(1250, base - 250) : base;
+            const base = Number(el("baseInterval").value || 1100);
+            const motion = classificarMovimento(diff);
+            const stable = diff < LIMIAR_MOVIMENTO_LEVE;
+            const movimentoModerado = diff >= LIMIAR_MOVIMENTO_MODERADO;
+            const movimentoForte = diff >= LIMIAR_MOVIMENTO_FORTE;
+            const movimentoMuitoForte = diff >= LIMIAR_MOVIMENTO_MUITO_FORTE;
+
+            intervaloAtual = movimentoMuitoForte ? 620 : movimentoForte ? 760 : movimentoModerado ? 920 : base;
 
             const timeSince = ultimoEnvio ? Date.now() - ultimoEnvio : 999999;
-            const stable = diff < 5.2;
-            const shouldAnalyze = primeiraLeitura || diff >= 5.2 || timeSince >= Math.max(5000, intervaloAtual * 2.6);
+            const minGap = movimentoForte ? MINIMO_ENTRE_ANALISES_MOVIMENTO_MS : movimentoModerado ? 1150 : 2300;
+            const analisePeriodica = timeSince >= Math.max(3200, base * 2.2);
+            const movimentoSustentado = movimentoModerado && timeSince >= minGap;
+            const movimentoForteImediato = movimentoForte && timeSince >= 650;
+            const shouldAnalyze = primeiraLeitura || movimentoSustentado || movimentoForteImediato || analisePeriodica;
+
+            if (movimentoModerado) {
+                ultimoDisparoPorMudanca = Date.now();
+                ultimaDiferencaComMovimento = diff;
+                setText("decisionStatus", movimentoForte ? "mudança forte detectada" : "mudança detectada");
+            }
 
             if (!shouldAnalyze) {
-                setText("decisionStatus", "cena estável");
-                schedule(650);
+                setText("decisionStatus", movimentoModerado ? "mudança percebida: aguardando janela" : "cena estável");
+                schedule(movimentoModerado ? 260 : 450);
                 return;
             }
 
             await analyze({
                 diff,
                 stable,
-                force: diff >= 12,
-                motion: diff >= 12 ? "alto" : diff >= 6 ? "medio" : "baixo"
+                force: primeiraLeitura || movimentoModerado,
+                movement: movimentoModerado,
+                motion,
+                question: montarPerguntaMovimento(diff, stable, motion)
             });
             schedule(intervaloAtual);
         }
@@ -673,6 +941,8 @@
             if (loopAtivo) return;
             loopAtivo = true;
             primeiraLeitura = true;
+            miniFrameAnterior = null;
+            analisePendentePorMovimento = null;
             setText("loopBadge", "Acompanhamento ativo");
             setText("systemStatus", "percepção ativa");
             loopTick();
@@ -689,7 +959,51 @@
         el("btnStopCamera").onclick = stopCamera;
         el("btnStartLoop").onclick = startLoop;
         el("btnStopLoop").onclick = stopLoop;
-        el("btnDescribeNow").onclick = () => analyze({ force: true, describe: true, diff: 100, stable: false, motion: "manual" });
+        el("btnDescribeNow").onclick = () => analyze({ force: true, describe: true, movement: true, diff: 100, stable: false, motion: "manual", question: "Descrição manual solicitada. Faça uma leitura espacial clara e completa do enquadramento atual, com objetos úteis e posição aproximada para acessibilidade." });
+
+        const btnFocusLibras = el("btnFocusLibras");
+        if (btnFocusLibras) {
+            btnFocusLibras.onclick = () => {
+                const box = el("librasText");
+                box.focus();
+                if (window.getSelection) {
+                    const range = document.createRange();
+                    range.selectNodeContents(box);
+                    const selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                }
+                setText("librasStatus", "texto selecionado");
+            };
+        }
+
+        const btnCopyLibras = el("btnCopyLibras");
+        if (btnCopyLibras) {
+            btnCopyLibras.onclick = async () => {
+                try {
+                    await navigator.clipboard.writeText(el("librasText").textContent.trim());
+                    setText("librasStatus", "texto copiado");
+                } catch {
+                    setText("librasStatus", "não foi possível copiar");
+                }
+            };
+        }
+
     </script>
+
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        if (window.VLibras) {
+            new window.VLibras.Widget("https://vlibras.gov.br/app");
+        }
+    </script>
+
 </body>
 </html>

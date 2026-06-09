@@ -8,7 +8,10 @@ namespace VisioraAPI.Services;
 public class OpenAIService
 {
     private readonly string _apiKey;
-    private static readonly HttpClient _httpClient = new();
+    private static readonly HttpClient _httpClient = new()
+    {
+        Timeout = TimeSpan.FromSeconds(45)
+    };
 
     public OpenAIService(IConfiguration config)
     {
@@ -32,9 +35,6 @@ public class OpenAIService
 
         var modoNormalizado = NormalizarModo(modo);
         var prompt = MontarPrompt(modoNormalizado, pergunta, contextoRecente);
-
-        using var request = new HttpRequestMessage(HttpMethod.Post, "https://api.openai.com/v1/chat/completions");
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _apiKey);
 
         var body = new
         {
@@ -72,20 +72,20 @@ public class OpenAIService
             },
             max_tokens = modoNormalizado switch
             {
-                "consulta" => 420,
-                "guia" => 460,
-                _ => 300
+                // A resposta espacial usa mapaVerbal + itensEspaciais.
+                // O limite antigo cortava o JSON no meio e quebrava a análise.
+                "consulta" => 900,
+                "guia" => 1100,
+                _ => 850
             }
         };
 
         var json = JsonSerializer.Serialize(body);
-        request.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
-        using var response = await _httpClient.SendAsync(request);
-        var result = await response.Content.ReadAsStringAsync();
+        var (statusCode, result) = await EnviarParaOpenAIComDiagnosticoAsync(json);
 
-        if (!response.IsSuccessStatusCode)
-            throw new Exception($"Erro OpenAI: {result}");
+        if ((int)statusCode < 200 || (int)statusCode >= 300)
+            throw new Exception($"Erro OpenAI ({(int)statusCode}): {result}");
 
         using var doc = JsonDocument.Parse(result);
 
@@ -100,17 +100,37 @@ public class OpenAIService
 
         content = LimparJsonResposta(content);
 
-        var respostaIA = JsonSerializer.Deserialize<RespostaIA>(
-            content,
-            new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
-
-        if (respostaIA == null)
-            throw new Exception("Não foi possível converter a resposta da IA.");
+        var respostaIA = DesserializarRespostaIAComRecuperacao(content);
 
         return SanitizarResposta(respostaIA, modoNormalizado);
+    }
+
+    private async Task<(System.Net.HttpStatusCode StatusCode, string Body)> EnviarParaOpenAIComDiagnosticoAsync(string json)
+    {
+        try
+        {
+            using var request = new HttpRequestMessage(HttpMethod.Post, "https://api.openai.com/v1/chat/completions");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _apiKey);
+            request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using var response = await _httpClient.SendAsync(request);
+            var result = await response.Content.ReadAsStringAsync();
+            return (response.StatusCode, result);
+        }
+        catch (TaskCanceledException ex)
+        {
+            throw new Exception("Falha ao enviar imagem para a OpenAI: tempo limite excedido. Verifique a internet do roteador/celular e tente reduzir a largura da captura para 640.", ex);
+        }
+        catch (HttpRequestException ex)
+        {
+            var detalhe = ex.InnerException?.Message ?? ex.Message;
+            throw new Exception($"Falha ao enviar imagem para a OpenAI: {detalhe}", ex);
+        }
+        catch (Exception ex)
+        {
+            var detalhe = ex.InnerException?.Message ?? ex.Message;
+            throw new Exception($"Falha inesperada ao chamar a OpenAI: {detalhe}", ex);
+        }
     }
 
     private string NormalizarModo(string? modo)
@@ -280,8 +300,8 @@ MAPA ESPACIAL OBRIGATÓRIO:
 - Preencha mapaVerbal com uma leitura espacial natural e útil do que aparece na câmera.
 - Não diga só "quarto", "sala" ou "escritório". Descreva organização e posição aproximada.
 - Informe a localização aproximada dos objetos úteis: à esquerda, ao centro, à direita, à frente, ao fundo.
-- Sempre que aparecerem mesa, cadeira, estante/prateleira, porta, passagem, cama, quadro, pessoa ou obstáculo, coloque em itensEspaciais.
-- itensEspaciais deve ter vários itens quando houver vários objetos úteis. Não escolha só um.
+- Sempre que aparecerem mesa, cadeira, estante/prateleira, porta, passagem, cama, quadro, pessoa ou obstáculo, coloque em itensEspaciais, priorizando os 6 itens mais úteis.
+- itensEspaciais deve ter de 3 a 6 itens úteis no máximo. Não escolha só um, mas também não escreva uma lista longa.
 - Se houver mesa e cadeira, diga mesa e cadeira. Se houver estante/prateleira, diga também.
 - Se a pessoa pode se mover, descreva o que pode atrapalhar e onde parece haver espaço livre, sem mandar ir.
 - Exemplo de mapaVerbal: "Parece um escritório. Há uma mesa mais ao centro, cadeira próxima à frente, estante ao fundo e uma porta à direita. O espaço livre parece mais estreito entre a mesa e a cadeira."
@@ -595,6 +615,115 @@ REGRAS:
         if (texto.Contains("baixa")) return "baixa";
 
         return "baixa";
+    }
+
+    private RespostaIA DesserializarRespostaIAComRecuperacao(string content)
+    {
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
+        try
+        {
+            var resposta = JsonSerializer.Deserialize<RespostaIA>(content, options);
+            if (resposta != null)
+                return resposta;
+        }
+        catch (JsonException)
+        {
+            // A OpenAI pode cortar o JSON quando a leitura espacial vem longa.
+            // Para apresentação, tentamos recuperar o objeto antes de desistir.
+        }
+
+        var reparado = RepararJsonPossivelmenteTruncado(content);
+
+        try
+        {
+            var respostaReparada = JsonSerializer.Deserialize<RespostaIA>(reparado, options);
+            if (respostaReparada != null)
+                return respostaReparada;
+        }
+        catch (JsonException ex)
+        {
+            throw new Exception("A IA retornou um JSON incompleto. Tente novamente ou reduza a largura da captura para 640. Detalhe: " + ex.Message);
+        }
+
+        throw new Exception("Não foi possível converter a resposta da IA.");
+    }
+
+    private string RepararJsonPossivelmenteTruncado(string json)
+    {
+        if (string.IsNullOrWhiteSpace(json))
+            return "{}";
+
+        json = json.Trim();
+
+        var stack = new Stack<char>();
+        var inString = false;
+        var escape = false;
+
+        foreach (var ch in json)
+        {
+            if (escape)
+            {
+                escape = false;
+                continue;
+            }
+
+            if (ch == '\\' && inString)
+            {
+                escape = true;
+                continue;
+            }
+
+            if (ch == '"')
+            {
+                inString = !inString;
+                continue;
+            }
+
+            if (inString)
+                continue;
+
+            if (ch == '{')
+                stack.Push('}');
+            else if (ch == '[')
+                stack.Push(']');
+            else if ((ch == '}' || ch == ']') && stack.Count > 0)
+                stack.Pop();
+        }
+
+        if (inString)
+            json += "\"";
+
+        json = RemoverVirgulasFinaisInvalidas(json);
+
+        while (stack.Count > 0)
+        {
+            var fechamento = stack.Pop();
+            json += fechamento;
+            json = RemoverVirgulasFinaisInvalidas(json);
+        }
+
+        return json;
+    }
+
+    private string RemoverVirgulasFinaisInvalidas(string json)
+    {
+        if (string.IsNullOrWhiteSpace(json))
+            return "{}";
+
+        var texto = json.TrimEnd();
+
+        while (texto.EndsWith(","))
+            texto = texto[..^1].TrimEnd();
+
+        texto = texto
+            .Replace(",}", "}")
+            .Replace(",]", "]");
+
+        return texto;
     }
 
     private string LimparJsonResposta(string content)

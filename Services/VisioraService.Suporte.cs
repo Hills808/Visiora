@@ -1064,10 +1064,10 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
         if (request.AudioTocando)
             return "aguardando fala terminar";
 
-        if (request.MudancaVisual >= 10 || nivel.Contains("forte"))
+        if (request.MudancaVisual >= 7.0 || nivel.Contains("forte") || nivel.Contains("alto"))
             return "movimento forte";
 
-        if (request.MudancaVisual >= 4.2 || nivel.Contains("moderado"))
+        if (request.MudancaVisual >= 3.4 || nivel.Contains("moderado") || nivel.Contains("medio") || nivel.Contains("médio"))
             return "mudança visual";
 
         if (request.CenaEstavel || nivel.Contains("parado"))
@@ -1093,10 +1093,10 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
         if (!request.CenaEstavel)
             return false;
 
-        if (request.MudancaVisual >= 3.2)
+        if (request.MudancaVisual >= 2.2)
             return false;
 
-        if (request.TempoDesdeUltimaAnaliseMs <= 0 || request.TempoDesdeUltimaAnaliseMs >= 18000)
+        if (request.TempoDesdeUltimaAnaliseMs <= 0 || request.TempoDesdeUltimaAnaliseMs >= 9000)
             return false;
 
         if (_memoriaAmbiente.HouveEntradaEmNovoAmbiente || _memoriaAmbiente.HouveTransicaoConfirmada || _memoriaAmbiente.HouveMudancaEstruturalRecente)
@@ -1255,7 +1255,7 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
         if (_memoriaAmbiente.HouveMudancaEstruturalRecente && !string.IsNullOrWhiteSpace(_memoriaAmbiente.UltimaMudancaEstrutural))
             return _memoriaAmbiente.UltimaMudancaEstrutural;
 
-        var houveMovimentoReal = request.MudancaVisual >= 6 || NormalizarTexto(request.NivelMovimento).Contains("medio") || NormalizarTexto(request.NivelMovimento).Contains("alto");
+        var houveMovimentoReal = request.MudancaVisual >= 4.0 || NormalizarTexto(request.NivelMovimento).Contains("medio") || NormalizarTexto(request.NivelMovimento).Contains("alto");
         var eventoUtil = evento is "mudanca" or "observacao" or "ponto_interesse" or "livre";
 
         if (houveMovimentoReal || eventoUtil)
@@ -1423,7 +1423,7 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
         var assinaturaAtual = CriarAssinaturaMapaEspacial(itens);
         var assinaturaAnterior = anterior == null ? "" : CriarAssinaturaMapaEspacial(ObterItensEspaciaisAssistivos(anterior));
         var houveMudancaDeMapa = !string.IsNullOrWhiteSpace(assinaturaAtual) && assinaturaAtual != assinaturaAnterior;
-        var movimentoReal = request.MudancaVisual >= 5.5 || NormalizarTexto(request.NivelMovimento).Contains("medio") || NormalizarTexto(request.NivelMovimento).Contains("alto");
+        var movimentoReal = request.MudancaVisual >= 3.8 || NormalizarTexto(request.NivelMovimento).Contains("medio") || NormalizarTexto(request.NivelMovimento).Contains("alto");
         var evento = NormalizarTexto(atual.EventoGuia).Replace(" ", "_").Replace("-", "_");
         var eventoEspacial = evento is "ponto_interesse" or "mudanca" or "observacao" or "livre";
 
@@ -1777,7 +1777,7 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
             return true;
         }
 
-        if (request.CenaEstavel && request.MudancaVisual < 3.2 && request.TempoDesdeUltimaFalaMs < 45000)
+        if (request.CenaEstavel && request.MudancaVisual < 2.2 && request.TempoDesdeUltimaFalaMs < 45000)
         {
             var evento = NormalizarTexto(atual.EventoGuia).Replace(" ", "_").Replace("-", "_");
             if (evento is "livre" or "ponto_interesse" or "observacao" or "mudanca" or "silencio" or "confirmacao")
@@ -1845,7 +1845,7 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
             return false;
 
         var evento = NormalizarTexto(atual.EventoGuia).Replace(" ", "_").Replace("-", "_");
-        var estavel = request.CenaEstavel || request.MudancaVisual < 4.2 || NormalizarTexto(request.NivelMovimento).Contains("baixo");
+        var estavel = request.CenaEstavel && request.MudancaVisual < 2.8 && NormalizarTexto(request.NivelMovimento).Contains("baixo");
 
         if (estavel && request.TempoDesdeUltimaFalaMs > 0 && request.TempoDesdeUltimaFalaMs < 45000)
         {
