@@ -6,18 +6,26 @@
     <title>Visiora AI</title>
     <style>
         :root {
-            --bg: #07111f;
-            --bg2: #0b1528;
-            --card: rgba(15, 23, 42, 0.94);
-            --card2: rgba(17, 30, 52, 0.92);
-            --line: rgba(148, 163, 184, 0.17);
-            --text: #f8fafc;
-            --muted: #aebbd0;
-            --blue: #3b82f6;
-            --blue2: #60a5fa;
-            --green: #22c55e;
-            --yellow: #f59e0b;
-            --red: #ef4444;
+            --bg: #f4f6f8;
+            --surface: #ffffff;
+            --surface-soft: #f8fafc;
+            --surface-muted: #f1f5f9;
+            --line: #d9e0ea;
+            --line-strong: #cbd5e1;
+            --text: #111827;
+            --muted: #64748b;
+            --muted-2: #475569;
+            --primary: #1f2937;
+            --primary-hover: #111827;
+            --accent: #2563eb;
+            --accent-soft: #eff6ff;
+            --green: #16a34a;
+            --green-soft: #ecfdf5;
+            --yellow: #d97706;
+            --yellow-soft: #fffbeb;
+            --red: #dc2626;
+            --red-soft: #fef2f2;
+            --shadow: 0 14px 34px rgba(15, 23, 42, .08);
         }
 
         * { box-sizing: border-box; }
@@ -25,66 +33,63 @@
         body {
             margin: 0;
             min-height: 100vh;
-            background:
-                radial-gradient(circle at top right, rgba(59, 130, 246, .16), transparent 30%),
-                radial-gradient(circle at left 35%, rgba(34, 197, 94, .08), transparent 28%),
-                linear-gradient(180deg, var(--bg), var(--bg2));
+            background: var(--bg);
             color: var(--text);
             font-family: Arial, Helvetica, sans-serif;
-            padding: 22px;
+            padding: 18px;
         }
 
         .app {
-            max-width: 1460px;
+            max-width: 1420px;
             margin: 0 auto;
             display: grid;
-            gap: 18px;
+            gap: 14px;
         }
 
         .hero, .panel {
-            background: linear-gradient(180deg, rgba(15, 23, 42, .96), rgba(10, 18, 33, .98));
+            background: var(--surface);
             border: 1px solid var(--line);
-            border-radius: 24px;
-            box-shadow: 0 18px 46px rgba(0, 0, 0, .26);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
         }
 
         .hero {
-            padding: 24px;
+            padding: 18px 20px;
             display: grid;
             grid-template-columns: 1fr auto;
-            gap: 18px;
+            gap: 14px;
             align-items: center;
         }
 
         .kicker {
-            color: #93c5fd;
-            font-size: 12px;
+            color: var(--muted-2);
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: .12em;
+            letter-spacing: .14em;
             font-weight: 800;
-            margin-bottom: 7px;
+            margin-bottom: 6px;
         }
 
         h1, h2, h3, p { margin: 0; }
-        h1 { font-size: 36px; letter-spacing: -.03em; margin-bottom: 8px; }
-        h2 { font-size: 22px; letter-spacing: -.02em; }
-        h3 { font-size: 17px; }
+        h1 { font-size: 28px; letter-spacing: -.03em; margin-bottom: 6px; }
+        h2 { font-size: 20px; letter-spacing: -.02em; }
+        h3 { font-size: 16px; }
 
         .sub {
             color: var(--muted);
-            line-height: 1.55;
-            margin-top: 6px;
+            line-height: 1.5;
+            margin-top: 5px;
         }
 
         .status-pill {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 13px;
+            padding: 8px 12px;
             border-radius: 999px;
-            background: rgba(15, 23, 42, .74);
-            border: 1px solid rgba(96, 165, 250, .20);
-            color: #dbeafe;
+            background: var(--surface-soft);
+            border: 1px solid var(--line);
+            color: var(--primary);
             font-weight: 800;
             font-size: 13px;
             white-space: nowrap;
@@ -104,35 +109,36 @@
 
         .grid {
             display: grid;
-            grid-template-columns: minmax(0, 1.28fr) minmax(390px, .72fr);
-            gap: 18px;
+            grid-template-columns: minmax(0, 1.35fr) minmax(360px, .65fr);
+            gap: 14px;
+            align-items: start;
         }
 
-        .column { display: flex; flex-direction: column; gap: 18px; }
-        .panel { padding: 18px; }
+        .column { display: flex; flex-direction: column; gap: 14px; }
+        .panel { padding: 16px; }
 
         .panel-head {
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
             gap: 12px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .camera-shell {
             position: relative;
-            border-radius: 22px;
+            border-radius: 18px;
             overflow: hidden;
-            background: #020617;
-            border: 1px solid var(--line);
-            min-height: 410px;
+            background: #111827;
+            border: 1px solid var(--line-strong);
+            min-height: 390px;
         }
 
         video, canvas {
             display: block;
             width: 100%;
             background: #000;
-            border-radius: 22px;
+            border-radius: 18px;
         }
 
         canvas { display: none; }
@@ -141,24 +147,31 @@
             pointer-events: none;
             position: absolute;
             inset: 0;
-            padding: 16px;
+            padding: 14px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            background: linear-gradient(180deg, rgba(2, 6, 23, .50), transparent 32%, transparent 68%, rgba(2, 6, 23, .44));
+            background: linear-gradient(180deg, rgba(17, 24, 39, .42), transparent 32%, transparent 70%, rgba(17, 24, 39, .36));
+        }
+
+        .camera-overlay .status-pill {
+            background: rgba(255, 255, 255, .88);
+            border-color: rgba(226, 232, 240, .9);
+            color: #111827;
+            backdrop-filter: blur(8px);
         }
 
         .controls {
             display: grid;
             grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 10px;
-            margin-top: 14px;
+            margin-top: 12px;
         }
 
-        button, select {
+        button, select, summary {
             border: 0;
-            border-radius: 14px;
-            padding: 13px 14px;
+            border-radius: 12px;
+            padding: 12px 13px;
             font-size: 14px;
             font-weight: 800;
         }
@@ -166,43 +179,67 @@
         button {
             color: #fff;
             cursor: pointer;
-            background: linear-gradient(180deg, #2563eb, #1d4ed8);
-            box-shadow: 0 12px 22px rgba(37, 99, 235, .18);
+            background: var(--primary);
+            box-shadow: none;
         }
 
-        button.secondary { background: linear-gradient(180deg, #334155, #1f2937); box-shadow: none; }
-        button.danger { background: linear-gradient(180deg, #dc2626, #b91c1c); box-shadow: none; }
-        button:hover { filter: brightness(1.08); }
+        button:hover { background: var(--primary-hover); }
         button:disabled { opacity: .5; cursor: not-allowed; }
+        button.secondary { background: #e2e8f0; color: #111827; }
+        button.secondary:hover { background: #cbd5e1; }
+        button.danger { background: #b91c1c; color: #fff; }
+        button.danger:hover { background: #991b1b; }
+
+        #btnStartCamera, #btnStartLoop { background: var(--accent); }
+        #btnStartCamera:hover, #btnStartLoop:hover { background: #1d4ed8; }
+
+        .advanced-settings {
+            margin-top: 12px;
+            border-radius: 16px;
+            border: 1px solid var(--line);
+            background: var(--surface-soft);
+            overflow: hidden;
+        }
+
+        .advanced-settings summary {
+            list-style: none;
+            cursor: pointer;
+            color: var(--muted-2);
+            padding: 12px 14px;
+        }
+
+        .advanced-settings summary::-webkit-details-marker { display: none; }
+        .advanced-settings summary::after { content: "  ▾"; color: var(--muted); }
+        .advanced-settings[open] summary::after { content: "  ▴"; }
 
         .settings {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 12px;
-            margin-top: 14px;
+            padding: 0 14px 14px 14px;
         }
 
-        label { display: block; color: #cbd5e1; font-size: 13px; font-weight: 800; margin-bottom: 6px; }
-        select { width: 100%; color: #fff; background: rgba(8, 15, 30, .96); border: 1px solid var(--line); }
+        label { display: block; color: var(--muted-2); font-size: 13px; font-weight: 800; margin-bottom: 6px; }
+        select { width: 100%; color: var(--text); background: #fff; border: 1px solid var(--line); }
 
         .readout {
-            padding: 18px;
-            border-radius: 20px;
-            background: rgba(8, 15, 30, .72);
+            padding: 16px;
+            border-radius: 18px;
+            background: var(--surface-soft);
             border: 1px solid var(--line);
         }
 
         .main-speech {
-            font-size: 24px;
+            font-size: 22px;
             line-height: 1.45;
             font-weight: 900;
             letter-spacing: -.02em;
         }
 
         .map-text {
-            margin-top: 12px;
-            color: #dbeafe;
-            line-height: 1.65;
+            margin-top: 10px;
+            color: var(--muted-2);
+            line-height: 1.6;
             font-size: 16px;
         }
 
@@ -210,19 +247,19 @@
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 10px;
-            margin-top: 14px;
+            margin-top: 12px;
         }
 
         .spatial-item, .metric, .memory-card, .history-item {
-            border-radius: 18px;
+            border-radius: 16px;
             border: 1px solid var(--line);
-            background: rgba(8, 15, 30, .72);
-            padding: 13px;
+            background: var(--surface-soft);
+            padding: 12px;
         }
 
         .item-title { font-weight: 900; font-size: 16px; margin-bottom: 5px; }
         .item-meta { color: var(--muted); font-size: 13px; line-height: 1.45; }
-        .item-risk { border-color: rgba(239, 68, 68, .34); background: rgba(127, 29, 29, .20); }
+        .item-risk { border-color: #fecaca; background: var(--red-soft); }
 
         .metrics {
             display: grid;
@@ -231,7 +268,7 @@
         }
 
         .metric-label {
-            color: #93c5fd;
+            color: var(--muted-2);
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: .1em;
@@ -240,7 +277,7 @@
         }
 
         .metric-value {
-            font-size: 19px;
+            font-size: 18px;
             line-height: 1.32;
             font-weight: 900;
         }
@@ -255,7 +292,7 @@
         .memory-card + .memory-card, .history-item + .history-item { margin-top: 10px; }
         .memory-title { font-weight: 900; margin-bottom: 6px; }
         .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-        .chip { padding: 7px 10px; border-radius: 999px; background: rgba(30, 41, 59, .92); border: 1px solid var(--line); font-size: 13px; color: #e2e8f0; }
+        .chip { padding: 7px 10px; border-radius: 999px; background: #e2e8f0; border: 1px solid var(--line); font-size: 13px; color: #1f2937; }
 
         .diagnostics {
             display: grid;
@@ -264,36 +301,29 @@
             margin-top: 12px;
         }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, .65); }
-            70% { box-shadow: 0 0 0 12px rgba(34, 197, 94, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-        }
-
+        .technical-panel { display: none; }
 
         .libras-panel {
-            border-color: rgba(34, 197, 94, .24);
-            background:
-                radial-gradient(circle at top right, rgba(34, 197, 94, .10), transparent 34%),
-                linear-gradient(180deg, rgba(17,24,39,.98), rgba(15,23,42,.98));
+            border-color: #bbf7d0;
+            background: linear-gradient(180deg, #ffffff, #f8fafc);
         }
 
         .libras-text-box {
             margin-top: 12px;
-            padding: 16px;
-            min-height: 118px;
-            border-radius: 18px;
-            border: 1px solid rgba(96, 165, 250, .20);
-            background: rgba(11, 18, 32, .94);
-            color: #f8fafc;
-            font-size: 18px;
-            line-height: 1.65;
+            padding: 14px;
+            min-height: 106px;
+            border-radius: 16px;
+            border: 1px solid var(--line-strong);
+            background: #fff;
+            color: var(--text);
+            font-size: 17px;
+            line-height: 1.6;
             outline: none;
         }
 
         .libras-text-box:focus {
-            border-color: rgba(34, 197, 94, .65);
-            box-shadow: 0 0 0 4px rgba(34, 197, 94, .12);
+            border-color: var(--green);
+            box-shadow: 0 0 0 4px rgba(22, 163, 74, .12);
         }
 
         .libras-actions {
@@ -303,10 +333,6 @@
             margin-top: 12px;
         }
 
-        .libras-actions button {
-            box-shadow: none;
-        }
-
         .libras-note {
             margin-top: 10px;
             color: var(--muted);
@@ -314,8 +340,12 @@
             line-height: 1.55;
         }
 
-        [vw] {
-            z-index: 999999 !important;
+        [vw] { z-index: 999999 !important; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, .55); }
+            70% { box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
         }
 
         @media (max-width: 1120px) {
@@ -323,58 +353,11 @@
             .controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
 
-
-        .libras-panel {
-            border-color: rgba(34, 197, 94, .24);
-            background:
-                radial-gradient(circle at top right, rgba(34, 197, 94, .10), transparent 34%),
-                linear-gradient(180deg, rgba(17,24,39,.98), rgba(15,23,42,.98));
-        }
-
-        .libras-text-box {
-            margin-top: 12px;
-            padding: 16px;
-            min-height: 118px;
-            border-radius: 18px;
-            border: 1px solid rgba(96, 165, 250, .20);
-            background: rgba(11, 18, 32, .94);
-            color: #f8fafc;
-            font-size: 18px;
-            line-height: 1.65;
-            outline: none;
-        }
-
-        .libras-text-box:focus {
-            border-color: rgba(34, 197, 94, .65);
-            box-shadow: 0 0 0 4px rgba(34, 197, 94, .12);
-        }
-
-        .libras-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 12px;
-        }
-
-        .libras-actions button {
-            box-shadow: none;
-        }
-
-        .libras-note {
-            margin-top: 10px;
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.55;
-        }
-
-        [vw] {
-            z-index: 999999 !important;
-        }
-
         @media (max-width: 720px) {
-            body { padding: 12px; }
+            body { padding: 10px; }
             .controls, .settings, .metrics, .spatial-grid, .diagnostics { grid-template-columns: 1fr; }
             .main-speech { font-size: 19px; }
+            h1 { font-size: 24px; }
         }
     </style>
 </head>
@@ -382,9 +365,9 @@
     <main class="app">
         <section class="hero">
             <div>
-                <div class="kicker">Visiora AI • Percepção espacial assistiva</div>
+                <div class="kicker">Visiora AI</div>
                 <h1>Assistente visual inteligente</h1>
-                <p class="sub">Descrição espacial, memória de ambiente, pontos de interesse e alertas para apoiar pessoas com deficiência visual sem presumir destino.</p>
+                <p class="sub">Percepção espacial, memória de ambiente, alertas e Libras em uma interface limpa para demonstração.</p>
             </div>
             <span class="status-pill"><span class="dot" id="systemDot"></span><span id="systemStatus">Pronto</span></span>
         </section>
@@ -395,8 +378,8 @@
                     <div class="panel-head">
                         <div>
                             <div class="kicker">Câmera</div>
-                            <h2>Observação contínua</h2>
-                            <p class="sub">Ative a câmera e deixe o Visiora acompanhar o ambiente em tempo real.</p>
+                            <h2>Câmera em tempo real</h2>
+                            <p class="sub">Ative a câmera para o Visiora analisar o ambiente e avisar mudanças relevantes.</p>
                         </div>
                         <span class="status-pill" id="loopBadge">Acompanhamento desligado</span>
                     </div>
@@ -418,39 +401,42 @@
                         <button class="secondary" id="btnDescribeNow">Descrever agora</button>
                     </div>
 
+                    <details class="advanced-settings">
+                        <summary>Configurações avançadas</summary>
                     <div class="settings">
                         <div>
                             <label for="captureWidth">Largura da captura</label>
                             <select id="captureWidth">
                                 <option value="800">800</option>
-                                <option value="720">720</option>
-                                <option value="640" selected>640</option>
+                                <option value="720" selected>720</option>
+                                <option value="640">640</option>
                             </select>
                         </div>
                         <div>
                             <label for="jpegQuality">Qualidade JPEG</label>
                             <select id="jpegQuality">
                                 <option value="0.78">0.78</option>
-                                <option value="0.72">0.72</option>
-                                <option value="0.66" selected>0.66</option>
+                                <option value="0.72" selected>0.72</option>
+                                <option value="0.66">0.66</option>
                             </select>
                         </div>
                         <div>
                             <label for="baseInterval">Intervalo base</label>
                             <select id="baseInterval">
-                                <option value="850">850 ms</option>
-                                <option value="1100" selected>1100 ms</option>
                                 <option value="1400">1400 ms</option>
+                                <option value="1700" selected>1700 ms</option>
+                                <option value="2100">2100 ms</option>
                             </select>
                         </div>
                     </div>
+                    </details>
                 </section>
 
                 <section class="panel">
                     <div class="panel-head">
                         <div>
                             <div class="kicker">Saída assistiva</div>
-                            <h2>Leitura atual</h2>
+                            <h2>Descrição do ambiente</h2>
                         </div>
                         <span class="status-pill" id="speechStatus">sem fala</span>
                     </div>
@@ -465,11 +451,11 @@
                     <div class="panel-head">
                         <div>
                             <div class="kicker">Acessibilidade em Libras</div>
-                            <h2>Descrição traduzível</h2>
+                            <h2>Libras</h2>
                         </div>
                         <span class="status-pill" id="librasStatus">texto pronto</span>
                     </div>
-                    <div class="sub">Texto simplificado da leitura espacial para apoio ao widget VLibras. A descrição abaixo acompanha a última percepção do Visiora.</div>
+                    <div class="sub">Texto simplificado para tradução no widget VLibras, acompanhando a última percepção do Visiora.</div>
                     <div id="librasText" class="libras-text-box" tabindex="0" aria-live="polite">
                         Aguardando uma descrição do ambiente para exibir em texto acessível.
                     </div>
@@ -490,7 +476,7 @@
                     <div class="panel-head">
                         <div>
                             <div class="kicker">Estado perceptivo</div>
-                            <h2>Contexto do ambiente</h2>
+                            <h2>Resumo perceptivo</h2>
                         </div>
                     </div>
                     <div class="metrics">
@@ -505,7 +491,7 @@
                     <div class="panel-head">
                         <div>
                             <div class="kicker">Memória SQLite</div>
-                            <h2>Ambiente lembrado</h2>
+                            <h2>Memória do ambiente</h2>
                         </div>
                         <span class="status-pill" id="memoryStatus">aprendendo</span>
                     </div>
@@ -517,7 +503,7 @@
                     <div id="recentMemories"></div>
                 </section>
 
-                <section class="panel">
+                <section class="panel technical-panel">
                     <div class="panel-head">
                         <div>
                             <div class="kicker">Telemetria essencial</div>
@@ -553,16 +539,7 @@
         let ultimoTextoFalado = "";
         let ultimaAssinaturaFront = "";
         let ultimaAssinaturaFrontEm = 0;
-        let intervaloAtual = 1100;
-        let analisePendentePorMovimento = null;
-        let ultimoDisparoPorMudanca = 0;
-        let ultimaDiferencaComMovimento = 0;
-
-        const LIMIAR_MOVIMENTO_LEVE = 2.4;
-        const LIMIAR_MOVIMENTO_MODERADO = 3.4;
-        const LIMIAR_MOVIMENTO_FORTE = 7.0;
-        const LIMIAR_MOVIMENTO_MUITO_FORTE = 11.0;
-        const MINIMO_ENTRE_ANALISES_MOVIMENTO_MS = 850;
+        let intervaloAtual = 1700;
 
         function setText(id, text) { el(id).textContent = text ?? ""; }
         function nowTime(ts) { return ts ? new Date(ts).toLocaleTimeString("pt-BR") : "nenhuma"; }
@@ -745,34 +722,6 @@
             });
         }
 
-        function classificarMovimento(diff) {
-            if (diff >= LIMIAR_MOVIMENTO_MUITO_FORTE) return "alto";
-            if (diff >= LIMIAR_MOVIMENTO_FORTE) return "alto";
-            if (diff >= LIMIAR_MOVIMENTO_MODERADO) return "medio";
-            if (diff >= LIMIAR_MOVIMENTO_LEVE) return "leve";
-            return "baixo";
-        }
-
-        function montarPerguntaMovimento(diff, stable, motion) {
-            if (primeiraLeitura) {
-                return "Primeira leitura do Visiora. Descreva o ambiente de forma útil para uma pessoa com deficiência visual formar um mapa mental: ambiente provável, organização geral, mesa, cadeira, estante, porta, passagem, pessoa ou obstáculo quando visíveis, sempre com posição aproximada.";
-            }
-
-            if (diff >= LIMIAR_MOVIMENTO_FORTE || motion === "alto") {
-                return "A câmera mudou bastante. Analise imediatamente o novo enquadramento. Informe o que apareceu, sumiu ou mudou de posição. Priorize porta, passagem, pessoa, obstáculo, mesa, cadeira, estante ou saída provável. Dê posição aproximada: esquerda, centro, direita, frente ou fundo. Não presuma destino.";
-            }
-
-            if (diff >= LIMIAR_MOVIMENTO_MODERADO || motion === "medio") {
-                return "A câmera mudou de direção. Compare com a leitura anterior e informe o que ficou relevante agora, com posição aproximada. Se nada realmente útil mudou, retorne silêncio.";
-            }
-
-            if (!stable) {
-                return "Houve pequena mudança visual. Verifique se apareceu pessoa, obstáculo, porta, passagem ou referência útil. Se não houver novidade importante, retorne silêncio.";
-            }
-
-            return "Verificação de continuidade. Se nada útil mudou, retorne silêncio.";
-        }
-
         function renderResponse(data) {
             const state = data.estadoCognitivo || {};
             const speech = data.falaGuia || data.descricao || "Sem descrição disponível.";
@@ -794,41 +743,25 @@
         }
 
         async function analyze(options = {}) {
-            if (!streamAtual) return null;
-
-            if (analisando) {
-                if (options.force || options.movement) {
-                    analisePendentePorMovimento = {
-                        ...options,
-                        force: true,
-                        movement: true,
-                        question: options.question || "A câmera mudou enquanto a análise anterior ainda estava em andamento. Assim que possível, reanalise o enquadramento atual e informe o que apareceu, sumiu ou ficou relevante para orientação espacial."
-                    };
-                    setText("decisionStatus", "mudança detectada: próxima análise preparada");
-                }
-                return null;
-            }
-
+            if (!streamAtual || analisando) return null;
             analisando = true;
-            setText("decisionStatus", options.movement ? "mudança detectada: analisando" : "analisando");
+            setText("decisionStatus", "analisando");
             el("systemDot").classList.add("live");
             const now = Date.now();
-            const motion = options.motion || classificarMovimento(options.diff || 0);
-            const stable = typeof options.stable === "boolean" ? options.stable : (options.diff || 0) < LIMIAR_MOVIMENTO_MODERADO;
 
             const payload = {
                 imagemBase64: captureBase64(),
                 modo: "guia",
-                pergunta: options.question || montarPerguntaMovimento(options.diff || 0, stable, motion),
+                pergunta: "",
                 mudancaVisual: options.diff || 0,
                 forcarAnalise: !!options.force,
                 preferirAudioLocal: true,
                 primeiraLeitura: primeiraLeitura,
                 forcarDescricaoInicial: primeiraLeitura || !!options.describe,
                 loopAtivo: loopAtivo,
-                cenaEstavel: stable,
+                cenaEstavel: !!options.stable,
                 audioTocando: false,
-                nivelMovimento: motion,
+                nivelMovimento: options.motion || "indefinido",
                 tempoDesdeUltimaAnaliseMs: ultimoEnvio ? (now - ultimoEnvio) : 0,
                 tempoDesdeUltimaFalaMs: ultimaFala ? (now - ultimaFala) : 0
             };
@@ -844,8 +777,8 @@
                 ultimoEnvio = Date.now();
                 primeiraLeitura = false;
                 renderResponse(data);
-                setText("decisionStatus", data.deveFalar ? "resposta útil" : (options.movement ? "mudança analisada" : "observando"));
-                if (data.usarFalaLocal && data.falaGuia && (data.deveFalar || options.movement || options.force)) speakLocal(data.falaGuia, true);
+                setText("decisionStatus", data.deveFalar ? "resposta útil" : "observando");
+                if (data.usarFalaLocal && data.falaGuia && data.deveFalar) speakLocal(data.falaGuia, true);
                 return data;
             } catch (err) {
                 console.error(err);
@@ -853,11 +786,6 @@
                 return null;
             } finally {
                 analisando = false;
-                if (analisePendentePorMovimento && loopAtivo && streamAtual) {
-                    const pendente = analisePendentePorMovimento;
-                    analisePendentePorMovimento = null;
-                    setTimeout(() => analyze(pendente), 120);
-                }
             }
         }
 
@@ -873,41 +801,24 @@
             miniFrameAnterior = current;
             setText("visualDiff", diff.toFixed(2));
 
-            const base = Number(el("baseInterval").value || 1100);
-            const motion = classificarMovimento(diff);
-            const stable = diff < LIMIAR_MOVIMENTO_LEVE;
-            const movimentoModerado = diff >= LIMIAR_MOVIMENTO_MODERADO;
-            const movimentoForte = diff >= LIMIAR_MOVIMENTO_FORTE;
-            const movimentoMuitoForte = diff >= LIMIAR_MOVIMENTO_MUITO_FORTE;
-
-            intervaloAtual = movimentoMuitoForte ? 620 : movimentoForte ? 760 : movimentoModerado ? 920 : base;
+            const base = Number(el("baseInterval").value || 1700);
+            intervaloAtual = diff >= 12 ? Math.max(1050, base - 450) : diff >= 6 ? Math.max(1250, base - 250) : base;
 
             const timeSince = ultimoEnvio ? Date.now() - ultimoEnvio : 999999;
-            const minGap = movimentoForte ? MINIMO_ENTRE_ANALISES_MOVIMENTO_MS : movimentoModerado ? 1150 : 2300;
-            const analisePeriodica = timeSince >= Math.max(3200, base * 2.2);
-            const movimentoSustentado = movimentoModerado && timeSince >= minGap;
-            const movimentoForteImediato = movimentoForte && timeSince >= 650;
-            const shouldAnalyze = primeiraLeitura || movimentoSustentado || movimentoForteImediato || analisePeriodica;
-
-            if (movimentoModerado) {
-                ultimoDisparoPorMudanca = Date.now();
-                ultimaDiferencaComMovimento = diff;
-                setText("decisionStatus", movimentoForte ? "mudança forte detectada" : "mudança detectada");
-            }
+            const stable = diff < 5.2;
+            const shouldAnalyze = primeiraLeitura || diff >= 5.2 || timeSince >= Math.max(5000, intervaloAtual * 2.6);
 
             if (!shouldAnalyze) {
-                setText("decisionStatus", movimentoModerado ? "mudança percebida: aguardando janela" : "cena estável");
-                schedule(movimentoModerado ? 260 : 450);
+                setText("decisionStatus", "cena estável");
+                schedule(650);
                 return;
             }
 
             await analyze({
                 diff,
                 stable,
-                force: primeiraLeitura || movimentoModerado,
-                movement: movimentoModerado,
-                motion,
-                question: montarPerguntaMovimento(diff, stable, motion)
+                force: diff >= 12,
+                motion: diff >= 12 ? "alto" : diff >= 6 ? "medio" : "baixo"
             });
             schedule(intervaloAtual);
         }
@@ -941,8 +852,6 @@
             if (loopAtivo) return;
             loopAtivo = true;
             primeiraLeitura = true;
-            miniFrameAnterior = null;
-            analisePendentePorMovimento = null;
             setText("loopBadge", "Acompanhamento ativo");
             setText("systemStatus", "percepção ativa");
             loopTick();
@@ -959,7 +868,7 @@
         el("btnStopCamera").onclick = stopCamera;
         el("btnStartLoop").onclick = startLoop;
         el("btnStopLoop").onclick = stopLoop;
-        el("btnDescribeNow").onclick = () => analyze({ force: true, describe: true, movement: true, diff: 100, stable: false, motion: "manual", question: "Descrição manual solicitada. Faça uma leitura espacial clara e completa do enquadramento atual, com objetos úteis e posição aproximada para acessibilidade." });
+        el("btnDescribeNow").onclick = () => analyze({ force: true, describe: true, diff: 100, stable: false, motion: "manual" });
 
         const btnFocusLibras = el("btnFocusLibras");
         if (btnFocusLibras) {
