@@ -4,6 +4,9 @@ namespace VisioraAPI.Services;
 
 public partial class VisioraService
 {
+    private static string _ultimaAssinaturaMapaEspacialFalada = "";
+    private static DateTime _ultimaAssinaturaMapaEspacialFaladaEm = DateTime.MinValue;
+
     private SinalAmbiente ExtrairSinalAmbiente(RespostaIA resposta)
     {
         var descricao = NormalizarTexto(resposta.Descricao);
@@ -507,6 +510,10 @@ private string CriarFalaInicialDoGuia(RespostaIA atual, bool exigirDescricaoUtil
         .Take(5)
         .ToList();
 
+    var falaPanoramicaSuperior = CriarFalaPanoramicaAssistivaSuperior(atual, true);
+    if (!string.IsNullOrWhiteSpace(falaPanoramicaSuperior))
+        return GarantirPontoFinal(LimparTextoParaAudio(falaPanoramicaSuperior, 560));
+
     var ambiente = "";
     var referencia = "";
 
@@ -926,7 +933,7 @@ private bool DeveEmitirConfirmacaoDeConforto(DateTime agora, RespostaIA atual)
     if (_ultimaFalaEm == DateTime.MinValue)
         return false;
 
-    if ((agora - _ultimaFalaEm).TotalSeconds < 32)
+    if ((agora - _ultimaFalaEm).TotalSeconds < 58)
         return false;
 
     if (!string.IsNullOrWhiteSpace(ObterAlertaPrincipal(atual)))
@@ -1089,7 +1096,7 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
         if (request.MudancaVisual >= 3.2)
             return false;
 
-        if (request.TempoDesdeUltimaAnaliseMs <= 0 || request.TempoDesdeUltimaAnaliseMs >= 9000)
+        if (request.TempoDesdeUltimaAnaliseMs <= 0 || request.TempoDesdeUltimaAnaliseMs >= 18000)
             return false;
 
         if (_memoriaAmbiente.HouveEntradaEmNovoAmbiente || _memoriaAmbiente.HouveTransicaoConfirmada || _memoriaAmbiente.HouveMudancaEstruturalRecente)
@@ -1136,6 +1143,8 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
             EstadoOperacional = estadoOperacional,
             ResumoAmbiente = string.IsNullOrWhiteSpace(resposta.ResumoAmbiente) ? resposta.Descricao : resposta.ResumoAmbiente,
             PontosInteresse = (resposta.PontosInteresse ?? new List<string>()).ToArray(),
+            MapaVerbal = resposta.MapaVerbal,
+            ItensEspaciais = (resposta.ItensEspaciais ?? new List<ItemEspacial>()).ToArray(),
             EstadoCognitivo = estado,
             MemoriaRecente = memoria,
             MemoriaPersistenteAtual = memoriaPersistenteAtual,
@@ -1163,21 +1172,29 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
 
         if (primeiraLeitura)
         {
-            partes.Add("Primeira leitura: faça descrição ambiental completa o suficiente para uma pessoa sem visão se situar. Não presuma destino. Aponte portas, passagens, obstáculos, pessoas e objetos úteis, caso apareçam.");
+            partes.Add("Primeira leitura: faça descrição espacial completa para uma pessoa sem visão formar um mapa mental. Informe ambiente provável, objetos úteis e posição aproximada: esquerda, centro, direita, frente ou fundo. Se houver mesa, cadeira, estante, porta, passagem, pessoa ou obstáculo, cite todos os relevantes e onde estão.");
         }
         else if (estadoOperacional.Contains("movimento") || estadoOperacional.Contains("mudança"))
         {
-            partes.Add("A câmera mudou. Informe o que apareceu, sumiu ou ficou relevante. Não mande a pessoa ir para lugar nenhum sem motivo; destaque possibilidades e riscos.");
+            partes.Add("A câmera mudou. Informe o que apareceu, sumiu ou ficou relevante, com posição aproximada. Se houver vários itens úteis, cite mais de um, por exemplo mesa à frente, cadeira no centro, estante ao fundo ou porta à direita. Não mande a pessoa ir para lugar nenhum; destaque possibilidades e riscos.");
         }
         else
         {
-            partes.Add("Verificação de prontidão. Se nada útil mudou, use silêncio. Fale apenas por risco, pessoa, porta/passagem, mudança relevante ou novo ambiente.");
+            partes.Add("Verificação de prontidão. Se nada útil mudou, use silêncio. Fale por risco, pessoa, porta/passagem, mudança relevante, novo ambiente ou quando uma leitura espacial com vários objetos úteis ainda não foi comunicada.");
         }
 
         return string.Join(" ", partes);
     }
 
-    private string AplicarPoliticaDeComunicacaoAssistiva(string textoAudio, RespostaIA atual, ImagemRequest request, bool primeiraLeitura)
+    private RespostaIA? ObterRespostaAnteriorParaPoliticaAssistiva()
+    {
+        lock (_lockMemoria)
+        {
+            return _ultimaRespostaIA;
+        }
+    }
+
+    private string AplicarPoliticaDeComunicacaoAssistiva(string textoAudio, RespostaIA atual, ImagemRequest request, bool primeiraLeitura, RespostaIA? anteriorParaPolitica)
     {
         if (primeiraLeitura)
         {
@@ -1185,22 +1202,691 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
             return GarantirPontoFinal(LimparTextoParaAudio(falaInicial, 520));
         }
 
-        if (string.IsNullOrWhiteSpace(textoAudio))
+        var falaAssistiva = ConstruirFalaAssistivaInteligente(textoAudio, atual, request, anteriorParaPolitica);
+        if (string.IsNullOrWhiteSpace(falaAssistiva))
             return "";
+
+        falaAssistiva = TornarOrientacaoCondicional(falaAssistiva);
+        falaAssistiva = SuavizarTexto(falaAssistiva);
+        falaAssistiva = LimparTextoParaAudio(falaAssistiva, 210);
+
+        if (DeveSilenciarAssinaturaAssistiva(falaAssistiva, atual, request))
+            return "";
+
+        RegistrarAssinaturaAssistivaFalada(falaAssistiva, atual);
+        return GarantirPontoFinal(falaAssistiva);
+    }
+
+    private string ConstruirFalaAssistivaInteligente(string textoAudio, RespostaIA atual, ImagemRequest request, RespostaIA? anterior)
+    {
+        var alerta = ObterAlertaPrincipal(atual);
+        var importancia = NormalizarTexto(atual.Importancia);
+        var evento = NormalizarTexto(atual.EventoGuia).Replace(" ", "_").Replace("-", "_");
+        var falaCurta = LimparTextoBasico(atual.FalaCurta);
+        var observacao = LimparTextoBasico(atual.ObservacaoMudanca);
+
+        if (!string.IsNullOrWhiteSpace(alerta))
+        {
+            if (importancia == "alta" || MudouAlertas(atual, anterior) || request.MudancaVisual >= 6)
+                return TransformarAlertaEmFala(alerta);
+
+            return "";
+        }
+
+        if (_memoriaAmbiente.HouveTransicaoConfirmada || _memoriaAmbiente.HouveEntradaEmNovoAmbiente || evento == "novo_ambiente")
+            return CriarFalaDeTransicaoGuia(atual);
+
+        if (!string.IsNullOrWhiteSpace(atual.Pessoa))
+        {
+            if (MudouPessoa(atual, anterior) || PessoaPareceInteracao(atual.Pessoa) || evento == "pessoa")
+                return LimparTextoParaAudio(atual.Pessoa, 150);
+
+            return "";
+        }
+
+        var falaMapaEspacial = CriarFalaMapaEspacialSituacional(atual, anterior, request);
+        if (!string.IsNullOrWhiteSpace(falaMapaEspacial))
+            return falaMapaEspacial;
+
+        var novosPontos = ObterNovasReferenciasAssistivas(atual, anterior);
+        if (novosPontos.Count > 0)
+            return CriarFalaNovasReferenciasAssistivas(novosPontos, atual);
+
+        if (_memoriaAmbiente.HouveMudancaEstruturalRecente && !string.IsNullOrWhiteSpace(_memoriaAmbiente.UltimaMudancaEstrutural))
+            return _memoriaAmbiente.UltimaMudancaEstrutural;
+
+        var houveMovimentoReal = request.MudancaVisual >= 6 || NormalizarTexto(request.NivelMovimento).Contains("medio") || NormalizarTexto(request.NivelMovimento).Contains("alto");
+        var eventoUtil = evento is "mudanca" or "observacao" or "ponto_interesse" or "livre";
+
+        if (houveMovimentoReal || eventoUtil)
+        {
+            var falaMudanca = CriarFalaMudancaAssistivaContextual(atual, anterior, textoAudio, falaCurta, observacao, request);
+            if (!string.IsNullOrWhiteSpace(falaMudanca))
+                return falaMudanca;
+        }
+
+        if (DeveEmitirConfirmacaoDeConforto(DateTime.UtcNow, atual))
+            return CriarConfirmacaoAssistivaContextual(atual);
+
+        return "";
+    }
+
+    private List<string> ObterNovasReferenciasAssistivas(RespostaIA atual, RespostaIA? anterior)
+    {
+        var atuais = ObterReferenciasAssistivas(atual);
+        if (atuais.Count == 0)
+            return new List<string>();
+
+        if (anterior == null)
+            return atuais.Take(2).ToList();
+
+        var anteriores = ObterReferenciasAssistivas(anterior)
+            .Select(NormalizarTexto)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        return atuais
+            .Where(x => !anteriores.Contains(NormalizarTexto(x)))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .Take(2)
+            .ToList();
+    }
+
+    private List<string> ObterReferenciasAssistivas(RespostaIA resposta)
+    {
+        var lista = new List<string>();
+
+        if (resposta.PontosInteresse != null)
+            lista.AddRange(resposta.PontosInteresse);
+
+        if (resposta.Objetos != null)
+            lista.AddRange(resposta.Objetos);
+
+        return lista
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .Select(x => x.Trim())
+            .Where(x => ObjetoEhUtil(NormalizarTexto(x)) || ReferenciaTextualEhUtil(x))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .Take(5)
+            .ToList();
+    }
+
+    private bool ReferenciaTextualEhUtil(string texto)
+    {
+        var t = NormalizarTexto(texto);
+        if (string.IsNullOrWhiteSpace(t))
+            return false;
+
+        return t.Contains("porta") ||
+               t.Contains("passagem") ||
+               t.Contains("corredor") ||
+               t.Contains("cadeira") ||
+               t.Contains("mesa") ||
+               t.Contains("cama") ||
+               t.Contains("quadro") ||
+               t.Contains("lousa") ||
+               t.Contains("prateleira") ||
+               t.Contains("escada") ||
+               t.Contains("pessoa") ||
+               t.Contains("obstaculo") ||
+               t.Contains("obstáculo");
+    }
+
+    private string CriarFalaNovasReferenciasAssistivas(List<string> novosPontos, RespostaIA atual)
+    {
+        var itens = ObterItensEspaciaisAssistivos(atual)
+            .Where(x => novosPontos.Any(p => NormalizarTexto(p).Contains(NormalizarTexto(x.Nome)) || NormalizarTexto(x.Nome).Contains(NormalizarTexto(p))))
+            .ToList();
+
+        if (itens.Count >= 2)
+        {
+            var frase = CriarFraseItensEspaciais(itens, 4);
+            if (!string.IsNullOrWhiteSpace(frase))
+                return frase;
+        }
+
+        var direcao = TextoDirecaoNatural(atual.Direcao);
+        var pontos = novosPontos
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .Take(4)
+            .ToList();
+
+        if (pontos.Count == 0)
+            return "";
+
+        var texto = $"Agora percebo {JuntarListaNatural(pontos)}";
+        if (!string.IsNullOrWhiteSpace(direcao))
+            texto += $" {direcao}";
+
+        if (pontos.Any(x => ReferenciaPodeAtrapalharMovimento(x)))
+            texto += "; atenção se você for se mover";
+        else if (pontos.Any(x => NormalizarTexto(x).Contains("porta") || NormalizarTexto(x).Contains("passagem")))
+            texto += ", como referência útil do ambiente";
+
+        return texto.Replace("  ", " ");
+    }
+
+
+    private string CriarFalaPanoramicaAssistivaSuperior(RespostaIA atual, bool primeiraLeitura)
+    {
+        var itens = ObterItensEspaciaisAssistivos(atual);
+        var mapaVerbal = LimparTextoBasico(atual.MapaVerbal);
+        var descricao = LimparTextoBasico(atual.Descricao);
+        var ambiente = !string.IsNullOrWhiteSpace(atual.AmbienteProvavel)
+            ? atual.AmbienteProvavel
+            : ObterAmbienteAssistivoAtual();
+
+        var partes = new List<string>();
+
+        if (!string.IsNullOrWhiteSpace(mapaVerbal) && !TextoEhGenericoParaGuia(mapaVerbal))
+            partes.Add(mapaVerbal);
+        else if (!string.IsNullOrWhiteSpace(descricao) && !TextoEhGenericoParaGuia(descricao))
+            partes.Add(descricao);
+        else if (!string.IsNullOrWhiteSpace(ambiente))
+            partes.Add($"Parece {AdicionarArtigoAoAmbiente(ambiente)}");
+
+        var fraseItens = CriarFraseItensEspaciais(itens, primeiraLeitura ? 6 : 4);
+        if (!string.IsNullOrWhiteSpace(fraseItens) && !TextoJaRepresentado(fraseItens, partes))
+            partes.Add(fraseItens);
 
         var alerta = ObterAlertaPrincipal(atual);
         if (!string.IsNullOrWhiteSpace(alerta))
-            return GarantirPontoFinal(LimparTextoParaAudio(SuavizarTexto(TransformarAlertaEmFala(alerta)), 130));
-
-        var textoSeguro = TornarOrientacaoCondicional(textoAudio);
-
-        if (request.CenaEstavel && request.MudancaVisual < 3.2 && NormalizarTexto(atual.Importancia) == "baixa")
         {
-            if (NormalizarTexto(atual.EventoGuia) is "silencio" or "confirmacao")
-                return "";
+            var alertaFala = TransformarAlertaEmFala(alerta);
+            if (!TextoJaRepresentado(alertaFala, partes))
+                partes.Add(alertaFala);
+        }
+        else
+        {
+            var contextoMovimento = CriarResumoDePassagemSemComando(atual, itens);
+            if (!string.IsNullOrWhiteSpace(contextoMovimento) && !TextoJaRepresentado(contextoMovimento, partes))
+                partes.Add(contextoMovimento);
         }
 
-        return GarantirPontoFinal(LimparTextoParaAudio(SuavizarTexto(textoSeguro), 220));
+        if (!string.IsNullOrWhiteSpace(atual.Pessoa) && !TextoJaRepresentado(atual.Pessoa, partes))
+            partes.Add(SuavizarTexto(atual.Pessoa));
+
+        var texto = string.Join(". ", partes
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .Select(x => x.Trim().TrimEnd('.'))
+            .Distinct(StringComparer.OrdinalIgnoreCase));
+
+        return GarantirPontoFinal(texto);
+    }
+
+    private string CriarFalaMapaEspacialSituacional(RespostaIA atual, RespostaIA? anterior, ImagemRequest request)
+    {
+        var itens = ObterItensEspaciaisAssistivos(atual);
+        if (itens.Count == 0)
+            return "";
+
+        var assinaturaAtual = CriarAssinaturaMapaEspacial(itens);
+        var assinaturaAnterior = anterior == null ? "" : CriarAssinaturaMapaEspacial(ObterItensEspaciaisAssistivos(anterior));
+        var houveMudancaDeMapa = !string.IsNullOrWhiteSpace(assinaturaAtual) && assinaturaAtual != assinaturaAnterior;
+        var movimentoReal = request.MudancaVisual >= 5.5 || NormalizarTexto(request.NivelMovimento).Contains("medio") || NormalizarTexto(request.NivelMovimento).Contains("alto");
+        var evento = NormalizarTexto(atual.EventoGuia).Replace(" ", "_").Replace("-", "_");
+        var eventoEspacial = evento is "ponto_interesse" or "mudanca" or "observacao" or "livre";
+
+        if (!houveMudancaDeMapa && !movimentoReal && !eventoEspacial)
+            return "";
+
+        if (MapaEspacialFoiFaladoRecentemente(assinaturaAtual, request))
+            return "";
+
+        var itensPrioritarios = SelecionarItensEspaciaisPrioritarios(itens, anterior, movimentoReal).ToList();
+        if (itensPrioritarios.Count == 0)
+            itensPrioritarios = itens.Take(4).ToList();
+
+        var frase = CriarFraseItensEspaciais(itensPrioritarios, movimentoReal ? 5 : 4);
+        if (string.IsNullOrWhiteSpace(frase))
+            return "";
+
+        var complemento = CriarResumoDePassagemSemComando(atual, itensPrioritarios);
+        if (!string.IsNullOrWhiteSpace(complemento) && !TextoJaRepresentado(complemento, new[] { frase }))
+            frase = frase.Trim().TrimEnd('.') + ". " + complemento;
+
+        RegistrarMapaEspacialFalado(assinaturaAtual);
+        return GarantirPontoFinal(LimparTextoParaAudio(frase, 260));
+    }
+
+    private List<ItemEspacial> ObterItensEspaciaisAssistivos(RespostaIA resposta)
+    {
+        var itens = new List<ItemEspacial>();
+
+        if (resposta.ItensEspaciais != null)
+        {
+            itens.AddRange(resposta.ItensEspaciais
+                .Where(x => x != null && !string.IsNullOrWhiteSpace(x.Nome))
+                .Select(x => new ItemEspacial
+                {
+                    Nome = LimparTextoBasico(x.Nome),
+                    Tipo = LimparTextoBasico(x.Tipo),
+                    Posicao = NormalizarPosicaoAssistiva(x.Posicao),
+                    DistanciaAproximada = LimparTextoBasico(x.DistanciaAproximada),
+                    Relevancia = LimparTextoBasico(x.Relevancia),
+                    Risco = x.Risco
+                }));
+        }
+
+        if (itens.Count == 0)
+        {
+            var direcaoPadrao = NormalizarPosicaoAssistiva(resposta.Direcao);
+            var referencias = ObterReferenciasAssistivas(resposta);
+            foreach (var referencia in referencias)
+            {
+                itens.Add(new ItemEspacial
+                {
+                    Nome = referencia,
+                    Tipo = InferirTipoItemEspacial(referencia),
+                    Posicao = direcaoPadrao,
+                    DistanciaAproximada = "indefinida",
+                    Relevancia = "referência útil",
+                    Risco = ReferenciaPodeAtrapalharMovimento(referencia)
+                });
+            }
+        }
+
+        return itens
+            .Where(x => !string.IsNullOrWhiteSpace(x.Nome))
+            .GroupBy(x => NormalizarTexto(x.Nome) + "|" + NormalizarTexto(x.Posicao))
+            .Select(g => g.First())
+            .OrderByDescending(PontuarItemEspacial)
+            .Take(8)
+            .ToList();
+    }
+
+    private IEnumerable<ItemEspacial> SelecionarItensEspaciaisPrioritarios(List<ItemEspacial> atuais, RespostaIA? anterior, bool movimentoReal)
+    {
+        var anteriores = anterior == null
+            ? new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            : ObterItensEspaciaisAssistivos(anterior).Select(CriarAssinaturaItemEspacial).ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        var novos = atuais
+            .Where(x => !anteriores.Contains(CriarAssinaturaItemEspacial(x)))
+            .OrderByDescending(PontuarItemEspacial)
+            .ToList();
+
+        if (novos.Count >= 2)
+            return novos.Take(5);
+
+        if (novos.Count == 1 && movimentoReal)
+            return novos.Concat(atuais.Where(x => CriarAssinaturaItemEspacial(x) != CriarAssinaturaItemEspacial(novos[0])).Take(3));
+
+        if (movimentoReal)
+            return atuais.Take(5);
+
+        return novos;
+    }
+
+    private string CriarFraseItensEspaciais(List<ItemEspacial> itens, int maxItens)
+    {
+        var selecionados = itens
+            .Where(x => !string.IsNullOrWhiteSpace(x.Nome))
+            .OrderByDescending(PontuarItemEspacial)
+            .Take(maxItens)
+            .Select(FormatarItemEspacial)
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
+
+        if (selecionados.Count == 0)
+            return "";
+
+        return "Identifico " + JuntarListaNatural(selecionados) + ".";
+    }
+
+    private string FormatarItemEspacial(ItemEspacial item)
+    {
+        var nome = LimparTextoBasico(item.Nome);
+        if (string.IsNullOrWhiteSpace(nome))
+            return "";
+
+        var posicao = NormalizarPosicaoAssistiva(item.Posicao);
+        var distancia = NormalizarTexto(item.DistanciaAproximada);
+        var risco = item.Risco || ReferenciaPodeAtrapalharMovimento(nome);
+
+        var texto = nome;
+
+        if (posicao != "indefinido")
+            texto += " " + PosicaoEmFrase(posicao);
+
+        if ((distancia.Contains("proxim") || distancia.Contains("perto")) && !NormalizarTexto(texto).Contains("proxim"))
+            texto += " próxima";
+
+        if (risco && !NormalizarTexto(texto).Contains("aten"))
+            texto += " como ponto de atenção";
+
+        return texto.Trim();
+    }
+
+    private string CriarResumoDePassagemSemComando(RespostaIA atual, List<ItemEspacial> itens)
+    {
+        var caminho = NormalizarTexto(atual.CaminhoStatus).Replace(" ", "_").Replace("-", "_");
+
+        if (!string.IsNullOrWhiteSpace(atual.ProximidadeRisco))
+            return SuavizarTexto(atual.ProximidadeRisco);
+
+        if (caminho == "bloqueado")
+            return "O caminho parece bloqueado; cuidado antes de se mover";
+
+        if (caminho == "estreito" || caminho == "parcialmente_livre")
+            return "O espaço parece parcialmente livre, mas com atenção aos objetos próximos";
+
+        if (itens.Any(x => x.Risco || ReferenciaPodeAtrapalharMovimento(x.Nome)))
+            return "Se for se mover, atenção aos objetos próximos";
+
+        if (caminho == "livre")
+            return "A área à frente parece livre, se você for se mover";
+
+        return "";
+    }
+
+    private bool MapaEspacialFoiFaladoRecentemente(string assinatura, ImagemRequest request)
+    {
+        if (string.IsNullOrWhiteSpace(assinatura))
+            return true;
+
+        lock (_lockMemoria)
+        {
+            if (_ultimaAssinaturaMapaEspacialFalada == assinatura &&
+                (DateTime.UtcNow - _ultimaAssinaturaMapaEspacialFaladaEm).TotalSeconds < 35 &&
+                request.TempoDesdeUltimaFalaMs < 35000)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void RegistrarMapaEspacialFalado(string assinatura)
+    {
+        lock (_lockMemoria)
+        {
+            _ultimaAssinaturaMapaEspacialFalada = assinatura;
+            _ultimaAssinaturaMapaEspacialFaladaEm = DateTime.UtcNow;
+        }
+    }
+
+    private string CriarAssinaturaMapaEspacial(List<ItemEspacial> itens)
+    {
+        return string.Join("|", itens
+            .Select(CriarAssinaturaItemEspacial)
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .OrderBy(x => x)
+            .Take(8));
+    }
+
+    private string CriarAssinaturaItemEspacial(ItemEspacial item)
+    {
+        return NormalizarTexto(item.Nome) + ":" + NormalizarTexto(item.Posicao);
+    }
+
+    private int PontuarItemEspacial(ItemEspacial item)
+    {
+        var nome = NormalizarTexto(item.Nome);
+        var tipo = NormalizarTexto(item.Tipo);
+        var score = 0;
+
+        if (item.Risco || tipo.Contains("obstaculo") || tipo.Contains("obstáculo")) score += 100;
+        if (nome.Contains("pessoa")) score += 85;
+        if (nome.Contains("porta") || tipo.Contains("saida") || tipo.Contains("saída")) score += 75;
+        if (nome.Contains("passagem") || nome.Contains("corredor")) score += 70;
+        if (nome.Contains("cadeira") || nome.Contains("mesa")) score += 60;
+        if (nome.Contains("estante") || nome.Contains("prateleira") || nome.Contains("cama")) score += 48;
+        if (nome.Contains("quadro") || nome.Contains("lousa")) score += 40;
+
+        if (NormalizarTexto(item.Posicao) is "frente" or "centro") score += 12;
+        if (NormalizarTexto(item.DistanciaAproximada).Contains("proxim")) score += 10;
+
+        return score;
+    }
+
+    private string NormalizarPosicaoAssistiva(string? posicao)
+    {
+        var texto = NormalizarTexto(posicao);
+        if (texto.Contains("esquer")) return "esquerda";
+        if (texto.Contains("direit")) return "direita";
+        if (texto.Contains("centro") || texto.Contains("meio")) return "centro";
+        if (texto.Contains("frente") || texto.Contains("adiante")) return "frente";
+        if (texto.Contains("fundo") || texto.Contains("atras") || texto.Contains("atrás")) return "fundo";
+        return "indefinido";
+    }
+
+    private string PosicaoEmFrase(string posicao)
+    {
+        return posicao switch
+        {
+            "esquerda" => "à esquerda",
+            "direita" => "à direita",
+            "centro" => "no centro",
+            "frente" => "à frente",
+            "fundo" => "ao fundo",
+            _ => ""
+        };
+    }
+
+    private string InferirTipoItemEspacial(string nome)
+    {
+        var t = NormalizarTexto(nome);
+        if (t.Contains("porta") || t.Contains("saida") || t.Contains("saída")) return "saida";
+        if (t.Contains("passagem") || t.Contains("corredor")) return "passagem";
+        if (t.Contains("pessoa")) return "pessoa";
+        if (ReferenciaPodeAtrapalharMovimento(nome)) return "obstaculo";
+        return "referencia";
+    }
+
+    private bool ReferenciaPodeAtrapalharMovimento(string referencia)
+    {
+        var t = NormalizarTexto(referencia);
+        return t.Contains("cadeira") ||
+               t.Contains("mesa") ||
+               t.Contains("cama") ||
+               t.Contains("mochila") ||
+               t.Contains("obstaculo") ||
+               t.Contains("obstáculo") ||
+               t.Contains("escada") ||
+               t.Contains("prateleira") ||
+               t.Contains("estante");
+    }
+
+    private string CriarFalaMudancaAssistivaContextual(
+        RespostaIA atual,
+        RespostaIA? anterior,
+        string textoAudio,
+        string falaCurta,
+        string observacao,
+        ImagemRequest request)
+    {
+        if (!string.IsNullOrWhiteSpace(observacao) && !TextoEhGenericoParaGuia(observacao))
+            return observacao;
+
+        if (!string.IsNullOrWhiteSpace(falaCurta) && !TextoEhGenericoParaGuia(falaCurta) && !FalaPareceComandoDeDestino(falaCurta))
+            return falaCurta;
+
+        var pontosAtuais = ObterReferenciasAssistivas(atual).Take(2).ToList();
+        var ambienteAtual = ObterAmbienteAssistivoAtual();
+
+        if (request.MudancaVisual >= 9 && pontosAtuais.Count > 0)
+            return $"A câmera mudou. Agora ficam mais evidentes {JuntarListaNatural(pontosAtuais)}";
+
+        if (request.MudancaVisual >= 9 && !string.IsNullOrWhiteSpace(ambienteAtual))
+            return $"Ainda parece {AdicionarArtigoAoAmbiente(ambienteAtual)}; estou acompanhando a mudança da câmera";
+
+        return "";
+    }
+
+    private string CriarConfirmacaoAssistivaContextual(RespostaIA atual)
+    {
+        var ambiente = ObterAmbienteAssistivoAtual();
+        var referencia = ExtrairReferenciaAmbiente(atual);
+
+        if (string.IsNullOrWhiteSpace(referencia))
+        {
+            referencia = ObterReferenciasPersistentesDoAmbienteAtual()
+                .FirstOrDefault(x => !string.IsNullOrWhiteSpace(x)) ?? "";
+        }
+
+        if (!string.IsNullOrWhiteSpace(ambiente) && !string.IsNullOrWhiteSpace(referencia))
+            return $"Continuo acompanhando {AdicionarArtigoAoAmbiente(ambiente)}. {PrimeiraLetraMaiuscula(referencia)} segue como referência útil.";
+
+        if (!string.IsNullOrWhiteSpace(ambiente))
+            return $"Continuo acompanhando {AdicionarArtigoAoAmbiente(ambiente)}.";
+
+        return "Continuo acompanhando o ambiente. Se algo importante mudar, eu aviso.";
+    }
+
+    private string ObterAmbienteAssistivoAtual()
+    {
+        lock (_lockMemoria)
+        {
+            if (!string.IsNullOrWhiteSpace(_memoriaAmbiente.AmbienteConfirmado))
+                return _memoriaAmbiente.AmbienteConfirmado;
+
+            if (!string.IsNullOrWhiteSpace(_memoriaAmbiente.CandidatoAmbiente))
+                return _memoriaAmbiente.CandidatoAmbiente;
+
+            if (!string.IsNullOrWhiteSpace(_painelMemoriaPersistente.Atual?.Ambiente))
+                return _painelMemoriaPersistente.Atual.Ambiente;
+        }
+
+        return "";
+    }
+
+    private bool DeveSilenciarAssinaturaAssistiva(string fala, RespostaIA atual, ImagemRequest request)
+    {
+        if (string.IsNullOrWhiteSpace(fala))
+            return true;
+
+        var importancia = NormalizarTexto(atual.Importancia);
+        if (importancia == "alta" || !string.IsNullOrWhiteSpace(ObterAlertaPrincipal(atual)))
+            return false;
+
+        var assinatura = CriarAssinaturaAssistiva(fala, atual);
+        var agora = DateTime.UtcNow;
+        var falaAnterior = NormalizarTexto(_ultimoTextoFalado);
+        var falaAtual = NormalizarTexto(fala);
+
+        if (!string.IsNullOrWhiteSpace(falaAnterior) && falaAnterior == falaAtual)
+            return true;
+
+        if (!string.IsNullOrWhiteSpace(_ultimaAssinaturaAssistivaFalada) &&
+            _ultimaAssinaturaAssistivaFalada == assinatura &&
+            (agora - _ultimaAssinaturaAssistivaFaladaEm).TotalSeconds < 55)
+        {
+            return true;
+        }
+
+        if (request.CenaEstavel && request.MudancaVisual < 3.2 && request.TempoDesdeUltimaFalaMs < 45000)
+        {
+            var evento = NormalizarTexto(atual.EventoGuia).Replace(" ", "_").Replace("-", "_");
+            if (evento is "livre" or "ponto_interesse" or "observacao" or "mudanca" or "silencio" or "confirmacao")
+                return true;
+        }
+
+        if (!string.IsNullOrWhiteSpace(falaAnterior))
+        {
+            var similaridade = CalcularSimilaridadeSimples(falaAnterior, falaAtual);
+            if (similaridade >= 0.78 && request.TempoDesdeUltimaFalaMs < 65000)
+                return true;
+        }
+
+        return false;
+    }
+
+    private string CriarAssinaturaAssistiva(string fala, RespostaIA atual)
+    {
+        var evento = NormalizarTexto(atual.EventoGuia).Replace(" ", "_").Replace("-", "_");
+        var ambiente = NormalizarTexto(ObterAmbienteAssistivoAtual());
+        var pontos = string.Join("|", ObterReferenciasAssistivas(atual).Select(NormalizarTexto).Take(3));
+        var alerta = NormalizarTexto(ObterAlertaPrincipal(atual));
+        var pessoa = NormalizarTexto(atual.Pessoa);
+
+        if (!string.IsNullOrWhiteSpace(alerta))
+            return "alerta:" + alerta;
+
+        if (!string.IsNullOrWhiteSpace(pessoa))
+            return "pessoa:" + pessoa;
+
+        if (!string.IsNullOrWhiteSpace(pontos))
+            return evento + ":" + ambiente + ":" + pontos;
+
+        return evento + ":" + ambiente + ":" + NormalizarTexto(fala);
+    }
+
+    private void RegistrarAssinaturaAssistivaFalada(string fala, RespostaIA atual)
+    {
+        lock (_lockMemoria)
+        {
+            _ultimaAssinaturaAssistivaFalada = CriarAssinaturaAssistiva(fala, atual);
+            _ultimaAssinaturaAssistivaFaladaEm = DateTime.UtcNow;
+        }
+    }
+
+    private bool DeveSilenciarPorRepeticaoAssistiva(RespostaIA atual, ImagemRequest request, string textoSeguro)
+    {
+        if (string.IsNullOrWhiteSpace(textoSeguro))
+            return true;
+
+        var importancia = NormalizarTexto(atual.Importancia);
+        if (importancia == "alta")
+            return false;
+
+        if (!string.IsNullOrWhiteSpace(ObterAlertaPrincipal(atual)))
+            return false;
+
+        if (!string.IsNullOrWhiteSpace(atual.Pessoa) &&
+            (MudouPessoa(atual, _ultimaRespostaIA) || PessoaPareceInteracao(atual.Pessoa)))
+            return false;
+
+        if (_memoriaAmbiente.HouveEntradaEmNovoAmbiente ||
+            _memoriaAmbiente.HouveTransicaoConfirmada ||
+            _memoriaAmbiente.HouveMudancaEstruturalRecente)
+            return false;
+
+        var evento = NormalizarTexto(atual.EventoGuia).Replace(" ", "_").Replace("-", "_");
+        var estavel = request.CenaEstavel || request.MudancaVisual < 4.2 || NormalizarTexto(request.NivelMovimento).Contains("baixo");
+
+        if (estavel && request.TempoDesdeUltimaFalaMs > 0 && request.TempoDesdeUltimaFalaMs < 45000)
+        {
+            if (evento is "livre" or "ponto_interesse" or "observacao" or "mudanca" or "silencio" or "confirmacao")
+                return true;
+        }
+
+        var ultimo = NormalizarTexto(_ultimoTextoFalado);
+        var atualTexto = NormalizarTexto(textoSeguro);
+
+        if (string.IsNullOrWhiteSpace(ultimo) || string.IsNullOrWhiteSpace(atualTexto))
+            return false;
+
+        if (ultimo == atualTexto)
+            return true;
+
+        var similaridade = CalcularSimilaridadeSimples(ultimo, atualTexto);
+        if (estavel && similaridade >= 0.72 && request.TempoDesdeUltimaFalaMs < 65000)
+            return true;
+
+        return false;
+    }
+
+    private double CalcularSimilaridadeSimples(string textoA, string textoB)
+    {
+        var a = textoA.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+            .Where(x => x.Length > 3)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        var b = textoB.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+            .Where(x => x.Length > 3)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        if (a.Count == 0 || b.Count == 0)
+            return 0;
+
+        var intersecao = a.Count(x => b.Contains(x));
+        var uniao = a.Union(b, StringComparer.OrdinalIgnoreCase).Count();
+        return uniao == 0 ? 0 : (double)intersecao / uniao;
     }
 
     private string DeterminarMotivoFala(string eventoGuia, bool primeiraLeitura)
@@ -1688,6 +2374,7 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
                 ? atual.Pessoa.Trim()
                 : (_estadoTemporal.PessoaPersistente ? "Pessoa ainda por perto" : "-");
             var confianca = CalcularConfiancaAmbienteEstado(atual);
+            var memoriaPersistenteAtual = ObterMemoriaPersistenteAtual();
 
             return new EstadoVisiora
             {
@@ -1708,7 +2395,16 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
                 LeiturasSuspeitaTransicao = _memoriaAmbiente.RepeticoesSuspeita,
                 TempoNoAmbienteSegundos = ObterTempoNoAmbienteSegundos(),
                 ModoGuiaStatus = string.IsNullOrWhiteSpace(atual.EventoGuia) ? "observando" : atual.EventoGuia,
-                AtualizadoEmUtc = DateTime.UtcNow
+                AtualizadoEmUtc = DateTime.UtcNow,
+                MemoriaPersistenteAtiva = !string.IsNullOrWhiteSpace(memoriaPersistenteAtual.Ambiente),
+                AmbienteMemorizado = memoriaPersistenteAtual.Ambiente,
+                LeiturasMemorizadas = memoriaPersistenteAtual.Leituras,
+                UltimoEventoMemorizado = memoriaPersistenteAtual.UltimoEvento,
+                MapaVerbal = string.IsNullOrWhiteSpace(atual.MapaVerbal) ? atual.ResumoAmbiente : atual.MapaVerbal,
+                ItensEspaciaisDetectados = atual.ItensEspaciais?.Count ?? 0,
+                MemoriaAssistivaStatus = !string.IsNullOrWhiteSpace(memoriaPersistenteAtual.Ambiente)
+                    ? $"Memória ativa: {memoriaPersistenteAtual.Ambiente} ({memoriaPersistenteAtual.Leituras} leituras)"
+                    : "ambiente em aprendizado"
             };
         }
     }
@@ -1733,7 +2429,10 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
             LeiturasSuspeitaTransicao = 0,
             TempoNoAmbienteSegundos = 0,
             ConfiancaAmbiente = 0,
-            AtualizadoEmUtc = DateTime.UtcNow
+            AtualizadoEmUtc = DateTime.UtcNow,
+            MapaVerbal = "",
+            ItensEspaciaisDetectados = 0,
+            MemoriaAssistivaStatus = "erro"
         };
     }
 
@@ -2140,6 +2839,58 @@ private bool DeveUsarTtsExterno(string modoNormalizado, string textoAudio)
         }
 
         return "Memória persistente: sem registros úteis salvos.";
+    }
+
+
+    private string AplicarMemoriaPersistenteNaFala(
+        string textoAtual,
+        MemoriaPersistenteAmbiente memoriaPersistenteAtual,
+        bool primeiraLeitura,
+        bool modoGuia)
+    {
+        if (!modoGuia || !primeiraLeitura || memoriaPersistenteAtual == null)
+            return textoAtual;
+
+        if (string.IsNullOrWhiteSpace(memoriaPersistenteAtual.Ambiente))
+            return textoAtual;
+
+        var textoNormalizado = NormalizarTexto(textoAtual);
+        var ambienteNormalizado = NormalizarTexto(memoriaPersistenteAtual.Ambiente);
+
+        if (textoNormalizado.Contains("memoria") || textoNormalizado.Contains("memória") ||
+            (!string.IsNullOrWhiteSpace(ambienteNormalizado) && textoNormalizado.Contains(ambienteNormalizado) && textoNormalizado.Contains("reconhec")))
+            return textoAtual;
+
+        var partes = new List<string>();
+
+        if (!string.IsNullOrWhiteSpace(textoAtual))
+            partes.Add(textoAtual.Trim().TrimEnd('.'));
+
+        var referencias = memoriaPersistenteAtual.Referencias?
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .Select(x => x.Trim())
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .Take(3)
+            .ToList() ?? new List<string>();
+
+        if (referencias.Count > 0)
+        {
+            partes.Add($"Este ambiente já aparece na memória como {memoriaPersistenteAtual.Ambiente}, com referências como {JuntarListaNatural(referencias)}");
+        }
+        else if (memoriaPersistenteAtual.Leituras > 0)
+        {
+            partes.Add($"Este ambiente já aparece na memória como {memoriaPersistenteAtual.Ambiente}");
+        }
+
+        var textoFinal = string.Join(". ", partes.Where(x => !string.IsNullOrWhiteSpace(x)).Distinct(StringComparer.OrdinalIgnoreCase));
+
+        if (string.IsNullOrWhiteSpace(textoFinal))
+            return textoAtual;
+
+        if (!textoFinal.EndsWith(".") && !textoFinal.EndsWith("!") && !textoFinal.EndsWith("?"))
+            textoFinal += ".";
+
+        return textoFinal;
     }
 
     private MemoriaPersistenteAmbiente ObterMemoriaPersistenteAtual()

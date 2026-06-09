@@ -31,15 +31,17 @@ public partial class VisioraService
     private static EventoNavegacaoInterno? _eventoNavegacaoAtual;
     private static string _ultimoEventoNavegacaoFalado = "";
     private static DateTime _ultimoEventoNavegacaoFaladoEm = DateTime.MinValue;
+    private static string _ultimaAssinaturaAssistivaFalada = "";
+    private static DateTime _ultimaAssinaturaAssistivaFaladaEm = DateTime.MinValue;
 
     private const int INTERVALO_MINIMO_ENTRE_FALAS_SEGUNDOS = 2;
-    private const int INTERVALO_CONFIRMACAO_CONTEXTUAL_SEGUNDOS = 8;
+    private const int INTERVALO_CONFIRMACAO_CONTEXTUAL_SEGUNDOS = 55;
     private const int FRAMES_MINIMOS_PARA_CONFIRMAR_MUDANCA = 1;
     private const int REPETICOES_PARA_CONFIRMAR_AMBIENTE = 2;
     private const int REPETICOES_PARA_TRANSICAO = 2;
     private const int JANELA_TEMPORAL_MAXIMA = 8;
     private const int MINIMO_LEITURAS_PERSISTENCIA = 3;
-    private const int INTERVALO_MINIMO_ENTRE_EVENTOS_REPETIDOS_SEGUNDOS = 6;
+    private const int INTERVALO_MINIMO_ENTRE_EVENTOS_REPETIDOS_SEGUNDOS = 16;
     private const int INTERVALO_MINIMO_PERSISTENCIA_SEGUNDOS = 16;
     private const int LEITURAS_MINIMAS_NOVA_CONSOLIDACAO = 3;
 
@@ -98,6 +100,9 @@ public partial class VisioraService
             AtualizarMotorTemporal(respostaIA);
             await AtualizarMemoriaPersistenteAsync(respostaIA, primeiraLeitura);
 
+            var memoriaPersistenteAtual = ObterMemoriaPersistenteAtual();
+            var respostaAnteriorParaPolitica = ObterRespostaAnteriorParaPoliticaAssistiva();
+
             var textoAudio = modoNormalizado == "consulta"
                 ? MontarTextoAudioConsulta(respostaIA, request.Pergunta)
                 : MontarTextoAudioAutomatico(respostaIA);
@@ -105,7 +110,8 @@ public partial class VisioraService
             if (modoGuia)
             {
                 textoAudio = PrepararFalaParaModoGuia(textoAudio, respostaIA, forcarDescricaoInicialGuia, forcarFalaPorMovimentoGuia);
-                textoAudio = AplicarPoliticaDeComunicacaoAssistiva(textoAudio, respostaIA, request, primeiraLeitura);
+                textoAudio = AplicarPoliticaDeComunicacaoAssistiva(textoAudio, respostaIA, request, primeiraLeitura, respostaAnteriorParaPolitica);
+                textoAudio = AplicarMemoriaPersistenteNaFala(textoAudio, memoriaPersistenteAtual, primeiraLeitura, modoGuia);
             }
 
             AtualizarContextoRecente(respostaIA, textoAudio);
@@ -116,7 +122,6 @@ public partial class VisioraService
 
             var estadoCognitivo = ConstruirEstadoCognitivo(respostaIA);
             var memoriaRecente = ConstruirMemoriaRecente();
-            var memoriaPersistenteAtual = ObterMemoriaPersistenteAtual();
             var ambientesPersistidos = ObterAmbientesPersistidos();
             var alertaPrincipal = ObterAlertaPrincipal(respostaIA);
             var pessoaPorPerto = !string.IsNullOrWhiteSpace(respostaIA.Pessoa)
@@ -153,6 +158,8 @@ public partial class VisioraService
                 EstadoOperacional = estadoOperacional,
                 ResumoAmbiente = string.IsNullOrWhiteSpace(respostaIA.ResumoAmbiente) ? respostaIA.Descricao : respostaIA.ResumoAmbiente,
                 PontosInteresse = (respostaIA.PontosInteresse ?? new List<string>()).ToArray(),
+                MapaVerbal = respostaIA.MapaVerbal,
+                ItensEspaciais = (respostaIA.ItensEspaciais ?? new List<ItemEspacial>()).ToArray(),
                 EstadoCognitivo = estadoCognitivo,
                 MemoriaRecente = memoriaRecente,
                 MemoriaPersistenteAtual = memoriaPersistenteAtual,
@@ -189,6 +196,8 @@ public partial class VisioraService
                 EstadoOperacional = "erro",
                 ResumoAmbiente = "",
                 PontosInteresse = Array.Empty<string>(),
+                MapaVerbal = "",
+                ItensEspaciais = Array.Empty<ItemEspacial>(),
                 EstadoCognitivo = ConstruirEstadoFalha(ex.Message),
                 MemoriaRecente = new List<MemoriaRecenteItem>(),
                 ConfiancaAmbiente = 0,
@@ -335,6 +344,26 @@ public partial class VisioraService
         var alertaPrincipal = ObterAlertaPrincipal(atual);
         var sugestao = LimparTextoBasico(atual.Sugestao);
         var pessoa = LimparTextoBasico(atual.Pessoa);
+
+        // Em modo contínuo, cena estável não deve virar narração repetida.
+        // A IA só volta a falar quando houver risco, pessoa, transição, mudança útil
+        // ou uma confirmação rara de funcionamento.
+        if (!houveMudancaRelevante &&
+            importancia != "alta" &&
+            string.IsNullOrWhiteSpace(alertaPrincipal) &&
+            string.IsNullOrWhiteSpace(pessoa) &&
+            !_memoriaAmbiente.HouveEntradaEmNovoAmbiente &&
+            !_memoriaAmbiente.HouveTransicaoConfirmada &&
+            !_memoriaAmbiente.HouveMudancaEstruturalRecente)
+        {
+            if (DeveDarConfirmacaoContextual(atual, houveMudancaRelevante))
+            {
+                _ultimaConfirmacaoContextualEm = DateTime.UtcNow;
+                return "Continuo acompanhando. Sem mudança importante agora.";
+            }
+
+            return "";
+        }
 
         var partes = new List<string>();
 

@@ -5,3905 +5,691 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Visiora AI</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap');
-
         :root {
-            --bg: #0b1220;
-            --panel: #111827;
-            --panel-2: #172033;
-            --soft: #1f2937;
-            --line: #2b3648;
-            --line-2: #334155;
+            --bg: #07111f;
+            --bg2: #0b1528;
+            --card: rgba(15, 23, 42, 0.94);
+            --card2: rgba(17, 30, 52, 0.92);
+            --line: rgba(148, 163, 184, 0.17);
             --text: #f8fafc;
-            --muted: #9ca3af;
-            --accent: #2563eb;
-            --accent-2: #60a5fa;
-            --good: #22c55e;
-            --warn: #f59e0b;
-            --danger: #ef4444;
+            --muted: #aebbd0;
+            --blue: #3b82f6;
+            --blue2: #60a5fa;
+            --green: #22c55e;
+            --yellow: #f59e0b;
+            --red: #ef4444;
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background:
-                radial-gradient(circle at top, rgba(37, 99, 235, 0.14), transparent 30%),
-                linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
-            color: var(--text);
             min-height: 100vh;
-            padding: 24px;
+            background:
+                radial-gradient(circle at top right, rgba(59, 130, 246, .16), transparent 30%),
+                radial-gradient(circle at left 35%, rgba(34, 197, 94, .08), transparent 28%),
+                linear-gradient(180deg, var(--bg), var(--bg2));
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 22px;
         }
 
-        .container {
-            max-width: 1400px;
+        .app {
+            max-width: 1460px;
             margin: 0 auto;
+            display: grid;
+            gap: 18px;
+        }
+
+        .hero, .panel {
+            background: linear-gradient(180deg, rgba(15, 23, 42, .96), rgba(10, 18, 33, .98));
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            box-shadow: 0 18px 46px rgba(0, 0, 0, .26);
         }
 
         .hero {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 20px;
-            margin-bottom: 22px;
-            padding: 22px;
-            border: 1px solid rgba(96, 165, 250, 0.18);
-            background: linear-gradient(135deg, rgba(17, 24, 39, 0.96), rgba(15, 23, 42, 0.96));
-            border-radius: 22px;
-            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.26);
-        }
-
-        .hero h1 {
-            margin: 0 0 8px 0;
-            font-size: 34px;
-            letter-spacing: -0.02em;
-        }
-
-        .hero p {
-            margin: 0;
-            color: #cbd5e1;
-            line-height: 1.6;
-            max-width: 760px;
-        }
-
-        .hero-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: flex-end;
-            min-width: 260px;
-        }
-
-        .hero-badge {
-            padding: 10px 14px;
-            border-radius: 999px;
-            border: 1px solid rgba(96, 165, 250, 0.18);
-            background: rgba(15, 23, 42, 0.76);
-            color: #dbeafe;
-            font-size: 13px;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
-        .grid {
+            padding: 24px;
             display: grid;
-            grid-template-columns: minmax(0, 1.28fr) minmax(360px, 0.92fr);
-            gap: 20px;
-        }
-
-        .main-column,
-        .side-column {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .card {
-            background: linear-gradient(180deg, rgba(17, 24, 39, 0.98), rgba(15, 23, 42, 0.98));
-            border: 1px solid rgba(148, 163, 184, 0.14);
-            border-radius: 22px;
-            padding: 18px;
-            box-shadow: 0 16px 42px rgba(0, 0, 0, 0.22);
-        }
-
-        .card h2,
-        .card h3 {
-            margin: 0;
-            font-size: 18px;
-            letter-spacing: -0.01em;
-        }
-
-        .card-subtitle {
-            margin-top: 6px;
-            color: var(--muted);
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .camera-frame {
-            position: relative;
-            overflow: hidden;
-            border-radius: 18px;
-            border: 1px solid rgba(148, 163, 184, 0.16);
-            background: #020617;
-            min-height: 360px;
-        }
-
-        video, canvas {
-            width: 100%;
-            border-radius: 18px;
-            background: #000;
-            display: block;
-        }
-
-        canvas {
-            display: none;
-        }
-
-        .camera-overlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            pointer-events: none;
-            padding: 16px;
-            background: linear-gradient(180deg, rgba(2, 6, 23, 0.34), transparent 28%, transparent 68%, rgba(2, 6, 23, 0.44));
-        }
-
-        .overlay-top,
-        .overlay-bottom {
-            display: flex;
+            grid-template-columns: 1fr auto;
+            gap: 18px;
             align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            flex-wrap: wrap;
         }
 
-        .overlay-label {
+        .kicker {
+            color: #93c5fd;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        h1, h2, h3, p { margin: 0; }
+        h1 { font-size: 36px; letter-spacing: -.03em; margin-bottom: 8px; }
+        h2 { font-size: 22px; letter-spacing: -.02em; }
+        h3 { font-size: 17px; }
+
+        .sub {
+            color: var(--muted);
+            line-height: 1.55;
+            margin-top: 6px;
+        }
+
+        .status-pill {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 9px 12px;
+            padding: 10px 13px;
             border-radius: 999px;
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(148, 163, 184, 0.16);
-            color: #e2e8f0;
+            background: rgba(15, 23, 42, .74);
+            border: 1px solid rgba(96, 165, 250, .20);
+            color: #dbeafe;
+            font-weight: 800;
             font-size: 13px;
-            font-weight: bold;
-            backdrop-filter: blur(8px);
+            white-space: nowrap;
         }
 
         .dot {
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: var(--accent-2);
-            box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.6);
+            background: var(--yellow);
         }
 
         .dot.live {
-            background: var(--good);
-            animation: pulse 1.3s infinite;
+            background: var(--green);
+            animation: pulse 1.25s infinite;
         }
 
-        .dot.warn {
-            background: var(--warn);
-            animation: pulseWarm 1.1s infinite;
-        }
-
-        .section-grid {
+        .grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 16px;
-            margin-top: 16px;
+            grid-template-columns: minmax(0, 1.28fr) minmax(390px, .72fr);
+            gap: 18px;
         }
 
-        .controls {
+        .column { display: flex; flex-direction: column; gap: 18px; }
+        .panel { padding: 18px; }
+
+        .panel-head {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 14px;
-        }
-
-        button, input, textarea, select {
-            border: none;
-            border-radius: 14px;
-            padding: 12px 14px;
-            font-size: 14px;
-        }
-
-        button {
-            background: linear-gradient(180deg, #2563eb, #1d4ed8);
-            color: white;
-            cursor: pointer;
-            transition: transform 0.18s ease, opacity 0.18s ease, background 0.2s ease;
-            font-weight: bold;
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.18);
-        }
-
-        button:hover {
-            transform: translateY(-1px);
-            background: linear-gradient(180deg, #2d6df6, #1e40af);
-        }
-
-        button:disabled {
-            opacity: 0.55;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        button.secondary {
-            background: linear-gradient(180deg, #334155, #1f2937);
-            box-shadow: none;
-        }
-
-        button.secondary:hover {
-            background: linear-gradient(180deg, #475569, #334155);
-        }
-
-        button.danger {
-            background: linear-gradient(180deg, #dc2626, #b91c1c);
-            box-shadow: none;
-        }
-
-        button.danger:hover {
-            background: linear-gradient(180deg, #ef4444, #b91c1c);
-        }
-
-        button.voice {
-            background: linear-gradient(180deg, #059669, #047857);
-            font-size: 16px;
-            min-height: 54px;
-            flex: 1 1 240px;
-        }
-
-        button.voice:hover {
-            background: linear-gradient(180deg, #10b981, #047857);
-        }
-
-        button.voice.off {
-            background: linear-gradient(180deg, #475569, #334155);
-        }
-
-        textarea, input, select {
-            width: 100%;
-            background: rgba(11, 18, 32, 0.96);
-            color: var(--text);
-            border: 1px solid var(--line);
-        }
-
-        textarea {
-            min-height: 110px;
-            resize: vertical;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #e2e8f0;
-        }
-
-        .field {
-            margin-top: 16px;
-        }
-
-        .pill-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        .pill-status {
-            padding: 14px;
-            border-radius: 16px;
-            background: rgba(11, 18, 32, 0.9);
-            border: 1px solid var(--line);
-        }
-
-        .pill-status-title {
-            color: #93c5fd;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
-
-        .pill-status-value {
-            font-size: 15px;
-            font-weight: bold;
-            color: #f8fafc;
-            line-height: 1.4;
-        }
-
-        .result {
-            background: rgba(11, 18, 32, 0.9);
-            border: 1px solid var(--line);
-            border-radius: 18px;
-            padding: 16px;
-        }
-
-        .result + .result {
-            margin-top: 16px;
-        }
-
-        .result-header {
-            display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 14px;
-        }
-
-        .result-badge {
-            padding: 8px 12px;
-            border-radius: 999px;
-            background: rgba(37, 99, 235, 0.12);
-            border: 1px solid rgba(96, 165, 250, 0.18);
-            color: #bfdbfe;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .result-item {
-            margin-bottom: 12px;
-        }
-
-        .result-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .result-item strong {
-            display: block;
-            margin-bottom: 6px;
-            color: #cbd5e1;
-        }
-
-        .chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 6px;
-        }
-
-        .chip {
-            background: rgba(51, 65, 85, 0.9);
-            border: 1px solid rgba(148, 163, 184, 0.16);
-            padding: 7px 11px;
-            border-radius: 999px;
-            font-size: 13px;
-            color: #e2e8f0;
-        }
-
-        .small {
-            font-size: 13px;
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        .voice-help {
-            margin-top: 16px;
-            padding: 16px;
-            border-radius: 18px;
-            background: rgba(15, 23, 42, 0.96);
-            border: 1px solid rgba(96, 165, 250, 0.14);
-            line-height: 1.6;
-        }
-
-        .voice-help strong {
-            color: #86efac;
-        }
-
-        .mono {
-            font-family: Consolas, monospace;
-            font-size: 13px;
-            color: #d1fae5;
-        }
-
-        .listening-box {
-            margin-top: 16px;
-            background: rgba(15, 23, 42, 0.96);
-            border: 1px solid rgba(96, 165, 250, 0.14);
-            border-radius: 18px;
-            padding: 16px;
-        }
-
-        .listening-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
-        }
-
-        .mic-indicator {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #6b7280;
-            box-shadow: 0 0 0 0 rgba(107, 114, 128, 0.5);
-        }
-
-        .mic-indicator.active {
-            background: #22c55e;
-            animation: pulse 1.2s infinite;
-            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-        }
-
-        .mic-indicator.hearing {
-            background: #f59e0b;
-            animation: pulseWarm 0.7s infinite;
-            box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
-        }
-
-        .listening-state {
-            font-weight: bold;
-        }
-
-        .heard-text {
-            min-height: 44px;
-            padding: 12px;
-            border-radius: 14px;
-            background: rgba(11, 18, 32, 0.92);
-            border: 1px solid var(--line);
-            color: #e5e7eb;
-        }
-
-        .stack {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .mini-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
-        }
-
-        .section-title {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 10px;
-        }
-
-        .section-kicker {
-            font-size: 12px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #93c5fd;
-            font-weight: bold;
-        }
-
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.2), transparent);
-            margin: 4px 0;
-        }
-
-        .voice-hidden,
-        .voice-help,
-        .listening-box,
-        #btnVoz,
-        #btnFalarAjuda {
-            display: none !important;
-        }
-
-
-
-        /* Modo feira/produto: foco em locomoção, câmera e guia automático.
-           A estrutura antiga de voz permanece no código para não quebrar compatibilidade,
-           mas fica oculta na interface principal. */
-        #btnVoz,
-        #btnFalarAjuda,
-        .listening-box,
-        .voice-help {
-            display: none !important;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-            }
-            70% {
-                transform: scale(1.06);
-                box-shadow: 0 0 0 12px rgba(34, 197, 94, 0);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
-            }
-        }
-
-        @keyframes pulseWarm {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
-            }
-            70% {
-                transform: scale(1.06);
-                box-shadow: 0 0 0 12px rgba(245, 158, 11, 0);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
-            }
-        }
-
-
-        .hero-visual {
-            position: relative;
-            min-width: 280px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .core-shell {
-            position: relative;
-            width: 240px;
-            height: 240px;
-            border-radius: 50%;
-            display: grid;
-            place-items: center;
-            background:
-                radial-gradient(circle at 50% 50%, rgba(96, 165, 250, 0.16), rgba(15, 23, 42, 0.02) 58%, transparent 72%);
-        }
-
-        .core-shell::before,
-        .core-shell::after {
-            content: "";
-            position: absolute;
-            inset: 18px;
-            border-radius: 50%;
-            border: 1px solid rgba(96, 165, 250, 0.18);
-            box-shadow: 0 0 30px rgba(37, 99, 235, 0.08);
-        }
-
-        .core-shell::after {
-            inset: 42px;
-            border-color: rgba(34, 197, 94, 0.12);
-        }
-
-        .core-orb {
-            position: relative;
-            width: 112px;
-            height: 112px;
-            border-radius: 50%;
-            background:
-                radial-gradient(circle at 35% 35%, #dbeafe 0%, #60a5fa 24%, #2563eb 60%, #0f172a 100%);
-            box-shadow:
-                0 0 0 10px rgba(96, 165, 250, 0.08),
-                0 0 40px rgba(37, 99, 235, 0.34),
-                inset 0 0 22px rgba(255, 255, 255, 0.15);
-            animation: orbPulse 4.8s ease-in-out infinite;
-        }
-
-        .core-ring {
-            position: absolute;
-            inset: -34px;
-            border-radius: 50%;
-            border: 1px dashed rgba(148, 163, 184, 0.25);
-            animation: spinSlow 16s linear infinite;
-        }
-
-        .core-ring.inner {
-            inset: -16px;
-            border-style: solid;
-            border-color: rgba(34, 197, 94, 0.16);
-            animation-direction: reverse;
-            animation-duration: 10s;
-        }
-
-        .core-caption {
-            position: absolute;
-            bottom: 18px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 8px 14px;
-            border-radius: 999px;
-            background: rgba(15, 23, 42, 0.78);
-            border: 1px solid rgba(96, 165, 250, 0.18);
-            color: #dbeafe;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        .cognition-rail {
-            display: grid;
-            grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .insight-panel,
-        .ambient-panel {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .insight-panel::before,
-        .ambient-panel::before {
-            content: "";
-            position: absolute;
-            inset: auto -100px -120px auto;
-            width: 240px;
-            height: 240px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.16), transparent 66%);
-            pointer-events: none;
-        }
-
-        .semantic-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        .semantic-tile {
-            padding: 16px;
-            border-radius: 18px;
-            border: 1px solid rgba(148, 163, 184, 0.14);
-            background: rgba(11, 18, 32, 0.82);
-            min-height: 108px;
-        }
-
-        .semantic-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.09em;
-            color: #93c5fd;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .semantic-value {
-            font-size: 16px;
-            line-height: 1.45;
-            font-weight: bold;
-            color: #f8fafc;
-        }
-
-        .semantic-note {
-            margin-top: 6px;
-            font-size: 12px;
-            color: var(--muted);
-            line-height: 1.5;
-        }
-
-        .thinking-flow {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 16px;
-        }
-
-        .thinking-chip {
-            padding: 9px 12px;
-            border-radius: 999px;
-            border: 1px solid rgba(96, 165, 250, 0.16);
-            background: rgba(15, 23, 42, 0.8);
-            color: #dbeafe;
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        .ambient-matrix {
-            display: grid;
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        .ambient-block {
-            padding: 16px;
-            border-radius: 18px;
-            background: rgba(11, 18, 32, 0.82);
-            border: 1px solid rgba(148, 163, 184, 0.14);
-        }
-
-        .ambient-block strong {
-            display: block;
-            margin-bottom: 6px;
-            color: #cbd5e1;
-            font-size: 12px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .ambient-big {
-            font-size: 22px;
-            line-height: 1.3;
-            font-weight: bold;
-            color: #f8fafc;
-        }
-
-        .ambient-sub {
-            margin-top: 6px;
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.5;
         }
 
         .camera-shell {
             position: relative;
+            border-radius: 22px;
+            overflow: hidden;
+            background: #020617;
+            border: 1px solid var(--line);
+            min-height: 410px;
         }
 
-        .camera-intelligence-bar {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 12px;
-            margin: 0 0 16px 0;
+        video, canvas {
+            display: block;
+            width: 100%;
+            background: #000;
+            border-radius: 22px;
         }
 
-        .camera-intelligence-pill {
-            padding: 14px 16px;
-            border-radius: 18px;
-            border: 1px solid rgba(96, 165, 250, 0.14);
-            background: rgba(11, 18, 32, 0.88);
-        }
+        canvas { display: none; }
 
-        .camera-intelligence-pill .label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.09em;
-            color: #93c5fd;
-            font-weight: bold;
-            margin-bottom: 6px;
-        }
-
-        .camera-intelligence-pill .value {
-            font-size: 15px;
-            font-weight: bold;
-            color: #f8fafc;
-            line-height: 1.4;
-        }
-
-        .camera-frame::after {
-            content: "";
+        .camera-overlay {
+            pointer-events: none;
             position: absolute;
             inset: 0;
-            border-radius: 18px;
-            pointer-events: none;
-            border: 1px solid rgba(96, 165, 250, 0.08);
-            box-shadow: inset 0 0 80px rgba(15, 23, 42, 0.18);
-        }
-
-        .status-emphasis {
-            color: #f8fafc;
-            font-weight: bold;
-        }
-
-        .presence-card {
-            background:
-                linear-gradient(180deg, rgba(17, 24, 39, 0.96), rgba(15, 23, 42, 0.98)),
-                radial-gradient(circle at top right, rgba(37, 99, 235, 0.12), transparent 32%);
-        }
-
-        @keyframes spinSlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes orbPulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow:
-                    0 0 0 10px rgba(96, 165, 250, 0.08),
-                    0 0 40px rgba(37, 99, 235, 0.34),
-                    inset 0 0 22px rgba(255, 255, 255, 0.15);
-            }
-            50% {
-                transform: scale(1.05);
-                box-shadow:
-                    0 0 0 14px rgba(96, 165, 250, 0.06),
-                    0 0 62px rgba(37, 99, 235, 0.42),
-                    inset 0 0 24px rgba(255, 255, 255, 0.18);
-            }
-        }
-
-        @media (max-width: 1120px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero {
-                flex-direction: column;
-            }
-
-            .hero-badges {
-                justify-content: flex-start;
-                min-width: auto;
-            }
-
-            .hero-visual {
-                min-width: auto;
-                width: 100%;
-            }
-
-            .cognition-rail {
-                grid-template-columns: 1fr;
-            }
-
-            .semantic-grid,
-            .camera-intelligence-bar {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-
-        @media (max-width: 760px) {
-            body {
-                padding: 14px;
-            }
-
-            .hero {
-                padding: 18px;
-                border-radius: 18px;
-            }
-
-            .hero h1 {
-                font-size: 28px;
-            }
-
-            .section-grid,
-            .mini-grid,
-            .pill-grid,
-            .semantic-grid,
-            .camera-intelligence-bar {
-                grid-template-columns: 1fr;
-            }
-
-            .camera-frame {
-                min-height: 240px;
-            }
-        }
-
-        body {
-            padding: 0;
-            font-family: "Segoe UI Variable Text", "Segoe UI", sans-serif;
-            background:
-                radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 24%),
-                linear-gradient(180deg, #f5f7fb 0%, #edf2f8 100%);
-            color: #102033;
-        }
-
-        .app-shell {
-            max-width: 1380px;
-            margin: 0 auto;
-            padding: 28px 24px 40px;
-        }
-
-        .topbar {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 24px;
-            padding: 24px 28px;
-            border-radius: 28px;
-            background: rgba(255, 255, 255, 0.92);
-            border: 1px solid rgba(148, 163, 184, 0.24);
-            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
-            backdrop-filter: blur(12px);
-        }
-
-        .eyebrow {
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #3157a6;
-        }
-
-        .topbar h1 {
-            margin: 8px 0 10px;
-            font-size: clamp(28px, 3vw, 42px);
-            line-height: 1.08;
-            color: #0f172a;
-        }
-
-        .topbar p {
-            margin: 0;
-            max-width: 760px;
-            font-size: 16px;
-            line-height: 1.7;
-            color: #46566d;
-        }
-
-        .topbar-status {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 12px;
-            min-width: 220px;
-        }
-
-        .status-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 14px;
-            border-radius: 999px;
-            background: #e6eefc;
-            color: #21457b;
-            font-size: 13px;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        .core-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 16px;
-            border-radius: 999px;
-            background: #0f172a;
-            color: #eff6ff;
-            font-weight: 700;
-            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
-        }
-
-        .pulse-dot {
-            width: 11px;
-            height: 11px;
-            border-radius: 50%;
-            background: #22c55e;
-            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45);
-            animation: pulse 1.3s infinite;
-        }
-
-        .summary-row {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 18px;
-            margin-top: 22px;
-        }
-
-        .summary-card,
-        .panel-surface {
-            background: rgba(255, 255, 255, 0.92);
-            border: 1px solid rgba(148, 163, 184, 0.22);
-            border-radius: 24px;
-            box-shadow: 0 18px 48px rgba(15, 23, 42, 0.07);
-            backdrop-filter: blur(12px);
-        }
-
-        .summary-card {
-            padding: 22px;
-            min-height: 164px;
-        }
-
-        .summary-label,
-        .panel-label {
-            display: inline-block;
-            margin-bottom: 12px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #4b6cb7;
-        }
-
-        .summary-card h2,
-        .guide-body,
-        .memory-hero,
-        .metric-strong {
-            margin: 0;
-            color: #0f172a;
-        }
-
-        .summary-card h2 {
-            font-size: 26px;
-            line-height: 1.2;
-        }
-
-        .summary-copy,
-        .metric-meta,
-        .panel-copy,
-        .subtle-text {
-            color: #526276;
-            line-height: 1.6;
-        }
-
-        .summary-copy {
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
-        .metric-strong {
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .metric-meta {
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
-        .focus-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1.2fr) minmax(350px, 0.8fr);
-            gap: 20px;
-            margin-top: 22px;
-        }
-
-        .camera-panel,
-        .guide-card,
-        .memory-card,
-        .status-card,
-        .advanced-panel {
-            padding: 22px;
-        }
-
-        .panel-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .panel-header h2,
-        .panel-header h3 {
-            margin: 4px 0 0;
-            color: #0f172a;
-        }
-
-        .camera-intelligence-row {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .camera-intelligence-pill {
-            padding: 14px 16px;
-            border-radius: 18px;
-            background: #eef4ff;
-            border: 1px solid rgba(96, 165, 250, 0.16);
-        }
-
-        .camera-intelligence-pill .label {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #4b6cb7;
-            margin-bottom: 6px;
-        }
-
-        .camera-intelligence-pill .value {
-            font-size: 15px;
-            color: #183256;
-            font-weight: 700;
-            line-height: 1.45;
-        }
-
-        .camera-frame {
-            min-height: 440px;
-            border: none;
-            border-radius: 24px;
-            box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.14);
-        }
-
-        .camera-overlay {
-            background: linear-gradient(180deg, rgba(2, 6, 23, 0.38), transparent 28%, transparent 72%, rgba(2, 6, 23, 0.48));
-        }
-
-        .primary-controls {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
-            margin-top: 18px;
-        }
-
-        .control-group {
             padding: 16px;
-            border-radius: 20px;
-            background: #f6f9ff;
-            border: 1px solid rgba(148, 163, 184, 0.2);
-        }
-
-        .control-title {
-            margin: 0 0 10px;
-            font-size: 15px;
-            font-weight: 700;
-            color: #1d3557;
-        }
-
-        .consult-box {
-            margin-top: 18px;
-            padding: 18px;
-            border-radius: 22px;
-            background: #f8fbff;
-            border: 1px solid rgba(148, 163, 184, 0.2);
-        }
-
-        .consult-box textarea,
-        .advanced-panel select {
-            background: #ffffff;
-            color: #102033;
-            border: 1px solid #cdd8ea;
-        }
-
-        .side-stack {
             display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        .guide-body {
-            font-size: 22px;
-            line-height: 1.55;
-            font-weight: 600;
-        }
-
-        .guide-grid,
-        .status-grid,
-        .advanced-grid {
-            display: grid;
-            gap: 12px;
-        }
-
-        .guide-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            margin-top: 16px;
-        }
-
-        .guide-block,
-        .status-pill,
-        .advanced-block,
-        .memory-subcard {
-            padding: 16px;
-            border-radius: 18px;
-            background: #f8fbff;
-            border: 1px solid rgba(148, 163, 184, 0.2);
-        }
-
-        .guide-block strong,
-        .memory-subcard strong,
-        .advanced-block strong {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #4b6cb7;
-        }
-
-        .guide-value,
-        .memory-hero {
-            font-size: 18px;
-            line-height: 1.5;
-            color: #102033;
-        }
-
-        .memory-hero {
-            font-weight: 700;
-        }
-
-        .memory-copy {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #526276;
-            line-height: 1.65;
-        }
-
-        .memory-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 12px;
-        }
-
-        .memory-item {
-            padding: 14px 16px;
-            border-radius: 16px;
-            background: #f8fbff;
-            border: 1px solid rgba(148, 163, 184, 0.18);
-        }
-
-        .memory-item-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: #102033;
-        }
-
-        .memory-item-meta {
-            margin-top: 6px;
-            font-size: 13px;
-            color: #526276;
-            line-height: 1.5;
-        }
-
-        .compact-status {
-            margin-top: 16px;
-            padding: 14px 16px;
-            border-radius: 18px;
-            background: #0f172a;
-            color: #eff6ff;
-            display: flex;
-            align-items: center;
             justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .compact-status .mic-indicator {
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 8px;
-        }
-
-        .status-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            margin-top: 14px;
-        }
-
-        .status-pill {
-            background: #ffffff;
-        }
-
-        .status-pill-label {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #4b6cb7;
-        }
-
-        .status-pill-value {
-            margin-top: 6px;
-            font-size: 15px;
-            font-weight: 700;
-            color: #102033;
-        }
-
-        .advanced-panel {
-            background: rgba(255, 255, 255, 0.88);
-        }
-
-        .advanced-panel summary {
-            cursor: pointer;
-            font-weight: 700;
-            color: #1d3557;
-            list-style: none;
-        }
-
-        .advanced-panel summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .advanced-panel[open] summary {
-            margin-bottom: 16px;
-        }
-
-        .advanced-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .advanced-block .small {
-            color: #526276;
-        }
-
-        .hidden-voice-controls {
-            display: none;
-        }
-
-        .plain-output .result-item + .result-item {
-            margin-top: 10px;
-        }
-
-        .plain-output .chips {
-            margin-top: 8px;
-        }
-
-        @media (max-width: 1080px) {
-            .summary-row,
-            .focus-grid,
-            .primary-controls,
-            .guide-grid,
-            .advanced-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .topbar {
-                flex-direction: column;
-            }
-
-            .topbar-status {
-                align-items: flex-start;
-            }
-        }
-
-        @media (max-width: 700px) {
-            .app-shell {
-                padding: 18px 14px 32px;
-            }
-
-            .topbar,
-            .summary-card,
-            .camera-panel,
-            .guide-card,
-            .memory-card,
-            .status-card,
-            .advanced-panel {
-                padding: 18px;
-                border-radius: 22px;
-            }
-
-            .camera-frame {
-                min-height: 300px;
-            }
-
-            .guide-body {
-                font-size: 18px;
-            }
-        }
-
-        body {
-            padding: 26px 20px 40px;
-            font-family: "Atkinson Hyperlegible Next", "Segoe UI", sans-serif;
-            background:
-                radial-gradient(circle at top left, rgba(210, 224, 245, 0.72), transparent 30%),
-                linear-gradient(180deg, #f4f7fb 0%, #edf2f7 100%);
-            color: #10233f;
-        }
-
-        .panel-surface {
-            border: 1px solid rgba(131, 151, 181, 0.18);
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 18px 36px rgba(15, 35, 63, 0.08);
-            backdrop-filter: blur(12px);
-        }
-
-        .app-shell {
-            max-width: 1240px;
-            padding-top: 16px;
-        }
-
-        .eyebrow,
-        .panel-label {
-            color: #4f6585;
-        }
-
-        .status-chip {
-            border-color: rgba(105, 125, 154, 0.18);
-            background: rgba(244, 247, 251, 0.92);
-            color: #1f3555;
-            box-shadow: none;
-        }
-
-        .hero-minimal {
-            display: flex;
             align-items: flex-start;
-            justify-content: space-between;
-            gap: 26px;
-            padding: 24px 26px;
-        }
-
-        .hero-copy h1 {
-            margin: 8px 0 12px;
-            max-width: 760px;
-            font-size: clamp(30px, 3vw, 42px);
-            line-height: 1.04;
-            letter-spacing: -0.035em;
-            color: #10233f;
-        }
-
-        .hero-copy p {
-            margin: 0;
-            max-width: 690px;
-            color: #5c6f87;
-            font-size: 15px;
-            line-height: 1.72;
-        }
-
-        .hero-status {
-            min-width: 220px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 12px;
-        }
-
-        .hero-metrics {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 16px;
-            margin-top: 20px;
-        }
-
-        .hero-metric {
-            padding: 2px 0 2px 16px;
-            border-radius: 0;
-            background: transparent;
-            border: none;
-            border-left: 3px solid rgba(113, 140, 181, 0.22);
-        }
-
-        .hero-metric strong {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #5a7398;
-        }
-
-        .hero-metric .metric-title {
-            font-size: 19px;
-            font-weight: 700;
-            line-height: 1.28;
-            color: #11243f;
-        }
-
-        .hero-metric .metric-text {
-            margin-top: 6px;
-            font-size: 14px;
-            line-height: 1.58;
-            color: #617387;
-        }
-
-        .clean-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 1.38fr) minmax(330px, 0.82fr);
-            gap: 18px;
-            margin-top: 18px;
-            align-items: start;
-        }
-
-        .camera-stage,
-        .insight-card,
-        .memory-focus,
-        .advanced-panel {
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .camera-stage,
-        .insight-card,
-        .memory-focus {
-            padding: 22px;
-        }
-
-        .camera-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 14px;
-            margin-bottom: 16px;
-        }
-
-        .camera-header h2,
-        .stack-title {
-            margin: 4px 0 0;
-            color: #10233f;
-        }
-
-        .signal-row {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .signal-pill {
-            padding: 14px 15px;
-            border-radius: 16px;
-            background: #f6f9fd;
-            border: 1px solid rgba(120, 146, 184, 0.14);
-        }
-
-        .signal-pill .label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #5a7398;
-        }
-
-        .signal-pill .value {
-            font-size: 14px;
-            line-height: 1.45;
-            font-weight: 700;
-            color: #15304f;
-        }
-
-        .camera-frame {
-            min-height: 540px;
-            border-radius: 28px;
-            box-shadow: inset 0 0 0 1px rgba(129, 146, 177, 0.18), 0 16px 34px rgba(18, 34, 58, 0.10);
-        }
-
-        video,
-        canvas {
-            border-radius: 28px;
-        }
-
-        .camera-overlay {
-            padding: 18px;
-            background: linear-gradient(180deg, rgba(5, 14, 28, 0.16), transparent 26%, transparent 74%, rgba(5, 14, 28, 0.3));
-        }
-
-        .overlay-label {
-            background: rgba(11, 22, 37, 0.6);
-            border-color: rgba(255, 255, 255, 0.08);
-            font-weight: 600;
-        }
-
-        .command-strip {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        .command-group {
-            padding: 16px;
-            border-radius: 18px;
-            background: #f8fbff;
-            border: 1px solid rgba(120, 146, 184, 0.14);
-        }
-
-        .command-group h3 {
-            margin: 0;
-            font-size: 15px;
-            color: #17314d;
-        }
-
-        .command-note {
-            margin: 6px 0 0;
-            font-size: 13px;
-            line-height: 1.55;
-            color: #67768a;
+            background: linear-gradient(180deg, rgba(2, 6, 23, .50), transparent 32%, transparent 68%, rgba(2, 6, 23, .44));
         }
 
         .controls {
-            gap: 8px;
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        button, select {
+            border: 0;
+            border-radius: 14px;
+            padding: 13px 14px;
+            font-size: 14px;
+            font-weight: 800;
         }
 
         button {
-            min-height: 48px;
-            border-radius: 14px;
-            box-shadow: 0 10px 22px rgba(37, 99, 235, 0.12);
+            color: #fff;
+            cursor: pointer;
+            background: linear-gradient(180deg, #2563eb, #1d4ed8);
+            box-shadow: 0 12px 22px rgba(37, 99, 235, .18);
         }
 
-        .query-panel {
-            margin-top: 14px;
-            padding: 16px;
-            border-radius: 18px;
-            background: #f8fbff;
-            border: 1px solid rgba(120, 146, 184, 0.14);
-        }
+        button.secondary { background: linear-gradient(180deg, #334155, #1f2937); box-shadow: none; }
+        button.danger { background: linear-gradient(180deg, #dc2626, #b91c1c); box-shadow: none; }
+        button:hover { filter: brightness(1.08); }
+        button:disabled { opacity: .5; cursor: not-allowed; }
 
-        .query-panel label {
-            color: #17314d;
-        }
-
-        .query-panel textarea,
-        .advanced-panel select {
-            background: #ffffff;
-            color: #0f1f34;
-            border: 1px solid #d6e0ef;
-        }
-
-        .right-rail {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            align-self: start;
-        }
-
-        .readout-text {
-            font-size: 25px;
-            line-height: 1.58;
-            font-weight: 600;
-            color: #10233f;
-        }
-
-        .insight-grid {
+        .settings {
             display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 12px;
-            margin-top: 18px;
+            margin-top: 14px;
         }
 
-        .insight-block {
-            padding-top: 12px;
-            border-top: 1px solid rgba(130, 150, 178, 0.18);
+        label { display: block; color: #cbd5e1; font-size: 13px; font-weight: 800; margin-bottom: 6px; }
+        select { width: 100%; color: #fff; background: rgba(8, 15, 30, .96); border: 1px solid var(--line); }
+
+        .readout {
+            padding: 18px;
+            border-radius: 20px;
+            background: rgba(8, 15, 30, .72);
+            border: 1px solid var(--line);
         }
 
-        .insight-block strong,
-        .memory-panel strong,
-        .system-decision strong {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #5a7398;
+        .main-speech {
+            font-size: 24px;
+            line-height: 1.45;
+            font-weight: 900;
+            letter-spacing: -.02em;
         }
 
-        .insight-value {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #16304d;
-        }
-
-        .compact-audio {
-            margin-top: 16px;
-            padding: 14px 16px;
-            border-radius: 16px;
-            background: #10233f;
-            color: #eef5ff;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .memory-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .memory-primary {
-            font-size: 21px;
-            line-height: 1.35;
-            font-weight: 700;
-            color: #10233f;
-        }
-
-        .memory-secondary {
-            margin-top: 8px;
-            font-size: 14px;
-            line-height: 1.7;
-            color: #627287;
-        }
-
-        .memory-panel {
-            padding: 16px;
-            border-radius: 16px;
-            background: #f8fbff;
-            border: 1px solid rgba(120, 146, 184, 0.14);
-        }
-
-        .memory-list {
+        .map-text {
             margin-top: 12px;
+            color: #dbeafe;
+            line-height: 1.65;
+            font-size: 16px;
         }
 
-        .memory-item {
-            background: #f8fbff;
+        .spatial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 14px;
         }
 
-        .system-inline {
-            margin-top: 18px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(130, 150, 178, 0.18);
+        .spatial-item, .metric, .memory-card, .history-item {
+            border-radius: 18px;
+            border: 1px solid var(--line);
+            background: rgba(8, 15, 30, .72);
+            padding: 13px;
         }
 
-        .system-grid {
+        .item-title { font-weight: 900; font-size: 16px; margin-bottom: 5px; }
+        .item-meta { color: var(--muted); font-size: 13px; line-height: 1.45; }
+        .item-risk { border-color: rgba(239, 68, 68, .34); background: rgba(127, 29, 29, .20); }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .metric-label {
+            color: #93c5fd;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .metric-value {
+            font-size: 19px;
+            line-height: 1.32;
+            font-weight: 900;
+        }
+
+        .metric-sub {
+            color: var(--muted);
+            margin-top: 5px;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .memory-card + .memory-card, .history-item + .history-item { margin-top: 10px; }
+        .memory-title { font-weight: 900; margin-bottom: 6px; }
+        .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .chip { padding: 7px 10px; border-radius: 999px; background: rgba(30, 41, 59, .92); border: 1px solid var(--line); font-size: 13px; color: #e2e8f0; }
+
+        .diagnostics {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 10px;
             margin-top: 12px;
         }
 
-        .system-pill {
-            padding: 14px 15px;
-            border-radius: 14px;
-            background: #f8fbff;
-            border: 1px solid rgba(120, 146, 184, 0.14);
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, .65); }
+            70% { box-shadow: 0 0 0 12px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
         }
 
-        .system-pill strong {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 11px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #5a7398;
+        @media (max-width: 1120px) {
+            .grid, .hero { grid-template-columns: 1fr; }
+            .controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
 
-        .system-pill span {
-            font-size: 14px;
-            line-height: 1.45;
-            font-weight: 700;
-            color: #17314d;
-        }
-
-        .system-decision {
-            margin-top: 12px;
-            padding: 16px;
-            border-radius: 16px;
-            background: #f8fbff;
-            border: 1px solid rgba(120, 146, 184, 0.14);
-        }
-
-        .advanced-panel {
-            padding: 18px 20px;
-        }
-
-        .advanced-panel summary {
-            font-size: 14px;
-        }
-
-        .advanced-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .advanced-block {
-            background: #f8fbff;
-        }
-
-        .plain-output .chips {
-            margin-top: 4px;
-        }
-
-        @media (max-width: 1100px) {
-            .hero-minimal,
-            .clean-layout {
-                grid-template-columns: 1fr;
-                flex-direction: column;
-            }
-
-            .hero-status {
-                align-items: flex-start;
-            }
-
-            .hero-metrics,
-            .signal-row,
-            .command-strip,
-            .system-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 700px) {
-            body {
-                padding: 18px 14px 30px;
-            }
-
-            .hero-minimal,
-            .camera-stage,
-            .insight-card,
-            .memory-focus,
-            .advanced-panel {
-                padding: 18px;
-                border-radius: 20px;
-            }
-
-            .readout-text {
-                font-size: 19px;
-            }
-
-            .camera-frame {
-                min-height: 320px;
-            }
+        @media (max-width: 720px) {
+            body { padding: 12px; }
+            .controls, .settings, .metrics, .spatial-grid, .diagnostics { grid-template-columns: 1fr; }
+            .main-speech { font-size: 19px; }
         }
     </style>
 </head>
 <body>
-    <div class="app-shell">
-        <header class="panel-surface hero-minimal">
-            <div class="hero-copy">
-                <div class="eyebrow">Visiora AI</div>
-                <h1>Leitura assistiva do ambiente, com foco no que realmente importa</h1>
-                <p>A interface foi reorganizada para priorizar entendimento rápido: câmera em destaque, descrição atual clara, memória do espaço e controles essenciais sem competir pela atenção do usuário.</p>
-
-                <div class="hero-metrics">
-                    <div class="hero-metric">
-                        <strong>Ambiente atual</strong>
-                        <div id="envStateText" class="metric-title">Aguardando primeira leitura útil</div>
-                        <div id="semanticSystemSub" class="metric-text">Inicie a câmera para ativar a percepção contínua.</div>
-                    </div>
-                    <div class="hero-metric">
-                        <strong>Estado perceptivo</strong>
-                        <div id="semanticSystemState" class="metric-title">Pronta para observar</div>
-                        <div class="metric-text">Última decisão: <span id="semanticDecisionState">Nenhuma</span></div>
-                    </div>
-                    <div class="hero-metric">
-                        <strong>Contexto consolidado</strong>
-                        <div id="envProfileText" class="metric-title">Não definido</div>
-                        <div class="metric-text">Confiança: <span id="envConfidenceText">Inicial</span><br />Referência: <span id="envReferenceText">Nenhuma ainda</span></div>
-                    </div>
-                </div>
+    <main class="app">
+        <section class="hero">
+            <div>
+                <div class="kicker">Visiora AI • Percepção espacial assistiva</div>
+                <h1>Assistente visual inteligente</h1>
+                <p class="sub">Descrição espacial, memória de ambiente, pontos de interesse e alertas para apoiar pessoas com deficiência visual sem presumir destino.</p>
             </div>
+            <span class="status-pill"><span class="dot" id="systemDot"></span><span id="systemStatus">Pronto</span></span>
+        </section>
 
-            <div class="hero-status">
-                <div id="presenceBadge" class="status-chip">Em espera</div>
-                <div class="core-pill">
-                    <span id="cameraDot" class="pulse-dot"></span>
-                    <span id="heroCoreStatus">Percepção ativa</span>
-                </div>
-            </div>
-        </header>
-
-        <div class="clean-layout">
-            <main class="panel-surface camera-stage">
-                <div class="camera-header">
-                    <div>
-                        <div class="panel-label">Câmera em tempo real</div>
-                        <h2>Visual principal do ambiente</h2>
-                    </div>
-                    <div class="status-chip">Assistência ao vivo</div>
-                </div>
-
-                <div class="signal-row">
-                    <div class="signal-pill">
-                        <span class="label">Modo de atenção</span>
-                        <span id="cameraSemanticMode" class="value">Observação assistida</span>
-                    </div>
-                    <div class="signal-pill">
-                        <span class="label">Leitura espacial</span>
-                        <span id="cameraSemanticSpace" class="value">Sem leitura ainda</span>
-                    </div>
-                    <div class="signal-pill">
-                        <span class="label">Tendência do ambiente</span>
-                        <span id="cameraSemanticTrend" class="value">Aguardando cena</span>
-                    </div>
-                </div>
-
-                <div class="camera-frame">
-                    <video id="video" autoplay playsinline muted></video>
-                    <canvas id="canvas"></canvas>
-
-                    <div class="camera-overlay">
-                        <div class="overlay-top">
-                            <div class="overlay-label">Captura contínua</div>
-                            <div class="overlay-label">
-                                <span class="dot" id="autoDot"></span>
-                                Loop inteligente
-                            </div>
+        <section class="grid">
+            <div class="column">
+                <section class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <div class="kicker">Câmera</div>
+                            <h2>Observação contínua</h2>
+                            <p class="sub">Ative a câmera e deixe o Visiora acompanhar o ambiente em tempo real.</p>
                         </div>
-                        <div class="overlay-bottom">
-                            <div class="overlay-label">
-                                <span class="dot warn" id="voiceDot"></span>
-                                Áudio assistivo
-                            </div>
-                            <div class="overlay-label">Silêncio quando nada muda</div>
+                        <span class="status-pill" id="loopBadge">Acompanhamento desligado</span>
+                    </div>
+
+                    <div class="camera-shell">
+                        <video id="video" autoplay muted playsinline></video>
+                        <canvas id="canvas"></canvas>
+                        <div class="camera-overlay">
+                            <span class="status-pill"><span class="dot" id="cameraDot"></span><span id="cameraStatus">câmera desligada</span></span>
+                            <span class="status-pill" id="decisionStatus">aguardando</span>
                         </div>
                     </div>
-                </div>
 
-                <div class="command-strip">
-                    <section class="command-group">
-                        <h3>Câmera</h3>
-                        <p class="command-note">Liga ou encerra a visualização principal.</p>
-                        <div class="controls">
-                            <button id="btnIniciarCamera">Iniciar câmera</button>
-                            <button id="btnPararCamera" class="secondary">Parar câmera</button>
-                        </div>
-                    </section>
-
-                    <section class="command-group">
-                        <h3>Percepção contínua</h3>
-                        <p class="command-note">Mantém a IA observando e falando só o que importa.</p>
-                        <div class="controls">
-                            <button id="btnIniciarAuto">Iniciar automático</button>
-                            <button id="btnPararAuto" class="danger">Parar automático</button>
-                        </div>
-                    </section>
-
-                    <section class="command-group">
-                        <h3>Áudio</h3>
-                        <p class="command-note">Controle rápido da fala do assistente.</p>
-                        <div class="controls">
-                            <button id="btnPausarAudio" class="secondary">Pausar</button>
-                            <button id="btnRetomarAudio" class="secondary">Retomar</button>
-                            <button id="btnPararAudio" class="danger">Parar</button>
-                        </div>
-                    </section>
-                </div>
-
-                <section class="query-panel">
-                    <label for="modoConsulta">Consulta manual ao ambiente</label>
-                    <textarea id="modoConsulta" rows="3" placeholder="Ex.: o que tem à minha frente? tem alguém por perto? há uma saída visível?"></textarea>
                     <div class="controls">
-                        <button id="btnConsultar">Perguntar ao ambiente</button>
-                    </div>
-                </section>
-            </main>
-
-            <aside class="right-rail">
-                <section class="panel-surface insight-card">
-                    <div class="panel-label">Leitura atual</div>
-                    <h2 class="stack-title">O que o usuário precisa saber agora</h2>
-                    <div id="guideDescriptionText" class="readout-text" aria-live="polite">A descrição útil do ambiente aparecerá aqui assim que a primeira leitura for concluída.</div>
-
-                    <div class="insight-grid">
-                        <div class="insight-block">
-                            <strong>Risco imediato</strong>
-                            <div id="guideAlertText" class="insight-value">Nenhum risco imediato detectado.</div>
-                        </div>
-                        <div class="insight-block">
-                            <strong>Pontos úteis agora</strong>
-                            <div id="guideFocusText" class="insight-value">Portas, passagens, pessoas e obstáculos importantes aparecerão aqui.</div>
-                        </div>
-                        <div class="insight-block">
-                            <strong>Última orientação falada</strong>
-                            <div id="heardText" class="insight-value">Aguardando primeira orientação do ambiente.</div>
-                        </div>
+                        <button id="btnStartCamera">Iniciar câmera</button>
+                        <button class="secondary" id="btnStopCamera">Parar câmera</button>
+                        <button id="btnStartLoop">Ativar acompanhamento</button>
+                        <button class="danger" id="btnStopLoop">Pausar</button>
+                        <button class="secondary" id="btnDescribeNow">Descrever agora</button>
                     </div>
 
-                    <div class="compact-audio">
+                    <div class="settings">
                         <div>
-                            <span id="micIndicator" class="mic-indicator"></span>
-                            <span id="listeningState">Pronto para gravar</span>
-                        </div>
-                        <div id="statusEscuta">🎙️ Loop inteligente em percepção ativa</div>
-                    </div>
-                </section>
-
-                <section class="panel-surface memory-focus">
-                    <div class="memory-header">
-                        <div>
-                            <div class="panel-label">Memória do ambiente</div>
-                            <h2 class="stack-title">Continuidade sem excesso de informação</h2>
-                        </div>
-                        <div class="status-chip">SQLite ativo</div>
-                    </div>
-
-                    <div id="memoryConfirmedState" class="memory-primary">Ainda sem consolidação</div>
-                    <div id="memoryTransitionState" class="memory-secondary">Nenhuma transição relevante registrada.</div>
-                    <div id="guideMemoryText" class="memory-secondary">A memória persistente será consolidada após confirmações úteis do ambiente.</div>
-
-                    <div class="memory-panel" style="margin-top: 14px;">
-                        <strong>Ambiente lembrado</strong>
-                        <div id="persistentCurrentSummary" class="insight-value">Nenhum ambiente persistido ainda.</div>
-                        <div id="persistentCurrentMeta" class="memory-secondary">Leituras úteis e referências frequentes aparecerão aqui sem gravar cada frame do loop.</div>
-                        <div id="persistentReferences" class="chips"></div>
-                    </div>
-
-                    <div class="memory-panel" style="margin-top: 12px;">
-                        <strong>Ambientes recentes</strong>
-                        <div id="persistentHistoryList" class="memory-list">
-                            <div class="memory-item">
-                                <div class="memory-item-title">Sem memória persistida ainda</div>
-                                <div class="memory-item-meta">Assim que o Visiora confirmar ambientes ou eventos úteis, este histórico começará a ser preenchido.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="system-inline">
-                        <div class="panel-label">Estado do sistema</div>
-                        <div class="system-grid">
-                            <div class="system-pill">
-                                <strong>Câmera</strong>
-                                <span id="statusCamera">desligada</span>
-                            </div>
-                            <div class="system-pill">
-                                <strong>Modo automático</strong>
-                                <span id="statusAuto">desligado</span>
-                            </div>
-                            <div class="system-pill">
-                                <strong>Áudio</strong>
-                                <span id="statusAudio">parado</span>
-                            </div>
-                            <div class="system-pill">
-                                <strong>Guia por áudio</strong>
-                                <span id="statusVoz">desligada</span>
-                            </div>
-                            <div class="system-pill">
-                                <strong>Reconhecimento</strong>
-                                <span id="statusReconhecimento">inativo</span>
-                            </div>
-                            <div class="system-pill">
-                                <strong>Última orientação</strong>
-                                <span id="statusComando">nenhum</span>
-                            </div>
-                        </div>
-
-                        <div class="system-decision">
-                            <strong>Decisão do loop</strong>
-                            <div id="statusDecision" class="insight-value">nenhuma</div>
-                        </div>
-                    </div>
-                </section>
-
-                <details class="panel-surface advanced-panel">
-                    <summary>Painel técnico</summary>
-
-                    <div class="advanced-grid">
-                        <div class="advanced-block">
-                            <strong>Qualidade da captura</strong>
-                            <label for="qualidadeImagem">Qualidade JPEG</label>
-                            <select id="qualidadeImagem">
-                                <option value="0.55">0.55</option>
-                                <option value="0.65">0.65</option>
-                                <option value="0.75" selected>0.75</option>
-                                <option value="0.85">0.85</option>
-                            </select>
-                        </div>
-
-                        <div class="advanced-block">
-                            <strong>Resolução da análise</strong>
-                            <label for="larguraCaptura">Largura da captura</label>
-                            <select id="larguraCaptura">
-                                <option value="480">480</option>
-                                <option value="640" selected>640</option>
+                            <label for="captureWidth">Largura da captura</label>
+                            <select id="captureWidth">
                                 <option value="800">800</option>
+                                <option value="720" selected>720</option>
+                                <option value="640">640</option>
                             </select>
                         </div>
-
-                        <div class="advanced-block">
-                            <strong>Telemetria do loop</strong>
-                            <div class="result-item"><span class="small">Requisição em andamento:</span> <div id="diagAnalisando" class="small">não</div></div>
-                            <div class="result-item"><span class="small">Áudio tocando:</span> <div id="diagAudioTocando" class="small">não</div></div>
-                            <div class="result-item"><span class="small">Diferença visual:</span> <div id="diagMudanca" class="small">0</div></div>
-                            <div class="result-item"><span class="small">Intervalo atual:</span> <div id="diagIntervalo" class="small">1800 ms</div></div>
-                            <div class="result-item"><span class="small">Último envio:</span> <div id="diagUltimoEnvio" class="small">nunca</div></div>
-                            <div class="result-item"><span class="small">Última fala importante:</span> <div id="diagUltimaFala" class="small">nenhuma</div></div>
-                            <div class="result-item"><span class="small">Última frase reconhecida:</span> <div id="diagReconhecido" class="small">nenhuma</div></div>
+                        <div>
+                            <label for="jpegQuality">Qualidade JPEG</label>
+                            <select id="jpegQuality">
+                                <option value="0.78">0.78</option>
+                                <option value="0.72" selected>0.72</option>
+                                <option value="0.66">0.66</option>
+                            </select>
                         </div>
-
-                        <div class="advanced-block plain-output">
-                            <strong>Saída crua da IA</strong>
-                            <div class="result-item">
-                                <span class="small">Descrição</span>
-                                <div id="resDescricao" class="small">-</div>
-                            </div>
-                            <div class="result-item">
-                                <span class="small">Pessoa</span>
-                                <div id="resPessoa" class="small">-</div>
-                            </div>
-                            <div class="result-item">
-                                <span class="small">Sugestão</span>
-                                <div id="resSugestao" class="small">-</div>
-                            </div>
-                            <div class="result-item">
-                                <span class="small">Direção</span>
-                                <div id="resDirecao" class="small">-</div>
-                            </div>
-                            <div class="result-item">
-                                <span class="small">Importância</span>
-                                <div id="resImportancia" class="small">-</div>
-                            </div>
-                            <div class="result-item">
-                                <span class="small">Objetos</span>
-                                <div id="resObjetos" class="chips"></div>
-                            </div>
-                            <div class="result-item">
-                                <span class="small">Alertas</span>
-                                <div id="resAlertas" class="chips"></div>
-                            </div>
+                        <div>
+                            <label for="baseInterval">Intervalo base</label>
+                            <select id="baseInterval">
+                                <option value="1400">1400 ms</option>
+                                <option value="1700" selected>1700 ms</option>
+                                <option value="2100">2100 ms</option>
+                            </select>
                         </div>
                     </div>
-                </details>
+                </section>
 
-                <div class="hidden-voice-controls">
-                    <button id="btnVoz" class="voice off" aria-hidden="true" tabindex="-1">Comando de voz desativado</button>
-                    <button id="btnFalarAjuda" class="secondary" aria-hidden="true" tabindex="-1">Instruções</button>
-                </div>
+                <section class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <div class="kicker">Saída assistiva</div>
+                            <h2>Leitura atual</h2>
+                        </div>
+                        <span class="status-pill" id="speechStatus">sem fala</span>
+                    </div>
+                    <div class="readout">
+                        <div class="main-speech" id="mainSpeech">Aguardando primeira leitura do ambiente.</div>
+                        <div class="map-text" id="mapText">O mapa espacial aparecerá aqui com objetos e posições aproximadas.</div>
+                    </div>
+                    <div class="spatial-grid" id="spatialItems"></div>
+                </section>
+            </div>
+
+            <aside class="column">
+                <section class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <div class="kicker">Estado perceptivo</div>
+                            <h2>Contexto do ambiente</h2>
+                        </div>
+                    </div>
+                    <div class="metrics">
+                        <div class="metric"><div class="metric-label">Ambiente</div><div class="metric-value" id="envName">Indefinido</div><div class="metric-sub" id="envType">Sem perfil</div></div>
+                        <div class="metric"><div class="metric-label">Confiança</div><div class="metric-value" id="confidence">0%</div><div class="metric-sub" id="attention">atenção média</div></div>
+                        <div class="metric"><div class="metric-label">Caminho</div><div class="metric-value" id="pathStatus">desconhecido</div><div class="metric-sub" id="mainAlert">sem alerta</div></div>
+                        <div class="metric"><div class="metric-label">Evento</div><div class="metric-value" id="eventStatus">observando</div><div class="metric-sub" id="motionStatus">sem movimento</div></div>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <div class="kicker">Memória SQLite</div>
+                            <h2>Ambiente lembrado</h2>
+                        </div>
+                        <span class="status-pill" id="memoryStatus">aprendendo</span>
+                    </div>
+                    <div class="memory-card">
+                        <div class="memory-title" id="memoryTitle">Nenhum ambiente reconhecido ainda</div>
+                        <div class="sub" id="memoryDescription">O Visiora salva referências úteis conforme o ambiente é analisado.</div>
+                        <div class="chips" id="memoryRefs"></div>
+                    </div>
+                    <div id="recentMemories"></div>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <div class="kicker">Telemetria essencial</div>
+                            <h2>Loop</h2>
+                        </div>
+                    </div>
+                    <div class="diagnostics">
+                        <div class="metric"><div class="metric-label">Mudança visual</div><div class="metric-value" id="visualDiff">0.00</div></div>
+                        <div class="metric"><div class="metric-label">Resposta</div><div class="metric-value" id="processTime">-</div></div>
+                        <div class="metric"><div class="metric-label">Última fala</div><div class="metric-value" id="lastSpeech">nenhuma</div></div>
+                    </div>
+                </section>
             </aside>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <script>
         const video = document.getElementById("video");
         const canvas = document.getElementById("canvas");
         const ctx = canvas.getContext("2d", { willReadFrequently: true });
 
-        const btnVoz = document.getElementById("btnVoz");
-        const btnFalarAjuda = document.getElementById("btnFalarAjuda");
-        const btnIniciarCamera = document.getElementById("btnIniciarCamera");
-        const btnPararCamera = document.getElementById("btnPararCamera");
-        const btnIniciarAuto = document.getElementById("btnIniciarAuto");
-        const btnPararAuto = document.getElementById("btnPararAuto");
-        const btnConsultar = document.getElementById("btnConsultar");
-        const btnPausarAudio = document.getElementById("btnPausarAudio");
-        const btnRetomarAudio = document.getElementById("btnRetomarAudio");
-        const btnPararAudio = document.getElementById("btnPararAudio");
-
-        const modoConsulta = document.getElementById("modoConsulta");
-        const qualidadeImagem = document.getElementById("qualidadeImagem");
-        const larguraCaptura = document.getElementById("larguraCaptura");
-
-        const statusCamera = document.getElementById("statusCamera");
-        const statusAuto = document.getElementById("statusAuto");
-        const statusAudio = document.getElementById("statusAudio");
-        const statusVoz = document.getElementById("statusVoz");
-        const statusReconhecimento = document.getElementById("statusReconhecimento");
-        const statusComando = document.getElementById("statusComando");
-        const statusDecision = document.getElementById("statusDecision");
-
-        const diagAnalisando = document.getElementById("diagAnalisando");
-        const diagAudioTocando = document.getElementById("diagAudioTocando");
-        const diagMudanca = document.getElementById("diagMudanca");
-        const diagIntervalo = document.getElementById("diagIntervalo");
-        const diagUltimoEnvio = document.getElementById("diagUltimoEnvio");
-        const diagUltimaFala = document.getElementById("diagUltimaFala");
-        const diagReconhecido = document.getElementById("diagReconhecido");
-
-        const resDescricao = document.getElementById("resDescricao");
-        const resPessoa = document.getElementById("resPessoa");
-        const resSugestao = document.getElementById("resSugestao");
-        const resDirecao = document.getElementById("resDirecao");
-        const resImportancia = document.getElementById("resImportancia");
-        const resObjetos = document.getElementById("resObjetos");
-        const resAlertas = document.getElementById("resAlertas");
-
-        const micIndicator = document.getElementById("micIndicator");
-        const listeningState = document.getElementById("listeningState");
-        const heardText = document.getElementById("heardText");
-
-        const heroCoreStatus = document.getElementById("heroCoreStatus");
-        const envStateText = document.getElementById("envStateText");
-        const envProfileText = document.getElementById("envProfileText");
-        const envConfidenceText = document.getElementById("envConfidenceText");
-        const envReferenceText = document.getElementById("envReferenceText");
-        const semanticSystemState = document.getElementById("semanticSystemState");
-        const semanticSystemSub = document.getElementById("semanticSystemSub");
-        const semanticDecisionState = document.getElementById("semanticDecisionState");
-        const presenceBadge = document.getElementById("presenceBadge");
-        const cameraSemanticMode = document.getElementById("cameraSemanticMode");
-        const cameraSemanticSpace = document.getElementById("cameraSemanticSpace");
-        const cameraSemanticTrend = document.getElementById("cameraSemanticTrend");
-        const memoryConfirmedState = document.getElementById("memoryConfirmedState");
-        const memoryTransitionState = document.getElementById("memoryTransitionState");
-        const guideDescriptionText = document.getElementById("guideDescriptionText");
-        const guideAlertText = document.getElementById("guideAlertText");
-        const guideFocusText = document.getElementById("guideFocusText");
-        const guideMemoryText = document.getElementById("guideMemoryText");
-        const persistentCurrentSummary = document.getElementById("persistentCurrentSummary");
-        const persistentCurrentMeta = document.getElementById("persistentCurrentMeta");
-        const persistentReferences = document.getElementById("persistentReferences");
-        const persistentHistoryList = document.getElementById("persistentHistoryList");
-
+        const el = (id) => document.getElementById(id);
+        const ENDPOINT = "/Teste/analisar";
 
         let streamAtual = null;
-        let modoAutomaticoAtivo = false;
+        let loopAtivo = false;
         let analisando = false;
-        let audioAtual = null;
-        let aguardandoComando = false;
-        let timeoutComando = null;
-        let ultimaAtivacao = 0;
-
-        let loopTimeout = null;
-        let ultimoEnvioEm = 0;
-        let ultimaFalaImportanteEm = 0;
-
-        let intervaloAtual = 1800;
+        let loopTimer = null;
         let miniFrameAnterior = null;
+        let ultimoEnvio = 0;
+        let ultimaFala = 0;
+        let primeiraLeitura = true;
+        let ultimoTextoFalado = "";
+        let ultimaAssinaturaFront = "";
+        let ultimaAssinaturaFrontEm = 0;
+        let intervaloAtual = 1700;
 
-        let ultimoResultado = null;
-        let ultimoAudioTocando = false;
+        function setText(id, text) { el(id).textContent = text ?? ""; }
+        function nowTime(ts) { return ts ? new Date(ts).toLocaleTimeString("pt-BR") : "nenhuma"; }
 
-        let reconhecimento = null;
-        let escutaVozAtiva = false;
-        let suporteReconhecimento = true;
-        let ultimoComandoExecutadoEm = 0;
-        let ultimaFraseReconhecida = "";
-        let ultimaFraseReconhecidaEm = 0;
-        let microfoneOuvindo = false;
-        let aguardandoPermissaoAudio = false;
-        let gravandoComando = false;
-        let mediaStreamVoz = null;
-        let audioContextVoz = null;
-        let mediaSourceVoz = null;
-        let processorVoz = null;
-        let buffersAudioVoz = [];
-        let sampleRateVoz = 16000;
-        let pointerVozAtivo = false;
-        let transcrevendoComando = false;
-        let timeoutSegurancaVoz = null;
-        let ultimoInicioGravacaoEm = 0;
-        let IA_FALANDO = false;
-        let retornoEscutaTimeout = null;
-        let ciclosEstaveisSemAnalise = 0;
-        let ultimaAnaliseEstavelEm = 0;
-        let ultimaFalaGuiaLocal = "";
-        let ultimaFalaGuiaLocalEm = 0;
-        let ultimaMudancaVisualAltaEm = 0;
-        let modoGuiaRapidoAtivo = true;
-        let primeiraLeituraPendente = true;
-        let ultimaDiferencaVisualCalculada = 0;
-        let nivelMovimentoAtual = "indefinido";
-
-        const INTERVALO_MAXIMO_ANALISE_ESTAVEL_MS = 9200;
-        const COOLDOWN_FALA_GUIA_LOCAL_MS = 2200;
-        const DIFERENCA_VISUAL_ALTA = 10;
-        const DIFERENCA_VISUAL_MODERADA = 4.5;
-
-        const ENDPOINT = "/Teste/analisar";
-        const PALAVRA_ATIVACAO = "guia";
-        const COOLDOWN_COMANDO_MS = 2200;
-        const COOLDOWN_REPETICAO_FALA_MS = 3500;
-
-        function atualizarTexto(el, texto) {
-            el.textContent = texto;
+        function normalize(text) {
+            return (text || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
         }
 
-        function atualizarStatus(texto) {
-            document.getElementById("statusEscuta").innerText = texto;
+        function captureBase64() {
+            const width = Number(el("captureWidth").value || 720);
+            const ratio = video.videoHeight && video.videoWidth ? video.videoHeight / video.videoWidth : 0.75;
+            canvas.width = width;
+            canvas.height = Math.max(1, Math.round(width * ratio));
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            return canvas.toDataURL("image/jpeg", Number(el("jpegQuality").value || 0.72)).split(",")[1];
         }
 
-        function ehAtivacao(texto) {
-            return texto.includes(PALAVRA_ATIVACAO);
+        function miniFrame() {
+            const w = 32, h = 24;
+            const temp = document.createElement("canvas");
+            temp.width = w;
+            temp.height = h;
+            const tctx = temp.getContext("2d", { willReadFrequently: true });
+            tctx.drawImage(video, 0, 0, w, h);
+            return tctx.getImageData(0, 0, w, h).data;
         }
 
-        function formatarHora(timestamp) {
-            if (!timestamp) return "nunca";
-            return new Date(timestamp).toLocaleTimeString("pt-BR");
-        }
-
-
-        function primeiraLetraMaiuscula(texto) {
-            if (!texto) return "";
-            return texto.charAt(0).toUpperCase() + texto.slice(1);
-        }
-
-        function inferirPerfilAmbiente(data) {
-            const descricao = normalizarTexto(data?.descricao || "");
-            const objetos = (data?.objetos || []).map(normalizarTexto);
-            const pessoa = normalizarTexto(data?.pessoa || "");
-            const alertas = (data?.alertas || []).map(normalizarTexto);
-
-            if (descricao.includes("mercado") || descricao.includes("loja") || descricao.includes("recepcao") || descricao.includes("comercial") || alertas.some(a => a.includes("circulacao"))) {
-                return "Dinâmico";
+        function diffFrame(a, b) {
+            if (!a || !b || a.length !== b.length) return 100;
+            let diff = 0;
+            for (let i = 0; i < a.length; i += 4) {
+                diff += Math.abs(a[i] - b[i]) + Math.abs(a[i + 1] - b[i + 1]) + Math.abs(a[i + 2] - b[i + 2]);
             }
-
-            if (descricao.includes("corredor") || descricao.includes("passagem")) {
-                return "De passagem";
-            }
-
-            if (pessoa || objetos.includes("pessoa")) {
-                return "Social";
-            }
-
-            if (descricao.includes("quarto") || descricao.includes("sala") || descricao.includes("cozinha") || descricao.includes("banheiro") || descricao.includes("domestico") || objetos.includes("cama") || objetos.includes("guarda-roupa") || objetos.includes("sofa")) {
-                return "Estável";
-            }
-
-            return "Em avaliação";
+            return diff / (a.length / 4) / 3;
         }
 
-        function inferirConfiancaContextual(data) {
-            const importancia = normalizarTexto(data?.importancia || "");
-            const descricao = normalizarTexto(data?.descricao || "");
+        function speakLocal(text, priority = true) {
+            if (!text || !("speechSynthesis" in window)) return;
 
-            if (importancia === "alta") return "Alta atenção";
-            if (descricao.includes("parece")) return "Moderada";
-            if (descricao) return "Em consolidação";
-            return "Inicial";
+            const signature = normalize(text);
+            const now = Date.now();
+            if (signature && signature === ultimaAssinaturaFront && now - ultimaAssinaturaFrontEm < 30000) return;
+
+            if (priority) window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = "pt-BR";
+            utterance.rate = 1.0;
+            utterance.pitch = 1.0;
+            utterance.onstart = () => setText("speechStatus", "falando");
+            utterance.onend = () => setText("speechStatus", "sem fala");
+            window.speechSynthesis.speak(utterance);
+            ultimaFala = Date.now();
+            ultimoTextoFalado = text;
+            ultimaAssinaturaFront = signature;
+            ultimaAssinaturaFrontEm = now;
+            setText("lastSpeech", nowTime(ultimaFala));
         }
 
-        function extrairReferenciaPrincipal(data) {
-            const objetos = (data?.objetos || []).map(item => item || "");
-            const prioridade = ["porta", "cama", "guarda-roupa", "mesa", "cadeira", "balcao", "prateleira", "sofa", "geladeira", "pia"];
-
-            for (const item of prioridade) {
-                const encontrado = objetos.find(obj => normalizarTexto(obj) === item);
-                if (encontrado) return primeiraLetraMaiuscula(encontrado);
-            }
-
-            if (objetos.length > 0) return primeiraLetraMaiuscula(objetos[0]);
-            return "Nenhuma ainda";
+        function stopAudio() {
+            if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+            setText("speechStatus", "sem fala");
         }
 
-        function atualizarCamadaSemantica(data) {
-            if (!data) return;
-
-            const estado = data.estadoCognitivo || data.EstadoCognitivo || {};
-            const memoria = data.memoriaRecente || data.MemoriaRecente || [];
-
-            const descricao = data.descricao || data.Descricao || "Sem leitura útil";
-            const ambiente = estado.ambienteAtual || estado.AmbienteAtual || descricao;
-            const perfil = estado.tipoAmbiente || estado.TipoAmbiente || inferirPerfilAmbiente(data);
-            const confiancaValor = estado.confiancaAmbiente ?? estado.ConfiancaAmbiente ?? data.confiancaAmbiente ?? data.ConfiancaAmbiente;
-            const confianca = typeof confiancaValor === "number" ? `${Math.round(confiancaValor)}%` : inferirConfiancaContextual(data);
-            const referencia = estado.referenciaPrincipal || estado.ReferenciaPrincipal || extrairReferenciaPrincipal(data);
-            const alerta = estado.alertaPrincipal || estado.AlertaPrincipal || data.alertaPrincipal || ((data.alertas && data.alertas.length > 0) ? data.alertas[0] : "");
-            const evento = estado.eventoAtual || estado.EventoAtual || "Observando";
-            const tendencia = estado.tendenciaMovimento || estado.TendenciaMovimento || (alerta ? "Atenção imediata" : (perfil === "Dinâmico" || perfil === "De passagem" ? "Mudança frequente" : "Cena mais estável"));
-
-            envStateText.textContent = ambiente || descricao;
-            envProfileText.textContent = perfil || "Em avaliação";
-            envConfidenceText.textContent = confianca || "Inicial";
-            envReferenceText.textContent = referencia || "Nenhuma ainda";
-
-            cameraSemanticSpace.textContent = alerta && alerta !== "-" ? primeiraLetraMaiuscula(alerta) : (ambiente || descricao);
-            cameraSemanticTrend.textContent = tendencia;
-            cameraSemanticMode.textContent = modoAutomaticoAtivo ? "Modo guia rápido" : "Consulta assistida";
-
-            if (memoria.length > 0) {
-                const ultimo = memoria[0];
-                const ambienteMemoria = ultimo.ambiente || ultimo.Ambiente || ambiente;
-                const eventoMemoria = ultimo.evento || ultimo.Evento || evento;
-                const caminhoMemoria = ultimo.caminho || ultimo.Caminho || estado.caminhoStatus || estado.CaminhoStatus || "desconhecido";
-
-                memoryConfirmedState.textContent = `${ambienteMemoria} • ${caminhoMemoria}`;
-                memoryTransitionState.textContent = eventoMemoria;
-            } else {
-                memoryConfirmedState.textContent = ambiente || descricao;
-                memoryTransitionState.textContent = evento || "Sem transição relevante";
-            }
-
-            heroCoreStatus.textContent = alerta && alerta !== "-" ? "Atenção ativa" : "Percepção ativa";
-        }
-
-        function atualizarPresencaIA(estado, subtitulo = "") {
-            semanticSystemState.textContent = estado;
-            if (subtitulo) semanticSystemSub.textContent = subtitulo;
-            presenceBadge.textContent = estado;
-        }
-
-        function atualizarDiagnostico() {
-            atualizarTexto(diagAnalisando, analisando ? "sim" : "não");
-            atualizarTexto(diagAudioTocando, ultimoAudioTocando ? "sim" : "não");
-            atualizarTexto(diagIntervalo, `${intervaloAtual} ms`);
-            atualizarTexto(diagUltimoEnvio, formatarHora(ultimoEnvioEm));
-            atualizarTexto(diagUltimaFala, ultimaFalaImportanteEm ? formatarHora(ultimaFalaImportanteEm) : "nenhuma");
-            atualizarTexto(diagReconhecido, ultimaFraseReconhecida || "nenhuma");
-        }
-
-        function setStatusDecision(texto) {
-            statusDecision.textContent = texto;
-            semanticDecisionState.textContent = primeiraLetraMaiuscula(texto || "nenhuma");
-        }
-
-        function preencherListaChips(container, items) {
+        function renderSpatialItems(items) {
+            const container = el("spatialItems");
             container.innerHTML = "";
-
-            if (!items || items.length === 0) {
-                const span = document.createElement("span");
-                span.className = "small";
-                span.textContent = "-";
-                container.appendChild(span);
+            const list = Array.isArray(items) ? items.filter(x => x && x.nome) : [];
+            if (!list.length) {
+                container.innerHTML = `<div class="spatial-item"><div class="item-title">Sem itens espaciais estruturados</div><div class="item-meta">A próxima leitura deve preencher objetos, posições e referências.</div></div>`;
                 return;
             }
+            list.slice(0, 8).forEach(item => {
+                const div = document.createElement("div");
+                div.className = "spatial-item" + (item.risco ? " item-risk" : "");
+                div.innerHTML = `<div class="item-title">${item.nome}</div><div class="item-meta">posição: ${item.posicao || 'indefinida'} • distância: ${item.distanciaAproximada || 'indefinida'}<br/>${item.relevancia || item.tipo || 'referência útil'}</div>`;
+                container.appendChild(div);
+            });
+        }
 
-            for (const item of items) {
+        function renderMemory(data) {
+            const mem = data.memoriaPersistenteAtual || {};
+            const recentes = data.ambientesPersistidos || [];
+            const hasMemory = mem && mem.ambiente && mem.leituras > 0;
+            setText("memoryStatus", hasMemory ? "memória ativa" : "aprendendo");
+            setText("memoryTitle", hasMemory ? `${mem.ambiente} • ${mem.leituras} leituras` : "Ambiente em aprendizado");
+            setText("memoryDescription", hasMemory ? (mem.descricaoConsolidada || mem.ultimoEvento || "Ambiente reconhecido pelo SQLite.") : "O sistema ainda está consolidando este ambiente.");
+
+            const refs = el("memoryRefs");
+            refs.innerHTML = "";
+            const list = hasMemory && Array.isArray(mem.referencias) ? mem.referencias : [];
+            if (!list.length) refs.innerHTML = `<span class="chip">sem referências consolidadas</span>`;
+            list.slice(0, 8).forEach(ref => {
                 const chip = document.createElement("span");
                 chip.className = "chip";
-                chip.textContent = item;
-                container.appendChild(chip);
-            }
-        }
+                chip.textContent = ref;
+                refs.appendChild(chip);
+            });
 
-        function formatarDataMemoria(valor) {
-            if (!valor) return "sem data";
-
-            const data = new Date(valor);
-            if (Number.isNaN(data.getTime())) return "sem data";
-
-            return data.toLocaleString("pt-BR", {
-                day: "2-digit",
-                month: "2-digit",
-                hour: "2-digit",
-                minute: "2-digit"
+            const recent = el("recentMemories");
+            recent.innerHTML = "";
+            recentes.slice(0, 3).forEach(r => {
+                if (!r || !r.ambiente) return;
+                const div = document.createElement("div");
+                div.className = "memory-card";
+                div.innerHTML = `<div class="memory-title">${r.ambiente} • ${r.leituras || 0} leituras</div><div class="sub">${r.ultimoEvento || r.perfil || 'memória recente'}</div>`;
+                recent.appendChild(div);
             });
         }
 
-        function renderizarHistoricoPersistente(ambientes = []) {
-            persistentHistoryList.innerHTML = "";
+        function renderResponse(data) {
+            const state = data.estadoCognitivo || {};
+            const speech = data.falaGuia || data.descricao || "Sem descrição disponível.";
+            setText("mainSpeech", speech);
+            setText("mapText", data.mapaVerbal || state.mapaVerbal || data.resumoAmbiente || data.descricao || "Sem mapa verbal disponível.");
+            renderSpatialItems(data.itensEspaciais || []);
 
-            if (!ambientes || ambientes.length === 0) {
-                persistentHistoryList.innerHTML = `
-                    <div class="memory-item">
-                        <div class="memory-item-title">Sem memória persistida ainda</div>
-                        <div class="memory-item-meta">Assim que o Visiora confirmar ambientes ou eventos úteis, este histórico começará a ser preenchido.</div>
-                    </div>
-                `;
-                return;
-            }
-
-            ambientes.slice(0, 4).forEach((item) => {
-                const ambiente = item.ambiente || item.Ambiente || "Ambiente";
-                const perfil = item.perfil || item.Perfil || "indefinido";
-                const leituras = item.leituras ?? item.Leituras ?? 0;
-                const evento = item.ultimoEvento || item.UltimoEvento || "reconhecimento estável";
-                const referencias = item.referencias || item.Referencias || [];
-                const quando = item.ultimoReconhecimentoUtc || item.UltimoReconhecimentoUtc || "";
-
-                const bloco = document.createElement("div");
-                bloco.className = "memory-item";
-                bloco.innerHTML = `
-                    <div class="memory-item-title">${primeiraLetraMaiuscula(ambiente)}</div>
-                    <div class="memory-item-meta">${primeiraLetraMaiuscula(perfil)} • ${leituras} leituras úteis • ${evento}</div>
-                    <div class="memory-item-meta">${referencias.length ? `Referências: ${referencias.join(", ")}` : "Sem referências persistidas ainda."}</div>
-                    <div class="memory-item-meta">Último reconhecimento: ${formatarDataMemoria(quando)}</div>
-                `;
-                persistentHistoryList.appendChild(bloco);
-            });
+            setText("envName", state.ambienteAtual || "Indefinido");
+            setText("envType", state.tipoAmbiente || "Sem perfil");
+            setText("confidence", `${data.confiancaAmbiente || Math.round(state.confiancaAmbiente || 0)}%`);
+            setText("attention", state.nivelAtencao || "atenção média");
+            setText("pathStatus", data.caminhoStatus || state.caminhoStatus || "desconhecido");
+            setText("mainAlert", data.alertaPrincipal && data.alertaPrincipal !== "-" ? data.alertaPrincipal : "sem alerta");
+            setText("eventStatus", data.eventoGuia || state.eventoAtual || "observando");
+            setText("motionStatus", state.tendenciaMovimento || data.estadoOperacional || "observando");
+            setText("processTime", `${data.tempoProcessamentoMs || 0} ms`);
+            renderMemory(data);
         }
 
-        function atualizarPainelAssistivo(data) {
-            const descricao = data.descricao || data.Descricao || "Sem leitura útil no momento.";
-            const resumo = data.resumoAmbiente || data.ResumoAmbiente || descricao;
-            const alerta = data.alertaPrincipal || data.AlertaPrincipal || ((data.alertas || []).length ? data.alertas[0] : "");
-            const pessoa = data.pessoaPorPerto || data.PessoaPorPerto || data.pessoa || data.Pessoa || "";
-            const pontosInteresse = data.pontosInteresse || data.PontosInteresse || [];
-            const memoriaAtual = data.memoriaPersistenteAtual || data.MemoriaPersistenteAtual || {};
-            const ambientesPersistidos = data.ambientesPersistidos || data.AmbientesPersistidos || [];
-            const referenciasPersistentes = memoriaAtual.referencias || memoriaAtual.Referencias || [];
-            const descricaoPersistente = memoriaAtual.descricaoConsolidada || memoriaAtual.DescricaoConsolidada || "";
-            const ambientePersistente = memoriaAtual.ambiente || memoriaAtual.Ambiente || "";
-            const leiturasPersistentes = memoriaAtual.leituras ?? memoriaAtual.Leituras ?? 0;
-            const ultimoReconhecimento = memoriaAtual.ultimoReconhecimentoUtc || memoriaAtual.UltimoReconhecimentoUtc || "";
-
-            guideDescriptionText.textContent = resumo || descricao;
-            guideAlertText.textContent = alerta && alerta !== "-" ? primeiraLetraMaiuscula(alerta) : "Nenhum risco imediato detectado.";
-
-            if (pontosInteresse.length > 0) {
-                guideFocusText.textContent = pontosInteresse.map(primeiraLetraMaiuscula).join(" • ");
-            } else if (pessoa && pessoa !== "-") {
-                guideFocusText.textContent = pessoa;
-            } else {
-                guideFocusText.textContent = "Sem nova mudança importante nesta leitura.";
-            }
-
-            if (descricaoPersistente) {
-                guideMemoryText.textContent = descricaoPersistente;
-            } else if (ambientesPersistidos.length > 0) {
-                const ultimo = ambientesPersistidos[0];
-                guideMemoryText.textContent = ultimo.descricaoConsolidada || ultimo.DescricaoConsolidada || "Memória recente disponível.";
-            } else {
-                guideMemoryText.textContent = "A memória persistente será consolidada após confirmações úteis do ambiente.";
-            }
-
-            if (ambientePersistente) {
-                persistentCurrentSummary.textContent = `${primeiraLetraMaiuscula(ambientePersistente)} • ${leiturasPersistentes} leituras úteis`;
-                persistentCurrentMeta.textContent = ultimoReconhecimento
-                    ? `Último reconhecimento em ${formatarDataMemoria(ultimoReconhecimento)}.`
-                    : "Esse ambiente já começou a ser consolidado na memória local.";
-            } else {
-                persistentCurrentSummary.textContent = "Nenhum ambiente persistido ainda.";
-                persistentCurrentMeta.textContent = "Leituras úteis e referências frequentes aparecerão aqui sem gravar cada frame do loop.";
-            }
-
-            preencherListaChips(persistentReferences, referenciasPersistentes);
-            renderizarHistoricoPersistente(ambientesPersistidos);
-        }
-
-        function mostrarResultado(data) {
-            ultimoResultado = data;
-
-            atualizarTexto(resDescricao, data.descricao || "-");
-            atualizarTexto(resPessoa, data.pessoa || "-");
-            atualizarTexto(resSugestao, data.sugestao || "-");
-            atualizarTexto(resDirecao, data.direcao || "-");
-            atualizarTexto(resImportancia, data.importancia || "-");
-
-            preencherListaChips(resObjetos, data.objetos || []);
-            preencherListaChips(resAlertas, data.alertas || []);
-            atualizarCamadaSemantica(data);
-            atualizarPainelAssistivo(data);
-        }
-
-        function atualizarMarcadorEscuta() {
-            micIndicator.classList.remove("active", "hearing");
-
-            if (!escutaVozAtiva) {
-                listeningState.textContent = "Pronto para gravar";
-                return;
-            }
-
-            if (microfoneOuvindo) {
-                micIndicator.classList.add("hearing");
-                listeningState.textContent = "Ouvindo comando agora";
-                return;
-            }
-
-            micIndicator.classList.add("active");
-            listeningState.textContent = "Escuta ativada";
-        }
-
-        function normalizarTexto(texto) {
-            return (texto || "")
-                .toLowerCase()
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")
-                .replace(/[^\w\s]/g, " ")
-                .replace(/\s+/g, " ")
-                .trim();
-        }
-
-        function contemAlgum(texto, termos) {
-            return termos.some(t => texto.includes(t));
-        }
-
-        function limparRetornoEscuta() {
-            if (retornoEscutaTimeout) {
-                clearTimeout(retornoEscutaTimeout);
-                retornoEscutaTimeout = null;
-            }
-        }
-
-        function pausarReconhecimentoDuranteFala(tempoMs = 700) {
-            limparRetornoEscuta();
-            microfoneOuvindo = false;
-            atualizarMarcadorEscuta();
-
-            if (escutaVozAtiva) {
-                atualizarTexto(statusReconhecimento, "pausado durante fala");
-                pararReconhecimentoInterno();
-
-                retornoEscutaTimeout = setTimeout(() => {
-                    retornoEscutaTimeout = null;
-
-                    if (!escutaVozAtiva || IA_FALANDO) {
-                        return;
-                    }
-
-                    atualizarTexto(statusReconhecimento, "ouvindo");
-                    atualizarStatus("🎙️ Loop inteligente em percepção ativa");
-                    iniciarReconhecimentoInterno();
-                }, tempoMs);
-            }
-        }
-
-        function pararSinteseLocal() {
-            try {
-                if ("speechSynthesis" in window) {
-                    window.speechSynthesis.cancel();
-                }
-            } catch (error) {
-                console.error("Erro ao parar síntese local:", error);
-            }
-        }
-
-        function selecionarVozPortugues() {
-            try {
-                if (!("speechSynthesis" in window)) return null;
-
-                const vozes = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
-                if (!vozes || vozes.length === 0) return null;
-
-                return vozes.find(v => normalizarTexto(v.lang || "").startsWith("pt br"))
-                    || vozes.find(v => normalizarTexto(v.lang || "").startsWith("pt"))
-                    || vozes.find(v => normalizarTexto(v.name || "").includes("portugu"))
-                    || null;
-            } catch {
-                return null;
-            }
-        }
-
-        function falarLocal(texto, prioridade = false) {
-            if (!texto || !("speechSynthesis" in window)) {
-                return;
-            }
-
-            try {
-                IA_FALANDO = true;
-                pausarReconhecimentoDuranteFala(1200);
-
-                if (prioridade) {
-                    window.speechSynthesis.cancel();
-                }
-
-                const utterance = new SpeechSynthesisUtterance(texto);
-                const textoNormalizado = normalizarTexto(texto);
-                const falaUrgente = textoNormalizado.includes("cuidado") || textoNormalizado.includes("pare") || textoNormalizado.includes("atencao") || textoNormalizado.includes("atenção");
-                utterance.lang = "pt-BR";
-                utterance.rate = falaUrgente ? 1.05 : (texto.length > 150 ? 0.96 : 0.98);
-                utterance.pitch = 1.0;
-                utterance.volume = 1.0;
-
-                const vozPtBr = selecionarVozPortugues();
-                if (vozPtBr) {
-                    utterance.voice = vozPtBr;
-                }
-
-                utterance.onstart = () => {
-                    IA_FALANDO = true;
-                    atualizarTexto(statusAudio, "falando local");
-                    atualizarStatus("🔊 Visiora falando...");
-                };
-
-                utterance.onend = () => {
-                    IA_FALANDO = false;
-                    atualizarTexto(statusAudio, "parado");
-                    pausarReconhecimentoDuranteFala(600);
-                };
-
-                utterance.onerror = () => {
-                    IA_FALANDO = false;
-                    atualizarTexto(statusAudio, "erro");
-                    pausarReconhecimentoDuranteFala(600);
-                };
-
-                window.speechSynthesis.speak(utterance);
-            } catch (error) {
-                IA_FALANDO = false;
-                console.error("Erro ao falar localmente:", error);
-            }
-        }
-
-        function obterTextoFalaGuia(data) {
-            if (!data) return "";
-
-            return (data.falaGuia || data.FalaGuia || "").trim();
-        }
-
-        function deveFalarGuiaLocal(texto, importancia) {
-            if (!texto) return false;
-
-            const agora = Date.now();
-            const normalizado = normalizarTexto(texto);
-            const ultima = normalizarTexto(ultimaFalaGuiaLocal);
-            const importanciaNormalizada = normalizarTexto(importancia || "");
-
-            if (normalizado === ultima && importanciaNormalizada !== "alta") {
-                return false;
-            }
-
-            if (ultimaFalaGuiaLocalEm && (agora - ultimaFalaGuiaLocalEm) < COOLDOWN_FALA_GUIA_LOCAL_MS && importanciaNormalizada !== "alta") {
-                return false;
-            }
-
-            return true;
-        }
-
-        function falarGuiaLocal(texto, importancia = "") {
-            if (!deveFalarGuiaLocal(texto, importancia)) {
-                return;
-            }
-
-            ultimaFalaGuiaLocal = texto;
-            ultimaFalaGuiaLocalEm = Date.now();
-
-            if (importancia === "alta" || importancia === "media") {
-                ultimaFalaImportanteEm = Date.now();
-            }
-
-            falarLocal(texto, true);
-            setStatusDecision("fala local do modo guia");
-        }
-
-        function falar(texto) {
-            falarLocal(texto, true);
-        }
-
-        function limparTimeoutComando() {
-            if (timeoutComando) {
-                clearTimeout(timeoutComando);
-                timeoutComando = null;
-            }
-        }
-
-        function iniciarTimeoutComando() {
-            limparTimeoutComando();
-
-            timeoutComando = setTimeout(() => {
-                aguardandoComando = false;
-                timeoutComando = null;
-                atualizarStatus("🎙️ Loop inteligente em percepção ativa");
-                falar("N\u00e3o entendi, tente novamente");
-            }, 5000);
-        }
-
-        async function iniciarCamera() {
-            try {
-                if (streamAtual) return;
-
-                const stream = await navigator.mediaDevices.getUserMedia({
-                    video: {
-                        facingMode: "environment",
-                        width: { ideal: 1280 },
-                        height: { ideal: 720 }
-                    },
-                    audio: false
-                });
-
-                streamAtual = stream;
-                video.srcObject = stream;
-
-                atualizarTexto(statusCamera, "ligada");
-                atualizarPresencaIA("Observando ambiente", "A câmera está ativa e pronta para captar o contexto espacial.");
-                setStatusDecision("câmera iniciada");
-            } catch (error) {
-                console.error(error);
-                atualizarTexto(statusCamera, "erro ao iniciar");
-                setStatusDecision("falha ao iniciar câmera");
-                alert("Não foi possível acessar a câmera.");
-            }
-        }
-
-        function pararCamera() {
-            if (streamAtual) {
-                streamAtual.getTracks().forEach(track => track.stop());
-                streamAtual = null;
-            }
-
-            video.srcObject = null;
-            atualizarTexto(statusCamera, "desligada");
-            atualizarPresencaIA("Pronta para observar", "Inicie a câmera para ativar a percepção contínua do ambiente.");
-            setStatusDecision("câmera parada");
-        }
-
-        function pausarAudio() {
-            if (audioAtual && !audioAtual.paused) {
-                audioAtual.pause();
-                ultimoAudioTocando = false;
-                atualizarTexto(statusAudio, "pausado");
-                atualizarDiagnostico();
-        atualizarPresencaIA("Pronta para observar", "Inicie a câmera para ativar a percepção contínua do ambiente.");
-            }
-        }
-
-        function retomarAudio() {
-            if (audioAtual && audioAtual.paused) {
-                audioAtual.play().catch(console.error);
-            }
-        }
-
-        function pararAudio() {
-            if (audioAtual) {
-                audioAtual.pause();
-                audioAtual.currentTime = 0;
-                audioAtual = null;
-            }
-
-            pararSinteseLocal();
-            IA_FALANDO = false;
-            ultimoAudioTocando = false;
-            atualizarTexto(statusAudio, "parado");
-            atualizarDiagnostico();
-            pausarReconhecimentoDuranteFala(500);
-        }
-
-        function configurarEventosAudio(audio) {
-            audio.addEventListener("play", () => {
-                if (audioAtual !== audio) return;
-
-                IA_FALANDO = true;
-                ultimoAudioTocando = true;
-                atualizarTexto(statusAudio, "tocando");
-                atualizarStatus("🔊 Visiora falando...");
-                pausarReconhecimentoDuranteFala(5000);
-                atualizarDiagnostico();
-            });
-
-            audio.addEventListener("pause", () => {
-                if (audioAtual !== audio) return;
-
-                if (!audio.ended) {
-                    IA_FALANDO = false;
-                    ultimoAudioTocando = false;
-                    atualizarTexto(statusAudio, "pausado");
-                    atualizarDiagnostico();
-                    pausarReconhecimentoDuranteFala(700);
-                }
-            });
-
-            audio.addEventListener("ended", () => {
-                if (audioAtual !== audio) return;
-
-                IA_FALANDO = false;
-                ultimoAudioTocando = false;
-                atualizarTexto(statusAudio, "parado");
-                atualizarDiagnostico();
-                pausarReconhecimentoDuranteFala(600);
-            });
-
-            audio.addEventListener("error", () => {
-                if (audioAtual !== audio) return;
-
-                IA_FALANDO = false;
-                ultimoAudioTocando = false;
-                atualizarTexto(statusAudio, "erro");
-                atualizarDiagnostico();
-                pausarReconhecimentoDuranteFala(700);
-            });
-        }
-
-        async function tocarAudioBase64(audioBase64, importancia) {
-    if (!audioBase64) return;
-
-    try {
-        if (IA_FALANDO) return;
-
-        IA_FALANDO = true;
-
-        if (audioAtual && !audioAtual.paused) {
-            audioAtual.pause();
-            audioAtual.currentTime = 0;
-        }
-
-        const audio = new Audio(`data:audio/mp3;base64,${audioBase64}`);
-        audioAtual = audio;
-        configurarEventosAudio(audio);
-
-        if (importancia === "alta" || importancia === "media") {
-            ultimaFalaImportanteEm = Date.now();
-        }
-
-        atualizarEstadoBotaoVoz();
-        await audio.play();
-
-        audio.onended = () => {
-            IA_FALANDO = false;
-            ultimoAudioTocando = false;
-            atualizarTexto(statusAudio, "parado");
-            atualizarDiagnostico();
-            atualizarEstadoBotaoVoz();
-        };
-
-        audio.onerror = () => {
-            IA_FALANDO = false;
-            ultimoAudioTocando = false;
-            atualizarTexto(statusAudio, "erro");
-            atualizarDiagnostico();
-            atualizarEstadoBotaoVoz();
-        };
-
-        atualizarDiagnostico();
-    } catch (error) {
-        console.error("Erro no áudio:", error);
-        IA_FALANDO = false;
-        atualizarEstadoBotaoVoz();
-    }
-}
-
-        function capturarFrameBase64(modoCaptura = "consulta") {
-            if (!video.videoWidth || !video.videoHeight) {
-                return "";
-            }
-
-            const larguraSelecionada = parseInt(larguraCaptura.value, 10);
-            const largura = modoCaptura === "guia" ? Math.min(larguraSelecionada, 640) : larguraSelecionada;
-            const proporcao = video.videoHeight / video.videoWidth;
-            const altura = Math.round(largura * proporcao);
-
-            canvas.width = largura;
-            canvas.height = altura;
-
-            ctx.drawImage(video, 0, 0, largura, altura);
-
-            const qualidade = parseFloat(qualidadeImagem.value);
-            return canvas.toDataURL("image/jpeg", qualidade).split(",")[1];
-        }
-
-        function capturarMiniFrame() {
-            if (!video.videoWidth || !video.videoHeight) {
-                return null;
-            }
-
-            const miniCanvas = document.createElement("canvas");
-            const miniCtx = miniCanvas.getContext("2d", { willReadFrequently: true });
-
-            miniCanvas.width = 32;
-            miniCanvas.height = 24;
-
-            miniCtx.drawImage(video, 0, 0, miniCanvas.width, miniCanvas.height);
-
-            const imageData = miniCtx.getImageData(0, 0, miniCanvas.width, miniCanvas.height).data;
-            const cinza = [];
-
-            for (let i = 0; i < imageData.length; i += 4) {
-                const r = imageData[i];
-                const g = imageData[i + 1];
-                const b = imageData[i + 2];
-                cinza.push((r + g + b) / 3);
-            }
-
-            return cinza;
-        }
-
-        function calcularMudancaVisual(frameA, frameB) {
-            if (!frameA || !frameB || frameA.length !== frameB.length) {
-                return 100;
-            }
-
-            let soma = 0;
-            for (let i = 0; i < frameA.length; i++) {
-                soma += Math.abs(frameA[i] - frameB[i]);
-            }
-
-            return soma / frameA.length;
-        }
-
-        function definirIntervaloDinamico(mudancaVisualAlta, mudancaVisualModerada = false) {
-            if (ultimoAudioTocando) {
-                intervaloAtual = 2600;
-            } else if (mudancaVisualAlta) {
-                intervaloAtual = 850;
-            } else if (mudancaVisualModerada) {
-                intervaloAtual = 1200;
-            } else if (ultimoResultado?.importancia === "alta") {
-                intervaloAtual = 1100;
-            } else if (ultimoResultado?.importancia === "media") {
-                intervaloAtual = 1600;
-            } else {
-                intervaloAtual = 2600;
-            }
-
-            atualizarDiagnostico();
-        }
-
-        function precisaEsperarCooldown(mudancaVisualAlta) {
-            const agora = Date.now();
-            const tempoDesdeUltimaFala = agora - ultimaFalaImportanteEm;
-
-            if (!ultimaFalaImportanteEm) return false;
-            if (mudancaVisualAlta) return false;
-
-            return tempoDesdeUltimaFala < 2500;
-        }
-
-        function inferirNivelMovimento(diferenca) {
-            if (diferenca >= DIFERENCA_VISUAL_ALTA) return "forte";
-            if (diferenca >= DIFERENCA_VISUAL_MODERADA) return "moderado";
-            if (diferenca >= 2.0) return "leve";
-            return "parado";
-        }
-
-        function montarTelemetriaAnalise(modo, opcoes = {}) {
-            const agora = Date.now();
-            const mudancaVisual = typeof opcoes.mudancaVisual === "number"
-                ? opcoes.mudancaVisual
-                : (parseFloat(diagMudanca.textContent || "0") || 0);
-
-            const nivelMovimento = opcoes.nivelMovimento || inferirNivelMovimento(mudancaVisual);
-            const cenaEstavel = typeof opcoes.cenaEstavel === "boolean"
-                ? opcoes.cenaEstavel
-                : mudancaVisual < DIFERENCA_VISUAL_MODERADA;
-
-            return {
-                mudancaVisual,
-                preferirAudioLocal: modo === "guia",
-                primeiraLeitura: !!opcoes.primeiraLeitura,
-                forcarDescricaoInicial: !!opcoes.forcarDescricaoInicial,
-                forcarAnalise: !!opcoes.forcarAnalise,
-                loopAtivo: modoAutomaticoAtivo,
-                cenaEstavel,
-                audioTocando: IA_FALANDO || ultimoAudioTocando,
-                nivelMovimento,
-                tempoDesdeUltimaAnaliseMs: ultimoEnvioEm ? Math.max(0, agora - ultimoEnvioEm) : 0,
-                tempoDesdeUltimaFalaMs: ultimaFalaGuiaLocalEm ? Math.max(0, agora - ultimaFalaGuiaLocalEm) : 0
-            };
-        }
-
-        function montarPerguntaPercepcaoAtiva(tipoEvento) {
-            if (tipoEvento === "inicio") {
-                return "Primeira leitura do Visiora. Descreva o ambiente de forma útil para uma pessoa com deficiência visual se situar. Não presuma que ela quer andar. Informe tipo provável de ambiente, organização geral, pontos de interesse como porta ou passagem, pessoas, obstáculos e objetos úteis.";
-            }
-
-            if (tipoEvento === "movimento-forte") {
-                return "Percepção ativa: a câmera mudou bastante. Verifique se é outro ambiente, se apareceu pessoa, obstáculo, porta, passagem ou ponto útil. Não dê comando de direção sem necessidade; informe possibilidades e riscos.";
-            }
-
-            if (tipoEvento === "movimento-moderado") {
-                return "Percepção ativa: a câmera mudou de direção. Informe apenas o que apareceu, mudou ou ficou útil para a pessoa compreender o espaço: porta, passagem, pessoa, obstáculo, cadeira, mesa ou referência importante.";
-            }
-
-            return "Verificação silenciosa de prontidão. Se nada útil mudou, retorne silêncio. Fale apenas se houver risco, pessoa, mudança de ambiente, porta, passagem ou ponto de interesse novo.";
-        }
-
-        async function enviarParaAnalise(modo, pergunta = "", opcoes = {}) {
-            if (analisando) {
-                setStatusDecision("requisição ignorada: análise já em andamento");
-                return null;
-            }
-
-            const imagemBase64 = capturarFrameBase64(modo === "guia" ? "guia" : "consulta");
-
-            if (!imagemBase64) {
-                setStatusDecision("sem frame disponível");
-                return null;
-            }
-
+        async function analyze(options = {}) {
+            if (!streamAtual || analisando) return null;
             analisando = true;
-            ultimoEnvioEm = Date.now();
-            atualizarPresencaIA("Interpretando cena", modo === "guia" ? "Percepção ativa analisando ambiente, pontos úteis, riscos e mudanças." : (modo === "automatico" ? "A IA está avaliando continuidade, risco e contexto do ambiente." : "A IA está respondendo a uma consulta direcionada do usuário."));
-            atualizarDiagnostico();
+            setText("decisionStatus", "analisando");
+            el("systemDot").classList.add("live");
+            const now = Date.now();
+
+            const payload = {
+                imagemBase64: captureBase64(),
+                modo: "guia",
+                pergunta: "",
+                mudancaVisual: options.diff || 0,
+                forcarAnalise: !!options.force,
+                preferirAudioLocal: true,
+                primeiraLeitura: primeiraLeitura,
+                forcarDescricaoInicial: primeiraLeitura || !!options.describe,
+                loopAtivo: loopAtivo,
+                cenaEstavel: !!options.stable,
+                audioTocando: false,
+                nivelMovimento: options.motion || "indefinido",
+                tempoDesdeUltimaAnaliseMs: ultimoEnvio ? (now - ultimoEnvio) : 0,
+                tempoDesdeUltimaFalaMs: ultimaFala ? (now - ultimaFala) : 0
+            };
 
             try {
                 const response = await fetch(ENDPOINT, {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        imagemBase64,
-                        modo,
-                        pergunta,
-                        ...montarTelemetriaAnalise(modo, opcoes)
-                    })
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
                 });
-
-                if (!response.ok) {
-                    const textoErro = await response.text();
-                    throw new Error(textoErro || "Erro ao chamar API.");
-                }
-
+                if (!response.ok) throw new Error(await response.text());
                 const data = await response.json();
-
-                mostrarResultado(data);
-
-                const textoGuia = obterTextoFalaGuia(data);
-
-                if (data.audioBase64) {
-                    await tocarAudioBase64(data.audioBase64, data.importancia || "");
-                } else if (modo === "guia" && textoGuia) {
-                    falarGuiaLocal(textoGuia, data.importancia || data.Importancia || "");
-                }
-
-                const tempoResposta = data.tempoProcessamentoMs || data.TempoProcessamentoMs || 0;
-                atualizarPresencaIA("Leitura atualizada", tempoResposta ? `Guia atualizado em ${tempoResposta} ms.` : "A percepção foi renovada com base no frame mais recente.");
-                setStatusDecision(`análise concluída (${modo})`);
+                ultimoEnvio = Date.now();
+                primeiraLeitura = false;
+                renderResponse(data);
+                setText("decisionStatus", data.deveFalar ? "resposta útil" : "observando");
+                if (data.usarFalaLocal && data.falaGuia && data.deveFalar) speakLocal(data.falaGuia, true);
                 return data;
-            } catch (error) {
-                console.error(error);
-                atualizarPresencaIA("Falha de leitura", "Houve um problema temporário ao interpretar o ambiente.");
-                setStatusDecision("erro ao analisar");
-                alert("Erro ao analisar ambiente.");
+            } catch (err) {
+                console.error(err);
+                setText("decisionStatus", "erro");
                 return null;
             } finally {
                 analisando = false;
-                atualizarDiagnostico();
             }
         }
 
-        async function executarLoopAutomatico() {
-            if (!modoAutomaticoAtivo) return;
+        function schedule(delay) {
+            clearTimeout(loopTimer);
+            loopTimer = setTimeout(loopTick, delay);
+        }
 
-            if (!streamAtual) {
-                setStatusDecision("loop aguardando câmera");
-                agendarProximoLoop(1200);
+        async function loopTick() {
+            if (!loopAtivo || !streamAtual) return;
+            const current = miniFrame();
+            const diff = diffFrame(miniFrameAnterior, current);
+            miniFrameAnterior = current;
+            setText("visualDiff", diff.toFixed(2));
+
+            const base = Number(el("baseInterval").value || 1700);
+            intervaloAtual = diff >= 12 ? Math.max(1050, base - 450) : diff >= 6 ? Math.max(1250, base - 250) : base;
+
+            const timeSince = ultimoEnvio ? Date.now() - ultimoEnvio : 999999;
+            const stable = diff < 5.2;
+            const shouldAnalyze = primeiraLeitura || diff >= 5.2 || timeSince >= Math.max(5000, intervaloAtual * 2.6);
+
+            if (!shouldAnalyze) {
+                setText("decisionStatus", "cena estável");
+                schedule(650);
                 return;
             }
 
-            const miniFrameAtual = capturarMiniFrame();
-            const diferenca = calcularMudancaVisual(miniFrameAnterior, miniFrameAtual);
-            miniFrameAnterior = miniFrameAtual;
-
-            const mudancaVisualAlta = diferenca >= DIFERENCA_VISUAL_ALTA;
-            const mudancaVisualModerada = diferenca >= DIFERENCA_VISUAL_MODERADA;
-            ultimaDiferencaVisualCalculada = diferenca;
-            nivelMovimentoAtual = inferirNivelMovimento(diferenca);
-
-            if (mudancaVisualAlta) {
-                ultimaMudancaVisualAltaEm = Date.now();
-                ciclosEstaveisSemAnalise = 0;
-            } else if (!mudancaVisualModerada) {
-                ciclosEstaveisSemAnalise++;
-            }
-
-            atualizarTexto(diagMudanca, diferenca.toFixed(2));
-            definirIntervaloDinamico(mudancaVisualAlta, mudancaVisualModerada);
-
-            const agora = Date.now();
-            const tempoDesdeUltimoEnvio = agora - ultimoEnvioEm;
-
-            if (analisando) {
-                setStatusDecision("esperando análise terminar");
-                agendarProximoLoop(700);
-                return;
-            }
-
-            if (ultimoAudioTocando && !mudancaVisualAlta) {
-                setStatusDecision("segurando envio: áudio tocando");
-                agendarProximoLoop(intervaloAtual);
-                return;
-            }
-
-            if (precisaEsperarCooldown(mudancaVisualAlta)) {
-                setStatusDecision("cooldown após fala importante");
-                agendarProximoLoop(900);
-                return;
-            }
-
-            if (!mudancaVisualModerada) {
-                const precisaAtualizacaoDeSeguranca = tempoDesdeUltimoEnvio >= INTERVALO_MAXIMO_ANALISE_ESTAVEL_MS;
-
-                if (!precisaAtualizacaoDeSeguranca) {
-                    setStatusDecision("cena estável: IA em espera inteligente");
-                    atualizarPresencaIA("Observando localmente", "Sem mudança suficiente para chamar análise pesada.");
-                    agendarProximoLoop(650);
-                    return;
-                }
-
-                ultimaAnaliseEstavelEm = agora;
-            }
-
-            let perguntaGuia = "";
-            let tipoEvento = "verificacao";
-
-            if (mudancaVisualAlta) {
-                tipoEvento = "movimento-forte";
-                perguntaGuia = montarPerguntaPercepcaoAtiva(tipoEvento);
-                setStatusDecision("movimento forte: percepção ativa avaliando mudança");
-            } else if (mudancaVisualModerada) {
-                tipoEvento = "movimento-moderado";
-                perguntaGuia = montarPerguntaPercepcaoAtiva(tipoEvento);
-                setStatusDecision("movimento moderado: procurando ponto útil");
-            } else {
-                tipoEvento = "verificacao";
-                perguntaGuia = montarPerguntaPercepcaoAtiva(tipoEvento);
-                setStatusDecision("checagem de prontidão em silêncio inteligente");
-            }
-
-            await enviarParaAnalise(modoGuiaRapidoAtivo ? "guia" : "automatico", perguntaGuia, {
-                mudancaVisual: diferenca,
-                nivelMovimento: nivelMovimentoAtual,
-                cenaEstavel: !mudancaVisualModerada,
-                forcarAnalise: mudancaVisualAlta
+            await analyze({
+                diff,
+                stable,
+                force: diff >= 12,
+                motion: diff >= 12 ? "alto" : diff >= 6 ? "medio" : "baixo"
             });
-            agendarProximoLoop(intervaloAtual);
+            schedule(intervaloAtual);
         }
 
-        function agendarProximoLoop(delay) {
-            clearTimeout(loopTimeout);
-            loopTimeout = setTimeout(executarLoopAutomatico, delay);
-        }
-
-        function iniciarModoAutomatico() {
-            if (!streamAtual) {
-                alert("Inicie a câmera antes.");
-                return;
-            }
-
-            if (modoAutomaticoAtivo) return;
-
-            modoAutomaticoAtivo = true;
-            ciclosEstaveisSemAnalise = 0;
-            ultimaAnaliseEstavelEm = 0;
-            miniFrameAnterior = capturarMiniFrame();
-            atualizarTexto(statusAuto, "ligado");
-            atualizarPresencaIA("Primeira leitura do ambiente", "A Visiora vai situar o espaço, apontar pontos de interesse e permanecer pronta para avisar mudanças relevantes.");
-            cameraSemanticMode.textContent = "Percepção ativa";
-            setStatusDecision("modo automático iniciado: primeira leitura do ambiente");
-
-            primeiraLeituraPendente = false;
-            enviarParaAnalise("guia", montarPerguntaPercepcaoAtiva("inicio"), {
-                primeiraLeitura: true,
-                forcarDescricaoInicial: true,
-                forcarAnalise: true,
-                mudancaVisual: 100,
-                nivelMovimento: "inicio",
-                cenaEstavel: false
-            })
-                .finally(() => {
-                    if (modoAutomaticoAtivo) {
-                        agendarProximoLoop(900);
-                    }
-                });
-        }
-
-        function pararModoAutomatico() {
-            modoAutomaticoAtivo = false;
-            clearTimeout(loopTimeout);
-            atualizarTexto(statusAuto, "desligado");
-            atualizarPresencaIA("Consulta assistida", "O loop automático foi pausado, mas a leitura manual continua disponível.");
-            cameraSemanticMode.textContent = "Consulta assistida";
-            setStatusDecision("modo automático parado");
-        }
-
-        async function enviarConsultaManual() {
-            if (!streamAtual) {
-                alert("Inicie a câmera antes.");
-                return;
-            }
-
-            const pergunta = modoConsulta.value.trim();
-
-            if (!pergunta) {
-                alert("Digite uma pergunta.");
-                return;
-            }
-
-            await enviarParaAnalise("consulta", pergunta);
-        }
-
-        function obterSpeechRecognition() {
-            return window.SpeechRecognition || window.webkitSpeechRecognition || null;
-        }
-
-        function atualizarEstadoBotaoVoz() {
-    const ocupado = IA_FALANDO || transcrevendoComando;
-    btnVoz.textContent = gravandoComando
-        ? "Solte para enviar o comando"
-        : (transcrevendoComando ? "Processando comando..." : "Segure para falar");
-
-    btnVoz.disabled = ocupado && !gravandoComando;
-    btnVoz.classList.toggle("off", ocupado && !gravandoComando);
-
-    atualizarTexto(
-        statusVoz,
-        gravandoComando
-            ? "gravando"
-            : (transcrevendoComando ? "processando" : "pronta")
-    );
-
-    atualizarMarcadorEscuta();
-}
-
-        function iniciarReconhecimentoInterno() {
-            return;
-        }
-
-        function pararReconhecimentoInterno() {
-            return;
-        }
-
-        function configurarReconhecimento() {
-    suporteReconhecimento = true;
-    escutaVozAtiva = true;
-    atualizarTexto(statusReconhecimento, "guia automático");
-    atualizarEstadoBotaoVoz();
-}
-
-function floatTo16BitPCM(output, offset, input) {
-    for (let i = 0; i < input.length; i++, offset += 2) {
-        let s = Math.max(-1, Math.min(1, input[i]));
-        output.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
-    }
-}
-
-function escreverString(view, offset, string) {
-    for (let i = 0; i < string.length; i++) {
-        view.setUint8(offset + i, string.charCodeAt(i));
-    }
-}
-
-function mesclarBuffers(buffers) {
-    let tamanhoTotal = 0;
-
-    for (const buffer of buffers) {
-        tamanhoTotal += buffer.length;
-    }
-
-    const resultado = new Float32Array(tamanhoTotal);
-    let offset = 0;
-
-    for (const buffer of buffers) {
-        resultado.set(buffer, offset);
-        offset += buffer.length;
-    }
-
-    return resultado;
-}
-
-function reduzirParaMono(samples) {
-    return samples;
-}
-
-function reamostrarBuffer(samples, inputSampleRate, outputSampleRate) {
-    if (inputSampleRate === outputSampleRate) {
-        return samples;
-    }
-
-    const taxa = inputSampleRate / outputSampleRate;
-    const novoTamanho = Math.round(samples.length / taxa);
-    const resultado = new Float32Array(novoTamanho);
-
-    let offsetResultado = 0;
-    let offsetBuffer = 0;
-
-    while (offsetResultado < resultado.length) {
-        const proximoOffsetBuffer = Math.round((offsetResultado + 1) * taxa);
-        let acumulado = 0;
-        let contagem = 0;
-
-        for (let i = offsetBuffer; i < proximoOffsetBuffer && i < samples.length; i++) {
-            acumulado += samples[i];
-            contagem++;
-        }
-
-        resultado[offsetResultado] = contagem > 0 ? (acumulado / contagem) : 0;
-        offsetResultado++;
-        offsetBuffer = proximoOffsetBuffer;
-    }
-
-    return resultado;
-}
-
-function criarWavBlob(samples, sampleRate) {
-    const buffer = new ArrayBuffer(44 + samples.length * 2);
-    const view = new DataView(buffer);
-
-    escreverString(view, 0, "RIFF");
-    view.setUint32(4, 36 + samples.length * 2, true);
-    escreverString(view, 8, "WAVE");
-    escreverString(view, 12, "fmt ");
-    view.setUint32(16, 16, true);
-    view.setUint16(20, 1, true);
-    view.setUint16(22, 1, true);
-    view.setUint32(24, sampleRate, true);
-    view.setUint32(28, sampleRate * 2, true);
-    view.setUint16(32, 2, true);
-    view.setUint16(34, 16, true);
-    escreverString(view, 36, "data");
-    view.setUint32(40, samples.length * 2, true);
-
-    floatTo16BitPCM(view, 44, samples);
-
-    return new Blob([view], { type: "audio/wav" });
-}
-
-
-function limparRecursosGravacao() {
-    try {
-        if (processorVoz) {
-            processorVoz.disconnect();
-            processorVoz.onaudioprocess = null;
-            processorVoz = null;
-        }
-    } catch {}
-
-    try {
-        if (mediaSourceVoz) {
-            mediaSourceVoz.disconnect();
-            mediaSourceVoz = null;
-        }
-    } catch {}
-
-    try {
-        if (mediaStreamVoz) {
-            mediaStreamVoz.getTracks().forEach(track => track.stop());
-            mediaStreamVoz = null;
-        }
-    } catch {}
-
-    try {
-        if (audioContextVoz) {
-            audioContextVoz.close();
-            audioContextVoz = null;
-        }
-    } catch {}
-}
-
-function resetarEstadoVoz(statusTexto = "🎙️ Loop inteligente em percepção ativa") {
-    gravandoComando = false;
-    microfoneOuvindo = false;
-    pointerVozAtivo = false;
-    transcrevendoComando = false;
-
-    if (timeoutSegurancaVoz) {
-        clearTimeout(timeoutSegurancaVoz);
-        timeoutSegurancaVoz = null;
-    }
-
-    limparRecursosGravacao();
-    atualizarStatus(statusTexto);
-    atualizarTexto(statusReconhecimento, "pronta");
-    atualizarMarcadorEscuta();
-    atualizarEstadoBotaoVoz();
-}
-
-function iniciarTimeoutSegurancaVoz() {
-    if (timeoutSegurancaVoz) {
-        clearTimeout(timeoutSegurancaVoz);
-    }
-
-    timeoutSegurancaVoz = setTimeout(() => {
-        console.warn("Reset de segurança da voz acionado.");
-        resetarEstadoVoz("🎙️ Loop inteligente em percepção ativa");
-    }, 15000);
-}
-
-async function iniciarGravacaoComando() {
-    if (IA_FALANDO || gravandoComando || transcrevendoComando) {
-        return;
-    }
-
-    try {
-        mediaStreamVoz = await navigator.mediaDevices.getUserMedia({
-            audio: {
-                echoCancellation: true,
-                noiseSuppression: true,
-                autoGainControl: true
-            }
-        });
-
-        audioContextVoz = new (window.AudioContext || window.webkitAudioContext)();
-        sampleRateVoz = audioContextVoz.sampleRate;
-
-        mediaSourceVoz = audioContextVoz.createMediaStreamSource(mediaStreamVoz);
-        processorVoz = audioContextVoz.createScriptProcessor(4096, 1, 1);
-
-        buffersAudioVoz = [];
-        gravandoComando = true;
-        microfoneOuvindo = true;
-        ultimoInicioGravacaoEm = Date.now();
-
-        processorVoz.onaudioprocess = (event) => {
-            if (!gravandoComando) return;
-            const canal = event.inputBuffer.getChannelData(0);
-            buffersAudioVoz.push(new Float32Array(canal));
-        };
-
-        mediaSourceVoz.connect(processorVoz);
-        processorVoz.connect(audioContextVoz.destination);
-
-        iniciarTimeoutSegurancaVoz();
-        atualizarStatus("🔴 Gravando comando...");
-        atualizarTexto(statusReconhecimento, "gravando comando");
-        atualizarMarcadorEscuta();
-        atualizarEstadoBotaoVoz();
-
-        if (audioAtual && !audioAtual.paused) {
-            pausarAudio();
-        }
-    } catch (error) {
-        console.error("Erro ao iniciar gravação:", error);
-        resetarEstadoVoz("🎤 Não foi possível acessar o microfone.");
-        atualizarTexto(statusReconhecimento, "erro de microfone");
-    }
-}
-
-async function pararGravacaoComando() {
-    if (!gravandoComando || transcrevendoComando) {
-        return;
-    }
-
-    gravandoComando = false;
-    microfoneOuvindo = false;
-    transcrevendoComando = true;
-
-    try {
-        const duracaoMs = Date.now() - ultimoInicioGravacaoEm;
-
-        if (timeoutSegurancaVoz) {
-            clearTimeout(timeoutSegurancaVoz);
-            timeoutSegurancaVoz = null;
-        }
-
-        try {
-            if (processorVoz) {
-                processorVoz.disconnect();
-                processorVoz.onaudioprocess = null;
-                processorVoz = null;
-            }
-        } catch {}
-
-        try {
-            if (mediaSourceVoz) {
-                mediaSourceVoz.disconnect();
-                mediaSourceVoz = null;
-            }
-        } catch {}
-
-        try {
-            if (mediaStreamVoz) {
-                mediaStreamVoz.getTracks().forEach(track => track.stop());
-                mediaStreamVoz = null;
-            }
-        } catch {}
-
-        if (audioContextVoz) {
-            await audioContextVoz.close();
-            audioContextVoz = null;
-        }
-
-        atualizarStatus("🧠 Transcrevendo comando...");
-        atualizarTexto(statusReconhecimento, "transcrevendo");
-        atualizarMarcadorEscuta();
-        atualizarEstadoBotaoVoz();
-
-        if (duracaoMs < 350 || buffersAudioVoz.length === 0) {
-            heardText.textContent = "Áudio muito curto.";
-            falarLocal("Fale um pouco mais devagar e segure o botão por mais tempo.", true);
-            resetarEstadoVoz("🎙️ Loop inteligente em percepção ativa");
-            return;
-        }
-
-        const mono = reduzirParaMono(mesclarBuffers(buffersAudioVoz));
-        const reamostrado = reamostrarBuffer(mono, sampleRateVoz, 16000);
-        const wavBlob = criarWavBlob(reamostrado, 16000);
-
-        await enviarAudioParaTranscricao(wavBlob);
-    } catch (error) {
-        console.error("Erro ao finalizar gravação:", error);
-        heardText.textContent = "Erro ao processar áudio.";
-        resetarEstadoVoz("🎤 Erro ao processar áudio.");
-        atualizarTexto(statusReconhecimento, "erro ao processar");
-    } finally {
-        buffersAudioVoz = [];
-    }
-}
-
-async function enviarAudioParaTranscricao(wavBlob) {
-    try {
-        const formData = new FormData();
-        formData.append("audioFile", wavBlob, "comando.wav");
-
-        const response = await fetch("/api/voz/transcrever", {
-            method: "POST",
-            body: formData
-        });
-
-        const data = await response.json();
-
-        if (!response.ok || !data.sucesso) {
-            throw new Error(data.erro || "Falha ao transcrever áudio.");
-        }
-
-        const texto = (data.texto || "").trim();
-
-        ultimaFraseReconhecida = texto;
-        ultimaFraseReconhecidaEm = Date.now();
-        heardText.textContent = texto || "Nenhum comando entendido.";
-        atualizarTexto(diagReconhecido, texto || "nenhum");
-
-        if (!texto) {
-            atualizarStatus("🎙️ Não entendi. Tente de novo.");
-            atualizarTexto(statusReconhecimento, "sem entendimento");
-            falarLocal("Não entendi. Tente novamente.", true);
-            resetarEstadoVoz("🎙️ Loop inteligente em percepção ativa");
-            return;
-        }
-
-        atualizarStatus("🧠 Processando comando...");
-        atualizarTexto(statusReconhecimento, "comando recebido");
-        await interpretarComando(texto);
-
-        resetarEstadoVoz("🎙️ Loop inteligente em percepção ativa");
-    } catch (error) {
-        console.error("Erro na transcrição:", error);
-        heardText.textContent = "Erro ao transcrever comando.";
-        atualizarTexto(statusReconhecimento, "erro na transcrição");
-        resetarEstadoVoz("🎤 Falha ao transcrever. Tente de novo.");
-    }
-}
-
-        async function interpretarComando(texto) {
-            const textoNormalizado = normalizarTexto(texto);
-
-            if (!textoNormalizado) {
-                return;
-            }
-
-            ultimaFraseReconhecida = textoNormalizado;
-            ultimaFraseReconhecidaEm = Date.now();
-
-            if (textoNormalizado.includes("descrever") || textoNormalizado.includes("ambiente")) {
-                atualizarTexto(statusComando, "descrever ambiente");
-                setStatusDecision("comando de voz: descrever ambiente");
-                await enviarParaAnalise("consulta", "Descreva o ambiente.");
-                return;
-            }
-
-            if (textoNormalizado.includes("frente")) {
-                atualizarTexto(statusComando, "frente");
-                setStatusDecision("comando de voz: frente");
-                await enviarParaAnalise("consulta", "O que tem à minha frente?");
-                return;
-            }
-
-            if (textoNormalizado.includes("tem alguem")) {
-                atualizarTexto(statusComando, "tem alguem");
-                setStatusDecision("comando de voz: tem alguem");
-                await enviarParaAnalise("consulta", "Tem alguém por perto?");
-                return;
-            }
-
-            if (textoNormalizado.includes("pausar")) {
-                atualizarTexto(statusComando, "pausar áudio");
-                pausarAudio();
-                falar("Áudio pausado");
-                return;
-            }
-
-            if (textoNormalizado.includes("iniciar")) {
-                atualizarTexto(statusComando, "iniciar modo automático");
-                iniciarModoAutomatico();
-                falar("Modo automático ativado");
-                return;
-            }
-
-            atualizarTexto(statusComando, "comando não reconhecido");
-            setStatusDecision("comando de voz não reconhecido");
-            falar("Não entendi o comando. Tente falar novamente.");
-        }
-
-        function extrairComandoFalado(texto) {
-    const textoNormalizado = normalizarTexto(texto);
-
-    if (!textoNormalizado) return null;
-
-    // aceita variações naturais de ativação
-    if (!ehAtivacao(textoNormalizado)) {
-        return null;
-    }
-
-    // remove "guia" do começo
-    let comandoTexto = textoNormalizado.replace(/^.*?guia\s*/, "");
-
-    if (!comandoTexto) {
-        return { tipo: "ajuda", nomeExibicao: "ajuda por voz" };
-    }
-
-    // comandos operacionais
-    if (contemAlgum(comandoTexto, ["pausar audio"])) {
-        return { tipo: "pausar-audio", nomeExibicao: "pausar áudio" };
-    }
-
-    if (contemAlgum(comandoTexto, ["retomar audio", "continuar audio"])) {
-        return { tipo: "retomar-audio", nomeExibicao: "retomar áudio" };
-    }
-
-    if (contemAlgum(comandoTexto, ["parar audio"])) {
-        return { tipo: "parar-audio", nomeExibicao: "parar áudio" };
-    }
-
-    if (contemAlgum(comandoTexto, ["iniciar modo automatico"])) {
-        return { tipo: "iniciar-auto", nomeExibicao: "iniciar modo automático" };
-    }
-
-    if (contemAlgum(comandoTexto, ["parar modo automatico"])) {
-        return { tipo: "parar-auto", nomeExibicao: "parar modo automático" };
-    }
-
-    // consultas inteligentes
-    if (contemAlgum(comandoTexto, ["o que tem a minha frente"])) {
-        return {
-            tipo: "consulta",
-            nomeExibicao: "frente",
-            pergunta: "O que tem à minha frente?"
-        };
-    }
-
-    if (contemAlgum(comandoTexto, ["tem alguem por perto"])) {
-        return {
-            tipo: "consulta",
-            nomeExibicao: "pessoas",
-            pergunta: "Tem alguém por perto?"
-        };
-    }
-
-    if (contemAlgum(comandoTexto, ["tem obstaculo a frente"])) {
-        return {
-            tipo: "consulta",
-            nomeExibicao: "obstáculo",
-            pergunta: "Tem obstáculo à frente?"
-        };
-    }
-
-    if (contemAlgum(comandoTexto, ["descrever ambiente"])) {
-        return {
-            tipo: "consulta",
-            nomeExibicao: "descrever",
-            pergunta: "Descreva o ambiente."
-        };
-    }
-
-    if (contemAlgum(comandoTexto, ["ajuda", "o que posso falar"])) {
-        return { tipo: "ajuda", nomeExibicao: "ajuda por voz" };
-    }
-
-    return null;
-}
-
-        async function executarComandoVoz(comando) {
-            try {
-                if (!comando) return false;
-
-                switch (comando.tipo) {
-                    case "pausar-audio":
-                        pausarAudio();
-                        falarLocal("Áudio pausado.", true);
-                        setStatusDecision("comando de voz: pausar áudio");
-                        return true;
-
-                    case "retomar-audio":
-                        retomarAudio();
-                        falarLocal("Retomando áudio.", true);
-                        setStatusDecision("comando de voz: retomar áudio");
-                        return true;
-
-                    case "parar-audio":
-                        pararAudio();
-                        falarLocal("Áudio parado.", true);
-                        setStatusDecision("comando de voz: parar áudio");
-                        return true;
-
-                    case "iniciar-auto":
-                        if (!streamAtual) {
-                            await iniciarCamera();
-                        }
-                        iniciarModoAutomatico();
-                        falarLocal("Modo automático ativado.", true);
-                        setStatusDecision("comando de voz: iniciar automático");
-                        return true;
-
-                    case "parar-auto":
-                        pararModoAutomatico();
-                        falarLocal("Modo automático desativado.", true);
-                        setStatusDecision("comando de voz: parar automático");
-                        return true;
-
-                    case "iniciar-camera":
-                        await iniciarCamera();
-                        falarLocal("Câmera iniciada.", true);
-                        setStatusDecision("comando de voz: iniciar câmera");
-                        return true;
-
-                    case "parar-camera":
-                        pararCamera();
-                        falarLocal("Câmera desligada.", true);
-                        setStatusDecision("comando de voz: parar câmera");
-                        return true;
-
-                    case "consulta":
-                        if (!streamAtual) {
-                            await iniciarCamera();
-                        }
-                        modoConsulta.value = comando.pergunta || "";
-                        falarLocal("Consultando o ambiente.", true);
-                        setStatusDecision(`comando de voz: ${comando.nomeExibicao}`);
-                        await enviarParaAnalise("consulta", comando.pergunta || "");
-                        return true;
-
-                    case "ajuda":
-                        falarAjuda();
-                        setStatusDecision("comando de voz: ajuda");
-                        return true;
-
-                    default:
-                        return false;
-                }
-            } catch (error) {
-                console.error("Erro ao executar comando de voz:", error);
-                return false;
-            }
-        }
-
-        function falarAjuda() {
-    const texto = "Visiora pronto. Segure o botão de voz enquanto fala. Você pode dizer: descrever ambiente, o que tem à minha frente, tem alguém por perto, iniciar modo automático, pausar áudio.";
-    atualizarPresencaIA("Assistente disponível", "A voz está pronta para receber comandos e iniciar novas leituras.");
-    falarLocal(texto, true);
-}
-
-        async function garantirPermissaoMicrofone() {
-            if (aguardandoPermissaoAudio) return false;
-
-            try {
-                aguardandoPermissaoAudio = true;
-
-                const tempStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                tempStream.getTracks().forEach(track => track.stop());
-
-                return true;
-            } catch (error) {
-                console.error("Permissão de microfone negada:", error);
-                heardText.textContent = "Permissão do microfone negada.";
-                alert("Permita o uso do microfone no navegador para usar os comandos por voz.");
-                return false;
-            } finally {
-                aguardandoPermissaoAudio = false;
-            }
-        }
-
-        async function alternarEscutaVoz() {
-    if (gravandoComando) {
-        await pararGravacaoComando();
-        return;
-    }
-
-    await iniciarGravacaoComando();
-}
-
-        function configurarAtalhosTeclado() {
-            document.addEventListener("keydown", async (event) => {
-                const tag = (event.target && event.target.tagName) ? event.target.tagName.toLowerCase() : "";
-
-                if (tag === "textarea" || tag === "input" || tag === "select") {
-                    return;
-                }
-
-                const tecla = event.key.toLowerCase();
-
-                if (tecla === " ") {
-                    event.preventDefault();
-                    if (audioAtual && !audioAtual.paused) {
-                        pausarAudio();
-                    } else {
-                        retomarAudio();
-                    }
-                }
-
-                if (tecla === "a") {
-                    event.preventDefault();
-                    if (modoAutomaticoAtivo) {
-                        pararModoAutomatico();
-                    } else {
-                        if (!streamAtual) {
-                            await iniciarCamera();
-                        }
-                        iniciarModoAutomatico();
-                    }
-                }
-
-                if (tecla === "d") {
-                    event.preventDefault();
-                    if (!streamAtual) {
-                        await iniciarCamera();
-                    }
-                    await enviarParaAnalise("consulta", "Descreva o ambiente.");
-                }
-
-                if (tecla === "o") {
-                    event.preventDefault();
-                    if (!streamAtual) {
-                        await iniciarCamera();
-                    }
-                    await enviarParaAnalise("consulta", "O que tem à minha frente?");
-                }
-
-                if (tecla === "v") {
-                    event.preventDefault();
-                    await alternarEscutaVoz();
-                }
+        async function startCamera() {
+            if (streamAtual) return;
+            streamAtual = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } },
+                audio: false
             });
+            video.srcObject = streamAtual;
+            setText("cameraStatus", "câmera ligada");
+            el("cameraDot").classList.add("live");
+            setText("systemStatus", "observando");
+            primeiraLeitura = true;
         }
 
-btnVoz.addEventListener("pointerdown", async (event) => {
-    event.preventDefault();
-    pointerVozAtivo = true;
-    await iniciarGravacaoComando();
-});
+        function stopCamera() {
+            if (streamAtual) streamAtual.getTracks().forEach(t => t.stop());
+            streamAtual = null;
+            video.srcObject = null;
+            stopLoop();
+            stopAudio();
+            el("cameraDot").classList.remove("live");
+            setText("cameraStatus", "câmera desligada");
+            setText("systemStatus", "pronto");
+        }
 
-window.addEventListener("pointerup", async () => {
-    if (!pointerVozAtivo) return;
-    pointerVozAtivo = false;
-    await pararGravacaoComando();
-});
+        function startLoop() {
+            if (!streamAtual) { alert("Inicie a câmera antes."); return; }
+            if (loopAtivo) return;
+            loopAtivo = true;
+            primeiraLeitura = true;
+            setText("loopBadge", "Acompanhamento ativo");
+            setText("systemStatus", "percepção ativa");
+            loopTick();
+        }
 
-btnVoz.addEventListener("pointercancel", async () => {
-    if (!pointerVozAtivo) return;
-    pointerVozAtivo = false;
-    await pararGravacaoComando();
-});
+        function stopLoop() {
+            loopAtivo = false;
+            clearTimeout(loopTimer);
+            setText("loopBadge", "Acompanhamento desligado");
+            setText("decisionStatus", "pausado");
+        }
 
-window.addEventListener("blur", async () => {
-    if (!pointerVozAtivo && !gravandoComando) return;
-    pointerVozAtivo = false;
-    await pararGravacaoComando();
-});
-btnVoz.addEventListener("touchend", (event) => {
-    event.preventDefault();
-    pararGravacaoComando();
-}, { passive: false });
-
-        btnFalarAjuda.addEventListener("click", falarAjuda);
-        btnIniciarCamera.addEventListener("click", iniciarCamera);
-        btnPararCamera.addEventListener("click", pararCamera);
-        btnIniciarAuto.addEventListener("click", iniciarModoAutomatico);
-        btnPararAuto.addEventListener("click", pararModoAutomatico);
-        btnConsultar.addEventListener("click", enviarConsultaManual);
-        btnPausarAudio.addEventListener("click", pausarAudio);
-        btnRetomarAudio.addEventListener("click", retomarAudio);
-        btnPararAudio.addEventListener("click", pararAudio);
-
-window.addEventListener("beforeunload", async () => {
-    pararReconhecimentoInterno();
-    clearTimeout(loopTimeout);
-    limparTimeoutComando();
-    pararAudio();
-    pararCamera();
-
-    try {
-        resetarEstadoVoz("🎙️ Loop inteligente em percepção ativa");
-    } catch {
-    }
-});
-
-        configurarReconhecimento();
-        configurarAtalhosTeclado();
-        atualizarEstadoBotaoVoz();
-        atualizarMarcadorEscuta();
-        atualizarDiagnostico();
+        el("btnStartCamera").onclick = startCamera;
+        el("btnStopCamera").onclick = stopCamera;
+        el("btnStartLoop").onclick = startLoop;
+        el("btnStopLoop").onclick = stopLoop;
+        el("btnDescribeNow").onclick = () => analyze({ force: true, describe: true, diff: 100, stable: false, motion: "manual" });
     </script>
 </body>
 </html>

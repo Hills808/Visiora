@@ -191,7 +191,20 @@ Responda APENAS em JSON válido, neste formato:
   "estadoUsuarioInferido": "",
   "motivoFala": "",
   "observacaoMudanca": "",
-  "ambienteProvavel": ""
+  "ambienteProvavel": "",
+  "mapaVerbal": "",
+  "itensEspaciais": [
+    {
+      "nome": "",
+      "tipo": "referencia|obstaculo|pessoa|passagem|saida|movel",
+      "posicao": "esquerda|centro|direita|frente|fundo|indefinido",
+      "distanciaAproximada": "proxima|media|distante|indefinida",
+      "relevancia": "",
+      "risco": false
+    }
+  ],
+  "mudancaEspacial": "",
+  "proximidadeRisco": ""
 }
 
 PERGUNTA PRINCIPAL DO VISIORA:
@@ -262,6 +275,16 @@ Prefira:
 - X aparece como referência
 - a passagem parece livre se você for se mover
 - cuidado se for se mover
+
+MAPA ESPACIAL OBRIGATÓRIO:
+- Preencha mapaVerbal com uma leitura espacial natural e útil do que aparece na câmera.
+- Não diga só "quarto", "sala" ou "escritório". Descreva organização e posição aproximada.
+- Informe a localização aproximada dos objetos úteis: à esquerda, ao centro, à direita, à frente, ao fundo.
+- Sempre que aparecerem mesa, cadeira, estante/prateleira, porta, passagem, cama, quadro, pessoa ou obstáculo, coloque em itensEspaciais.
+- itensEspaciais deve ter vários itens quando houver vários objetos úteis. Não escolha só um.
+- Se houver mesa e cadeira, diga mesa e cadeira. Se houver estante/prateleira, diga também.
+- Se a pessoa pode se mover, descreva o que pode atrapalhar e onde parece haver espaço livre, sem mandar ir.
+- Exemplo de mapaVerbal: "Parece um escritório. Há uma mesa mais ao centro, cadeira próxima à frente, estante ao fundo e uma porta à direita. O espaço livre parece mais estreito entre a mesa e a cadeira."
 
 PONTOS DE INTERESSE:
 Inclua em pontosInteresse itens úteis para a autonomia: porta, saída provável, passagem, cadeira, mesa, pessoa, escada, balcão, quadro/lousa, obstáculo, corredor, elevador.
@@ -378,6 +401,32 @@ REGRAS:
         resposta.MotivoFala = LimparTexto(resposta.MotivoFala);
         resposta.ObservacaoMudanca = LimparTexto(resposta.ObservacaoMudanca);
         resposta.AmbienteProvavel = LimparTexto(resposta.AmbienteProvavel);
+        resposta.MapaVerbal = LimparTexto(resposta.MapaVerbal);
+        resposta.MudancaEspacial = LimparTexto(resposta.MudancaEspacial);
+        resposta.ProximidadeRisco = LimparTexto(resposta.ProximidadeRisco);
+
+        resposta.ItensEspaciais = (resposta.ItensEspaciais ?? new List<ItemEspacial>())
+            .Where(x => x != null && !string.IsNullOrWhiteSpace(x.Nome))
+            .Select(x => new ItemEspacial
+            {
+                Nome = LimparTexto(x.Nome),
+                Tipo = LimparTexto(x.Tipo),
+                Posicao = NormalizarPosicaoEspacial(x.Posicao),
+                DistanciaAproximada = NormalizarDistanciaAproximada(x.DistanciaAproximada),
+                Relevancia = LimparTexto(x.Relevancia),
+                Risco = x.Risco
+            })
+            .Where(x => !string.IsNullOrWhiteSpace(x.Nome))
+            .GroupBy(x => (x.Nome + "|" + x.Posicao).ToLowerInvariant())
+            .Select(g => g.First())
+            .Take(8)
+            .ToList();
+
+        if ((resposta.PontosInteresse == null || resposta.PontosInteresse.Count == 0) && resposta.ItensEspaciais.Any())
+            resposta.PontosInteresse = resposta.ItensEspaciais.Select(x => MontarDescricaoItemEspacialCurta(x)).Where(x => !string.IsNullOrWhiteSpace(x)).Take(8).ToList();
+
+        if ((resposta.Objetos == null || resposta.Objetos.Count == 0) && resposta.ItensEspaciais.Any())
+            resposta.Objetos = resposta.ItensEspaciais.Select(x => x.Nome).Where(x => !string.IsNullOrWhiteSpace(x)).Distinct(StringComparer.OrdinalIgnoreCase).Take(8).ToList();
 
         resposta.PontosInteresse = (resposta.PontosInteresse ?? new List<string>())
             .Where(x => !string.IsNullOrWhiteSpace(x))
@@ -422,6 +471,9 @@ REGRAS:
             resposta.ResumoAmbiente = LimitarTexto(resposta.ResumoAmbiente, 260);
             resposta.MotivoFala = LimitarTexto(resposta.MotivoFala, 160);
             resposta.ObservacaoMudanca = LimitarTexto(resposta.ObservacaoMudanca, 180);
+            resposta.MapaVerbal = LimitarTexto(resposta.MapaVerbal, 360);
+            resposta.MudancaEspacial = LimitarTexto(resposta.MudancaEspacial, 180);
+            resposta.ProximidadeRisco = LimitarTexto(resposta.ProximidadeRisco, 120);
         }
         else
         {
@@ -432,11 +484,47 @@ REGRAS:
             resposta.ResumoAmbiente = LimitarTexto(resposta.ResumoAmbiente, 260);
             resposta.MotivoFala = LimitarTexto(resposta.MotivoFala, 160);
             resposta.ObservacaoMudanca = LimitarTexto(resposta.ObservacaoMudanca, 180);
+            resposta.MapaVerbal = LimitarTexto(resposta.MapaVerbal, 360);
+            resposta.MudancaEspacial = LimitarTexto(resposta.MudancaEspacial, 180);
+            resposta.ProximidadeRisco = LimitarTexto(resposta.ProximidadeRisco, 120);
         }
 
         return resposta;
     }
 
+
+
+    private string NormalizarPosicaoEspacial(string? posicao)
+    {
+        var texto = LimparTexto(posicao).ToLowerInvariant();
+        if (texto.Contains("esquer")) return "esquerda";
+        if (texto.Contains("direit")) return "direita";
+        if (texto.Contains("centro") || texto.Contains("meio")) return "centro";
+        if (texto.Contains("frente") || texto.Contains("adiante")) return "frente";
+        if (texto.Contains("fundo") || texto.Contains("atrás") || texto.Contains("atras")) return "fundo";
+        return "indefinido";
+    }
+
+    private string NormalizarDistanciaAproximada(string? distancia)
+    {
+        var texto = LimparTexto(distancia).ToLowerInvariant();
+        if (texto.Contains("proxim") || texto.Contains("perto")) return "proxima";
+        if (texto.Contains("media") || texto.Contains("média")) return "media";
+        if (texto.Contains("dist") || texto.Contains("longe") || texto.Contains("fundo")) return "distante";
+        return "indefinida";
+    }
+
+    private string MontarDescricaoItemEspacialCurta(ItemEspacial item)
+    {
+        if (item == null || string.IsNullOrWhiteSpace(item.Nome))
+            return "";
+
+        var posicao = NormalizarPosicaoEspacial(item.Posicao);
+        if (posicao == "indefinido")
+            return item.Nome;
+
+        return $"{item.Nome} à {posicao}".Replace("à frente", "à frente").Replace("à centro", "ao centro").Replace("à fundo", "ao fundo");
+    }
 
     private string NormalizarEventoGuia(string? evento)
     {

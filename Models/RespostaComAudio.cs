@@ -25,6 +25,10 @@ public class RespostaComAudio
     public string ResumoAmbiente { get; set; } = "";
     public string[] PontosInteresse { get; set; } = Array.Empty<string>();
 
+    // Saída espacial estruturada para o front e para a fala assistiva.
+    public string MapaVerbal { get; set; } = "";
+    public ItemEspacial[] ItensEspaciais { get; set; } = Array.Empty<ItemEspacial>();
+
     public EstadoVisiora EstadoCognitivo { get; set; } = new();
     public List<MemoriaRecenteItem> MemoriaRecente { get; set; } = new();
     public MemoriaPersistenteAmbiente MemoriaPersistenteAtual { get; set; } = new();

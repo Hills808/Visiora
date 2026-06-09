@@ -20,4 +20,11 @@ public class EstadoVisiora
     public int TempoNoAmbienteSegundos { get; set; } = 0;
     public string ModoGuiaStatus { get; set; } = "observando";
     public DateTime AtualizadoEmUtc { get; set; } = DateTime.UtcNow;
+    public bool MemoriaPersistenteAtiva { get; set; } = false;
+    public string AmbienteMemorizado { get; set; } = "";
+    public int LeiturasMemorizadas { get; set; } = 0;
+    public string UltimoEventoMemorizado { get; set; } = "";
+    public string MapaVerbal { get; set; } = "";
+    public int ItensEspaciaisDetectados { get; set; } = 0;
+    public string MemoriaAssistivaStatus { get; set; } = "sem memória ativa";
 }

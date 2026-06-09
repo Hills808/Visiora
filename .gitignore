@@ -6,3 +6,10 @@ obj/
 appsettings.Development.json
 appsettings.json
 Properties/launchSettings.json
+# Banco local do Visiora
+Data/*.db
+Data/*.db-shm
+Data/*.db-wal
+
+# Cópias locais
+* - Copia*
