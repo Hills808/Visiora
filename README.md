@@ -9,10 +9,6 @@ O Visiora AI é um protótipo acadêmico de assistência visual. A aplicação c
 
 O projeto está disponível em [github.com/Hills808/Visiora](https://github.com/Hills808/Visiora). Este documento descreve o que está implementado no branch main e não substitui validação clínica, testes de segurança ou um sistema de navegação certificado.
 
-## Demonstração
-
-> Vídeo e GIF de demonstração serão adicionados aqui quando houver um material público validado.
-
 ## Funcionalidades implementadas
 
 - Captura da câmera diretamente no navegador com getUserMedia, video e canvas.
