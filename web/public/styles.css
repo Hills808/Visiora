@@ -626,6 +626,7 @@ h2 .icon {
   border-radius: 5px;
   padding: 0 10px;
   min-height: 44px;
+  min-width: 44px;
   background: none;
   font-size: 11px;
 }
@@ -1601,7 +1602,7 @@ html.large .quick-action {
   }
   .quiet-note .text-button {
     margin-left: 24px;
-    min-height: 32px;
+    min-height: 44px;
   }
   .footer {
     padding: 20px 0;

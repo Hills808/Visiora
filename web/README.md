@@ -2,6 +2,10 @@
 
 A [Especificação de Requisitos de Software](docs/REQUISITOS.md) organiza funcionalidades, regras, interfaces, qualidade e design do Visiora segundo a ISO/IEC/IEEE 29148:2018, com IDs, critérios de verificação e estado de cada requisito.
 
+Os controles da tela inicial foram verificados em 390 e 1440 px: áreas de botão/select ≥44 px, sem violações axe sérias/críticas nem de contraste reforçado no ensaio automatizado. O botão Ajustes mantém nome para leitor de tela no celular. [Evidência de interface](docs/EVIDENCIAS/ACESSIBILIDADE-2026-10-23.md).
+
+`npm run test:a11y` executa a auditoria estática de interface em Chromium; o CI instala o navegador headless e roda esse comando em cada mudança de `web/`.
+
 Se a GPU falhar durante a análise local, o Visiora descarta o quadro incompleto e tenta continuar uma vez na CPU sem fechar a câmera. Falha posterior encerra a sessão com erro. [Teste e limites](docs/EVIDENCIAS/GPU-RECUPERACAO-2026-10-23.md).
 
 O reconhecimento de ambiente também usa GPU quando disponível, após carregar e preparar os dois modelos. Se a GPU falhar ao iniciar, usa CPU; se falhar durante a análise, descarta aquela resposta e reinicia na CPU. Em vídeo público simulado, 34 respostas de ambiente levaram p50 191 ms e p95 249 ms da captura até a resposta. [Medição e limites](docs/EVIDENCIAS/CENAS-GPU-2026-10-23.md).

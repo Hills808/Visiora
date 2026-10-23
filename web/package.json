@@ -16,17 +16,19 @@
     "format": "node node_modules/prettier/bin/prettier.cjs --write src public/index.html public/styles.css public/sw.js tools tests",
     "simulate": "node tools/simulate.mjs",
     "test:e2e": "node tests/e2e/smoke.mjs",
+    "test:a11y": "node tests/e2e/accessibility.mjs",
     "dev:luna": "node --env-file-if-exists=.env server/gateway.mjs",
     "luna:models": "node tools/luna-models.mjs",
     "test:luna": "node --test tests/luna*.test.mjs"
   },
   "dependencies": {
-    "onnxruntime-web": "1.30.0",
-    "fflate": "0.8.3"
+    "fflate": "0.8.3",
+    "onnxruntime-web": "1.30.0"
   },
   "devDependencies": {
-    "typescript": "7.0.2",
+    "axe-core": "4.14.0",
+    "playwright-core": "1.64.1",
     "prettier": "3.6.2",
-    "playwright-core": "1.64.1"
+    "typescript": "7.0.2"
   }
 }

@@ -62,6 +62,7 @@ npm test                              # cérebro, saída, armazenamento e detect
 node tools/simulate.mjs               # transcrições das cenas simuladas
 npm run typecheck                    # TypeScript estrito
 npm run lint                         # sintaxe e regras locais
+npm run test:a11y                    # Chromium instalado; alvos, axe e contraste na interface inicial
 node tests/e2e/smoke.mjs <url>        # Chrome instalado, servidor e insumos de QA do README
 ```
 
