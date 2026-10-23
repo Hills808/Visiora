@@ -56,7 +56,7 @@ Cada linha é uma obrigação testável. IDs `RF-*` pertencem a esta ERS; `CA-*`
 | RF-09 | O sistema deve apresentar texto equivalente à fala, idade da descrição e estado de câmera, modo, voz, GPU/CPU e erros em linguagem compreensível. | Inspeção UI, E2E e diagnóstico; CA-A1/E5/H2. | Parcial: leitor de tela físico pendente. |
 | RF-10 | O usuário deve conseguir pausar voz, parar a sessão, revogar novos envios Luna e apagar os dados locais controlados pelo aplicativo. | E2E de controles/armazenamento; CA-S4/H9. | Implementado localmente; retenção do provedor não é controlada pelo app. |
 | RF-11 | O sistema deve exportar diagnóstico somente sob ação do usuário, sem pixels ou texto das descrições, incluindo contagens, tempos, erros e provedor local. | Teste de diagnóstico; CA-S1/S4. | Implementado; auditoria completa de disco/rede pendente. |
-| RF-12 | Se GPU não iniciar no modo local, o sistema deve informar o uso da CPU e conservar a mesma política de detecção. | E2E GPU/CPU; CA-H7. | Parcial: perda de GPU durante sessão não testada. |
+| RF-12 | Se a GPU não iniciar ou falhar durante o modo local, o sistema deve informar o uso da CPU e conservar a mesma política de detecção, sem aproveitar quadro incompleto. | E2E GPU/CPU e teste de falha; CA-H7. | Implementado em teste simulado; perda física de GPU pendente. |
 
 ## 4. Interfaces externas
 
@@ -92,7 +92,7 @@ Cada linha é uma obrigação testável. IDs `RF-*` pertencem a esta ERS; `CA-*`
 | --- | --- | --- |
 | RF-01, RF-02, RF-04, RI-01, RI-03, RNF-09 | ADR-017/020/021/023/025/029; CA-L*, CA-H1/H2/H9 | `EVIDENCIAS/H1-CAPTURA-COMPARTILHADA.md`, testes Luna; custo real não medido. |
 | RF-03, RF-05 a RF-08, RNF-01/03/10 | Plano §7/11; ADR-024/026/030; CA-F*, CA-P3/P6 | Simulador, testes de fala, `EVIDENCIAS/H2-PERCEPCAO-LOCAL-2026-10-23.md`; precisão física pendente. |
-| RF-09 a RF-12, RI-02/04, RNF-04/06, RD-* | Plano §8/11; ADR-030; CA-A*, CA-S*, CA-H7 | E2E e testes locais; leitor de tela, disco/rede e GPU perdida pendentes. |
+| RF-09 a RF-12, RI-02/04, RNF-04/06, RD-* | Plano §8/11; ADR-030/032; CA-A*, CA-S*, CA-H7 | E2E e testes locais; leitor de tela, disco/rede e GPU física perdida pendentes. |
 | RNF-02/05/08 | Plano §11 e plano híbrido §9; CA-D1/D5/E3/A4/A5/H4/H11 | Não aceitos; exigem medição e estudo físico/humano. |
 
 Mudanças que afetem fala, privacidade, custo ou modelos devem atualizar este documento, [DECISOES.md](DECISOES.md), testes/transcrições e a evidência `CA-*` correspondente. Requisitos planejados devem continuar identificados como planejados até serem implementados e medidos. O aceite final do produto só ocorre após CA-A4 e CA-A5 com participantes reais; até lá, a designação é **protótipo em avaliação**.

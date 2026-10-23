@@ -1,5 +1,7 @@
 ## Verificação automática (23/10/2026)
 
+O retorno automático à CPU após erro ou demora da GPU durante a sessão passou em teste simulado CA-H7. A falha física da GPU, o tempo de reinicialização e a qualidade da observação após a troca não foram medidos. [Evidência](EVIDENCIAS/GPU-RECUPERACAO-2026-10-23.md).
+
 GitHub Actions foi configurado para testar código e transcrições da versão web a cada mudança. CI verde, quando observado, demonstra somente esses comandos no runner; não comprova câmera, áudio, leitor de tela, precisão de modelos, desempenho em outros PCs, 30 minutos de uso ou aceite humano. [Escopo da verificação](EVIDENCIAS/CI-2026-10-23.md).
 
 ## Ensaio de execução local — ADR-030 (23/10/2026)

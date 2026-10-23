@@ -465,3 +465,11 @@ Não testado: API/fatura/painel reais, virada física do relógio, outros PCs/SO
 **Decisão:** adicionar workflow GitHub Actions restrito a mudanças em `web/` e no próprio arquivo. Ele instala dependências fixadas por `package-lock.json`, usa Node 24/Python 3.11 e executa `npm test`, `npm run typecheck`, `npm run lint` e `node tools/simulate.mjs`. Permissão do token limitada a leitura; checkout sem credenciais persistentes. Fontes oficiais consultadas: [checkout v7.0.1](https://github.com/actions/checkout/releases), [setup-node v7.1.0](https://github.com/actions/setup-node/releases), [setup-python v7.0.0](https://github.com/actions/setup-python/releases). São ferramentas de CI, sem peso de modelo ou dependência de runtime do aplicativo; o runner hospedado precisa suportar essas versões. Alternativa: executar manualmente em cada computador, rejeitada por não detectar regressões em PRs.
 
 **Limite:** o workflow não executa E2E de navegador porque os vídeos públicos de QA são artefatos locais fora do Git. Também não mede webcam/voz físicas, precisão, acessibilidade humana ou custo Luna. Não declarar CA-E1 completo antes de um job remoto verde e cobertura do E2E exigido. [Evidência](EVIDENCIAS/CI-2026-10-23.md).
+
+## ADR-032 — recuperação de GPU durante a sessão local (23/10/2026)
+
+**Problema:** a inicialização já retornava à CPU quando WebGPU falhava, mas erro durante a inferência ou prazo excedido parava a câmera. O quadro poderia conter detecções parciais dos três modelos.
+
+**Decisão:** depois de erro ou prazo excedido no worker de objetos em WebGPU, descartar todo o quadro, terminar esse worker e inicializar uma única vez os mesmos YOLOX Nano/Tiny/S em WASM. Manter o fluxo de câmera e o worker independente de ambientes. A próxima captura só ocorre após a CPU estar pronta. Se a CPU falhar, encerrar a sessão e mostrar o erro. O backend é registrado em cada resultado; nenhuma regra de consenso, limiar, classe, modelo, orçamento ou chamada Luna muda. Alternativa de reaproveitar detecções parciais rejeitada porque quebraria o consenso de pessoas.
+
+**Evidência e limite:** [GPU-RECUPERACAO-2026-10-23.md](EVIDENCIAS/GPU-RECUPERACAO-2026-10-23.md), CA-H7. Teste simulado cobre erro explícito; webcam, perda física da GPU, prazo real e tempo de reinicialização ainda exigem medição.
