@@ -94,3 +94,7 @@ Para usar Luna no notebook Windows x64 da apresentação, o pacote portátil ini
 ## Gateway hospedado — preparação ADR-039 (23/10/2026)
 
 Existe uma configuração de implantação HTTPS com autenticação pelo Caddy para servir a interface e Luna na mesma origem, em **uma única instância** com SQLite persistente. O Site público `visiora-ambiente.hills808.chatgpt.site` segue estático e sem Luna. A configuração exige domínio, servidor, chave e senha privados e testes antes da exposição; nenhum desses pré-requisitos foi executado nesta revisão. Orçamento é reserva conservadora e não garante disponibilidade da OpenAI, da rede ou da voz no navegador.
+
+## Link temporário protegido para apresentação — ADR-040 (23/10/2026)
+
+O iniciador `tools/apresentacao-luna.ps1` usa o `cloudflared` atualizado com autenticação por e-mail, túnel HTTPS temporário e cabeçalho Host interno `127.0.0.1:8080`. O navegador deve acessar somente a origem HTTPS exibida no terminal. A chave e a base SQLite permanecem no computador local; este deve ficar ligado, com internet, sem outro gateway consumindo o orçamento. O endereço muda a cada execução; o tunelamento não altera o site `chatgpt.site`. Não foram medidos disponibilidade, autenticação em dispositivo físico, webcam, latência, custo real nem voz no túnel; deve ser considerado contingência experimental, sem promessa de continuidade durante a apresentação.
