@@ -1,5 +1,9 @@
 ## Verificação automática (23/10/2026)
 
+Um Chrome headless com vídeo público como câmera e modelos reais WebGPU ficou ativo por 30 minutos: 6.062 quadros, zero erros de página/diagnóstico e memória privada da árvore de processos +1,29% após aquecimento. Isso verifica resistência apenas neste cenário artificial, sem webcam, voz audível, bateria, outro aparelho ou participante cego. [Evidência CA-D5](EVIDENCIAS/ESTABILIDADE-INSTALACAO-2026-10-23.md).
+
+Em clone novo no Windows, com Node/npm/Python/Git já instalados, obter o repositório, instalar pelo lockfile e gerar o pacote levou 22,87 s; outra cópia respondeu HTTP 200 em loopback. A medição não inclui instalar pré-requisitos nem foi feita por pessoa de fora, exigida pelo CA-E3. Outro computador na rede não acessa o serviço de loopback sem configuração HTTPS específica. [Evidência CA-E3](EVIDENCIAS/ESTABILIDADE-INSTALACAO-2026-10-23.md).
+
 O ensaio de interface em Chrome com câmera artificial passou em desktop e largura móvel para alvos de botão/select ≥44 px, axe sem violações sérias/críticas e regra automatizada de contraste reforçado. Isso não substitui NVDA, VoiceOver, TalkBack, aparelho físico nem testes com pessoas cegas. [Evidência](EVIDENCIAS/ACESSIBILIDADE-2026-10-23.md).
 
 O retorno automático à CPU após erro ou demora da GPU durante a sessão passou em teste simulado CA-H7. A falha física da GPU, o tempo de reinicialização e a qualidade da observação após a troca não foram medidos. [Evidência](EVIDENCIAS/GPU-RECUPERACAO-2026-10-23.md).

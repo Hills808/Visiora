@@ -1,0 +1,15 @@
+# CA-D5/E3 — resistência e instalação Windows (23/10/2026)
+
+## Instalação limpa reproduzida pelo agente
+
+Origem: `git clone --depth 1 https://github.com/Hills808/Visiora.git` da `main` no commit `9e1fd0ba36301605ef84f10b9861d3eb65cc7c73`, em pasta nova, sem `node_modules`, `dist` ou `artifacts` anteriores. Ambiente: Windows, Node v24.11.0, npm 11.6.1, Python já disponível. Com cronômetro PowerShell, `git clone`, `npm ci` e `npm run build` conforme README levaram **22,87 s**; npm instalou 43 pacotes e o build criou `artifacts/visiora-local.zip` com 167.439.253 bytes e 83 arquivos. Em uma primeira pasta limpa, a variante `npm ci --ignore-scripts --no-audit --no-fund` levou **25,69 s** com clone e build. O servidor dessa primeira pasta, `node tools/serve.mjs` na porta 8091, respondeu HTTP **200** em loopback, com 34.656 bytes de HTML. O processo foi encerrado pelo PID identificado na porta.
+
+Esse resultado não conta instalação de Node, npm, Python ou Git, nem o tempo de uma pessoa seguindo o README. O CA-E3 exige um teste cronometrado por pessoa de fora, portanto permanece **parcial**. A cópia limpa não usou webcam, fala, navegador nem modo Luna. O servidor escuta só em `127.0.0.1`; outro aparelho na rede requer HTTPS configurado separadamente.
+
+## Resistência CA-D5
+
+`node tests/e2e/stability.mjs` abriu Chrome instalado no Windows, usou o vídeo público de QA `artifacts/vision/dog.y4m` como câmera simulada, executou os modelos locais reais em GPU e substituiu somente a voz. Amostrou a memória privada da árvore de processos desse Chrome a cada 30 s, após dois minutos de aquecimento. Também verificou câmera ativa, erro JavaScript, quadros analisados e erros do diagnóstico exportado. O limite de crescimento é 10% durante 30 minutos.
+
+**Resultado:** 30 minutos completos, 59 amostras, 6.062 quadros, 850 análises de ambiente, WebGPU ativo, zero erros de página e zero erros no diagnóstico. A primeira amostra após aquecimento foi **1.602.453.504 bytes**, a última **1.623.072.768 bytes**: crescimento de **1,29%**. Entre as amostras estáveis, mínimo **1.593.737.216 bytes** e máximo **1.675.874.304 bytes**. O status permaneceu “Câmera ativa · visão local na GPU · distância desconhecida”. O script retornou `passed: true`. Os JSONs brutos `artifacts/e2e-stability/result-30m.json` e `diagnostic-30m.json` ficam na máquina de teste, fora do Git; este documento guarda os números auditáveis. Após ajustar a contagem de processos que encerram entre enumeração e leitura e verificar explicitamente o status, um ensaio de **1 minuto** da versão final também passou: 204 quadros, 25 análises, zero erros, nenhum processo ausente nas duas amostras.
+
+**Limite:** CA-D5 está demonstrado apenas nesta máquina, com vídeo público repetido, Chrome headless e voz substituída. Não foram medidos webcam/áudio reais, bateria, outro PC ou celular, perda física de GPU, uso por pessoa cega nem qualidade das descrições. A comparação de memória é entre o primeiro e o último ponto após aquecimento; picos transitórios aparecem nos limites mínimo/máximo acima. CA-E3 ainda depende de pessoa de fora seguindo o README. Não houve chamada Luna paga.

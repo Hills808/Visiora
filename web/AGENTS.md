@@ -64,6 +64,7 @@ npm run typecheck                    # TypeScript estrito
 npm run lint                         # sintaxe e regras locais
 npm run test:a11y                    # Chromium instalado; alvos, axe e contraste na interface inicial
 node tests/e2e/smoke.mjs <url>        # Chrome instalado, servidor e insumos de QA do README
+node tests/e2e/stability.mjs          # Windows, 30 min, vídeo público como câmera; resultado em artifacts/
 ```
 
 A percepção desta versão roda em TypeScript no navegador, com backend simulado para testes. Não há pasta perception nem pytest de serviço nesta implementação. Python é usado apenas para empacotar e medir opcionalmente. O E2E --fixtures não verifica HTTP, câmera real, áudio ou offline.
