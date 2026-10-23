@@ -1,6 +1,11 @@
 declare module '*ort.wasm.min.mjs' {
   export const env: {
-    wasm: { wasmPaths: string; numThreads: number; proxy: boolean };
+    wasm: {
+      wasmPaths: string;
+      wasmBinary?: Uint8Array<ArrayBuffer>;
+      numThreads: number;
+      proxy: boolean;
+    };
     logLevel: string;
   };
   export class Tensor {
@@ -22,7 +27,12 @@ declare module '*ort.wasm.min.mjs' {
 
 declare module '*ort.webgpu.min.mjs' {
   export const env: {
-    wasm: { wasmPaths: string; numThreads: number; proxy: boolean };
+    wasm: {
+      wasmPaths: string;
+      wasmBinary?: Uint8Array<ArrayBuffer>;
+      numThreads: number;
+      proxy: boolean;
+    };
     logLevel: string;
   };
   export class Tensor {

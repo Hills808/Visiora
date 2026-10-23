@@ -1,6 +1,7 @@
 import { cp, mkdir, readdir, readFile, writeFile, rm, lstat, realpath } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
+import { gzipSync } from 'node:zlib';
 import path from 'node:path';
 const root = await realpath('.');
 const { version } = JSON.parse(await readFile('package.json', 'utf8'));
@@ -26,9 +27,20 @@ for (const name of [
   'ort-wasm-simd-threaded.mjs',
   'ort-wasm-simd-threaded.wasm',
   'ort-wasm-simd-threaded.asyncify.mjs',
-  'ort-wasm-simd-threaded.asyncify.wasm',
 ])
   await cp(path.join('node_modules/onnxruntime-web/dist', name), path.join('dist/vendor', name));
+const asyncifyWasm = await readFile(
+  'node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.asyncify.wasm',
+);
+const compressedWasm = gzipSync(asyncifyWasm, { level: 9 });
+await writeFile('dist/vendor/ort-wasm-simd-threaded.asyncify.wasm.gz', compressedWasm);
+await writeFile(
+  'dist/vendor/asyncify-wasm.json',
+  JSON.stringify({
+    bytes: asyncifyWasm.length,
+    sha256: createHash('sha256').update(asyncifyWasm).digest('hex'),
+  }),
+);
 await cp('node_modules/fflate/esm/browser.js', 'dist/vendor/fflate.mjs');
 await cp('node_modules/fflate/LICENSE', 'dist/licenses/fflate.txt');
 await cp('node_modules/typescript/LICENSE', 'dist/licenses/TypeScript.txt');

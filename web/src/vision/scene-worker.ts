@@ -1,5 +1,6 @@
 import * as ort from '../vendor/ort.webgpu.min.mjs';
 import { ScenePerception } from './scene-model.js';
+import { loadRuntimeWasm } from './runtime-wasm.js';
 type Request =
   | { type: 'init' }
   | { type: 'frame'; frameId: number; capturedAtMs: number; rgba: ArrayBuffer };
@@ -16,6 +17,7 @@ scope.onmessage = async (event: MessageEvent<Request>): Promise<void> => {
   try {
     if (request.type === 'init') {
       ort.env.wasm.wasmPaths = new URL('../vendor/', import.meta.url).href;
+      ort.env.wasm.wasmBinary = await loadRuntimeWasm();
       ort.env.wasm.numThreads = 1;
       ort.env.wasm.proxy = false;
       ort.env.logLevel = 'error';

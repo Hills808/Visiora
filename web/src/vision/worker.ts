@@ -3,6 +3,7 @@ import { decodeYolox, packBgr, type ImageBounds } from './yolox.js';
 import * as ort from '../vendor/ort.webgpu.min.mjs';
 import { loadModelAsset, verifiedData, type ModelManifest } from './model-assets.js';
 import { composeDetections, type DetectorHead, type HeadDetections } from './person-consensus.js';
+import { loadRuntimeWasm } from './runtime-wasm.js';
 type Request =
   | { type: 'init'; forceCpu?: boolean }
   | {
@@ -25,6 +26,7 @@ scope.onmessage = async (event: MessageEvent<Request>): Promise<void> => {
   try {
     if (message.type === 'init') {
       ort.env.wasm.wasmPaths = new URL('../vendor/', import.meta.url).href;
+      ort.env.wasm.wasmBinary = await loadRuntimeWasm();
       ort.env.wasm.numThreads = 1;
       ort.env.wasm.proxy = false;
       ort.env.logLevel = 'error';

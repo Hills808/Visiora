@@ -1,3 +1,11 @@
+## Apresentação em outro aparelho (23/10/2026)
+
+Abra https://visiora-ambiente.hills808.chatgpt.site em Chrome ou Edge atualizado, com internet. Selecione **Modelos locais**, permita a câmera e aguarde o primeiro download de cerca de 168 MB. Em **Ajustes**, confira se há uma voz pt-BR; se não houver, use as descrições em texto ou o leitor de tela. Teste no notebook antes da apresentação, de preferência na mesma rede que será usada no local. A análise local roda no próprio aparelho e pode ficar lenta em notebooks sem GPU compatível. A demonstração de cenas funciona sem câmera.
+
+O endereço público oferece o modo local. **Luna não funciona nesse endereço**, pois exige um gateway privado com chave, consentimento e orçamento. Não cole a chave da API no navegador. O site é um protótipo em avaliação: não oferece orientação segura para deslocamento.
+
+[Evidências e limites desta publicação](docs/EVIDENCIAS/PUBLICACAO-APRESENTACAO-2026-10-23.md).
+
 ## Visão local mais rápida no PC testado (23/10/2026)
 
 A [Especificação de Requisitos de Software](docs/REQUISITOS.md) organiza funcionalidades, regras, interfaces, qualidade e design do Visiora segundo a ISO/IEC/IEEE 29148:2018, com IDs, critérios de verificação e estado de cada requisito.
