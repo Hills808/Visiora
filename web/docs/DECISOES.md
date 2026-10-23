@@ -542,3 +542,13 @@ Não testado: API/fatura/painel reais, virada física do relógio, outros PCs/SO
 **Decisão:** preparar implantação alternativa em servidor Linux de instância única: frontend e gateway Node no mesmo endereço, TLS e HTTP Basic aplicados pelo Caddy a todas as rotas; Node limitado ao loopback compartilhado e Host interno fixo, `VISIORA_PUBLIC_ORIGIN` HTTPS exata; CSRF/consentimento preservados. SQLite persistente em um único volume. Node.js 24.22.1 (MIT; alternativa: Node 26 após revalidação) e Caddy 2.11.7 (Apache-2.0; alternativa: Nginx + Certbot), publicados nos repositórios oficiais. Não há modelo de visão novo.
 
 **Limites:** esta implementação não migra o Site chatgpt.site automaticamente nem cria infraestrutura. Exige servidor e domínio, configuração privada de autenticação/chave e validação física. CI de testes do gateway é diferente de validação de HTTPS/Docker/câmera/voz. Persistência e único processo são pré-requisitos de orçamento, cuja estimativa não constitui hard cap do faturamento OpenAI. Não publicar sem gates; nenhuma chamada paga ou chave foi configurada.
+
+## ADR-040 — contingência HTTPS para apresentação remota (23/10/2026)
+
+**Contexto:** o usuário integrou as mudanças à main, porém o host `chatgpt.site` permanece estático sem gateway. A apresentação ocorrerá fora do computador que guarda a chave e o ledger.
+
+**Decisão:** oferecer, além do pacote Windows local, um script opcional de Quick Tunnel protegido por e-mail (`cloudflared` 2026.9.3+), com TLS na borda e conexão originada no PC que já executa o Luna. O CLI reescreve Host para loopback, enquanto `VISIORA_PUBLIC_ORIGIN` guarda exatamente a origem HTTPS do túnel para o CSRF. O script verifica .env, ledger e build, recusa porta 8080 ocupada e encerra o túnel ao fechar. A opção não cria novo ledger nem migra a chave. A proteção por e-mail da Cloudflare é necessária; não usar túnel anônimo para um backend pago.
+
+**Alternativas:** implantar servidor Linux permanente (ADR-039), ainda sem infraestrutura; pacote portátil Windows, preferível quando não é possível manter o PC de origem conectado.
+
+**Limites:** Cloudflare Quick Tunnel é uma solução de demonstração, com endereço efêmero e sem garantia de disponibilidade. Primeira configuração, autenticação, origem, câmera, áudio, limite e conectividade ainda exigem teste físico. Não há prova de funcionamento real nesta alteração; nenhuma API paga foi chamada. Fonte: documentação oficial https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/.
