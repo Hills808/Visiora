@@ -4,7 +4,7 @@ A [Especificação de Requisitos de Software](docs/REQUISITOS.md) organiza funci
 
 Os controles da tela inicial foram verificados em 390 e 1440 px: áreas de botão/select ≥44 px, sem violações axe sérias/críticas nem de contraste reforçado no ensaio automatizado. O botão Ajustes mantém nome para leitor de tela no celular. [Evidência de interface](docs/EVIDENCIAS/ACESSIBILIDADE-2026-10-23.md).
 
-`npm run test:a11y` executa a auditoria estática de interface em Chromium; o CI instala o navegador headless e roda esse comando em cada mudança de `web/`.
+`npm run test:a11y` prepara o build e executa a auditoria estática de interface em Chromium; o CI instala o navegador headless e roda esse comando em cada mudança de `web/`.
 
 Se a GPU falhar durante a análise local, o Visiora descarta o quadro incompleto e tenta continuar uma vez na CPU sem fechar a câmera. Falha posterior encerra a sessão com erro. [Teste e limites](docs/EVIDENCIAS/GPU-RECUPERACAO-2026-10-23.md).
 
@@ -95,9 +95,9 @@ node tests/e2e/scenes.mjs http://127.0.0.1:8080 --fixtures
 node tests/e2e/people.mjs
 ```
 
-`--fixtures` substitui HTTP por arquivos locais; não testa servidor, rede nem service worker. `people.mjs` sempre usa esse transporte. Pesos WASM são reais; câmera e voz são simuladas. Insumos de QA não entram no produto. O teste de objetos usa [dog.jpg do YOLOX](https://raw.githubusercontent.com/Megvii-BaseDetection/YOLOX/main/assets/dog.jpg), convertido em `artifacts/vision/dog.y4m`, e axe-core 4.14.0 em `artifacts/packages/axe.min.js`. O teste de lugar usa uma imagem positiva selecionada em `artifacts/scene/browser.y4m`. O de pessoas usa a foto pública COCO val2017 23899 convertida em `artifacts/recognition-upgrade/people.y4m`. São testes de integração, não de precisão.
+`--fixtures` substitui HTTP por arquivos locais; não testa servidor, rede nem service worker. `people.mjs` sempre usa esse transporte. Pesos WASM são reais; câmera e voz são simuladas. Insumos de QA não entram no produto. O teste de objetos usa [dog.jpg do YOLOX](https://raw.githubusercontent.com/Megvii-BaseDetection/YOLOX/main/assets/dog.jpg), convertido em `artifacts/vision/dog.y4m`; axe-core 4.14.0 vem do `package-lock.json`. O teste de lugar usa uma imagem positiva selecionada em `artifacts/scene/browser.y4m`. O de pessoas usa a foto pública COCO val2017 23899 convertida em `artifacts/recognition-upgrade/people.y4m`. São testes de integração, não de precisão.
 
-Reprodução dos benchmarks requer downloads e dependências opcionais descritos na evidência. Scripts, protocolos congelados, todas as previsões e fontes sem fotografias foram preservados em `docs/EVIDENCIAS/0.3.0/`. `tools/prepare_recognition_models.mjs` verifica e divide os três pesos adicionais já obtidos; não baixa nem treina modelos. Nenhum script de pesquisa roda no aplicativo. Não houve instalação limpa nem CI; lockfile completo ainda pendente.
+Reprodução dos benchmarks requer downloads e dependências opcionais descritos na evidência. Scripts, protocolos congelados, todas as previsões e fontes sem fotografias foram preservados em `docs/EVIDENCIAS/0.3.0/`. `tools/prepare_recognition_models.mjs` verifica e divide os três pesos adicionais já obtidos; não baixa nem treina modelos. Nenhum script de pesquisa roda no aplicativo. A instalação limpa em Windows ainda precisa de ensaio cronometrado; o CI e o lockfile já estão em uso.
 
 ## Documentos e publicação
 
