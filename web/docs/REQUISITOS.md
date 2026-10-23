@@ -72,7 +72,7 @@ Cada linha é uma obrigação testável. IDs `RF-*` pertencem a esta ERS; `CA-*`
 | ID | Requisito mensurável | Verificação / aceite | Estado |
 | --- | --- | --- | --- |
 | RNF-01 | O sistema não deve afirmar segurança, caminho livre ou saída garantida; alertas, se implementados, devem ser raros e rotulados experimentais. | Revisão de todas as falas/UI; CA-F2/P6. | Parcial; avaliação humana pendente. |
-| RNF-02 | O modo local deve atingir p50 ≤150 ms e p95 ≤400 ms de quadro até resposta de percepção no PC de referência, sem remover verificadores de pessoas. | Medição integrada CA-D1/H4. | Não aceito: objetos acelerados em fixture, ambiente ~1,6 s. |
+| RNF-02 | O modo local deve atingir p50 ≤150 ms e p95 ≤400 ms de quadro até resposta de percepção no PC de referência, sem remover verificadores de pessoas. | Medição integrada CA-D1/H4. | Parcial: inferência de objetos e ambiente acelerada em fixture GPU; falta medir captura até resposta integrada e outros PCs. |
 | RNF-03 | O sistema deve rejeitar 100% dos resultados com mais de 3 s para fatos locais, sem fila crescente; snapshot Luna deve exibir idade e respeitar seu prazo próprio. | Testes de carga/idade; CA-D4/L4. | Implementado em testes; carga física pendente. |
 | RNF-04 | A interface deve ser responsiva, com contraste padrão ≥7:1, alvos ≥44 px, operação por teclado e zero violações axe sérias/críticas. | CA-A1/A3; auditoria desktop/celular. | Parcial; leitores e aparelhos reais pendentes. |
 | RNF-05 | O fluxo iniciar → ambientação → pergunta → parar deve ser concluído com NVDA, VoiceOver e TalkBack; aceite final requer CA-A4/A5 com pessoas cegas. | Roteiro manual e estudo consentido. | Não executado. |

@@ -1,5 +1,5 @@
 import { CONFIG } from '../config.js';
-import * as ort from '../vendor/ort.wasm.min.mjs';
+import * as ort from '../vendor/ort.webgpu.min.mjs';
 import { loadModelAsset, verifiedData } from './model-assets.js';
 import {
   hasVisualInformation,
@@ -19,8 +19,9 @@ export class ScenePerception {
   private labels: string[] = [];
   private embeddings: SceneEmbeddings | null = null;
   private loading = false;
+  private provider: 'webgpu' | 'wasm' = 'wasm';
   constructor(private status: (value: SceneStatus) => void) {}
-  async load(): Promise<void> {
+  async load(forceCpu = false): Promise<void> {
     if (this.session || this.loading) return;
     this.loading = true;
     const controller = new AbortController();
@@ -49,10 +50,6 @@ export class ScenePerception {
         !Array.isArray(embeddings.candidates)
       )
         throw new Error('Modelo e descrições incompatíveis.');
-      this.session = await ort.InferenceSession.create(bytes, {
-        executionProviders: ['wasm'],
-        graphOptimizationLevel: 'all',
-      });
       const placesBase = new URL('../models/places365/', import.meta.url);
       const places = await loadModelAsset(placesBase, controller.signal, (done, total) =>
         this.status({
@@ -70,14 +67,52 @@ export class ScenePerception {
           ),
         ),
       );
-      this.places = await ort.InferenceSession.create(places.bytes, {
-        executionProviders: ['wasm'],
-        graphOptimizationLevel: 'all',
-      });
+      const initialize = async (provider: 'webgpu' | 'wasm'): Promise<void> => {
+        this.session = await ort.InferenceSession.create(bytes, {
+          executionProviders: [provider],
+          graphOptimizationLevel: 'all',
+        });
+        this.places = await ort.InferenceSession.create(places.bytes, {
+          executionProviders: [provider],
+          graphOptimizationLevel: 'all',
+        });
+        const input = new ort.Tensor(
+          'float32',
+          new Float32Array(3 * CONFIG.classification.size ** 2),
+          [1, 3, CONFIG.classification.size, CONFIG.classification.size],
+        );
+        try {
+          const first = await this.session.run({ pixel_values: input });
+          Object.values(first).forEach((value) => value.dispose());
+          const second = await this.places.run({ [this.places.inputNames[0]]: input });
+          Object.values(second).forEach((value) => value.dispose());
+        } finally {
+          input.dispose();
+        }
+        this.provider = provider;
+      };
+      if (!forceCpu && (navigator as Navigator & { gpu?: unknown }).gpu) {
+        try {
+          await initialize('webgpu');
+        } catch (error) {
+          await this.release();
+          console.warn(
+            JSON.stringify({
+              event: 'scene_webgpu_fallback',
+              reason: error instanceof Error ? error.message : 'unknown',
+            }),
+          );
+          this.status({
+            state: 'loading',
+            message: 'GPU indisponível para ambientes. Preparando CPU.',
+          });
+        }
+      }
+      if (!this.session || !this.places) await initialize('wasm');
       this.embeddings = embeddings;
       this.status({
         state: 'ready',
-        message: 'Dois modelos comparam a imagem inteira. A análise pode admitir dúvida.',
+        message: `Dois modelos comparam a imagem inteira na ${this.provider === 'webgpu' ? 'GPU' : 'CPU'}. A análise pode admitir dúvida.`,
       });
     } catch (error) {
       await this.release();
@@ -140,7 +175,13 @@ export class ScenePerception {
       analysis.latencyMs = performance.now() - started;
       return analysis;
     } catch (error) {
+      const failedProvider = this.provider;
       await this.release();
+      if (failedProvider === 'webgpu') {
+        this.status({ state: 'loading', message: 'A GPU parou. Reiniciando ambientes na CPU.' });
+        await this.load(true);
+        return undefined;
+      }
       const message =
         error instanceof Error ? error.message : 'A análise de ambientes foi interrompida.';
       this.status({ state: 'error', message });
@@ -159,6 +200,10 @@ export class ScenePerception {
     this.places = null;
     this.embeddings = null;
     this.labels = [];
-    for (const session of sessions) if (session) await session.release();
+    const released = await Promise.allSettled(
+      sessions.filter((session) => session !== null).map((session) => session.release()),
+    );
+    const failures = released.filter((result) => result.status === 'rejected').length;
+    if (failures) console.warn(JSON.stringify({ event: 'scene_release_failed', failures }));
   }
 }

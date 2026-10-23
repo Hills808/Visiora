@@ -47,8 +47,10 @@ const metrics = {
   frames: 0,
   speechCompleted: 0,
   localLatencyMs: [] as number[],
+  localResponseLatencyMs: [] as number[],
   localProvider: null as 'webgpu' | 'wasm' | null,
   sceneLatencyMs: [] as number[],
+  sceneResponseLatencyMs: [] as number[],
   sceneSamples: 0,
   sceneAbstentions: 0,
   sceneRejectedFrames: 0,
@@ -302,8 +304,11 @@ function receive(result: VisionResult): void {
   if (mode !== 'camera') return;
   metrics.frames++;
   metrics.localLatencyMs.push(Math.round(result.latencyMs));
+  metrics.localResponseLatencyMs.push(Math.round(performance.now() - result.capturedAtMs));
   metrics.localProvider = result.provider ?? null;
   if (metrics.localLatencyMs.length > CONFIG.ui.diagnosticSamples) metrics.localLatencyMs.shift();
+  if (metrics.localResponseLatencyMs.length > CONFIG.ui.diagnosticSamples)
+    metrics.localResponseLatencyMs.shift();
   const accepted = brain.ingest(
     {
       frameId: result.frameId,
@@ -328,7 +333,10 @@ function receiveScene(result: SceneAnalysis): void {
   metrics.sceneSamples++;
   if (!result.accepted) metrics.sceneAbstentions++;
   metrics.sceneLatencyMs.push(Math.round(result.latencyMs));
+  metrics.sceneResponseLatencyMs.push(Math.round(performance.now() - result.capturedAtMs));
   if (metrics.sceneLatencyMs.length > CONFIG.ui.diagnosticSamples) metrics.sceneLatencyMs.shift();
+  if (metrics.sceneResponseLatencyMs.length > CONFIG.ui.diagnosticSamples)
+    metrics.sceneResponseLatencyMs.shift();
   sceneReason = result.reason;
   if (!brain.ingestScene(result, performance.now())) {
     metrics.sceneRejectedFrames++;
@@ -802,8 +810,10 @@ el('export-diagnostics').addEventListener('click', () => {
     errors: metrics.errors,
     rejectedFrames: brain.world.rejectedFrames,
     inferenceLatencyMs: metrics.localLatencyMs,
+    localResponseLatencyMs: metrics.localResponseLatencyMs,
     localProvider: metrics.localProvider,
     sceneInferenceLatencyMs: metrics.sceneLatencyMs,
+    sceneResponseLatencyMs: metrics.sceneResponseLatencyMs,
     sceneSamples: metrics.sceneSamples,
     sceneAbstentions: metrics.sceneAbstentions,
     sceneRejectedFrames: metrics.sceneRejectedFrames,

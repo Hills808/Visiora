@@ -1,4 +1,4 @@
-import * as ort from '../vendor/ort.wasm.min.mjs';
+import * as ort from '../vendor/ort.webgpu.min.mjs';
 import { ScenePerception } from './scene-model.js';
 type Request =
   | { type: 'init' }
