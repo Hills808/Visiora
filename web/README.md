@@ -1,3 +1,9 @@
+## Luna na apresentação pelo notebook Windows (23/10/2026)
+
+O endereço público abaixo serve somente arquivos estáticos e **não dispõe do gateway Luna**. Para apresentar o acompanhamento automático no notebook Windows x64, use o pacote portátil `artifacts/visiora-luna-notebook-windows-x64.zip`. Ele inclui Node.js e o mesmo build da interface; abra `LEIA-ME-LUNA.txt` dentro do ZIP. Antes de sair, pare o gateway no PC e transfira separadamente `.env` e `.runtime/luna-budget.sqlite` para a pasta extraída no notebook. O ZIP distribuível não contém chave nem registro de gasto. Depois, abra `iniciar-luna.cmd` e visite `http://127.0.0.1:8080` no notebook. O gateway escuta só nesse aparelho; a câmera funciona no loopback do navegador. Teste a voz e a internet no notebook antes da apresentação. Não use Luna nos dois computadores ao mesmo tempo, pois o teto diário não é compartilhado ao vivo.
+
+Para regenerar o pacote nesta máquina: `npm run package:luna-notebook`. O script baixa o Node.js 24.22.1 x64 do site oficial e confere o SHA-256 publicado. [Evidência do ensaio portátil](docs/EVIDENCIAS/LUNA-NOTEBOOK-2026-10-23.md).
+
 ## Apresentação em outro aparelho (23/10/2026)
 
 Abra https://visiora-ambiente.hills808.chatgpt.site em Chrome ou Edge atualizado, com internet. Selecione **Modelos locais**, permita a câmera e aguarde o primeiro download de cerca de 168 MB. Em **Ajustes**, confira se há uma voz pt-BR; se não houver, use as descrições em texto ou o leitor de tela. Teste no notebook antes da apresentação, de preferência na mesma rede que será usada no local. A análise local roda no próprio aparelho e pode ficar lenta em notebooks sem GPU compatível. A demonstração de cenas funciona sem câmera.
