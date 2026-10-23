@@ -2,6 +2,8 @@
 
 A [Especificação de Requisitos de Software](docs/REQUISITOS.md) organiza funcionalidades, regras, interfaces, qualidade e design do Visiora segundo a ISO/IEC/IEEE 29148:2018, com IDs, critérios de verificação e estado de cada requisito.
 
+O último diagnóstico Luna com webcam registrou uma fala entregue em duas consultas enviadas. Foi exportado após a sessão parar; por isso `paused=true` não identifica falha. O diagnóstico novo distingue motivo da parada e análise pendente ao parar. [Leitura e limites do teste](docs/EVIDENCIAS/LUNA-DIAGNOSTICO-2026-10-23.md). Para investigar outra ocorrência, exporte o JSON enquanto a mensagem ainda aparece, antes de tocar em **Parar ambientação**; isso não envia nova imagem à API.
+
 Em Chrome no Windows, um ensaio de 30 minutos com vídeo público como câmera e voz simulada manteve a sessão ativa: 6.062 quadros, zero erros e crescimento de memória privada de 1,29% depois do aquecimento. Isso ainda precisa de webcam, voz e outras máquinas. [Evidência CA-D5/E3](docs/EVIDENCIAS/ESTABILIDADE-INSTALACAO-2026-10-23.md).
 
 Os controles da tela inicial foram verificados em 390 e 1440 px: áreas de botão/select ≥44 px, sem violações axe sérias/críticas nem de contraste reforçado no ensaio automatizado. O botão Ajustes mantém nome para leitor de tela no celular. [Evidência de interface](docs/EVIDENCIAS/ACESSIBILIDADE-2026-10-23.md).

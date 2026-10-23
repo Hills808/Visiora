@@ -70,6 +70,13 @@ try {
   page.on('request', (r) => requests.push(r.url()));
   await installTestVoice(page);
   await page.addInitScript(() => {
+    window.__diagnosticBlobs = [];
+    const createObjectURL = URL.createObjectURL.bind(URL);
+    URL.createObjectURL = (blob) => {
+      if (blob.type === 'application/json') window.__diagnosticBlobs.push(blob);
+      return createObjectURL(blob);
+    };
+    HTMLAnchorElement.prototype.click = function () {}; // Inspect the JSON without downloading it.
     window.__sceneLevel = 0;
     const original = CanvasRenderingContext2D.prototype.getImageData;
     CanvasRenderingContext2D.prototype.getImageData = function (...args) {
@@ -81,6 +88,19 @@ try {
       return image;
     };
   });
+  async function exportOnlineDiagnostic() {
+    await page.click('[data-page=help]');
+    if (!(await page.locator('#export-diagnostics').isVisible()))
+      await page.click('details.technical summary');
+    await page.click('#export-diagnostics');
+    const diagnostic = await page.evaluate(async () =>
+      JSON.parse(await window.__diagnosticBlobs.at(-1).text()),
+    );
+    await page.click('[data-page=ambient]');
+    assert.equal(diagnostic.counterScopes.errors, 'all-modes, page-lifetime');
+    assert.equal(diagnostic.counterScopes.onlineContinuity, 'current-or-last-Luna-session');
+    return diagnostic.onlineContinuity;
+  }
   await page.goto(base);
   await page.waitForFunction(() =>
     document.querySelector('#luna-config').textContent.includes('Simulador'),
@@ -199,6 +219,10 @@ try {
   );
   assert.equal(await page.locator('#camera').evaluate((v) => v.srcObject), null);
   assert.equal(await page.evaluate(() => window.__spoken.length), 5);
+  assert.deepEqual((await exportOnlineDiagnostic()).sessionEnd, {
+    reason: 'user',
+    pendingAtStop: true,
+  });
   report.cases.push('Stopping during upstream analysis stops camera and rejects late speech');
   let releaseStatus;
   let intercepted;
@@ -249,6 +273,10 @@ try {
   );
   report.transcript = await page.evaluate(() => window.__spoken.slice());
   await page.click('#start');
+  assert.deepEqual((await exportOnlineDiagnostic()).sessionEnd, {
+    reason: 'user',
+    pendingAtStop: false,
+  });
   assert.equal(
     requests.every((url) => new URL(url).origin === base),
     true,

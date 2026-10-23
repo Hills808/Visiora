@@ -497,3 +497,11 @@ Não testado: API/fatura/painel reais, virada física do relógio, outros PCs/SO
 **Decisão:** acrescentar roteiro local de 30 minutos no Windows com Chrome próprio, vídeo público como câmera artificial, modelos locais reais e voz substituída para evitar depender do dispositivo/idioma. Amostrar a memória privada da árvore do Chrome a cada 30 s e comparar após dois minutos de aquecimento; exigir câmera ativa, ausência de erro de página e diagnóstico sem erro. Executar o clone/`npm ci`/build/HTTP em diretório novo e registrar o tempo. Manter esse ensaio fora do CI, que não dispõe de Windows nem deve consumir 30 minutos em cada PR. Não há modelo, biblioteca, chamada paga, segredo ou regra de fala novos. Alternativa de confiar apenas em heap JavaScript foi rejeitada porque os pesos ONNX e a GPU consomem memória fora do heap.
 
 **Evidência e limite:** [ESTABILIDADE-INSTALACAO-2026-10-23.md](EVIDENCIAS/ESTABILIDADE-INSTALACAO-2026-10-23.md), CA-D5/E3. O ensaio artificial não substitui webcam/voz reais nem a repetição da instalação por pessoa de fora; a instalação prévia de Node/npm/Python/Git não está no cronômetro.
+
+## ADR-036 — distinguir parada voluntária de falha Luna no diagnóstico (23/10/2026)
+
+**Problema:** um diagnóstico real chegou após a sessão já ter terminado. `paused=true` era consequência normal de `stop()`, mas parecia erro; `source=idle` e contadores gerais da página também não indicavam o desfecho da segunda consulta Luna. A tela mostrava uma análise em outro instante.
+
+**Decisão:** registrar apenas o motivo categórico da última parada Luna e se havia análise pendente ao parar (`sessionEnd.reason`, `pendingAtStop`). Limpar esse registro ao começar outra sessão. Informar no JSON o escopo dos contadores gerais e de `onlineContinuity`. Não guardar imagem, texto da resposta, segredo ou log de consultas, nem alterar consentimento, envio, orçamento ou fala. Alternativa de deduzir falha apenas de `paused`/`errors` rejeitada porque esses campos têm outros significados.
+
+**Evidência e limite:** [LUNA-DIAGNOSTICO-2026-10-23.md](EVIDENCIAS/LUNA-DIAGNOSTICO-2026-10-23.md), CA-L4/S4. O arquivo antigo continua ambíguo. O teste fake cobre motivos de parada, não reproduz a sessão paga nem prova o motivo do erro geral observado.
