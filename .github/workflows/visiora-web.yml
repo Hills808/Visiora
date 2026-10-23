@@ -1,0 +1,43 @@
+name: Visiora web
+
+on:
+  push:
+    paths:
+      - '.github/workflows/visiora-web.yml'
+      - 'web/**'
+  pull_request:
+    paths:
+      - '.github/workflows/visiora-web.yml'
+      - 'web/**'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.11'
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Test and build offline package
+        run: npm test
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
+      - name: Simulated speech transcripts
+        run: node tools/simulate.mjs
