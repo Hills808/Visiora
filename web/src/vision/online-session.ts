@@ -19,6 +19,14 @@ interface Hooks {
   canAnalyze(): boolean;
   announce(message: string): void;
 }
+export type OnlineStopReason =
+  | 'user'
+  | 'camera-ended'
+  | 'start-failed'
+  | 'background'
+  | 'pagehide'
+  | 'data-cleared'
+  | 'mode-switch';
 export class OnlineSession {
   private client = new LunaClient();
   private memory = new VisualMemory();
@@ -40,6 +48,7 @@ export class OnlineSession {
     recoveries: 0,
   };
   private lastError: string | null = null;
+  private sessionEnd: { reason: OnlineStopReason; pendingAtStop: boolean } | null = null;
   private analyzedView: readonly number[] = [];
   private resultView: SnapshotView | null = null;
   private pendingView: SnapshotView | null = null;
@@ -49,6 +58,7 @@ export class OnlineSession {
       deliveryPolicy: CONFIG.online.deliveryPolicyRevision,
       ...this.counts,
       lastError: this.lastError,
+      sessionEnd: this.sessionEnd,
       running: this.running,
       pending: this.pending,
       paused: this.automatic.isPaused,
@@ -122,6 +132,7 @@ export class OnlineSession {
       recoveries: 0,
     };
     this.lastError = null;
+    this.sessionEnd = null;
     this.analyzedView = [];
     this.resultView = null;
     this.pendingView = null;
@@ -148,11 +159,12 @@ export class OnlineSession {
         : null;
       await this.camera.start(generation);
     } catch (error) {
-      this.stop();
+      this.stop('start-failed');
       throw error;
     }
   }
-  stop(): void {
+  stop(reason: OnlineStopReason = 'user'): void {
+    if (this.running || this.pending) this.sessionEnd = { reason, pendingAtStop: this.pending };
     this.generation++;
     this.running = false;
     this.pending = false;

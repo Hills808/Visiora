@@ -138,3 +138,7 @@ Leia docs/EVIDENCIAS/LUNA-FALA-EXPIRADA-RETESTE-2026-10-22.md. Fala iniciada den
 ## H2 parcial — ADR-030 (23/10/2026)
 
 Leia `docs/EVIDENCIAS/H2-PERCEPCAO-LOCAL-2026-10-23.md` e `docs/EVIDENCIAS/CENAS-GPU-2026-10-23.md`. O modo local mantém YOLOX Nano/Tiny/S, SigLIP2 e Places365, agora com WebGPU quando funciona e retorno à CPU em falha. RF-DETR e D-FINE não foram adotados. O modo Luna continua sem detector local real. H2/H3 não liberam fala híbrida; faltam webcam/voz, uso prolongado, outros equipamentos e revisão independente de qualidade.
+
+## Diagnóstico da sessão real — ADR-036 (23/10/2026)
+
+O arquivo `visiora-diagnosticov.json` mostrou 2 envios Luna, 1 aceito e 1 entrega, mas foi exportado depois da parada; `paused=true` não prova falha. Leia `docs/EVIDENCIAS/LUNA-DIAGNOSTICO-2026-10-23.md`. A revisão registra motivo da parada, análise pendente e escopo dos contadores, sem imagens/textos. Ainda falta reteste real; não atribuir o segundo envio a crédito ou expiração sem evidência.

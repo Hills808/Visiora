@@ -1,5 +1,7 @@
 ## Verificação automática (23/10/2026)
 
+O diagnóstico Luna recebido após a última sessão foi exportado com a câmera já parada: uma de duas consultas teve resposta aceita e fala confirmada. `paused=true` nesse momento é efeito normal da parada; o erro geral da página não tem causa registrada no JSON. A revisão ADR-036 acrescenta o motivo da parada e sinaliza se havia análise pendente, mas ainda não foi retestada na webcam do usuário. [Leitura da evidência](EVIDENCIAS/LUNA-DIAGNOSTICO-2026-10-23.md).
+
 Um Chrome headless com vídeo público como câmera e modelos reais WebGPU ficou ativo por 30 minutos: 6.062 quadros, zero erros de página/diagnóstico e memória privada da árvore de processos +1,29% após aquecimento. Isso verifica resistência apenas neste cenário artificial, sem webcam, voz audível, bateria, outro aparelho ou participante cego. [Evidência CA-D5](EVIDENCIAS/ESTABILIDADE-INSTALACAO-2026-10-23.md).
 
 Em clone novo no Windows, com Node/npm/Python/Git já instalados, obter o repositório, instalar pelo lockfile e gerar o pacote levou 22,87 s; outra cópia respondeu HTTP 200 em loopback. A medição não inclui instalar pré-requisitos nem foi feita por pessoa de fora, exigida pelo CA-E3. Outro computador na rede não acessa o serviço de loopback sem configuração HTTPS específica. [Evidência CA-E3](EVIDENCIAS/ESTABILIDADE-INSTALACAO-2026-10-23.md).

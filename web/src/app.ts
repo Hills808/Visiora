@@ -4,7 +4,7 @@ import { Brain } from './brain/brain.js';
 import type { Question, Utterance } from './brain/types.js';
 import { Speaker } from './output/speaker.js';
 import { Camera, type VisionResult } from './vision/camera.js';
-import { OnlineSession } from './vision/online-session.js';
+import { OnlineSession, type OnlineStopReason } from './vision/online-session.js';
 import type { SceneStatus } from './vision/scene-model.js';
 import type { SceneAnalysis } from './vision/scene.js';
 import {
@@ -282,13 +282,16 @@ function resetBrain(): void {
   initialTextPending = true;
   configure();
 }
-function stop(message = 'Ambientação parada. A câmera está desligada.'): void {
+function stop(
+  message = 'Ambientação parada. A câmera está desligada.',
+  reason: OnlineStopReason = 'user',
+): void {
   recognitionTrace.clear();
   text('caption-age', '');
   generation++;
   onlineNotice = null;
   camera.stop();
-  online.stop();
+  online.stop(reason);
   speaker.cancel();
   brain = new Brain();
   configure();
@@ -374,7 +377,7 @@ const online = new OnlineSession(el<HTMLVideoElement>('camera'), {
   },
   present,
   cancelSpeech: () => speaker.cancel(),
-  ended: () => stop('Sessão Luna encerrada. Nenhuma nova imagem será enviada.'),
+  ended: () => stop('Sessão Luna encerrada. Nenhuma nova imagem será enviada.', 'camera-ended'),
   canAnalyze: () =>
     !muted &&
     (preferences.output === 'reader' || !voiceUnavailable) &&
@@ -474,7 +477,7 @@ async function startCamera(): Promise<void> {
     }
   } catch (error) {
     if (attempt !== generation) return;
-    stop('Não foi possível iniciar a câmera. Você pode tentar novamente.');
+    stop('Não foi possível iniciar a câmera. Você pode tentar novamente.', 'start-failed');
     const name = error instanceof DOMException ? error.name : '';
     report(
       name === 'NotAllowedError'
@@ -494,7 +497,7 @@ function startDemo(): void {
     stop();
     return;
   }
-  stop();
+  stop('Ambientação parada. A câmera está desligada.', 'mode-switch');
   resetBrain();
   demoYaw = 0;
   setMode('demo');
@@ -786,7 +789,7 @@ el<HTMLFormElement>('search-form').addEventListener('submit', (event) => {
 el('clear-open').addEventListener('click', () => el<HTMLDialogElement>('clear-dialog').showModal());
 el('clear-cancel').addEventListener('click', () => el<HTMLDialogElement>('clear-dialog').close());
 el('clear-confirm').addEventListener('click', async () => {
-  stop();
+  stop('Ambientação parada. A câmera está desligada.', 'data-cleared');
   try {
     await clearData(localStorage);
     preferences = { ...DEFAULTS };
@@ -805,6 +808,12 @@ el('export-diagnostics').addEventListener('click', () => {
     version: CONFIG.version,
     date: new Date().toISOString(),
     source: mode,
+    counterScopes: {
+      frames: 'local-mode, page-lifetime',
+      speechCompleted: 'all-modes, page-lifetime',
+      errors: 'all-modes, page-lifetime',
+      onlineContinuity: 'current-or-last-Luna-session',
+    },
     frames: metrics.frames,
     speechCompleted: metrics.speechCompleted,
     errors: metrics.errors,
@@ -857,11 +866,11 @@ document.addEventListener('keydown', (event) => {
 });
 document.addEventListener('visibilitychange', () => {
   if (document.hidden && mode !== 'idle')
-    stop('Sessão parada porque a página ficou em segundo plano.');
+    stop('Sessão parada porque a página ficou em segundo plano.', 'background');
 });
 window.addEventListener('pagehide', () => {
   camera.stop();
-  online.stop();
+  online.stop('pagehide');
   localDownloadWorker?.terminate();
   if (localDownloadUrl) URL.revokeObjectURL(localDownloadUrl);
   if (diagnosticUrl) URL.revokeObjectURL(diagnosticUrl);
