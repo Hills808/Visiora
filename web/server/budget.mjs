@@ -88,7 +88,11 @@ export class Budget {
       const today = this.db
         .prepare('SELECT COALESCE(SUM(charge),0) n FROM requests WHERE at>=? AND at<?')
         .get(start, end).n;
-      if (today + charge > this.limits.daily) throw new GatewayError(429, 'budget');
+      // Evaluate on every reservation: the exception expires even if the process stays running.
+      const dailyLimit = day === this.limits.presentationDay
+        ? Math.max(this.limits.daily, this.limits.presentationDaily)
+        : this.limits.daily;
+      if (today + charge > dailyLimit) throw new GatewayError(429, 'budget');
       this.db
         .prepare("INSERT INTO requests(id,at,day,charge,state) VALUES(?,?,?,?,'pending')")
         .run(id, now, day, charge);

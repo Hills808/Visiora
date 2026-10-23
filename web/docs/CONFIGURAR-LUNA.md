@@ -1,3 +1,7 @@
+## Exceção para apresentação — 23/10/2026 (ADR-037)
+
+Por autorização do usuário, o teto de reserva do **Luna** no piloto com servidor configurado foi elevado para **US$ 10 no dia 23/10/2026**, no fuso `America/Sao_Paulo`. Esse valor inclui as reservas e os gastos já computados no dia: não é crédito adicional. Às 00h de **24/10/2026**, retorna automaticamente ao teto normal de **US$ 2/dia**, mesmo sem reiniciar o processo. A configuração `VISIORA_DAILY_USD` continua limitada a 2; a exceção só atua com o Luna previamente habilitado e orçamento normal positivo. Histórico, reservas incertas, chave e consentimento permanecem intactos. Para usar o código novo, atualizar o checkout local e **reiniciar o gateway** antes da apresentação. Isso não altera cotas ou faturamento do provedor e não resolve timeout, rede, credenciais ou falhas de voz. O link público estático ainda não oferece Luna. Evidência e roteiro: [EVIDENCIAS/LUNA-LIMITE-APRESENTACAO-2026-10-23.md](EVIDENCIAS/LUNA-LIMITE-APRESENTACAO-2026-10-23.md).
+
 ## Orçamento corrigido: US$ 2 por dia — ADR-025 (19/10/2026)
 
 O limite autorizado é **US$ 2 por dia**, renovado à meia-noite de São Paulo (`America/Sao_Paulo`). Não há teto acumulado de US$ 2. `VISIORA_DAILY_USD=2` continua válido; `VISIORA_TOTAL_USD` foi aposentado e é ignorado, mesmo se ainda existir no `.env`. Configuração inicial continua zero/desligada; valor diário acima de 2 é recusado. Nenhum segredo precisa ser reenviado ou editado para aplicar esta correção.
