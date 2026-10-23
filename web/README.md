@@ -2,6 +2,8 @@
 
 A [Especificação de Requisitos de Software](docs/REQUISITOS.md) organiza funcionalidades, regras, interfaces, qualidade e design do Visiora segundo a ISO/IEC/IEEE 29148:2018, com IDs, critérios de verificação e estado de cada requisito.
 
+Em Chrome no Windows, um ensaio de 30 minutos com vídeo público como câmera e voz simulada manteve a sessão ativa: 6.062 quadros, zero erros e crescimento de memória privada de 1,29% depois do aquecimento. Isso ainda precisa de webcam, voz e outras máquinas. [Evidência CA-D5/E3](docs/EVIDENCIAS/ESTABILIDADE-INSTALACAO-2026-10-23.md).
+
 Os controles da tela inicial foram verificados em 390 e 1440 px: áreas de botão/select ≥44 px, sem violações axe sérias/críticas nem de contraste reforçado no ensaio automatizado. O botão Ajustes mantém nome para leitor de tela no celular. [Evidência de interface](docs/EVIDENCIAS/ACESSIBILIDADE-2026-10-23.md).
 
 `npm run test:a11y` prepara o build e executa a auditoria estática de interface em Chromium; o CI instala o navegador headless e roda esse comando em cada mudança de `web/`.
@@ -68,10 +70,19 @@ A câmera não mede distância nem mantém mapa 360°. Passos e giros da demonst
 
 ## Desenvolver
 
-Node.js 24+, npm e Python 3.11+ (stdlib para criar ZIP). Nesta pasta:
+Node.js 24+, npm e Python 3.11+ (stdlib para criar ZIP). Em outro computador Windows, com esses programas e Git já instalados:
 
 ```powershell
-npm install
+git clone https://github.com/Hills808/Visiora.git
+cd Visiora/web
+npm ci
+npm run build
+npm run dev
+```
+
+Abra `http://127.0.0.1:8080` nesse mesmo computador e escolha **Modelos locais** para testar sem API. O servidor escuta apenas em loopback; acessar de outro aparelho pela rede exige uma configuração HTTPS própria. Para verificar o código nesta pasta:
+
+```powershell
 npm test
 npm run typecheck
 npm run lint
@@ -97,7 +108,7 @@ node tests/e2e/people.mjs
 
 `--fixtures` substitui HTTP por arquivos locais; não testa servidor, rede nem service worker. `people.mjs` sempre usa esse transporte. Pesos WASM são reais; câmera e voz são simuladas. Insumos de QA não entram no produto. O teste de objetos usa [dog.jpg do YOLOX](https://raw.githubusercontent.com/Megvii-BaseDetection/YOLOX/main/assets/dog.jpg), convertido em `artifacts/vision/dog.y4m`; axe-core 4.14.0 vem do `package-lock.json`. O teste de lugar usa uma imagem positiva selecionada em `artifacts/scene/browser.y4m`. O de pessoas usa a foto pública COCO val2017 23899 convertida em `artifacts/recognition-upgrade/people.y4m`. São testes de integração, não de precisão.
 
-Reprodução dos benchmarks requer downloads e dependências opcionais descritos na evidência. Scripts, protocolos congelados, todas as previsões e fontes sem fotografias foram preservados em `docs/EVIDENCIAS/0.3.0/`. `tools/prepare_recognition_models.mjs` verifica e divide os três pesos adicionais já obtidos; não baixa nem treina modelos. Nenhum script de pesquisa roda no aplicativo. A instalação limpa em Windows ainda precisa de ensaio cronometrado; o CI e o lockfile já estão em uso.
+Reprodução dos benchmarks requer downloads e dependências opcionais descritos na evidência. Scripts, protocolos congelados, todas as previsões e fontes sem fotografias foram preservados em `docs/EVIDENCIAS/0.3.0/`. `tools/prepare_recognition_models.mjs` verifica e divide os três pesos adicionais já obtidos; não baixa nem treina modelos. Nenhum script de pesquisa roda no aplicativo. Um clone limpo com Node/npm já instalados gerou o build em 22,87 s; outra cópia respondeu HTTP 200. Ainda falta repetir o roteiro com uma pessoa de fora e medir instalação dos pré-requisitos. [Evidência](docs/EVIDENCIAS/ESTABILIDADE-INSTALACAO-2026-10-23.md).
 
 ## Documentos e publicação
 
