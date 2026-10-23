@@ -6,6 +6,7 @@ Esta opção entrega **o mesmo frontend e o gateway Luna na mesma origem HTTPS**
 
 - Uma máquina/VM Linux com Docker Engine + Compose e portas 80/443 acessíveis; DNS A/AAAA do domínio apontando para ela; HTTPS emitido pelo Caddy.
 - Instância **única** (não distribuir a aplicação entre réplicas); volume Docker `luna_ledger` persistente. Um ledger independente em outro computador não compartilha gastos.
+- **Obrigatório se Luna já foi usado hoje no PC:** desligar o gateway anterior e transferir o ledger SQLite **antes** de iniciar o gateway hospedado. Uma base vazia reiniciaria a contagem e poderia ultrapassar os US$ 10 totais autorizados para a apresentação. Não permitir dois gateways pagos simultâneos. Sem migração conferida, manter `VISIORA_LUNA_ENABLED=0`.
 - Chave OpenAI privada e tarifas conferidas segundo `docs/CONFIGURAR-LUNA.md`. Não inserir chave no navegador, repositório ou build. O controle interno limita **reservas estimadas**, não substitui as cotas do provedor.
 - Credenciais privadas para HTTP Basic; todos os recursos, inclusive `/api/vision/status`, exigem autenticação.
 
