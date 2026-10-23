@@ -21,6 +21,17 @@ jobs:
       - name: Build single-instance gateway image
         working-directory: web
         run: docker build -f deploy/Dockerfile -t visiora-luna:ci .
+      - name: Validate Compose and Caddy without real secrets
+        working-directory: web
+        run: |
+          printf 'VISIORA_PROVIDER=fake\n' > .env
+          printf 'VISIORA_HOST=visiora.example\n' > deploy/.env
+          cp deploy/auth.caddy.example deploy/auth.caddy
+          docker compose --env-file deploy/.env -f deploy/compose.yml config --quiet
+          docker run --rm -e VISIORA_HOST=visiora.example \
+            -v "$PWD/deploy/Caddyfile:/etc/caddy/Caddyfile:ro" \
+            -v "$PWD/deploy/auth.caddy:/etc/caddy/auth.caddy:ro" \
+            caddy:2.11.7-alpine caddy validate --config /etc/caddy/Caddyfile
       - name: Start simulated gateway without billing
         run: docker run -d --name visiora-luna-ci -e VISIORA_PROVIDER=fake visiora-luna:ci
       - name: Verify HTTP status only on container loopback
