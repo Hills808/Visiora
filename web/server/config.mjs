@@ -30,6 +30,7 @@ function publicOrigin(value = '') {
   } catch {
     throw new Error('Origem pública inválida.');
   }
+  // Only one exact HTTPS origin is allowed; paths and wildcard hosts are rejected.
   if (url.protocol !== 'https:' || url.origin !== value || !/^[a-z0-9.-]+$/i.test(url.hostname))
     throw new Error('A origem pública deve ser uma origem HTTPS exata, sem caminho ou barra final.');
   return url.origin;
