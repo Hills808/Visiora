@@ -16,7 +16,7 @@
     "format": "node node_modules/prettier/bin/prettier.cjs --write src public/index.html public/styles.css public/sw.js tools tests",
     "simulate": "node tools/simulate.mjs",
     "test:e2e": "node tests/e2e/smoke.mjs",
-    "test:a11y": "node tests/e2e/accessibility.mjs",
+    "test:a11y": "node tools/build.mjs && node tests/e2e/accessibility.mjs",
     "dev:luna": "node --env-file-if-exists=.env server/gateway.mjs",
     "luna:models": "node tools/luna-models.mjs",
     "test:luna": "node --test tests/luna*.test.mjs"
