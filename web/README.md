@@ -1,3 +1,7 @@
+## Luna pela internet — implantação privada (em preparação)
+
+A hospedagem pública atual `https://visiora-ambiente.hills808.chatgpt.site` é **estática** e não oferece Luna. Há uma opção de implantação em endereço HTTPS próprio, com autenticação, chave somente no servidor e orçamento SQLite persistente: [guia de implantação](deploy/README.md). **Não foi implantada nem testada ao vivo.** Não divulgue um endereço como funcionando com Luna até confirmar as etapas do guia.
+
 ## Exceção para apresentação — 23/10/2026 (ADR-037)
 
 Por autorização do usuário, o teto de reserva do **Luna** no piloto com servidor configurado foi elevado para **US$ 10 no dia 23/10/2026**, no fuso `America/Sao_Paulo`. Esse valor inclui as reservas e os gastos já computados no dia: não é crédito adicional. Às 00h de **24/10/2026**, retorna automaticamente ao teto normal de **US$ 2/dia**, mesmo sem reiniciar o processo. A configuração `VISIORA_DAILY_USD` continua limitada a 2; a exceção só atua com o Luna previamente habilitado e orçamento normal positivo. Histórico, reservas incertas, chave e consentimento permanecem intactos. Para usar o código novo, atualizar o checkout local e **reiniciar o gateway** antes da apresentação. Isso não altera cotas ou faturamento do provedor e não resolve timeout, rede, credenciais ou falhas de voz. O link público estático ainda não oferece Luna. Evidência e roteiro: [docs/EVIDENCIAS/LUNA-LIMITE-APRESENTACAO-2026-10-23.md](docs/EVIDENCIAS/LUNA-LIMITE-APRESENTACAO-2026-10-23.md).

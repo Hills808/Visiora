@@ -1,0 +1,5 @@
+# Copie para auth.caddy (ignorado pelo Git), substitua o hash e mantenha privado.
+# Gere um hash bcrypt: docker run --rm -it caddy:2.11.7-alpine caddy hash-password
+basic_auth {
+  operador SUBSTITUA_PELO_HASH_BCRYPT
+}
