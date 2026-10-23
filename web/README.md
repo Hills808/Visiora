@@ -1,5 +1,7 @@
 ## Visão local mais rápida no PC testado (23/10/2026)
 
+A [Especificação de Requisitos de Software](docs/REQUISITOS.md) organiza funcionalidades, regras, interfaces, qualidade e design do Visiora segundo a ISO/IEC/IEEE 29148:2018, com IDs, critérios de verificação e estado de cada requisito.
+
 O modo **Modelos locais** agora usa GPU/WebGPU para objetos quando funciona no navegador e retorna à CPU se não conseguir iniciar. Os mesmos YOLOX Nano/Tiny/S e a mesma regra de pessoas permanecem. No teste com imagem pública e câmera simulada, a análise de objetos levou 64–124 ms na RTX 3060 e 1334–1665 ms na CPU; o reconhecimento de ambiente ainda levou cerca de 1,6 s. O status e o diagnóstico indicam GPU ou CPU. RF-DETR e D-FINE foram comparados, mas produziram mais detecções de cadeira sem anotação correspondente e não entraram no aplicativo. O modo Luna continua usando capturas próprias, sem detector local híbrido ativo. [Medições, modelos e limites](docs/EVIDENCIAS/H2-PERCEPCAO-LOCAL-2026-10-23.md). Para usar o build local, recarregue duas vezes após `npm run build` e `npm run dev:luna`; o cache offline troca de revisão. Não houve chamada paga nem publicação nesta mudança.
 
 ## Correção da expiração da fala Luna (22/10/2026)
