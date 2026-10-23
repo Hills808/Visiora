@@ -14,7 +14,9 @@ export const POLICY = Object.freeze({
   requestsPerMinute: 15,
   cooldownMs: 4000,
   budgetTimeZone: 'America/Sao_Paulo', // The authorized daily allowance follows the user's calendar, not the host timezone.
-  maxDailyMicros: 2000000, // US$2/day authorized by the user; no cumulative US$2 pilot cap.
+  maxDailyMicros: 2000000, // Default: US$2/day. The exception below expires at Sao Paulo midnight.
+  presentationDay: '2026-10-23', // One-day classroom demonstration expressly authorized by the user.
+  presentationDailyMicros: 10000000, // US$10 TOTAL for that calendar day, including prior charges.
   // Conservative reservation: entire 1.05M context at long-context cache-write rate,
   // plus capped output, plus 10% regional premium. Standard tier only. USD in micros.
   reservationMicros: 300000,
@@ -55,6 +57,8 @@ export function loadConfig(env = process.env) {
   return {
     provider,
     daily,
+    presentationDay: POLICY.presentationDay,
+    presentationDaily: daily > 0 ? POLICY.presentationDailyMicros : 0,
     port,
     publicOrigin: publicOrigin(env.VISIORA_PUBLIC_ORIGIN),
     ready,

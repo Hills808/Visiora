@@ -523,3 +523,22 @@ Não testado: API/fatura/painel reais, virada física do relógio, outros PCs/SO
 **Runtime:** Node.js 24.22.1 LTS Windows x64, publicado em [arquivo oficial](https://nodejs.org/en/download/archive/v24.22.1) e verificado com `SHASUMS256.txt`; ZIP oficial Windows x64 em torno de 38 MB. Licença MIT e avisos de terceiros incluídos em `licenses/Node.js-LICENSE.txt`, conforme [licença oficial](https://github.com/nodejs/node/blob/v24.22.1/LICENSE). Requer Windows x64 ou emulação x64; alternativa é instalar Node.js 24 no notebook e clonar o repositório, com mais etapas e downloads. Não há modelo novo nem mudança da tarifa/limite Luna.
 
 **Evidência:** [LUNA-NOTEBOOK-2026-10-23.md](EVIDENCIAS/LUNA-NOTEBOOK-2026-10-23.md), CA-L4/CA-E3/CA-E4. A extração e o gateway foram ensaiados neste PC com backend fake e credencial fictícia; nenhuma chamada paga foi feita. Webcam, voz, rede e API no notebook ainda dependem de ensaio físico.
+
+
+## ADR-037 — Limite excepcional na apresentação de sala de aula (23/10/2026)
+
+**Contexto:** o usuário autorizou explicitamente aumentar o teto de Luna de US$ 2 para **US$ 10 apenas em 23/10/2026**, para a primeira demonstração em sala de aula. O piloto usa ledger SQLite local e reservas conservadoras por requisição.
+
+**Decisão:** manter `VISIORA_DAILY_USD` e o teto padrão em US$ 2, com exceção limitada em `server/config.mjs` ao dia local `2026-10-23` em `America/Sao_Paulo`. Quando o gateway está habilitado com orçamento positivo, `Budget.reserve` escolhe US$ 10 para esse dia e US$ 2 para qualquer outro. A escolha ocorre a cada reserva, independentemente de reinício. Os US$ 10 são o total do dia, incluindo reservas já registradas; após 00h de 24/10 o histórico não é apagado e não existe reembolso de solicitações incertas. Configuração desativada continua desativada. Mantidos consentimento, CSRF, modelo, precificação, cooldown, proteção contra chamadas paralelas e segredo exclusivo de servidor.
+
+**Alternativas rejeitadas:** editar `.env` para 10 e aumentar globalmente o teto (permitiria continuar com US$ 10 amanhã se o servidor permanecesse ligado); zerar SQLite ao chegar no orçamento (poderia superar a autorização e perder auditoria); aumentar a cota da API remotamente sem controle no código (não protege do orçamento local).
+
+**Consequências/limitações:** atualizar os arquivos no servidor e reiniciar para carregar a versão nova; o endpoint não está publicado de forma autenticada na internet. O controle é uma estimativa/reserva local, não limite garantido na plataforma OpenAI. Qualquer erro de rede, 429 do provedor, tempo limite ou expiração da fala ainda pode pausar a sessão. Verificar com testes de relógio controlado e sem chamadas pagas. Evidência: `docs/EVIDENCIAS/LUNA-LIMITE-APRESENTACAO-2026-10-23.md`.
+
+## ADR-039 — preparação para Luna hospedado com origem única (23/10/2026)
+
+**Contexto:** o Site público é estático e não possui `/api/vision/*`. O usuário precisa acessar o Luna no navegador de outros aparelhos sem expor a chave ou liberar consultas anônimas.
+
+**Decisão:** preparar implantação alternativa em servidor Linux de instância única: frontend e gateway Node no mesmo endereço, TLS e HTTP Basic aplicados pelo Caddy a todas as rotas; Node limitado ao loopback compartilhado e Host interno fixo, `VISIORA_PUBLIC_ORIGIN` HTTPS exata; CSRF/consentimento preservados. SQLite persistente em um único volume. Node.js 24.22.1 (MIT; alternativa: Node 26 após revalidação) e Caddy 2.11.7 (Apache-2.0; alternativa: Nginx + Certbot), publicados nos repositórios oficiais. Não há modelo de visão novo.
+
+**Limites:** esta implementação não migra o Site chatgpt.site automaticamente nem cria infraestrutura. Exige servidor e domínio, configuração privada de autenticação/chave e validação física. CI de testes do gateway é diferente de validação de HTTPS/Docker/câmera/voz. Persistência e único processo são pré-requisitos de orçamento, cuja estimativa não constitui hard cap do faturamento OpenAI. Não publicar sem gates; nenhuma chamada paga ou chave foi configurada.

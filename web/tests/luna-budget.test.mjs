@@ -159,3 +159,39 @@ test('CA-L3: missing usage retains full reservation; zero budget blocks and thro
     b.close();
   }
 });
+
+
+test('CA-L3: only Oct 23 has US$10 total, then US$2 returns without server restart', () => {
+  const cfg = loadConfig({ VISIORA_PROVIDER: 'fake', VISIORA_DAILY_USD: '2' });
+  assert.equal(cfg.daily, 2000000);
+  assert.equal(cfg.presentationDay, '2026-10-23');
+  assert.equal(cfg.presentationDaily, 10000000);
+  let now = Date.parse('2026-10-23T12:00:00Z');
+  const b = new Budget(':memory:', cfg, () => now);
+  try {
+    // Existing use counts inside the US$10 allowance; no extra US$10 is added.
+    for (let i = 0; i < 33; i++) {
+      b.reserve('presentation-' + i);
+      b.uncertain('presentation-' + i);
+      now += 10000;
+    }
+    assert.throws(() => b.reserve('over-10'), /budget/);
+    now = Date.parse('2026-10-24T02:59:59Z'); // Still Oct 23 in Sao Paulo.
+    assert.equal(budgetDay(now), '2026-10-23');
+    assert.throws(() => b.reserve('still-23'), /budget/);
+    now = Date.parse('2026-10-24T03:00:01Z'); // Oct 24, 00:00:01 in Sao Paulo.
+    assert.equal(budgetDay(now), '2026-10-24');
+    for (let i = 0; i < 6; i++) {
+      b.reserve('regular-' + i);
+      b.uncertain('regular-' + i);
+      now += 10000;
+    }
+    assert.throws(() => b.reserve('over-2'), /budget/);
+    assert.equal(b.db.prepare('SELECT COUNT(*) n FROM requests').get().n, 39);
+  } finally {
+    b.close();
+  }
+  const disabled = loadConfig({ VISIORA_DAILY_USD: '0' });
+  assert.equal(disabled.presentationDaily, 0);
+  assert.equal(disabled.ready, false);
+});
