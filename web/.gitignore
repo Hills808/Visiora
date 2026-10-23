@@ -23,3 +23,6 @@ dist/
 !public/models/**
 !docs/EVIDENCIAS/*.log
 !docs/EVIDENCIAS/0.3.0/*.log
+
+deploy/.env
+deploy/auth.caddy

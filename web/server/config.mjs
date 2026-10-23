@@ -22,6 +22,18 @@ export const POLICY = Object.freeze({
   reservationMicros: 300000,
   pricingRevision: '2026-10-18',
 });
+function publicOrigin(value = '') {
+  if (!value) return '';
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    throw new Error('Origem pública inválida.');
+  }
+  if (url.protocol !== 'https:' || url.origin !== value || !/^[a-z0-9.-]+$/i.test(url.hostname))
+    throw new Error('A origem pública deve ser uma origem HTTPS exata, sem caminho ou barra final.');
+  return url.origin;
+}
 function money(value = '0') {
   if (!/^\d+(\.\d{1,6})?$/.test(value))
     throw new Error('Orçamento inválido; use USD com ponto decimal.');
@@ -47,6 +59,7 @@ export function loadConfig(env = process.env) {
     presentationDay: POLICY.presentationDay,
     presentationDaily: daily > 0 ? POLICY.presentationDailyMicros : 0,
     port,
+    publicOrigin: publicOrigin(env.VISIORA_PUBLIC_ORIGIN),
     ready,
     apiKey: env.OPENAI_API_KEY || '',
     root: path.resolve('dist'),

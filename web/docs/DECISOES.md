@@ -534,3 +534,11 @@ Não testado: API/fatura/painel reais, virada física do relógio, outros PCs/SO
 **Alternativas rejeitadas:** editar `.env` para 10 e aumentar globalmente o teto (permitiria continuar com US$ 10 amanhã se o servidor permanecesse ligado); zerar SQLite ao chegar no orçamento (poderia superar a autorização e perder auditoria); aumentar a cota da API remotamente sem controle no código (não protege do orçamento local).
 
 **Consequências/limitações:** atualizar os arquivos no servidor e reiniciar para carregar a versão nova; o endpoint não está publicado de forma autenticada na internet. O controle é uma estimativa/reserva local, não limite garantido na plataforma OpenAI. Qualquer erro de rede, 429 do provedor, tempo limite ou expiração da fala ainda pode pausar a sessão. Verificar com testes de relógio controlado e sem chamadas pagas. Evidência: `docs/EVIDENCIAS/LUNA-LIMITE-APRESENTACAO-2026-10-23.md`.
+
+## ADR-039 — preparação para Luna hospedado com origem única (23/10/2026)
+
+**Contexto:** o Site público é estático e não possui `/api/vision/*`. O usuário precisa acessar o Luna no navegador de outros aparelhos sem expor a chave ou liberar consultas anônimas.
+
+**Decisão:** preparar implantação alternativa em servidor Linux de instância única: frontend e gateway Node no mesmo endereço, TLS e HTTP Basic aplicados pelo Caddy a todas as rotas; Node limitado ao loopback compartilhado e Host interno fixo, `VISIORA_PUBLIC_ORIGIN` HTTPS exata; CSRF/consentimento preservados. SQLite persistente em um único volume. Node.js 24.22.1 (MIT; alternativa: Node 26 após revalidação) e Caddy 2.11.7 (Apache-2.0; alternativa: Nginx + Certbot), publicados nos repositórios oficiais. Não há modelo de visão novo.
+
+**Limites:** esta implementação não migra o Site chatgpt.site automaticamente nem cria infraestrutura. Exige servidor e domínio, configuração privada de autenticação/chave e validação física. CI de testes do gateway é diferente de validação de HTTPS/Docker/câmera/voz. Persistência e único processo são pré-requisitos de orçamento, cuja estimativa não constitui hard cap do faturamento OpenAI. Não publicar sem gates; nenhuma chamada paga ou chave foi configurada.

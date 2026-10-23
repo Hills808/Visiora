@@ -1,0 +1,9 @@
+{$VISIORA_HOST} {
+  encode zstd gzip
+  # Access control is mandatory on the HTML, status and paid analyze routes.
+  import /etc/caddy/auth.caddy
+  reverse_proxy 127.0.0.1:8080 {
+    # Node trusts only loopback Host; the browser Origin remains the public HTTPS origin.
+    header_up Host 127.0.0.1:8080
+  }
+}
