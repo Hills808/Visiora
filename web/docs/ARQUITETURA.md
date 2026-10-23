@@ -1,3 +1,7 @@
+## Verificação contínua — ADR-031 (23/10/2026)
+
+O workflow de GitHub Actions em `.github/workflows/visiora-web.yml` executa o projeto em `web/` com Node 24 e Python 3.11. Instala pelo `package-lock.json`, roda build e 161 testes Node, checagem estrita de tipos, lint e seis transcrições simuladas. Não usa `.env`, chave ou imagens privadas; E2E de navegador com fixture pública e ensaios físicos são gates separados. [Evidência](EVIDENCIAS/CI-2026-10-23.md).
+
 ## Execução local de objetos — ADR-030 (23/10/2026)
 
 `vision/worker.ts` usa o bundle WebGPU do ONNX Runtime Web 1.30.0 no worker de objetos. Depois de verificar os pesos YOLOX Nano/Tiny/S, inicia e aquece as três sessões com WebGPU quando disponível. Falha de inicialização libera as sessões e recria a mesma política em WASM. O resultado carrega `provider`, exibido como GPU/CPU no status e guardado no diagnóstico. `tools/build.mjs` copia os arquivos de runtime para pacote e cache versionado. O worker de ambientes permanece WASM. Não há alternância automática após perda de GPU durante a sessão; essa condição requer teste CA-H7. No modo Luna, o pipeline local real permanece desativado. [Ensaio H2 parcial](EVIDENCIAS/H2-PERCEPCAO-LOCAL-2026-10-23.md).

@@ -1,3 +1,7 @@
+## Verificação automática (23/10/2026)
+
+GitHub Actions foi configurado para testar código e transcrições da versão web a cada mudança. CI verde, quando observado, demonstra somente esses comandos no runner; não comprova câmera, áudio, leitor de tela, precisão de modelos, desempenho em outros PCs, 30 minutos de uso ou aceite humano. [Escopo da verificação](EVIDENCIAS/CI-2026-10-23.md).
+
 ## Ensaio de execução local — ADR-030 (23/10/2026)
 
 No PC de teste com RTX 3060, os mesmos modelos YOLOX de objetos passaram a usar WebGPU, com retorno à CPU/WASM se a GPU não iniciar. Em uma foto pública apresentada como câmera artificial, 13 inferências GPU levaram 64–124 ms; seis CPU, 1334–1665 ms. O reconhecimento de ambiente seguiu em WASM, 1568–1651 ms em cinco amostras. Não são tempos de captura até voz, nem teste com a webcam do usuário. Dois candidatos de detector aumentaram falsos de cadeira segundo anotações COCO; nenhum foi adotado. Um dos negativos mostra assentos possivelmente não anotados, portanto o conjunto precisa de revisão independente. [Protocolo e evidências](EVIDENCIAS/H2-PERCEPCAO-LOCAL-2026-10-23.md). Não testados perda de GPU durante sessão, uso prolongado, RAM, celular, outros PCs, áudio real ou qualidade com pessoas cegas. H2/H3 ainda bloqueiam fala híbrida local no Luna. As medições históricas WASM abaixo continuam válidas para o perfil CPU.
