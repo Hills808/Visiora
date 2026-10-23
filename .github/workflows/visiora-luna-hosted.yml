@@ -1,0 +1,46 @@
+name: Visiora Luna deployment smoke
+
+on:
+  pull_request:
+    paths:
+      - 'web/deploy/**'
+      - 'web/server/**'
+      - '.github/workflows/visiora-luna-hosted.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  container-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build single-instance gateway image
+        working-directory: web
+        run: docker build -f deploy/Dockerfile -t visiora-luna:ci .
+      - name: Start simulated gateway without billing
+        run: docker run -d --name visiora-luna-ci -e VISIORA_PROVIDER=fake visiora-luna:ci
+      - name: Verify HTTP status only on container loopback
+        run: |
+          docker exec visiora-luna-ci node --input-type=module -e '
+            const deadline = Date.now() + 10000;
+            for (;;) {
+              try {
+                const response = await fetch("http://127.0.0.1:8080/api/vision/status");
+                if (!response.ok) throw new Error("HTTP " + response.status);
+                const status = await response.json();
+                if (status.ready !== true || status.provider !== "fake") throw new Error("Invalid fake status");
+                if (!/^[a-f0-9]{64}$/.test(status.csrfToken)) throw new Error("Invalid CSRF");
+                break;
+              } catch (err) {
+                if (Date.now() >= deadline) throw err;
+                await new Promise(resolve => setTimeout(resolve, 200));
+              }
+            }'
+          test -z "$(docker port visiora-luna-ci)"
+      - name: Tear down simulated gateway
+        if: always()
+        run: docker rm -f visiora-luna-ci || true
