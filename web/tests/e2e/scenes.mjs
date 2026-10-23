@@ -8,7 +8,7 @@ import {
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
-const base = 'http://127.0.0.1:8080';
+const base = process.env.VISIORA_TEST_URL || 'http://127.0.0.1:8080';
 const out = path.resolve('artifacts/e2e-scenes');
 await mkdir(out, { recursive: true });
 const fixture = JSON.parse(await readFile('artifacts/scene/browser-fixture.json', 'utf8'));

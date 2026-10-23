@@ -85,3 +85,8 @@ Sites mantém a identidade em `.openai/hosting.json` e publica `dist`. Sem profu
 ## Adendo de planejamento — Luna 6
 
 A migração futura está em [PLANO-MIGRACAO-LUNA-6.md](PLANO-MIGRACAO-LUNA-6.md), com escopo registrado na ADR-016 de [DECISOES.md](DECISOES.md). Leia [RETOMADA-LUNA-6.md](RETOMADA-LUNA-6.md) antes de continuar. Este adendo não altera o funcionamento publicado, não substitui evidências dos critérios de aceite e não autoriza chamadas pagas ou envio de imagens.
+# Hospedagem da apresentação (23/10/2026)
+
+O site público serve apenas os arquivos estáticos de `dist` por HTTPS. A câmera, os workers ONNX, os pesos e a voz rodam no navegador do visitante; imagens não passam pelo host no modo local. O endpoint `/api/vision/*` não existe nessa hospedagem, portanto Luna informa gateway indisponível. O gateway com chave e ledger continua apenas no ambiente local configurado. O seletor inicia em Modelos locais para evitar escolher por engano um serviço ausente.
+
+Para respeitar o limite de 25 MiB por arquivo do host, o build grava o runtime WebAssembly asyncify como gzip e um manifesto com bytes/SHA-256. Os dois workers o descomprimem e verificam antes de chamar o ONNX Runtime. O pacote local e o cache offline incluem esses arquivos compactados.
