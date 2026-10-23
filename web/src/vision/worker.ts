@@ -4,7 +4,7 @@ import * as ort from '../vendor/ort.webgpu.min.mjs';
 import { loadModelAsset, verifiedData, type ModelManifest } from './model-assets.js';
 import { composeDetections, type DetectorHead, type HeadDetections } from './person-consensus.js';
 type Request =
-  | { type: 'init' }
+  | { type: 'init'; forceCpu?: boolean }
   | {
       type: 'frame';
       frameId: number;
@@ -83,7 +83,7 @@ scope.onmessage = async (event: MessageEvent<Request>): Promise<void> => {
           }
           provider = next;
         };
-        if ((navigator as Navigator & { gpu?: unknown }).gpu) {
+        if (!message.forceCpu && (navigator as Navigator & { gpu?: unknown }).gpu) {
           try {
             await initialize('webgpu');
           } catch (error) {

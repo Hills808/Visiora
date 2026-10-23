@@ -17,6 +17,7 @@ export class Camera {
   private id = 0;
   private timer: ReturnType<typeof setTimeout> | null = null;
   private watchdog: ReturnType<typeof setTimeout> | null = null;
+  private runtimeFailure: ((message: string) => void) | null = null;
   private canvas = document.createElement('canvas');
   private sourceCanvas = document.createElement('canvas');
   private verificationCanvas = document.createElement('canvas');
@@ -59,48 +60,95 @@ export class Camera {
     this.video.srcObject = stream;
     await this.video.play();
     status('Preparando a visão local. O primeiro acesso baixa o modelo…');
-    const worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
-    this.worker = worker;
-    await new Promise<void>((resolve, reject) => {
-      const timeout = setTimeout(() => {
-        reject(new Error('O modelo demorou a iniciar. Tente novamente ou abra a demonstração.'));
-      }, CONFIG.vision.workerTimeoutMs);
-      worker.onerror = (event): void => {
-        clearTimeout(timeout);
-        reject(new Error(event.message || 'Não foi possível iniciar a visão local.'));
-      };
-      worker.onmessage = (event: MessageEvent<{ type: string; message?: string }>): void => {
-        if (event.data.type === 'status' && event.data.message) status(event.data.message);
-        if (event.data.type === 'ready') {
+    let cpuRecoveryAttempted = false;
+    let activeProvider: 'webgpu' | 'wasm' = 'wasm';
+    const fail = (message: string): void => {
+      if (generation !== this.generation) return;
+      this.stop();
+      this.onError(message);
+    };
+    const initialize = async (forceCpu: boolean): Promise<void> => {
+      const worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
+      this.worker = worker;
+      await new Promise<void>((resolve, reject) => {
+        const timeout = setTimeout(
+          () => reject(new Error('O modelo demorou a iniciar.')),
+          CONFIG.vision.workerTimeoutMs,
+        );
+        worker.onerror = (event): void => {
           clearTimeout(timeout);
-          resolve();
+          reject(new Error(event.message || 'Não foi possível iniciar a visão local.'));
+        };
+        worker.onmessage = (
+          event: MessageEvent<{ type: string; message?: string; provider?: 'webgpu' | 'wasm' }>,
+        ): void => {
+          if (event.data.type === 'status' && event.data.message) status(event.data.message);
+          if (event.data.type === 'ready') {
+            clearTimeout(timeout);
+            activeProvider = event.data.provider ?? 'wasm';
+            resolve();
+          }
+          if (event.data.type === 'error') {
+            clearTimeout(timeout);
+            reject(new Error(event.data.message));
+          }
+        };
+        worker.postMessage({ type: 'init', forceCpu });
+      });
+      if (generation !== this.generation || this.worker !== worker) return;
+      const recover = (message: string): void => {
+        if (activeProvider !== 'webgpu' || cpuRecoveryAttempted) {
+          fail(message);
+          return;
+        }
+        cpuRecoveryAttempted = true;
+        this.inFlight = true;
+        if (this.watchdog) clearTimeout(this.watchdog);
+        this.watchdog = null;
+        worker.terminate();
+        status('A GPU parou. Reiniciando a visão local na CPU; este quadro foi descartado.');
+        void initialize(true)
+          .then(() => {
+            if (generation !== this.generation) return;
+            this.inFlight = false;
+            this.schedule();
+          })
+          .catch((error: unknown) => {
+            fail(error instanceof Error ? error.message : 'Não foi possível continuar na CPU.');
+          });
+      };
+      worker.onerror = (event): void => {
+        if (generation === this.generation && this.worker === worker)
+          recover(event.message || 'A visão local parou.');
+      };
+      worker.onmessage = (
+        event: MessageEvent<VisionResult & { type: string; message?: string }>,
+      ): void => {
+        if (generation !== this.generation || this.worker !== worker) return;
+        if (event.data.type === 'status') {
+          if (event.data.message) status(event.data.message);
+          return;
         }
         if (event.data.type === 'error') {
-          clearTimeout(timeout);
-          reject(new Error(event.data.message));
+          recover(event.data.message || 'Falha na percepção.');
+          return;
         }
+        if (event.data.type !== 'result') return;
+        this.inFlight = false;
+        if (this.watchdog) clearTimeout(this.watchdog);
+        this.watchdog = null;
+        this.onResult({ ...event.data, moving: this.moving });
+        this.schedule();
       };
-      worker.postMessage({ type: 'init' });
-    });
-    if (generation !== this.generation) return;
-    worker.onerror = (event): void => {
+      this.runtimeFailure = recover;
+    };
+    try {
+      await initialize(false);
+    } catch (error) {
       this.stop();
-      this.onError(event.message || 'A visão local parou.');
-    };
-    worker.onmessage = (
-      event: MessageEvent<VisionResult & { type: string; message?: string }>,
-    ): void => {
-      if (generation !== this.generation) return;
-      this.inFlight = false;
-      if (this.watchdog) clearTimeout(this.watchdog);
-      if (event.data.type === 'error') {
-        this.stop();
-        this.onError(event.data.message || 'Falha na percepção.');
-        return;
-      }
-      if (event.data.type === 'result') this.onResult({ ...event.data, moving: this.moving });
-      this.schedule();
-    };
+      throw error;
+    }
+    if (generation !== this.generation) return;
     this.canvas.width = CONFIG.vision.size;
     this.canvas.height = CONFIG.vision.size;
     this.verificationCanvas.width = CONFIG.vision.verificationSize;
@@ -238,14 +286,19 @@ export class Camera {
       }, CONFIG.classification.inferenceTimeoutMs);
     }
     this.watchdog = setTimeout(() => {
-      this.stop();
-      this.onError('A percepção não respondeu a tempo. A câmera foi parada.');
+      const message = 'A percepção não respondeu a tempo.';
+      if (this.runtimeFailure) this.runtimeFailure(message);
+      else {
+        this.stop();
+        this.onError(`${message} A câmera foi parada.`);
+      }
     }, CONFIG.vision.inferenceTimeoutMs);
   }
   stop(): void {
     this.generation++;
     this.worker?.terminate();
     this.worker = null;
+    this.runtimeFailure = null;
     this.sceneWorker?.terminate();
     this.sceneWorker = null;
     this.sceneInFlight = false;
