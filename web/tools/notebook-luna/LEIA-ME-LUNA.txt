@@ -1,0 +1,31 @@
+VISIORA LUNA NO NOTEBOOK WINDOWS x64 — APRESENTAÇÃO
+
+O Luna precisa de internet e usa a API paga configurada por você. Este pacote
+inclui o aplicativo, o servidor e o Node.js. Não inclui chave nem orçamento.
+
+ANTES DE SAIR DO PC PRINCIPAL
+
+1. Pare o terminal do Visiora no PC com Ctrl+C. Não use o Luna nele enquanto
+   estiver usando o notebook; o teto diário não é compartilhado em tempo real.
+2. Copie este ZIP para um pendrive privado e extraia no notebook.
+3. Copie separadamente, da pasta visiora no PC, estes arquivos para a pasta
+   visiora-luna extraída no notebook, mantendo os mesmos nomes e subpastas:
+     .env
+     .runtime\luna-budget.sqlite
+   O segundo arquivo leva o gasto/reservas já registrados. Não copie enquanto
+   o servidor do PC estiver em execução. Não envie .env em chat nem ao GitHub.
+
+NO NOTEBOOK
+
+4. Abra iniciar-luna.cmd. Se a configuração estiver correta, a janela mostrará
+   "Visiora: http://127.0.0.1:8080". Deixe-a aberta.
+5. Abra http://127.0.0.1:8080 no Chrome ou Edge. Escolha "Luna 6", marque a
+   autorização de envio, permita a câmera e inicie a ambientação. Em Ajustes,
+   teste a voz pt-BR. Ao terminar, pare a ambientação e use Ctrl+C na janela.
+6. Faça um ensaio com o notebook e a conexão de internet que levará ao local.
+
+O servidor só escuta neste notebook (127.0.0.1). A chave não fica no navegador.
+Não publique a pasta extraída nem o pendrive após copiar .env. O orçamento
+interno não substitui a conferência do consumo na plataforma da API.
+Se o notebook tiver Windows ARM, este pacote x64 pode depender de emulação.
+O Visiora é um protótipo em avaliação e não orienta deslocamento seguro.

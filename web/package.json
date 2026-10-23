@@ -19,7 +19,8 @@
     "test:a11y": "node tools/build.mjs && node tests/e2e/accessibility.mjs",
     "dev:luna": "node --env-file-if-exists=.env server/gateway.mjs",
     "luna:models": "node tools/luna-models.mjs",
-    "test:luna": "node --test tests/luna*.test.mjs"
+    "test:luna": "node --test tests/luna*.test.mjs",
+    "package:luna-notebook": "npm run build && python tools/package_luna_notebook.py"
   },
   "dependencies": {
     "fflate": "0.8.3",

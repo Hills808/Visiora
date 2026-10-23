@@ -84,3 +84,5 @@ No ensaio Luna de 22/10/2026, uma consulta foi concluída e identificou pessoa e
 # Apresentação pública (23/10/2026)
 
 O endereço público do Visiora usa HTTPS e modelos locais baixados no navegador (cerca de 168 MB na primeira execução). A velocidade, a câmera e a disponibilidade de voz pt-BR dependem do aparelho, navegador e conexão. O modo Luna exibido no seletor precisa de um gateway privado configurado e não funciona na hospedagem estática. Não inserir chave de API na página. A publicação não comprova precisão, uso acessível por pessoas cegas nem segurança para caminhar.
+
+Para usar Luna no notebook Windows x64 da apresentação, o pacote portátil inicia o gateway em `127.0.0.1` com a configuração privada copiada pelo proprietário. A chave e o ledger não estão no ZIP; sem os dois, o inicializador não abre a sessão. O teto diário não é sincronizado entre PC e notebook. É necessário parar o gateway do PC antes de copiar o ledger e usar apenas o notebook durante a demonstração. O pacote foi ensaiado nesta máquina com credencial fictícia e backend fake; webcam, voz, rede e API reais no notebook ainda não foram medidos.
