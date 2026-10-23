@@ -2,6 +2,8 @@
 
 O retorno automático à CPU após erro ou demora da GPU durante a sessão passou em teste simulado CA-H7. A falha física da GPU, o tempo de reinicialização e a qualidade da observação após a troca não foram medidos. [Evidência](EVIDENCIAS/GPU-RECUPERACAO-2026-10-23.md).
 
+Os dois modelos de ambiente passaram a usar WebGPU após aquecimento, com CPU de reserva. Em vídeo público simulado por 60 segundos, 34 respostas de ambiente tiveram p50 191 ms e p95 249 ms desde a captura; 248 respostas de objetos tiveram p50 80 ms e p95 221 ms. Isso não mede captura até fala, webcam física, uso prolongado nem outros aparelhos. A precisão continua dependente de avaliação humana. [Evidência](EVIDENCIAS/CENAS-GPU-2026-10-23.md).
+
 GitHub Actions foi configurado para testar código e transcrições da versão web a cada mudança. CI verde, quando observado, demonstra somente esses comandos no runner; não comprova câmera, áudio, leitor de tela, precisão de modelos, desempenho em outros PCs, 30 minutos de uso ou aceite humano. [Escopo da verificação](EVIDENCIAS/CI-2026-10-23.md).
 
 ## Ensaio de execução local — ADR-030 (23/10/2026)

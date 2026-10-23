@@ -473,3 +473,11 @@ Não testado: API/fatura/painel reais, virada física do relógio, outros PCs/SO
 **Decisão:** depois de erro ou prazo excedido no worker de objetos em WebGPU, descartar todo o quadro, terminar esse worker e inicializar uma única vez os mesmos YOLOX Nano/Tiny/S em WASM. Manter o fluxo de câmera e o worker independente de ambientes. A próxima captura só ocorre após a CPU estar pronta. Se a CPU falhar, encerrar a sessão e mostrar o erro. O backend é registrado em cada resultado; nenhuma regra de consenso, limiar, classe, modelo, orçamento ou chamada Luna muda. Alternativa de reaproveitar detecções parciais rejeitada porque quebraria o consenso de pessoas.
 
 **Evidência e limite:** [GPU-RECUPERACAO-2026-10-23.md](EVIDENCIAS/GPU-RECUPERACAO-2026-10-23.md), CA-H7. Teste simulado cobre erro explícito; webcam, perda física da GPU, prazo real e tempo de reinicialização ainda exigem medição.
+
+## ADR-033 — inferência de ambientes na GPU com retorno à CPU (23/10/2026)
+
+**Problema medido:** SigLIP2 e Places365 levavam cerca de 1,6 s no navegador de QA em WASM. Isso não atende à meta de percepção RNF-02/CA-D1/H4.
+
+**Decisão:** executar os mesmos pesos verificados e a mesma regra de consenso em WebGPU quando disponível. Aquecer as duas sessões antes de marcar o reconhecimento pronto. Se a inicialização falhar, liberar sessões parciais e criar as duas em WASM. Se uma inferência GPU falhar, descartar aquela análise e preparar a CPU; a observação antiga não é falada como nova. Erro de CPU é exposto. ONNX Runtime Web 1.30.0 MIT já integra o projeto; os pesos, tamanhos, licenças e alternativas permanecem registrados na ADR-030 e nos manifests. Nenhuma dependência nova, API paga ou mudança de fala. Alternativa de substituir os modelos foi descartada nesta fatia porque exigiria nova avaliação de precisão e licença.
+
+**Evidência e limite:** [CENAS-GPU-2026-10-23.md](EVIDENCIAS/CENAS-GPU-2026-10-23.md), CA-D1/H4/H7. Vídeo público como câmera artificial: em 60 segundos, 34 respostas de ambiente tiveram p50 191 ms e p95 249 ms desde a captura; inicialização GPU forçada a falhar ainda reconheceu a cena em CPU. Não aprova latência até fala, precisão, RAM/30 min ou usuários reais. Perda de GPU em execução só foi coberta por lógica; falta ensaio físico.

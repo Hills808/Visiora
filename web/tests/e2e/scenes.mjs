@@ -76,13 +76,30 @@ try {
     { expected: fixture.phrase, before },
   );
   result.cases.push('unchanged scene stays silent; an explicit place query can repeat it');
+  // A fixed observation window gathers enough independent scene samples for a latency distribution.
+  const spokenBeforeWindow = await page.evaluate(() => window.__spoken.length);
+  const benchmarkStart = await page.evaluate(() => performance.now());
+  await page.waitForFunction((start) => performance.now() - start >= 60000, benchmarkStart, {
+    timeout: 65000,
+  });
+  assert.equal(await page.evaluate(() => window.__spoken.length), spokenBeforeWindow);
+  result.cases.push('one-minute static scene stays silent after the explicit answer');
   await page.click('[data-page=help]');
   await page.click('.technical summary');
   await page.click('#export-diagnostics');
   await saveGeneratedBlob(page, 'application/json', out + '/diagnostic.json');
   result.diagnostic = JSON.parse(await readFile(out + '/diagnostic.json', 'utf8'));
   assert.ok(result.diagnostic.sceneSamples >= 2);
-  assert.ok(result.diagnostic.sceneInferenceLatencyMs.length >= 2);
+  assert.ok(result.diagnostic.sceneInferenceLatencyMs.length >= 25);
+  assert.equal(
+    result.diagnostic.sceneResponseLatencyMs.length,
+    result.diagnostic.sceneInferenceLatencyMs.length,
+  );
+  assert.equal(
+    result.diagnostic.localResponseLatencyMs.length,
+    result.diagnostic.inferenceLatencyMs.length,
+  );
+  assert.ok(result.diagnostic.sceneResponseLatencyMs.every((value) => value >= 0));
   await page.click('[data-page=ambient]');
   await page.click('#start');
   assert.equal(await page.locator('#source-badge').innerText(), 'Câmera desligada');
@@ -99,6 +116,30 @@ try {
   );
   assert.deepEqual(result.errors, []);
   result.cases.push('tested flow has no external page requests or uploads');
+  const cpuContext = await createTestContext(browser, base, { fixtureMode: true });
+  try {
+    await cpuContext.addInitScript(() => {
+      Object.defineProperty(navigator, 'gpu', {
+        configurable: true,
+        value: { requestAdapter: async () => null },
+      });
+    });
+    await installTestVoice(cpuContext);
+    const cpuPage = await cpuContext.newPage();
+    await cpuPage.goto(base);
+    await cpuPage.selectOption('#perception-provider', 'local');
+    await cpuPage.click('#start');
+    await cpuPage.waitForFunction(
+      (expected) => document.querySelector('#scene-place').textContent === expected,
+      fixture.phrase,
+      { timeout: 120000 },
+    );
+    result.cases.push(
+      'same scene is recognized after WebGPU initialization fails and WASM is used',
+    );
+  } finally {
+    await cpuContext.close();
+  }
   result.passed = true;
   await context.close();
 } catch (error) {
