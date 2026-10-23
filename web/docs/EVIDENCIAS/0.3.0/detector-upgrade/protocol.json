@@ -1,0 +1,6261 @@
+{
+  "version": "visiora-object-eval-v1",
+  "createdBeforeModelExecution": true,
+  "dataset": "COCO val2017 official annotations",
+  "selection": "Sort SHA256(visiora-object-eval-v1:+numeric image id) lexicographically; first 12 in each of five disjoint annotation strata",
+  "strata": [
+    "bed-without-person",
+    "chair-without-person-or-bed",
+    "person-with-chair-or-bed",
+    "person-without-chair-or-bed",
+    "neither-target"
+  ],
+  "images": [
+    {
+      "license": 3,
+      "file_name": "000000415741.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000415741.jpg",
+      "height": 360,
+      "width": 640,
+      "date_captured": "2013-11-21 22:11:20",
+      "flickr_url": "http://farm8.staticflickr.com/7212/7344188134_c471bb4d64_z.jpg",
+      "id": 415741,
+      "anns": [
+        {
+          "id": 103573,
+          "category_id": 62,
+          "bbox": [
+            445.16,
+            202.84,
+            89.03,
+            69.68
+          ],
+          "area": 2258.31935,
+          "iscrowd": 0
+        },
+        {
+          "id": 107242,
+          "category_id": 62,
+          "bbox": [
+            325.24,
+            230.06,
+            207.81,
+            129.79
+          ],
+          "area": 21650.101450000006,
+          "iscrowd": 0
+        },
+        {
+          "id": 315201,
+          "category_id": 65,
+          "bbox": [
+            227.33,
+            157.15,
+            62.29,
+            107.59
+          ],
+          "area": 5703.530900000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1648235,
+          "category_id": 84,
+          "bbox": [
+            603.31,
+            316.53,
+            34.5,
+            17.91
+          ],
+          "area": 326.5172500000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 1648882,
+          "category_id": 84,
+          "bbox": [
+            579.22,
+            339.66,
+            45.95,
+            19.81
+          ],
+          "area": 433.3524000000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 1651055,
+          "category_id": 84,
+          "bbox": [
+            578.64,
+            322.32,
+            46.26,
+            26.67
+          ],
+          "area": 815.6620999999993,
+          "iscrowd": 0
+        }
+      ],
+      "order": "007b3b1aab6ef9d8eacde37c827ba1395bce225cbb6c86e69b5862c118862cfb",
+      "bucket": "bed-without-person"
+    },
+    {
+      "license": 2,
+      "file_name": "000000366199.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000366199.jpg",
+      "height": 427,
+      "width": 640,
+      "date_captured": "2013-11-17 20:10:00",
+      "flickr_url": "http://farm5.staticflickr.com/4101/4794594634_08a6586cc0_z.jpg",
+      "id": 366199,
+      "anns": [
+        {
+          "id": 49703,
+          "category_id": 17,
+          "bbox": [
+            237.01,
+            171.76,
+            177.52,
+            80.6
+          ],
+          "area": 10063.965500000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 1612641,
+          "category_id": 65,
+          "bbox": [
+            0.96,
+            221.11,
+            637.63,
+            191.48
+          ],
+          "area": 103105.79969999997,
+          "iscrowd": 0
+        }
+      ],
+      "order": "021c5fa66aba63705ff0c34c27ebf3b1a057ba7e3a3f887226ff9d20139639c0",
+      "bucket": "bed-without-person"
+    },
+    {
+      "license": 2,
+      "file_name": "000000051738.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000051738.jpg",
+      "height": 375,
+      "width": 500,
+      "date_captured": "2013-11-20 23:25:11",
+      "flickr_url": "http://farm2.staticflickr.com/1439/684337390_1d37ec3d36_z.jpg",
+      "id": 51738,
+      "anns": [
+        {
+          "id": 315778,
+          "category_id": 65,
+          "bbox": [
+            106.42,
+            117.4,
+            393.58,
+            257.6
+          ],
+          "area": 72374.1246,
+          "iscrowd": 0
+        },
+        {
+          "id": 380869,
+          "category_id": 62,
+          "bbox": [
+            103.69,
+            162.27,
+            113.58,
+            57.3
+          ],
+          "area": 4539.5928,
+          "iscrowd": 0
+        },
+        {
+          "id": 1445326,
+          "category_id": 33,
+          "bbox": [
+            1.59,
+            207.05,
+            52.27,
+            73.81
+          ],
+          "area": 3126.07565,
+          "iscrowd": 0
+        }
+      ],
+      "order": "040ea593530cd45400fe3476dd59a0574d5b3f031493283f773b0aadba2c63c1",
+      "bucket": "bed-without-person"
+    },
+    {
+      "license": 1,
+      "file_name": "000000200252.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000200252.jpg",
+      "height": 375,
+      "width": 500,
+      "date_captured": "2013-11-18 13:23:43",
+      "flickr_url": "http://farm1.staticflickr.com/5/4715676_27719ad496_z.jpg",
+      "id": 200252,
+      "anns": [
+        {
+          "id": 316081,
+          "category_id": 65,
+          "bbox": [
+            16.09,
+            112.21,
+            483.91,
+            262.79
+          ],
+          "area": 67395.62640000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1654235,
+          "category_id": 84,
+          "bbox": [
+            382.54,
+            200.9,
+            43.02,
+            17.28
+          ],
+          "area": 394.34799999999984,
+          "iscrowd": 0
+        },
+        {
+          "id": 2144007,
+          "category_id": 84,
+          "bbox": [
+            379.48,
+            195.38,
+            22.13,
+            4.62
+          ],
+          "area": 81.73430000000016,
+          "iscrowd": 0
+        }
+      ],
+      "order": "073be012365ba84a5580622976ed05d00628ded7c00a63e02b17d0865e31777c",
+      "bucket": "bed-without-person"
+    },
+    {
+      "license": 4,
+      "file_name": "000000068286.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000068286.jpg",
+      "height": 366,
+      "width": 640,
+      "date_captured": "2013-11-21 00:16:59",
+      "flickr_url": "http://farm4.staticflickr.com/3772/9124536029_b9eaf76c3e_z.jpg",
+      "id": 68286,
+      "anns": [
+        {
+          "id": 314818,
+          "category_id": 65,
+          "bbox": [
+            23.05,
+            46.28,
+            527.73,
+            319.4
+          ],
+          "area": 118954.8936,
+          "iscrowd": 0
+        }
+      ],
+      "order": "079863c5835790f5f80ddebab1779d79c7df65bb5574bf7e12e0cd2f3b61e897",
+      "bucket": "bed-without-person"
+    },
+    {
+      "license": 1,
+      "file_name": "000000433192.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000433192.jpg",
+      "height": 375,
+      "width": 500,
+      "date_captured": "2013-11-24 04:31:26",
+      "flickr_url": "http://farm4.staticflickr.com/3611/3389204868_00ea42723a_z.jpg",
+      "id": 433192,
+      "anns": [
+        {
+          "id": 319402,
+          "category_id": 65,
+          "bbox": [
+            83.43,
+            85.17,
+            416.29,
+            283.99
+          ],
+          "area": 93411.4899,
+          "iscrowd": 0
+        },
+        {
+          "id": 1103999,
+          "category_id": 73,
+          "bbox": [
+            141.86,
+            142.59,
+            122.27,
+            86.46
+          ],
+          "area": 6086.972999999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 1984552,
+          "category_id": 84,
+          "bbox": [
+            256.98,
+            163.61,
+            42.4,
+            16.1
+          ],
+          "area": 367.54584999999986,
+          "iscrowd": 0
+        }
+      ],
+      "order": "095e6cec0874db2a65e4bf3f279197deb8db7590f263be660039be077fd1c308",
+      "bucket": "bed-without-person"
+    },
+    {
+      "license": 1,
+      "file_name": "000000365387.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000365387.jpg",
+      "height": 425,
+      "width": 640,
+      "date_captured": "2013-11-15 14:02:24",
+      "flickr_url": "http://farm5.staticflickr.com/4140/4887961917_161a96c682_z.jpg",
+      "id": 365387,
+      "anns": [
+        {
+          "id": 1956722,
+          "category_id": 65,
+          "bbox": [
+            331.17,
+            234.03,
+            287.01,
+            183.24
+          ],
+          "area": 39121.58609999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 1967637,
+          "category_id": 70,
+          "bbox": [
+            121.11,
+            223.46,
+            155.25,
+            161.85
+          ],
+          "area": 20280.756999999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 1981519,
+          "category_id": 81,
+          "bbox": [
+            271.61,
+            112.96,
+            101.05,
+            101.56
+          ],
+          "area": 7451.7863000000025,
+          "iscrowd": 0
+        },
+        {
+          "id": 2099074,
+          "category_id": 47,
+          "bbox": [
+            274.28,
+            0.24,
+            17.44,
+            17.44
+          ],
+          "area": 282.6128000000002,
+          "iscrowd": 0
+        }
+      ],
+      "order": "097db10b9c90f11209cb075c547997cb7558004593e2737908f4a1fafebe11b2",
+      "bucket": "bed-without-person"
+    },
+    {
+      "license": 5,
+      "file_name": "000000231549.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000231549.jpg",
+      "height": 480,
+      "width": 640,
+      "date_captured": "2013-11-20 23:00:38",
+      "flickr_url": "http://farm9.staticflickr.com/8220/8256493366_f50131fb10_z.jpg",
+      "id": 231549,
+      "anns": [
+        {
+          "id": 315268,
+          "category_id": 65,
+          "bbox": [
+            119.73,
+            350.23,
+            388.31,
+            129.77
+          ],
+          "area": 40355.323449999996,
+          "iscrowd": 0
+        },
+        {
+          "id": 1506193,
+          "category_id": 47,
+          "bbox": [
+            88.67,
+            411.44,
+            18.43,
+            27.32
+          ],
+          "area": 425.2044499999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 1664790,
+          "category_id": 85,
+          "bbox": [
+            560.98,
+            406.87,
+            62.42,
+            16.99
+          ],
+          "area": 894.2471000000002,
+          "iscrowd": 0
+        }
+      ],
+      "order": "110895d00051e30215a9d48366406291cf14d524accfa528c21078c50570f4cd",
+      "bucket": "bed-without-person"
+    },
+    {
+      "license": 1,
+      "file_name": "000000551815.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000551815.jpg",
+      "height": 480,
+      "width": 640,
+      "date_captured": "2013-11-17 19:56:34",
+      "flickr_url": "http://farm3.staticflickr.com/2151/2126259110_79df1cde52_z.jpg",
+      "id": 551815,
+      "anns": [
+        {
+          "id": 49017,
+          "category_id": 17,
+          "bbox": [
+            256,
+            128,
+            384,
+            224
+          ],
+          "area": 51492.370549999985,
+          "iscrowd": 0
+        },
+        {
+          "id": 49171,
+          "category_id": 17,
+          "bbox": [
+            20.98,
+            115.84,
+            618.68,
+            364.16
+          ],
+          "area": 102345.1563,
+          "iscrowd": 0
+        },
+        {
+          "id": 318264,
+          "category_id": 65,
+          "bbox": [
+            0.47,
+            150.05,
+            138.17,
+            329.95
+          ],
+          "area": 31399.024649999996,
+          "iscrowd": 0
+        }
+      ],
+      "order": "138353d7f602271b8b0c0a2d1a43ef371413224fa6ad65005203ef5bb26ca761",
+      "bucket": "bed-without-person"
+    },
+    {
+      "license": 1,
+      "file_name": "000000014831.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000014831.jpg",
+      "height": 640,
+      "width": 480,
+      "date_captured": "2013-11-17 19:58:56",
+      "flickr_url": "http://farm9.staticflickr.com/8113/8656986875_366dec25c9_z.jpg",
+      "id": 14831,
+      "anns": [
+        {
+          "id": 273446,
+          "category_id": 17,
+          "bbox": [
+            1.44,
+            232.99,
+            478.56,
+            405.57
+          ],
+          "area": 185874.36909999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 316818,
+          "category_id": 65,
+          "bbox": [
+            0,
+            0.2,
+            480,
+            269.18
+          ],
+          "area": 119214.07190000001,
+          "iscrowd": 0
+        }
+      ],
+      "order": "152755e83b221b561e34ae1d1454eda4b9df031eac55ceaaaa248f287fea765b",
+      "bucket": "bed-without-person"
+    },
+    {
+      "license": 5,
+      "file_name": "000000218091.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000218091.jpg",
+      "height": 429,
+      "width": 640,
+      "date_captured": "2013-11-20 22:16:55",
+      "flickr_url": "http://farm5.staticflickr.com/4154/5033065824_d526130e36_z.jpg",
+      "id": 218091,
+      "anns": [
+        {
+          "id": 28887,
+          "category_id": 72,
+          "bbox": [
+            570.16,
+            143.25,
+            44.61,
+            89.22
+          ],
+          "area": 2386.9100500000013,
+          "iscrowd": 0
+        },
+        {
+          "id": 97993,
+          "category_id": 63,
+          "bbox": [
+            0.03,
+            231.57,
+            93.98,
+            153.55
+          ],
+          "area": 9649.912550000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 315227,
+          "category_id": 65,
+          "bbox": [
+            223.7,
+            99.5,
+            220.79,
+            163.66
+          ],
+          "area": 22376.191850000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 1112308,
+          "category_id": 75,
+          "bbox": [
+            521.1,
+            198.02,
+            28.5,
+            10.04
+          ],
+          "area": 184.3815000000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1598339,
+          "category_id": 62,
+          "bbox": [
+            174.49,
+            384.65,
+            61.7,
+            39.53
+          ],
+          "area": 1218.9047500000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 2222918,
+          "category_id": 62,
+          "bbox": [
+            0.29,
+            169.64,
+            153.84,
+            110.76
+          ],
+          "area": 10683.494100000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 2223835,
+          "category_id": 63,
+          "bbox": [
+            0,
+            169.66,
+            153.43,
+            118.75
+          ],
+          "area": 11008.42475,
+          "iscrowd": 0
+        }
+      ],
+      "order": "1564c671b462930e36e4140bf5a0ce3bf1f6f0699ab6ddfa70845fd9ed3872e7",
+      "bucket": "bed-without-person"
+    },
+    {
+      "license": 1,
+      "file_name": "000000291490.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000291490.jpg",
+      "height": 393,
+      "width": 640,
+      "date_captured": "2013-11-17 19:55:10",
+      "flickr_url": "http://farm8.staticflickr.com/7435/9089928284_9d723bfaca_z.jpg",
+      "id": 291490,
+      "anns": [
+        {
+          "id": 49694,
+          "category_id": 17,
+          "bbox": [
+            117,
+            76.7,
+            246.16,
+            242.85
+          ],
+          "area": 27145.580699999988,
+          "iscrowd": 0
+        },
+        {
+          "id": 318132,
+          "category_id": 65,
+          "bbox": [
+            0,
+            2.21,
+            640,
+            386.81
+          ],
+          "area": 173108.40189999997,
+          "iscrowd": 0
+        }
+      ],
+      "order": "16569a2f86ee6368f8f04c418c7d40e90f1d4f383035f407ee74dd19bf2e1162",
+      "bucket": "bed-without-person"
+    },
+    {
+      "license": 4,
+      "file_name": "000000194724.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000194724.jpg",
+      "height": 480,
+      "width": 640,
+      "date_captured": "2013-11-21 03:23:48",
+      "flickr_url": "http://farm7.staticflickr.com/6155/6165978029_81ac06fbe3_z.jpg",
+      "id": 194724,
+      "anns": [
+        {
+          "id": 79620,
+          "category_id": 44,
+          "bbox": [
+            418.29,
+            0.3,
+            102.84,
+            258.31
+          ],
+          "area": 17049.2279,
+          "iscrowd": 0
+        },
+        {
+          "id": 332720,
+          "category_id": 82,
+          "bbox": [
+            101.62,
+            0.54,
+            284.33,
+            136.22
+          ],
+          "area": 33878.323,
+          "iscrowd": 0
+        },
+        {
+          "id": 374467,
+          "category_id": 62,
+          "bbox": [
+            511.28,
+            42.07,
+            127.28,
+            100.31
+          ],
+          "area": 8054.93325,
+          "iscrowd": 0
+        },
+        {
+          "id": 383785,
+          "category_id": 62,
+          "bbox": [
+            0,
+            96.76,
+            35.68,
+            112.43
+          ],
+          "area": 2023.2687999999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 391206,
+          "category_id": 67,
+          "bbox": [
+            1.08,
+            115.67,
+            638.92,
+            357.56
+          ],
+          "area": 37903.2543,
+          "iscrowd": 0
+        },
+        {
+          "id": 671514,
+          "category_id": 47,
+          "bbox": [
+            514.77,
+            133.02,
+            94.48,
+            129.26
+          ],
+          "area": 8284.895300000007,
+          "iscrowd": 0
+        },
+        {
+          "id": 1074052,
+          "category_id": 59,
+          "bbox": [
+            283.69,
+            337.62,
+            194.15,
+            116.49
+          ],
+          "area": 13099.972700000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1137084,
+          "category_id": 84,
+          "bbox": [
+            80.9,
+            139.15,
+            349.48,
+            103.55
+          ],
+          "area": 24201.15305000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1484835,
+          "category_id": 44,
+          "bbox": [
+            190.87,
+            2.26,
+            23.72,
+            49.69
+          ],
+          "area": 781.2201000000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1569797,
+          "category_id": 59,
+          "bbox": [
+            395.27,
+            335.38,
+            154.66,
+            106.32
+          ],
+          "area": 8820.769350000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 1638925,
+          "category_id": 77,
+          "bbox": [
+            575.78,
+            221.7,
+            64.22,
+            67.81
+          ],
+          "area": 3337.2860000000005,
+          "iscrowd": 0
+        },
+        {
+          "id": 1867268,
+          "category_id": 44,
+          "bbox": [
+            170.94,
+            0,
+            21.93,
+            54.43
+          ],
+          "area": 957.7212,
+          "iscrowd": 0
+        },
+        {
+          "id": 1871048,
+          "category_id": 44,
+          "bbox": [
+            261.95,
+            0,
+            18.38,
+            52.86
+          ],
+          "area": 910.6543500000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1871681,
+          "category_id": 44,
+          "bbox": [
+            280.45,
+            0.05,
+            19.13,
+            53.75
+          ],
+          "area": 947.0558000000008,
+          "iscrowd": 0
+        },
+        {
+          "id": 1871711,
+          "category_id": 44,
+          "bbox": [
+            299.87,
+            0,
+            20.84,
+            52.12
+          ],
+          "area": 972.6136499999993,
+          "iscrowd": 0
+        },
+        {
+          "id": 1872222,
+          "category_id": 44,
+          "bbox": [
+            209.45,
+            1.25,
+            23.69,
+            49.87
+          ],
+          "area": 873.6120500000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1889547,
+          "category_id": 48,
+          "bbox": [
+            96.79,
+            273.76,
+            61.31,
+            58.78
+          ],
+          "area": 750.0456000000013,
+          "iscrowd": 0
+        },
+        {
+          "id": 2117331,
+          "category_id": 59,
+          "bbox": [
+            232.85,
+            261.08,
+            303.42,
+            158.43
+          ],
+          "area": 23449.654899999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 2213329,
+          "category_id": 44,
+          "bbox": [
+            339.81,
+            2.76,
+            17.78,
+            48.59
+          ],
+          "area": 747.27285,
+          "iscrowd": 0
+        }
+      ],
+      "order": "013d9d3c15cbfabf362e7afcc78227e8aeac5f812d69d739a0dd9f23ed358baf",
+      "bucket": "chair-without-person-or-bed"
+    },
+    {
+      "license": 2,
+      "file_name": "000000138550.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000138550.jpg",
+      "height": 428,
+      "width": 640,
+      "date_captured": "2013-11-16 20:21:16",
+      "flickr_url": "http://farm5.staticflickr.com/4122/4827465358_c700047f0d_z.jpg",
+      "id": 138550,
+      "anns": [
+        {
+          "id": 374914,
+          "category_id": 62,
+          "bbox": [
+            402.36,
+            26.48,
+            86.44,
+            89.18
+          ],
+          "area": 6625.4973,
+          "iscrowd": 0
+        },
+        {
+          "id": 380455,
+          "category_id": 62,
+          "bbox": [
+            95.15,
+            40.36,
+            123.71,
+            198.44
+          ],
+          "area": 4226.074700000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 417376,
+          "category_id": 11,
+          "bbox": [
+            264.49,
+            121.03,
+            103.88,
+            222.17
+          ],
+          "area": 14150.16065,
+          "iscrowd": 0
+        },
+        {
+          "id": 1090923,
+          "category_id": 67,
+          "bbox": [
+            167.35,
+            45.2,
+            150.04,
+            198.13
+          ],
+          "area": 11481.47725,
+          "iscrowd": 0
+        }
+      ],
+      "order": "0256b26c5e5b829ba4038726eb7f9193e5c0344446c4b6f20fa4f4ee08bfc180",
+      "bucket": "chair-without-person-or-bed"
+    },
+    {
+      "license": 4,
+      "file_name": "000000313130.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000313130.jpg",
+      "height": 480,
+      "width": 640,
+      "date_captured": "2013-11-24 11:34:22",
+      "flickr_url": "http://farm5.staticflickr.com/4139/4930439332_ed665548e3_z.jpg",
+      "id": 313130,
+      "anns": [
+        {
+          "id": 330574,
+          "category_id": 82,
+          "bbox": [
+            181.21,
+            73.35,
+            204.95,
+            400.18
+          ],
+          "area": 75737.54590000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1119788,
+          "category_id": 78,
+          "bbox": [
+            387.71,
+            127.73,
+            133.96,
+            98.19
+          ],
+          "area": 11161.863399999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 1584713,
+          "category_id": 62,
+          "bbox": [
+            48.45,
+            123.35,
+            79.31,
+            155.1
+          ],
+          "area": 5423.572150000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1588908,
+          "category_id": 62,
+          "bbox": [
+            93.13,
+            133.82,
+            35,
+            25.1
+          ],
+          "area": 673.4864500000001,
+          "iscrowd": 0
+        }
+      ],
+      "order": "0356a18e1037f948447085112ac06ae13070bab23705f4be163bd90cc555aa52",
+      "bucket": "chair-without-person-or-bed"
+    },
+    {
+      "license": 5,
+      "file_name": "000000239318.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000239318.jpg",
+      "height": 500,
+      "width": 375,
+      "date_captured": "2013-11-22 01:30:23",
+      "flickr_url": "http://farm1.staticflickr.com/26/39047896_b94db54bb4_z.jpg",
+      "id": 239318,
+      "anns": [
+        {
+          "id": 1104310,
+          "category_id": 73,
+          "bbox": [
+            40.24,
+            13.84,
+            314.12,
+            398.36
+          ],
+          "area": 83100.67300000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1116970,
+          "category_id": 76,
+          "bbox": [
+            51.69,
+            317.98,
+            280.89,
+            137.08
+          ],
+          "area": 30994.85589999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 1634189,
+          "category_id": 76,
+          "bbox": [
+            75.28,
+            235.96,
+            248.32,
+            87.64
+          ],
+          "area": 18860.037250000005,
+          "iscrowd": 0
+        },
+        {
+          "id": 1931139,
+          "category_id": 62,
+          "bbox": [
+            310.39,
+            18.18,
+            64.61,
+            229.87
+          ],
+          "area": 2835.9596500000002,
+          "iscrowd": 0
+        }
+      ],
+      "order": "042ef087ef0051f7fdb90b74d78b2efbd5da6c310abc5b44ca2f29b90de7fb4d",
+      "bucket": "chair-without-person-or-bed"
+    },
+    {
+      "license": 2,
+      "file_name": "000000570456.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000570456.jpg",
+      "height": 480,
+      "width": 640,
+      "date_captured": "2013-11-21 21:50:40",
+      "flickr_url": "http://farm8.staticflickr.com/7277/7683769676_edbe5fa498_z.jpg",
+      "id": 570456,
+      "anns": [
+        {
+          "id": 99812,
+          "category_id": 63,
+          "bbox": [
+            294.59,
+            280.29,
+            132.88,
+            131.85
+          ],
+          "area": 10235.944400000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 377754,
+          "category_id": 62,
+          "bbox": [
+            388.88,
+            178.07,
+            26.23,
+            66.99
+          ],
+          "area": 871.003650000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 716416,
+          "category_id": 51,
+          "bbox": [
+            176.04,
+            314.92,
+            15.02,
+            13.27
+          ],
+          "area": 148.5123499999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 1136207,
+          "category_id": 81,
+          "bbox": [
+            46.47,
+            252.54,
+            46.25,
+            25.35
+          ],
+          "area": 614.3415500000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1141788,
+          "category_id": 84,
+          "bbox": [
+            387.04,
+            174.51,
+            29.78,
+            11.31
+          ],
+          "area": 203.1994500000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1534527,
+          "category_id": 51,
+          "bbox": [
+            119.83,
+            268.91,
+            32.32,
+            17.8
+          ],
+          "area": 431.28040000000016,
+          "iscrowd": 0
+        },
+        {
+          "id": 1586722,
+          "category_id": 62,
+          "bbox": [
+            448.89,
+            223.9,
+            63.75,
+            78.85
+          ],
+          "area": 3834.7196499999986,
+          "iscrowd": 0
+        },
+        {
+          "id": 1614090,
+          "category_id": 67,
+          "bbox": [
+            100.22,
+            241.86,
+            118.95,
+            166.03
+          ],
+          "area": 8267.592949999997,
+          "iscrowd": 0
+        },
+        {
+          "id": 1936884,
+          "category_id": 62,
+          "bbox": [
+            349.76,
+            257.65,
+            88.82,
+            84.23
+          ],
+          "area": 3409.3475999999982,
+          "iscrowd": 0
+        },
+        {
+          "id": 1964072,
+          "category_id": 67,
+          "bbox": [
+            284.75,
+            179.23,
+            114.25,
+            107.56
+          ],
+          "area": 5175.996099999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 1985090,
+          "category_id": 84,
+          "bbox": [
+            385.33,
+            180.65,
+            13.6,
+            8.91
+          ],
+          "area": 55.891950000000286,
+          "iscrowd": 0
+        }
+      ],
+      "order": "06d8f269170cb4900a85dcdbfa0cfce298d6e9dce36be5e5b1dd9e9318f4c41b",
+      "bucket": "chair-without-person-or-bed"
+    },
+    {
+      "license": 3,
+      "file_name": "000000170670.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000170670.jpg",
+      "height": 426,
+      "width": 640,
+      "date_captured": "2013-11-20 00:18:48",
+      "flickr_url": "http://farm2.staticflickr.com/1234/759414821_bc27a2c58f_z.jpg",
+      "id": 170670,
+      "anns": [
+        {
+          "id": 88310,
+          "category_id": 44,
+          "bbox": [
+            424.71,
+            72.59,
+            39.23,
+            112.37
+          ],
+          "area": 2998.5813499999995,
+          "iscrowd": 0
+        },
+        {
+          "id": 91225,
+          "category_id": 44,
+          "bbox": [
+            383.71,
+            64.67,
+            35.62,
+            105.82
+          ],
+          "area": 2583.088349999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 92740,
+          "category_id": 44,
+          "bbox": [
+            337.71,
+            57.54,
+            36.62,
+            94.72
+          ],
+          "area": 2311.4312999999984,
+          "iscrowd": 0
+        },
+        {
+          "id": 107784,
+          "category_id": 62,
+          "bbox": [
+            518.93,
+            39.33,
+            121.07,
+            81.89
+          ],
+          "area": 3927.0798499999983,
+          "iscrowd": 0
+        },
+        {
+          "id": 120671,
+          "category_id": 67,
+          "bbox": [
+            0,
+            57.68,
+            640,
+            363.31
+          ],
+          "area": 198211.01785,
+          "iscrowd": 0
+        },
+        {
+          "id": 675368,
+          "category_id": 47,
+          "bbox": [
+            75.94,
+            207.06,
+            85.62,
+            145.33
+          ],
+          "area": 8692.574600000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 683889,
+          "category_id": 47,
+          "bbox": [
+            395.37,
+            230.71,
+            82.32,
+            149.34
+          ],
+          "area": 8774.687249999997,
+          "iscrowd": 0
+        },
+        {
+          "id": 684146,
+          "category_id": 47,
+          "bbox": [
+            463.54,
+            78.43,
+            63.12,
+            117.71
+          ],
+          "area": 5035.592199999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 686266,
+          "category_id": 48,
+          "bbox": [
+            510.97,
+            197.97,
+            96.22,
+            109.96
+          ],
+          "area": 537.7384499999985,
+          "iscrowd": 0
+        },
+        {
+          "id": 688486,
+          "category_id": 48,
+          "bbox": [
+            547.03,
+            201.7,
+            71.04,
+            88.05
+          ],
+          "area": 612.9048000000018,
+          "iscrowd": 0
+        },
+        {
+          "id": 688545,
+          "category_id": 48,
+          "bbox": [
+            561.69,
+            201.18,
+            42.51,
+            88.75
+          ],
+          "area": 698.786100000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 715459,
+          "category_id": 51,
+          "bbox": [
+            181.3,
+            163.84,
+            113.58,
+            77.47
+          ],
+          "area": 6401.75875,
+          "iscrowd": 0
+        },
+        {
+          "id": 717819,
+          "category_id": 51,
+          "bbox": [
+            375.46,
+            196.4,
+            209.77,
+            161.94
+          ],
+          "area": 15660.34635,
+          "iscrowd": 0
+        },
+        {
+          "id": 718354,
+          "category_id": 51,
+          "bbox": [
+            64.81,
+            196.41,
+            135.32,
+            86.73
+          ],
+          "area": 4363.14655,
+          "iscrowd": 0
+        },
+        {
+          "id": 1038015,
+          "category_id": 51,
+          "bbox": [
+            288.46,
+            147.19,
+            126.08,
+            104.11
+          ],
+          "area": 8779.790350000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1063794,
+          "category_id": 57,
+          "bbox": [
+            210.16,
+            182.27,
+            71.67,
+            48.93
+          ],
+          "area": 2530.3321499999997,
+          "iscrowd": 0
+        },
+        {
+          "id": 1512316,
+          "category_id": 47,
+          "bbox": [
+            290.59,
+            65.81,
+            49.59,
+            98.34
+          ],
+          "area": 3582.54725,
+          "iscrowd": 0
+        },
+        {
+          "id": 1517887,
+          "category_id": 48,
+          "bbox": [
+            581.14,
+            268,
+            39.38,
+            38.38
+          ],
+          "area": 307.59795000000094,
+          "iscrowd": 0
+        },
+        {
+          "id": 1519448,
+          "category_id": 48,
+          "bbox": [
+            584.38,
+            257.98,
+            47.93,
+            23.39
+          ],
+          "area": 511.27090000000015,
+          "iscrowd": 0
+        },
+        {
+          "id": 1935722,
+          "category_id": 62,
+          "bbox": [
+            52.01,
+            1.11,
+            167.08,
+            119.5
+          ],
+          "area": 8700.87925,
+          "iscrowd": 0
+        },
+        {
+          "id": 2092939,
+          "category_id": 44,
+          "bbox": [
+            30.13,
+            238.95,
+            70.8,
+            102.11
+          ],
+          "area": 4974.364749999999,
+          "iscrowd": 0
+        }
+      ],
+      "order": "071c5ca7217aa25b3f705453d20a2797c919663a5ed818b0ccb70d98bb4b1004",
+      "bucket": "chair-without-person-or-bed"
+    },
+    {
+      "license": 4,
+      "file_name": "000000249129.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000249129.jpg",
+      "height": 427,
+      "width": 640,
+      "date_captured": "2013-11-24 21:59:34",
+      "flickr_url": "http://farm3.staticflickr.com/2400/2113224886_a95ec64e34_z.jpg",
+      "id": 249129,
+      "anns": [
+        {
+          "id": 379522,
+          "category_id": 62,
+          "bbox": [
+            204.13,
+            243.85,
+            89.71,
+            129.32
+          ],
+          "area": 6298.8921500000015,
+          "iscrowd": 0
+        },
+        {
+          "id": 387761,
+          "category_id": 62,
+          "bbox": [
+            97.98,
+            198.96,
+            88.01,
+            127.99
+          ],
+          "area": 4286.375350000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 388619,
+          "category_id": 62,
+          "bbox": [
+            424.04,
+            70.83,
+            92.59,
+            159.6
+          ],
+          "area": 2945.0334999999986,
+          "iscrowd": 0
+        },
+        {
+          "id": 389125,
+          "category_id": 62,
+          "bbox": [
+            539.25,
+            275.52,
+            100.75,
+            115.09
+          ],
+          "area": 4671.671999999997,
+          "iscrowd": 0
+        },
+        {
+          "id": 419724,
+          "category_id": 67,
+          "bbox": [
+            182.79,
+            199.38,
+            182.52,
+            68.91
+          ],
+          "area": 7602.678650000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 1160402,
+          "category_id": 88,
+          "bbox": [
+            185.59,
+            154.43,
+            103.49,
+            58.9
+          ],
+          "area": 3760.0349499999993,
+          "iscrowd": 0
+        },
+        {
+          "id": 1161145,
+          "category_id": 88,
+          "bbox": [
+            330.09,
+            171.76,
+            96.91,
+            99.79
+          ],
+          "area": 5354.91005,
+          "iscrowd": 0
+        },
+        {
+          "id": 1161474,
+          "category_id": 88,
+          "bbox": [
+            402.11,
+            63.19,
+            109.14,
+            122.55
+          ],
+          "area": 7995.784600000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 1161564,
+          "category_id": 88,
+          "bbox": [
+            545.98,
+            178.48,
+            94.02,
+            142.97
+          ],
+          "area": 8778.535549999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 1162268,
+          "category_id": 88,
+          "bbox": [
+            107.78,
+            156.39,
+            76.53,
+            120.95
+          ],
+          "area": 6467.689200000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1162398,
+          "category_id": 88,
+          "bbox": [
+            197.67,
+            219.74,
+            103.63,
+            106.51
+          ],
+          "area": 6560.127650000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1521309,
+          "category_id": 49,
+          "bbox": [
+            186.96,
+            232.45,
+            17.8,
+            3.61
+          ],
+          "area": 48.10635000000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 1673183,
+          "category_id": 88,
+          "bbox": [
+            0,
+            40.14,
+            76.76,
+            131.46
+          ],
+          "area": 6197.0560000000005,
+          "iscrowd": 0
+        },
+        {
+          "id": 1886165,
+          "category_id": 47,
+          "bbox": [
+            209.57,
+            197.53,
+            12.2,
+            17.89
+          ],
+          "area": 161.23600000000027,
+          "iscrowd": 0
+        },
+        {
+          "id": 1931194,
+          "category_id": 62,
+          "bbox": [
+            337.39,
+            225.09,
+            88.5,
+            84.53
+          ],
+          "area": 3248.9720000000034,
+          "iscrowd": 0
+        },
+        {
+          "id": 1934233,
+          "category_id": 62,
+          "bbox": [
+            1.53,
+            157.25,
+            68.07,
+            68.83
+          ],
+          "area": 2156.2539999999995,
+          "iscrowd": 0
+        },
+        {
+          "id": 1991129,
+          "category_id": 85,
+          "bbox": [
+            587.03,
+            88.65,
+            12.25,
+            22.35
+          ],
+          "area": 177.72569999999968,
+          "iscrowd": 0
+        }
+      ],
+      "order": "09e92892cb10806de67567f4ff10f8459d0ca09d9afa112fee0061c1c481369f",
+      "bucket": "chair-without-person-or-bed"
+    },
+    {
+      "license": 3,
+      "file_name": "000000543047.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000543047.jpg",
+      "height": 480,
+      "width": 640,
+      "date_captured": "2013-11-14 17:25:33",
+      "flickr_url": "http://farm2.staticflickr.com/1095/1261234994_168135c622_z.jpg",
+      "id": 543047,
+      "anns": [
+        {
+          "id": 113570,
+          "category_id": 63,
+          "bbox": [
+            0,
+            249.31,
+            209.18,
+            223.34
+          ],
+          "area": 33979.4265,
+          "iscrowd": 0
+        },
+        {
+          "id": 113621,
+          "category_id": 63,
+          "bbox": [
+            455.73,
+            235.51,
+            182.81,
+            244.16
+          ],
+          "area": 31684.64614999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 380569,
+          "category_id": 62,
+          "bbox": [
+            357.76,
+            215.97,
+            54.45,
+            73
+          ],
+          "area": 2634.0214499999993,
+          "iscrowd": 0
+        },
+        {
+          "id": 384537,
+          "category_id": 62,
+          "bbox": [
+            302.97,
+            220.08,
+            52.08,
+            73.54
+          ],
+          "area": 2323.256849999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 387438,
+          "category_id": 62,
+          "bbox": [
+            370.62,
+            180.35,
+            22.08,
+            25.34
+          ],
+          "area": 531.1749000000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 388300,
+          "category_id": 62,
+          "bbox": [
+            397.23,
+            177.89,
+            22.31,
+            28.81
+          ],
+          "area": 508.71950000000083,
+          "iscrowd": 0
+        },
+        {
+          "id": 388565,
+          "category_id": 62,
+          "bbox": [
+            426.37,
+            176.91,
+            26.51,
+            47.89
+          ],
+          "area": 638.2774499999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 553674,
+          "category_id": 67,
+          "bbox": [
+            283.49,
+            203.11,
+            156.47,
+            87.6
+          ],
+          "area": 4063.6996999999983,
+          "iscrowd": 0
+        },
+        {
+          "id": 713311,
+          "category_id": 51,
+          "bbox": [
+            288.15,
+            363.38,
+            25.35,
+            15.98
+          ],
+          "area": 285.3747000000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1118882,
+          "category_id": 78,
+          "bbox": [
+            342.64,
+            152.27,
+            27.76,
+            15.99
+          ],
+          "area": 415.74324999999976,
+          "iscrowd": 0
+        },
+        {
+          "id": 1138031,
+          "category_id": 84,
+          "bbox": [
+            358.01,
+            327.77,
+            42.3,
+            23.7
+          ],
+          "area": 944.8084000000017,
+          "iscrowd": 0
+        },
+        {
+          "id": 1437016,
+          "category_id": 31,
+          "bbox": [
+            463.53,
+            189.65,
+            41.9,
+            34.13
+          ],
+          "area": 686.2596499999997,
+          "iscrowd": 0
+        },
+        {
+          "id": 1506059,
+          "category_id": 47,
+          "bbox": [
+            499.21,
+            205.32,
+            7.93,
+            11.89
+          ],
+          "area": 77.60805,
+          "iscrowd": 0
+        },
+        {
+          "id": 1513107,
+          "category_id": 47,
+          "bbox": [
+            508.32,
+            203.69,
+            8.2,
+            11.45
+          ],
+          "area": 73.33780000000017,
+          "iscrowd": 0
+        },
+        {
+          "id": 2140715,
+          "category_id": 81,
+          "bbox": [
+            388.16,
+            177.27,
+            12.7,
+            2.51
+          ],
+          "area": 26.88829999999989,
+          "iscrowd": 0
+        },
+        {
+          "id": 2183669,
+          "category_id": 47,
+          "bbox": [
+            329.52,
+            337.66,
+            16.44,
+            25.86
+          ],
+          "area": 346.5671499999998,
+          "iscrowd": 0
+        }
+      ],
+      "order": "0a35603e83e0c665e6b4930d3efc2e69ec2574d7827e33078a9e2d2d18ccf650",
+      "bucket": "chair-without-person-or-bed"
+    },
+    {
+      "license": 2,
+      "file_name": "000000136355.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000136355.jpg",
+      "height": 427,
+      "width": 640,
+      "date_captured": "2013-11-14 19:32:02",
+      "flickr_url": "http://farm9.staticflickr.com/8230/8422234851_13fffe755b_z.jpg",
+      "id": 136355,
+      "anns": [
+        {
+          "id": 22806,
+          "category_id": 64,
+          "bbox": [
+            513.2,
+            84.47,
+            90.76,
+            70.59
+          ],
+          "area": 4235.0086,
+          "iscrowd": 0
+        },
+        {
+          "id": 26324,
+          "category_id": 64,
+          "bbox": [
+            328.17,
+            0.96,
+            237.96,
+            186.15
+          ],
+          "area": 13725.7423,
+          "iscrowd": 0
+        },
+        {
+          "id": 26341,
+          "category_id": 64,
+          "bbox": [
+            326.2,
+            123.56,
+            55.63,
+            63.12
+          ],
+          "area": 1963.6413499999992,
+          "iscrowd": 0
+        },
+        {
+          "id": 26700,
+          "category_id": 64,
+          "bbox": [
+            448.77,
+            175.76,
+            64.45,
+            123
+          ],
+          "area": 2933.8099,
+          "iscrowd": 0
+        },
+        {
+          "id": 101996,
+          "category_id": 62,
+          "bbox": [
+            362.44,
+            235.86,
+            44.27,
+            185.38
+          ],
+          "area": 2495.050199999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 103159,
+          "category_id": 62,
+          "bbox": [
+            46.11,
+            254.31,
+            94.99,
+            166.93
+          ],
+          "area": 5236.6246999999985,
+          "iscrowd": 0
+        },
+        {
+          "id": 104284,
+          "category_id": 62,
+          "bbox": [
+            180.68,
+            223.58,
+            29.9,
+            39.88
+          ],
+          "area": 523.4421500000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 123110,
+          "category_id": 67,
+          "bbox": [
+            74.35,
+            249.17,
+            313.47,
+            172.81
+          ],
+          "area": 31661.37445000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 331450,
+          "category_id": 82,
+          "bbox": [
+            580.8,
+            74.6,
+            59.2,
+            346.76
+          ],
+          "area": 14565.653799999996,
+          "iscrowd": 0
+        },
+        {
+          "id": 371615,
+          "category_id": 44,
+          "bbox": [
+            221.64,
+            87.5,
+            17.45,
+            26.91
+          ],
+          "area": 396.81785,
+          "iscrowd": 0
+        },
+        {
+          "id": 711634,
+          "category_id": 51,
+          "bbox": [
+            477.93,
+            287.33,
+            57.81,
+            36.51
+          ],
+          "area": 1599.90265,
+          "iscrowd": 0
+        },
+        {
+          "id": 1535482,
+          "category_id": 51,
+          "bbox": [
+            533.97,
+            288.44,
+            58.4,
+            30.49
+          ],
+          "area": 1178.7015500000014,
+          "iscrowd": 0
+        },
+        {
+          "id": 1670015,
+          "category_id": 86,
+          "bbox": [
+            212.54,
+            241.87,
+            35.58,
+            60.59
+          ],
+          "area": 1688.6121499999995,
+          "iscrowd": 0
+        },
+        {
+          "id": 1912069,
+          "category_id": 55,
+          "bbox": [
+            491.32,
+            298.4,
+            15.99,
+            9.81
+          ],
+          "area": 122.00435000000013,
+          "iscrowd": 0
+        },
+        {
+          "id": 1912242,
+          "category_id": 55,
+          "bbox": [
+            508.3,
+            298.72,
+            17.26,
+            11.27
+          ],
+          "area": 130.38414999999986,
+          "iscrowd": 0
+        },
+        {
+          "id": 1952288,
+          "category_id": 64,
+          "bbox": [
+            183,
+            160.82,
+            92.05,
+            139.74
+          ],
+          "area": 7175.0953,
+          "iscrowd": 0
+        },
+        {
+          "id": 2108685,
+          "category_id": 51,
+          "bbox": [
+            242.88,
+            250.95,
+            44.79,
+            19.69
+          ],
+          "area": 699.3614000000005,
+          "iscrowd": 0
+        },
+        {
+          "id": 2219830,
+          "category_id": 55,
+          "bbox": [
+            554.66,
+            299.98,
+            14.53,
+            6.43
+          ],
+          "area": 60.53715000000047,
+          "iscrowd": 0
+        },
+        {
+          "id": 2219833,
+          "category_id": 55,
+          "bbox": [
+            566.52,
+            296.57,
+            14.47,
+            9.59
+          ],
+          "area": 107.39254999999986,
+          "iscrowd": 0
+        }
+      ],
+      "order": "0be99715ef4364b964b5dbc8e2f2f1f3c06e681d978b73389eeaf324c6b9cb05",
+      "bucket": "chair-without-person-or-bed"
+    },
+    {
+      "license": 4,
+      "file_name": "000000540928.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000540928.jpg",
+      "height": 455,
+      "width": 640,
+      "date_captured": "2013-11-17 18:50:41",
+      "flickr_url": "http://farm4.staticflickr.com/3591/3373335806_30482ab023_z.jpg",
+      "id": 540928,
+      "anns": [
+        {
+          "id": 48572,
+          "category_id": 17,
+          "bbox": [
+            236.15,
+            4.17,
+            305.37,
+            292.14
+          ],
+          "area": 34426.89645000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 107800,
+          "category_id": 62,
+          "bbox": [
+            20.59,
+            0.49,
+            608.96,
+            432.45
+          ],
+          "area": 148888.98239999992,
+          "iscrowd": 0
+        }
+      ],
+      "order": "0db35886fa61a1b67dbbc88c269ee183aa5ec3a23bf184cd21ab4089bd6f97ab",
+      "bucket": "chair-without-person-or-bed"
+    },
+    {
+      "license": 3,
+      "file_name": "000000221708.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000221708.jpg",
+      "height": 640,
+      "width": 480,
+      "date_captured": "2013-11-14 21:33:45",
+      "flickr_url": "http://farm8.staticflickr.com/7165/6633214697_49a43a19ca_z.jpg",
+      "id": 221708,
+      "anns": [
+        {
+          "id": 106956,
+          "category_id": 62,
+          "bbox": [
+            373,
+            266.64,
+            93.39,
+            179
+          ],
+          "area": 6206.77985,
+          "iscrowd": 0
+        },
+        {
+          "id": 107078,
+          "category_id": 62,
+          "bbox": [
+            270.75,
+            265.14,
+            113.28,
+            207.04
+          ],
+          "area": 14468.302199999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 108730,
+          "category_id": 62,
+          "bbox": [
+            210.25,
+            255.88,
+            75.42,
+            168.56
+          ],
+          "area": 5568.454349999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 119239,
+          "category_id": 67,
+          "bbox": [
+            239.54,
+            263.8,
+            205.7,
+            71.31
+          ],
+          "area": 3795.8157999999994,
+          "iscrowd": 0
+        },
+        {
+          "id": 289384,
+          "category_id": 62,
+          "bbox": [
+            283.47,
+            254.39,
+            45.28,
+            30.03
+          ],
+          "area": 439.1815,
+          "iscrowd": 0
+        },
+        {
+          "id": 291903,
+          "category_id": 64,
+          "bbox": [
+            309.69,
+            251.33,
+            50.7,
+            43.11
+          ],
+          "area": 889.2289999999996,
+          "iscrowd": 0
+        },
+        {
+          "id": 330943,
+          "category_id": 82,
+          "bbox": [
+            132.87,
+            171.98,
+            107.2,
+            181.14
+          ],
+          "area": 15081.116250000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 1133434,
+          "category_id": 81,
+          "bbox": [
+            64.21,
+            256.01,
+            37.03,
+            3.09
+          ],
+          "area": 74.31395000000072,
+          "iscrowd": 0
+        },
+        {
+          "id": 1624418,
+          "category_id": 72,
+          "bbox": [
+            426.97,
+            228.75,
+            28.95,
+            33.74
+          ],
+          "area": 751.1322499999999,
+          "iscrowd": 0
+        }
+      ],
+      "order": "0e966a823feb1390a42ab696313e570adaf07d2c38b10893d7f07985d7b57819",
+      "bucket": "chair-without-person-or-bed"
+    },
+    {
+      "license": 3,
+      "file_name": "000000139684.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000139684.jpg",
+      "height": 333,
+      "width": 500,
+      "date_captured": "2013-11-22 00:51:34",
+      "flickr_url": "http://farm3.staticflickr.com/2793/4386321826_9830af09c5_z.jpg",
+      "id": 139684,
+      "anns": [
+        {
+          "id": 33558,
+          "category_id": 72,
+          "bbox": [
+            156.28,
+            94.32,
+            69.86,
+            46.73
+          ],
+          "area": 3216.1187000000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 51453,
+          "category_id": 17,
+          "bbox": [
+            190.49,
+            236.32,
+            140.36,
+            58.73
+          ],
+          "area": 5565.786849999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 97792,
+          "category_id": 63,
+          "bbox": [
+            2.15,
+            206.25,
+            412.49,
+            122.45
+          ],
+          "area": 34202.86785000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 106759,
+          "category_id": 62,
+          "bbox": [
+            300.81,
+            134.86,
+            100.69,
+            89.34
+          ],
+          "area": 6032.727399999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 1137207,
+          "category_id": 84,
+          "bbox": [
+            184.51,
+            198.75,
+            42.2,
+            10.89
+          ],
+          "area": 242.23184999999984,
+          "iscrowd": 0
+        },
+        {
+          "id": 1141467,
+          "category_id": 84,
+          "bbox": [
+            184.16,
+            201.18,
+            42.19,
+            12.96
+          ],
+          "area": 217.00624999999934,
+          "iscrowd": 0
+        },
+        {
+          "id": 1933162,
+          "category_id": 62,
+          "bbox": [
+            365.09,
+            163.46,
+            124.87,
+            127.48
+          ],
+          "area": 7540.58325,
+          "iscrowd": 0
+        },
+        {
+          "id": 1986073,
+          "category_id": 84,
+          "bbox": [
+            195.1,
+            209.33,
+            30.54,
+            11.28
+          ],
+          "area": 174.91850000000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1986967,
+          "category_id": 84,
+          "bbox": [
+            187.3,
+            194.48,
+            23.92,
+            10.97
+          ],
+          "area": 151.22584999999992,
+          "iscrowd": 0
+        },
+        {
+          "id": 1993446,
+          "category_id": 86,
+          "bbox": [
+            280.82,
+            90.01,
+            10.6,
+            23.57
+          ],
+          "area": 187.82430000000005,
+          "iscrowd": 0
+        },
+        {
+          "id": 1993779,
+          "category_id": 86,
+          "bbox": [
+            230.89,
+            130.45,
+            10.48,
+            14.6
+          ],
+          "area": 104.59900000000007,
+          "iscrowd": 0
+        },
+        {
+          "id": 2131132,
+          "category_id": 67,
+          "bbox": [
+            173.55,
+            206.27,
+            96.96,
+            55.23
+          ],
+          "area": 2242.5274499999987,
+          "iscrowd": 0
+        }
+      ],
+      "order": "10accfccaa73fe5de0d1bb8a0b95f0a0bde6ce785e037611ad3a9a1927364434",
+      "bucket": "chair-without-person-or-bed"
+    },
+    {
+      "license": 1,
+      "file_name": "000000273420.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000273420.jpg",
+      "height": 400,
+      "width": 500,
+      "date_captured": "2013-11-24 07:35:19",
+      "flickr_url": "http://farm1.staticflickr.com/108/363783376_0b170b1135_z.jpg",
+      "id": 273420,
+      "anns": [
+        {
+          "id": 382982,
+          "category_id": 62,
+          "bbox": [
+            123.15,
+            241.8,
+            62.02,
+            82.69
+          ],
+          "area": 3286.543999999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 467327,
+          "category_id": 1,
+          "bbox": [
+            169.89,
+            107.72,
+            100.67,
+            198.65
+          ],
+          "area": 9273.034150000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1349741,
+          "category_id": 3,
+          "bbox": [
+            383.17,
+            216.5,
+            42.62,
+            19.69
+          ],
+          "area": 594.0086499999995,
+          "iscrowd": 0
+        },
+        {
+          "id": 1501989,
+          "category_id": 47,
+          "bbox": [
+            174.59,
+            286.54,
+            16.87,
+            25.1
+          ],
+          "area": 316.76979999999975,
+          "iscrowd": 0
+        },
+        {
+          "id": 1638934,
+          "category_id": 77,
+          "bbox": [
+            190.51,
+            126.18,
+            11.95,
+            20.04
+          ],
+          "area": 107.04850000000008,
+          "iscrowd": 0
+        },
+        {
+          "id": 1956982,
+          "category_id": 65,
+          "bbox": [
+            2.07,
+            291.88,
+            497.41,
+            103.63
+          ],
+          "area": 20960.6446,
+          "iscrowd": 0
+        }
+      ],
+      "order": "0015610d61fa7b9dec3f6f39c37cc9f641b4fe77c3fc61cd135267787ca8f15f",
+      "bucket": "person-with-chair-or-bed"
+    },
+    {
+      "license": 1,
+      "file_name": "000000144003.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000144003.jpg",
+      "height": 375,
+      "width": 500,
+      "date_captured": "2013-11-15 18:03:37",
+      "flickr_url": "http://farm3.staticflickr.com/2368/2253553631_241413d9d7_z.jpg",
+      "id": 144003,
+      "anns": [
+        {
+          "id": 330741,
+          "category_id": 82,
+          "bbox": [
+            0,
+            142.42,
+            155.06,
+            228.37
+          ],
+          "area": 13383.606950000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 477326,
+          "category_id": 1,
+          "bbox": [
+            18.58,
+            89.1,
+            226.35,
+            281.25
+          ],
+          "area": 26026.122099999982,
+          "iscrowd": 0
+        },
+        {
+          "id": 477868,
+          "category_id": 1,
+          "bbox": [
+            181.61,
+            15.93,
+            230.39,
+            352.3
+          ],
+          "area": 24167.468500000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 504627,
+          "category_id": 1,
+          "bbox": [
+            330.04,
+            0.31,
+            169.96,
+            339.64
+          ],
+          "area": 29194.12845,
+          "iscrowd": 0
+        },
+        {
+          "id": 528121,
+          "category_id": 1,
+          "bbox": [
+            276.91,
+            0.51,
+            174.65,
+            188.78
+          ],
+          "area": 4504.044250000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 533283,
+          "category_id": 1,
+          "bbox": [
+            193.29,
+            0.15,
+            192.94,
+            180.97
+          ],
+          "area": 6475.2607499999995,
+          "iscrowd": 0
+        },
+        {
+          "id": 698859,
+          "category_id": 49,
+          "bbox": [
+            152.15,
+            254.87,
+            49.43,
+            10.01
+          ],
+          "area": 158.5052000000009,
+          "iscrowd": 0
+        },
+        {
+          "id": 710790,
+          "category_id": 51,
+          "bbox": [
+            371.87,
+            202.37,
+            55.06,
+            46.36
+          ],
+          "area": 1529.9056499999992,
+          "iscrowd": 0
+        },
+        {
+          "id": 1087258,
+          "category_id": 61,
+          "bbox": [
+            178.29,
+            212.81,
+            111.99,
+            83.54
+          ],
+          "area": 5410.475649999997,
+          "iscrowd": 0
+        },
+        {
+          "id": 1107946,
+          "category_id": 75,
+          "bbox": [
+            361.6,
+            212.01,
+            35.66,
+            25.41
+          ],
+          "area": 478.98764999999963,
+          "iscrowd": 0
+        },
+        {
+          "id": 1710319,
+          "category_id": 1,
+          "bbox": [
+            108.22,
+            1.5,
+            107.47,
+            160.94
+          ],
+          "area": 7276.022099999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 1930356,
+          "category_id": 62,
+          "bbox": [
+            368.39,
+            174.87,
+            101.52,
+            185.34
+          ],
+          "area": 9234.934700000005,
+          "iscrowd": 0
+        },
+        {
+          "id": 2130056,
+          "category_id": 67,
+          "bbox": [
+            123.7,
+            177.27,
+            252.27,
+            192.86
+          ],
+          "area": 33436.2035,
+          "iscrowd": 0
+        }
+      ],
+      "order": "016e5772a2d9bf5bfa673367d1631b0bf88db87dae97a11639e4fc63769568c2",
+      "bucket": "person-with-chair-or-bed"
+    },
+    {
+      "license": 5,
+      "file_name": "000000019432.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000019432.jpg",
+      "height": 480,
+      "width": 640,
+      "date_captured": "2013-11-21 04:39:45",
+      "flickr_url": "http://farm6.staticflickr.com/5131/5533564723_6f1633b85e_z.jpg",
+      "id": 19432,
+      "anns": [
+        {
+          "id": 378536,
+          "category_id": 62,
+          "bbox": [
+            344.09,
+            58.26,
+            72.18,
+            108.69
+          ],
+          "area": 5872.678250000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 382669,
+          "category_id": 62,
+          "bbox": [
+            190.62,
+            15.99,
+            47.95,
+            41.76
+          ],
+          "area": 1569.4438999999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 383277,
+          "category_id": 62,
+          "bbox": [
+            522.07,
+            57.92,
+            74.42,
+            115.41
+          ],
+          "area": 6399.3884999999955,
+          "iscrowd": 0
+        },
+        {
+          "id": 384172,
+          "category_id": 62,
+          "bbox": [
+            282.16,
+            15.68,
+            72.43,
+            150.27
+          ],
+          "area": 7672.035949999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 385840,
+          "category_id": 62,
+          "bbox": [
+            356.82,
+            14.51,
+            62.88,
+            49.56
+          ],
+          "area": 2528.3536,
+          "iscrowd": 0
+        },
+        {
+          "id": 386016,
+          "category_id": 62,
+          "bbox": [
+            420.54,
+            14.05,
+            59.46,
+            47.57
+          ],
+          "area": 2511.9208500000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 387128,
+          "category_id": 62,
+          "bbox": [
+            479.08,
+            15.44,
+            61.2,
+            51.24
+          ],
+          "area": 2481.1789999999996,
+          "iscrowd": 0
+        },
+        {
+          "id": 387701,
+          "category_id": 62,
+          "bbox": [
+            411.74,
+            60.41,
+            55.26,
+            107.26
+          ],
+          "area": 5520.135899999997,
+          "iscrowd": 0
+        },
+        {
+          "id": 388156,
+          "category_id": 62,
+          "bbox": [
+            224.96,
+            58.1,
+            67.88,
+            108.93
+          ],
+          "area": 5495.6161999999995,
+          "iscrowd": 0
+        },
+        {
+          "id": 388869,
+          "category_id": 62,
+          "bbox": [
+            166.24,
+            56.51,
+            66.6,
+            109.81
+          ],
+          "area": 5778.258949999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 428692,
+          "category_id": 1,
+          "bbox": [
+            55.26,
+            26.82,
+            153.86,
+            404.15
+          ],
+          "area": 30702.014250000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 655150,
+          "category_id": 43,
+          "bbox": [
+            88.08,
+            242.4,
+            73.31,
+            137.11
+          ],
+          "area": 3830.6329500000006,
+          "iscrowd": 0
+        },
+        {
+          "id": 1593544,
+          "category_id": 62,
+          "bbox": [
+            538.25,
+            18.34,
+            58.24,
+            47.46
+          ],
+          "area": 2525.8217000000013,
+          "iscrowd": 0
+        },
+        {
+          "id": 1853933,
+          "category_id": 37,
+          "bbox": [
+            320.12,
+            271,
+            22.11,
+            20.21
+          ],
+          "area": 359.60995,
+          "iscrowd": 0
+        },
+        {
+          "id": 2192372,
+          "category_id": 62,
+          "bbox": [
+            74.29,
+            12.48,
+            59.25,
+            44.18
+          ],
+          "area": 1275.47215,
+          "iscrowd": 0
+        },
+        {
+          "id": 906200019432,
+          "category_id": 62,
+          "bbox": [
+            1,
+            9,
+            638,
+            288
+          ],
+          "area": 33435,
+          "iscrowd": 1
+        }
+      ],
+      "order": "01ad3e70fd1bebb1480ff2f9d9b2bb6f8cd385c29b8e40d0ca18812b1fab910f",
+      "bucket": "person-with-chair-or-bed"
+    },
+    {
+      "license": 3,
+      "file_name": "000000217285.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000217285.jpg",
+      "height": 427,
+      "width": 640,
+      "date_captured": "2013-11-22 23:59:37",
+      "flickr_url": "http://farm8.staticflickr.com/7426/9767698732_710aa92ce8_z.jpg",
+      "id": 217285,
+      "anns": [
+        {
+          "id": 629541,
+          "category_id": 39,
+          "bbox": [
+            323.55,
+            130.02,
+            32.22,
+            108.39
+          ],
+          "area": 640.0029499999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 634408,
+          "category_id": 40,
+          "bbox": [
+            409.24,
+            322.53,
+            36.51,
+            35.48
+          ],
+          "area": 930.8597500000005,
+          "iscrowd": 0
+        },
+        {
+          "id": 1256641,
+          "category_id": 1,
+          "bbox": [
+            261.96,
+            162.16,
+            107.47,
+            252.37
+          ],
+          "area": 12300.622050000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 1263909,
+          "category_id": 1,
+          "bbox": [
+            510.82,
+            168.47,
+            73.07,
+            258.53
+          ],
+          "area": 13666.2842,
+          "iscrowd": 0
+        },
+        {
+          "id": 1279276,
+          "category_id": 1,
+          "bbox": [
+            376.37,
+            210.25,
+            98.39,
+            212.07
+          ],
+          "area": 12222.778399999997,
+          "iscrowd": 0
+        },
+        {
+          "id": 1289136,
+          "category_id": 1,
+          "bbox": [
+            422.92,
+            56.99,
+            41.61,
+            60.07
+          ],
+          "area": 1622.010399999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 1293086,
+          "category_id": 1,
+          "bbox": [
+            308.02,
+            72.93,
+            40.3,
+            47.97
+          ],
+          "area": 1104.8978500000005,
+          "iscrowd": 0
+        },
+        {
+          "id": 1299925,
+          "category_id": 1,
+          "bbox": [
+            238.75,
+            48.16,
+            74.4,
+            66.41
+          ],
+          "area": 2383.3777999999993,
+          "iscrowd": 0
+        },
+        {
+          "id": 1308830,
+          "category_id": 1,
+          "bbox": [
+            173.1,
+            46.18,
+            48.38,
+            66.81
+          ],
+          "area": 1999.4913000000008,
+          "iscrowd": 0
+        },
+        {
+          "id": 1309164,
+          "category_id": 1,
+          "bbox": [
+            131.5,
+            70.29,
+            42.79,
+            43.5
+          ],
+          "area": 1055.2920500000005,
+          "iscrowd": 0
+        },
+        {
+          "id": 1310468,
+          "category_id": 1,
+          "bbox": [
+            335.79,
+            75.99,
+            44.69,
+            44.69
+          ],
+          "area": 1145.3303999999996,
+          "iscrowd": 0
+        },
+        {
+          "id": 1319463,
+          "category_id": 1,
+          "bbox": [
+            598.84,
+            39.96,
+            41.16,
+            51.31
+          ],
+          "area": 1494.343650000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1322323,
+          "category_id": 1,
+          "bbox": [
+            577.29,
+            183.44,
+            52.08,
+            85.12
+          ],
+          "area": 2946.3751500000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 1596964,
+          "category_id": 62,
+          "bbox": [
+            595.16,
+            107.73,
+            33.89,
+            20.39
+          ],
+          "area": 536.1510499999993,
+          "iscrowd": 0
+        },
+        {
+          "id": 1597469,
+          "category_id": 62,
+          "bbox": [
+            594.03,
+            89.49,
+            36.53,
+            17.67
+          ],
+          "area": 550.0817499999991,
+          "iscrowd": 0
+        },
+        {
+          "id": 1599117,
+          "category_id": 62,
+          "bbox": [
+            560.02,
+            86.96,
+            36.26,
+            17.75
+          ],
+          "area": 507.9223999999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 1599794,
+          "category_id": 62,
+          "bbox": [
+            504.95,
+            102.52,
+            56.21,
+            23.98
+          ],
+          "area": 850.3791499999994,
+          "iscrowd": 0
+        },
+        {
+          "id": 1600706,
+          "category_id": 62,
+          "bbox": [
+            528.21,
+            86.5,
+            33.34,
+            19.01
+          ],
+          "area": 513.8376499999996,
+          "iscrowd": 0
+        },
+        {
+          "id": 1601362,
+          "category_id": 62,
+          "bbox": [
+            444.5,
+            101.12,
+            49.28,
+            22.97
+          ],
+          "area": 672.4595499999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 1743174,
+          "category_id": 1,
+          "bbox": [
+            58.81,
+            73.27,
+            46.83,
+            38.06
+          ],
+          "area": 1028.20885,
+          "iscrowd": 0
+        },
+        {
+          "id": 1937092,
+          "category_id": 62,
+          "bbox": [
+            483.71,
+            102.86,
+            36.7,
+            22.24
+          ],
+          "area": 343.19654999999926,
+          "iscrowd": 0
+        },
+        {
+          "id": 1943173,
+          "category_id": 62,
+          "bbox": [
+            612.16,
+            108.08,
+            27.84,
+            21.87
+          ],
+          "area": 311.1442,
+          "iscrowd": 0
+        },
+        {
+          "id": 1945944,
+          "category_id": 62,
+          "bbox": [
+            626.03,
+            90.42,
+            13.97,
+            18.79
+          ],
+          "area": 211.4192000000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 2005353,
+          "category_id": 1,
+          "bbox": [
+            530.96,
+            26.56,
+            62.98,
+            61.08
+          ],
+          "area": 1351.2051999999994,
+          "iscrowd": 0
+        },
+        {
+          "id": 900100217285,
+          "category_id": 1,
+          "bbox": [
+            1,
+            1,
+            638,
+            267
+          ],
+          "area": 104752,
+          "iscrowd": 1
+        }
+      ],
+      "order": "01c9c28f0f4a032bb158e21d736290a58aac4f394a71b9e51a65d8667234c07b",
+      "bucket": "person-with-chair-or-bed"
+    },
+    {
+      "license": 1,
+      "file_name": "000000259597.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000259597.jpg",
+      "height": 312,
+      "width": 640,
+      "date_captured": "2013-11-24 08:09:16",
+      "flickr_url": "http://farm7.staticflickr.com/6113/6310588429_b05f6d670b_z.jpg",
+      "id": 259597,
+      "anns": [
+        {
+          "id": 329623,
+          "category_id": 77,
+          "bbox": [
+            208.94,
+            105.12,
+            26.44,
+            69.7
+          ],
+          "area": 1143.8304999999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 469584,
+          "category_id": 1,
+          "bbox": [
+            23.78,
+            27.95,
+            272.13,
+            275.62
+          ],
+          "area": 41227.674949999986,
+          "iscrowd": 0
+        },
+        {
+          "id": 480801,
+          "category_id": 1,
+          "bbox": [
+            347.29,
+            13.63,
+            74.9,
+            139.73
+          ],
+          "area": 6412.896899999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 511312,
+          "category_id": 1,
+          "bbox": [
+            272.55,
+            79.68,
+            52.6,
+            67.15
+          ],
+          "area": 1999.7718500000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 572374,
+          "category_id": 15,
+          "bbox": [
+            246.24,
+            146.91,
+            393.15,
+            159.49
+          ],
+          "area": 52174.31245,
+          "iscrowd": 0
+        },
+        {
+          "id": 1204681,
+          "category_id": 1,
+          "bbox": [
+            319.89,
+            88.08,
+            28.59,
+            64.16
+          ],
+          "area": 1207.4240000000007,
+          "iscrowd": 0
+        },
+        {
+          "id": 1236509,
+          "category_id": 1,
+          "bbox": [
+            10.1,
+            76.77,
+            30.15,
+            58.84
+          ],
+          "area": 1167.3738000000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 1272781,
+          "category_id": 1,
+          "bbox": [
+            230.12,
+            91.47,
+            34.49,
+            52.73
+          ],
+          "area": 1019.6906500000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1288576,
+          "category_id": 1,
+          "bbox": [
+            451.75,
+            24.48,
+            75.4,
+            205.38
+          ],
+          "area": 6183.851650000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1288986,
+          "category_id": 1,
+          "bbox": [
+            596.04,
+            55.26,
+            43.09,
+            106.93
+          ],
+          "area": 3112.4144000000015,
+          "iscrowd": 0
+        },
+        {
+          "id": 1297592,
+          "category_id": 1,
+          "bbox": [
+            562.3,
+            48.38,
+            51.88,
+            108.67
+          ],
+          "area": 2911.8180500000008,
+          "iscrowd": 0
+        },
+        {
+          "id": 1298647,
+          "category_id": 1,
+          "bbox": [
+            516.73,
+            44.87,
+            52.58,
+            112.88
+          ],
+          "area": 4014.611700000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1733953,
+          "category_id": 1,
+          "bbox": [
+            29.96,
+            93.8,
+            76.48,
+            119.64
+          ],
+          "area": 4787.3408500000005,
+          "iscrowd": 0
+        },
+        {
+          "id": 1737173,
+          "category_id": 1,
+          "bbox": [
+            335.11,
+            70.1,
+            23.88,
+            42.37
+          ],
+          "area": 435.158,
+          "iscrowd": 0
+        },
+        {
+          "id": 1932390,
+          "category_id": 62,
+          "bbox": [
+            372.09,
+            184.12,
+            73.79,
+            112.72
+          ],
+          "area": 5780.88175,
+          "iscrowd": 0
+        },
+        {
+          "id": 2000762,
+          "category_id": 1,
+          "bbox": [
+            432.25,
+            84.35,
+            26.06,
+            68.01
+          ],
+          "area": 1232.1141500000008,
+          "iscrowd": 0
+        },
+        {
+          "id": 2122595,
+          "category_id": 62,
+          "bbox": [
+            0.81,
+            179.4,
+            37.99,
+            80.83
+          ],
+          "area": 811.7849000000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 2124464,
+          "category_id": 62,
+          "bbox": [
+            31.89,
+            160.68,
+            21.25,
+            50.08
+          ],
+          "area": 288.9409499999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 900100259597,
+          "category_id": 1,
+          "bbox": [
+            0,
+            32,
+            579,
+            205
+          ],
+          "area": 28188,
+          "iscrowd": 1
+        }
+      ],
+      "order": "024b3caf34da5beeb2e0a952bfce12553644eaa6b594fa5bb564b6d8c6037fca",
+      "bucket": "person-with-chair-or-bed"
+    },
+    {
+      "license": 1,
+      "file_name": "000000474854.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000474854.jpg",
+      "height": 640,
+      "width": 424,
+      "date_captured": "2013-11-19 21:06:57",
+      "flickr_url": "http://farm4.staticflickr.com/3390/4593790367_a8659d9d72_z.jpg",
+      "id": 474854,
+      "anns": [
+        {
+          "id": 102786,
+          "category_id": 62,
+          "bbox": [
+            38.37,
+            338.7,
+            41.12,
+            143.89
+          ],
+          "area": 1835.1838000000014,
+          "iscrowd": 0
+        },
+        {
+          "id": 122353,
+          "category_id": 67,
+          "bbox": [
+            3.01,
+            537.7,
+            418.64,
+            94.87
+          ],
+          "area": 33503.787850000015,
+          "iscrowd": 0
+        },
+        {
+          "id": 206540,
+          "category_id": 1,
+          "bbox": [
+            15.86,
+            124.68,
+            351.71,
+            443.97
+          ],
+          "area": 92616.39310000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 1042325,
+          "category_id": 52,
+          "bbox": [
+            193.9,
+            280.5,
+            83.51,
+            159.35
+          ],
+          "area": 4961.35125,
+          "iscrowd": 0
+        }
+      ],
+      "order": "02bc1e0936e97947ed55d81d1abd2dcd5a1909b9f018c7bbc95f889cb96c5a3f",
+      "bucket": "person-with-chair-or-bed"
+    },
+    {
+      "license": 4,
+      "file_name": "000000479126.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000479126.jpg",
+      "height": 427,
+      "width": 640,
+      "date_captured": "2013-11-15 12:54:02",
+      "flickr_url": "http://farm6.staticflickr.com/5189/5734725144_37742ab51b_z.jpg",
+      "id": 479126,
+      "anns": [
+        {
+          "id": 376092,
+          "category_id": 62,
+          "bbox": [
+            53.95,
+            201.84,
+            147.69,
+            214.11
+          ],
+          "area": 5770.312099999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 383479,
+          "category_id": 62,
+          "bbox": [
+            333.47,
+            223.18,
+            98.38,
+            147.91
+          ],
+          "area": 7342.450199999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 384192,
+          "category_id": 62,
+          "bbox": [
+            519.32,
+            266.88,
+            120.68,
+            154.83
+          ],
+          "area": 12063.031700000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 452193,
+          "category_id": 1,
+          "bbox": [
+            336.67,
+            156.87,
+            236.43,
+            257.1
+          ],
+          "area": 26343.23534999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 1098390,
+          "category_id": 73,
+          "bbox": [
+            261.74,
+            302.91,
+            161.44,
+            118.45
+          ],
+          "area": 7124.319700000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1498100,
+          "category_id": 46,
+          "bbox": [
+            149.81,
+            258.96,
+            15.32,
+            32.34
+          ],
+          "area": 254.18529999999973,
+          "iscrowd": 0
+        },
+        {
+          "id": 2152991,
+          "category_id": 1,
+          "bbox": [
+            108.69,
+            148.29,
+            108.69,
+            268.4
+          ],
+          "area": 15172.184149999995,
+          "iscrowd": 0
+        },
+        {
+          "id": 2190137,
+          "category_id": 62,
+          "bbox": [
+            494.41,
+            220.72,
+            90.34,
+            88.29
+          ],
+          "area": 3927.9998500000006,
+          "iscrowd": 0
+        }
+      ],
+      "order": "03708bc3b05e50b9d0fa225b006e67aee2b3b9644c2b85ade6b6e7ada5e35f29",
+      "bucket": "person-with-chair-or-bed"
+    },
+    {
+      "license": 1,
+      "file_name": "000000162092.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000162092.jpg",
+      "height": 640,
+      "width": 640,
+      "date_captured": "2013-11-20 18:09:50",
+      "flickr_url": "http://farm9.staticflickr.com/8070/8154841450_5a9aa5956c_z.jpg",
+      "id": 162092,
+      "anns": [
+        {
+          "id": 424432,
+          "category_id": 1,
+          "bbox": [
+            251.12,
+            41.78,
+            365.92,
+            598.22
+          ],
+          "area": 137899.8523,
+          "iscrowd": 0
+        },
+        {
+          "id": 493206,
+          "category_id": 1,
+          "bbox": [
+            1.35,
+            258.07,
+            93.67,
+            380.8
+          ],
+          "area": 23776.740749999997,
+          "iscrowd": 0
+        },
+        {
+          "id": 496096,
+          "category_id": 1,
+          "bbox": [
+            90.42,
+            71.42,
+            167.92,
+            163.1
+          ],
+          "area": 16503.9789,
+          "iscrowd": 0
+        },
+        {
+          "id": 501891,
+          "category_id": 1,
+          "bbox": [
+            0.78,
+            49.43,
+            91.7,
+            174.39
+          ],
+          "area": 12491.07725,
+          "iscrowd": 0
+        },
+        {
+          "id": 1086388,
+          "category_id": 61,
+          "bbox": [
+            90.65,
+            492.45,
+            106.42,
+            70.74
+          ],
+          "area": 5786.3339499999975,
+          "iscrowd": 0
+        },
+        {
+          "id": 1202891,
+          "category_id": 1,
+          "bbox": [
+            224.34,
+            94.39,
+            78.88,
+            132.09
+          ],
+          "area": 7678.421450000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1229140,
+          "category_id": 1,
+          "bbox": [
+            106.04,
+            38.94,
+            53.81,
+            59.79
+          ],
+          "area": 1973.4269,
+          "iscrowd": 0
+        },
+        {
+          "id": 1247867,
+          "category_id": 1,
+          "bbox": [
+            185.14,
+            49.74,
+            44.55,
+            83
+          ],
+          "area": 2687.4290999999994,
+          "iscrowd": 0
+        },
+        {
+          "id": 1263705,
+          "category_id": 1,
+          "bbox": [
+            239.37,
+            43.34,
+            61.25,
+            54.32
+          ],
+          "area": 1620.0949999999996,
+          "iscrowd": 0
+        },
+        {
+          "id": 1516823,
+          "category_id": 48,
+          "bbox": [
+            234.04,
+            280.14,
+            90.07,
+            75.26
+          ],
+          "area": 847.70905,
+          "iscrowd": 0
+        },
+        {
+          "id": 1577701,
+          "category_id": 61,
+          "bbox": [
+            232.02,
+            508.03,
+            101.86,
+            48.27
+          ],
+          "area": 3186.0989,
+          "iscrowd": 0
+        },
+        {
+          "id": 1579565,
+          "category_id": 62,
+          "bbox": [
+            138.07,
+            609.8,
+            224.36,
+            23.01
+          ],
+          "area": 3478.714700000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1680068,
+          "category_id": 1,
+          "bbox": [
+            294.83,
+            94.92,
+            61.84,
+            133.75
+          ],
+          "area": 6362.505900000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 1929237,
+          "category_id": 61,
+          "bbox": [
+            219.28,
+            528.72,
+            213.23,
+            78.92
+          ],
+          "area": 8732.874149999996,
+          "iscrowd": 0
+        },
+        {
+          "id": 1999688,
+          "category_id": 1,
+          "bbox": [
+            202.78,
+            72.58,
+            70.06,
+            87
+          ],
+          "area": 1921.8353500000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 2003632,
+          "category_id": 1,
+          "bbox": [
+            68.58,
+            54.2,
+            41.38,
+            153.09
+          ],
+          "area": 3680.469,
+          "iscrowd": 0
+        }
+      ],
+      "order": "0487d4e5eee576f064d2dd39cdb05799ab21647805d4e5d144b9d43b10beb85c",
+      "bucket": "person-with-chair-or-bed"
+    },
+    {
+      "license": 1,
+      "file_name": "000000288584.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000288584.jpg",
+      "height": 427,
+      "width": 640,
+      "date_captured": "2013-11-16 12:34:56",
+      "flickr_url": "http://farm1.staticflickr.com/151/362223710_1e7722b711_z.jpg",
+      "id": 288584,
+      "anns": [
+        {
+          "id": 384291,
+          "category_id": 62,
+          "bbox": [
+            179.65,
+            166.8,
+            61.81,
+            90.64
+          ],
+          "area": 1572.0156500000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 392258,
+          "category_id": 67,
+          "bbox": [
+            100.32,
+            119.81,
+            106.14,
+            26.54
+          ],
+          "area": 1029.4159499999992,
+          "iscrowd": 0
+        },
+        {
+          "id": 1175960,
+          "category_id": 31,
+          "bbox": [
+            183.85,
+            300.98,
+            37.14,
+            75.63
+          ],
+          "area": 662.6402999999992,
+          "iscrowd": 0
+        },
+        {
+          "id": 1179328,
+          "category_id": 31,
+          "bbox": [
+            422.36,
+            176.82,
+            24.46,
+            68.05
+          ],
+          "area": 345.69870000000077,
+          "iscrowd": 0
+        },
+        {
+          "id": 1226416,
+          "category_id": 1,
+          "bbox": [
+            118.92,
+            83.89,
+            71.5,
+            249.44
+          ],
+          "area": 9445.236400000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1252117,
+          "category_id": 1,
+          "bbox": [
+            127.74,
+            257.92,
+            83.74,
+            168.25
+          ],
+          "area": 9213.7523,
+          "iscrowd": 0
+        },
+        {
+          "id": 1291536,
+          "category_id": 1,
+          "bbox": [
+            399.17,
+            143.93,
+            90.2,
+            255.24
+          ],
+          "area": 11929.768850000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1291795,
+          "category_id": 1,
+          "bbox": [
+            477.46,
+            89.95,
+            40.74,
+            164.57
+          ],
+          "area": 4018.4258000000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 1302105,
+          "category_id": 1,
+          "bbox": [
+            523.82,
+            77.69,
+            88.98,
+            106.09
+          ],
+          "area": 3644.5908499999987,
+          "iscrowd": 0
+        },
+        {
+          "id": 1309796,
+          "category_id": 1,
+          "bbox": [
+            545.66,
+            38.59,
+            62.66,
+            73.85
+          ],
+          "area": 1625.468350000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1417931,
+          "category_id": 27,
+          "bbox": [
+            423.43,
+            177.98,
+            22.55,
+            67.63
+          ],
+          "area": 322.1021000000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1421645,
+          "category_id": 27,
+          "bbox": [
+            586.3,
+            106.28,
+            9.63,
+            22.95
+          ],
+          "area": 77.14835000000019,
+          "iscrowd": 0
+        },
+        {
+          "id": 1730632,
+          "category_id": 1,
+          "bbox": [
+            19.1,
+            294.67,
+            86.32,
+            131.7
+          ],
+          "area": 7549.061599999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 1740789,
+          "category_id": 1,
+          "bbox": [
+            544.03,
+            117.03,
+            73.8,
+            128.63
+          ],
+          "area": 5803.31725,
+          "iscrowd": 0
+        },
+        {
+          "id": 1743171,
+          "category_id": 1,
+          "bbox": [
+            618.95,
+            116.73,
+            21.05,
+            103.95
+          ],
+          "area": 1122.4846999999986,
+          "iscrowd": 0
+        },
+        {
+          "id": 1826844,
+          "category_id": 27,
+          "bbox": [
+            625.53,
+            153.84,
+            10.47,
+            33.49
+          ],
+          "area": 170.84480000000062,
+          "iscrowd": 0
+        },
+        {
+          "id": 1836559,
+          "category_id": 31,
+          "bbox": [
+            75.42,
+            337.16,
+            44.36,
+            89.84
+          ],
+          "area": 1571.0065999999997,
+          "iscrowd": 0
+        },
+        {
+          "id": 1933986,
+          "category_id": 62,
+          "bbox": [
+            6.34,
+            0,
+            53.06,
+            53.63
+          ],
+          "area": 1280.4533499999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 2071524,
+          "category_id": 27,
+          "bbox": [
+            546.06,
+            106.04,
+            12.38,
+            20.88
+          ],
+          "area": 89.84200000000028,
+          "iscrowd": 0
+        }
+      ],
+      "order": "0620c52b17d7383b16a879274c0d044624947fa9e54a62cb708652ebd38e10e8",
+      "bucket": "person-with-chair-or-bed"
+    },
+    {
+      "license": 2,
+      "file_name": "000000261318.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000261318.jpg",
+      "height": 640,
+      "width": 427,
+      "date_captured": "2013-11-24 07:43:30",
+      "flickr_url": "http://farm1.staticflickr.com/59/206742579_e293a53d9f_z.jpg",
+      "id": 261318,
+      "anns": [
+        {
+          "id": 323575,
+          "category_id": 77,
+          "bbox": [
+            172.4,
+            218.48,
+            27.68,
+            45.69
+          ],
+          "area": 161.19845000000024,
+          "iscrowd": 0
+        },
+        {
+          "id": 441426,
+          "category_id": 1,
+          "bbox": [
+            91.6,
+            179.08,
+            212.52,
+            398.24
+          ],
+          "area": 31657.05634999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 1184301,
+          "category_id": 33,
+          "bbox": [
+            0,
+            353.67,
+            76.43,
+            285.61
+          ],
+          "area": 18689.08615,
+          "iscrowd": 0
+        },
+        {
+          "id": 1185136,
+          "category_id": 33,
+          "bbox": [
+            353.8,
+            392.63,
+            71.91,
+            237.3
+          ],
+          "area": 15378.346149999992,
+          "iscrowd": 0
+        },
+        {
+          "id": 1835395,
+          "category_id": 31,
+          "bbox": [
+            73.82,
+            449.87,
+            73.8,
+            105.23
+          ],
+          "area": 6287.767750000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 1936867,
+          "category_id": 62,
+          "bbox": [
+            127.14,
+            308.7,
+            208.38,
+            331.3
+          ],
+          "area": 46739.653900000005,
+          "iscrowd": 0
+        }
+      ],
+      "order": "06c8a7f289cf0bc1f0e3e9cf5f572af48c09837286dd5451a2d9e50765af36f8",
+      "bucket": "person-with-chair-or-bed"
+    },
+    {
+      "license": 3,
+      "file_name": "000000569976.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000569976.jpg",
+      "height": 640,
+      "width": 480,
+      "date_captured": "2013-11-24 22:08:49",
+      "flickr_url": "http://farm5.staticflickr.com/4093/4737241362_7b60073cae_z.jpg",
+      "id": 569976,
+      "anns": [
+        {
+          "id": 433720,
+          "category_id": 1,
+          "bbox": [
+            128.58,
+            1.08,
+            212.37,
+            410.3
+          ],
+          "area": 46489.71965,
+          "iscrowd": 0
+        },
+        {
+          "id": 437179,
+          "category_id": 1,
+          "bbox": [
+            20.13,
+            336.54,
+            218.61,
+            290.52
+          ],
+          "area": 44029.997849999985,
+          "iscrowd": 0
+        },
+        {
+          "id": 1188281,
+          "category_id": 89,
+          "bbox": [
+            194.58,
+            209.63,
+            144.71,
+            229.02
+          ],
+          "area": 10347.806049999994,
+          "iscrowd": 0
+        },
+        {
+          "id": 1239516,
+          "category_id": 1,
+          "bbox": [
+            188.4,
+            265.83,
+            145.26,
+            184.09
+          ],
+          "area": 10687.444850000005,
+          "iscrowd": 0
+        },
+        {
+          "id": 1580748,
+          "category_id": 62,
+          "bbox": [
+            168.69,
+            473.76,
+            108.97,
+            38.2
+          ],
+          "area": 1575.3461,
+          "iscrowd": 0
+        },
+        {
+          "id": 1582191,
+          "category_id": 62,
+          "bbox": [
+            0,
+            521.72,
+            263.89,
+            118.28
+          ],
+          "area": 21503.676999999996,
+          "iscrowd": 0
+        },
+        {
+          "id": 2123111,
+          "category_id": 62,
+          "bbox": [
+            208.97,
+            492.19,
+            124.13,
+            147.81
+          ],
+          "area": 12597.112650000001,
+          "iscrowd": 0
+        }
+      ],
+      "order": "0772e52f9e88816a6a3bfbe93faba9ced527f1e62cbec9606057d75a54cc089f",
+      "bucket": "person-with-chair-or-bed"
+    },
+    {
+      "license": 3,
+      "file_name": "000000189752.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000189752.jpg",
+      "height": 480,
+      "width": 640,
+      "date_captured": "2013-11-21 01:01:54",
+      "flickr_url": "http://farm3.staticflickr.com/2761/4363686692_ff3ce5c8f4_z.jpg",
+      "id": 189752,
+      "anns": [
+        {
+          "id": 390201,
+          "category_id": 67,
+          "bbox": [
+            0.83,
+            194.8,
+            639.17,
+            285.2
+          ],
+          "area": 162424.61620000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 451250,
+          "category_id": 1,
+          "bbox": [
+            99.46,
+            1.08,
+            74.59,
+            105.95
+          ],
+          "area": 4290.4171000000015,
+          "iscrowd": 0
+        },
+        {
+          "id": 469136,
+          "category_id": 1,
+          "bbox": [
+            0.24,
+            0.09,
+            96.76,
+            114.05
+          ],
+          "area": 6209.46735,
+          "iscrowd": 0
+        },
+        {
+          "id": 687812,
+          "category_id": 48,
+          "bbox": [
+            249.66,
+            101.23,
+            73.1,
+            126.81
+          ],
+          "area": 1111.4456,
+          "iscrowd": 0
+        },
+        {
+          "id": 695017,
+          "category_id": 49,
+          "bbox": [
+            76.58,
+            343.76,
+            424.99,
+            100.31
+          ],
+          "area": 12116.46815000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1075062,
+          "category_id": 59,
+          "bbox": [
+            351.93,
+            214.17,
+            281.97,
+            144.22
+          ],
+          "area": 27193.74195,
+          "iscrowd": 0
+        },
+        {
+          "id": 1076464,
+          "category_id": 59,
+          "bbox": [
+            298.79,
+            195.24,
+            138.06,
+            50.69
+          ],
+          "area": 4165.1239,
+          "iscrowd": 0
+        },
+        {
+          "id": 1211750,
+          "category_id": 1,
+          "bbox": [
+            142.7,
+            0.54,
+            496.22,
+            240
+          ],
+          "area": 80763.48430000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 1515096,
+          "category_id": 47,
+          "bbox": [
+            505.89,
+            60.22,
+            114.33,
+            162.88
+          ],
+          "area": 16366.917850000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 1515640,
+          "category_id": 47,
+          "bbox": [
+            43.75,
+            62.33,
+            36.68,
+            62.75
+          ],
+          "area": 1568.87885,
+          "iscrowd": 0
+        },
+        {
+          "id": 1614364,
+          "category_id": 67,
+          "bbox": [
+            0.6,
+            104.55,
+            156.92,
+            51.01
+          ],
+          "area": 4829.975700000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1935835,
+          "category_id": 62,
+          "bbox": [
+            0,
+            213.79,
+            212.83,
+            39.1
+          ],
+          "area": 4257.381050000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 2097457,
+          "category_id": 46,
+          "bbox": [
+            500.95,
+            63.23,
+            120.09,
+            164.51
+          ],
+          "area": 16287.329099999992,
+          "iscrowd": 0
+        }
+      ],
+      "order": "07c6f5cba078f35eaddd9f9e3827639bbdfcc58aa719a6bc0895e589c2c0fc43",
+      "bucket": "person-with-chair-or-bed"
+    },
+    {
+      "license": 3,
+      "file_name": "000000304365.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000304365.jpg",
+      "height": 427,
+      "width": 640,
+      "date_captured": "2013-11-17 09:37:22",
+      "flickr_url": "http://farm4.staticflickr.com/3681/8922460501_faa1a0af7d_z.jpg",
+      "id": 304365,
+      "anns": [
+        {
+          "id": 170507,
+          "category_id": 7,
+          "bbox": [
+            245.09,
+            234.45,
+            161.88,
+            163.82
+          ],
+          "area": 18964.72495,
+          "iscrowd": 0
+        },
+        {
+          "id": 193697,
+          "category_id": 1,
+          "bbox": [
+            449.3,
+            309.21,
+            28.28,
+            55.58
+          ],
+          "area": 884.2282000000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1446883,
+          "category_id": 33,
+          "bbox": [
+            446.14,
+            338.18,
+            10.44,
+            18.11
+          ],
+          "area": 148.00679999999954,
+          "iscrowd": 0
+        },
+        {
+          "id": 2211585,
+          "category_id": 31,
+          "bbox": [
+            445.39,
+            338.46,
+            11.07,
+            17.05
+          ],
+          "area": 135.5234,
+          "iscrowd": 0
+        }
+      ],
+      "order": "001cff771770829ca01a3a454f70ed315be0bf9078ea1be7ad814611cf9e0f3c",
+      "bucket": "person-without-chair-or-bed"
+    },
+    {
+      "license": 3,
+      "file_name": "000000574315.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000574315.jpg",
+      "height": 480,
+      "width": 640,
+      "date_captured": "2013-11-17 21:23:14",
+      "flickr_url": "http://farm3.staticflickr.com/2010/2247055627_5269f84985_z.jpg",
+      "id": 574315,
+      "anns": [
+        {
+          "id": 51384,
+          "category_id": 17,
+          "bbox": [
+            181.78,
+            105.3,
+            251.74,
+            235.66
+          ],
+          "area": 40250.26605000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 116111,
+          "category_id": 63,
+          "bbox": [
+            2.06,
+            1.1,
+            637.94,
+            469.68
+          ],
+          "area": 104418.14359999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 220502,
+          "category_id": 1,
+          "bbox": [
+            333.3,
+            0,
+            306.7,
+            412.04
+          ],
+          "area": 73365.6641,
+          "iscrowd": 0
+        },
+        {
+          "id": 1098752,
+          "category_id": 73,
+          "bbox": [
+            0,
+            257.47,
+            557.66,
+            215.73
+          ],
+          "area": 80806.22359999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 1634567,
+          "category_id": 76,
+          "bbox": [
+            147.78,
+            343.01,
+            357.03,
+            129.44
+          ],
+          "area": 20249.157100000004,
+          "iscrowd": 0
+        }
+      ],
+      "order": "002fb81e10a75c4f525f73370429ffbe9fb3cec84305ac489faa97dfff8a68cc",
+      "bucket": "person-without-chair-or-bed"
+    },
+    {
+      "license": 4,
+      "file_name": "000000105335.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000105335.jpg",
+      "height": 612,
+      "width": 612,
+      "date_captured": "2013-11-25 08:58:01",
+      "flickr_url": "http://farm4.staticflickr.com/3753/9165139551_307fa8f59d_z.jpg",
+      "id": 105335,
+      "anns": [
+        {
+          "id": 1063531,
+          "category_id": 57,
+          "bbox": [
+            78.71,
+            289.33,
+            124.73,
+            93.06
+          ],
+          "area": 6395.7374500000005,
+          "iscrowd": 0
+        },
+        {
+          "id": 1063992,
+          "category_id": 57,
+          "bbox": [
+            267.29,
+            290.76,
+            85.87,
+            68.1
+          ],
+          "area": 3818.1636000000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 1066009,
+          "category_id": 57,
+          "bbox": [
+            388.5,
+            365.78,
+            88.09,
+            69.59
+          ],
+          "area": 3947.2084999999997,
+          "iscrowd": 0
+        },
+        {
+          "id": 1066184,
+          "category_id": 57,
+          "bbox": [
+            21.28,
+            245.29,
+            96.3,
+            67.5
+          ],
+          "area": 4077.5288500000015,
+          "iscrowd": 0
+        },
+        {
+          "id": 1535133,
+          "category_id": 51,
+          "bbox": [
+            2.75,
+            233.8,
+            609.25,
+            328.69
+          ],
+          "area": 161960.89210000006,
+          "iscrowd": 0
+        },
+        {
+          "id": 1706516,
+          "category_id": 1,
+          "bbox": [
+            174.27,
+            0.91,
+            422.64,
+            282.68
+          ],
+          "area": 86729.17099999997,
+          "iscrowd": 0
+        },
+        {
+          "id": 1915176,
+          "category_id": 56,
+          "bbox": [
+            237.7,
+            277.81,
+            47.11,
+            64.3
+          ],
+          "area": 1277.074799999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 2032294,
+          "category_id": 1,
+          "bbox": [
+            119.04,
+            560.58,
+            211,
+            51.42
+          ],
+          "area": 6897.9186999999965,
+          "iscrowd": 0
+        },
+        {
+          "id": 2115891,
+          "category_id": 57,
+          "bbox": [
+            201.47,
+            388.06,
+            39.95,
+            34.07
+          ],
+          "area": 982.2508,
+          "iscrowd": 0
+        },
+        {
+          "id": 2116094,
+          "category_id": 57,
+          "bbox": [
+            0,
+            394.76,
+            83.21,
+            58.74
+          ],
+          "area": 3396.71655,
+          "iscrowd": 0
+        },
+        {
+          "id": 2116153,
+          "category_id": 57,
+          "bbox": [
+            231.31,
+            306.71,
+            82.03,
+            64.85
+          ],
+          "area": 889.3500500000006,
+          "iscrowd": 0
+        }
+      ],
+      "order": "0091262a1d76fddac73d67e0a404095700abd7a468cecbe80653f16b2bd88d0e",
+      "bucket": "person-without-chair-or-bed"
+    },
+    {
+      "license": 5,
+      "file_name": "000000191013.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000191013.jpg",
+      "height": 640,
+      "width": 474,
+      "date_captured": "2013-11-24 15:14:15",
+      "flickr_url": "http://farm9.staticflickr.com/8057/8193281147_81461e9773_z.jpg",
+      "id": 191013,
+      "anns": [
+        {
+          "id": 333904,
+          "category_id": 85,
+          "bbox": [
+            142.38,
+            209.98,
+            188.41,
+            188.4
+          ],
+          "area": 27601.156649999997,
+          "iscrowd": 0
+        },
+        {
+          "id": 349746,
+          "category_id": 3,
+          "bbox": [
+            305.48,
+            551.47,
+            133.53,
+            60.7
+          ],
+          "area": 5542.157649999995,
+          "iscrowd": 0
+        },
+        {
+          "id": 353685,
+          "category_id": 3,
+          "bbox": [
+            44.37,
+            548.77,
+            179.72,
+            91.23
+          ],
+          "area": 10783.84105,
+          "iscrowd": 0
+        },
+        {
+          "id": 401670,
+          "category_id": 8,
+          "bbox": [
+            122.25,
+            520.63,
+            145.26,
+            87.73
+          ],
+          "area": 7212.934850000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 463493,
+          "category_id": 1,
+          "bbox": [
+            59.86,
+            542.82,
+            24.38,
+            41.35
+          ],
+          "area": 587.8468499999991,
+          "iscrowd": 0
+        },
+        {
+          "id": 1340946,
+          "category_id": 3,
+          "bbox": [
+            450.52,
+            567.14,
+            23.48,
+            36.09
+          ],
+          "area": 611.1511500000006,
+          "iscrowd": 0
+        },
+        {
+          "id": 1711168,
+          "category_id": 1,
+          "bbox": [
+            366.41,
+            564.34,
+            12.58,
+            13.65
+          ],
+          "area": 105.13134999999957,
+          "iscrowd": 0
+        },
+        {
+          "id": 2039834,
+          "category_id": 3,
+          "bbox": [
+            0.02,
+            621.61,
+            210.11,
+            18.39
+          ],
+          "area": 3049.240849999992,
+          "iscrowd": 0
+        }
+      ],
+      "order": "00dcb23c36bd188e4c4ba467009b09a312f117126d2636c6609f94cf0aa3ceb6",
+      "bucket": "person-without-chair-or-bed"
+    },
+    {
+      "license": 1,
+      "file_name": "000000373705.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000373705.jpg",
+      "height": 427,
+      "width": 640,
+      "date_captured": "2013-11-16 21:45:00",
+      "flickr_url": "http://farm4.staticflickr.com/3386/3532803097_b451b6fc0d_z.jpg",
+      "id": 373705,
+      "anns": [
+        {
+          "id": 460031,
+          "category_id": 1,
+          "bbox": [
+            492.13,
+            65.33,
+            87.37,
+            145.61
+          ],
+          "area": 6544.306350000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 465356,
+          "category_id": 1,
+          "bbox": [
+            206.61,
+            129.76,
+            43.43,
+            72.67
+          ],
+          "area": 2006.234,
+          "iscrowd": 0
+        },
+        {
+          "id": 468751,
+          "category_id": 1,
+          "bbox": [
+            94.04,
+            85.24,
+            42.22,
+            116.11
+          ],
+          "area": 3240.2072500000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 542379,
+          "category_id": 1,
+          "bbox": [
+            130.95,
+            154.33,
+            35.06,
+            50.03
+          ],
+          "area": 1179.02015,
+          "iscrowd": 0
+        },
+        {
+          "id": 1259641,
+          "category_id": 1,
+          "bbox": [
+            0.06,
+            159.46,
+            10.08,
+            26.98
+          ],
+          "area": 116.41799999999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 1709692,
+          "category_id": 1,
+          "bbox": [
+            620.1,
+            135.59,
+            19.85,
+            73.03
+          ],
+          "area": 1172.0853500000032,
+          "iscrowd": 0
+        },
+        {
+          "id": 1808923,
+          "category_id": 11,
+          "bbox": [
+            365.85,
+            165.53,
+            189.78,
+            259.36
+          ],
+          "area": 27177.1407,
+          "iscrowd": 0
+        }
+      ],
+      "order": "01179e276fc1016483cf6c0a4e1885b9a9d92f838f1d1f0f5a810a37d81dc94f",
+      "bucket": "person-without-chair-or-bed"
+    },
+    {
+      "license": 1,
+      "file_name": "000000576654.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000576654.jpg",
+      "height": 427,
+      "width": 640,
+      "date_captured": "2013-11-22 18:18:32",
+      "flickr_url": "http://farm4.staticflickr.com/3164/2647243570_f9e4b20872_z.jpg",
+      "id": 576654,
+      "anns": [
+        {
+          "id": 479066,
+          "category_id": 1,
+          "bbox": [
+            501.89,
+            229.55,
+            82.01,
+            153.31
+          ],
+          "area": 4847.011050000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 486909,
+          "category_id": 1,
+          "bbox": [
+            190.92,
+            319.35,
+            10.97,
+            22.12
+          ],
+          "area": 140.38349999999957,
+          "iscrowd": 0
+        },
+        {
+          "id": 1855595,
+          "category_id": 38,
+          "bbox": [
+            243.29,
+            35.91,
+            248.79,
+            122.2
+          ],
+          "area": 19976.842099999994,
+          "iscrowd": 0
+        }
+      ],
+      "order": "0163b9ce0650b6bb7d5744bbe93266ab454d738742515e184448d8490dcf8cda",
+      "bucket": "person-without-chair-or-bed"
+    },
+    {
+      "license": 1,
+      "file_name": "000000183675.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000183675.jpg",
+      "height": 412,
+      "width": 640,
+      "date_captured": "2013-11-17 04:12:49",
+      "flickr_url": "http://farm4.staticflickr.com/3101/5836249800_9e8f07b294_z.jpg",
+      "id": 183675,
+      "anns": [
+        {
+          "id": 54931,
+          "category_id": 19,
+          "bbox": [
+            113.81,
+            113.18,
+            526.19,
+            298.82
+          ],
+          "area": 68858.62759999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 221034,
+          "category_id": 1,
+          "bbox": [
+            352.88,
+            15.33,
+            181.06,
+            390.76
+          ],
+          "area": 37013.42700000001,
+          "iscrowd": 0
+        }
+      ],
+      "order": "01894687a2d76399a4a0e47250a72f118691a485e36cb17fab64ee9079485e60",
+      "bucket": "person-without-chair-or-bed"
+    },
+    {
+      "license": 1,
+      "file_name": "000000274066.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000274066.jpg",
+      "height": 427,
+      "width": 640,
+      "date_captured": "2013-11-20 22:54:57",
+      "flickr_url": "http://farm7.staticflickr.com/6202/6023604756_1f27626677_z.jpg",
+      "id": 274066,
+      "anns": [
+        {
+          "id": 431176,
+          "category_id": 1,
+          "bbox": [
+            262.45,
+            154.41,
+            183.97,
+            165.43
+          ],
+          "area": 9816.00405,
+          "iscrowd": 0
+        },
+        {
+          "id": 495157,
+          "category_id": 1,
+          "bbox": [
+            406.2,
+            109.67,
+            116.01,
+            117.34
+          ],
+          "area": 5618.295250000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 537292,
+          "category_id": 1,
+          "bbox": [
+            415.3,
+            45.82,
+            89.69,
+            87.74
+          ],
+          "area": 3324.545299999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 650915,
+          "category_id": 42,
+          "bbox": [
+            11.51,
+            209.01,
+            256.2,
+            133.37
+          ],
+          "area": 14467.150149999998,
+          "iscrowd": 0
+        },
+        {
+          "id": 1225858,
+          "category_id": 1,
+          "bbox": [
+            373.76,
+            185.08,
+            28.97,
+            25.23
+          ],
+          "area": 411.2196500000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 2162128,
+          "category_id": 1,
+          "bbox": [
+            171.66,
+            87.71,
+            156.78,
+            193.49
+          ],
+          "area": 13838.661649999996,
+          "iscrowd": 0
+        },
+        {
+          "id": 2230561,
+          "category_id": 42,
+          "bbox": [
+            352.88,
+            112.68,
+            56.81,
+            17.98
+          ],
+          "area": 539.3501999999994,
+          "iscrowd": 0
+        },
+        {
+          "id": 2230581,
+          "category_id": 42,
+          "bbox": [
+            476.68,
+            212.18,
+            102.31,
+            39.87
+          ],
+          "area": 1952.748150000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 2230633,
+          "category_id": 42,
+          "bbox": [
+            478.19,
+            122.76,
+            33.9,
+            8.02
+          ],
+          "area": 167.60385000000014,
+          "iscrowd": 0
+        }
+      ],
+      "order": "0198a8ec8c70bd8e14d105328757b0bfc23e5bfa188265e8fb74b88cf445437a",
+      "bucket": "person-without-chair-or-bed"
+    },
+    {
+      "license": 1,
+      "file_name": "000000252559.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000252559.jpg",
+      "height": 640,
+      "width": 480,
+      "date_captured": "2013-11-17 06:50:29",
+      "flickr_url": "http://farm1.staticflickr.com/205/498228745_126f25f752_z.jpg",
+      "id": 252559,
+      "anns": [
+        {
+          "id": 1221759,
+          "category_id": 1,
+          "bbox": [
+            106.9,
+            460.28,
+            28.76,
+            69.75
+          ],
+          "area": 1216.30505,
+          "iscrowd": 0
+        },
+        {
+          "id": 1222083,
+          "category_id": 1,
+          "bbox": [
+            63.58,
+            456.67,
+            25.92,
+            84.1
+          ],
+          "area": 1282.2134500000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1260674,
+          "category_id": 1,
+          "bbox": [
+            45.65,
+            458.63,
+            22.73,
+            68.89
+          ],
+          "area": 1091.9652000000006,
+          "iscrowd": 0
+        },
+        {
+          "id": 1267980,
+          "category_id": 1,
+          "bbox": [
+            216.2,
+            451.15,
+            54.4,
+            174.67
+          ],
+          "area": 3889.6414,
+          "iscrowd": 0
+        },
+        {
+          "id": 1290276,
+          "category_id": 1,
+          "bbox": [
+            87.83,
+            462.66,
+            24.19,
+            75.46
+          ],
+          "area": 1269.8300499999996,
+          "iscrowd": 0
+        },
+        {
+          "id": 1312284,
+          "category_id": 1,
+          "bbox": [
+            25.33,
+            458.76,
+            21.89,
+            70.85
+          ],
+          "area": 941.5036999999996,
+          "iscrowd": 0
+        },
+        {
+          "id": 1313810,
+          "category_id": 1,
+          "bbox": [
+            43.23,
+            453.64,
+            10.14,
+            19.24
+          ],
+          "area": 119.03685000000007,
+          "iscrowd": 0
+        },
+        {
+          "id": 1314566,
+          "category_id": 1,
+          "bbox": [
+            0.33,
+            457.6,
+            17.84,
+            73.09
+          ],
+          "area": 938.7881000000008,
+          "iscrowd": 0
+        },
+        {
+          "id": 1324572,
+          "category_id": 1,
+          "bbox": [
+            82.81,
+            463.96,
+            10.28,
+            64.44
+          ],
+          "area": 344.68414999999993,
+          "iscrowd": 0
+        },
+        {
+          "id": 1328706,
+          "category_id": 1,
+          "bbox": [
+            145.26,
+            490.43,
+            34.52,
+            126.56
+          ],
+          "area": 2100.639100000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 1328954,
+          "category_id": 1,
+          "bbox": [
+            16.15,
+            463.71,
+            15.3,
+            58.23
+          ],
+          "area": 461.84395,
+          "iscrowd": 0
+        },
+        {
+          "id": 1717870,
+          "category_id": 1,
+          "bbox": [
+            160.93,
+            471.12,
+            80.93,
+            165.7
+          ],
+          "area": 8221.866899999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 2020399,
+          "category_id": 1,
+          "bbox": [
+            61.27,
+            458.22,
+            10.52,
+            13.55
+          ],
+          "area": 86.22884999999985,
+          "iscrowd": 0
+        }
+      ],
+      "order": "01c0a8cecec149d4d4b71b868a3a92740c0dcb3cd2fb93c04cf171b9fa62e705",
+      "bucket": "person-without-chair-or-bed"
+    },
+    {
+      "license": 2,
+      "file_name": "000000226662.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000226662.jpg",
+      "height": 453,
+      "width": 640,
+      "date_captured": "2013-11-15 12:45:26",
+      "flickr_url": "http://farm5.staticflickr.com/4016/5127097013_9bab3b1ec2_z.jpg",
+      "id": 226662,
+      "anns": [
+        {
+          "id": 150883,
+          "category_id": 4,
+          "bbox": [
+            87.35,
+            18.28,
+            518,
+            426.59
+          ],
+          "area": 130843.09480000014,
+          "iscrowd": 0
+        },
+        {
+          "id": 1209374,
+          "category_id": 1,
+          "bbox": [
+            548.3,
+            9.22,
+            51.55,
+            197.5
+          ],
+          "area": 7121.487950000006,
+          "iscrowd": 0
+        },
+        {
+          "id": 1789577,
+          "category_id": 4,
+          "bbox": [
+            10.12,
+            10,
+            523.22,
+            313.54
+          ],
+          "area": 48080.70279999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 2150979,
+          "category_id": 1,
+          "bbox": [
+            483.59,
+            10.59,
+            78.84,
+            203.56
+          ],
+          "area": 9979.094299999999,
+          "iscrowd": 0
+        }
+      ],
+      "order": "01c5fb7437c2945a035127310e480366bf080e6d275fd9409001ae8a3d3a3b93",
+      "bucket": "person-without-chair-or-bed"
+    },
+    {
+      "license": 6,
+      "file_name": "000000538458.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000538458.jpg",
+      "height": 427,
+      "width": 640,
+      "date_captured": "2013-11-20 06:08:05",
+      "flickr_url": "http://farm3.staticflickr.com/2802/4487717317_cf7e502de2_z.jpg",
+      "id": 538458,
+      "anns": [
+        {
+          "id": 408069,
+          "category_id": 10,
+          "bbox": [
+            616.84,
+            119.8,
+            5.74,
+            15.78
+          ],
+          "area": 70.91160000000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 639224,
+          "category_id": 41,
+          "bbox": [
+            296.78,
+            190.4,
+            74.17,
+            38.17
+          ],
+          "area": 1079.53165,
+          "iscrowd": 0
+        },
+        {
+          "id": 640710,
+          "category_id": 41,
+          "bbox": [
+            464.25,
+            240.38,
+            50.18,
+            37.54
+          ],
+          "area": 873.2750500000003,
+          "iscrowd": 0
+        },
+        {
+          "id": 1373512,
+          "category_id": 8,
+          "bbox": [
+            506.21,
+            171.2,
+            17.44,
+            14.01
+          ],
+          "area": 184.83530000000007,
+          "iscrowd": 0
+        },
+        {
+          "id": 1475249,
+          "category_id": 41,
+          "bbox": [
+            553.26,
+            304.73,
+            45.92,
+            28.15
+          ],
+          "area": 660.7742999999994,
+          "iscrowd": 0
+        },
+        {
+          "id": 1725296,
+          "category_id": 1,
+          "bbox": [
+            487.45,
+            106.51,
+            152.55,
+            206.3
+          ],
+          "area": 14584.64994999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 1806282,
+          "category_id": 10,
+          "bbox": [
+            609.03,
+            94.07,
+            12.38,
+            20.56
+          ],
+          "area": 217.13924999999912,
+          "iscrowd": 0
+        },
+        {
+          "id": 1806443,
+          "category_id": 10,
+          "bbox": [
+            490.9,
+            149.38,
+            7.21,
+            7.12
+          ],
+          "area": 39.01520000000018,
+          "iscrowd": 0
+        },
+        {
+          "id": 2159686,
+          "category_id": 1,
+          "bbox": [
+            296.47,
+            35.4,
+            101.77,
+            147.13
+          ],
+          "area": 7836.147500000002,
+          "iscrowd": 0
+        }
+      ],
+      "order": "01e391460a4949ea9e561aff9d6b1121afaa9484c19eb955eac56309238aa60a",
+      "bucket": "person-without-chair-or-bed"
+    },
+    {
+      "license": 4,
+      "file_name": "000000339823.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000339823.jpg",
+      "height": 640,
+      "width": 484,
+      "date_captured": "2013-11-18 11:40:45",
+      "flickr_url": "http://farm6.staticflickr.com/5023/5596623597_042b2c2ded_z.jpg",
+      "id": 339823,
+      "anns": [
+        {
+          "id": 279676,
+          "category_id": 28,
+          "bbox": [
+            70.47,
+            39.06,
+            325.25,
+            319.73
+          ],
+          "area": 61299.020399999994,
+          "iscrowd": 0
+        },
+        {
+          "id": 2228884,
+          "category_id": 1,
+          "bbox": [
+            17.38,
+            184.89,
+            339.76,
+            450.37
+          ],
+          "area": 93828.63394999997,
+          "iscrowd": 0
+        }
+      ],
+      "order": "020af5a2518a90dd08a639f1ba471107f0dc8f8476114abd71ed9cb9a481421d",
+      "bucket": "person-without-chair-or-bed"
+    },
+    {
+      "license": 1,
+      "file_name": "000000010363.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000010363.jpg",
+      "height": 361,
+      "width": 640,
+      "date_captured": "2013-11-15 07:08:52",
+      "flickr_url": "http://farm4.staticflickr.com/3027/2477308902_443e5baf08_z.jpg",
+      "id": 10363,
+      "anns": [
+        {
+          "id": 47902,
+          "category_id": 17,
+          "bbox": [
+            245.51,
+            108.3,
+            226.13,
+            135.68
+          ],
+          "area": 16892.101950000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 80785,
+          "category_id": 44,
+          "bbox": [
+            147.18,
+            28.8,
+            12.66,
+            37.61
+          ],
+          "area": 404.1564499999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 138210,
+          "category_id": 3,
+          "bbox": [
+            90.83,
+            27.17,
+            549.17,
+            333.83
+          ],
+          "area": 121140.34724999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 2168366,
+          "category_id": 2,
+          "bbox": [
+            492.55,
+            0,
+            143.35,
+            52.9
+          ],
+          "area": 4492.532800000001,
+          "iscrowd": 0
+        }
+      ],
+      "order": "000a5bd0b88f1638d8fa406570aa2ca299be2720bbb28be7aaecbc5de5aa95d0",
+      "bucket": "neither-target"
+    },
+    {
+      "license": 6,
+      "file_name": "000000100489.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000100489.jpg",
+      "height": 640,
+      "width": 479,
+      "date_captured": "2013-11-17 03:59:06",
+      "flickr_url": "http://farm3.staticflickr.com/2840/10000657246_f4e5c89bc7_z.jpg",
+      "id": 100489,
+      "anns": [
+        {
+          "id": 37317,
+          "category_id": 16,
+          "bbox": [
+            82.4,
+            74.16,
+            225.24,
+            288.42
+          ],
+          "area": 22910.86229999999,
+          "iscrowd": 0
+        }
+      ],
+      "order": "001c0b8210df85f5daac3742865211640609ea588afabf46c8856077134f6ac1",
+      "bucket": "neither-target"
+    },
+    {
+      "license": 5,
+      "file_name": "000000079188.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000079188.jpg",
+      "height": 640,
+      "width": 480,
+      "date_captured": "2013-11-16 16:42:34",
+      "flickr_url": "http://farm6.staticflickr.com/5337/8893150526_e517ed3bf3_z.jpg",
+      "id": 79188,
+      "anns": [
+        {
+          "id": 596097,
+          "category_id": 25,
+          "bbox": [
+            0,
+            10.07,
+            451.6,
+            629.93
+          ],
+          "area": 118554.74199999997,
+          "iscrowd": 0
+        }
+      ],
+      "order": "008d9fccb6a8dada0d432a0c93d4d48b4b05a5f30aa3bced1c2681c6bc88d0a7",
+      "bucket": "neither-target"
+    },
+    {
+      "license": 4,
+      "file_name": "000000356498.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000356498.jpg",
+      "height": 350,
+      "width": 500,
+      "date_captured": "2013-11-19 23:26:54",
+      "flickr_url": "http://farm4.staticflickr.com/3158/3390188250_1985da0517_z.jpg",
+      "id": 356498,
+      "anns": [
+        {
+          "id": 2231114,
+          "category_id": 56,
+          "bbox": [
+            107.27,
+            33.69,
+            92.26,
+            98.41
+          ],
+          "area": 5402.595200000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 2231125,
+          "category_id": 56,
+          "bbox": [
+            236.51,
+            9.27,
+            129.8,
+            123.33
+          ],
+          "area": 9376.2364,
+          "iscrowd": 0
+        }
+      ],
+      "order": "00c0577dd87c72bd385b42f40031faa5ffb4503e7e8fbe37bb505e4eff262cf5",
+      "bucket": "neither-target"
+    },
+    {
+      "license": 3,
+      "file_name": "000000007784.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000007784.jpg",
+      "height": 375,
+      "width": 500,
+      "date_captured": "2013-11-22 10:05:41",
+      "flickr_url": "http://farm1.staticflickr.com/68/203228464_2633d96d51_z.jpg",
+      "id": 7784,
+      "anns": [
+        {
+          "id": 623269,
+          "category_id": 38,
+          "bbox": [
+            93.96,
+            86.13,
+            240.41,
+            220.09
+          ],
+          "area": 25232.739100000006,
+          "iscrowd": 0
+        }
+      ],
+      "order": "00d71379969170cebfe488cf60f22675d08ba7fe6cab7cafb2bc1875f0849417",
+      "bucket": "neither-target"
+    },
+    {
+      "license": 1,
+      "file_name": "000000224093.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000224093.jpg",
+      "height": 316,
+      "width": 640,
+      "date_captured": "2013-11-18 00:26:44",
+      "flickr_url": "http://farm6.staticflickr.com/5215/5457144236_071ce23e18_z.jpg",
+      "id": 224093,
+      "anns": [
+        {
+          "id": 73390,
+          "category_id": 21,
+          "bbox": [
+            404.19,
+            133.77,
+            56.77,
+            33.55
+          ],
+          "area": 1159.4158499999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 74097,
+          "category_id": 21,
+          "bbox": [
+            327.94,
+            116.06,
+            46.5,
+            37.58
+          ],
+          "area": 1011.7588999999996,
+          "iscrowd": 0
+        },
+        {
+          "id": 75310,
+          "category_id": 21,
+          "bbox": [
+            147.17,
+            116.6,
+            43.7,
+            29.85
+          ],
+          "area": 822.6098500000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 75937,
+          "category_id": 21,
+          "bbox": [
+            22.04,
+            136.38,
+            72.54,
+            51.89
+          ],
+          "area": 2364.8195499999993,
+          "iscrowd": 0
+        },
+        {
+          "id": 77048,
+          "category_id": 21,
+          "bbox": [
+            236.51,
+            118.4,
+            15.26,
+            27.96
+          ],
+          "area": 272.3381999999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 1407523,
+          "category_id": 21,
+          "bbox": [
+            414.98,
+            118.62,
+            16.18,
+            24.16
+          ],
+          "area": 286.8773499999999,
+          "iscrowd": 0
+        },
+        {
+          "id": 2069618,
+          "category_id": 21,
+          "bbox": [
+            263.76,
+            127.82,
+            8.05,
+            8.22
+          ],
+          "area": 38.79575000000005,
+          "iscrowd": 0
+        }
+      ],
+      "order": "00f115b54731f832139ae32afded10e45eb4608d469bc4d4cd9ec02f1fb0ee08",
+      "bucket": "neither-target"
+    },
+    {
+      "license": 1,
+      "file_name": "000000508586.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000508586.jpg",
+      "height": 360,
+      "width": 640,
+      "date_captured": "2013-11-18 16:14:37",
+      "flickr_url": "http://farm6.staticflickr.com/5346/9458150907_e3a3e4c4c1_z.jpg",
+      "id": 508586,
+      "anns": [
+        {
+          "id": 588556,
+          "category_id": 24,
+          "bbox": [
+            20.72,
+            138.19,
+            174.6,
+            116.61
+          ],
+          "area": 10632.339850000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 589469,
+          "category_id": 24,
+          "bbox": [
+            301.17,
+            173.41,
+            127.25,
+            69.03
+          ],
+          "area": 5096.827400000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 590183,
+          "category_id": 24,
+          "bbox": [
+            316.42,
+            151.11,
+            35.63,
+            41.2
+          ],
+          "area": 676.1973000000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 591249,
+          "category_id": 24,
+          "bbox": [
+            349.2,
+            157.73,
+            41.24,
+            34.63
+          ],
+          "area": 998.5101000000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 592037,
+          "category_id": 24,
+          "bbox": [
+            429.57,
+            161.8,
+            70.39,
+            83.32
+          ],
+          "area": 3667.7992999999997,
+          "iscrowd": 0
+        },
+        {
+          "id": 593268,
+          "category_id": 24,
+          "bbox": [
+            506.9,
+            158.51,
+            119.16,
+            89.57
+          ],
+          "area": 5784.4556,
+          "iscrowd": 0
+        },
+        {
+          "id": 593802,
+          "category_id": 24,
+          "bbox": [
+            422.73,
+            163.34,
+            17.21,
+            24.39
+          ],
+          "area": 251.81650000000033,
+          "iscrowd": 0
+        },
+        {
+          "id": 1412654,
+          "category_id": 24,
+          "bbox": [
+            0.01,
+            157.82,
+            39.14,
+            14.64
+          ],
+          "area": 420.1726500000005,
+          "iscrowd": 0
+        },
+        {
+          "id": 1822237,
+          "category_id": 24,
+          "bbox": [
+            597.14,
+            191.67,
+            35.38,
+            36.22
+          ],
+          "area": 920.0651499999993,
+          "iscrowd": 0
+        },
+        {
+          "id": 1822711,
+          "category_id": 24,
+          "bbox": [
+            625.14,
+            166.22,
+            14.86,
+            30.88
+          ],
+          "area": 357.74930000000006,
+          "iscrowd": 0
+        }
+      ],
+      "order": "017e0048927b2e08f5849a044eaafd1865f6ed823bba85396a6b47f057e64e6c",
+      "bucket": "neither-target"
+    },
+    {
+      "license": 3,
+      "file_name": "000000058384.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000058384.jpg",
+      "height": 466,
+      "width": 640,
+      "date_captured": "2013-11-18 05:32:00",
+      "flickr_url": "http://farm8.staticflickr.com/7252/7846835264_2c93071735_z.jpg",
+      "id": 58384,
+      "anns": [
+        {
+          "id": 173392,
+          "category_id": 7,
+          "bbox": [
+            0,
+            179.35,
+            210.48,
+            41.06
+          ],
+          "area": 7109.79025,
+          "iscrowd": 0
+        },
+        {
+          "id": 582150,
+          "category_id": 22,
+          "bbox": [
+            328.82,
+            179.07,
+            54.45,
+            90.06
+          ],
+          "area": 3296.6569999999992,
+          "iscrowd": 0
+        },
+        {
+          "id": 583936,
+          "category_id": 22,
+          "bbox": [
+            304.15,
+            203.57,
+            33.26,
+            66.45
+          ],
+          "area": 1489.7117999999996,
+          "iscrowd": 0
+        },
+        {
+          "id": 584606,
+          "category_id": 22,
+          "bbox": [
+            272.74,
+            187.99,
+            41.86,
+            82.39
+          ],
+          "area": 2461.5258000000003,
+          "iscrowd": 0
+        }
+      ],
+      "order": "01aa8ff30feb7b7ae4aedab006030a3f0d0f5a3146b807b890a4ae6a77e0bc12",
+      "bucket": "neither-target"
+    },
+    {
+      "license": 1,
+      "file_name": "000000216636.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000216636.jpg",
+      "height": 427,
+      "width": 640,
+      "date_captured": "2013-11-20 17:39:20",
+      "flickr_url": "http://farm3.staticflickr.com/2138/2147694355_ba82ff5b43_z.jpg",
+      "id": 216636,
+      "anns": [
+        {
+          "id": 1084020,
+          "category_id": 61,
+          "bbox": [
+            0.96,
+            0.96,
+            458.66,
+            343.52
+          ],
+          "area": 124382.83490000002,
+          "iscrowd": 0
+        }
+      ],
+      "order": "01d3810739c3b233c3f40cafdb41ac1c40a94c09e124db88590df77f2011e5c7",
+      "bucket": "neither-target"
+    },
+    {
+      "license": 1,
+      "file_name": "000000523194.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000523194.jpg",
+      "height": 425,
+      "width": 640,
+      "date_captured": "2013-11-16 22:43:30",
+      "flickr_url": "http://farm5.staticflickr.com/4094/4903015085_50b5cf1a37_z.jpg",
+      "id": 523194,
+      "anns": [
+        {
+          "id": 417600,
+          "category_id": 11,
+          "bbox": [
+            175.38,
+            241.88,
+            31.91,
+            68.24
+          ],
+          "area": 1336.9503000000004,
+          "iscrowd": 0
+        },
+        {
+          "id": 2209817,
+          "category_id": 13,
+          "bbox": [
+            526.22,
+            88.6,
+            59.31,
+            51.34
+          ],
+          "area": 1685.171499999998,
+          "iscrowd": 0
+        }
+      ],
+      "order": "01de68662b6940204657f7f0dc825be56e6f9a74382f00c46b776cd6a803c2fa",
+      "bucket": "neither-target"
+    },
+    {
+      "license": 1,
+      "file_name": "000000197796.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000197796.jpg",
+      "height": 478,
+      "width": 640,
+      "date_captured": "2013-11-15 05:02:29",
+      "flickr_url": "http://farm6.staticflickr.com/5288/5326269245_7d4fd945d8_z.jpg",
+      "id": 197796,
+      "anns": [
+        {
+          "id": 81517,
+          "category_id": 44,
+          "bbox": [
+            213.38,
+            96.46,
+            16.08,
+            74.72
+          ],
+          "area": 889.7253000000002,
+          "iscrowd": 0
+        },
+        {
+          "id": 91994,
+          "category_id": 44,
+          "bbox": [
+            282.1,
+            61.41,
+            22.37,
+            107.84
+          ],
+          "area": 1675.92785,
+          "iscrowd": 0
+        },
+        {
+          "id": 93122,
+          "category_id": 44,
+          "bbox": [
+            312.48,
+            57.63,
+            24.95,
+            98.33
+          ],
+          "area": 1280.3639499999995,
+          "iscrowd": 0
+        },
+        {
+          "id": 94226,
+          "category_id": 44,
+          "bbox": [
+            116.33,
+            120.66,
+            36.93,
+            85.89
+          ],
+          "area": 1890.7372,
+          "iscrowd": 0
+        },
+        {
+          "id": 371260,
+          "category_id": 44,
+          "bbox": [
+            229.02,
+            103.7,
+            26.42,
+            71.07
+          ],
+          "area": 1581.2592999999988,
+          "iscrowd": 0
+        },
+        {
+          "id": 371432,
+          "category_id": 44,
+          "bbox": [
+            66,
+            84.97,
+            59.43,
+            135.58
+          ],
+          "area": 4079.998400000001,
+          "iscrowd": 0
+        },
+        {
+          "id": 1133279,
+          "category_id": 81,
+          "bbox": [
+            80.04,
+            247.88,
+            296.13,
+            230.02
+          ],
+          "area": 34730.608700000004,
+          "iscrowd": 0
+        }
+      ],
+      "order": "01ea2e0bcc78bdfd14a281788ed5f465233c8dd1276906f202e5c29b56164773",
+      "bucket": "neither-target"
+    },
+    {
+      "license": 4,
+      "file_name": "000000360393.jpg",
+      "coco_url": "http://images.cocodataset.org/val2017/000000360393.jpg",
+      "height": 427,
+      "width": 640,
+      "date_captured": "2013-11-21 03:13:35",
+      "flickr_url": "http://farm8.staticflickr.com/7153/6533098435_76b2fe85a0_z.jpg",
+      "id": 360393,
+      "anns": [
+        {
+          "id": 1071015,
+          "category_id": 59,
+          "bbox": [
+            64.61,
+            62.33,
+            550.15,
+            321.01
+          ],
+          "area": 135139.2912,
+          "iscrowd": 0
+        },
+        {
+          "id": 1533212,
+          "category_id": 51,
+          "bbox": [
+            502.8,
+            263.88,
+            137.2,
+            163.12
+          ],
+          "area": 18104.582399999992,
+          "iscrowd": 0
+        },
+        {
+          "id": 1536439,
+          "category_id": 51,
+          "bbox": [
+            579.31,
+            0,
+            60.69,
+            180.47
+          ],
+          "area": 7116.04984999999,
+          "iscrowd": 0
+        }
+      ],
+      "order": "01ec68b0579f25e62c46565835d2e12d067af25f180404f0863248f61463da46",
+      "bucket": "neither-target"
+    }
+  ],
+  "metrics": {
+    "targets": [
+      "person",
+      "chair",
+      "bed"
+    ],
+    "primaryScore": 0.5,
+    "secondaryScore": 0.45,
+    "nmsIoU": 0.45,
+    "matchingIoU": 0.5,
+    "matching": "greedy predictions descending score, one ground-truth box per match; iscrowd ignores overlapping unmatched detections; all sizes; no AP claimed"
+  },
+  "limitations": [
+    "Small stratified convenience sample, not representative prevalence",
+    "COCO is source validation data for YOLOX; no independent Brazilian camera validation",
+    "Not an accessibility or safety test",
+    "CPU shared: timings exploratory, not controlled benchmark"
+  ]
+}

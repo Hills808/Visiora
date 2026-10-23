@@ -1,0 +1,60 @@
+{
+  "selection_before_inference": "First confirmation/test image in each of 8 categories, from existing deterministic hash-selected sample. Not selected for responses.",
+  "dataset": "keremberke/indoor-scene-classification",
+  "dataset_revision": "030dcb9ec61c436299b1df10d90ae1cbe1d1b401",
+  "license_note": "MIT IndoorScenes derived research images; not redistributed with app.",
+  "images": [
+    {
+      "expected": "living_room",
+      "source_archive": "train",
+      "source_file": "livingroom/graceland_piano_32_4_jpg.rf.372e33ce310d42e54d8c64b212fa7a2d.jpg",
+      "source_sha256": "6331e7e7fea7856d3acadaa413b85da24fe2eac14588dd55dd81c42ac4b257b3"
+    },
+    {
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/8_cuarto_jpg.rf.eb8ba44f741369891894848bdd7d8413.jpg",
+      "source_sha256": "bd98a3de2c5a5f43696d0281cd6adbd605d3bfe655eb392ada83eab515885cc2"
+    },
+    {
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/apto_flavia_015_jpg.rf.99aabb0cb5cccd1260b0149578f57178.jpg",
+      "source_sha256": "ac0725230658962f9fe37154417e3d6b4b924d2cc899458823cd876b912c2005"
+    },
+    {
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/IMG_9647_jpg.rf.b037561bca0e8c48cb1098a75a53d8dd.jpg",
+      "source_sha256": "4040b6e67528024598c1c12e39f665767f5f325bcd63236768eaf922bb134abf"
+    },
+    {
+      "expected": "office",
+      "source_archive": "test",
+      "source_file": "office/ins2_jpg.rf.df13a8c33b86adfe16f2c04f711f61d7.jpg",
+      "source_sha256": "653bece7f9f3c436398d5da64a9e84ea7da8ac5c744fd70e2be95f83e44f2699"
+    },
+    {
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/Tour_Franco_Classroom157_Side_rdax_90_jpg.rf.e0d91f7d738e91f553ba97ec992a0394.jpg",
+      "source_sha256": "afb315c74d9cb817579f44469e71cdda1ac8d1ca41cbeec01047ed8ba4104013"
+    },
+    {
+      "expected": "restaurant",
+      "source_archive": "test",
+      "source_file": "restaurant/restaurante_37_13_altavista_jpg.rf.c94bc75d35ed727a9dfc3df7969752fc.jpg",
+      "source_sha256": "0152e19ee3151b3f7f57e4a41f482aafe01e90201a6296cbeeffbaf0279cbee6"
+    },
+    {
+      "expected": "corridor",
+      "source_archive": "train",
+      "source_file": "corridor/img_0005_jpg.rf.669112f0ba18ead67e9f2bc2ef07426e.jpg",
+      "source_sha256": "379e32aa37d1c260f7c3a00b5eca68155c4b23e97be366270ae0b8deb2629b20"
+    }
+  ],
+  "prompts": {
+    "pt-BR": "Descreva esta imagem em português do Brasil, em até três frases curtas. Diga que tipo de ambiente aparece, quais objetos principais são visíveis e se há pessoas. Não invente detalhes. Se não conseguir identificar algo, diga que não sabe.",
+    "en-control": "Describe this image in up to three short sentences. State the type of place, the main visible objects, and whether any people are visible. Do not invent details. If uncertain, say you do not know."
+  }
+}

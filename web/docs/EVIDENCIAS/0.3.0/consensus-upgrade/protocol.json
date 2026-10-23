@@ -1,0 +1,35 @@
+{
+  "version": "visiora-fixed-two-of-three-consensus-v1",
+  "createdBeforeConsensusProcessing": true,
+  "createdUtc": "2026-10-18T02:15:54Z",
+  "heads": [
+    "nano",
+    "tiny",
+    "s"
+  ],
+  "scoreMinEachHead": 0.45,
+  "sameClassMatchingIoUMin": 0.5,
+  "votesMinDistinctHeads": 2,
+  "boxAndScoreFusion": "Unweighted arithmetic mean of members; at most one prediction per head per cluster",
+  "association": "Pool candidates score-descending, tie head name/source index. For each unassigned seed, scan pool in same order, add one candidate from unused head only if same class and IoU>=.5 to EVERY current member (complete-link). Accepted clusters assign all members; isolated candidates do not consume other candidates. No class-specific or photo-specific rule.",
+  "finalNMS": "Clusters descending fused score, same-class IoU>.45 suppression; max30 global among archived three targets",
+  "extraFusedScoreThreshold": null,
+  "baseline": "Nano product score>=.50, same archived detections, same evaluator",
+  "sources": {
+    "protocol.json": "d8699b76d8062db130694d115ad182efe4a5589510f8dc33208338f4e7d28521",
+    "results.json": "b1774a019dc17d2034bc4834aa585adfb787e7fbcd9bc116d28d7bfa2356d321",
+    "confirmation-protocol.json": "498b1bd28feb4c97432bf3be06958dc136b3fc9ec32ec50da46a5aaf7476e87b",
+    "confirmation-results.json": "d1e04079f88cb5b7a754be33b00cbb8f001989eec8af81cacad9602c68eed104"
+  },
+  "matching": "Existing greedy IoU>=.5 normal GT then crowdIoA>=.5; all sizes; no relabeling",
+  "exploratoryOnly": "Both old60 development and prior30 confirmation are exploratory for this new consensus because already inspected. No new thresholds or grades.",
+  "gateForNew30": "Conservative operational promising check: precision AND recall not lower than Nano.50 for each of three classes in BOTH exploratory partitions, with at least one strict gain overall. If fails, stop without downloading next30. This is not significance or validated superiority.",
+  "limitations": [
+    "Archived head detections contain only person/chair/bed after the original global mapped-class cap30 per head.",
+    "Consensus cap30 is among retained three targets, and does not reproduce competition from all80 classes in a generic product implementation; results cannot establish all-class consensus quality.",
+    "Original classes, model bytes, annotations and scores remain unchanged.",
+    "Shared model errors may agree; consensus does not guarantee correctness.",
+    "No private image, product change, paid API, or new model inference.",
+    "No new latency/memory/endurance measurement; three-head inference would add computation."
+  ]
+}

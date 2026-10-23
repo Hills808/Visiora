@@ -1,0 +1,6 @@
+YOLOX Nano, Tiny and S exports from Megvii-BaseDetection/YOLOX release0.1.1rc0.
+https://github.com/Megvii-BaseDetection/YOLOX/releases/tag/0.1.1rc0
+Apache License2.0, supplied as YOLOX.txt. Model hashes, byte sizes and sources
+are in models/manifest.json, models/yolox-tiny/manifest.json and models/yolox-s/manifest.json.
+Tiny and S are split for transport and reconstructed unchanged.
+The Visiora person-consensus policy is not a guarantee that people are present.

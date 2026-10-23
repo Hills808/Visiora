@@ -1,0 +1,10 @@
+{
+  "commit": "6ddff4824372906469a7fae2dc3206c7aa4bbaee",
+  "urls": {
+    "LICENSE": "https://raw.githubusercontent.com/Megvii-BaseDetection/YOLOX/6ddff4824372906469a7fae2dc3206c7aa4bbaee/LICENSE",
+    "yolox/data/data_augment.py": "https://raw.githubusercontent.com/Megvii-BaseDetection/YOLOX/6ddff4824372906469a7fae2dc3206c7aa4bbaee/yolox/data/data_augment.py",
+    "demo/ONNXRuntime/onnx_inference.py": "https://raw.githubusercontent.com/Megvii-BaseDetection/YOLOX/6ddff4824372906469a7fae2dc3206c7aa4bbaee/demo/ONNXRuntime/onnx_inference.py",
+    "yolox/utils/demo_utils.py": "https://raw.githubusercontent.com/Megvii-BaseDetection/YOLOX/6ddff4824372906469a7fae2dc3206c7aa4bbaee/yolox/utils/demo_utils.py",
+    "demo/ONNXRuntime/README.md": "https://raw.githubusercontent.com/Megvii-BaseDetection/YOLOX/6ddff4824372906469a7fae2dc3206c7aa4bbaee/demo/ONNXRuntime/README.md"
+  }
+}

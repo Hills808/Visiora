@@ -1,0 +1,95 @@
+{
+  "purpose": "Learned whole-image scene consensus, finite catalogs, not open-ended visual analysis. No object hints, private images or category forcing.",
+  "families": {
+    "bedroom": [
+      "bedroom",
+      "bedchamber",
+      "childs_room",
+      "dorm_room",
+      "hotel_room",
+      "nursery"
+    ],
+    "classroom": [
+      "classroom",
+      "kindergarden_classroom",
+      "lecture_room"
+    ],
+    "office": [
+      "office",
+      "home_office",
+      "office_cubicles"
+    ],
+    "kitchen": [
+      "kitchen",
+      "restaurant_kitchen",
+      "galley"
+    ],
+    "restaurant": [
+      "restaurant",
+      "restaurant_patio",
+      "fastfood_restaurant"
+    ]
+  },
+  "canonicalization": "Only predeclared aliases plus replacing slash and hyphen with underscore. Sig children_room -> childs_room and kindergarten -> kindergarden_classroom before aliases. Other incompatible names remain incompatible.",
+  "sig_gate": {
+    "top_raw_candidates": 3,
+    "minimum_cosine": 0.12,
+    "maximum_distance_from_top1": 0.015,
+    "reject_top1_aborts": true,
+    "reject_candidates_never_match": true
+  },
+  "places_gate": "Use raw top1 class probability, not summed family probability. Margin is raw top1 probability minus strongest raw class in another family.",
+  "output": "Canonical Places top1 family, supported by a compatible Sig candidate. Any canonical category can pass; evaluation targets do not restrict gating.",
+  "probability_grid": [
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8
+  ],
+  "family_margin_grid": [
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.3
+  ],
+  "adoption_policy": "At least95% family precision, at most1 wrong family, at least10 accepted dev. Maximize correct accepted, then precision, then stricter margin and probability. Freeze before any new test inference. If no dev candidate passes, stop without opening indices22..26.",
+  "preprocessing": "Both models receive the same whole RGB frame warped directly to224x224, PIL bilinear, no crop. Sig normalizes x/127.5-1; Places uses x/255 and ImageNet mean [.485,.456,.406]/std [.229,.224,.225]. This differs from previous Places center-crop audit and is frozen before dev.",
+  "development": "Same96 public original-photo-hash samples indices0..11; includes earlier research samples, no claim of independent dev.",
+  "confirmation_if_eligible": "40 next hash-ordered photos, indices22..26 per8classes, no SHA overlap with all prior0..21. Not opened unless dev candidate passes.",
+  "baseline": "q4 Sig alone, cosine>=.12 and raw top1 margin>=.03, reject top1 abstains. Apply same canonicalization only for scoring.",
+  "models": {
+    "siglip": {
+      "file": "artifacts\\scene\\siglip\\onnx\\vision_model_q4.onnx",
+      "bytes": 63267466,
+      "sha256": "03e61be280fb24114facd87a1e1e6b2b654aad49845686da2f930c72740914aa",
+      "repository": "onnx-community/siglip2-base-patch16-224-ONNX",
+      "revision": "ba1f3b0843f24bc5417d38e19c37b287d719b2f4",
+      "original_repository": "google/siglip2-base-patch16-224",
+      "original_revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+      "original_license": "Apache-2.0",
+      "conversion_card": "Links original model; no separate license field"
+    },
+    "places": {
+      "file": "artifacts\\scene\\places365.onnx",
+      "bytes": 45445545,
+      "sha256": "843436fd7a9c9af62382d1924948761cb0e03637f679710062e9a84f3d77a06e",
+      "architecture": "ResNet18 Places365",
+      "source": "CSAILVision/places365, resnet18_places365.pth.tar, public author checkpoint",
+      "checkpoint_sha256": "2f4759217d470da2b803f8f66cd4488a066406b555a5fb95ee9a4663f9f05588",
+      "checkpoint_bytes": 45506139,
+      "weight_license": "CC BY, version unspecified by authors",
+      "code_license": "MIT",
+      "onnx_conversion": "Existing local float32 opset17 export; no new conversion or weights"
+    }
+  },
+  "embedding_sha256": "79e6e68e003271fc0ba71e1fc2fac953169bb6c70f6aa2919d072ada439d2600",
+  "categories_places_sha256": "2affba635eb657e7ca95f4e6cc69bd9fac29ef4c32aeb83cafdfcd06ec6a1ea6",
+  "runtime": "1.23.2",
+  "provider": "CPUExecutionProvider",
+  "threads": 4,
+  "frozen_at_unix": 1792289877.9136508,
+  "limits": "Small MIT-derived public8class dataset with uncertain annotations and unknown pretraining overlap; not Brazilian, users, safety or accessibility validation."
+}

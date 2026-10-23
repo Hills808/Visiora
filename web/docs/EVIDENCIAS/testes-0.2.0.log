@@ -1,0 +1,84 @@
+Local ZIP: 66300250 bytes; 49 files
+{"built":true,"files":45}
+Ô£ö CA-F1/F2/F7: six scenes, 12 seeds, five simulated minutes remain quiet after briefing (802.8492ms)
+Ô£ö CA-F3: eight exact fixed directional prefixes (0.345ms)
+Ô£ö CA-P6: depth provenance, frame, finite value and uncertainty are all mandatory (0.2753ms)
+Ô£ö CA-P6: entity without scale is retained with direction, no fabricated distance (1.2649ms)
+Ô£ö CA-D4: stale, duplicated, out-of-order and future observations are rejected (0.1531ms)
+Ô£ö CA-F4: stable repeated observations do not create duplicate identities (0.2968ms)
+Ô£ö CA-F4: two separated chairs stay two entities (0.2233ms)
+Ô£ö CA-F4: new relevant entity is narrated, unchanged item is not repeated (0.4049ms)
+Ô£ö CA-F4: 61 percent does not repeat; 60 percent is a material approach (0.4958ms)
+Ô£ö CA-F4: explicit repeat is allowed and unknown object name is handled (0.4794ms)
+Ô£ö CA-F5: all channels including explicit queries are blocked above 15 deg/s (0.3732ms)
+Ô£ö CA-F5: boundary at 15 deg/s is accepted after settle, visual motion also blocks (0.2722ms)
+Ô£ö CA-F5: rotation invalidates confirmation and enforces settling after rotation (0.3085ms)
+Ô£ö CA-F6: planning does not mark spoken; drop re-plans current facts (0.2657ms)
+Ô£ö CA-F6: expired unstarted speech cannot be confirmed and is re-planned (0.3006ms)
+Ô£ö CA-F6: a completed long utterance is acknowledged if it began before its TTL (0.3704ms)
+Ô£ö CA-F7/F8: entire lexicon has consistent forms and bounded per-sector language (0.5634ms)
+Ô£ö CA-F8: Portuguese number and alias forms (0.2703ms)
+Ô£ö CA-F9: uncertain room is not confidently named, sufficient evidence stabilizes (0.1577ms)
+Ô£ö CA-F9: even a confirmed bed never decides the type of place (0.6725ms)
+Ô£ö CA-P5: scripted person approach is noticed with metric input; pure yaw is not approach (0.4292ms)
+Ô£ö CA-P5: alert interrupts pending lower priority speech only with material metric evidence (0.2446ms)
+Ô£ö memory outside FOV is labeled old; dynamic memory expires (0.4648ms)
+Ô£ö missing object and empty front response never assert a clear path (0.2339ms)
+Ô£ö geometry wraps at 180 degrees and converts calibrated FOV symmetrically (0.145ms)
+Ô£ö distance quantization is honest for unknown and extremes (0.087ms)
+Ô£ö world ignores unsupported and weak detections and supports reset (1.1081ms)
+Ô£ö grouping never mixes sectors and plural distances refer to nearest member (0.1525ms)
+Ô£ö essential mode suppresses low-importance automatic novelty, explicit queries still work (0.5322ms)
+Ô£ö auto narration can be disabled for screen reader controlled output (0.3385ms)
+Ô£ö configuration covers the documented maximum thresholds (0.0826ms)
+Ô£ö CA-F6: text output may be repeated without confirming that any entity was spoken (0.328ms)
+Ô£ö CA-F9: duplicate, stale and unsupported scene samples cannot establish a place (0.1979ms)
+Ô£ö CA-F1/F6/F9: a late scene is announced once and interrupted output is replanned (0.5515ms)
+Ô£ö CA-F6/F9: speaking an object answer does not mark the current place as spoken (0.2532ms)
+Ô£ö CA-F5/D4/F9: independent scene results reject pre-turn, future and stale captures (0.2422ms)
+Ô£ö whole-image RGB preprocessing has exact channel order, range and size (4.4659ms)
+Ô£ö uniform obscured frames are rejected without inventing a place (8.0746ms)
+Ô£ö whole-image classifier accepts a supported embedding and preserves frame provenance (0.9585ms)
+Ô£ö ambiguous image embeddings and explicit reject candidates abstain (0.684ms)
+Ô£ö invalid model output cannot become a spoken place (0.56ms)
+Ô£ö model parts reconstruct exact bytes, with checksums and progress (21.8468ms)
+Ô£ö tampered parts, unsafe paths, failed requests and invalid sizes fail explicitly (3.4834ms)
+Ô£ö CA-S3: remote and non-Brazilian voices are excluded (2.151ms)
+Ô£ö CA-F6: speaker confirms only after onend, planning/start do not mark completed (0.5651ms)
+Ô£ö CA-F6: late callbacks after cancellation cannot confirm a new utterance (0.1931ms)
+Ô£ö expired speech is dropped before synthesis (0.1435ms)
+Ô£ö missing voice surfaces a clear error and never substitutes a remote voice (0.4424ms)
+Ô£ö speech start rejection cancels the utterance; errors return facts to planner (0.4566ms)
+Ô£ö CA-S4: history is opt-in and disabled by default (3.5686ms)
+Ô£ö preferences accept only documented values and persist locally (0.5282ms)
+Ô£ö corrupted and oversized storage is reported, never swallowed (0.606ms)
+Ô£ö history is bounded and does not contain frames (2.4614ms)
+Ô£ö CA-S4: delete removes owned preferences/history, preserves unrelated storage (0.3736ms)
+Ô£ö model contract: 80 COCO labels, unsupported door is never fabricated (1.1154ms)
+Ô£ö released checkpoint uses raw BGR, not obsolete ImageNet normalization (11.2859ms)
+Ô£ö decode handles grid/stride, confidence, clipping and per-class suppression (4.5017ms)
+Ô£ö intersection-over-union is invariant for identical and disjoint boxes (0.2428ms)
+Ôä╣ tests 58
+Ôä╣ suites 0
+Ôä╣ pass 58
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 1016.6202
+Ôä╣ start of coverage report
+Ôä╣ --------------------------------------------------------------
+Ôä╣ file          | line % | branch % | funcs % | uncovered lines
+Ôä╣ --------------------------------------------------------------
+Ôä╣ dist          |        |          |         | 
+Ôä╣  brain        |        |          |         | 
+Ôä╣   brain.js    |  98.45 |    96.30 |   93.55 | 54-55 67-68
+Ôä╣   geometry.js | 100.00 |   100.00 |  100.00 | 
+Ôä╣   lexicon.js  | 100.00 |   100.00 |  100.00 | 
+Ôä╣   realizer.js |  98.61 |    95.83 |  100.00 | 61
+Ôä╣   scene.js    | 100.00 |   100.00 |  100.00 | 
+Ôä╣   world.js    |  97.87 |    98.33 |   90.00 | 95-97
+Ôä╣ --------------------------------------------------------------
+Ôä╣ all files     |  98.78 |    97.32 |   96.00 | 
+Ôä╣ --------------------------------------------------------------
+Ôä╣ end of coverage report

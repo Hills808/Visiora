@@ -1,0 +1,62 @@
+{
+  "scope": "Loopback gateway + Chrome synthetic camera/voice, artificial evidence and clock. No OpenAI calls.",
+  "cases": [
+    "Moderate localized change triggers analysis and a person no longer identified is voiced with unchanged furniture",
+    "Unchanged view after the update stays silent and makes no new request",
+    "Broad structural change reintroduces visible references even with the same scene label",
+    "A broad view change during an in-flight request omits old positions, stays silent for known scene context, then describes a fresh capture",
+    "Temporary failure announces once, waits 15 seconds, then automatically captures a fresh frame with a new request ID",
+    "A second temporary failure pauses automatic analysis and motion cannot restart paid attempts",
+    "Exported continuity diagnostics contain counts and safe error codes without scene descriptions or pixels",
+    "Stop cancels scheduled recovery and releases the synthetic camera"
+  ],
+  "errors": [],
+  "diagnostics": {
+    "dispatched": 9,
+    "accepted": 6,
+    "obsolete": 1,
+    "silent": 1,
+    "delivered": 5,
+    "recoveries": 2,
+    "lastError": "http-503",
+    "running": true,
+    "pending": false,
+    "paused": true,
+    "recovering": false,
+    "capture": {
+      "backend": "video-frame",
+      "frames": 15,
+      "fresh": true,
+      "pendingFrames": 0
+    },
+    "local": {
+      "state": "disabled",
+      "reason": "model-not-selected"
+    }
+  },
+  "transcript": [
+    "Simulação de análise. Na imagem capturada há 1 segundo: O ambiente parece escritório. À sua frente, à esquerda, há uma cadeira. À sua frente, há uma pessoa.",
+    "Simulação de análise. Na imagem capturada há 1 segundo: À sua frente, não identifiquei pessoas nesta captura.",
+    "Simulação de análise. Na imagem capturada há 1 segundo: Neste enquadramento, o ambiente parece escritório. À sua frente, à esquerda, há uma cadeira.",
+    "Simulação de análise. Na imagem capturada há 1 segundo: Neste enquadramento, o ambiente parece escritório. À sua frente, à esquerda, há uma cadeira.",
+    "Falha temporária. Vou tentar uma nova captura em 15 segundos.",
+    "Simulação de análise. Na imagem capturada há 1 segundo: Neste enquadramento, o ambiente parece escritório. À sua frente, à esquerda, há uma cadeira.",
+    "Falha temporária. Vou tentar uma nova captura em 15 segundos.",
+    "Acompanhamento pausado. Luna não configurado, sem conexão ou temporariamente indisponível."
+  ],
+  "failures": [
+    {
+      "code": "provider-unavailable"
+    },
+    {
+      "code": "provider-unavailable"
+    },
+    {
+      "code": "provider-unavailable"
+    },
+    {
+      "code": "provider-unavailable"
+    }
+  ],
+  "calls": 10
+}

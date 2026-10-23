@@ -1,0 +1,36 @@
+{
+  "id": "h2-dfine-nano-f32-v1",
+  "model": {
+    "repository": "onnx-community/dfine-nano-coco-ONNX",
+    "revision": "89df95b0e8575ff9879f13351bafe69bbe8e6823",
+    "file": "onnx/model.onnx",
+    "sha256": "f7febe9695cd6f71120abbeb0642d3d6b6c6bcc36f0ba1d79b66d302b5860814",
+    "bytes": 15434994,
+    "license": "Apache-2.0 per model card; source is ustc-community/dfine-nano-coco"
+  },
+  "data": {
+    "development": "artifacts/detector-upgrade/protocol.json (60 public COCO val2017 images)",
+    "developmentSha256": "d8699b76d8062db130694d115ad182efe4a5589510f8dc33208338f4e7d28521",
+    "confirmation": "artifacts/detector-upgrade/confirmation-protocol.json (30 disjoint public COCO val2017 images)",
+    "confirmationSha256": "498b1bd28feb4c97432bf3be06958dc136b3fc9ec32ec50da46a5aaf7476e87b"
+  },
+  "preprocess": "RTDetrImageProcessor from pinned model card: RGB full-image resize 640x640 bilinear, rescale 1/255, no normalize/pad",
+  "postprocess": "Sigmoid top300 query-class pairs; keep highest class per query; contiguous COCO80 IDs; no NMS; mapped Visiora classes only; global cap30 before scoring",
+  "thresholds": [
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.95
+  ],
+  "selection": "Per target class on development only: among thresholds with at least five accepted predictions and precision >= 90%, choose maximum recall, then precision, then lower threshold; otherwise report no eligible threshold. Freeze before confirmation.",
+  "baseline": "Same existing YOLOX Nano 0.50 outputs and matching rules; report person/chair/bed TP/FP/FN, precision, recall",
+  "gate": "Do not replace product unless selected policy improves coverage without materially increasing false references for person/chair/bed on confirmation, and browser timing and license pass separately.",
+  "limits": "COCO val2017 is known model validation data, not independent Brazilian webcam quality or temporal speech evaluation; this full-precision variant is screened after uint8 development, and old 30 are only a comparison. No user images or paid calls."
+}

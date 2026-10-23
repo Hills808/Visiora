@@ -1,0 +1,18 @@
+Visiora redistributes the unmodified quantized visual encoder from:
+onnx-community/siglip2-base-patch16-224-ONNX
+revision ba1f3b0843f24bc5417d38e19c37b287d719b2f4
+file onnx/vision_model_q4.onnx
+SHA-256 03e61be280fb24114facd87a1e1e6b2b654aad49845686da2f930c72740914aa
+The file is split into four transport parts and reconstructed unchanged.
+
+Original model: google/siglip2-base-patch16-224
+revision 75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2
+Google / SigLIP 2 authors; Apache License 2.0 (SigLIP2.txt).
+https://huggingface.co/google/siglip2-base-patch16-224
+https://huggingface.co/onnx-community/siglip2-base-patch16-224-ONNX
+https://github.com/google-research/big_vision
+
+Visiora also distributes normalized text vectors computed offline from the
+same conversion's text_model_q4.onnx and Visiora's finite scene descriptions.
+Text model weights and research benchmark images are not distributed.
+This notice describes provenance; it does not claim endorsement or accuracy.

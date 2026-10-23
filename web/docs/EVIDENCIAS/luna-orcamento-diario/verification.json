@@ -1,0 +1,10 @@
+{
+  "unitTests": 135,
+  "failedTests": 0,
+  "typecheck": "passed",
+  "lint": "passed",
+  "serverFormatting": "passed",
+  "paidCalls": 0,
+  "realLedgerWritten": false,
+  "userGatewayRestarted": false
+}

@@ -1,3 +1,13 @@
+# Visiora ? vers?es do projeto
+
+A vers?o web/TypeScript em desenvolvimento est? em **[web/](web/)**. Ela oferece ambienta??o local por voz e um modo Luna opcional, configurado no gateway do pr?prio computador. ? um prot?tipo em avalia??o; n?o garante seguran?a e n?o substitui bengala nem c?o-guia.
+
+Para come?ar com a vers?o atual: instale Node 24+, execute `cd web`, `npm ci`, `npm run build` e `npm run dev`. Abra `http://127.0.0.1:8080` no mesmo computador. O modo local n?o precisa de chave de API. Para configurar o Luna, siga [web/docs/CONFIGURAR-LUNA.md](web/docs/CONFIGURAR-LUNA.md); a chave fica apenas no servidor local. O gateway atual n?o ? compartilhado entre computadores.
+
+O c?digo C# abaixo ? a implementa??o anterior, mantida para consulta. A pasta `Uploads/` saiu da vers?o ativa do reposit?rio por conter imagens de teste; arquivos antigos ainda podem existir no hist?rico Git.
+
+---
+
 # Visiora AI
 
 ![.NET 10](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet&logoColor=white)

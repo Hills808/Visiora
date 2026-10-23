@@ -1,0 +1,14 @@
+{
+  "scope": "Verificação documental do planejamento; não é teste de produto",
+  "date": "2026-10-18 America/Sao_Paulo",
+  "phases": 8,
+  "proposedAcceptanceCriteria": 11,
+  "mirroredDocuments": 6,
+  "localLinksChecked": 24,
+  "checks": "passed",
+  "productTestsRun": false,
+  "newModelBenchmarks": false,
+  "paidApiCalls": 0,
+  "implementation": false,
+  "deployment": false
+}

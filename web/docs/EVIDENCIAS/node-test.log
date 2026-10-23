@@ -1,0 +1,120 @@
+node:internal/modules/esm/resolve:274
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'C:\Users\henri\Documents\Codex\2026-10-17\crie-um-novo-site-com-sites-2\work\prototipo\web\js\brain\geometry.js' imported from C:\Users\henri\Documents\Codex\2026-10-17\crie-um-novo-site-com-sites-2\work\prototipo\tests\geometry.test.mjs
+    at finalizeResolution (node:internal/modules/esm/resolve:274:11)
+    at moduleResolve (node:internal/modules/esm/resolve:864:10)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38)
+    at #link (node:internal/modules/esm/module_job:208:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///C:/Users/henri/Documents/Codex/2026-10-17/crie-um-novo-site-com-sites-2/work/prototipo/web/js/brain/geometry.js'
+}
+
+Node.js v24.11.0
+Ô£û tests\geometry.test.mjs (78.1293ms)
+node:internal/modules/esm/resolve:274
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'C:\Users\henri\Documents\Codex\2026-10-17\crie-um-novo-site-com-sites-2\work\prototipo\web\js\sim\simulator.js' imported from C:\Users\henri\Documents\Codex\2026-10-17\crie-um-novo-site-com-sites-2\work\prototipo\tests\narrator.test.mjs
+    at finalizeResolution (node:internal/modules/esm/resolve:274:11)
+    at moduleResolve (node:internal/modules/esm/resolve:864:10)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38)
+    at #link (node:internal/modules/esm/module_job:208:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///C:/Users/henri/Documents/Codex/2026-10-17/crie-um-novo-site-com-sites-2/work/prototipo/web/js/sim/simulator.js'
+}
+
+Node.js v24.11.0
+Ô£û tests\narrator.test.mjs (74.2046ms)
+node:internal/modules/esm/resolve:274
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'C:\Users\henri\Documents\Codex\2026-10-17\crie-um-novo-site-com-sites-2\work\prototipo\web\js\brain\pdr.js' imported from C:\Users\henri\Documents\Codex\2026-10-17\crie-um-novo-site-com-sites-2\work\prototipo\tests\pdr.test.mjs
+    at finalizeResolution (node:internal/modules/esm/resolve:274:11)
+    at moduleResolve (node:internal/modules/esm/resolve:864:10)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38)
+    at #link (node:internal/modules/esm/module_job:208:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///C:/Users/henri/Documents/Codex/2026-10-17/crie-um-novo-site-com-sites-2/work/prototipo/web/js/brain/pdr.js'
+}
+
+Node.js v24.11.0
+Ô£û tests\pdr.test.mjs (74.0653ms)
+node:internal/modules/esm/resolve:274
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'C:\Users\henri\Documents\Codex\2026-10-17\crie-um-novo-site-com-sites-2\work\prototipo\web\js\brain\realize.js' imported from C:\Users\henri\Documents\Codex\2026-10-17\crie-um-novo-site-com-sites-2\work\prototipo\tests\realize.test.mjs
+    at finalizeResolution (node:internal/modules/esm/resolve:274:11)
+    at moduleResolve (node:internal/modules/esm/resolve:864:10)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38)
+    at #link (node:internal/modules/esm/module_job:208:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///C:/Users/henri/Documents/Codex/2026-10-17/crie-um-novo-site-com-sites-2/work/prototipo/web/js/brain/realize.js'
+}
+
+Node.js v24.11.0
+Ô£û tests\realize.test.mjs (73.7067ms)
+node:internal/modules/esm/resolve:274
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'C:\Users\henri\Documents\Codex\2026-10-17\crie-um-novo-site-com-sites-2\work\prototipo\web\js\brain\world.js' imported from C:\Users\henri\Documents\Codex\2026-10-17\crie-um-novo-site-com-sites-2\work\prototipo\tests\world.test.mjs
+    at finalizeResolution (node:internal/modules/esm/resolve:274:11)
+    at moduleResolve (node:internal/modules/esm/resolve:864:10)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38)
+    at #link (node:internal/modules/esm/module_job:208:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///C:/Users/henri/Documents/Codex/2026-10-17/crie-um-novo-site-com-sites-2/work/prototipo/web/js/brain/world.js'
+}
+
+Node.js v24.11.0
+Ô£û tests\world.test.mjs (73.9639ms)
+Ôä╣ tests 5
+Ôä╣ suites 0
+Ôä╣ pass 0
+Ôä╣ fail 5
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 116.2846
+
+Ô£û failing tests:
+
+test at tests\geometry.test.mjs:1:1
+Ô£û tests\geometry.test.mjs (78.1293ms)
+  'test failed'
+
+test at tests\narrator.test.mjs:1:1
+Ô£û tests\narrator.test.mjs (74.2046ms)
+  'test failed'
+
+test at tests\pdr.test.mjs:1:1
+Ô£û tests\pdr.test.mjs (74.0653ms)
+  'test failed'
+
+test at tests\realize.test.mjs:1:1
+Ô£û tests\realize.test.mjs (73.7067ms)
+  'test failed'
+
+test at tests\world.test.mjs:1:1
+Ô£û tests\world.test.mjs (73.9639ms)
+  'test failed'

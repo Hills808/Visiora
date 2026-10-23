@@ -6,3 +6,12 @@ obj/
 appsettings.Development.json
 appsettings.json
 Properties/launchSettings.json
+# Local data and generated output
+Uploads/
+.env
+.env.*
+!.env.example
+.runtime/
+node_modules/
+artifacts/
+dist/

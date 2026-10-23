@@ -1,0 +1,530 @@
+[
+  {
+    "id": "living_room",
+    "label": "uma sala de estar",
+    "description": "a living room",
+    "reject": false
+  },
+  {
+    "id": "bedroom",
+    "label": "um quarto",
+    "description": "a bedroom",
+    "reject": false
+  },
+  {
+    "id": "kitchen",
+    "label": "uma cozinha",
+    "description": "a kitchen",
+    "reject": false
+  },
+  {
+    "id": "bathroom",
+    "label": "um banheiro",
+    "description": "a bathroom",
+    "reject": false
+  },
+  {
+    "id": "office",
+    "label": "um escritório",
+    "description": "an office",
+    "reject": false
+  },
+  {
+    "id": "classroom",
+    "label": "uma sala de aula",
+    "description": "a classroom",
+    "reject": false
+  },
+  {
+    "id": "restaurant",
+    "label": "um restaurante",
+    "description": "a restaurant",
+    "reject": false
+  },
+  {
+    "id": "corridor",
+    "label": "um corredor",
+    "description": "a corridor",
+    "reject": false
+  },
+  {
+    "id": "meeting_room",
+    "label": "uma sala de reunião",
+    "description": "a meeting room",
+    "reject": false
+  },
+  {
+    "id": "dining_room",
+    "label": "uma sala de jantar",
+    "description": "a dining room",
+    "reject": false
+  },
+  {
+    "id": "lobby",
+    "label": "um saguão",
+    "description": "a lobby",
+    "reject": false
+  },
+  {
+    "id": "waiting_room",
+    "label": "uma sala de espera",
+    "description": "a waiting room",
+    "reject": false
+  },
+  {
+    "id": "library",
+    "label": "uma biblioteca",
+    "description": "a library",
+    "reject": false
+  },
+  {
+    "id": "bookstore",
+    "label": "uma livraria",
+    "description": "a bookstore",
+    "reject": false
+  },
+  {
+    "id": "supermarket",
+    "label": "um supermercado",
+    "description": "a supermarket",
+    "reject": false
+  },
+  {
+    "id": "mall",
+    "label": "um shopping",
+    "description": "a shopping mall",
+    "reject": false
+  },
+  {
+    "id": "store",
+    "label": "uma loja",
+    "description": "a retail store",
+    "reject": false
+  },
+  {
+    "id": "hospital_room",
+    "label": "um quarto de hospital",
+    "description": "a hospital patient room",
+    "reject": false
+  },
+  {
+    "id": "clinic",
+    "label": "um consultório",
+    "description": "a medical examination room",
+    "reject": false
+  },
+  {
+    "id": "gym",
+    "label": "uma academia",
+    "description": "a gym",
+    "reject": false
+  },
+  {
+    "id": "garage",
+    "label": "uma garagem",
+    "description": "a garage",
+    "reject": false
+  },
+  {
+    "id": "warehouse",
+    "label": "um depósito",
+    "description": "a warehouse",
+    "reject": false
+  },
+  {
+    "id": "laundry",
+    "label": "uma lavanderia",
+    "description": "a laundry room",
+    "reject": false
+  },
+  {
+    "id": "workshop",
+    "label": "uma oficina",
+    "description": "a workshop",
+    "reject": false
+  },
+  {
+    "id": "factory",
+    "label": "uma fábrica",
+    "description": "a factory interior",
+    "reject": false
+  },
+  {
+    "id": "church",
+    "label": "uma igreja",
+    "description": "a church interior",
+    "reject": false
+  },
+  {
+    "id": "auditorium",
+    "label": "um auditório",
+    "description": "an auditorium",
+    "reject": false
+  },
+  {
+    "id": "cinema",
+    "label": "uma sala de cinema",
+    "description": "a movie theater",
+    "reject": false
+  },
+  {
+    "id": "subway_station",
+    "label": "uma estação de metrô",
+    "description": "a subway station",
+    "reject": false
+  },
+  {
+    "id": "train_station",
+    "label": "uma estação de trem",
+    "description": "a train station",
+    "reject": false
+  },
+  {
+    "id": "bus_interior",
+    "label": "o interior de um ônibus",
+    "description": "the inside of a bus",
+    "reject": false
+  },
+  {
+    "id": "train_interior",
+    "label": "o interior de um trem",
+    "description": "the inside of a train",
+    "reject": false
+  },
+  {
+    "id": "airport",
+    "label": "um aeroporto",
+    "description": "an airport terminal",
+    "reject": false
+  },
+  {
+    "id": "stairwell",
+    "label": "uma escadaria",
+    "description": "a staircase or stairwell",
+    "reject": false
+  },
+  {
+    "id": "elevator",
+    "label": "um elevador",
+    "description": "an elevator interior",
+    "reject": false
+  },
+  {
+    "id": "balcony",
+    "label": "uma varanda",
+    "description": "a balcony",
+    "reject": false
+  },
+  {
+    "id": "patio",
+    "label": "um pátio",
+    "description": "a courtyard or patio",
+    "reject": false
+  },
+  {
+    "id": "garden",
+    "label": "um jardim",
+    "description": "a garden",
+    "reject": false
+  },
+  {
+    "id": "park",
+    "label": "um parque",
+    "description": "a public park",
+    "reject": false
+  },
+  {
+    "id": "street",
+    "label": "uma rua",
+    "description": "a street",
+    "reject": false
+  },
+  {
+    "id": "sidewalk",
+    "label": "uma calçada",
+    "description": "a sidewalk",
+    "reject": false
+  },
+  {
+    "id": "beach",
+    "label": "uma praia",
+    "description": "a beach",
+    "reject": false
+  },
+  {
+    "id": "forest",
+    "label": "uma área de mata",
+    "description": "a forest",
+    "reject": false
+  },
+  {
+    "id": "field",
+    "label": "um campo aberto",
+    "description": "an open grassy field",
+    "reject": false
+  },
+  {
+    "id": "construction",
+    "label": "uma obra",
+    "description": "a construction site",
+    "reject": false
+  },
+  {
+    "id": "sports_court",
+    "label": "uma quadra de esportes",
+    "description": "a sports court",
+    "reject": false
+  },
+  {
+    "id": "playground",
+    "label": "um parquinho",
+    "description": "a playground",
+    "reject": false
+  },
+  {
+    "id": "swimming_pool",
+    "label": "uma área de piscina",
+    "description": "a swimming pool",
+    "reject": false
+  },
+  {
+    "id": "bar",
+    "label": "um bar",
+    "description": "a bar or pub",
+    "reject": false
+  },
+  {
+    "id": "cafe",
+    "label": "uma cafeteria",
+    "description": "a cafe",
+    "reject": false
+  },
+  {
+    "id": "bakery",
+    "label": "uma padaria",
+    "description": "a bakery",
+    "reject": false
+  },
+  {
+    "id": "hair_salon",
+    "label": "um salão de beleza",
+    "description": "a hair salon",
+    "reject": false
+  },
+  {
+    "id": "museum",
+    "label": "um museu",
+    "description": "a museum",
+    "reject": false
+  },
+  {
+    "id": "art_studio",
+    "label": "um ateliê",
+    "description": "an art studio",
+    "reject": false
+  },
+  {
+    "id": "music_studio",
+    "label": "um estúdio de música",
+    "description": "a music recording studio",
+    "reject": false
+  },
+  {
+    "id": "laboratory",
+    "label": "um laboratório",
+    "description": "a laboratory",
+    "reject": false
+  },
+  {
+    "id": "computer_room",
+    "label": "uma sala de computadores",
+    "description": "a computer lab",
+    "reject": false
+  },
+  {
+    "id": "kindergarten",
+    "label": "uma sala de educação infantil",
+    "description": "a kindergarten classroom",
+    "reject": false
+  },
+  {
+    "id": "nursery",
+    "label": "um quarto de bebê",
+    "description": "a baby nursery",
+    "reject": false
+  },
+  {
+    "id": "children_room",
+    "label": "um quarto infantil",
+    "description": "a child's bedroom",
+    "reject": false
+  },
+  {
+    "id": "closet",
+    "label": "um closet",
+    "description": "a walk-in closet",
+    "reject": false
+  },
+  {
+    "id": "pantry",
+    "label": "uma despensa",
+    "description": "a pantry",
+    "reject": false
+  },
+  {
+    "id": "locker_room",
+    "label": "um vestiário",
+    "description": "a locker room",
+    "reject": false
+  },
+  {
+    "id": "dental_office",
+    "label": "um consultório odontológico",
+    "description": "a dentist office",
+    "reject": false
+  },
+  {
+    "id": "operating_room",
+    "label": "uma sala de cirurgia",
+    "description": "a hospital operating room",
+    "reject": false
+  },
+  {
+    "id": "greenhouse",
+    "label": "uma estufa",
+    "description": "a greenhouse",
+    "reject": false
+  },
+  {
+    "id": "bowling",
+    "label": "uma pista de boliche",
+    "description": "a bowling alley",
+    "reject": false
+  },
+  {
+    "id": "game_room",
+    "label": "uma sala de jogos",
+    "description": "a game room",
+    "reject": false
+  },
+  {
+    "id": "clothing_store",
+    "label": "uma loja de roupas",
+    "description": "a clothing store",
+    "reject": false
+  },
+  {
+    "id": "shoe_store",
+    "label": "uma loja de calçados",
+    "description": "a shoe store",
+    "reject": false
+  },
+  {
+    "id": "toy_store",
+    "label": "uma loja de brinquedos",
+    "description": "a toy store",
+    "reject": false
+  },
+  {
+    "id": "jewelry_store",
+    "label": "uma joalheria",
+    "description": "a jewelry store",
+    "reject": false
+  },
+  {
+    "id": "florist",
+    "label": "uma floricultura",
+    "description": "a flower shop",
+    "reject": false
+  },
+  {
+    "id": "wine_cellar",
+    "label": "uma adega",
+    "description": "a wine cellar",
+    "reject": false
+  },
+  {
+    "id": "restaurant_kitchen",
+    "label": "uma cozinha de restaurante",
+    "description": "a restaurant kitchen",
+    "reject": false
+  },
+  {
+    "id": "parking_lot",
+    "label": "um estacionamento",
+    "description": "a parking lot",
+    "reject": false
+  },
+  {
+    "id": "reception",
+    "label": "uma recepção",
+    "description": "a reception area",
+    "reject": false
+  },
+  {
+    "id": "laundromat",
+    "label": "uma lavanderia comercial",
+    "description": "a laundromat",
+    "reject": false
+  },
+  {
+    "id": "concert_hall",
+    "label": "uma sala de concertos",
+    "description": "a concert hall",
+    "reject": false
+  },
+  {
+    "id": "tv_studio",
+    "label": "um estúdio de televisão",
+    "description": "a television studio",
+    "reject": false
+  },
+  {
+    "id": "reject_closeup",
+    "label": "",
+    "description": "a close-up photograph of an object with no visible room",
+    "reject": true
+  },
+  {
+    "id": "reject_person",
+    "label": "",
+    "description": "a close-up portrait of a person without visible surroundings",
+    "reject": true
+  },
+  {
+    "id": "reject_dark",
+    "label": "",
+    "description": "a dark image with no visible scene",
+    "reject": true
+  },
+  {
+    "id": "reject_blur",
+    "label": "",
+    "description": "an extremely blurry photograph with no recognizable scene",
+    "reject": true
+  },
+  {
+    "id": "reject_wall",
+    "label": "",
+    "description": "a close-up view of a blank wall",
+    "reject": true
+  },
+  {
+    "id": "reject_screen",
+    "label": "",
+    "description": "a screenshot or a computer screen showing a digital interface",
+    "reject": true
+  },
+  {
+    "id": "reject_document",
+    "label": "",
+    "description": "a close-up photograph of a document or printed page",
+    "reject": true
+  },
+  {
+    "id": "reject_cover",
+    "label": "",
+    "description": "an obscured camera lens or a solid color image",
+    "reject": true
+  }
+]

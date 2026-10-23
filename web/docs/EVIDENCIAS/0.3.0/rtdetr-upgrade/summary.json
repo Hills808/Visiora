@@ -1,0 +1,691 @@
+{
+  "protocolSHA256": "7fcbc120ed2ff5647c5875c94415c9cd523771273c709ad77f06113f254a2471",
+  "selectionSHA256": "4f71c33338a1ad4fb8674e156c4967b840bc728e8fc8a4cecef915f24e250bc2",
+  "developmentResultsSHA256": "0fa7643e286238ea91727b0735c0ab46143c7b5a1c0481d474ac484e2ee327f4",
+  "confirmationResultsSHA256": "c9451603d2a9026d1368059f120bf375cd876fba5b7a24e3bec8278bc943bcf9",
+  "onnxRevision": "936f90b6a476c6da4dfe053fc521af55285976ba",
+  "originalRevision": "5650961749fa93567c0d46fc7f43ea4f9e914107",
+  "license": "Apache-2.0, both official original and ONNX conversion metadata; upstream LICENSE saved",
+  "selectedBeforeConfirmationInference": {
+    "variant": "uint8",
+    "thresholds": {
+      "person": 0.55,
+      "chair": 0.75,
+      "bed": 0.8
+    },
+    "developmentSummary": {
+      "target": 0.9,
+      "classes": {
+        "person": {
+          "tp": 81,
+          "fp": 7,
+          "fn": 21,
+          "gt": 102,
+          "precision": 0.9204545454545454,
+          "recall": 0.7941176470588235,
+          "ignoredCrowd": 9,
+          "predictions": 88,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.55
+        },
+        "chair": {
+          "tp": 21,
+          "fp": 2,
+          "fn": 56,
+          "gt": 77,
+          "precision": 0.9130434782608695,
+          "recall": 0.2727272727272727,
+          "ignoredCrowd": 3,
+          "predictions": 23,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.75
+        },
+        "bed": {
+          "tp": 7,
+          "fp": 0,
+          "fn": 6,
+          "gt": 13,
+          "precision": 1.0,
+          "recall": 0.5384615384615384,
+          "ignoredCrowd": 0,
+          "predictions": 7,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.8
+        }
+      },
+      "eligible": true,
+      "bytes": 20991219,
+      "macroRecall": 0.5351021527492116,
+      "macroPrecision": 0.9444993412384717
+    },
+    "sha256": "4b839c46187b77fc620c770de0be6790637b98afde9b386232b0fcf74382eb3c"
+  },
+  "confirmation": {
+    "person": {
+      "tp": 44,
+      "fp": 5,
+      "fn": 10,
+      "gt": 54,
+      "precision": 0.8979591836734694,
+      "recall": 0.8148148148148148,
+      "ignoredCrowd": 0,
+      "predictions": 49,
+      "negativeImages": 18,
+      "negativeImagesWithFalseDetection": 0,
+      "threshold": 0.55
+    },
+    "chair": {
+      "tp": 5,
+      "fp": 5,
+      "fn": 17,
+      "gt": 22,
+      "precision": 0.5,
+      "recall": 0.22727272727272727,
+      "ignoredCrowd": 0,
+      "predictions": 10,
+      "negativeImages": 16,
+      "negativeImagesWithFalseDetection": 2,
+      "threshold": 0.75
+    },
+    "bed": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 3,
+      "gt": 7,
+      "precision": 0.8,
+      "recall": 0.5714285714285714,
+      "ignoredCrowd": 0,
+      "predictions": 5,
+      "negativeImages": 23,
+      "negativeImagesWithFalseDetection": 0,
+      "threshold": 0.8
+    }
+  },
+  "nanoBaselineSame30": {
+    "person": {
+      "tp": 27,
+      "fp": 3,
+      "fn": 27,
+      "gt": 54,
+      "ignoredCrowd": 0,
+      "precision": 0.9,
+      "recall": 0.5,
+      "negativeImages": 18,
+      "negativeImagesWithFalseDetection": 1
+    },
+    "chair": {
+      "tp": 7,
+      "fp": 2,
+      "fn": 15,
+      "gt": 22,
+      "ignoredCrowd": 0,
+      "precision": 0.7777777777777778,
+      "recall": 0.3181818181818182,
+      "negativeImages": 16,
+      "negativeImagesWithFalseDetection": 1
+    },
+    "bed": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 4,
+      "gt": 7,
+      "ignoredCrowd": 0,
+      "precision": 1.0,
+      "recall": 0.42857142857142855,
+      "negativeImages": 23,
+      "negativeImagesWithFalseDetection": 0
+    }
+  },
+  "conservativeAdditionalDevelopmentOnly": {
+    "f32": {
+      "target95": {
+        "person": {
+          "tp": 72,
+          "fp": 2,
+          "fn": 30,
+          "gt": 102,
+          "precision": 0.972972972972973,
+          "recall": 0.7058823529411765,
+          "ignoredCrowd": 2,
+          "predictions": 74,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.65
+        },
+        "chair": {
+          "tp": 21,
+          "fp": 1,
+          "fn": 56,
+          "gt": 77,
+          "precision": 0.9545454545454546,
+          "recall": 0.2727272727272727,
+          "ignoredCrowd": 2,
+          "predictions": 22,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.8
+        },
+        "bed": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 8,
+          "gt": 13,
+          "precision": 1.0,
+          "recall": 0.38461538461538464,
+          "ignoredCrowd": 0,
+          "predictions": 5,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.9
+        }
+      },
+      "atMostNanoFalsePositives": {
+        "person": {
+          "tp": 72,
+          "fp": 2,
+          "fn": 30,
+          "gt": 102,
+          "precision": 0.972972972972973,
+          "recall": 0.7058823529411765,
+          "ignoredCrowd": 2,
+          "predictions": 74,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.65
+        },
+        "chair": {
+          "tp": 7,
+          "fp": 0,
+          "fn": 70,
+          "gt": 77,
+          "precision": 1.0,
+          "recall": 0.09090909090909091,
+          "ignoredCrowd": 0,
+          "predictions": 7,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.9
+        },
+        "bed": {
+          "tp": 8,
+          "fp": 1,
+          "fn": 5,
+          "gt": 13,
+          "precision": 0.8888888888888888,
+          "recall": 0.6153846153846154,
+          "ignoredCrowd": 0,
+          "predictions": 9,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.75
+        }
+      },
+      "atLeastNanoPrecision": {
+        "person": {
+          "tp": 72,
+          "fp": 2,
+          "fn": 30,
+          "gt": 102,
+          "precision": 0.972972972972973,
+          "recall": 0.7058823529411765,
+          "ignoredCrowd": 2,
+          "predictions": 74,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.65
+        },
+        "chair": {
+          "tp": 7,
+          "fp": 0,
+          "fn": 70,
+          "gt": 77,
+          "precision": 1.0,
+          "recall": 0.09090909090909091,
+          "ignoredCrowd": 0,
+          "predictions": 7,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.9
+        },
+        "bed": {
+          "tp": 8,
+          "fp": 1,
+          "fn": 5,
+          "gt": 13,
+          "precision": 0.8888888888888888,
+          "recall": 0.6153846153846154,
+          "ignoredCrowd": 0,
+          "predictions": 9,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.75
+        }
+      }
+    },
+    "uint8": {
+      "target95": {
+        "person": {
+          "tp": 72,
+          "fp": 3,
+          "fn": 30,
+          "gt": 102,
+          "precision": 0.96,
+          "recall": 0.7058823529411765,
+          "ignoredCrowd": 1,
+          "predictions": 75,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.65
+        },
+        "chair": {
+          "tp": 9,
+          "fp": 0,
+          "fn": 68,
+          "gt": 77,
+          "precision": 1.0,
+          "recall": 0.11688311688311688,
+          "ignoredCrowd": 0,
+          "predictions": 9,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.9
+        },
+        "bed": {
+          "tp": 7,
+          "fp": 0,
+          "fn": 6,
+          "gt": 13,
+          "precision": 1.0,
+          "recall": 0.5384615384615384,
+          "ignoredCrowd": 0,
+          "predictions": 7,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.8
+        }
+      },
+      "atMostNanoFalsePositives": {
+        "person": {
+          "tp": 63,
+          "fp": 0,
+          "fn": 39,
+          "gt": 102,
+          "precision": 1.0,
+          "recall": 0.6176470588235294,
+          "ignoredCrowd": 0,
+          "predictions": 63,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.7
+        },
+        "chair": {
+          "tp": 9,
+          "fp": 0,
+          "fn": 68,
+          "gt": 77,
+          "precision": 1.0,
+          "recall": 0.11688311688311688,
+          "ignoredCrowd": 0,
+          "predictions": 9,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.9
+        },
+        "bed": {
+          "tp": 7,
+          "fp": 0,
+          "fn": 6,
+          "gt": 13,
+          "precision": 1.0,
+          "recall": 0.5384615384615384,
+          "ignoredCrowd": 0,
+          "predictions": 7,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.8
+        }
+      },
+      "atLeastNanoPrecision": {
+        "person": {
+          "tp": 63,
+          "fp": 0,
+          "fn": 39,
+          "gt": 102,
+          "precision": 1.0,
+          "recall": 0.6176470588235294,
+          "ignoredCrowd": 0,
+          "predictions": 63,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.7
+        },
+        "chair": {
+          "tp": 9,
+          "fp": 0,
+          "fn": 68,
+          "gt": 77,
+          "precision": 1.0,
+          "recall": 0.11688311688311688,
+          "ignoredCrowd": 0,
+          "predictions": 9,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.9
+        },
+        "bed": {
+          "tp": 7,
+          "fp": 0,
+          "fn": 6,
+          "gt": 13,
+          "precision": 1.0,
+          "recall": 0.5384615384615384,
+          "ignoredCrowd": 0,
+          "predictions": 7,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.8
+        }
+      }
+    }
+  },
+  "browser": {
+    "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "runtime": "onnxruntime-web bundled1.30.0",
+    "provider": "wasm",
+    "threads": 1,
+    "transport": "Same-origin static fixture; service workers blocked",
+    "input": "COCO val2017 public image415741, RGB canvas high resize640 rescale1/255",
+    "timingCaveat": "One cold inference, shared CPU; not controlled latency or equivalence to native PIL preprocessing",
+    "variant": "uint8",
+    "inputShape": [
+      1,
+      3,
+      640,
+      640
+    ],
+    "outputs": {
+      "logits": [
+        1,
+        300,
+        80
+      ],
+      "pred_boxes": [
+        1,
+        300,
+        4
+      ]
+    },
+    "finite": true,
+    "loadMsExploratory": 1171.5,
+    "inferenceMsExploratory": 1515.6000000014901,
+    "repeatedSameQueryAboveMinScore": 0,
+    "detections": [
+      {
+        "classId": 59,
+        "queryIndex": 0,
+        "score": 0.8659225005203335,
+        "box": [
+          224.98611450195312,
+          154.95009899139404,
+          290.37994384765625,
+          261.8635082244873
+        ],
+        "class": "bed"
+      }
+    ],
+    "pageErrors": []
+  },
+  "nativeUncontrolledTiming": {
+    "f32": {
+      "n": 60,
+      "p50Ms": 687.2496500000125,
+      "p95MsNearestRank": 918.624899997667,
+      "threads": 1,
+      "coldFirstCallIncluded": true,
+      "provider": "CPUExecutionProvider",
+      "onnxruntime": "1.23.2",
+      "caveat": "Single pass shared CPU; no causal speed/quantization conclusion"
+    },
+    "uint8": {
+      "n": 60,
+      "p50Ms": 933.5652499976277,
+      "p95MsNearestRank": 1196.1645999981556,
+      "threads": 1,
+      "coldFirstCallIncluded": true,
+      "provider": "CPUExecutionProvider",
+      "onnxruntime": "1.23.2",
+      "caveat": "Single pass shared CPU; no causal speed/quantization conclusion"
+    }
+  },
+  "postprocessingDiagnostics": {
+    "f32": {
+      "sameQueryDuplicatesAboveScore0.45Removed": 15
+    },
+    "uint8": {
+      "sameQueryDuplicatesAboveScore0.45Removed": 15
+    },
+    "confirmation_uint8": {
+      "sameQueryDuplicatesAboveScore0.45Removed": 7
+    }
+  },
+  "falsePositiveExamples": [
+    {
+      "imageId": 336356,
+      "class": "person",
+      "tp": 4,
+      "fp": 1,
+      "fn": 1,
+      "gt": 5,
+      "falsePositiveBoxes": [
+        {
+          "classId": 0,
+          "queryIndex": 7,
+          "score": 0.6077257990837097,
+          "box": [
+            310.23318414390087,
+            80.14369010925293,
+            336.1893062144518,
+            126.01754188537598
+          ],
+          "class": "person"
+        }
+      ]
+    },
+    {
+      "imageId": 521509,
+      "class": "bed",
+      "tp": 0,
+      "fp": 1,
+      "fn": 1,
+      "gt": 1,
+      "falsePositiveBoxes": [
+        {
+          "classId": 59,
+          "queryIndex": 1,
+          "score": 0.8696743845939636,
+          "box": [
+            280.51533699035645,
+            207.46651066839695,
+            476.7830181121826,
+            403.95948277413845
+          ],
+          "class": "bed"
+        }
+      ]
+    },
+    {
+      "imageId": 194875,
+      "class": "person",
+      "tp": 8,
+      "fp": 1,
+      "fn": 3,
+      "gt": 11,
+      "falsePositiveBoxes": [
+        {
+          "classId": 0,
+          "queryIndex": 16,
+          "score": 0.7645209431648254,
+          "box": [
+            385.8631134033203,
+            242.03227040171623,
+            474.5500946044922,
+            302.4153726398945
+          ],
+          "class": "person"
+        }
+      ]
+    },
+    {
+      "imageId": 224664,
+      "class": "person",
+      "tp": 5,
+      "fp": 1,
+      "fn": 3,
+      "gt": 8,
+      "falsePositiveBoxes": [
+        {
+          "classId": 0,
+          "queryIndex": 6,
+          "score": 0.700026273727417,
+          "box": [
+            374.06490325927734,
+            317.69930362701416,
+            379.87056732177734,
+            336.546893119812
+          ],
+          "class": "person"
+        }
+      ]
+    },
+    {
+      "imageId": 78915,
+      "class": "person",
+      "tp": 9,
+      "fp": 2,
+      "fn": 1,
+      "gt": 10,
+      "falsePositiveBoxes": [
+        {
+          "classId": 0,
+          "queryIndex": 18,
+          "score": 0.7289198637008667,
+          "box": [
+            349.04452243447304,
+            0.0,
+            467.1853687465191,
+            39.81705665588379
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 11,
+          "score": 0.6735363602638245,
+          "box": [
+            0.0,
+            0.15641212463378906,
+            59.08151838183403,
+            44.89863395690918
+          ],
+          "class": "person"
+        }
+      ]
+    },
+    {
+      "imageId": 78915,
+      "class": "chair",
+      "tp": 0,
+      "fp": 4,
+      "fn": 0,
+      "gt": 0,
+      "falsePositiveBoxes": [
+        {
+          "classId": 56,
+          "queryIndex": 7,
+          "score": 0.8426082134246826,
+          "box": [
+            45.07265616953373,
+            27.09951400756836,
+            91.26192353665829,
+            51.81291580200195
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 9,
+          "score": 0.8334610462188721,
+          "box": [
+            186.302997097373,
+            44.346914291381836,
+            233.47566844522953,
+            67.87774085998535
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 17,
+          "score": 0.8084030747413635,
+          "box": [
+            0.014807969331741333,
+            20.687589645385742,
+            44.36520650982857,
+            45.79300880432129
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 15,
+          "score": 0.7917590737342834,
+          "box": [
+            138.96257854998112,
+            39.00620460510254,
+            185.737398609519,
+            63.119916915893555
+          ],
+          "class": "chair"
+        }
+      ]
+    },
+    {
+      "imageId": 172877,
+      "class": "chair",
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "gt": 0,
+      "falsePositiveBoxes": [
+        {
+          "classId": 56,
+          "queryIndex": 2,
+          "score": 0.8530354499816895,
+          "box": [
+            0.18125534057617188,
+            285.492467880249,
+            155.13456344604492,
+            477.04075813293457
+          ],
+          "class": "chair"
+        }
+      ]
+    }
+  ],
+  "conclusion": "RT-DETRv2 uint8 passed native CPU and browser WASM execution, but primary dev-selected policy did not uniformly improve the three classes on confirmation. Chair precision fell to50%, and person precision89.8% vsNano90% despite greater person recall. No automatic product replacement justified by this limited evaluation.",
+  "notTested": [
+    "Private user photo",
+    "Real camera",
+    "Audible speech",
+    "Endurance or battery",
+    "Offline service-worker behavior",
+    "Mobile browsers",
+    "Assistive readers",
+    "Brazilian scenes",
+    "Controlled timing",
+    "COCO mAP"
+  ]
+}

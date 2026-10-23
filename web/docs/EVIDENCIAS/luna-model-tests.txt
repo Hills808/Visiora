@@ -1,0 +1,44 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> visiora@0.3.0 test:luna
+> node --test tests/luna*.test.mjs
+
+(node:31400) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Ô£ö CA-L3: transaction prevents duplicate, concurrent and over-budget dispatch (3.7297ms)
+Ô£ö CA-L3: restart/multiple connections preserve uncertain spend and single pending request (32.8648ms)
+Ô£ö CA-L3: missing usage retains full reservation; zero budget blocks and throttling persists (1.1205ms)
+(node:28900) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Ô£ö CA-L2: real HTTP, same origin and CSRF enforced; no images stored or secret returned (137.8129ms)
+Ô£ö CA-L2/L3: disabled configuration, missing consent and insufficient quota never dispatch (25.6306ms)
+Ô£ö CA-L1/L2: oversized body, invalid JPEG, dimensions and injected fields rejected before provider (25.3842ms)
+Ô£ö CA-L3: simultaneous requests dispatch once; uncertain failure keeps reservation and no retry (16.413ms)
+Ô£ö CA-L2: service worker uses explicit asset allow-list, never API responses (1.4964ms)
+(node:7380) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Ô£ö CA-L1/L2: verify provider model exactly; missing/invalid IDs are not copied from the requested model (1.3776ms)
+Ô£ö CA-L1/L3: real HTTP gateway records each returned model before accepting or rejecting evidence (146.2715ms)
+Ô£ö CA-L1/L2: refused/incomplete/error/malformed responses also record only model metadata (1.6788ms)
+Ô£ö CA-L2/L3: failed durable model audit blocks delivery; fake and transport failures cannot claim a model (0.7ms)
+Ô£ö CA-L3: opening an existing ledger preserves spending, pending records and historical lack of model evidence (203.1271ms)
+(node:29552) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Ô£ö CA-L1: open scene/items accepted without catalog hints; original stamp required (3.2011ms)
+Ô£ö CA-L1/P6: malformed boxes, hallucinated references, extra depth, HTML and duplicate IDs rejected (0.591ms)
+Ô£ö CA-L4: old/generation-mismatched/reordered results do not enter snapshot memory (0.3114ms)
+Ô£ö CA-F2/F3/F6/P6/L4: local rendering, camera direction, no distance, explicit age and completed repeat (0.638ms)
+Ô£ö CA-L1: find/ahead/where accept open vocabulary; no box means no directional speech (0.8849ms)
+Ô£ö CA-L1: refusal, incomplete and malformed Responses payload are explicit failures (0.4769ms)
+Ô£ö CA-L2: provider fixes model/endpoint, sends pixels, disables storage and tools; no retries (6.0539ms)
+Ô£ö CA-L3: default configuration cannot make paid calls; malformed budgets fail closed (0.3436ms)
+Ô£ö CA-L4: canceled client response cannot be adopted; only one active request (1.0992ms)
+Ô£ö CA-F7/F8: source/age qualification fits word limits; long open labels do not overflow speech (0.4016ms)
+Ôä╣ tests 23
+Ôä╣ suites 0
+Ôä╣ pass 23
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 498.2962

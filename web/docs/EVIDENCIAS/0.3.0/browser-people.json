@@ -1,0 +1,50 @@
+{
+  "scope": "Selected public COCO23899 image as fake camera, five real WASM models, stubbed voice, fixture transport; integration only, no accuracy or live camera claim",
+  "cases": [
+    "person consensus reaches the real app object memory",
+    "person description reaches output without fabricated depth and shows its age",
+    "mobile layout including description age has no horizontal overflow",
+    "accepted frames retain numeric provenance and the measured object pipeline stays below 3s",
+    "stopping clears description-age state"
+  ],
+  "errors": [],
+  "diagnostic": {
+    "version": "0.3.0",
+    "date": "2026-10-18T02:37:44.513Z",
+    "source": "camera",
+    "frames": 3,
+    "speechCompleted": 1,
+    "errors": 0,
+    "rejectedFrames": 0,
+    "inferenceLatencyMs": [
+      1447,
+      1523,
+      1319
+    ],
+    "sceneInferenceLatencyMs": [
+      1576
+    ],
+    "sceneSamples": 1,
+    "sceneAbstentions": 1,
+    "sceneRejectedFrames": 0,
+    "recognitionProvenance": {
+      "lastAcceptedObjectFrame": {
+        "frameId": 3,
+        "capturedAtMs": 7403.20000000298
+      },
+      "lastAcceptedSceneFrame": {
+        "frameId": 3,
+        "capturedAtMs": 7403.20000000298
+      },
+      "lastDescription": {
+        "createdAtMs": 8906.5,
+        "objectFrames": [
+          3
+        ],
+        "sceneFrame": null,
+        "oldestEvidenceAtMs": 7403.20000000298
+      }
+    }
+  },
+  "passed": true
+}

@@ -1,0 +1,626 @@
+{
+  "protocolSHA256": "c95167e2ee77cc21b1015bbd1161723a7146bc21872519aaeecbe58112f474e8",
+  "resultsSHA256": "76b5f76507023f42c36bfa10427d608ab2a52a2766b68a1999e51b53e0532f47",
+  "browserEvidenceSHA256": "97e5888396f1a3f21ec2e9534be3c04ef4a90e676e9fae60c7f28a3721486269",
+  "imageSourcesSHA256": "db0b8a4bfdd9b13a2b1c51c5110c031a1abea45e540ebd14bc9debba97c59989",
+  "newImages": 30,
+  "selection": "Positions19..24 per same5strata; no overlap with previous90 asserted before inference",
+  "policy": "Person from fixed two-of-three YOLOX agreement, fusedscore>=.50; mapped non-person from unchanged Nano>=.50; final globalNMS/max30",
+  "nanoBaseline": {
+    "person": {
+      "tp": 24,
+      "fp": 6,
+      "fn": 32,
+      "gt": 56,
+      "precision": 0.8,
+      "recall": 0.42857142857142855,
+      "ignoredCrowd": 2,
+      "negativeImages": 18,
+      "negativeImagesWithFalseDetection": 1
+    },
+    "chair": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 49,
+      "gt": 55,
+      "precision": 0.8571428571428571,
+      "recall": 0.10909090909090909,
+      "ignoredCrowd": 0,
+      "negativeImages": 16,
+      "negativeImagesWithFalseDetection": 0
+    },
+    "bed": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 3,
+      "gt": 6,
+      "precision": 1.0,
+      "recall": 0.5,
+      "ignoredCrowd": 0,
+      "negativeImages": 24,
+      "negativeImagesWithFalseDetection": 0
+    }
+  },
+  "pipeline": {
+    "person": {
+      "tp": 29,
+      "fp": 5,
+      "fn": 27,
+      "gt": 56,
+      "precision": 0.8529411764705882,
+      "recall": 0.5178571428571429,
+      "ignoredCrowd": 2,
+      "negativeImages": 18,
+      "negativeImagesWithFalseDetection": 0
+    },
+    "chair": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 49,
+      "gt": 55,
+      "precision": 0.8571428571428571,
+      "recall": 0.10909090909090909,
+      "ignoredCrowd": 0,
+      "negativeImages": 16,
+      "negativeImagesWithFalseDetection": 0
+    },
+    "bed": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 3,
+      "gt": 6,
+      "precision": 1.0,
+      "recall": 0.5,
+      "ignoredCrowd": 0,
+      "negativeImages": 24,
+      "negativeImagesWithFalseDetection": 0
+    }
+  },
+  "qualityGatePassed": true,
+  "latencyGatePassed": true,
+  "combinedLimitedGatePassed": true,
+  "browserWarmFrameMs": [
+    1335.3000000044703,
+    1312,
+    1318
+  ],
+  "compositionParity": {
+    "publicImages": 30,
+    "channelsPerImage": 2,
+    "detectionsChecked": 166,
+    "tolerance": 1e-09,
+    "maxAbsDifference": 0,
+    "passed": true,
+    "failures": [],
+    "scope": "Artifact browser composition implementation vs Python using same full-mapped detections; not equivalence of JPEG/canvas/OpenCV or ONNX runtimes"
+  },
+  "allMappedClassCount": 48,
+  "allRawHeadClasses": 80,
+  "fullMappedBeforeCapSaved": true,
+  "capEffectsPerImage": [
+    {
+      "id": 226592,
+      "baselineCount": 1,
+      "pipelineCount": 1,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 249550,
+      "baselineCount": 2,
+      "pipelineCount": 2,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 235399,
+      "baselineCount": 1,
+      "pipelineCount": 1,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 370478,
+      "baselineCount": 3,
+      "pipelineCount": 2,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 10092,
+      "baselineCount": 2,
+      "pipelineCount": 2,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 319935,
+      "baselineCount": 2,
+      "pipelineCount": 2,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 519569,
+      "baselineCount": 3,
+      "pipelineCount": 3,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 24610,
+      "baselineCount": 3,
+      "pipelineCount": 3,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 290771,
+      "baselineCount": 2,
+      "pipelineCount": 2,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 472046,
+      "baselineCount": 1,
+      "pipelineCount": 1,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 555972,
+      "baselineCount": 2,
+      "pipelineCount": 2,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 366141,
+      "baselineCount": 2,
+      "pipelineCount": 2,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 179898,
+      "baselineCount": 8,
+      "pipelineCount": 8,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 67616,
+      "baselineCount": 8,
+      "pipelineCount": 8,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 555050,
+      "baselineCount": 4,
+      "pipelineCount": 4,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 92939,
+      "baselineCount": 4,
+      "pipelineCount": 4,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 142620,
+      "baselineCount": 5,
+      "pipelineCount": 5,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 522889,
+      "baselineCount": 3,
+      "pipelineCount": 3,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 393469,
+      "baselineCount": 1,
+      "pipelineCount": 1,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 148508,
+      "baselineCount": 7,
+      "pipelineCount": 9,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 411817,
+      "baselineCount": 8,
+      "pipelineCount": 10,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 23899,
+      "baselineCount": 2,
+      "pipelineCount": 3,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 27768,
+      "baselineCount": 1,
+      "pipelineCount": 2,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 19221,
+      "baselineCount": 1,
+      "pipelineCount": 0,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 255718,
+      "baselineCount": 0,
+      "pipelineCount": 0,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 297681,
+      "baselineCount": 1,
+      "pipelineCount": 1,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 114871,
+      "baselineCount": 1,
+      "pipelineCount": 1,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 174018,
+      "baselineCount": 2,
+      "pipelineCount": 2,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 534639,
+      "baselineCount": 1,
+      "pipelineCount": 1,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    },
+    {
+      "id": 92839,
+      "baselineCount": 0,
+      "pipelineCount": 0,
+      "nonPersonRemoved": 0,
+      "nonPersonAddedFromNano": 0
+    }
+  ],
+  "nonPersonChanges": 0,
+  "falsePositiveExamples": [
+    {
+      "id": 10092,
+      "class": "chair",
+      "tp": 0,
+      "fp": 1,
+      "fn": 2,
+      "gt": 2,
+      "falsePositiveBoxes": [
+        {
+          "class": "chair",
+          "classId": 56,
+          "score": 0.5217866897583008,
+          "box": [
+            459.5273766150841,
+            244.67080483069785,
+            516.3860731858473,
+            319.1421816899226
+          ],
+          "anchorIndex": 3035
+        }
+      ]
+    },
+    {
+      "id": 67616,
+      "class": "person",
+      "tp": 2,
+      "fp": 2,
+      "fn": 3,
+      "gt": 5,
+      "falsePositiveBoxes": [
+        {
+          "class": "person",
+          "box": [
+            80.35135244711851,
+            361.0525231972719,
+            119.75858927995732,
+            438.6073846083421
+          ],
+          "score": 0.7337807218233744,
+          "votes": 3,
+          "members": [
+            {
+              "class": "person",
+              "classId": 0,
+              "score": 0.7796804904937744,
+              "box": [
+                78.91895000751202,
+                360.0449048555814,
+                118.4804945725661,
+                440.0817783062275
+              ],
+              "anchorIndex": 3097,
+              "head": "nano",
+              "sourceIndex": 1
+            },
+            {
+              "class": "person",
+              "classId": 0,
+              "score": 0.7471790313720703,
+              "box": [
+                82.57792472839355,
+                362.2699394226074,
+                120.69338417053223,
+                437.7440071105957
+              ],
+              "anchorIndex": 7405,
+              "head": "s",
+              "sourceIndex": 1
+            },
+            {
+              "class": "person",
+              "classId": 0,
+              "score": 0.6744826436042786,
+              "box": [
+                79.55718260544997,
+                360.8427253136268,
+                120.10188909677359,
+                437.9963684082031
+              ],
+              "anchorIndex": 3097,
+              "head": "tiny",
+              "sourceIndex": 1
+            }
+          ]
+        },
+        {
+          "class": "person",
+          "box": [
+            159.2508785541241,
+            362.0460996383276,
+            193.4423317542443,
+            429.86810116890155
+          ],
+          "score": 0.5926701227823893,
+          "votes": 3,
+          "members": [
+            {
+              "class": "person",
+              "classId": 0,
+              "score": 0.6693492531776428,
+              "box": [
+                160.53939819335938,
+                362.7824172973633,
+                196.37869262695312,
+                426.78418731689453
+              ],
+              "anchorIndex": 3861,
+              "head": "s",
+              "sourceIndex": 2
+            },
+            {
+              "class": "person",
+              "classId": 0,
+              "score": 0.5844922661781311,
+              "box": [
+                158.42038814838116,
+                361.8821474222036,
+                194.26271438598633,
+                438.51579446059003
+              ],
+              "anchorIndex": 1678,
+              "head": "nano",
+              "sourceIndex": 3
+            },
+            {
+              "class": "person",
+              "classId": 0,
+              "score": 0.524168848991394,
+              "box": [
+                158.79284932063175,
+                361.4737341954158,
+                189.68558824979343,
+                424.30432172921985
+              ],
+              "anchorIndex": 1626,
+              "head": "tiny",
+              "sourceIndex": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 555050,
+      "class": "person",
+      "tp": 0,
+      "fp": 2,
+      "fn": 1,
+      "gt": 1,
+      "falsePositiveBoxes": [
+        {
+          "class": "person",
+          "box": [
+            181.83989092134513,
+            170.85358328544177,
+            205.31876800725092,
+            212.09980031618704
+          ],
+          "score": 0.6532633900642395,
+          "votes": 2,
+          "members": [
+            {
+              "class": "person",
+              "classId": 0,
+              "score": 0.6981217265129089,
+              "box": [
+                182.64955683396414,
+                172.13726043701172,
+                205.40736443721332,
+                212.68920715038593
+              ],
+              "anchorIndex": 956,
+              "head": "tiny",
+              "sourceIndex": 0
+            },
+            {
+              "class": "person",
+              "classId": 0,
+              "score": 0.6084050536155701,
+              "box": [
+                181.03022500872612,
+                169.56990613387183,
+                205.23017157728856,
+                211.5103934819882
+              ],
+              "anchorIndex": 1008,
+              "head": "nano",
+              "sourceIndex": 0
+            }
+          ]
+        },
+        {
+          "class": "person",
+          "box": [
+            226.54438849825127,
+            171.7425871353883,
+            258.0999998519054,
+            222.53529727458954
+          ],
+          "score": 0.5956587195396423,
+          "votes": 2,
+          "members": [
+            {
+              "class": "person",
+              "classId": 0,
+              "score": 0.64034104347229,
+              "box": [
+                222.5459240950071,
+                170.04538614016315,
+                257.2426131138435,
+                222.5870226438229
+              ],
+              "anchorIndex": 1012,
+              "head": "tiny",
+              "sourceIndex": 1
+            },
+            {
+              "class": "person",
+              "classId": 0,
+              "score": 0.5509763956069946,
+              "box": [
+                230.54285290149542,
+                173.4397881306135,
+                258.9573865899673,
+                222.4835719053562
+              ],
+              "anchorIndex": 1065,
+              "head": "nano",
+              "sourceIndex": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 411817,
+      "class": "person",
+      "tp": 5,
+      "fp": 1,
+      "fn": 3,
+      "gt": 8,
+      "falsePositiveBoxes": [
+        {
+          "class": "person",
+          "box": [
+            333.4576930388426,
+            130.645152483231,
+            396.04225949752026,
+            220.20823975098438
+          ],
+          "score": 0.6395316322644552,
+          "votes": 3,
+          "members": [
+            {
+              "class": "person",
+              "classId": 0,
+              "score": 0.7008434534072876,
+              "box": [
+                343.70366525650024,
+                128.66034984588623,
+                396.3317437171936,
+                225.85015392303467
+              ],
+              "anchorIndex": 6903,
+              "head": "s",
+              "sourceIndex": 6
+            },
+            {
+              "class": "person",
+              "classId": 0,
+              "score": 0.6493518352508545,
+              "box": [
+                328.4624345485981,
+                130.93312997084396,
+                394.9865000064556,
+                221.70526577876163
+              ],
+              "anchorIndex": 757,
+              "head": "tiny",
+              "sourceIndex": 3
+            },
+            {
+              "class": "person",
+              "classId": 0,
+              "score": 0.5683996081352234,
+              "box": [
+                328.2069793114295,
+                132.34197763296274,
+                396.8085347689115,
+                213.06929955115683
+              ],
+              "anchorIndex": 2874,
+              "head": "nano",
+              "sourceIndex": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Small stratified COCO val2017 sample, model-known validation data; not COCO mAP or independent Brazilian camera validation.",
+    "Per-class specialist channel is explicitly a detector policy, not a rule inferring rooms from objects.",
+    "Three correlated models can agree on a false person.",
+    "Browser fixture timing is not real camera/endurance/phone performance.",
+    "All artifacts local, no private image, product code, Git or Sites mutation.",
+    "Only one fewer personFP in this sample; cannot establish broad precision gain or user-photo correction.",
+    "Chair recall remains6/55; policy does not improve non-person perception.",
+    "All3warm browser frames came from first3selected bed-without-person images by predeclared order; timing does not measure diverse scene contention.",
+    "Scene model concurrency, live camera/transfer, mobile, battery, audible speech and endurance not tested.",
+    "Browser canvas/OpenCV preprocessing are not claimed pixel-equivalent; composition code checked independently on all30native full-mapped results."
+  ]
+}

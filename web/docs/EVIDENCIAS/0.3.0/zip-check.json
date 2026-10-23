@@ -1,0 +1,72 @@
+[
+  {
+    "file": "artifacts\\visiora-local.zip",
+    "bytes": 160710445,
+    "files": 66,
+    "version": "0.3.0",
+    "crc": true,
+    "models": [
+      {
+        "id": "yolox-nano",
+        "bytes": 3659407,
+        "verified": true
+      },
+      {
+        "id": "yolox-tiny",
+        "bytes": 20219662,
+        "verified": true
+      },
+      {
+        "id": "yolox-s",
+        "bytes": 35858002,
+        "verified": true
+      },
+      {
+        "id": "siglip2",
+        "bytes": 63267466,
+        "verified": true
+      },
+      {
+        "id": "places365",
+        "bytes": 45445545,
+        "verified": true
+      }
+    ],
+    "research_images": false
+  },
+  {
+    "file": "artifacts\\e2e-scenes\\visiora-browser.zip",
+    "bytes": 161307091,
+    "files": 66,
+    "version": "0.3.0",
+    "crc": true,
+    "models": [
+      {
+        "id": "yolox-nano",
+        "bytes": 3659407,
+        "verified": true
+      },
+      {
+        "id": "yolox-tiny",
+        "bytes": 20219662,
+        "verified": true
+      },
+      {
+        "id": "yolox-s",
+        "bytes": 35858002,
+        "verified": true
+      },
+      {
+        "id": "siglip2",
+        "bytes": 63267466,
+        "verified": true
+      },
+      {
+        "id": "places365",
+        "bytes": 45445545,
+        "verified": true
+      }
+    ],
+    "research_images": false
+  }
+]

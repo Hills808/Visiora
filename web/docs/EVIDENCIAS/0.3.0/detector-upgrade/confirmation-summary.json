@@ -1,0 +1,725 @@
+{
+  "protocolSHA256": "498b1bd28feb4c97432bf3be06958dc136b3fc9ec32ec50da46a5aaf7476e87b",
+  "resultsSHA256": "d1e04079f88cb5b7a754be33b00cbb8f001989eec8af81cacad9602c68eed104",
+  "imageCount": 30,
+  "developmentIntersection": [],
+  "noThresholdAdjustmentAfterConfirmation": true,
+  "crowdAssertions": "Synthetic crowd IoA and normal-first assertions passed",
+  "crowdAnnotationsInSample": 1,
+  "targetCrowdAnnotationsInSample": 0,
+  "policies": {
+    "nano-baseline": {
+      "model": "nano",
+      "thresholds": {
+        "person": 0.5,
+        "chair": 0.5,
+        "bed": 0.5
+      },
+      "summary": {
+        "person": {
+          "tp": 27,
+          "fp": 3,
+          "fn": 27,
+          "gt": 54,
+          "ignoredCrowd": 0,
+          "precision": 0.9,
+          "recall": 0.5,
+          "negativeImages": 18,
+          "negativeImagesWithFalseDetection": 1
+        },
+        "chair": {
+          "tp": 7,
+          "fp": 2,
+          "fn": 15,
+          "gt": 22,
+          "ignoredCrowd": 0,
+          "precision": 0.7777777777777778,
+          "recall": 0.3181818181818182,
+          "negativeImages": 16,
+          "negativeImagesWithFalseDetection": 1
+        },
+        "bed": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 4,
+          "gt": 7,
+          "ignoredCrowd": 0,
+          "precision": 1.0,
+          "recall": 0.42857142857142855,
+          "negativeImages": 23,
+          "negativeImagesWithFalseDetection": 0
+        }
+      }
+    },
+    "tiny-target90": {
+      "model": "tiny",
+      "thresholds": {
+        "person": 0.45,
+        "chair": 0.7,
+        "bed": 0.45
+      },
+      "summary": {
+        "person": {
+          "tp": 31,
+          "fp": 0,
+          "fn": 23,
+          "gt": 54,
+          "ignoredCrowd": 0,
+          "precision": 1.0,
+          "recall": 0.5740740740740741,
+          "negativeImages": 18,
+          "negativeImagesWithFalseDetection": 0
+        },
+        "chair": {
+          "tp": 4,
+          "fp": 1,
+          "fn": 18,
+          "gt": 22,
+          "ignoredCrowd": 0,
+          "precision": 0.8,
+          "recall": 0.18181818181818182,
+          "negativeImages": 16,
+          "negativeImagesWithFalseDetection": 0
+        },
+        "bed": {
+          "tp": 4,
+          "fp": 1,
+          "fn": 3,
+          "gt": 7,
+          "ignoredCrowd": 0,
+          "precision": 0.8,
+          "recall": 0.5714285714285714,
+          "negativeImages": 23,
+          "negativeImagesWithFalseDetection": 0
+        }
+      }
+    },
+    "s-target85": {
+      "model": "s",
+      "thresholds": {
+        "person": 0.45,
+        "chair": 0.45,
+        "bed": 0.65
+      },
+      "summary": {
+        "person": {
+          "tp": 40,
+          "fp": 1,
+          "fn": 14,
+          "gt": 54,
+          "ignoredCrowd": 0,
+          "precision": 0.975609756097561,
+          "recall": 0.7407407407407407,
+          "negativeImages": 18,
+          "negativeImagesWithFalseDetection": 0
+        },
+        "chair": {
+          "tp": 13,
+          "fp": 12,
+          "fn": 9,
+          "gt": 22,
+          "ignoredCrowd": 0,
+          "precision": 0.52,
+          "recall": 0.5909090909090909,
+          "negativeImages": 16,
+          "negativeImagesWithFalseDetection": 2
+        },
+        "bed": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 5,
+          "gt": 7,
+          "ignoredCrowd": 0,
+          "precision": 1.0,
+          "recall": 0.2857142857142857,
+          "negativeImages": 23,
+          "negativeImagesWithFalseDetection": 0
+        }
+      }
+    },
+    "s-target90": {
+      "model": "s",
+      "thresholds": {
+        "person": 0.45,
+        "chair": 0.55,
+        "bed": 0.8
+      },
+      "summary": {
+        "person": {
+          "tp": 40,
+          "fp": 1,
+          "fn": 14,
+          "gt": 54,
+          "ignoredCrowd": 0,
+          "precision": 0.975609756097561,
+          "recall": 0.7407407407407407,
+          "negativeImages": 18,
+          "negativeImagesWithFalseDetection": 0
+        },
+        "chair": {
+          "tp": 12,
+          "fp": 11,
+          "fn": 10,
+          "gt": 22,
+          "ignoredCrowd": 0,
+          "precision": 0.5217391304347826,
+          "recall": 0.5454545454545454,
+          "negativeImages": 16,
+          "negativeImagesWithFalseDetection": 2
+        },
+        "bed": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 5,
+          "gt": 7,
+          "ignoredCrowd": 0,
+          "precision": 1.0,
+          "recall": 0.2857142857142857,
+          "negativeImages": 23,
+          "negativeImagesWithFalseDetection": 0
+        }
+      }
+    }
+  },
+  "inferenceOnlyUncontrolledTiming": {
+    "nano": {
+      "p50Ms": 19.87734999784152,
+      "p95MsNearestRank": 20.591000000422355,
+      "samples": 30,
+      "warmupExcluded": false,
+      "threads": 1
+    },
+    "tiny": {
+      "p50Ms": 62.423600000329316,
+      "p95MsNearestRank": 64.47160000243457,
+      "samples": 30,
+      "warmupExcluded": false,
+      "threads": 1
+    },
+    "s": {
+      "p50Ms": 253.26229999700445,
+      "p95MsNearestRank": 262.2598999951151,
+      "samples": 30,
+      "warmupExcluded": false,
+      "threads": 1
+    }
+  },
+  "falsePositiveExamples": {
+    "nano-baseline": [
+      {
+        "imageId": 267300,
+        "class": "person",
+        "tp": 0,
+        "fp": 1,
+        "fn": 0,
+        "gt": 0,
+        "negativeImageForClass": true,
+        "detections": [
+          {
+            "class": "person",
+            "score": 0.5277240872383118,
+            "box": [
+              257.0557286189153,
+              20.633738591120792,
+              640.0,
+              348.5021796593299
+            ]
+          }
+        ]
+      },
+      {
+        "imageId": 368900,
+        "class": "chair",
+        "tp": 1,
+        "fp": 1,
+        "fn": 0,
+        "gt": 1,
+        "negativeImageForClass": false,
+        "detections": [
+          {
+            "class": "chair",
+            "score": 0.564563512802124,
+            "box": [
+              452.6809655703031,
+              361.2036793048565,
+              629.5448383918175,
+              477.96997803908124
+            ]
+          }
+        ]
+      },
+      {
+        "imageId": 194875,
+        "class": "person",
+        "tp": 3,
+        "fp": 1,
+        "fn": 8,
+        "gt": 11,
+        "negativeImageForClass": false,
+        "detections": [
+          {
+            "class": "person",
+            "score": 0.6362478733062744,
+            "box": [
+              0.35377795879657453,
+              229.11042433518628,
+              89.17126288780798,
+              409.84493549053485
+            ]
+          }
+        ]
+      },
+      {
+        "imageId": 78915,
+        "class": "person",
+        "tp": 7,
+        "fp": 1,
+        "fn": 3,
+        "gt": 10,
+        "negativeImageForClass": false,
+        "detections": [
+          {
+            "class": "person",
+            "score": 0.5731480121612549,
+            "box": [
+              191.8218792401827,
+              0.0665752704326923,
+              257.34502095442554,
+              63.94303541917067
+            ]
+          }
+        ]
+      },
+      {
+        "imageId": 172877,
+        "class": "chair",
+        "tp": 0,
+        "fp": 1,
+        "fn": 0,
+        "gt": 0,
+        "negativeImageForClass": true,
+        "detections": [
+          {
+            "class": "chair",
+            "score": 0.7198811769485474,
+            "box": [
+              0.0,
+              286.9607477921706,
+              149.0859633225661,
+              474.6938786139855
+            ]
+          }
+        ]
+      }
+    ],
+    "tiny-target90": [
+      {
+        "imageId": 463842,
+        "class": "bed",
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "gt": 1,
+        "negativeImageForClass": false,
+        "detections": [
+          {
+            "class": "bed",
+            "score": 0.49515870213508606,
+            "box": [
+              67.79506096473106,
+              63.92076639028696,
+              510.1630841768705,
+              349.26439431997443
+            ]
+          }
+        ]
+      },
+      {
+        "imageId": 34873,
+        "class": "chair",
+        "tp": 0,
+        "fp": 1,
+        "fn": 3,
+        "gt": 3,
+        "negativeImageForClass": false,
+        "detections": [
+          {
+            "class": "chair",
+            "score": 0.7000547051429749,
+            "box": [
+              493.69374201847955,
+              179.29135175851675,
+              604.1622337928185,
+              265.42885927053595
+            ]
+          }
+        ]
+      }
+    ],
+    "s-target85": [
+      {
+        "imageId": 385997,
+        "class": "chair",
+        "tp": 1,
+        "fp": 1,
+        "fn": 0,
+        "gt": 1,
+        "negativeImageForClass": false,
+        "detections": [
+          {
+            "class": "chair",
+            "score": 0.4763331115245819,
+            "box": [
+              270.7307987213135,
+              277.9622163772583,
+              461.1462650299072,
+              448.5992097854614
+            ]
+          }
+        ]
+      },
+      {
+        "imageId": 368900,
+        "class": "chair",
+        "tp": 1,
+        "fp": 1,
+        "fn": 0,
+        "gt": 1,
+        "negativeImageForClass": false,
+        "detections": [
+          {
+            "class": "chair",
+            "score": 0.7550117373466492,
+            "box": [
+              455.4330244064331,
+              358.2190990447998,
+              626.1724653244019,
+              479.85217094421387
+            ]
+          }
+        ]
+      },
+      {
+        "imageId": 194875,
+        "class": "person",
+        "tp": 9,
+        "fp": 1,
+        "fn": 2,
+        "gt": 11,
+        "negativeImageForClass": false,
+        "detections": [
+          {
+            "class": "person",
+            "score": 0.6244490742683411,
+            "box": [
+              383.9328508377075,
+              241.11731958389282,
+              465.5475740432739,
+              303.26234674453735
+            ]
+          }
+        ]
+      },
+      {
+        "imageId": 78915,
+        "class": "chair",
+        "tp": 0,
+        "fp": 8,
+        "fn": 0,
+        "gt": 0,
+        "negativeImageForClass": true,
+        "detections": [
+          {
+            "class": "chair",
+            "score": 0.8361287117004395,
+            "box": [
+              0.2730989456176758,
+              20.82641339302063,
+              44.25808811187744,
+              45.01603627204895
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.8279048800468445,
+            "box": [
+              45.49855136871338,
+              27.533695220947266,
+              91.06726551055908,
+              51.21415138244629
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.7874564528465271,
+            "box": [
+              139.66040349006653,
+              37.46046686172485,
+              185.71999287605286,
+              62.62916803359985
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.7717823386192322,
+            "box": [
+              186.22937870025635,
+              44.65270662307739,
+              232.40934085845947,
+              67.08822870254517
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.7707094550132751,
+            "box": [
+              405.83593463897705,
+              19.44534158706665,
+              455.83499240875244,
+              55.543264865875244
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.7468907237052917,
+            "box": [
+              91.8945951461792,
+              32.299428939819336,
+              138.7696409225464,
+              57.243595123291016
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.6211869120597839,
+            "box": [
+              265.41060972213745,
+              3.89548921585083,
+              308.16539335250854,
+              41.28026628494263
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.5737716555595398,
+            "box": [
+              232.6216335296631,
+              49.639769554138184,
+              248.91344261169434,
+              68.58078289031982
+            ]
+          }
+        ]
+      },
+      {
+        "imageId": 172877,
+        "class": "chair",
+        "tp": 0,
+        "fp": 2,
+        "fn": 0,
+        "gt": 0,
+        "negativeImageForClass": true,
+        "detections": [
+          {
+            "class": "chair",
+            "score": 0.7987589836120605,
+            "box": [
+              0.0,
+              285.6000461578369,
+              147.66846084594727,
+              478.93584632873535
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.6747409105300903,
+            "box": [
+              420.847900390625,
+              298.02371406555176,
+              561.9451751708984,
+              472.89891242980957
+            ]
+          }
+        ]
+      }
+    ],
+    "s-target90": [
+      {
+        "imageId": 368900,
+        "class": "chair",
+        "tp": 1,
+        "fp": 1,
+        "fn": 0,
+        "gt": 1,
+        "negativeImageForClass": false,
+        "detections": [
+          {
+            "class": "chair",
+            "score": 0.7550117373466492,
+            "box": [
+              455.4330244064331,
+              358.2190990447998,
+              626.1724653244019,
+              479.85217094421387
+            ]
+          }
+        ]
+      },
+      {
+        "imageId": 194875,
+        "class": "person",
+        "tp": 9,
+        "fp": 1,
+        "fn": 2,
+        "gt": 11,
+        "negativeImageForClass": false,
+        "detections": [
+          {
+            "class": "person",
+            "score": 0.6244490742683411,
+            "box": [
+              383.9328508377075,
+              241.11731958389282,
+              465.5475740432739,
+              303.26234674453735
+            ]
+          }
+        ]
+      },
+      {
+        "imageId": 78915,
+        "class": "chair",
+        "tp": 0,
+        "fp": 8,
+        "fn": 0,
+        "gt": 0,
+        "negativeImageForClass": true,
+        "detections": [
+          {
+            "class": "chair",
+            "score": 0.8361287117004395,
+            "box": [
+              0.2730989456176758,
+              20.82641339302063,
+              44.25808811187744,
+              45.01603627204895
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.8279048800468445,
+            "box": [
+              45.49855136871338,
+              27.533695220947266,
+              91.06726551055908,
+              51.21415138244629
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.7874564528465271,
+            "box": [
+              139.66040349006653,
+              37.46046686172485,
+              185.71999287605286,
+              62.62916803359985
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.7717823386192322,
+            "box": [
+              186.22937870025635,
+              44.65270662307739,
+              232.40934085845947,
+              67.08822870254517
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.7707094550132751,
+            "box": [
+              405.83593463897705,
+              19.44534158706665,
+              455.83499240875244,
+              55.543264865875244
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.7468907237052917,
+            "box": [
+              91.8945951461792,
+              32.299428939819336,
+              138.7696409225464,
+              57.243595123291016
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.6211869120597839,
+            "box": [
+              265.41060972213745,
+              3.89548921585083,
+              308.16539335250854,
+              41.28026628494263
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.5737716555595398,
+            "box": [
+              232.6216335296631,
+              49.639769554138184,
+              248.91344261169434,
+              68.58078289031982
+            ]
+          }
+        ]
+      },
+      {
+        "imageId": 172877,
+        "class": "chair",
+        "tp": 0,
+        "fp": 2,
+        "fn": 0,
+        "gt": 0,
+        "negativeImageForClass": true,
+        "detections": [
+          {
+            "class": "chair",
+            "score": 0.7987589836120605,
+            "box": [
+              0.0,
+              285.6000461578369,
+              147.66846084594727,
+              478.93584632873535
+            ]
+          },
+          {
+            "class": "chair",
+            "score": 0.6747409105300903,
+            "box": [
+              420.847900390625,
+              298.02371406555176,
+              561.9451751708984,
+              472.89891242980957
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "conclusion": "No single candidate improved all three target classes. S improved person recall and observed precision but reduced chair precision and bed recall. Tiny's high chair threshold reduced chair recall. No blanket detector replacement is established.",
+  "limitations": [
+    "30 stratified public COCO validation images; prevalence not representative.",
+    "COCO val2017 is known model-development validation data; not independent Brazilian camera performance.",
+    "Policy names refer to development targets, never confirmation guarantees.",
+    "No threshold adjustment permitted after confirmation; no private photograph used.",
+    "Timing exploratory single-pass shared CPU, not controlled latency comparison.",
+    "Only public annotations define truth; visually plausible unannotated objects still count as false positives. No relabeling after results.",
+    "Class thresholds are raw detector scores, not calibrated probabilities.",
+    "Image downloads used official COCO HTTP URLs because HTTPS connection failed; byte hashes record local reproducibility but do not provide authenticated upstream integrity.",
+    "No user photograph, camera video, audible voice, accessibility assessment, endurance, mobile, or controlled browser performance trial included."
+  ]
+}

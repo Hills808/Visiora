@@ -1,0 +1,110 @@
+## Visão local mais rápida no PC testado (23/10/2026)
+
+O modo **Modelos locais** agora usa GPU/WebGPU para objetos quando funciona no navegador e retorna à CPU se não conseguir iniciar. Os mesmos YOLOX Nano/Tiny/S e a mesma regra de pessoas permanecem. No teste com imagem pública e câmera simulada, a análise de objetos levou 64–124 ms na RTX 3060 e 1334–1665 ms na CPU; o reconhecimento de ambiente ainda levou cerca de 1,6 s. O status e o diagnóstico indicam GPU ou CPU. RF-DETR e D-FINE foram comparados, mas produziram mais detecções de cadeira sem anotação correspondente e não entraram no aplicativo. O modo Luna continua usando capturas próprias, sem detector local híbrido ativo. [Medições, modelos e limites](docs/EVIDENCIAS/H2-PERCEPCAO-LOCAL-2026-10-23.md). Para usar o build local, recarregue duas vezes após `npm run build` e `npm run dev:luna`; o cache offline troca de revisão. Não houve chamada paga nem publicação nesta mudança.
+
+## Correção da expiração da fala Luna (22/10/2026)
+
+No reteste com webcam, o acompanhamento ainda pausou quando a descrição Luna ultrapassou dez segundos antes de terminar a fala. Agora uma fala iniciada dentro da validade pode terminar se a vista continuar válida; se não começar, há no máximo uma nova captura após 15 s, sujeita ao mesmo consentimento e orçamento. O build também troca a versão do cache offline quando o código muda. O usuário confirmou funcionamento em nova sessão: 4 respostas aceitas, 3 entregas, nenhum erro; ainda sem medição independente de precisão, áudio ou latência. [Evidência e limites](docs/EVIDENCIAS/LUNA-FALA-EXPIRADA-RETESTE-2026-10-22.md). Para carregar o build novo no navegador que já tinha o app aberto, recarregue duas vezes; o primeiro recarregamento instala o novo cache, o segundo abre os arquivos atuais. A versão publicada não mudou.
+
+## Memória e comunicação revisadas (19/10/2026)
+
+ADR-026 implementa novidades visíveis antes de ausências, atualizações até 25 palavras e menos repetição por pequenas oscilações de posição/certeza/lugar. Ausência não recebe direção antiga; uma captura que perdeu sua vista não recupera posições por pixels parecidos. Texto/voz só entram no histórico após entrega válida. Memória linguística não é tracking nem um mapa atual; o modelo/API e US$ 2/dia continuam iguais.
+
+[Evidências](docs/EVIDENCIAS/MEMORIA-COMUNICACAO.md): 150 testes e 34 cenários de navegador com fontes artificiais. [Protocolo MC-01](docs/AVALIACAO-MEMORIA-COMUNICACAO.md) e [ficha vazia](docs/FICHA-AVALIACAO-MEMORIA.csv) preparados, com zero sessões/participantes/avaliações profissionais. Próximo nessa frente: executar sessões consentidas com pessoas cegas e O&M disponíveis, registrar falhas e revisar as hipóteses. H2 e demais gates híbridos continuam pendentes. Build local atualizado; recarregue com Ctrl+Shift+R. Sem API paga, segredo/ledger alterado ou publicação nesta revisão.
+
+## Orçamento vigente: US$ 2 por dia (19/10/2026)
+
+ADR-025 corrige o teto acumulado antigo: o limite é US$ 2 em cada dia de America/Sao_Paulo, renovado à meia-noite, sem teto total do piloto. O histórico permanece; reservas incertas são atribuídas pelo horário original e uma chamada pendente continua bloqueando concorrência. VISIORA_TOTAL_USD foi aposentado e é ignorado. Reinicie o gateway para aplicar (Ctrl+C e npm run dev:luna), depois recarregue a página. Não foi alterado o segredo ou ledger real nem executada chamada paga. As menções anteriores a US$ 2 totais/dia UTC são históricas e sucedidas por esta regra.
+
+## Correção atual: início com movimento e fala agrupada (19/10/2026)
+
+O Luna começa a analisar no primeiro quadro recente, sem exigir estabilidade. Movimento menor não interrompe a descrição da captura; uma mudança ampla retira posições antigas e permite apenas contexto histórico até a próxima análise. Se essa descrição expirar antes da fala após a mudança ampla, o acompanhamento aguarda uma captura nova na cadência existente, sem usar a posição antiga. Itens no mesmo setor compartilham a direção: “À sua frente, há uma janela, uma pessoa e uma cama.” Silêncio sem novidade e orçamento preservados. Ainda são capturas espaçadas, com mínimo de 4,5 s entre envios, não visão contínua em tempo real.
+
+Build local atualizado. Para aplicar, recarregue o piloto com **Ctrl+Shift+R**; se o servidor estiver parado, na pasta `visiora` execute `npm run dev:luna`. Autorize a câmera/envio e inicie. [Guia atual](docs/ACOMPANHAMENTO-AUTOMATICO.md) · [Evidências](docs/EVIDENCIAS/LUNA-MOVIMENTO-FALA.md): 131 testes e 32 cenários de navegador. Sem API paga nos testes ou publicação. Não testados caminhada física, precisão em movimento, áudio/leitores reais, pessoas cegas e outras máquinas. ADR-024 sucede as exigências antigas de estabilidade no modo Luna. Os blocos abaixo são históricos.
+
+## Implementado localmente: primeira etapa da captura compartilhada (18/10/2026)
+
+H1 está implementada: uma câmera no modo Luna alimenta capturas e consumidores locais independentes, com identidade/idade e cancelamento. O consumidor novo foi testado com worker simulado; **o detector local real ainda não foi ativado no Luna**. Próxima fatia: benchmark H2 antes de escolher modelo e liberar fala local. H0 técnico passou; entrevistas e medições físicas seguem pendentes. [Resultados e limites](docs/EVIDENCIAS/H1-CAPTURA-COMPARTILHADA.md): 127 testes, 34 cenários no navegador, tipos/lint e seis transcrições iguais. Nenhuma chamada paga ou publicação.
+
+Build local atualizado. Para reproduzir: `npm test`, `npm run typecheck`, `npm run lint`, `node tools/simulate.mjs` e `node tests/e2e/hybrid-capture.mjs`. O último inicia e encerra seu próprio gateway fake em loopback, SQLite em memória e Chrome com vídeo/voz artificiais; não lê `.env` nem usa chave. Requer Chrome (ou `CHROME_PATH`) e o vídeo público de QA já descrito abaixo. As seções seguintes preservam o histórico.
+
+## Próxima evolução planejada: percepção contínua e portabilidade
+
+O próximo incremento está documentado em [PLANO-PERCEPCAO-CONTINUA.md](docs/PLANO-PERCEPCAO-CONTINUA.md): câmera compartilhada, acompanhamento local independente do Luna, memória com fonte/validade, perfis conforme capacidade da máquina e futuro orçamento único entre computadores. Começar por H0/H1; escolher modelos após benchmark. **Somente planejamento concluído: não há nova funcionalidade implementada nem chamada paga.** O piloto atual permanece descrito abaixo.
+
+## Continuidade revisada no piloto local (18/10/2026)
+
+O acompanhamento local foi revisado: percebe mudanças localizadas, considera pessoas que deixam de ser identificadas e descreve novamente uma vista amplamente diferente. Uma falha temporária conhecida permite uma nova captura após 15 s; duas falhas consecutivas pausam. Intervalo mínimo de 4,5 s, uma análise por vez, silêncio sem mudança e orçamento original preservado. Não foi testado reconhecimento real desta revisão. Para aplicar: na pasta `visiora`, pare o servidor com Ctrl+C, rode `npm run build`, depois `npm run dev:luna`, e recarregue `http://127.0.0.1:8080` com Ctrl+Shift+R. Autorize novamente o envio automático. [Guia](docs/ACOMPANHAMENTO-AUTOMATICO.md) · [Evidências e limites](docs/EVIDENCIAS/LUNA-CONTINUIDADE.md). Publicado permanece 0.3. Os blocos abaixo sobre a primeira versão automática são históricos.
+
+## Fluxo atual do piloto Luna: automático
+
+O Luna analisa a primeira imagem estável ao ativar e acompanha mudanças sem exigir perguntas. Envia no máximo uma captura por vez, com intervalo mínimo de 12 s, e fala novidades após validação. Ausência de mudança relevante não gera envios periódicos. Exige novo consentimento explícito para automático e preserva orçamento/registro de modelo. Erro pausa, sem retry pago. Voz local indisponível impede consultas automáticas no modo voz. Portas e aberturas são referências visíveis, sem garantia de saída. Guia: [ACOMPANHAMENTO-AUTOMATICO.md](docs/ACOMPANHAMENTO-AUTOMATICO.md). Evidência e limites: [LUNA-AUTOMATICO.md](docs/EVIDENCIAS/LUNA-AUTOMATICO.md). Mudança local experimental, não publicada; seções antigas sobre Luna somente sob demanda são históricas.
+
+# Visiora 0.3.0
+
+Protótipo em avaliação de ambientação por voz em pt-BR. Objetos vêm do YOLOX-Nano; pessoas precisam de acordo entre dois dos três detectores Nano/Tiny/S. SigLIP2 e Places365 comparam a mesma imagem inteira para reconhecer o ambiente. Tudo roda localmente, sem API paga. O cérebro escolhe quando falar e mantém silêncio entre mudanças. Não garante segurança e não substitui bengala nem cão-guia.
+
+Não há regra que deduza o lugar pelos objetos detectados. O consenso tem **34 tipos de lugar com nomes compatíveis** entre os catálogos aprendidos; isso continua limitado e não é análise aberta de qualquer lugar. Sem concordância suficiente, responde que não sabe. Há erros mesmo entre respostas aceitas. A tela mostra há quanto tempo a última descrição foi produzida; falas na fila são reavaliadas antes de começar.
+
+## Experimentar
+
+Inicie a ambientação e autorize a câmera. O primeiro acesso baixa cerca de **168 MB de modelos**, além do aplicativo/runtime. Mantenha o aparelho estável e acompanhe o cartão **Reconhecer o ambiente**. Use **Ouvir sobre este lugar** para consultar. Falha dos modelos de ambiente permite nova tentativa e mantém a identificação de objetos. Falha dos verificadores de pessoas interrompe a câmera com aviso; não há troca silenciosa de política.
+
+Para usar localmente, baixe o pacote pela Ajuda ou extraia `artifacts/visiora-local.zip`, abra `iniciar.cmd` com Node.js 24+ instalado e visite http://127.0.0.1:8080. Veja LEIA-ME-LOCAL.txt. A demonstração não usa reconhecimento real. Em Ajustes, teste uma voz local pt-BR ou escolha leitor de tela; sem voz local, há texto com aviso.
+
+A câmera não mede distância nem mantém mapa 360°. Passos e giros da demonstração são simulados. Não há microfone, OCR, reconhecimento facial, análise generativa ou navegação. Histórico começa desligado e só guarda descrições neste navegador quando você permite.
+
+## Desenvolver
+
+Node.js 24+, npm e Python 3.11+ (stdlib para criar ZIP). Nesta pasta:
+
+```powershell
+npm install
+npm test
+npm run typecheck
+npm run lint
+npm run simulate
+npm run dev
+```
+
+`dev` serve `dist` em loopback; após editar, rode `npm run build`. `node tools/test.mjs` executa build e testes. O build gera o pacote local em `artifacts`, fora dos arquivos individuais publicados. O navegador também monta esse ZIP com fflate, incluindo somente arquivos estáticos e instruções.
+
+Sem serviço Python obrigatório, API paga ou inferência na nuvem. Modelos, hashes, revisões e licenças estão em `public/models` e `public/licenses`. Pesos maiores são divididos em partes de até 20 MB, reconstruídos e verificados antes de rodar. O modelo textual SigLIP2 só preparou os vetores offline e não é distribuído. Places365 tem pesos CC BY sem versão indicada pelos autores, com atribuição incluída; seu código tem MIT. Cache offline tem botão explícito e ainda não foi verificado com rede desligada.
+
+## Verificações e pesquisa
+
+Veja `docs/EVIDENCIAS/RECONHECIMENTO-0.3.0.md`, `docs/DECISOES.md` (ADR-014/015) e `docs/LIMITES.md`. Em 40 imagens novas, ambientes passaram de 14 acertos/1 erro/25 dúvidas para **16/1/23**, contando famílias equivalentes nos dois métodos. Ganho pequeno, com nove acertos novos e sete acertos anteriores omitidos. Em outras 30 imagens novas, pessoas passaram de 24 acertos/6 falsos/32 omissões para **29/5/27**. Cadeiras permaneceram em **6 acertos, 1 falso e 49 omissões**: este problema não foi resolvido. Não é avaliação brasileira nem validação com pessoas cegas/baixa visão.
+
+QA com Chrome instalado no caminho Windows padrão ou `CHROME_PATH`:
+
+```powershell
+node tests/e2e/smoke.mjs http://127.0.0.1:8080 --fixtures
+node tests/e2e/scenes.mjs http://127.0.0.1:8080 --fixtures
+node tests/e2e/people.mjs
+```
+
+`--fixtures` substitui HTTP por arquivos locais; não testa servidor, rede nem service worker. `people.mjs` sempre usa esse transporte. Pesos WASM são reais; câmera e voz são simuladas. Insumos de QA não entram no produto. O teste de objetos usa [dog.jpg do YOLOX](https://raw.githubusercontent.com/Megvii-BaseDetection/YOLOX/main/assets/dog.jpg), convertido em `artifacts/vision/dog.y4m`, e axe-core 4.14.0 em `artifacts/packages/axe.min.js`. O teste de lugar usa uma imagem positiva selecionada em `artifacts/scene/browser.y4m`. O de pessoas usa a foto pública COCO val2017 23899 convertida em `artifacts/recognition-upgrade/people.y4m`. São testes de integração, não de precisão.
+
+Reprodução dos benchmarks requer downloads e dependências opcionais descritos na evidência. Scripts, protocolos congelados, todas as previsões e fontes sem fotografias foram preservados em `docs/EVIDENCIAS/0.3.0/`. `tools/prepare_recognition_models.mjs` verifica e divide os três pesos adicionais já obtidos; não baixa nem treina modelos. Nenhum script de pesquisa roda no aplicativo. Não houve instalação limpa nem CI; lockfile completo ainda pendente.
+
+## Documentos e publicação
+
+O plano completo continua sendo a referência do produto. Decisões de escopo estão nos ADRs; mudanças de fala exigem verificar testes e transcrições. Evidências anteriores são históricas.
+
+Site privado com identidade preservada em `.openai/hosting.json`. Para publicar alterações, use o fluxo oficial do Sites com a mesma identidade. O pacote local independe da hospedagem.
+
+## Próxima etapa planejada: Luna 6
+
+Arquitetura e tarefas estão em [PLANO-MIGRACAO-LUNA-6.md](docs/PLANO-MIGRACAO-LUNA-6.md). Para continuar, leia [RETOMADA-LUNA-6.md](docs/RETOMADA-LUNA-6.md). Documentação somente: a versão publicada continua 0.3; nenhuma integração Luna ou chamada paga foi realizada nesta etapa.
+
+
+## Integração Luna local implementada (ainda não publicada)
+
+Leia [CONFIGURAR-LUNA.md](docs/CONFIGURAR-LUNA.md). Luna é a opção principal no novo seletor, com consultas sob demanda, snapshots com idade e nomes abertos. Chave somente no servidor; API começa desligada e orçamento zero. Para experimentar sem cobrança, faça build e rode `npm run dev:luna` com `VISIORA_PROVIDER=fake`. A resposta fake padrão é artificial e vazia. O pacote offline continua oferecendo somente os modelos locais. Testes e limites em [LUNA-INTEGRACAO-LOCAL.md](docs/EVIDENCIAS/LUNA-INTEGRACAO-LOCAL.md). Nenhuma chamada real ou ganho de qualidade medido.
+## Ferramenta separada: orquestrador de IA
+
+O protótipo de orquestração para tarefas de desenvolvimento fica em [ORQUESTRADOR-IA.md](docs/ORQUESTRADOR-IA.md). `node tools/ai-orchestrator/cli.mjs preview "pedido"` funciona sem rede; `run` requer chave, orçamento próprio e `--allow-paid-api` e pode cobrar API. Ele produz plano e resultados textuais, sem alterar o Visiora ou outros projetos.
+
+## Conferir o modelo devolvido pela API
+
+No piloto local Luna, reinicie o gateway após atualizar o código. A próxima resposta registra `visiora_model_response` no terminal e metadados em SQLite. Use `npm run luna:models` em outro terminal para consultar o modelo solicitado, o informado e a conferência (`verified`, `mismatch`, `missing`, `invalid`). Apenas `gpt-6-luna` exato é aceito. Modelo ausente ou diferente bloqueia análise/voz e preserva a reserva, sem repetir chamada. Registros antigos não são confirmados retroativamente. Isso confirma o campo da API, não a precisão do reconhecimento. [Evidência e limites](docs/EVIDENCIAS/LUNA-MODELO-RESPOSTA.md).

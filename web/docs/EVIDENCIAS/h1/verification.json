@@ -1,0 +1,9 @@
+{
+  "mirroredDocs": 7,
+  "checkedLinks": 41,
+  "qaFixturesExcludedFromBuild": true,
+  "unitTests": 127,
+  "browserScenarios": 34,
+  "paidApiCalls": 0,
+  "physicalRecognitionTested": false
+}

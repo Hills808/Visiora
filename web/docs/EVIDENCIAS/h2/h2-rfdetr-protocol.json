@@ -1,0 +1,24 @@
+{
+  "id": "h2-rfdetr-nano-uint8-v1",
+  "model": {
+    "repository": "onnx-community/rfdetr_nano-ONNX",
+    "revision": "eae21cee0687a91bcf9fa071605c48d7705d2d91",
+    "file": "onnx/model_uint8.onnx",
+    "sha256": "2981aa0a57781c0f1a5be171c3fded504c38fe8611326bc5e3d0f8a2e9a57085",
+    "bytes": 28826010,
+    "license": "Apache-2.0 per model card; verify source checkpoint before adoption"
+  },
+  "data": {
+    "development": "artifacts/detector-upgrade/protocol.json (60 public COCO val2017 images)",
+    "developmentSha256": "d8699b76d8062db130694d115ad182efe4a5589510f8dc33208338f4e7d28521",
+    "confirmation": "artifacts/detector-upgrade/confirmation-protocol.json (30 disjoint public COCO val2017 images)",
+    "confirmationSha256": "498b1bd28feb4c97432bf3be06958dc136b3fc9ec32ec50da46a5aaf7476e87b"
+  },
+  "preprocess": "RTDetrImageProcessor from pinned model card: RGB full-image resize 384x384 bilinear, rescale 1/255, no normalize/pad",
+  "postprocess": "Official sigmoid top300 query-class pairs; keep highest class per query to avoid contradictory labels; sparse COCO IDs; no NMS; mapped Visiora classes only; global cap30 before scoring",
+  "thresholds": [0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95],
+  "selection": "Per target class on development only: among thresholds with at least five accepted predictions and precision >= 90%, choose maximum recall, then precision, then lower threshold; otherwise report no eligible threshold. Freeze before confirmation.",
+  "baseline": "Same existing YOLOX Nano 0.50 outputs and matching rules; report person/chair/bed TP/FP/FN, precision, recall",
+  "gate": "Do not replace product unless selected policy improves coverage without materially increasing false references for person/chair/bed on confirmation, and browser timing and license pass separately.",
+  "limits": "COCO val2017 is known model validation data, not independent Brazilian webcam quality or temporal speech evaluation; no user images or paid calls."
+}

@@ -1,0 +1,128 @@
+{
+  "type": "object",
+  "properties": {
+    "scene": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string",
+              "maxLength": 60
+            },
+            "support": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 24
+              },
+              "maxItems": 12
+            }
+          },
+          "required": ["label", "support"],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 24
+          },
+          "kind": {
+            "type": "string",
+            "enum": ["person", "object", "text"]
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 60
+          },
+          "uncertain": {
+            "type": "boolean"
+          },
+          "box": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "width": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "height": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                "required": ["x", "y", "width", "height"],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "article": {
+            "type": "string",
+            "enum": ["um", "uma"]
+          }
+        },
+        "required": ["id", "kind", "label", "uncertain", "box", "article"],
+        "additionalProperties": false
+      },
+      "maxItems": 12
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "subject": {
+            "type": "string",
+            "maxLength": 24
+          },
+          "object": {
+            "type": "string",
+            "maxLength": 24
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 100
+          }
+        },
+        "required": ["subject", "object", "description"],
+        "additionalProperties": false
+      },
+      "maxItems": 12
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "maxItems": 6
+    }
+  },
+  "required": ["scene", "observations", "relations", "limitations"],
+  "additionalProperties": false
+}

@@ -1,0 +1,311 @@
+{
+  "purpose": "Additional development-only comparison requested after primary selection and confirmation inference had already been launched; confirmation results not read by this script. Does not modify selection or primary confirmation policy.",
+  "createdUtc": "2026-10-18T02:12:46Z",
+  "primarySelectionSHA256": "4f71c33338a1ad4fb8674e156c4967b840bc728e8fc8a4cecef915f24e250bc2",
+  "developmentResultsSHA256": "0fa7643e286238ea91727b0735c0ab46143c7b5a1c0481d474ac484e2ee327f4",
+  "nanoBaselineScore0.50": {
+    "person": {
+      "tp": 58,
+      "fp": 2,
+      "fn": 44,
+      "gt": 102,
+      "precision": 0.9666666666666667,
+      "recall": 0.5686274509803921,
+      "ignoredCrowd": 3,
+      "predictions": 60,
+      "negativeImages": 36,
+      "negativeImagesWithFalseDetection": 0,
+      "threshold": 0.5
+    },
+    "chair": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 69,
+      "gt": 77,
+      "precision": 1.0,
+      "recall": 0.1038961038961039,
+      "ignoredCrowd": 0,
+      "predictions": 8,
+      "negativeImages": 33,
+      "negativeImagesWithFalseDetection": 0,
+      "threshold": 0.5
+    },
+    "bed": {
+      "tp": 7,
+      "fp": 1,
+      "fn": 6,
+      "gt": 13,
+      "precision": 0.875,
+      "recall": 0.5384615384615384,
+      "ignoredCrowd": 0,
+      "predictions": 8,
+      "negativeImages": 47,
+      "negativeImagesWithFalseDetection": 0,
+      "threshold": 0.5
+    }
+  },
+  "rules": {
+    "target95": "Precision>=.95 and TP+FP>=5; maximize recall then precision then lower threshold; same frozen .45-.90 grade.",
+    "atMostNanoFalsePositives": "FP count<=Nano .50 FP count on same60dev and TP+FP>=5; maximize recall then precision then lower threshold. Absolute FP budget is not same as precision and may still lower precision.",
+    "atLeastNanoPrecision": "Precision>=Nano .50 precision on same60dev and TP+FP>=5; maximize recall then precision then lower threshold."
+  },
+  "variants": {
+    "f32": {
+      "target95": {
+        "person": {
+          "tp": 72,
+          "fp": 2,
+          "fn": 30,
+          "gt": 102,
+          "precision": 0.972972972972973,
+          "recall": 0.7058823529411765,
+          "ignoredCrowd": 2,
+          "predictions": 74,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.65
+        },
+        "chair": {
+          "tp": 21,
+          "fp": 1,
+          "fn": 56,
+          "gt": 77,
+          "precision": 0.9545454545454546,
+          "recall": 0.2727272727272727,
+          "ignoredCrowd": 2,
+          "predictions": 22,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.8
+        },
+        "bed": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 8,
+          "gt": 13,
+          "precision": 1.0,
+          "recall": 0.38461538461538464,
+          "ignoredCrowd": 0,
+          "predictions": 5,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.9
+        }
+      },
+      "atMostNanoFalsePositives": {
+        "person": {
+          "tp": 72,
+          "fp": 2,
+          "fn": 30,
+          "gt": 102,
+          "precision": 0.972972972972973,
+          "recall": 0.7058823529411765,
+          "ignoredCrowd": 2,
+          "predictions": 74,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.65
+        },
+        "chair": {
+          "tp": 7,
+          "fp": 0,
+          "fn": 70,
+          "gt": 77,
+          "precision": 1.0,
+          "recall": 0.09090909090909091,
+          "ignoredCrowd": 0,
+          "predictions": 7,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.9
+        },
+        "bed": {
+          "tp": 8,
+          "fp": 1,
+          "fn": 5,
+          "gt": 13,
+          "precision": 0.8888888888888888,
+          "recall": 0.6153846153846154,
+          "ignoredCrowd": 0,
+          "predictions": 9,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.75
+        }
+      },
+      "atLeastNanoPrecision": {
+        "person": {
+          "tp": 72,
+          "fp": 2,
+          "fn": 30,
+          "gt": 102,
+          "precision": 0.972972972972973,
+          "recall": 0.7058823529411765,
+          "ignoredCrowd": 2,
+          "predictions": 74,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.65
+        },
+        "chair": {
+          "tp": 7,
+          "fp": 0,
+          "fn": 70,
+          "gt": 77,
+          "precision": 1.0,
+          "recall": 0.09090909090909091,
+          "ignoredCrowd": 0,
+          "predictions": 7,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.9
+        },
+        "bed": {
+          "tp": 8,
+          "fp": 1,
+          "fn": 5,
+          "gt": 13,
+          "precision": 0.8888888888888888,
+          "recall": 0.6153846153846154,
+          "ignoredCrowd": 0,
+          "predictions": 9,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.75
+        }
+      }
+    },
+    "uint8": {
+      "target95": {
+        "person": {
+          "tp": 72,
+          "fp": 3,
+          "fn": 30,
+          "gt": 102,
+          "precision": 0.96,
+          "recall": 0.7058823529411765,
+          "ignoredCrowd": 1,
+          "predictions": 75,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.65
+        },
+        "chair": {
+          "tp": 9,
+          "fp": 0,
+          "fn": 68,
+          "gt": 77,
+          "precision": 1.0,
+          "recall": 0.11688311688311688,
+          "ignoredCrowd": 0,
+          "predictions": 9,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.9
+        },
+        "bed": {
+          "tp": 7,
+          "fp": 0,
+          "fn": 6,
+          "gt": 13,
+          "precision": 1.0,
+          "recall": 0.5384615384615384,
+          "ignoredCrowd": 0,
+          "predictions": 7,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.8
+        }
+      },
+      "atMostNanoFalsePositives": {
+        "person": {
+          "tp": 63,
+          "fp": 0,
+          "fn": 39,
+          "gt": 102,
+          "precision": 1.0,
+          "recall": 0.6176470588235294,
+          "ignoredCrowd": 0,
+          "predictions": 63,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.7
+        },
+        "chair": {
+          "tp": 9,
+          "fp": 0,
+          "fn": 68,
+          "gt": 77,
+          "precision": 1.0,
+          "recall": 0.11688311688311688,
+          "ignoredCrowd": 0,
+          "predictions": 9,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.9
+        },
+        "bed": {
+          "tp": 7,
+          "fp": 0,
+          "fn": 6,
+          "gt": 13,
+          "precision": 1.0,
+          "recall": 0.5384615384615384,
+          "ignoredCrowd": 0,
+          "predictions": 7,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.8
+        }
+      },
+      "atLeastNanoPrecision": {
+        "person": {
+          "tp": 63,
+          "fp": 0,
+          "fn": 39,
+          "gt": 102,
+          "precision": 1.0,
+          "recall": 0.6176470588235294,
+          "ignoredCrowd": 0,
+          "predictions": 63,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.7
+        },
+        "chair": {
+          "tp": 9,
+          "fp": 0,
+          "fn": 68,
+          "gt": 77,
+          "precision": 1.0,
+          "recall": 0.11688311688311688,
+          "ignoredCrowd": 0,
+          "predictions": 9,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.9
+        },
+        "bed": {
+          "tp": 7,
+          "fp": 0,
+          "fn": 6,
+          "gt": 13,
+          "precision": 1.0,
+          "recall": 0.5384615384615384,
+          "ignoredCrowd": 0,
+          "predictions": 7,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.8
+        }
+      }
+    }
+  },
+  "confirmationUsedForSelection": false,
+  "limitations": [
+    "Supplemental request arrived after primary selection and confirmation inference launch, so not part of original pre-inference protocol.",
+    "Development only: not confirmation or generalization evidence.",
+    "No thresholds outside original grade and no new models.",
+    "Primary selection and confirmation remain unchanged."
+  ]
+}

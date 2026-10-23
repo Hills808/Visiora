@@ -1,0 +1,18 @@
+{
+  "scope": "Real loopback HTTP and browser camera capture; synthetic video, provider evidence and voice. No OpenAI call.",
+  "cases": [
+    "Default principal, no automatic calls, camera to real multipart HTTP to open-label snapshot and voice without ONNX",
+    "Repeat uses completed local memory without another provider call",
+    "Find open item, fixed camera direction, no fabricated distance",
+    "390px layout has no horizontal overflow",
+    "Stopping during upstream analysis stops camera and rejects late speech",
+    "Canceling startup during gateway configuration does not open the camera"
+  ],
+  "calls": 3,
+  "errors": [],
+  "transcript": [
+    "Simulação de análise. Na imagem capturada há 1 segundo: O ambiente parece laboratório de cerâmica. À sua frente, à esquerda, há um torno de cerâmica.",
+    "Simulação de análise. Na imagem capturada há 1 segundo: O ambiente parece laboratório de cerâmica. À sua frente, à esquerda, há um torno de cerâmica.",
+    "Simulação de análise. Na imagem capturada há 1 segundo: À sua frente, à esquerda, há um torno de cerâmica."
+  ]
+}

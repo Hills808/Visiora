@@ -1,0 +1,26 @@
+{
+  "id": "yolox-tiny",
+  "bytes": 20219662,
+  "sha256": "427cc366d34e27ff7a03e2899b5e3671425c262ea2291f88bb942bc1cc70b0f7",
+  "license": "Apache-2.0",
+  "source": "https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_tiny.onnx",
+  "input": [
+    1,
+    3,
+    416,
+    416
+  ],
+  "release": "0.1.1rc0",
+  "chunks": [
+    {
+      "path": "part-1.bin",
+      "bytes": 20000000,
+      "sha256": "47d189b2c31d091364c612a5a89781ba8ceb565657bca3220d27c026c319040d"
+    },
+    {
+      "path": "part-2.bin",
+      "bytes": 219662,
+      "sha256": "12eec7645d023eea0519e138701e4cb995e462cb2aafa998c1689e68676943fb"
+    }
+  ]
+}

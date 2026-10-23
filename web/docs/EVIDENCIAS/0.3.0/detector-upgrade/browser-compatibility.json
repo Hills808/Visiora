@@ -1,0 +1,62 @@
+{
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+  "runtime": "onnxruntime-web bundled 1.30.0",
+  "provider": "wasm",
+  "threads": 1,
+  "transport": "same-origin static fixture; SW blocked",
+  "input": "COCO val2017 image415741 public photo",
+  "timingCaveat": "one cold inference per model, CPU shared; exploratory only, not controlled performance benchmark",
+  "results": [
+    {
+      "name": "nano",
+      "loadMsExploratory": 1124,
+      "inferenceMsExploratory": 205.80000000074506,
+      "input": [
+        1,
+        3,
+        416,
+        416
+      ],
+      "output": [
+        1,
+        3549,
+        85
+      ],
+      "finite": true
+    },
+    {
+      "name": "tiny",
+      "loadMsExploratory": 776.8000000007451,
+      "inferenceMsExploratory": 510.8999999985099,
+      "input": [
+        1,
+        3,
+        416,
+        416
+      ],
+      "output": [
+        1,
+        3549,
+        85
+      ],
+      "finite": true
+    },
+    {
+      "name": "s",
+      "loadMsExploratory": 1233.8999999985099,
+      "inferenceMsExploratory": 1988.5999999977648,
+      "input": [
+        1,
+        3,
+        640,
+        640
+      ],
+      "output": [
+        1,
+        8400,
+        85
+      ],
+      "finite": true
+    }
+  ]
+}

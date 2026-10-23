@@ -1,0 +1,10 @@
+{
+  "publicImages": 30,
+  "channelsPerImage": 2,
+  "detectionsChecked": 166,
+  "tolerance": 1e-9,
+  "maxAbsDifference": 0,
+  "passed": true,
+  "failures": [],
+  "scope": "Artifact browser composition implementation vs Python using same full-mapped detections; not equivalence of JPEG/canvas/OpenCV or ONNX runtimes"
+}

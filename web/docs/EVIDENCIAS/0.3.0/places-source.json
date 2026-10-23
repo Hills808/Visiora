@@ -1,0 +1,6 @@
+{
+  "repository": "CSAILVision/places365",
+  "revision": "8a953ed56438726dc98bdef3796d042e7f1f171e",
+  "license_url": "https://github.com/CSAILVision/places365/blob/8a953ed56438726dc98bdef3796d042e7f1f171e/README.md",
+  "grant": "The pretrained places-CNN models can be used under the Creative Common License (Attribution CC BY). Please give appropriate credit, such as providing a link to our paper or to the [Places Project Page](http://places2.csail.mit.edu). The copyright of all the images belongs to the image owners."
+}

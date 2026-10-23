@@ -1,0 +1,363 @@
+{
+  "version": "visiora-rtdetr-v2-r18-confirm-v1",
+  "createdBeforeAnyVariantInference": true,
+  "createdUtc": "2026-10-18T02:09:58Z",
+  "development": {
+    "count": 60,
+    "path": "../detector-upgrade/protocol.json",
+    "sha256": "d8699b76d8062db130694d115ad182efe4a5589510f8dc33208338f4e7d28521"
+  },
+  "confirmation": {
+    "count": 30,
+    "path": "../detector-upgrade/confirmation-protocol.json",
+    "sha256": "498b1bd28feb4c97432bf3be06958dc136b3fc9ec32ec50da46a5aaf7476e87b"
+  },
+  "sources": {
+    "onnx": {
+      "_id": "67e70c106887b70da5b760fe",
+      "id": "onnx-community/rtdetr_v2_r18vd-ONNX",
+      "private": false,
+      "pipeline_tag": "object-detection",
+      "library_name": "transformers.js",
+      "tags": [
+        "transformers.js",
+        "onnx",
+        "rt_detr_v2",
+        "object-detection",
+        "base_model:PekingU/rtdetr_v2_r18vd",
+        "base_model:quantized:PekingU/rtdetr_v2_r18vd",
+        "license:apache-2.0",
+        "region:us"
+      ],
+      "downloads": 531,
+      "likes": 0,
+      "modelId": "onnx-community/rtdetr_v2_r18vd-ONNX",
+      "author": "onnx-community",
+      "sha": "936f90b6a476c6da4dfe053fc521af55285976ba",
+      "lastModified": "2025-03-28T21:26:24.000Z",
+      "gated": false,
+      "disabled": false,
+      "model-index": null,
+      "config": {
+        "architectures": [
+          "RtDetrV2ForObjectDetection"
+        ],
+        "model_type": "rt_detr_v2"
+      },
+      "cardData": {
+        "license": "apache-2.0",
+        "base_model": [
+          "PekingU/rtdetr_v2_r18vd"
+        ],
+        "pipeline_tag": "object-detection",
+        "library_name": "transformers.js"
+      },
+      "transformersInfo": {
+        "auto_model": "RtDetrV2ForObjectDetection",
+        "processor": "AutoTokenizer"
+      },
+      "siblings": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+          "size": 1519
+        },
+        {
+          "rfilename": "README.md",
+          "blobId": "39d40ae69a1929237ee5a1f1dcc52f259bb05c74",
+          "size": 818
+        },
+        {
+          "rfilename": "config.json",
+          "blobId": "83184c801c04be51c51e12d906e650be47d085b4",
+          "size": 5731
+        },
+        {
+          "rfilename": "onnx/model.onnx",
+          "blobId": "7dc6666aa426d35110055e6fed82f2556a1c6f46",
+          "size": 81057510,
+          "lfs": {
+            "sha256": "583a236ac21c95a7fd94f284fc21485e42355bfef82c27011ba78fbc09ee87e2",
+            "size": 81057510,
+            "pointerSize": 133
+          }
+        },
+        {
+          "rfilename": "onnx/model_bnb4.onnx",
+          "blobId": "e96d0be8ab953e5aedcde344d888557ddb37f021",
+          "size": 65360344,
+          "lfs": {
+            "sha256": "f8e15ce149afb975a61d6db0bd8736306ba62d1e0b5cc15a0ccb35406db4e848",
+            "size": 65360344,
+            "pointerSize": 133
+          }
+        },
+        {
+          "rfilename": "onnx/model_fp16.onnx",
+          "blobId": "45916ffc66c2d5470e576209c6e547dd5f96e1ae",
+          "size": 40750249,
+          "lfs": {
+            "sha256": "2922e7137689ac648cd99f0aa33b885d681fd981302ac5c77ed9a4ee946eaa36",
+            "size": 40750249,
+            "pointerSize": 133
+          }
+        },
+        {
+          "rfilename": "onnx/model_int8.onnx",
+          "blobId": "bae0825dd4e8036d10bd439ba2f5961816e8b845",
+          "size": 20991219,
+          "lfs": {
+            "sha256": "fed736d2593cf2ab099f665eeeb6d315d909783eea830f80a807fc1ac1c1b2ec",
+            "size": 20991219,
+            "pointerSize": 133
+          }
+        },
+        {
+          "rfilename": "onnx/model_q4.onnx",
+          "blobId": "479697d428d99149ae6f9de3981f5e1bd2bd1efa",
+          "size": 65655640,
+          "lfs": {
+            "sha256": "cc5fec8a4af55c28a08a0fb7c8f5882de46475b70bee65abeda65483c2401b63",
+            "size": 65655640,
+            "pointerSize": 133
+          }
+        },
+        {
+          "rfilename": "onnx/model_q4f16.onnx",
+          "blobId": "bfa408a1a622462cd372b2a545c4bae1754d6bf6",
+          "size": 34200081,
+          "lfs": {
+            "sha256": "fc6e61e42cfa1aa040c34ea139726179e602231b65c1694c7a4ac38043caef8b",
+            "size": 34200081,
+            "pointerSize": 133
+          }
+        },
+        {
+          "rfilename": "onnx/model_quantized.onnx",
+          "blobId": "eb353c4682f382d9d34d4b10d022e1da44d734cd",
+          "size": 20991219,
+          "lfs": {
+            "sha256": "4b839c46187b77fc620c770de0be6790637b98afde9b386232b0fcf74382eb3c",
+            "size": 20991219,
+            "pointerSize": 133
+          }
+        },
+        {
+          "rfilename": "onnx/model_uint8.onnx",
+          "blobId": "eb353c4682f382d9d34d4b10d022e1da44d734cd",
+          "size": 20991219,
+          "lfs": {
+            "sha256": "4b839c46187b77fc620c770de0be6790637b98afde9b386232b0fcf74382eb3c",
+            "size": 20991219,
+            "pointerSize": 133
+          }
+        },
+        {
+          "rfilename": "preprocessor_config.json",
+          "blobId": "fcdff16b42e5ebc51d28f59184490c6eff91a88b",
+          "size": 444
+        },
+        {
+          "rfilename": "quantize_config.json",
+          "blobId": "cc312cee238f28e3c023c713ac2b09f90cc03ace",
+          "size": 310
+        }
+      ],
+      "spaces": [],
+      "createdAt": "2025-03-28T20:52:32.000Z",
+      "usedStorage": 329006262
+    },
+    "original": {
+      "_id": "679d0414c968f2ff57bb4339",
+      "id": "PekingU/rtdetr_v2_r18vd",
+      "private": false,
+      "pipeline_tag": "object-detection",
+      "library_name": "transformers",
+      "tags": [
+        "transformers",
+        "safetensors",
+        "rt_detr_v2",
+        "object-detection",
+        "vision",
+        "en",
+        "dataset:coco",
+        "arxiv:2407.17140",
+        "license:apache-2.0",
+        "endpoints_compatible",
+        "deploy:azure",
+        "region:us"
+      ],
+      "downloads": 309337,
+      "likes": 9,
+      "modelId": "PekingU/rtdetr_v2_r18vd",
+      "author": "PekingU",
+      "sha": "5650961749fa93567c0d46fc7f43ea4f9e914107",
+      "lastModified": "2025-02-06T18:21:53.000Z",
+      "gated": false,
+      "disabled": false,
+      "widgetData": [
+        {
+          "src": "https://huggingface.co/datasets/mishig/sample_images/resolve/main/savanna.jpg",
+          "example_title": "Savanna"
+        },
+        {
+          "src": "https://huggingface.co/datasets/mishig/sample_images/resolve/main/football-match.jpg",
+          "example_title": "Football Match"
+        },
+        {
+          "src": "https://huggingface.co/datasets/mishig/sample_images/resolve/main/airport.jpg",
+          "example_title": "Airport"
+        }
+      ],
+      "model-index": null,
+      "config": {
+        "architectures": [
+          "RtDetrV2ForObjectDetection"
+        ],
+        "model_type": "rt_detr_v2"
+      },
+      "cardData": {
+        "library_name": "transformers",
+        "license": "apache-2.0",
+        "language": [
+          "en"
+        ],
+        "pipeline_tag": "object-detection",
+        "tags": [
+          "object-detection",
+          "vision"
+        ],
+        "datasets": [
+          "coco"
+        ],
+        "widget": [
+          {
+            "src": "https://huggingface.co/datasets/mishig/sample_images/resolve/main/savanna.jpg",
+            "example_title": "Savanna"
+          },
+          {
+            "src": "https://huggingface.co/datasets/mishig/sample_images/resolve/main/football-match.jpg",
+            "example_title": "Football Match"
+          },
+          {
+            "src": "https://huggingface.co/datasets/mishig/sample_images/resolve/main/airport.jpg",
+            "example_title": "Airport"
+          }
+        ]
+      },
+      "transformersInfo": {
+        "auto_model": "RtDetrV2ForObjectDetection",
+        "processor": "AutoTokenizer"
+      },
+      "siblings": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+          "size": 1519
+        },
+        {
+          "rfilename": "README.md",
+          "blobId": "37d358fb4e1d91881c4081fc8df0b75d0c2cd99e",
+          "size": 3542
+        },
+        {
+          "rfilename": "config.json",
+          "blobId": "6f984c30c65857419deeeebfdf7dc4e7d7bce6f8",
+          "size": 5437
+        },
+        {
+          "rfilename": "model.safetensors",
+          "blobId": "820a37cacd1a40bd83f736222a2f6ddd5e1f4eab",
+          "size": 80904640,
+          "lfs": {
+            "sha256": "d18309d0d7ea57048138885c4c6ecfcb1e24506fc6153b94ad484f8ab62c7115",
+            "size": 80904640,
+            "pointerSize": 133
+          }
+        },
+        {
+          "rfilename": "preprocessor_config.json",
+          "blobId": "fcdff16b42e5ebc51d28f59184490c6eff91a88b",
+          "size": 444
+        }
+      ],
+      "spaces": [],
+      "createdAt": "2025-01-31T17:10:44.000Z",
+      "safetensors": {
+        "parameters": {
+          "F32": 20209716
+        },
+        "total": 20209716
+      },
+      "usedStorage": 80904640
+    }
+  },
+  "modelFiles": [
+    {
+      "name": "preprocessor_config.json",
+      "url": "https://huggingface.co/onnx-community/rtdetr_v2_r18vd-ONNX/resolve/936f90b6a476c6da4dfe053fc521af55285976ba/preprocessor_config.json",
+      "bytes": 444,
+      "sha256": "cd38cd59999e7a95d68e487fbe5132df3d4e5c32a0836add57e6126ba0c4eaf1",
+      "verifiedAgainstHFMetadata": true
+    },
+    {
+      "name": "config.json",
+      "url": "https://huggingface.co/onnx-community/rtdetr_v2_r18vd-ONNX/resolve/936f90b6a476c6da4dfe053fc521af55285976ba/config.json",
+      "bytes": 5731,
+      "sha256": "2146837ddc24e4ab5e7c39d96ffe986d1d9048fdd4d02b37a0af5b59b17821c1",
+      "verifiedAgainstHFMetadata": true
+    },
+    {
+      "name": "quantize_config.json",
+      "url": "https://huggingface.co/onnx-community/rtdetr_v2_r18vd-ONNX/resolve/936f90b6a476c6da4dfe053fc521af55285976ba/quantize_config.json",
+      "bytes": 310,
+      "sha256": "9b60b5877b9a1687b5cddbc06124a974cb7536af9dbf5295279bf73c3823170c",
+      "verifiedAgainstHFMetadata": true
+    },
+    {
+      "name": "README.md",
+      "url": "https://huggingface.co/onnx-community/rtdetr_v2_r18vd-ONNX/resolve/936f90b6a476c6da4dfe053fc521af55285976ba/README.md",
+      "bytes": 818,
+      "sha256": "76b3f440f9b8d4027e72d9ca99446fac927e3e7d0e15aefd450f7047219fe3d7",
+      "verifiedAgainstHFMetadata": true
+    },
+    {
+      "name": "onnx/model_uint8.onnx",
+      "url": "https://huggingface.co/onnx-community/rtdetr_v2_r18vd-ONNX/resolve/936f90b6a476c6da4dfe053fc521af55285976ba/onnx/model_uint8.onnx",
+      "bytes": 20991219,
+      "sha256": "4b839c46187b77fc620c770de0be6790637b98afde9b386232b0fcf74382eb3c",
+      "verifiedAgainstHFMetadata": true
+    },
+    {
+      "name": "onnx/model.onnx",
+      "url": "https://huggingface.co/onnx-community/rtdetr_v2_r18vd-ONNX/resolve/936f90b6a476c6da4dfe053fc521af55285976ba/onnx/model.onnx",
+      "bytes": 81057510,
+      "sha256": "583a236ac21c95a7fd94f284fc21485e42355bfef82c27011ba78fbc09ee87e2",
+      "verifiedAgainstHFMetadata": true
+    }
+  ],
+  "preprocessing": "PIL RGB bilinear resize whole frame 640x640, no letterbox/pad; float32 channels-first RGB *1/255; no mean/std normalization. Browser canvas high interpolation may differ and is not equated to PIL.",
+  "postprocessing": "Sigmoid logits [300,80]. Official focal postprocessor flattens all query/class pairs, sorts top300 (stable flat-index tie break here); keep highest scoring pair once per original query to prevent identical query box repeated under multiple classes. This differs from official output only by that explicit query de-duplication. No NMS or suppression between distinct queries. Convert normalized cxcywh to original xyxy, clip image bounds; keep product mapped classes and at most30 globally, then retain three evaluation targets. Threshold>=.45 caches reusable raw detections. Do not favor target classes.",
+  "matching": "Existing evaluate: descending score, IoU>=.5 to unused normal GT, then same-class crowd ignored at intersection/detectionArea>=.5. All sizes. No relabeling. Not COCO mAP.",
+  "grid": [
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9
+  ],
+  "minimumNonIgnoredPredictionsForDevelopmentClassSelection": 5,
+  "selectionRule": "Use ONLY development60. For each variant/class, at precision target.90 maximize recall, then precision, then lower threshold, requiring >=5 TP+FP. Eligible variant needs all3classes. Rank eligible variants by macro recall, macro precision, then lower bytes. If no variant eligible at.90, repeat once at.85. If none eligible, no selected model and do not claim adoptable variant. Freeze selected variant/thresholds in selection.json before confirmation30. No post-confirmation changes.",
+  "limitations": [
+    "Small stratified COCO val2017 samples, not representative prevalence or independent Brazilian camera validation.",
+    "COCO val2017 is model development validation data; these are local regression comparisons, not COCO mAP.",
+    "Confidence score is not calibrated probability.",
+    "No private image or product source mutation.",
+    "Native CPU timings single-pass shared machine, not controlled performance or browser latency."
+  ]
+}

@@ -1,0 +1,36 @@
+VISIORA 0.3.0 - protótipo em avaliação
+
+1. Tenha Node.js 24 ou superior instalado (https://nodejs.org/).
+2. Extraia este ZIP. No Windows, abra iniciar.cmd dentro da pasta visiora.
+   Em outros sistemas: abra terminal nessa pasta e rode node tools/serve.mjs.
+3. Abra http://127.0.0.1:8080 no Chrome ou Edge. Mantenha o terminal aberto.
+4. A demonstração é simulada. Para análise real, inicie e autorize a câmera.
+5. Em Ajustes, teste voz local pt-BR. Se faltar, use texto ou leitor de tela.
+6. Mantenha a câmera estável. O cartão Reconhecer o ambiente mostra a preparação,
+   a dúvida ou o resultado. Ouvir sobre este lugar permite consultar novamente.
+
+Aplicativo e cinco modelos locais estão incluídos. Com Node instalado,
+não é necessário contratar API, enviar imagens ou usar inferência na nuvem.
+O servidor escuta apenas 127.0.0.1. Para encerrar, pare a sessão na tela e use
+Ctrl+C no terminal. Não exponha este servidor diretamente na rede.
+
+O lugar é analisado pela imagem inteira, sem regras baseadas em objetos.
+O consenso tem 34 tipos de lugar compatíveis; não é descrição aberta.
+Em 40 novas imagens públicas: 16 respostas corretas, 1 errada e 23 dúvidas.
+Ganho pequeno nessa amostra; sete acertos anteriores deixam de ser respondidos.
+Pessoas passam por acordo de dois de três detectores. Ainda há erros.
+Cadeiras continuam frequentemente omitidas.
+Não é teste brasileiro. O modelo pode errar e muitas vezes não sabe.
+
+Câmera informa direção aproximada, sem distância. Demonstração tem passos
+simulados. Sem mapa 360° real, OCR ou orientação de percurso.
+Não detecta todos os objetos, portas, degraus, buracos ou vidro. Pode errar.
+Não garante caminho livre; não substitui bengala ou cão-guia.
+Não testado com pessoas cegas/baixa visão, NVDA, VoiceOver ou TalkBack.
+Instalação limpa, áudio audível e uso offline fora do ambiente de desenvolvimento
+continuam pendentes. Não use como recurso de segurança.
+
+Histórico vem desligado. Ajustes e histórico opcional ficam neste navegador.
+Apagar tudo remove dados e caches do Visiora desse navegador. Não remove
+ZIP ou arquivos extraídos. Nenhuma imagem é salva pelo aplicativo.
+Licenças e atribuições dos componentes estão em dist/licenses.

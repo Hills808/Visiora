@@ -1,0 +1,5 @@
+# Preserve verified model bytes across Windows checkouts.
+public/models/** binary
+# Frozen research protocols/results contain byte hashes; keep their original bytes.
+docs/EVIDENCIAS/0.3.0/** -text
+tests/fixtures/*.json -text
