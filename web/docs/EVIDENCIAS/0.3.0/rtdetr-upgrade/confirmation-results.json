@@ -1,0 +1,3847 @@
+{
+  "modelFile": "model_uint8.onnx",
+  "bytes": 20991219,
+  "sha256": "4b839c46187b77fc620c770de0be6790637b98afde9b386232b0fcf74382eb3c",
+  "loadMsExploratory": 420.50510000262875,
+  "rows": [
+    {
+      "id": 267300,
+      "file": "000000267300.jpg",
+      "bucket": "bed-without-person",
+      "imageSHA256": "d527da3ddf25ec519b01fddd4eee2c417eed7b40f61db689b76aa07ad005fab6",
+      "inferenceMsExploratory": 778.3302999960142,
+      "detections": [],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 158,
+        "repeatedSameQueryAboveMinScore": 1,
+        "allMappedAboveMinScore": 7
+      }
+    },
+    {
+      "id": 385997,
+      "file": "000000385997.jpg",
+      "bucket": "bed-without-person",
+      "imageSHA256": "e35bd1a93a4eebfce3829761c06d9621f3c36a5a5ac424cdcc6b83af86a673a8",
+      "inferenceMsExploratory": 860.717299998214,
+      "detections": [
+        {
+          "classId": 56,
+          "queryIndex": 0,
+          "score": 0.9044589400291443,
+          "box": [
+            354.0915107727051,
+            141.51997804641724,
+            486.7797660827637,
+            287.5370764732361
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 59,
+          "queryIndex": 7,
+          "score": 0.7762250900268555,
+          "box": [
+            272.21826553344727,
+            277.4712610244751,
+            461.5426445007324,
+            448.1574010848999
+          ],
+          "class": "bed"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 164,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 6
+      }
+    },
+    {
+      "id": 170278,
+      "file": "000000170278.jpg",
+      "bucket": "bed-without-person",
+      "imageSHA256": "5de7f5b7b981875fd86c5497811da825118e52c58dfed8a2658e80131c99e5f1",
+      "inferenceMsExploratory": 895.0957999986713,
+      "detections": [
+        {
+          "classId": 59,
+          "queryIndex": 3,
+          "score": 0.9008844494819641,
+          "box": [
+            0.463714599609375,
+            119.02228689193726,
+            639.318962097168,
+            498.6077170372009
+          ],
+          "class": "bed"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 119,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 2
+      }
+    },
+    {
+      "id": 463842,
+      "file": "000000463842.jpg",
+      "bucket": "bed-without-person",
+      "imageSHA256": "7e534102e2fa1c5436cd8f2a162509d77c0f37c0fbd0de6cad7a9c22ba0a7cc9",
+      "inferenceMsExploratory": 875.5039000025135,
+      "detections": [
+        {
+          "classId": 59,
+          "queryIndex": 0,
+          "score": 0.874498188495636,
+          "box": [
+            67.86163330078125,
+            50.85270166397095,
+            454.7001266479492,
+            270.3826117515564
+          ],
+          "class": "bed"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 88,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 23
+      }
+    },
+    {
+      "id": 39956,
+      "file": "000000039956.jpg",
+      "bucket": "bed-without-person",
+      "imageSHA256": "76e73337d2385cf701750bc38a42f0205153af090244e66fb7a261052cb05217",
+      "inferenceMsExploratory": 831.8680000011227,
+      "detections": [
+        {
+          "classId": 59,
+          "queryIndex": 0,
+          "score": 0.8393005728721619,
+          "box": [
+            0.43849945068359375,
+            265.78901709616184,
+            367.63988494873047,
+            423.0379952043295
+          ],
+          "class": "bed"
+        },
+        {
+          "classId": 59,
+          "queryIndex": 2,
+          "score": 0.7422173023223877,
+          "box": [
+            0.22902488708496094,
+            207.1848296970129,
+            122.74140357971191,
+            298.0368371158838
+          ],
+          "class": "bed"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 1,
+          "score": 0.6902392506599426,
+          "box": [
+            517.5027656555176,
+            184.81160432100296,
+            638.9869499206543,
+            318.30906730890274
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 3,
+          "score": 0.6859164834022522,
+          "box": [
+            518.0349349975586,
+            184.31888850033283,
+            631.9902420043945,
+            275.6604494303465
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 4,
+          "score": 0.6413989067077637,
+          "box": [
+            484.2846202850342,
+            271.1727822571993,
+            533.1689929962158,
+            337.73262779414654
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 38,
+          "score": 0.5412802696228027,
+          "box": [
+            517.6751804351807,
+            184.6363283842802,
+            639.3539333343506,
+            321.2027841359377
+          ],
+          "class": "chair"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 139,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 12
+      }
+    },
+    {
+      "id": 213422,
+      "file": "000000213422.jpg",
+      "bucket": "bed-without-person",
+      "imageSHA256": "714feac14119915e0d37155c49a0b7bba1b8d3320bfdaefda0d459d002d65cf9",
+      "inferenceMsExploratory": 803.9742999972077,
+      "detections": [
+        {
+          "classId": 59,
+          "queryIndex": 0,
+          "score": 0.9570817351341248,
+          "box": [
+            0.4860687255859375,
+            161.40245687961578,
+            552.4746704101562,
+            423.25582253932953
+          ],
+          "class": "bed"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 1,
+          "score": 0.5938907265663147,
+          "box": [
+            48.9300537109375,
+            164.6811671257019,
+            106.93992614746094,
+            224.96851634979248
+          ],
+          "class": "chair"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 177,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 2
+      }
+    },
+    {
+      "id": 453722,
+      "file": "000000453722.jpg",
+      "bucket": "chair-without-person-or-bed",
+      "imageSHA256": "02439c92eca0c51c177cbc9c9b31bf6afeb6870c4d1e93b7475601f8f869021a",
+      "inferenceMsExploratory": 749.502599996049,
+      "detections": [],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 158,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 4
+      }
+    },
+    {
+      "id": 471991,
+      "file": "000000471991.jpg",
+      "bucket": "chair-without-person-or-bed",
+      "imageSHA256": "51288ea643006b471c953a548554822e2c5e2f6745c9dd65726458dce634907f",
+      "inferenceMsExploratory": 763.1153000038466,
+      "detections": [
+        {
+          "classId": 56,
+          "queryIndex": 4,
+          "score": 0.4582099914550781,
+          "box": [
+            347.438383102417,
+            235.6888279914856,
+            383.14488410949707,
+            280.99308824539185
+          ],
+          "class": "chair"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 116,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 4
+      }
+    },
+    {
+      "id": 368900,
+      "file": "000000368900.jpg",
+      "bucket": "chair-without-person-or-bed",
+      "imageSHA256": "125a508da98e2c2413ece8f6a8bf0af1740e2018fec9e7b5214d86590ccfe0a0",
+      "inferenceMsExploratory": 793.5737000007066,
+      "detections": [
+        {
+          "classId": 56,
+          "queryIndex": 2,
+          "score": 0.7291045784950256,
+          "box": [
+            351.48118019104004,
+            287.4261403083801,
+            447.9977321624756,
+            472.72087812423706
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 1,
+          "score": 0.7218834757804871,
+          "box": [
+            457.4654006958008,
+            359.286904335022,
+            626.0280990600586,
+            477.3825216293335
+          ],
+          "class": "chair"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 142,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 7
+      }
+    },
+    {
+      "id": 172595,
+      "file": "000000172595.jpg",
+      "bucket": "chair-without-person-or-bed",
+      "imageSHA256": "faa06206531e26d29bed2d1ecca535d5496a017e1e88a7329f19bf4a5574a83b",
+      "inferenceMsExploratory": 833.7399999945774,
+      "detections": [
+        {
+          "classId": 56,
+          "queryIndex": 4,
+          "score": 0.9520518779754639,
+          "box": [
+            14.992389678955078,
+            35.122947692871094,
+            233.28798294067383,
+            356.63500785827637
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 6,
+          "score": 0.6408719420433044,
+          "box": [
+            0.5541610717773438,
+            0.6355655193328857,
+            48.51390838623047,
+            43.228551149368286
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 14,
+          "score": 0.47233882546424866,
+          "box": [
+            381.39092445373535,
+            15.775659084320068,
+            423.88861656188965,
+            33.09330940246582
+          ],
+          "class": "chair"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 107,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 16
+      }
+    },
+    {
+      "id": 190236,
+      "file": "000000190236.jpg",
+      "bucket": "chair-without-person-or-bed",
+      "imageSHA256": "703b3b3f8d8ee32af794427e6271765f22e120387d6c2f994606b120f7cb3e6a",
+      "inferenceMsExploratory": 821.6059999977006,
+      "detections": [
+        {
+          "classId": 56,
+          "queryIndex": 0,
+          "score": 0.9529284238815308,
+          "box": [
+            252.28960037231445,
+            160.9006949365139,
+            356.3495445251465,
+            294.53342762589455
+          ],
+          "class": "chair"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 102,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 28
+      }
+    },
+    {
+      "id": 34873,
+      "file": "000000034873.jpg",
+      "bucket": "chair-without-person-or-bed",
+      "imageSHA256": "376dbffac6db0b092cc07b43dfc34886725682d8e641caeff54710ac8f61ffb6",
+      "inferenceMsExploratory": 735.2182999966317,
+      "detections": [
+        {
+          "classId": 56,
+          "queryIndex": 1,
+          "score": 0.8850429654121399,
+          "box": [
+            483.42888832092285,
+            171.91537857055664,
+            529.0595149993896,
+            220.35959243774414
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 0,
+          "score": 0.8468060493469238,
+          "box": [
+            542.9930782318115,
+            178.07544708251953,
+            605.1538944244385,
+            272.15649604797363
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 4,
+          "score": 0.4869673252105713,
+          "box": [
+            493.3632755279541,
+            178.21977138519287,
+            562.02467918396,
+            262.5700521469116
+          ],
+          "class": "chair"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 133,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 7
+      }
+    },
+    {
+      "id": 336356,
+      "file": "000000336356.jpg",
+      "bucket": "person-with-chair-or-bed",
+      "imageSHA256": "0b9315fe0e6c212f070a1bd4e5589bacf038a4791c4882472609b2351339bbe5",
+      "inferenceMsExploratory": 737.744300000486,
+      "detections": [
+        {
+          "classId": 0,
+          "queryIndex": 0,
+          "score": 0.9612032175064087,
+          "box": [
+            119.67775040864944,
+            16.57547950744629,
+            350.8815935254097,
+            309.0871334075928
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 5,
+          "score": 0.9004660248756409,
+          "box": [
+            0.08941000699996948,
+            24.344310760498047,
+            132.79887890815735,
+            282.05907821655273
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 12,
+          "score": 0.6779852509498596,
+          "box": [
+            310.13555976748466,
+            79.83121871948242,
+            336.3320300877094,
+            150.74167251586914
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 10,
+          "score": 0.6429967880249023,
+          "box": [
+            128.4904644191265,
+            60.761451721191406,
+            184.98193636536598,
+            187.22820281982422
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 7,
+          "score": 0.6077257990837097,
+          "box": [
+            310.23318414390087,
+            80.14369010925293,
+            336.1893062144518,
+            126.01754188537598
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 20,
+          "score": 0.4820956587791443,
+          "box": [
+            43.513869032263756,
+            58.81760597229004,
+            132.5166443735361,
+            207.43388175964355
+          ],
+          "class": "person"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 102,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 12
+      }
+    },
+    {
+      "id": 397354,
+      "file": "000000397354.jpg",
+      "bucket": "person-with-chair-or-bed",
+      "imageSHA256": "067fb73c369a8433d1f9d97c2c36f51f487cf3a6d37c1f2fe0368a39f3dc38db",
+      "inferenceMsExploratory": 743.8743000020622,
+      "detections": [
+        {
+          "classId": 0,
+          "queryIndex": 0,
+          "score": 0.9481670260429382,
+          "box": [
+            336.72388076782227,
+            215.56450366973877,
+            530.3482627868652,
+            476.60266399383545
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 3,
+          "score": 0.9181740283966064,
+          "box": [
+            336.6361713409424,
+            152.69164323806763,
+            400.62968254089355,
+            335.5542254447937
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 2,
+          "score": 0.9037245512008667,
+          "box": [
+            141.81771278381348,
+            166.735417842865,
+            219.72987174987793,
+            344.3137764930725
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 8,
+          "score": 0.9000433087348938,
+          "box": [
+            494.86400604248047,
+            242.41446733474731,
+            639.7739028930664,
+            469.7265315055847
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 4,
+          "score": 0.8989622592926025,
+          "box": [
+            248.0281639099121,
+            173.21353197097778,
+            362.99657821655273,
+            333.5452151298523
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 11,
+          "score": 0.7166728377342224,
+          "box": [
+            199.20099258422852,
+            404.4195556640625,
+            304.4676399230957,
+            479.9748229980469
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 138,
+          "score": 0.575323224067688,
+          "box": [
+            199.9117660522461,
+            404.25215005874634,
+            371.7405700683594,
+            479.39618825912476
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 68,
+          "score": 0.5199726819992065,
+          "box": [
+            502.6866912841797,
+            449.39828395843506,
+            617.1244812011719,
+            480.0
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 203,
+          "score": 0.46432414650917053,
+          "box": [
+            501.8385696411133,
+            368.35832118988037,
+            639.3851089477539,
+            478.7672281265259
+          ],
+          "class": "chair"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 106,
+        "repeatedSameQueryAboveMinScore": 2,
+        "allMappedAboveMinScore": 30
+      }
+    },
+    {
+      "id": 116439,
+      "file": "000000116439.jpg",
+      "bucket": "person-with-chair-or-bed",
+      "imageSHA256": "a0e9476784e5398887642f7c603fa755b7aa19c0b03b195047448c75a926eb7a",
+      "inferenceMsExploratory": 733.4943000023486,
+      "detections": [
+        {
+          "classId": 0,
+          "queryIndex": 1,
+          "score": 0.866159975528717,
+          "box": [
+            104.39948934316635,
+            273.1598377227783,
+            248.09141564369202,
+            431.97070121765137
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 3,
+          "score": 0.4956929683685303,
+          "box": [
+            285.6673568934202,
+            110.80352783203125,
+            341.661875680089,
+            349.5555877685547
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 7,
+          "score": 0.4517863392829895,
+          "box": [
+            285.3144535124302,
+            109.57066535949707,
+            350.99494752287865,
+            350.2245616912842
+          ],
+          "class": "person"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 104,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 4
+      }
+    },
+    {
+      "id": 521509,
+      "file": "000000521509.jpg",
+      "bucket": "person-with-chair-or-bed",
+      "imageSHA256": "32e087992c2613f404b90f768c5035999b53e19d26dec4e6018303b3dcb03672",
+      "inferenceMsExploratory": 736.0961999947904,
+      "detections": [
+        {
+          "classId": 0,
+          "queryIndex": 0,
+          "score": 0.8968619108200073,
+          "box": [
+            151.92421913146973,
+            186.9740641117096,
+            269.6848964691162,
+            357.86374390125275
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 59,
+          "queryIndex": 1,
+          "score": 0.8696743845939636,
+          "box": [
+            280.51533699035645,
+            207.46651066839695,
+            476.7830181121826,
+            403.95948277413845
+          ],
+          "class": "bed"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 158,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 12
+      }
+    },
+    {
+      "id": 376307,
+      "file": "000000376307.jpg",
+      "bucket": "person-with-chair-or-bed",
+      "imageSHA256": "a21b620bce393bbad0b44bfecb475a8cc9abcd7f637dca09ed657bb4bd9c6d38",
+      "inferenceMsExploratory": 732.622799994715,
+      "detections": [
+        {
+          "classId": 0,
+          "queryIndex": 0,
+          "score": 0.9213443398475647,
+          "box": [
+            244.61779184639454,
+            149.2263376712799,
+            374.82192926108837,
+            432.64952301979065
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 1,
+          "score": 0.8345623016357422,
+          "box": [
+            196.3107269257307,
+            157.18284249305725,
+            267.7196580916643,
+            271.6922461986542
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 4,
+          "score": 0.635017991065979,
+          "box": [
+            0.04774332046508789,
+            213.15617114305496,
+            71.05444371700287,
+            288.78044337034225
+          ],
+          "class": "chair"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 73,
+        "repeatedSameQueryAboveMinScore": 1,
+        "allMappedAboveMinScore": 20
+      }
+    },
+    {
+      "id": 194875,
+      "file": "000000194875.jpg",
+      "bucket": "person-with-chair-or-bed",
+      "imageSHA256": "5b14af08d271a7468d1fba24e56d37c6235de4111af266ad8292296c2cba65eb",
+      "inferenceMsExploratory": 752.4941000010585,
+      "detections": [
+        {
+          "classId": 0,
+          "queryIndex": 0,
+          "score": 0.883894681930542,
+          "box": [
+            159.54730987548828,
+            222.93376711010933,
+            262.21370697021484,
+            327.86046811938286
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 1,
+          "score": 0.879619300365448,
+          "box": [
+            5.657167434692383,
+            226.00973558425903,
+            93.49509239196777,
+            323.19824504852295
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 2,
+          "score": 0.8652637004852295,
+          "box": [
+            219.5022964477539,
+            167.94263553619385,
+            308.68602752685547,
+            290.58802688121796
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 3,
+          "score": 0.8606328964233398,
+          "box": [
+            294.96155738830566,
+            157.38422673940659,
+            364.9636745452881,
+            274.4397162795067
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 5,
+          "score": 0.8503890037536621,
+          "box": [
+            437.11585998535156,
+            144.68924617767334,
+            519.5182037353516,
+            275.89943385124207
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 4,
+          "score": 0.7924160361289978,
+          "box": [
+            510.784854888916,
+            239.24867823719978,
+            589.5712089538574,
+            322.67475947737694
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 8,
+          "score": 0.7791475653648376,
+          "box": [
+            442.8510856628418,
+            246.13672640919685,
+            501.1792182922363,
+            322.0301853120327
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 16,
+          "score": 0.7645209431648254,
+          "box": [
+            385.8631134033203,
+            242.03227040171623,
+            474.5500946044922,
+            302.4153726398945
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 25,
+          "score": 0.7230089902877808,
+          "box": [
+            266.34191513061523,
+            234.8916870355606,
+            353.96005630493164,
+            339.03974997997284
+          ],
+          "class": "person"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 72,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 40
+      }
+    },
+    {
+      "id": 224664,
+      "file": "000000224664.jpg",
+      "bucket": "person-without-chair-or-bed",
+      "imageSHA256": "227fb6bfdc2acff13936f2e0c931d6d237447cd6b1ea29e836aed263f66a052e",
+      "inferenceMsExploratory": 732.1654999977909,
+      "detections": [
+        {
+          "classId": 0,
+          "queryIndex": 6,
+          "score": 0.700026273727417,
+          "box": [
+            374.06490325927734,
+            317.69930362701416,
+            379.87056732177734,
+            336.546893119812
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 10,
+          "score": 0.6917778849601746,
+          "box": [
+            368.3549404144287,
+            251.94043636322021,
+            373.88916969299316,
+            265.73946475982666
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 9,
+          "score": 0.6396512985229492,
+          "box": [
+            218.02340507507324,
+            219.8091173171997,
+            222.11522102355957,
+            227.77726650238037
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 12,
+          "score": 0.6363039612770081,
+          "box": [
+            304.9383735656738,
+            224.48190450668335,
+            308.63237380981445,
+            231.1927342414856
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 7,
+          "score": 0.620328426361084,
+          "box": [
+            407.1988296508789,
+            306.30610942840576,
+            415.75878143310547,
+            316.7067003250122
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 13,
+          "score": 0.5910347104072571,
+          "box": [
+            193.6418628692627,
+            217.25038290023804,
+            196.9344997406006,
+            222.18122720718384
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 11,
+          "score": 0.5343713164329529,
+          "box": [
+            514.506778717041,
+            254.8180389404297,
+            521.0804557800293,
+            263.24060440063477
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 15,
+          "score": 0.5178992748260498,
+          "box": [
+            625.5319118499756,
+            228.51237773895264,
+            628.6587619781494,
+            233.30745220184326
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 29,
+          "score": 0.48943954706192017,
+          "box": [
+            518.5593318939209,
+            255.31715869903564,
+            522.161340713501,
+            263.2124090194702
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 26,
+          "score": 0.47144249081611633,
+          "box": [
+            202.5023078918457,
+            212.8833532333374,
+            204.77216720581055,
+            215.9478521347046
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 18,
+          "score": 0.46637600660324097,
+          "box": [
+            373.2858180999756,
+            249.00615692138672,
+            379.518518447876,
+            263.1243324279785
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 20,
+          "score": 0.4586331844329834,
+          "box": [
+            280.8855438232422,
+            216.68807744979858,
+            284.3316650390625,
+            219.50016260147095
+          ],
+          "class": "person"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 139,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 12
+      }
+    },
+    {
+      "id": 78915,
+      "file": "000000078915.jpg",
+      "bucket": "person-without-chair-or-bed",
+      "imageSHA256": "800d4feb64141487b944c3ccd32554a2dc4095589b8cb4d617066a9d0e7c6c43",
+      "inferenceMsExploratory": 729.5539999977336,
+      "detections": [
+        {
+          "classId": 0,
+          "queryIndex": 0,
+          "score": 0.9268185496330261,
+          "box": [
+            129.0047925710678,
+            397.1343421936035,
+            296.44723176956177,
+            637.0006370544434
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 4,
+          "score": 0.9066359400749207,
+          "box": [
+            317.4376931488514,
+            1.7757701873779297,
+            367.2888294160366,
+            85.83767890930176
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 2,
+          "score": 0.9031882286071777,
+          "box": [
+            243.90368987619877,
+            5.132131576538086,
+            318.46032463014126,
+            79.39225196838379
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 3,
+          "score": 0.8969869017601013,
+          "box": [
+            357.315905764699,
+            11.106300354003906,
+            417.3727145642042,
+            89.41173553466797
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 7,
+          "score": 0.8426082134246826,
+          "box": [
+            45.07265616953373,
+            27.09951400756836,
+            91.26192353665829,
+            51.81291580200195
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 9,
+          "score": 0.8334610462188721,
+          "box": [
+            186.302997097373,
+            44.346914291381836,
+            233.47566844522953,
+            67.87774085998535
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 17,
+          "score": 0.8084030747413635,
+          "box": [
+            0.014807969331741333,
+            20.687589645385742,
+            44.36520650982857,
+            45.79300880432129
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 15,
+          "score": 0.7917590737342834,
+          "box": [
+            138.96257854998112,
+            39.00620460510254,
+            185.737398609519,
+            63.119916915893555
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 10,
+          "score": 0.7914910316467285,
+          "box": [
+            190.61858838796616,
+            0.5279350280761719,
+            268.2252777814865,
+            52.30894088745117
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 12,
+          "score": 0.7663004398345947,
+          "box": [
+            463.31445375084877,
+            71.56990051269531,
+            480.7484365403652,
+            168.88233184814453
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 8,
+          "score": 0.7444088459014893,
+          "box": [
+            95.79653085768223,
+            0.2258586883544922,
+            202.32679675519466,
+            56.33683204650879
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 19,
+          "score": 0.7422716617584229,
+          "box": [
+            91.13385538756847,
+            33.294219970703125,
+            136.78719754517078,
+            56.41986846923828
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 18,
+          "score": 0.7289198637008667,
+          "box": [
+            349.04452243447304,
+            0.0,
+            467.1853687465191,
+            39.81705665588379
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 16,
+          "score": 0.6758617162704468,
+          "box": [
+            407.0732486695051,
+            20.5557918548584,
+            456.05401177704334,
+            56.56411170959473
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 11,
+          "score": 0.6735363602638245,
+          "box": [
+            0.0,
+            0.15641212463378906,
+            59.08151838183403,
+            44.89863395690918
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 5,
+          "score": 0.633580207824707,
+          "box": [
+            256.68897373974323,
+            87.60709762573242,
+            349.0765824764967,
+            195.04331588745117
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 62,
+          "score": 0.6288256049156189,
+          "box": [
+            253.23859503865242,
+            2.908306121826172,
+            308.7023100554943,
+            40.59537887573242
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 23,
+          "score": 0.6244074702262878,
+          "box": [
+            306.92209254205227,
+            8.257770538330078,
+            327.59558023512363,
+            35.57756423950195
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 14,
+          "score": 0.5966159701347351,
+          "box": [
+            233.85811686515808,
+            49.160003662109375,
+            249.7792785167694,
+            69.317626953125
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 13,
+          "score": 0.5836713314056396,
+          "box": [
+            40.630745589733124,
+            0.2877998352050781,
+            121.16683262586594,
+            38.6039924621582
+          ],
+          "class": "person"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 94,
+        "repeatedSameQueryAboveMinScore": 1,
+        "allMappedAboveMinScore": 20
+      }
+    },
+    {
+      "id": 21903,
+      "file": "000000021903.jpg",
+      "bucket": "person-without-chair-or-bed",
+      "imageSHA256": "3fa9ccedfc3ac829c07e14b0e7ef4211b5963f7700dc6e30dde3054f704efa09",
+      "inferenceMsExploratory": 731.4889000044786,
+      "detections": [
+        {
+          "classId": 0,
+          "queryIndex": 1,
+          "score": 0.9433416128158569,
+          "box": [
+            327.53955841064453,
+            223.53888988494873,
+            552.6493453979492,
+            477.6519441604614
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 2,
+          "score": 0.768740177154541,
+          "box": [
+            615.4325771331787,
+            242.65392780303955,
+            639.6549320220947,
+            330.9538221359253
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 4,
+          "score": 0.514383852481842,
+          "box": [
+            615.2093696594238,
+            242.43925094604492,
+            639.8590660095215,
+            396.5484809875488
+          ],
+          "class": "person"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 135,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 4
+      }
+    },
+    {
+      "id": 168337,
+      "file": "000000168337.jpg",
+      "bucket": "person-without-chair-or-bed",
+      "imageSHA256": "bcdd0a74f8a7964c8ceb703c08adf3554eb7ee8fe942629e4aedb9ffc648fbdc",
+      "inferenceMsExploratory": 737.5345000036759,
+      "detections": [
+        {
+          "classId": 0,
+          "queryIndex": 1,
+          "score": 0.9181618690490723,
+          "box": [
+            539.8807621002197,
+            173.8213849067688,
+            584.0425777435303,
+            307.10793256759644
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 2,
+          "score": 0.9178905487060547,
+          "box": [
+            44.71952438354492,
+            226.8592071533203,
+            100.29211044311523,
+            385.95142364501953
+          ],
+          "class": "person"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 143,
+        "repeatedSameQueryAboveMinScore": 1,
+        "allMappedAboveMinScore": 7
+      }
+    },
+    {
+      "id": 172877,
+      "file": "000000172877.jpg",
+      "bucket": "person-without-chair-or-bed",
+      "imageSHA256": "079e9dfb3eb9067760e402cb6d52b7d48037dba9ed1f81cd85929ec4b1c43ea5",
+      "inferenceMsExploratory": 733.8045999931637,
+      "detections": [
+        {
+          "classId": 0,
+          "queryIndex": 0,
+          "score": 0.967278778553009,
+          "box": [
+            107.09627151489258,
+            68.6898422241211,
+            509.6224784851074,
+            475.83818435668945
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 2,
+          "score": 0.8530354499816895,
+          "box": [
+            0.18125534057617188,
+            285.492467880249,
+            155.13456344604492,
+            477.04075813293457
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 3,
+          "score": 0.7381746172904968,
+          "box": [
+            416.4720058441162,
+            295.3727316856384,
+            560.9246158599854,
+            477.0425820350647
+          ],
+          "class": "chair"
+        },
+        {
+          "classId": 56,
+          "queryIndex": 10,
+          "score": 0.45795178413391113,
+          "box": [
+            478.3984661102295,
+            163.4444761276245,
+            563.345537185669,
+            197.8236436843872
+          ],
+          "class": "chair"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 127,
+        "repeatedSameQueryAboveMinScore": 1,
+        "allMappedAboveMinScore": 9
+      }
+    },
+    {
+      "id": 304180,
+      "file": "000000304180.jpg",
+      "bucket": "person-without-chair-or-bed",
+      "imageSHA256": "655b8f4c204a7820d26b2a53d454a572e8e2c65a46cd1fe71132a0c2794b83c0",
+      "inferenceMsExploratory": 727.1188000013353,
+      "detections": [
+        {
+          "classId": 0,
+          "queryIndex": 1,
+          "score": 0.9399814605712891,
+          "box": [
+            546.8252277374268,
+            68.01074159145355,
+            640.0,
+            415.65649449825287
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 0,
+          "score": 0.9195559620857239,
+          "box": [
+            276.5602111816406,
+            96.92752557992935,
+            397.2700500488281,
+            404.82631796598434
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 4,
+          "score": 0.7675926089286804,
+          "box": [
+            0.28533935546875,
+            1.0311464071273804,
+            126.50909423828125,
+            140.2213362455368
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 3,
+          "score": 0.6795793175697327,
+          "box": [
+            417.437105178833,
+            86.23632347583771,
+            504.8388957977295,
+            193.51506459712982
+          ],
+          "class": "person"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 148,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 6
+      }
+    },
+    {
+      "id": 455352,
+      "file": "000000455352.jpg",
+      "bucket": "neither-target",
+      "imageSHA256": "9382294548add74b236b813a9155ade5761ab625faa9b635b8afd576be9286ee",
+      "inferenceMsExploratory": 727.7638000014122,
+      "detections": [],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 217,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 2
+      }
+    },
+    {
+      "id": 476491,
+      "file": "000000476491.jpg",
+      "bucket": "neither-target",
+      "imageSHA256": "ec88d4895a9f697857b8ba6e38fba32fd2b7d62f44bbdc8c26be7be9c2d2cefa",
+      "inferenceMsExploratory": 726.4832000000752,
+      "detections": [
+        {
+          "classId": 0,
+          "queryIndex": 0,
+          "score": 0.5459571480751038,
+          "box": [
+            111.70379161834717,
+            228.9891093969345,
+            120.42089366912842,
+            250.11040270328522
+          ],
+          "class": "person"
+        },
+        {
+          "classId": 0,
+          "queryIndex": 1,
+          "score": 0.45372629165649414,
+          "box": [
+            124.94259095191956,
+            227.32942551374435,
+            132.21464323997498,
+            242.68922954797745
+          ],
+          "class": "person"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 113,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 3
+      }
+    },
+    {
+      "id": 552371,
+      "file": "000000552371.jpg",
+      "bucket": "neither-target",
+      "imageSHA256": "01a03e955ca00cc38244bff8b3b240160041563bac82830b0e7fc89fc68ebebf",
+      "inferenceMsExploratory": 735.5326000033529,
+      "detections": [
+        {
+          "classId": 0,
+          "queryIndex": 3,
+          "score": 0.539746880531311,
+          "box": [
+            255.2035903930664,
+            159.43387484550476,
+            317.6848602294922,
+            281.0345513820648
+          ],
+          "class": "person"
+        }
+      ],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 126,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 1
+      }
+    },
+    {
+      "id": 205542,
+      "file": "000000205542.jpg",
+      "bucket": "neither-target",
+      "imageSHA256": "1a1de8d0ecb1151f783c1a1449ac39758a846d332f9251e7337d727c073c8eae",
+      "inferenceMsExploratory": 720.5948999981047,
+      "detections": [],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 201,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 1
+      }
+    },
+    {
+      "id": 176701,
+      "file": "000000176701.jpg",
+      "bucket": "neither-target",
+      "imageSHA256": "ae6f462f467cd7cd7f6f3ec2e3c34a12f6f29549e44dad3e1c5324ebed87255f",
+      "inferenceMsExploratory": 733.73790000187,
+      "detections": [],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 156,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 0
+      }
+    },
+    {
+      "id": 6614,
+      "file": "000000006614.jpg",
+      "bucket": "neither-target",
+      "imageSHA256": "5c4214d0503ea4ad699298cdca84ab631496d58d0ccdc4f6bafba9553fe067c6",
+      "inferenceMsExploratory": 730.0800000011805,
+      "detections": [],
+      "postprocessDiagnostics": {
+        "repeatedSameQueryInOfficialTop300": 139,
+        "repeatedSameQueryAboveMinScore": 0,
+        "allMappedAboveMinScore": 4
+      }
+    }
+  ],
+  "selectionSHA256": "4f71c33338a1ad4fb8674e156c4967b840bc728e8fc8a4cecef915f24e250bc2",
+  "thresholds": {
+    "person": 0.55,
+    "chair": 0.75,
+    "bed": 0.8
+  },
+  "summary": {
+    "person": {
+      "tp": 44,
+      "fp": 5,
+      "fn": 10,
+      "gt": 54,
+      "precision": 0.8979591836734694,
+      "recall": 0.8148148148148148,
+      "ignoredCrowd": 0,
+      "predictions": 49,
+      "negativeImages": 18,
+      "negativeImagesWithFalseDetection": 0,
+      "threshold": 0.55
+    },
+    "chair": {
+      "tp": 5,
+      "fp": 5,
+      "fn": 17,
+      "gt": 22,
+      "precision": 0.5,
+      "recall": 0.22727272727272727,
+      "ignoredCrowd": 0,
+      "predictions": 10,
+      "negativeImages": 16,
+      "negativeImagesWithFalseDetection": 2,
+      "threshold": 0.75
+    },
+    "bed": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 3,
+      "gt": 7,
+      "precision": 0.8,
+      "recall": 0.5714285714285714,
+      "ignoredCrowd": 0,
+      "predictions": 5,
+      "negativeImages": 23,
+      "negativeImagesWithFalseDetection": 0,
+      "threshold": 0.8
+    }
+  },
+  "scores": [
+    {
+      "id": 267300,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "gt": 1,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              3.78,
+              161.47,
+              638.5799999999999,
+              303.86
+            ]
+          ],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 385997,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "gt": 1,
+          "matches": [
+            {
+              "classId": 56,
+              "queryIndex": 0,
+              "score": 0.9044589400291443,
+              "box": [
+                354.0915107727051,
+                141.51997804641724,
+                486.7797660827637,
+                287.5370764732361
+              ],
+              "class": "chair",
+              "groundTruthIndex": 0,
+              "iou": 0.9770677233757055
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "gt": 1,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              294.05,
+              285.0,
+              424.29,
+              425.55
+            ]
+          ],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 170278,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "gt": 1,
+          "matches": [
+            {
+              "classId": 59,
+              "queryIndex": 3,
+              "score": 0.9008844494819641,
+              "box": [
+                0.463714599609375,
+                119.02228689193726,
+                639.318962097168,
+                498.6077170372009
+              ],
+              "class": "bed",
+              "groundTruthIndex": 0,
+              "iou": 0.962935958401684
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 463842,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "gt": 1,
+          "matches": [
+            {
+              "classId": 59,
+              "queryIndex": 0,
+              "score": 0.874498188495636,
+              "box": [
+                67.86163330078125,
+                50.85270166397095,
+                454.7001266479492,
+                270.3826117515564
+              ],
+              "class": "bed",
+              "groundTruthIndex": 0,
+              "iou": 0.5412853077321865
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 39956,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "gt": 1,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              518.51,
+              184.87,
+              639.67,
+              319.44
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "gt": 1,
+          "matches": [
+            {
+              "classId": 59,
+              "queryIndex": 0,
+              "score": 0.8393005728721619,
+              "box": [
+                0.43849945068359375,
+                265.78901709616184,
+                367.63988494873047,
+                423.0379952043295
+              ],
+              "class": "bed",
+              "groundTruthIndex": 0,
+              "iou": 0.6531319843210913
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 213422,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "gt": 1,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              49.87,
+              162.58,
+              89.46000000000001,
+              220.66000000000003
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "gt": 1,
+          "matches": [
+            {
+              "classId": 59,
+              "queryIndex": 0,
+              "score": 0.9570817351341248,
+              "box": [
+                0.4860687255859375,
+                161.40245687961578,
+                552.4746704101562,
+                423.25582253932953
+              ],
+              "class": "bed",
+              "groundTruthIndex": 0,
+              "iou": 0.9888210261858059
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 453722,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "gt": 1,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              1.11,
+              262.98,
+              210.16000000000003,
+              419.77
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 471991,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "gt": 1,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              237.86,
+              240.73,
+              256.75,
+              260.21999999999997
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 368900,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "gt": 1,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              355.23,
+              287.54,
+              454.1,
+              473.24
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 172595,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 1,
+          "gt": 2,
+          "matches": [
+            {
+              "classId": 56,
+              "queryIndex": 4,
+              "score": 0.9520518779754639,
+              "box": [
+                14.992389678955078,
+                35.122947692871094,
+                233.28798294067383,
+                356.63500785827637
+              ],
+              "class": "chair",
+              "groundTruthIndex": 0,
+              "iou": 0.9556037319123292
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              0.0,
+              0.64,
+              43.62,
+              49.1
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 190236,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "gt": 1,
+          "matches": [
+            {
+              "classId": 56,
+              "queryIndex": 0,
+              "score": 0.9529284238815308,
+              "box": [
+                252.28960037231445,
+                160.9006949365139,
+                356.3495445251465,
+                294.53342762589455
+              ],
+              "class": "chair",
+              "groundTruthIndex": 0,
+              "iou": 0.9582109953892991
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 34873,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "gt": 3,
+          "matches": [
+            {
+              "classId": 56,
+              "queryIndex": 1,
+              "score": 0.8850429654121399,
+              "box": [
+                483.42888832092285,
+                171.91537857055664,
+                529.0595149993896,
+                220.35959243774414
+              ],
+              "class": "chair",
+              "groundTruthIndex": 1,
+              "iou": 0.897829888998714
+            },
+            {
+              "classId": 56,
+              "queryIndex": 0,
+              "score": 0.8468060493469238,
+              "box": [
+                542.9930782318115,
+                178.07544708251953,
+                605.1538944244385,
+                272.15649604797363
+              ],
+              "class": "chair",
+              "groundTruthIndex": 0,
+              "iou": 0.936979225846269
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              493.97,
+              209.88,
+              559.6800000000001,
+              263.08
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 336356,
+      "score": {
+        "person": {
+          "tp": 4,
+          "fp": 1,
+          "fn": 1,
+          "gt": 5,
+          "matches": [
+            {
+              "classId": 0,
+              "queryIndex": 0,
+              "score": 0.9612032175064087,
+              "box": [
+                119.67775040864944,
+                16.57547950744629,
+                350.8815935254097,
+                309.0871334075928
+              ],
+              "class": "person",
+              "groundTruthIndex": 0,
+              "iou": 0.9735233263817469
+            },
+            {
+              "classId": 0,
+              "queryIndex": 5,
+              "score": 0.9004660248756409,
+              "box": [
+                0.08941000699996948,
+                24.344310760498047,
+                132.79887890815735,
+                282.05907821655273
+              ],
+              "class": "person",
+              "groundTruthIndex": 2,
+              "iou": 0.8232753207788208
+            },
+            {
+              "classId": 0,
+              "queryIndex": 12,
+              "score": 0.6779852509498596,
+              "box": [
+                310.13555976748466,
+                79.83121871948242,
+                336.3320300877094,
+                150.74167251586914
+              ],
+              "class": "person",
+              "groundTruthIndex": 3,
+              "iou": 0.5319299558419563
+            },
+            {
+              "classId": 0,
+              "queryIndex": 10,
+              "score": 0.6429967880249023,
+              "box": [
+                128.4904644191265,
+                60.761451721191406,
+                184.98193636536598,
+                187.22820281982422
+              ],
+              "class": "person",
+              "groundTruthIndex": 1,
+              "iou": 0.8684337566463906
+            }
+          ],
+          "falsePositives": [
+            {
+              "classId": 0,
+              "queryIndex": 7,
+              "score": 0.6077257990837097,
+              "box": [
+                310.23318414390087,
+                80.14369010925293,
+                336.1893062144518,
+                126.01754188537598
+              ],
+              "class": "person"
+            }
+          ],
+          "missedBoxes": [
+            [
+              51.04,
+              100.27,
+              127.37,
+              208.41
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "gt": 1,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              0.0,
+              268.64,
+              41.74,
+              328.88
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 397354,
+      "score": {
+        "person": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 1,
+          "gt": 6,
+          "matches": [
+            {
+              "classId": 0,
+              "queryIndex": 0,
+              "score": 0.9481670260429382,
+              "box": [
+                336.72388076782227,
+                215.56450366973877,
+                530.3482627868652,
+                476.60266399383545
+              ],
+              "class": "person",
+              "groundTruthIndex": 4,
+              "iou": 0.9603903224330683
+            },
+            {
+              "classId": 0,
+              "queryIndex": 3,
+              "score": 0.9181740283966064,
+              "box": [
+                336.6361713409424,
+                152.69164323806763,
+                400.62968254089355,
+                335.5542254447937
+              ],
+              "class": "person",
+              "groundTruthIndex": 0,
+              "iou": 0.93557696130134
+            },
+            {
+              "classId": 0,
+              "queryIndex": 2,
+              "score": 0.9037245512008667,
+              "box": [
+                141.81771278381348,
+                166.735417842865,
+                219.72987174987793,
+                344.3137764930725
+              ],
+              "class": "person",
+              "groundTruthIndex": 3,
+              "iou": 0.9218104913080503
+            },
+            {
+              "classId": 0,
+              "queryIndex": 8,
+              "score": 0.9000433087348938,
+              "box": [
+                494.86400604248047,
+                242.41446733474731,
+                639.7739028930664,
+                469.7265315055847
+              ],
+              "class": "person",
+              "groundTruthIndex": 2,
+              "iou": 0.8568571143368289
+            },
+            {
+              "classId": 0,
+              "queryIndex": 4,
+              "score": 0.8989622592926025,
+              "box": [
+                248.0281639099121,
+                173.21353197097778,
+                362.99657821655273,
+                333.5452151298523
+              ],
+              "class": "person",
+              "groundTruthIndex": 1,
+              "iou": 0.9241989965062841
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              517.6,
+              324.62,
+              603.44,
+              382.27
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 2,
+          "gt": 2,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              507.99,
+              363.63,
+              638.62,
+              474.56
+            ],
+            [
+              198.01,
+              407.17,
+              351.45,
+              474.56
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 116439,
+      "score": {
+        "person": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "gt": 1,
+          "matches": [
+            {
+              "classId": 0,
+              "queryIndex": 1,
+              "score": 0.866159975528717,
+              "box": [
+                104.39948934316635,
+                273.1598377227783,
+                248.09141564369202,
+                431.97070121765137
+              ],
+              "class": "person",
+              "groundTruthIndex": 0,
+              "iou": 0.5332540453062222
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "gt": 1,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              395.62,
+              283.05,
+              428.86,
+              381.84000000000003
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 521509,
+      "score": {
+        "person": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "gt": 1,
+          "matches": [
+            {
+              "classId": 0,
+              "queryIndex": 0,
+              "score": 0.8968619108200073,
+              "box": [
+                151.92421913146973,
+                186.9740641117096,
+                269.6848964691162,
+                357.86374390125275
+              ],
+              "class": "person",
+              "groundTruthIndex": 0,
+              "iou": 0.8984544900254524
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "gt": 1,
+          "matches": [],
+          "falsePositives": [
+            {
+              "classId": 59,
+              "queryIndex": 1,
+              "score": 0.8696743845939636,
+              "box": [
+                280.51533699035645,
+                207.46651066839695,
+                476.7830181121826,
+                403.95948277413845
+              ],
+              "class": "bed"
+            }
+          ],
+          "missedBoxes": [
+            [
+              122.55,
+              267.11,
+              475.83,
+              420.3
+            ]
+          ],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 376307,
+      "score": {
+        "person": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "gt": 3,
+          "matches": [
+            {
+              "classId": 0,
+              "queryIndex": 0,
+              "score": 0.9213443398475647,
+              "box": [
+                244.61779184639454,
+                149.2263376712799,
+                374.82192926108837,
+                432.64952301979065
+              ],
+              "class": "person",
+              "groundTruthIndex": 1,
+              "iou": 0.9380526655817816
+            },
+            {
+              "classId": 0,
+              "queryIndex": 1,
+              "score": 0.8345623016357422,
+              "box": [
+                196.3107269257307,
+                157.18284249305725,
+                267.7196580916643,
+                271.6922461986542
+              ],
+              "class": "person",
+              "groundTruthIndex": 2,
+              "iou": 0.7629647345665481
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              139.62,
+              190.05,
+              199.14000000000001,
+              269.51
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "gt": 1,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              3.36,
+              224.69,
+              69.25,
+              293.17
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 194875,
+      "score": {
+        "person": {
+          "tp": 8,
+          "fp": 1,
+          "fn": 3,
+          "gt": 11,
+          "matches": [
+            {
+              "classId": 0,
+              "queryIndex": 0,
+              "score": 0.883894681930542,
+              "box": [
+                159.54730987548828,
+                222.93376711010933,
+                262.21370697021484,
+                327.86046811938286
+              ],
+              "class": "person",
+              "groundTruthIndex": 0,
+              "iou": 0.9160724766660069
+            },
+            {
+              "classId": 0,
+              "queryIndex": 1,
+              "score": 0.879619300365448,
+              "box": [
+                5.657167434692383,
+                226.00973558425903,
+                93.49509239196777,
+                323.19824504852295
+              ],
+              "class": "person",
+              "groundTruthIndex": 1,
+              "iou": 0.8825218531300565
+            },
+            {
+              "classId": 0,
+              "queryIndex": 2,
+              "score": 0.8652637004852295,
+              "box": [
+                219.5022964477539,
+                167.94263553619385,
+                308.68602752685547,
+                290.58802688121796
+              ],
+              "class": "person",
+              "groundTruthIndex": 4,
+              "iou": 0.9849380097267599
+            },
+            {
+              "classId": 0,
+              "queryIndex": 3,
+              "score": 0.8606328964233398,
+              "box": [
+                294.96155738830566,
+                157.38422673940659,
+                364.9636745452881,
+                274.4397162795067
+              ],
+              "class": "person",
+              "groundTruthIndex": 5,
+              "iou": 0.8368054355379404
+            },
+            {
+              "classId": 0,
+              "queryIndex": 5,
+              "score": 0.8503890037536621,
+              "box": [
+                437.11585998535156,
+                144.68924617767334,
+                519.5182037353516,
+                275.89943385124207
+              ],
+              "class": "person",
+              "groundTruthIndex": 6,
+              "iou": 0.8445738848678576
+            },
+            {
+              "classId": 0,
+              "queryIndex": 4,
+              "score": 0.7924160361289978,
+              "box": [
+                510.784854888916,
+                239.24867823719978,
+                589.5712089538574,
+                322.67475947737694
+              ],
+              "class": "person",
+              "groundTruthIndex": 3,
+              "iou": 0.905913680623656
+            },
+            {
+              "classId": 0,
+              "queryIndex": 8,
+              "score": 0.7791475653648376,
+              "box": [
+                442.8510856628418,
+                246.13672640919685,
+                501.1792182922363,
+                322.0301853120327
+              ],
+              "class": "person",
+              "groundTruthIndex": 2,
+              "iou": 0.9240893457961861
+            },
+            {
+              "classId": 0,
+              "queryIndex": 25,
+              "score": 0.7230089902877808,
+              "box": [
+                266.34191513061523,
+                234.8916870355606,
+                353.96005630493164,
+                339.03974997997284
+              ],
+              "class": "person",
+              "groundTruthIndex": 9,
+              "iou": 0.6559174715607725
+            }
+          ],
+          "falsePositives": [
+            {
+              "classId": 0,
+              "queryIndex": 16,
+              "score": 0.7645209431648254,
+              "box": [
+                385.8631134033203,
+                242.03227040171623,
+                474.5500946044922,
+                302.4153726398945
+              ],
+              "class": "person"
+            }
+          ],
+          "missedBoxes": [
+            [
+              389.66,
+              154.47,
+              447.55,
+              237.06
+            ],
+            [
+              387.74,
+              240.2,
+              506.86,
+              360.75
+            ],
+            [
+              588.53,
+              239.78,
+              640.0,
+              299.54
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 5,
+          "gt": 5,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [
+            [
+              393.45,
+              298.43,
+              491.7,
+              363.0
+            ],
+            [
+              511.65,
+              274.1,
+              531.14,
+              308.52000000000004
+            ],
+            [
+              580.11,
+              298.38,
+              640.0,
+              475.32
+            ],
+            [
+              247.43,
+              287.41,
+              277.77,
+              320.48
+            ],
+            [
+              1.29,
+              287.97,
+              63.199999999999996,
+              351.17
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 224664,
+      "score": {
+        "person": {
+          "tp": 5,
+          "fp": 1,
+          "fn": 3,
+          "gt": 8,
+          "matches": [
+            {
+              "classId": 0,
+              "queryIndex": 10,
+              "score": 0.6917778849601746,
+              "box": [
+                368.3549404144287,
+                251.94043636322021,
+                373.88916969299316,
+                265.73946475982666
+              ],
+              "class": "person",
+              "groundTruthIndex": 0,
+              "iou": 0.7794460413534774
+            },
+            {
+              "classId": 0,
+              "queryIndex": 9,
+              "score": 0.6396512985229492,
+              "box": [
+                218.02340507507324,
+                219.8091173171997,
+                222.11522102355957,
+                227.77726650238037
+              ],
+              "class": "person",
+              "groundTruthIndex": 7,
+              "iou": 0.678289503835755
+            },
+            {
+              "classId": 0,
+              "queryIndex": 12,
+              "score": 0.6363039612770081,
+              "box": [
+                304.9383735656738,
+                224.48190450668335,
+                308.63237380981445,
+                231.1927342414856
+              ],
+              "class": "person",
+              "groundTruthIndex": 1,
+              "iou": 0.8108344585452332
+            },
+            {
+              "classId": 0,
+              "queryIndex": 7,
+              "score": 0.620328426361084,
+              "box": [
+                407.1988296508789,
+                306.30610942840576,
+                415.75878143310547,
+                316.7067003250122
+              ],
+              "class": "person",
+              "groundTruthIndex": 3,
+              "iou": 0.7658864111715655
+            },
+            {
+              "classId": 0,
+              "queryIndex": 13,
+              "score": 0.5910347104072571,
+              "box": [
+                193.6418628692627,
+                217.25038290023804,
+                196.9344997406006,
+                222.18122720718384
+              ],
+              "class": "person",
+              "groundTruthIndex": 4,
+              "iou": 0.5289580328343382
+            }
+          ],
+          "falsePositives": [
+            {
+              "classId": 0,
+              "queryIndex": 6,
+              "score": 0.700026273727417,
+              "box": [
+                374.06490325927734,
+                317.69930362701416,
+                379.87056732177734,
+                336.546893119812
+              ],
+              "class": "person"
+            }
+          ],
+          "missedBoxes": [
+            [
+              374.03,
+              249.34,
+              380.16999999999996,
+              261.13
+            ],
+            [
+              625.62,
+              227.85,
+              628.28,
+              233.76999999999998
+            ],
+            [
+              513.26,
+              255.32,
+              522.35,
+              262.79
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 78915,
+      "score": {
+        "person": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 1,
+          "gt": 10,
+          "matches": [
+            {
+              "classId": 0,
+              "queryIndex": 0,
+              "score": 0.9268185496330261,
+              "box": [
+                129.0047925710678,
+                397.1343421936035,
+                296.44723176956177,
+                637.0006370544434
+              ],
+              "class": "person",
+              "groundTruthIndex": 0,
+              "iou": 0.9260912304825096
+            },
+            {
+              "classId": 0,
+              "queryIndex": 4,
+              "score": 0.9066359400749207,
+              "box": [
+                317.4376931488514,
+                1.7757701873779297,
+                367.2888294160366,
+                85.83767890930176
+              ],
+              "class": "person",
+              "groundTruthIndex": 3,
+              "iou": 0.8803066487054017
+            },
+            {
+              "classId": 0,
+              "queryIndex": 2,
+              "score": 0.9031882286071777,
+              "box": [
+                243.90368987619877,
+                5.132131576538086,
+                318.46032463014126,
+                79.39225196838379
+              ],
+              "class": "person",
+              "groundTruthIndex": 1,
+              "iou": 0.9064384394210057
+            },
+            {
+              "classId": 0,
+              "queryIndex": 3,
+              "score": 0.8969869017601013,
+              "box": [
+                357.315905764699,
+                11.106300354003906,
+                417.3727145642042,
+                89.41173553466797
+              ],
+              "class": "person",
+              "groundTruthIndex": 2,
+              "iou": 0.9544047030827715
+            },
+            {
+              "classId": 0,
+              "queryIndex": 10,
+              "score": 0.7914910316467285,
+              "box": [
+                190.61858838796616,
+                0.5279350280761719,
+                268.2252777814865,
+                52.30894088745117
+              ],
+              "class": "person",
+              "groundTruthIndex": 4,
+              "iou": 0.6508649188544269
+            },
+            {
+              "classId": 0,
+              "queryIndex": 12,
+              "score": 0.7663004398345947,
+              "box": [
+                463.31445375084877,
+                71.56990051269531,
+                480.7484365403652,
+                168.88233184814453
+              ],
+              "class": "person",
+              "groundTruthIndex": 8,
+              "iou": 0.5655200729034704
+            },
+            {
+              "classId": 0,
+              "queryIndex": 8,
+              "score": 0.7444088459014893,
+              "box": [
+                95.79653085768223,
+                0.2258586883544922,
+                202.32679675519466,
+                56.33683204650879
+              ],
+              "class": "person",
+              "groundTruthIndex": 5,
+              "iou": 0.7687168443504709
+            },
+            {
+              "classId": 0,
+              "queryIndex": 5,
+              "score": 0.633580207824707,
+              "box": [
+                256.68897373974323,
+                87.60709762573242,
+                349.0765824764967,
+                195.04331588745117
+              ],
+              "class": "person",
+              "groundTruthIndex": 6,
+              "iou": 0.7123032589946346
+            },
+            {
+              "classId": 0,
+              "queryIndex": 13,
+              "score": 0.5836713314056396,
+              "box": [
+                40.630745589733124,
+                0.2877998352050781,
+                121.16683262586594,
+                38.6039924621582
+              ],
+              "class": "person",
+              "groundTruthIndex": 9,
+              "iou": 0.7593572861885552
+            }
+          ],
+          "falsePositives": [
+            {
+              "classId": 0,
+              "queryIndex": 18,
+              "score": 0.7289198637008667,
+              "box": [
+                349.04452243447304,
+                0.0,
+                467.1853687465191,
+                39.81705665588379
+              ],
+              "class": "person"
+            },
+            {
+              "classId": 0,
+              "queryIndex": 11,
+              "score": 0.6735363602638245,
+              "box": [
+                0.0,
+                0.15641212463378906,
+                59.08151838183403,
+                44.89863395690918
+              ],
+              "class": "person"
+            }
+          ],
+          "missedBoxes": [
+            [
+              73.88,
+              0.0,
+              153.03,
+              36.96
+            ]
+          ],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 4,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [
+            {
+              "classId": 56,
+              "queryIndex": 7,
+              "score": 0.8426082134246826,
+              "box": [
+                45.07265616953373,
+                27.09951400756836,
+                91.26192353665829,
+                51.81291580200195
+              ],
+              "class": "chair"
+            },
+            {
+              "classId": 56,
+              "queryIndex": 9,
+              "score": 0.8334610462188721,
+              "box": [
+                186.302997097373,
+                44.346914291381836,
+                233.47566844522953,
+                67.87774085998535
+              ],
+              "class": "chair"
+            },
+            {
+              "classId": 56,
+              "queryIndex": 17,
+              "score": 0.8084030747413635,
+              "box": [
+                0.014807969331741333,
+                20.687589645385742,
+                44.36520650982857,
+                45.79300880432129
+              ],
+              "class": "chair"
+            },
+            {
+              "classId": 56,
+              "queryIndex": 15,
+              "score": 0.7917590737342834,
+              "box": [
+                138.96257854998112,
+                39.00620460510254,
+                185.737398609519,
+                63.119916915893555
+              ],
+              "class": "chair"
+            }
+          ],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 21903,
+      "score": {
+        "person": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "gt": 2,
+          "matches": [
+            {
+              "classId": 0,
+              "queryIndex": 1,
+              "score": 0.9433416128158569,
+              "box": [
+                327.53955841064453,
+                223.53888988494873,
+                552.6493453979492,
+                477.6519441604614
+              ],
+              "class": "person",
+              "groundTruthIndex": 0,
+              "iou": 0.948488440543941
+            },
+            {
+              "classId": 0,
+              "queryIndex": 2,
+              "score": 0.768740177154541,
+              "box": [
+                615.4325771331787,
+                242.65392780303955,
+                639.6549320220947,
+                330.9538221359253
+              ],
+              "class": "person",
+              "groundTruthIndex": 1,
+              "iou": 0.9335252655260508
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 168337,
+      "score": {
+        "person": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "gt": 2,
+          "matches": [
+            {
+              "classId": 0,
+              "queryIndex": 1,
+              "score": 0.9181618690490723,
+              "box": [
+                539.8807621002197,
+                173.8213849067688,
+                584.0425777435303,
+                307.10793256759644
+              ],
+              "class": "person",
+              "groundTruthIndex": 0,
+              "iou": 0.9569775912953596
+            },
+            {
+              "classId": 0,
+              "queryIndex": 2,
+              "score": 0.9178905487060547,
+              "box": [
+                44.71952438354492,
+                226.8592071533203,
+                100.29211044311523,
+                385.95142364501953
+              ],
+              "class": "person",
+              "groundTruthIndex": 1,
+              "iou": 0.9755554472786405
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 172877,
+      "score": {
+        "person": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "gt": 1,
+          "matches": [
+            {
+              "classId": 0,
+              "queryIndex": 0,
+              "score": 0.967278778553009,
+              "box": [
+                107.09627151489258,
+                68.6898422241211,
+                509.6224784851074,
+                475.83818435668945
+              ],
+              "class": "person",
+              "groundTruthIndex": 0,
+              "iou": 0.9852701705563589
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [
+            {
+              "classId": 56,
+              "queryIndex": 2,
+              "score": 0.8530354499816895,
+              "box": [
+                0.18125534057617188,
+                285.492467880249,
+                155.13456344604492,
+                477.04075813293457
+              ],
+              "class": "chair"
+            }
+          ],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 304180,
+      "score": {
+        "person": {
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "gt": 4,
+          "matches": [
+            {
+              "classId": 0,
+              "queryIndex": 1,
+              "score": 0.9399814605712891,
+              "box": [
+                546.8252277374268,
+                68.01074159145355,
+                640.0,
+                415.65649449825287
+              ],
+              "class": "person",
+              "groundTruthIndex": 1,
+              "iou": 0.9847955074822488
+            },
+            {
+              "classId": 0,
+              "queryIndex": 0,
+              "score": 0.9195559620857239,
+              "box": [
+                276.5602111816406,
+                96.92752557992935,
+                397.2700500488281,
+                404.82631796598434
+              ],
+              "class": "person",
+              "groundTruthIndex": 0,
+              "iou": 0.9611791051164273
+            },
+            {
+              "classId": 0,
+              "queryIndex": 4,
+              "score": 0.7675926089286804,
+              "box": [
+                0.28533935546875,
+                1.0311464071273804,
+                126.50909423828125,
+                140.2213362455368
+              ],
+              "class": "person",
+              "groundTruthIndex": 2,
+              "iou": 0.9783544059174863
+            },
+            {
+              "classId": 0,
+              "queryIndex": 3,
+              "score": 0.6795793175697327,
+              "box": [
+                417.437105178833,
+                86.23632347583771,
+                504.8388957977295,
+                193.51506459712982
+              ],
+              "class": "person",
+              "groundTruthIndex": 3,
+              "iou": 0.8721194509748863
+            }
+          ],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 455352,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 476491,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 552371,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 205542,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 176701,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    },
+    {
+      "id": 6614,
+      "score": {
+        "person": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "chair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        },
+        "bed": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "gt": 0,
+          "matches": [],
+          "falsePositives": [],
+          "missedBoxes": [],
+          "ignoredCrowd": []
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "status": "fulfilled",
+    "value": {
+      "id": "onnx-community/Qwen3.5-0.8B-ONNX-OPT",
+      "revision": "9a4c21d8f724176b0a7edaaed36303044451886e",
+      "license": "apache-2.0"
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "id": "HuggingFaceTB/SmolVLM-500M-Instruct",
+      "revision": "a7da5b986cb59b408707209984f360a5f4ad7e47",
+      "license": "apache-2.0",
+      "language": [
+        "en"
+      ]
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "id": "microsoft/Florence-2-base-ft",
+      "revision": "f6c1a25888ffc1d945ee8a1a77ac833c7303d46e",
+      "license": "mit"
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "id": "apple/MobileCLIP2-S0",
+      "revision": "3136ea51c8ed56b9f9abfab04cb816735aaad6cb",
+      "license": "apple-amlr"
+    }
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "file": "artifacts/visiora-local.zip",
+    "bytes": 66300250,
+    "crc_ok": true,
+    "scene_model_sha256": true,
+    "text_vectors_sha256": true,
+    "scene_worker": true,
+    "starter": true,
+    "camera_images": false,
+    "native_browser_save_tested": false
+  },
+  {
+    "file": "artifacts/e2e-scenes/visiora-browser.zip",
+    "bytes": 66676738,
+    "crc_ok": true,
+    "scene_model_sha256": true,
+    "text_vectors_sha256": true,
+    "scene_worker": true,
+    "starter": true,
+    "camera_images": false,
+    "native_browser_save_tested": false
+  }
+]

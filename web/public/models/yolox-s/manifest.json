@@ -1,0 +1,26 @@
+{
+  "id": "yolox-s",
+  "bytes": 35858002,
+  "sha256": "c5c2d13e59ae883e6af3b45daea64af4833a4951c92d116ec270d9ddbe998063",
+  "license": "Apache-2.0",
+  "source": "https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_s.onnx",
+  "input": [
+    1,
+    3,
+    640,
+    640
+  ],
+  "release": "0.1.1rc0",
+  "chunks": [
+    {
+      "path": "part-1.bin",
+      "bytes": 20000000,
+      "sha256": "a962255e783e42b6b871aa8c18fd8f9e15355727043ccbd5a8b82a5b6cec2321"
+    },
+    {
+      "path": "part-2.bin",
+      "bytes": 15858002,
+      "sha256": "af34263e4360328b791a0442e9bbb184bd12d41c2ddb4836e10b1ccb26dd0cb6"
+    }
+  ]
+}

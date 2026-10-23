@@ -1,0 +1,18 @@
+[
+  {
+    "name": "image_processing_rt_detr.py",
+    "url": "https://raw.githubusercontent.com/huggingface/transformers/v4.57.6/src/transformers/models/rt_detr/image_processing_rt_detr.py",
+    "sha256": "6b206c7833d12595f83f0799ae7bd1fd92173f3a3d5ce74fc2264b00f18b18b0"
+  },
+  {
+    "name": "base-README.md",
+    "url": "https://huggingface.co/PekingU/rtdetr_v2_r18vd/resolve/5650961749fa93567c0d46fc7f43ea4f9e914107/README.md",
+    "sha256": "4a26a3a6de73500f181e4edbc75b3f3f19ca6dde0fdaceeeb78167f223973305"
+  },
+  {
+    "name": "LICENSE",
+    "url": "https://raw.githubusercontent.com/lyuwenyu/RT-DETR/df2a96c8c3a098567a1149bf0248da6efe6d495d/LICENSE",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "revision": "df2a96c8c3a098567a1149bf0248da6efe6d495d"
+  }
+]

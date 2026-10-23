@@ -1,0 +1,169 @@
+{
+  "bugs": {
+    "url": "https://github.com/101arrowz/fflate/issues",
+    "email": "arjunbarrett@gmail.com"
+  },
+  "dist": {
+    "shasum": "bc27d8eb30343d4d512abb03480202ce65d825fc",
+    "tarball": "https://registry.npmjs.org/fflate/-/fflate-0.8.3.tgz",
+    "fileCount": 17,
+    "integrity": "sha512-tbZNuJrLwGUp3zshBtdy4W+ORxZuIh8a5ilyIEQDC5rY1f3U20JMry0Ll3WBzU58EZKsEuJFXhb5gwv8CsPvgA==",
+    "signatures": [
+      {
+        "sig": "MEUCIQDKHszYJq2f7EvHObBmG6jyQvta31NC5L2CK0carbSMGQIgIVKjNjB3PzYaa/odeFHGG0ovorVN7UIMFpr1PwYcBtY=",
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+      }
+    ],
+    "unpackedSize": 796742
+  },
+  "main": "./lib/index.cjs",
+  "name": "fflate",
+  "_from": "file:fflate-0.8.3.tgz",
+  "alias": {
+    "react": "preact/compat",
+    "buffer": false,
+    "process": false,
+    "react-dom": "preact/compat"
+  },
+  "types": "./lib/index.d.ts",
+  "unpkg": "./umd/index.js",
+  "author": {
+    "name": "Arjun Barrett",
+    "email": "arjunbarrett@gmail.com"
+  },
+  "module": "./esm/browser.js",
+  "browser": {
+    "./lib/node-worker.cjs": "./lib/worker.cjs"
+  },
+  "exports": {
+    ".": {
+      "node": {
+        "import": {
+          "types": "./esm/index.d.mts",
+          "default": "./esm/index.mjs"
+        },
+        "require": {
+          "types": "./lib/node.d.cts",
+          "default": "./lib/node.cjs"
+        }
+      },
+      "import": {
+        "types": "./esm/browser.d.ts",
+        "default": "./esm/browser.js"
+      },
+      "require": {
+        "types": "./lib/browser.d.cts",
+        "default": "./lib/browser.cjs"
+      }
+    },
+    "./node": {
+      "import": {
+        "types": "./esm/index.d.mts",
+        "default": "./esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/node.d.cts",
+        "default": "./lib/node.cjs"
+      }
+    },
+    "./browser": {
+      "import": {
+        "types": "./esm/browser.d.ts",
+        "default": "./esm/browser.js"
+      },
+      "require": {
+        "types": "./lib/browser.d.cts",
+        "default": "./lib/browser.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "TS_NODE_PROJECT=test/tsconfig.json uvu -b -r ts-node/register test",
+    "build": "npm run build:lib && npm run build:docs && npm run build:demo",
+    "script": "node -r ts-node/register scripts/$SC.ts",
+    "prepack": "npm run build && npm run test",
+    "build:lib": "tsc && tsc --project tsconfig.esm.json && npm run build:rewrite && npm run build:umd",
+    "build:umd": "SC=buildUMD npm run script",
+    "build:demo": "tsc --project tsconfig.demo.json && parcel build demo/index.html --no-cache --public-url \"./\" && SC=cpGHPages npm run script",
+    "build:docs": "typedoc --plugin typedoc-plugin-markdown --hideBreadcrumbs --readme none --disableSources --excludePrivate --excludeProtected --expandParameters --githubPages false --out docs/ src/index.ts",
+    "build:rewrite": "SC=rewriteBuilds npm run script"
+  },
+  "targets": {
+    "main": false,
+    "types": false,
+    "module": false,
+    "browser": false
+  },
+  "_npmUser": {
+    "name": "101arrowz",
+    "email": "arjunbarrett@gmail.com"
+  },
+  "homepage": "https://101arrowz.github.io/fflate",
+  "jsdelivr": "./umd/index.js",
+  "keywords": [
+    "gzip",
+    "gunzip",
+    "deflate",
+    "inflate",
+    "compression",
+    "decompression",
+    "zlib",
+    "pako",
+    "jszip",
+    "browser",
+    "node.js",
+    "tiny",
+    "fast",
+    "zip",
+    "unzip",
+    "non-blocking"
+  ],
+  "_resolved": "/Users/arjunb/Dev/fflate/fflate-0.8.3.tgz",
+  "_integrity": "sha512-tbZNuJrLwGUp3zshBtdy4W+ORxZuIh8a5ilyIEQDC5rY1f3U20JMry0Ll3WBzU58EZKsEuJFXhb5gwv8CsPvgA==",
+  "repository": {
+    "url": "git+https://github.com/101arrowz/fflate.git",
+    "type": "git"
+  },
+  "_npmVersion": "9.8.1",
+  "description": "High performance (de)compression in an 8kB package",
+  "directories": {},
+  "maintainers": [
+    {
+      "name": "101arrowz",
+      "email": "arjunbarrett@gmail.com"
+    }
+  ],
+  "sideEffects": false,
+  "_nodeVersion": "18.18.0",
+  "_hasShrinkwrap": false,
+  "devDependencies": {
+    "uvu": "^0.5.6",
+    "pako": "*",
+    "uzip": "*",
+    "jszip": "^3.10.1",
+    "react": "^18.2.0",
+    "parcel": "^2.9.3",
+    "preact": "^10.17.1",
+    "terser": "^5.47.1",
+    "ts-node": "^10.9.2",
+    "typedoc": "^0.28.19",
+    "react-dom": "^18.2.0",
+    "simple-git": "^3.19.1",
+    "typescript": "^6.0.3",
+    "@types/node": "^25.8.0",
+    "@types/pako": "*",
+    "@types/react": "^18.2.21",
+    "tiny-inflate": "*",
+    "@types/react-dom": "^18.2.7",
+    "@parcel/service-worker": "^2.9.3",
+    "typedoc-plugin-markdown": "^4.11.0"
+  },
+  "_npmOperationalInternal": {
+    "tmp": "tmp/fflate_0.8.3_1778890443233_0.2539217478632745",
+    "host": "s3://npm-registry-packages-npm-production"
+  },
+  "_id": "fflate@0.8.3",
+  "version": "0.8.3"
+}

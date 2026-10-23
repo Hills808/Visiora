@@ -1,0 +1,163 @@
+{
+  "createdBeforeConfirmationExecution": true,
+  "createdUtc": "2026-10-18T02:11:54Z",
+  "developmentResultsSHA256": "0fa7643e286238ea91727b0735c0ab46143c7b5a1c0481d474ac484e2ee327f4",
+  "protocolSHA256": "7fcbc120ed2ff5647c5875c94415c9cd523771273c709ad77f06113f254a2471",
+  "developmentCandidates": {
+    "0.9": {
+      "f32": {
+        "target": 0.9,
+        "classes": {
+          "person": {
+            "tp": 79,
+            "fp": 7,
+            "fn": 23,
+            "gt": 102,
+            "precision": 0.9186046511627907,
+            "recall": 0.7745098039215687,
+            "ignoredCrowd": 8,
+            "predictions": 86,
+            "negativeImages": 36,
+            "negativeImagesWithFalseDetection": 0,
+            "threshold": 0.55
+          },
+          "chair": {
+            "tp": 21,
+            "fp": 1,
+            "fn": 56,
+            "gt": 77,
+            "precision": 0.9545454545454546,
+            "recall": 0.2727272727272727,
+            "ignoredCrowd": 2,
+            "predictions": 22,
+            "negativeImages": 33,
+            "negativeImagesWithFalseDetection": 0,
+            "threshold": 0.8
+          },
+          "bed": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 8,
+            "gt": 13,
+            "precision": 1.0,
+            "recall": 0.38461538461538464,
+            "ignoredCrowd": 0,
+            "predictions": 5,
+            "negativeImages": 47,
+            "negativeImagesWithFalseDetection": 0,
+            "threshold": 0.9
+          }
+        },
+        "eligible": true,
+        "bytes": 81057510,
+        "macroRecall": 0.47728415375474204,
+        "macroPrecision": 0.9577167019027484
+      },
+      "uint8": {
+        "target": 0.9,
+        "classes": {
+          "person": {
+            "tp": 81,
+            "fp": 7,
+            "fn": 21,
+            "gt": 102,
+            "precision": 0.9204545454545454,
+            "recall": 0.7941176470588235,
+            "ignoredCrowd": 9,
+            "predictions": 88,
+            "negativeImages": 36,
+            "negativeImagesWithFalseDetection": 0,
+            "threshold": 0.55
+          },
+          "chair": {
+            "tp": 21,
+            "fp": 2,
+            "fn": 56,
+            "gt": 77,
+            "precision": 0.9130434782608695,
+            "recall": 0.2727272727272727,
+            "ignoredCrowd": 3,
+            "predictions": 23,
+            "negativeImages": 33,
+            "negativeImagesWithFalseDetection": 0,
+            "threshold": 0.75
+          },
+          "bed": {
+            "tp": 7,
+            "fp": 0,
+            "fn": 6,
+            "gt": 13,
+            "precision": 1.0,
+            "recall": 0.5384615384615384,
+            "ignoredCrowd": 0,
+            "predictions": 7,
+            "negativeImages": 47,
+            "negativeImagesWithFalseDetection": 0,
+            "threshold": 0.8
+          }
+        },
+        "eligible": true,
+        "bytes": 20991219,
+        "macroRecall": 0.5351021527492116,
+        "macroPrecision": 0.9444993412384717
+      }
+    }
+  },
+  "selected": {
+    "variant": "uint8",
+    "thresholds": {
+      "person": 0.55,
+      "chair": 0.75,
+      "bed": 0.8
+    },
+    "developmentSummary": {
+      "target": 0.9,
+      "classes": {
+        "person": {
+          "tp": 81,
+          "fp": 7,
+          "fn": 21,
+          "gt": 102,
+          "precision": 0.9204545454545454,
+          "recall": 0.7941176470588235,
+          "ignoredCrowd": 9,
+          "predictions": 88,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.55
+        },
+        "chair": {
+          "tp": 21,
+          "fp": 2,
+          "fn": 56,
+          "gt": 77,
+          "precision": 0.9130434782608695,
+          "recall": 0.2727272727272727,
+          "ignoredCrowd": 3,
+          "predictions": 23,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.75
+        },
+        "bed": {
+          "tp": 7,
+          "fp": 0,
+          "fn": 6,
+          "gt": 13,
+          "precision": 1.0,
+          "recall": 0.5384615384615384,
+          "ignoredCrowd": 0,
+          "predictions": 7,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0,
+          "threshold": 0.8
+        }
+      },
+      "eligible": true,
+      "bytes": 20991219,
+      "macroRecall": 0.5351021527492116,
+      "macroPrecision": 0.9444993412384717
+    },
+    "sha256": "4b839c46187b77fc620c770de0be6790637b98afde9b386232b0fcf74382eb3c"
+  }
+}

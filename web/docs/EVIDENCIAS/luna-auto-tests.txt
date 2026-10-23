@@ -1,0 +1,148 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> visiora@0.3.0 test
+> node tools/test.mjs
+
+Local ZIP: 160723689 bytes; 72 files
+{"built":true,"files":68}
+Ô£ö CA-F1/F2/F7: six scenes, 12 seeds, five simulated minutes remain quiet after briefing (1083.7435ms)
+Ô£ö CA-F3: eight exact fixed directional prefixes (0.2532ms)
+Ô£ö CA-P6: depth provenance, frame, finite value and uncertainty are all mandatory (0.1976ms)
+Ô£ö CA-P6: entity without scale is retained with direction, no fabricated distance (1.1405ms)
+Ô£ö CA-D4: stale, duplicated, out-of-order and future observations are rejected (0.1541ms)
+Ô£ö CA-F4: stable repeated observations do not create duplicate identities (0.4716ms)
+Ô£ö CA-F4: two separated chairs stay two entities (0.2778ms)
+Ô£ö CA-F4: new relevant entity is narrated, unchanged item is not repeated (0.4253ms)
+Ô£ö CA-F4: 61 percent does not repeat; 60 percent is a material approach (0.5513ms)
+Ô£ö CA-F4: explicit repeat is allowed and unknown object name is handled (0.5211ms)
+Ô£ö CA-F5: all channels including explicit queries are blocked above 15 deg/s (0.44ms)
+Ô£ö CA-F5: boundary at 15 deg/s is accepted after settle, visual motion also blocks (0.3073ms)
+Ô£ö CA-F5: rotation invalidates confirmation and enforces settling after rotation (0.3067ms)
+Ô£ö CA-F6: planning does not mark spoken; drop re-plans current facts (0.2761ms)
+Ô£ö CA-F6: expired unstarted speech cannot be confirmed and is re-planned (0.3116ms)
+Ô£ö CA-F6: a completed long utterance is acknowledged if it began before its TTL (0.3818ms)
+Ô£ö CA-F7/F8: entire lexicon has consistent forms and bounded per-sector language (0.5792ms)
+Ô£ö CA-F8: Portuguese number and alias forms (0.2615ms)
+Ô£ö CA-F9: uncertain room is not confidently named, sufficient evidence stabilizes (0.1647ms)
+Ô£ö CA-F9: even a confirmed bed never decides the type of place (0.4047ms)
+Ô£ö CA-P5: scripted person approach is noticed with metric input; pure yaw is not approach (0.5043ms)
+Ô£ö CA-P5: alert interrupts pending lower priority speech only with material metric evidence (0.3145ms)
+Ô£ö memory outside FOV is labeled old; dynamic memory expires (0.5058ms)
+Ô£ö missing object and empty front response never assert a clear path (0.8986ms)
+Ô£ö geometry wraps at 180 degrees and converts calibrated FOV symmetrically (0.1901ms)
+Ô£ö distance quantization is honest for unknown and extremes (0.1868ms)
+Ô£ö world ignores unsupported and weak detections and supports reset (0.9841ms)
+Ô£ö grouping never mixes sectors and plural distances refer to nearest member (0.1488ms)
+Ô£ö essential mode suppresses low-importance automatic novelty, explicit queries still work (0.4286ms)
+Ô£ö auto narration can be disabled for screen reader controlled output (0.1748ms)
+Ô£ö configuration covers the documented maximum thresholds (0.0699ms)
+Ô£ö CA-F6: text output may be repeated without confirming that any entity was spoken (0.2274ms)
+Ô£ö CA-F9: duplicate, stale and unsupported scene samples cannot establish a place (0.12ms)
+Ô£ö CA-F1/F6/F9: a late scene is announced once and interrupted output is replanned (0.4108ms)
+Ô£ö CA-F6/F9: speaking an object answer does not mark the current place as spoken (0.2644ms)
+Ô£ö CA-F5/D4/F9: independent scene results reject pre-turn, future and stale captures (0.2456ms)
+Ô£ö one detector cannot verify a person, even with duplicate boxes (2.5759ms)
+Ô£ö two detectors may recover a person Nano missed; other objects retain Nano evidence (2.4652ms)
+Ô£ö complete-link clusters do not merge a chain of incompatible person boxes (0.429ms)
+Ô£ö global cap is applied after verification, with all mapped Nano objects available (4.005ms)
+Ô£ö product person composition reproduces the 30 frozen independent confirmation outputs (16.3581ms)
+Ô£ö S decoder uses its own 640px grid and raw BGR input contract (39.7726ms)
+Ô£ö two whole-image models can agree on a broad family, including Sig third place (4.7652ms)
+Ô£ö scene disagreement, weak support, reject winner and small family margin all abstain (5.813ms)
+Ô£ö Places catalog preserves exact index order and does not invent namespace equivalences (16.2903ms)
+Ô£ö Places uses RGB ImageNet normalization on the same whole-frame pixels (6.2614ms)
+Ô£ö CA-F1/L3: activation analyzes once; five static minutes with noise, twelve seeds, do not spend again (100.4533ms)
+Ô£ö CA-F5/D4/L3: no queue, no dispatch while moving/busy, cadence, accumulated change and explicit pause (0.4178ms)
+Ô£ö CA-L1: localized image changes can schedule without a large global mean change (0.1378ms)
+Ô£ö CA-F2/F3/F4/F6/P6: automatic descriptions acknowledge only completed speech and announce new references (2.8309ms)
+Ô£ö CA-F4/F7/L4: changed person count and direction are described; snapshots stay age-qualified and bounded (1.0035ms)
+Ô£ö CA-F4/P6: losing all visible references is qualified once; returning references can be announced again (0.5664ms)
+Ô£ö CA-F9: a different room reintroduces its visible references instead of applying the old room memory (0.3029ms)
+(node:33452) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Ô£ö CA-L3: transaction prevents duplicate, concurrent and over-budget dispatch (7.577ms)
+Ô£ö CA-L3: restart/multiple connections preserve uncertain spend and single pending request (65.7807ms)
+Ô£ö CA-L3: missing usage retains full reservation; zero budget blocks and throttling persists (2.0844ms)
+(node:32576) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Ô£ö CA-L2: real HTTP, same origin and CSRF enforced; no images stored or secret returned (270.4992ms)
+Ô£ö CA-L2/L3: disabled configuration, missing consent and insufficient quota never dispatch (49.5919ms)
+Ô£ö CA-L1/L2: oversized body, invalid JPEG, dimensions and injected fields rejected before provider (26.2237ms)
+Ô£ö CA-L3: simultaneous requests dispatch once; uncertain failure keeps reservation and no retry (22.9941ms)
+Ô£ö CA-L2: service worker uses explicit asset allow-list, never API responses (1.5143ms)
+(node:35048) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Ô£ö CA-L1/L2: verify provider model exactly; missing/invalid IDs are not copied from the requested model (2.124ms)
+Ô£ö CA-L1/L3: real HTTP gateway records each returned model before accepting or rejecting evidence (280.6391ms)
+Ô£ö CA-L1/L2: refused/incomplete/error/malformed responses also record only model metadata (2.5471ms)
+Ô£ö CA-L2/L3: failed durable model audit blocks delivery; fake and transport failures cannot claim a model (1.5747ms)
+Ô£ö CA-L3: opening an existing ledger preserves spending, pending records and historical lack of model evidence (264.7356ms)
+(node:36156) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Ô£ö CA-L1: open scene/items accepted without catalog hints; original stamp required (7.2951ms)
+Ô£ö CA-L1/P6: malformed boxes, hallucinated references, extra depth, HTML and duplicate IDs rejected (3.5001ms)
+Ô£ö CA-L4: old/generation-mismatched/reordered results do not enter snapshot memory (1.3967ms)
+Ô£ö CA-F2/F3/F6/P6/L4: local rendering, camera direction, no distance, explicit age and completed repeat (1.8067ms)
+Ô£ö CA-L1: find/ahead/where accept open vocabulary; no box means no directional speech (1.6223ms)
+Ô£ö CA-L1: refusal, incomplete and malformed Responses payload are explicit failures (0.6637ms)
+Ô£ö CA-L2: provider fixes model/endpoint, sends pixels, disables storage and tools; no retries (19.5351ms)
+Ô£ö CA-L3: default configuration cannot make paid calls; malformed budgets fail closed (0.9604ms)
+Ô£ö CA-L4: canceled client response cannot be adopted; only one active request (3.3961ms)
+Ô£ö CA-F7/F8: source/age qualification fits word limits; long open labels do not overflow speech (1.2112ms)
+Ô£ö queued current object description cannot start after the object disappears (5.5134ms)
+Ô£ö queued directions are re-evaluated after an object changes sector (2.8058ms)
+Ô£ö a place withdrawn before voice starts is replanned as uncertainty (1.1042ms)
+Ô£ö explicit old-memory answers remain labelled and can start (0.9712ms)
+Ô£ö object evidence retains its actual capture frame; diagnostics omit images and descriptions (2.4136ms)
+Ô£ö whole-image RGB preprocessing has exact channel order, range and size (9.341ms)
+Ô£ö uniform obscured frames are rejected without inventing a place (7.8576ms)
+Ô£ö whole-image classifier accepts a supported embedding and preserves frame provenance (0.495ms)
+Ô£ö ambiguous image embeddings and explicit reject candidates abstain (0.1555ms)
+Ô£ö invalid model output cannot become a spoken place (0.2154ms)
+Ô£ö model parts reconstruct exact bytes, with checksums and progress (33.7727ms)
+Ô£ö tampered parts, unsafe paths, failed requests and invalid sizes fail explicitly (4.5725ms)
+Ô£ö CA-S3: remote and non-Brazilian voices are excluded (4.8692ms)
+Ô£ö CA-F6: speaker confirms only after onend, planning/start do not mark completed (1.0468ms)
+Ô£ö CA-F6: late callbacks after cancellation cannot confirm a new utterance (0.2805ms)
+Ô£ö expired speech is dropped before synthesis (0.1962ms)
+Ô£ö missing voice surfaces a clear error and never substitutes a remote voice (0.4005ms)
+Ô£ö speech start rejection cancels the utterance; errors return facts to planner (0.3633ms)
+Ô£ö CA-S4: history is opt-in and disabled by default (6.6495ms)
+Ô£ö preferences accept only documented values and persist locally (0.4822ms)
+Ô£ö corrupted and oversized storage is reported, never swallowed (0.5973ms)
+Ô£ö history is bounded and does not contain frames (2.7786ms)
+Ô£ö CA-S4: delete removes owned preferences/history, preserves unrelated storage (0.4172ms)
+Ô£ö model contract: 80 COCO labels, unsupported door is never fabricated (3.1858ms)
+Ô£ö released checkpoint uses raw BGR, not obsolete ImageNet normalization (16.4429ms)
+Ô£ö decode handles grid/stride, confidence, clipping and per-class suppression (6.292ms)
+Ô£ö intersection-over-union is invariant for identical and disjoint boxes (0.292ms)
+Ôä╣ tests 103
+Ôä╣ suites 0
+Ôä╣ pass 103
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 1337.2394
+Ôä╣ start of coverage report
+Ôä╣ -------------------------------------------------------------------
+Ôä╣ file               | line % | branch % | funcs % | uncovered lines
+Ôä╣ -------------------------------------------------------------------
+Ôä╣ dist               |        |          |         | 
+Ôä╣  brain             |        |          |         | 
+Ôä╣   brain.js         |  98.59 |    97.32 |   93.94 | 55-56 68-69
+Ôä╣   geometry.js      | 100.00 |   100.00 |  100.00 | 
+Ôä╣   lexicon.js       | 100.00 |   100.00 |  100.00 | 
+Ôä╣   realizer.js      |  98.61 |    95.83 |  100.00 | 61
+Ôä╣   scene.js         | 100.00 |    96.67 |  100.00 | 
+Ôä╣   visual-memory.js |  98.89 |    93.75 |   93.33 | 17-18
+Ôä╣   world.js         |  97.93 |    98.36 |   90.00 | 97-99
+Ôä╣ -------------------------------------------------------------------
+Ôä╣ all files          |  98.85 |    96.49 |   95.70 | 
+Ôä╣ -------------------------------------------------------------------
+Ôä╣ end of coverage report
+npm notice
+npm notice New minor version of npm available! 11.6.1 -> 11.21.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.1
+npm notice To update run: npm install -g npm@11.21.1
+npm notice

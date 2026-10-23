@@ -1,0 +1,61 @@
+{
+  "scope": "Loopback HTTP, real Worker/message transfer and synthetic video/voice/evidence. No model inference or paid API.",
+  "browser": "155.0.8059.84",
+  "cases": [
+    "CA-H1: one stream and local worker keeps processing fresh frames during 12 s of pending API, with zero queued frames",
+    "CA-H2/CA-L4: delayed snapshot beyond 10 s is rejected even though local observations are fresh",
+    "CA-H1/CA-F4: local worker continues during held speech; unchanged view makes no extra API request",
+    "CA-H2: restart has a new generation and disposes the previous worker",
+    "CA-H9: failed local worker terminates once and leaves the existing snapshot path available with a capability notice",
+    "CA-H1/H9: fallback without video-frame callback processes frames; simulated hidden-tab event stops camera and worker",
+    "CA-H9: consent revocation stops capture, worker and scheduling (fake transport, Luna consent policy)"
+  ],
+  "errors": [],
+  "requestsOutsideLoopback": [],
+  "concurrent": {
+    "pendingMs": 12014.699999999953,
+    "acceptedDuringWait": 13,
+    "busySkipped": 24,
+    "pendingFrames": 0,
+    "cameraRequests": 1
+  },
+  "diagnostics": {
+    "dispatched": 1,
+    "accepted": 1,
+    "obsolete": 0,
+    "silent": 0,
+    "delivered": 1,
+    "recoveries": 0,
+    "lastError": null,
+    "running": true,
+    "pending": false,
+    "paused": false,
+    "recovering": false,
+    "capture": {
+      "backend": "video-frame",
+      "frames": 19,
+      "fresh": true,
+      "pendingFrames": 0
+    },
+    "local": {
+      "dispatched": 6,
+      "accepted": 5,
+      "busySkipped": 9,
+      "stale": 0,
+      "invalid": 0,
+      "errors": 1,
+      "state": "error",
+      "inFlight": 0,
+      "pendingFrames": 0,
+      "lastAcceptedFrameId": 52,
+      "latencyMs": [
+        610.9000000001397,
+        604.6999999999534,
+        603.6999999999534,
+        606.1000000000931,
+        616.1000000000931
+      ]
+    }
+  },
+  "calls": 4
+}

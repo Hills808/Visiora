@@ -1,0 +1,21 @@
+{
+  "repository": "huggingface/transformers.js-examples",
+  "path": "smolvlm-webgpu",
+  "observed_commit": "9c6b7f911c85dcf29ee247bad518bbc89e2126b2",
+  "source_package": "https://raw.githubusercontent.com/huggingface/transformers.js-examples/9c6b7f911c85dcf29ee247bad518bbc89e2126b2/smolvlm-webgpu/package.json",
+  "source_worker": "https://raw.githubusercontent.com/huggingface/transformers.js-examples/9c6b7f911c85dcf29ee247bad518bbc89e2126b2/smolvlm-webgpu/src/worker.js",
+  "transformers_js": "3.7.1 stable pinned in official example",
+  "device": "webgpu",
+  "example_dtype": "fp32",
+  "quantized_256_total": 259855437,
+  "quantized_500_total": 511314996,
+  "known": "Official model card supplies CPU ORT example and ONNX quantized weights. Official web demo uses WebGPU.",
+  "not_tested": [
+    "Actual JS/browser inference",
+    "WASM fallback in browser",
+    "WebGPU availability/device memory",
+    "Quantized vs PyTorch quality parity",
+    "Brazilian Portuguese correct generation"
+  ],
+  "support_doc": "https://huggingface.co/docs/transformers.js/v3.8.1/guides/webgpu"
+}

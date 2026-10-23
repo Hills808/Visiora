@@ -1,0 +1,64 @@
+{
+  "policy": "At least95% precision among at least10 accepted development inputs and at most1 wrong; maximize correct, precision, smaller file. Same frozen score/margin grid and unchanged88 text embeddings.",
+  "chosen": {
+    "model": "fp16",
+    "bytes": 186039516,
+    "minimum": 0.12,
+    "margin": 0.03,
+    "samples": 96,
+    "raw_top1_correct": 74,
+    "accepted": 29,
+    "correct": 28,
+    "wrong": 1,
+    "abstained": 67,
+    "coverage": 0.3020833333333333,
+    "precision_when_accepted": 0.9655172413793104
+  },
+  "choices": [
+    {
+      "model": "q4",
+      "bytes": 63267466,
+      "minimum": 0.12,
+      "margin": 0.03,
+      "samples": 96,
+      "raw_top1_correct": 70,
+      "accepted": 28,
+      "correct": 27,
+      "wrong": 1,
+      "abstained": 68,
+      "coverage": 0.2916666666666667,
+      "precision_when_accepted": 0.9642857142857143
+    },
+    {
+      "model": "fp16",
+      "bytes": 186039516,
+      "minimum": 0.12,
+      "margin": 0.03,
+      "samples": 96,
+      "raw_top1_correct": 74,
+      "accepted": 29,
+      "correct": 28,
+      "wrong": 1,
+      "abstained": 67,
+      "coverage": 0.3020833333333333,
+      "precision_when_accepted": 0.9655172413793104
+    },
+    {
+      "model": "f32",
+      "bytes": 371807752,
+      "minimum": 0.12,
+      "margin": 0.03,
+      "samples": 96,
+      "raw_top1_correct": 74,
+      "accepted": 29,
+      "correct": 28,
+      "wrong": 1,
+      "abstained": 67,
+      "coverage": 0.3020833333333333,
+      "precision_when_accepted": 0.9655172413793104
+    }
+  ],
+  "development_sha256": "ce6ce4f41c3209c0dddfec2fd744a689c0707b69514a415151d6c57c4c906a28",
+  "at_unix": 1792289570.0170648,
+  "timing_correction": "Root requested conservative policy after first90% experiment had already evaluated indices12..16. Those40 cannot confirm this new policy. New indices17..21 are reserved here, before inference, for conservative confirmation. No tuning on private images or previous40."
+}

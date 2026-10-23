@@ -1,0 +1,62 @@
+[
+  {
+    "name": "mypy",
+    "version": "2.4.0",
+    "license": "MIT",
+    "filename": "mypy-2.4.0-cp311-cp311-win_amd64.whl",
+    "sha256": "ba05652540bf12828e52abae807b024b09ca144ff4f75e2450a81d69c376425b",
+    "bytes": 11299572,
+    "url": "https://files.pythonhosted.org/packages/e8/55/ba63121494404fd7d3787ec176ccd02820d6ec125ac4e7c4c0b79f2cc6c7/mypy-2.4.0-cp311-cp311-win_amd64.whl",
+    "license_source": "PyPI and downloaded wheel METADATA"
+  },
+  {
+    "name": "typing_extensions",
+    "version": "4.16.0",
+    "license": "PSF-2.0",
+    "filename": "typing_extensions-4.16.0-py3-none-any.whl",
+    "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+    "bytes": 45571,
+    "url": "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl",
+    "license_source": "PyPI and downloaded wheel METADATA"
+  },
+  {
+    "name": "mypy_extensions",
+    "version": "1.1.0",
+    "license": "MIT",
+    "filename": "mypy_extensions-1.1.0-py3-none-any.whl",
+    "sha256": "1be4cccdb0f2482337c4743e60421de3a356cd97508abadd57d47403e94f5505",
+    "bytes": 4963,
+    "url": "https://files.pythonhosted.org/packages/79/7b/2c79738432f5c924bef5071f933bcc9efd0473bac3b4aa584a6f7c1c8df8/mypy_extensions-1.1.0-py3-none-any.whl",
+    "license_source": "PyPI and downloaded wheel METADATA"
+  },
+  {
+    "name": "pathspec",
+    "version": "1.1.1",
+    "license": "MPL-2.0",
+    "filename": "pathspec-1.1.1-py3-none-any.whl",
+    "sha256": "a00ce642f577bf7f473932318056212bc4f8bfdf53128c78bbd5af0b9b20b189",
+    "bytes": 57328,
+    "url": "https://files.pythonhosted.org/packages/f1/d9/7fb5aa316bc299258e68c73ba3bddbc499654a07f151cba08f6153988714/pathspec-1.1.1-py3-none-any.whl",
+    "license_source": "PyPI and downloaded wheel METADATA"
+  },
+  {
+    "name": "librt",
+    "version": "0.16.0",
+    "license": "MIT",
+    "filename": "librt-0.16.0-cp311-cp311-win_amd64.whl",
+    "sha256": "5f49cff01bd608ef7d97104cb035c75455e79c2d70bf4a506cf773338ac1860d",
+    "bytes": 125093,
+    "url": "https://files.pythonhosted.org/packages/d1/38/c892383d2bb1a6a80b2ec8ede84970a265a792c56614a06282bf3008517c/librt-0.16.0-cp311-cp311-win_amd64.whl",
+    "license_source": "PyPI and downloaded wheel METADATA"
+  },
+  {
+    "name": "ast-serialize",
+    "version": "0.13.1",
+    "license": "MIT",
+    "filename": "ast_serialize-0.13.1-cp39-abi3-win_amd64.whl",
+    "sha256": "ddf7cbc9c8abf70102c4a088efe154bb86bfb825b0a10e556d2b15972cf99bd7",
+    "bytes": 1171153,
+    "url": "https://files.pythonhosted.org/packages/9f/6f/bafd6490fe7b355627fabe95f4417e3d02da93102c8552550eb9a0774e1e/ast_serialize-0.13.1-cp39-abi3-win_amd64.whl",
+    "license_source": "PyPI and downloaded wheel METADATA"
+  }
+]

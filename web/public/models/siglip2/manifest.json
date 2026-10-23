@@ -1,0 +1,33 @@
+{
+  "model": "SigLIP2 base patch16-224",
+  "repository": "onnx-community/siglip2-base-patch16-224-ONNX",
+  "revision": "ba1f3b0843f24bc5417d38e19c37b287d719b2f4",
+  "license": "Apache-2.0",
+  "quantization": "q4 visual encoder; q4 text encoder precomputed offline",
+  "bytes": 63267466,
+  "sha256": "03e61be280fb24114facd87a1e1e6b2b654aad49845686da2f930c72740914aa",
+  "chunks": [
+    {
+      "path": "vision-00.bin",
+      "bytes": 20000000,
+      "sha256": "f07eb55287890440c7cbb9238c35d6a2a6325df6d7e04f0fff99996b8f64a856"
+    },
+    {
+      "path": "vision-01.bin",
+      "bytes": 20000000,
+      "sha256": "b6fa6be183636533ebfbdfda561233649a911212f2ccf413f06c9c3c7bd14b08"
+    },
+    {
+      "path": "vision-02.bin",
+      "bytes": 20000000,
+      "sha256": "a30e6c3193803237189c7941dd2cda5cc566921977808decc94149763417f128"
+    },
+    {
+      "path": "vision-03.bin",
+      "bytes": 3267466,
+      "sha256": "78a9487931aac6358d2defefbebc27b9d4f7acf253de980cb501f35b4b8cec1d"
+    }
+  ],
+  "output": "pooler_output",
+  "embeddings_sha256": "79e6e68e003271fc0ba71e1fc2fac953169bb6c70f6aa2919d072ada439d2600"
+}

@@ -1,0 +1,18 @@
+{
+  "release": "0.1.1rc0",
+  "published": "2021-08-18T12:41:41Z",
+  "models": [
+    {
+      "name": "yolox_s.onnx",
+      "source": "https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_s.onnx",
+      "bytes": 35858002,
+      "sha256": "c5c2d13e59ae883e6af3b45daea64af4833a4951c92d116ec270d9ddbe998063"
+    },
+    {
+      "name": "yolox_tiny.onnx",
+      "source": "https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_tiny.onnx",
+      "bytes": 20219662,
+      "sha256": "427cc366d34e27ff7a03e2899b5e3671425c262ea2291f88bb942bc1cc70b0f7"
+    }
+  ]
+}

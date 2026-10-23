@@ -1,0 +1,12 @@
+[
+  {
+    "file": "onnx/vision_model.onnx",
+    "bytes": 371807752,
+    "sha256": "c0573e3f4140c3a7c4e9cc5912bd6b26a033b46a6a8e8af26cbea262b163bcad"
+  },
+  {
+    "file": "onnx/vision_model_fp16.onnx",
+    "bytes": 186039516,
+    "sha256": "a1959f7bd3993a607e48839f6d01e25b876fe76afda301b028b78eef68aabd95"
+  }
+]

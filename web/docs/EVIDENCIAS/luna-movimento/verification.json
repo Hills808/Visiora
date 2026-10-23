@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-19",
+  "unitTests": 131,
+  "failedTests": 0,
+  "browserCases": {
+    "luna-e2e.json": 10,
+    "continuity-e2e.json": 8,
+    "movement-e2e.json": 7,
+    "hybrid-e2e.json": 7
+  },
+  "totalBrowserCases": 32,
+  "typecheck": "passed",
+  "lint": "passed",
+  "codeFormatting": "passed",
+  "historicalJsonFixtureFormatting": "pre-existing warning; not changed",
+  "localSimulatorTranscripts": 6,
+  "localSimulatorUnchanged": true,
+  "paidCalls": 0,
+  "publication": false,
+  "physicalWalkingTested": false
+}

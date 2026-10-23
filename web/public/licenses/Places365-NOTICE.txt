@@ -1,0 +1,22 @@
+Places365 ResNet18 weights, Bolei Zhou / MIT CSAIL Computer Vision and Places authors.
+Project: https://places2.csail.mit.edu/
+Source: https://github.com/CSAILVision/places365
+README revision: 8a953ed56438726dc98bdef3796d042e7f1f171e
+
+The authors grant use of pretrained Places-CNN weights under Attribution CC BY,
+without specifying a CC BY version. This notice preserves that distinction;
+it does not relabel the weights as MIT or CC BY 4.0. The source-code MIT license
+is provided separately in Places365-code.txt.
+
+Reference: Bolei Zhou, Agata Lapedriza, Aditya Khosla, Aude Oliva, Antonio Torralba.
+Places: A 10 million Image Database for Scene Recognition. IEEE TPAMI, 2017.
+https://places2.csail.mit.edu/PAMI_places.pdf
+
+Original checkpoint: resnet18_places365.pth.tar
+SHA-256: 2f4759217d470da2b803f8f66cd4488a066406b555a5fb95ee9a4663f9f05588
+Visiora exports the same learned weights locally to ONNX float32, opset17.
+ONNX SHA-256: 843436fd7a9c9af62382d1924948761cb0e03637f679710062e9a84f3d77a06e
+Three transport parts reconstruct that ONNX unchanged. No research photographs
+are distributed. Original image copyrights belong to their owners.
+Inference uses whole-frame resize rather than the example's center crop.
+This notice does not imply endorsement, accuracy or safety.

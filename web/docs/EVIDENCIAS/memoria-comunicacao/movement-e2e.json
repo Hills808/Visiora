@@ -1,0 +1,32 @@
+{
+  "scope": "Synthetic continuous pixel motion, fake API and controlled voice in Chrome; no paid calls or physical walking.",
+  "cases": [
+    "First fresh frame starts analysis before the old settling window, despite continuous synthetic motion",
+    "Small ongoing motion during API and voice does not starve or cancel the age-labelled description",
+    "Three items in one direction form one phrase with one directional prefix and a bounded word count",
+    "Continuous motion allows the next analysis at the configured cadence, while unchanged evidence stays silent",
+    "Broad view change during API preserves only historical scene context and removes old object positions",
+    "Next fresh snapshot can describe objects omitted from context-only speech, without a stability pause",
+    "Broad change during speech cancels directional output once; only completed historical context is acknowledged",
+    "A broad change and return during API cannot revive the positions of that earlier capture",
+    "A voice callback delayed beyond the delivery TTL is rejected before audio and cannot acknowledge delivery"
+  ],
+  "errors": [],
+  "transcripts": [
+    [
+      "Simulação de análise. Na imagem capturada há 2 segundos: O ambiente parece quarto. À sua frente, há uma janela com veneziana, uma pessoa e uma cama."
+    ],
+    [
+      "Simulação de análise. Na imagem capturada há 1 segundo: O ambiente parecia quarto.",
+      "Simulação de análise. Na imagem capturada há 1 segundo: Neste enquadramento, o ambiente parece quarto. À sua frente, há uma janela com veneziana, uma pessoa e uma cama."
+    ],
+    [
+      "Simulação de análise. Na imagem capturada há 1 segundo: O ambiente parecia quarto."
+    ],
+    [
+      "Simulação de análise. Na imagem capturada há 1 segundo: O ambiente parecia quarto."
+    ]
+  ],
+  "firstFrameToDispatchMs": 126.80000000004657,
+  "calls": 7
+}

@@ -1,0 +1,19 @@
+{
+  "protocol_sha256": "9a247500ed89fed5485174f9e0e5e0ef4dab040080a322caa1ce74657a49f0a7",
+  "chosen": {
+    "model": "fp16",
+    "bytes": 186039516,
+    "minimum": 0.12,
+    "margin": 0.025,
+    "samples": 96,
+    "raw_top1_correct": 74,
+    "accepted": 35,
+    "correct": 32,
+    "wrong": 3,
+    "abstained": 61,
+    "coverage": 0.3645833333333333,
+    "precision_when_accepted": 0.9142857142857143
+  },
+  "at_unix": 1792289471.8418996,
+  "confirmation_evaluated": false
+}

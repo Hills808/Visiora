@@ -1,0 +1,322 @@
+[
+  {
+    "split": "consensus_confirmation",
+    "index": 22,
+    "expected": "living_room",
+    "source_archive": "train",
+    "source_file": "livingroom/room136_jpg.rf.f1e203881b764eab2a6e563617932d0c.jpg",
+    "sha256": "d54d5259d827e0e4829dcba2b4973e2260558a14dfc4ee3b5ac04303fd26f92d"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 23,
+    "expected": "living_room",
+    "source_archive": "train",
+    "source_file": "livingroom/cdmc1298_jpg.rf.07c3f43f295bba36321596f9fae20b07.jpg",
+    "sha256": "17d742e3fadd8ad561343509dfc57dd2cfd913c322628c535ff118130b505ae8"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 24,
+    "expected": "living_room",
+    "source_archive": "train",
+    "source_file": "livingroom/n14m_jpg.rf.d7f102833cf071c75585182569b797b3.jpg",
+    "sha256": "cdb69d3e2c0849a3bb6b96af5423dd848ecb0b4b12736220657710ee07aee61c"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 25,
+    "expected": "living_room",
+    "source_archive": "train",
+    "source_file": "livingroom/green_chair_dining_room_jpg.rf.f845ffa5db046ff0751f3945bd025c0a.jpg",
+    "sha256": "110b5b4b2eea13f6470b214338c6bcc7eaa0de8a71b491be6b6bc66adfcb2de0"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 26,
+    "expected": "living_room",
+    "source_archive": "train",
+    "source_file": "livingroom/int625_jpg.rf.fb2f85b68a9421c2bed0b2cc8748be15.jpg",
+    "sha256": "2181801a9a4d39c808fa03597d3e4de25294dcbd4027035325ee1dd4fec896c4"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 22,
+    "expected": "bedroom",
+    "source_archive": "valid",
+    "source_file": "bedroom/indoor_0338_jpg.rf.ff295fe221d7a1f7e9d506b37ec5d859.jpg",
+    "sha256": "a928ce6d982146152b776602cf723f5862c9b69a5e11af14cddaeb21445a6129"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 23,
+    "expected": "bedroom",
+    "source_archive": "valid",
+    "source_file": "bedroom/indoor_0502_jpg.rf.efc7fdd180dc2e8f4f881ed62338313b.jpg",
+    "sha256": "1fe28a142ba386f25d037769354136a0aee66933121f3903996c30634f829306"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 24,
+    "expected": "bedroom",
+    "source_archive": "valid",
+    "source_file": "bedroom/int726_jpg.rf.6d44340ac9ccf6902828a7ae80bede0e.jpg",
+    "sha256": "a010547855c9a32c434aa3a56aa2da71347566d3373909577618cd3fdebdb861"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 25,
+    "expected": "bedroom",
+    "source_archive": "valid",
+    "source_file": "bedroom/kamer2g_jpg.rf.807a987d838706696d37bfbbc44989ba.jpg",
+    "sha256": "73deea5de3096a57daaf335372ef77e82970068aca11ae23e3a06f5bccff8366"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 26,
+    "expected": "bedroom",
+    "source_archive": "valid",
+    "source_file": "bedroom/int631_jpg.rf.b1c7cfd0740608cc23e337433471ba3d.jpg",
+    "sha256": "b612de682b527406a5b98ed509c5a8224e9b44f74bf48937900ad047ed57c77a"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 22,
+    "expected": "kitchen",
+    "source_archive": "train",
+    "source_file": "kitchen/dsc01012_jpg.rf.4adbe1c824c54ddfbf752fd087e37f26.jpg",
+    "sha256": "64f81c835e53769fa2e2513902e67412bf86f62a536e5f5c7d13182ee1b7d190"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 23,
+    "expected": "kitchen",
+    "source_archive": "train",
+    "source_file": "kitchen/p3060098_jpg.rf.dd872dbc8d8497fdc0e8018dc7a656d3.jpg",
+    "sha256": "43eec1b0ab4303a5bbf49db62cca9dc5f5801ae2b66fcdfe25ee1ed8a75cc6bf"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 24,
+    "expected": "kitchen",
+    "source_archive": "train",
+    "source_file": "kitchen/casas_073_jpg.rf.21beaca73b7058adef3ba020d1cbc3e4.jpg",
+    "sha256": "a7d0910f124f1d1470d42336b6c738598adc1808f941c75fcc96ddda5873cdcb"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 25,
+    "expected": "kitchen",
+    "source_archive": "train",
+    "source_file": "kitchen/kitchen028_jpg.rf.41dbf759b44e03407b3c0137179fdc78.jpg",
+    "sha256": "d989466350bdb2e5e580eb9701ba3f41bb056828ddb57ed32d9c98b69c10e925"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 26,
+    "expected": "kitchen",
+    "source_archive": "test",
+    "source_file": "kitchen/int425_jpg.rf.f14ac7f3c0267c89eaf5998a586c53d0.jpg",
+    "sha256": "7c941855719f18fc504469d7cc888fdcabf0cd38c3919d9e246dc099c4b87ca7"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 22,
+    "expected": "bathroom",
+    "source_archive": "valid",
+    "source_file": "bathroom/indoor_0065_jpg.rf.bc65526c7cca0731730bcdca04c1950d.jpg",
+    "sha256": "0941a20c50d5eec8530708459bee8c9f5aa85bbd76c1e28e1e64b73afdf4a76c"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 23,
+    "expected": "bathroom",
+    "source_archive": "valid",
+    "source_file": "bathroom/indoor_0461_jpg.rf.909510aa8d54251eda0f06b6e2220e04.jpg",
+    "sha256": "c7e9e8608cb74185ab97bf0d9d95eecc68f1b98dbe8f6b465909df967a6f1e9f"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 24,
+    "expected": "bathroom",
+    "source_archive": "valid",
+    "source_file": "bathroom/b5_jpg.rf.03529c645350cd82aaa657e6f218db1d.jpg",
+    "sha256": "df61ed9ecb20c6a6f15326fdba3976ae4e574112e96fd9ddd037ae8ef437505e"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 25,
+    "expected": "bathroom",
+    "source_archive": "valid",
+    "source_file": "bathroom/IMG_3272_jpg.rf.4384bd512a678f36608c417191f1d5b6.jpg",
+    "sha256": "94536637b4210bd837b873776394178c4333357edbb9702f69afa99e402572f2"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 26,
+    "expected": "bathroom",
+    "source_archive": "valid",
+    "source_file": "bathroom/pasadena_IMG_0154_jpg.rf.1dbce4ac0383fe7927e1a366d1bc18a7.jpg",
+    "sha256": "85f8e5de02e248163aac519ac6a78fde3d9f6c2d9dae7d2c8bdd31fb11d6f50c"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 22,
+    "expected": "office",
+    "source_archive": "train",
+    "source_file": "office/int594_jpg.rf.4eef69b656831802c1502ae7c2d8d706.jpg",
+    "sha256": "8f0eba0c53dc49d75ff8803b9c90c4aac229be8d1621e1ddbf18267e29fd3961"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 23,
+    "expected": "office",
+    "source_archive": "train",
+    "source_file": "office/office18_jpg.rf.46bb245bf4485f968e77eeddedf46229.jpg",
+    "sha256": "780ad3147333c7e73b7f681979ca0391b167c884a66e0e4e127c7066bf6212e6"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 24,
+    "expected": "office",
+    "source_archive": "train",
+    "source_file": "office/tuscan_home_office500A_jpg.rf.fc79bdc11949a1f3cb9d29c357024b4b.jpg",
+    "sha256": "ca5bedbea509c1cd3db58c8f28c76c656b6bc9bea810f25a7126b9b600359700"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 25,
+    "expected": "office",
+    "source_archive": "train",
+    "source_file": "office/homeoff012_jpg.rf.f9a0a9f5f4c1af48480f0c0f1c9b8f70.jpg",
+    "sha256": "484a90f89af2cd17b8b5a41afb5fc436b951251a0c06b19cfa2a4d48ffeb6d3c"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 26,
+    "expected": "office",
+    "source_archive": "train",
+    "source_file": "office/office6_jpg.rf.b7345cf6aa4592c66f2a8b1b4672e6e9.jpg",
+    "sha256": "3493ac606a60d60f40cb4a4feac97bffb793cf718f871d054bfa68d2bda64566"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 22,
+    "expected": "classroom",
+    "source_archive": "valid",
+    "source_file": "classroom/salle_classe_int_jpg.rf.aa5de8082f7f9a2e0a3667dc5e76993b.jpg",
+    "sha256": "7096795f6e6b87d17a9b8f524313b71e865529da9c4c9c8cafe6023d30c9f0cb"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 23,
+    "expected": "classroom",
+    "source_archive": "train",
+    "source_file": "classroom/salle_de_classe67_jpg.rf.2208e8550c6b5fa22dea945d1c924188.jpg",
+    "sha256": "b2087060bc08046025f959f4c57bc352a901a9a6ddce844505b21f87f367efc6"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 24,
+    "expected": "classroom",
+    "source_archive": "train",
+    "source_file": "classroom/salle_de_cours_2_jpg.rf.3c92e29724455a52780e1e6dc4042578.jpg",
+    "sha256": "33d173ebdd0599d3cf6e55bbca56d2ec0f74e44d8c9bae022cc7f294acb73bdf"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 25,
+    "expected": "classroom",
+    "source_archive": "train",
+    "source_file": "classroom/sdeclasse2_jpg.rf.7390ff887928c43fae8e9a646e2ac518.jpg",
+    "sha256": "13cf2b9a75cb972fb8391a08f31a48ee1a982fbf39c1818f18486f129d592fed"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 26,
+    "expected": "classroom",
+    "source_archive": "valid",
+    "source_file": "classroom/class_room_2_jpg.rf.aca0e3d993a76d4e065e2c5dc09cd743.jpg",
+    "sha256": "0b654110643c330197483cc9c2c9f4d0efd5f6252a0b54f74707c5d2a1406567"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 22,
+    "expected": "restaurant",
+    "source_archive": "train",
+    "source_file": "restaurant/gaststaette1_jpg.rf.2979f111597b8e2405e0246bbb5d4417.jpg",
+    "sha256": "366caf42f53f197a64dd2ed77f3f600da7ba23ea3cf09c342c34c5733c47a609"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 23,
+    "expected": "restaurant",
+    "source_archive": "train",
+    "source_file": "restaurant/restau_17_jpg.rf.5396fd9e66c845fab7b986f673fcf5ad.jpg",
+    "sha256": "72e3b3f9bd4a90012e95d11194e84d2c0047236d61a526130e5361388c7c3b22"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 24,
+    "expected": "restaurant",
+    "source_archive": "train",
+    "source_file": "restaurant/restaurant_09_10_altavista_jpg.rf.a3ab81049ccf9c5706ebedfe3217ab0f.jpg",
+    "sha256": "50a0dcbe260f895202074adcbf5d72f576e06c8e3545f0896aa0f65024cfa301"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 25,
+    "expected": "restaurant",
+    "source_archive": "train",
+    "source_file": "restaurant/restaurant_05_09_altavista_jpg.rf.4f803bbd2542a1c28a7a34569512abd7.jpg",
+    "sha256": "6b9a409bb6f2da08e77b29b41bd266158dcb1b60df3d8086d33b03065b1ead3c"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 26,
+    "expected": "restaurant",
+    "source_archive": "train",
+    "source_file": "restaurant/restaurante_39_16_altavista_jpg.rf.09dfa876a0d06665b0f9c4081cc7f052.jpg",
+    "sha256": "6ff1231b8a52c926e8677517ffe8c4f9db18714a595d45fb9b625956c8c8d0e5"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 22,
+    "expected": "corridor",
+    "source_archive": "train",
+    "source_file": "corridor/c8_jpg.rf.9740bc36489ae2a58a9a31818820ec93.jpg",
+    "sha256": "663998fec483803c02c6e5bd4a4ba65a0693c4b31a7045ce15a5ecb990c63cef"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 23,
+    "expected": "corridor",
+    "source_archive": "valid",
+    "source_file": "corridor/003_jpg.rf.85cae100d519d91ab32e5cf8a3ab508c.jpg",
+    "sha256": "289d44a225775ea557f0a85ee55830f13a967b38d9b9732dd83b3db5c7c86314"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 24,
+    "expected": "corridor",
+    "source_archive": "valid",
+    "source_file": "corridor/PH_01_06_87774_31_l_jpg.rf.18c426df6c8d473f614cc1d96fd06d76.jpg",
+    "sha256": "2021f9e0b7bc5286ccdb65fe41dbf268efe976a153c2a727e7bbe5aefb47122a"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 25,
+    "expected": "corridor",
+    "source_archive": "train",
+    "source_file": "corridor/SMS_Main_Corridor_jpg.rf.eeb3b8b2e9f25c35ecf589bdb59b07a9.jpg",
+    "sha256": "771a02dc6a4bbdcffde59efa8a4ed628b6462cb48f384e124679170a4698a72a"
+  },
+  {
+    "split": "consensus_confirmation",
+    "index": 26,
+    "expected": "corridor",
+    "source_archive": "train",
+    "source_file": "corridor/hospital-corridor_jpg.rf.ca44ac842f8f95a6a84e57c6fcdc8455.jpg",
+    "sha256": "9f8cb8e43fb8325ac77118acb1654d7b7d9b08a3b15e687b02effe698bbeb556"
+  }
+]

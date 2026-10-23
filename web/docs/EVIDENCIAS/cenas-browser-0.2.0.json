@@ -1,0 +1,484 @@
+{
+  "scope": "Real SigLIP2 q4/WASM and YOLOX with a selected public positive image as fake camera; stubbed voice; fixture HTTP; no real users",
+  "cases": [
+    "scene-model download failure is explicit and object camera continues",
+    "retry loads verified real image model; temporal recognition and voice output",
+    "unchanged scene stays silent; an explicit place query can repeat it",
+    "local diagnostics include scene timing and stopping clears the scene",
+    "complete offline ZIP generated in-browser from static assets",
+    "tested flow has no external page requests or uploads"
+  ],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:8080/",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/styles.css",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/app.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/icon.svg",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/config.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/brain/brain.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/output/speaker.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/camera.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/storage.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/sim/scenarios.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/ui/render.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/brain/geometry.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/brain/lexicon.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/brain/realizer.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/brain/scene.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/brain/world.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/data/scene-catalog.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/icon.svg",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/worker.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/config.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/yolox.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vendor/ort.wasm.min.mjs",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/brain/geometry.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vendor/ort-wasm-simd-threaded.mjs",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vendor/ort-wasm-simd-threaded.wasm",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/yolox-nano.onnx",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/scene-worker.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vendor/ort.wasm.min.mjs",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/scene-model.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/config.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/model-assets.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/scene.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/siglip2/manifest.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/scene-worker.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vendor/ort.wasm.min.mjs",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/scene-model.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/config.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/model-assets.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/scene.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/siglip2/manifest.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/siglip2/vision-00.bin",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/siglip2/vision-01.bin",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/siglip2/vision-02.bin",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/siglip2/vision-03.bin",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/siglip2/embeddings.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vendor/ort-wasm-simd-threaded.mjs",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vendor/ort-wasm-simd-threaded.wasm",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/icon.svg",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/icon.svg",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/icon.svg",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/download-worker.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vendor/fflate.mjs",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/local-package.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/app.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/brain/brain.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/brain/geometry.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/brain/lexicon.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/brain/realizer.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/brain/scene.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/brain/types.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/brain/world.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/config.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/data/scene-catalog.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/download-worker.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/icon.svg",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/index.html",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/licenses/ONNX-Runtime.txt",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/licenses/SigLIP2-NOTICE.txt",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/licenses/SigLIP2.txt",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/licenses/TypeScript.txt",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/licenses/YOLOX.txt",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/licenses/fflate.txt",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/local-package.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/manifest.webmanifest",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/manifest.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/siglip2/embeddings.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/siglip2/manifest.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/siglip2/vision-00.bin",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/siglip2/vision-01.bin",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/siglip2/vision-02.bin",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/siglip2/vision-03.bin",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/models/yolox-nano.onnx",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/output/speaker.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/sim/scenarios.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/storage.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/styles.css",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/sw.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/ui/render.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vendor/fflate.mjs",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vendor/ort-wasm-simd-threaded.mjs",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vendor/ort-wasm-simd-threaded.wasm",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vendor/ort.wasm.min.mjs",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/camera.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/model-assets.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/scene-model.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/scene-worker.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/scene.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/worker.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:8080/vision/yolox.js",
+      "method": "GET"
+    }
+  ],
+  "errors": [],
+  "expected": "bathroom",
+  "diagnostic": {
+    "version": "0.2.0",
+    "date": "2026-10-17T21:57:47.161Z",
+    "source": "camera",
+    "frames": 49,
+    "speechCompleted": 3,
+    "errors": 1,
+    "rejectedFrames": 0,
+    "inferenceLatencyMs": [
+      170,
+      103,
+      117,
+      121,
+      95,
+      100,
+      89,
+      97,
+      101,
+      79,
+      86,
+      78,
+      80,
+      76,
+      81,
+      78,
+      77,
+      84,
+      77,
+      78,
+      82,
+      77,
+      74,
+      134,
+      81,
+      78,
+      83,
+      77,
+      78,
+      77,
+      76,
+      77,
+      80,
+      81,
+      78,
+      77,
+      74,
+      74,
+      77,
+      77,
+      79,
+      78,
+      83,
+      77,
+      73,
+      73,
+      75,
+      74,
+      75
+    ],
+    "sceneInferenceLatencyMs": [
+      1608,
+      1556,
+      1586,
+      1525,
+      1496
+    ],
+    "sceneSamples": 5,
+    "sceneAbstentions": 0,
+    "sceneRejectedFrames": 0
+  },
+  "zipBytes": 66676738,
+  "nativeDownloadNotTested": "Environment cancels even a minimal about:blank Blob download. QA copies generated bytes; no native download-save verification.",
+  "passed": true
+}

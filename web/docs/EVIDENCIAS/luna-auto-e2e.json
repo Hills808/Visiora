@@ -1,0 +1,25 @@
+{
+  "scope": "Real loopback HTTP and browser camera capture; synthetic video, provider evidence and voice. No OpenAI call.",
+  "cases": [
+    "Activation automatically analyzes and speaks the first stable view, without question button or ONNX",
+    "Repeat uses completed local memory without another provider call",
+    "Find open item, fixed camera direction, no fabricated distance",
+    "390px layout has no horizontal overflow",
+    "Material camera change automatically analyzes a new view and voices a visible passage without repeating the room",
+    "Changed pixels with the same acknowledged references do not repeat speech",
+    "A result arriving during settings waits for the dialog to close without another API request",
+    "Stopping during upstream analysis stops camera and rejects late speech",
+    "Canceling startup during gateway configuration does not open the camera",
+    "Provider failure pauses automatic dispatch and announces once, with no automatic paid retry"
+  ],
+  "calls": 7,
+  "errors": [],
+  "transcript": [
+    "Simulação de análise. Na imagem capturada há 1 segundo: O ambiente parece laboratório de cerâmica. À sua frente, à esquerda, há um torno de cerâmica.",
+    "Simulação de análise. Na imagem capturada há 1 segundo: O ambiente parece laboratório de cerâmica. À sua frente, à esquerda, há um torno de cerâmica.",
+    "Simulação de análise. Na imagem capturada há 1 segundo: À sua frente, à esquerda, há um torno de cerâmica.",
+    "Simulação de análise. Na imagem capturada há 1 segundo: À sua frente, à esquerda, talvez haja uma passagem com placa de saída.",
+    "Simulação de análise. Na imagem capturada há 1 segundo: O ambiente parece laboratório de cerâmica. À sua frente, à esquerda, talvez haja uma passagem com placa de saída.",
+    "Acompanhamento pausado. Não foi possível concluir a análise."
+  ]
+}

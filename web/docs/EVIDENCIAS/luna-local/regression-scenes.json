@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "cases": [
+    "scene-model download failure is explicit and object camera continues",
+    "retry loads verified real image model; temporal recognition and voice output",
+    "unchanged scene stays silent; an explicit place query can repeat it",
+    "local diagnostics include scene timing and stopping clears the scene",
+    "complete offline ZIP generated in-browser from static assets",
+    "tested flow has no external page requests or uploads"
+  ],
+  "diagnostic": {
+    "version": "0.3.0",
+    "date": "2026-10-18T19:18:30.866Z",
+    "source": "camera",
+    "frames": 12,
+    "speechCompleted": 5,
+    "errors": 1,
+    "rejectedFrames": 0,
+    "inferenceLatencyMs": [
+      2108,
+      2203,
+      1609,
+      1592,
+      1596,
+      1395,
+      1456,
+      1330,
+      1352,
+      1323,
+      1355,
+      1332
+    ],
+    "sceneInferenceLatencyMs": [
+      1921,
+      1852,
+      1680,
+      1577,
+      1577
+    ],
+    "sceneSamples": 5,
+    "sceneAbstentions": 0,
+    "sceneRejectedFrames": 0,
+    "recognitionProvenance": {
+      "lastAcceptedObjectFrame": {
+        "frameId": 12,
+        "capturedAtMs": 24734.600000000093
+      },
+      "lastAcceptedSceneFrame": {
+        "frameId": 11,
+        "capturedAtMs": 23156.100000000093
+      },
+      "lastDescription": {
+        "createdAtMs": 26541.40000000014,
+        "objectFrames": [],
+        "sceneFrame": 11,
+        "oldestEvidenceAtMs": 23156.100000000093
+      }
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-17",
+  "product_code_written": false,
+  "prototype_js_test_definitions": 40,
+  "prototype_python_test_definitions": 13,
+  "behavior_tests_passed_this_session": 0,
+  "benchmark_real_scenes_received": 0,
+  "model_inference_runs": 0,
+  "missing_prototype_paths": [
+    "README.md",
+    "package.json",
+    "web/js/brain/geometry.js",
+    "web/js/sim/simulator.js"
+  ],
+  "files": [
+    {
+      "path": "docs/ARQUITETURA.md",
+      "bytes": 1611,
+      "sha256": "3f207097b172c26ae0efe2a47bba3215b8a1af38f290d183b49b481269759ed6"
+    },
+    {
+      "path": "docs/CONJUNTO-DE-TESTE.md",
+      "bytes": 12832,
+      "sha256": "ce8c6aa42bbfecfce18f983b0bcf5af0eb9c388665d8e56bdbb2c9285e6af82b"
+    },
+    {
+      "path": "docs/DECISOES.md",
+      "bytes": 17532,
+      "sha256": "35755c1358613ded18850516ea927cb4dedad14d57cbaa177a3013b817ccaba9"
+    },
+    {
+      "path": "docs/EVIDENCIAS/e2e.log",
+      "bytes": 275,
+      "sha256": "b78e2409115531b9fb01cbdeb23825f12257516329c8ac9c3e236b6e93a33add"
+    },
+    {
+      "path": "docs/EVIDENCIAS/FASE0-EXECUCAO.md",
+      "bytes": 6022,
+      "sha256": "ca24ea0fb855f2a096d70029f02a71d637049b35b80269e01777216823cf59a4"
+    },
+    {
+      "path": "docs/EVIDENCIAS/node-test.log",
+      "bytes": 6127,
+      "sha256": "7e2d0cfa29f99faca13dd2f90bce9456a97d68a45f1d4e989af939a53f1d171e"
+    },
+    {
+      "path": "docs/EVIDENCIAS/npm-test.log",
+      "bytes": 657,
+      "sha256": "1d2c2597043cfec56cd43183f6d7a433a2d5b573a713f0c158aa23cce99a738f"
+    },
+    {
+      "path": "docs/EVIDENCIAS/pytest.log",
+      "bytes": 91,
+      "sha256": "5419508729a42d79b00c67abba77eafbacf75889ee425e8af2939251dd5de9fb"
+    },
+    {
+      "path": "docs/EVIDENCIAS/simulate.log",
+      "bytes": 1050,
+      "sha256": "ddde41ef17cc897a245f9558bbab9e2a5c822a7307949f5ea0c0f4ed3a572f73"
+    },
+    {
+      "path": "docs/FASE-0.md",
+      "bytes": 5121,
+      "sha256": "c2bdb4b06a16d44f2d9c71eb355631d406da38ef8233502d8c0da943bf611511"
+    },
+    {
+      "path": "docs/LIMITES.md",
+      "bytes": 986,
+      "sha256": "49440191ce06cdc307935640936a64b60c54c92daa642ea66e74a832f9f40fcd"
+    },
+    {
+      "path": "docs/PLANO-COMPLETO-VISIORA.md",
+      "bytes": 34951,
+      "sha256": "86737ff01de4ead651c899af36b103d9e8b17b9d8b3bf908872389439c136ee7"
+    },
+    {
+      "path": "docs/PLANO-FASE-1.md",
+      "bytes": 11267,
+      "sha256": "40eedb80925306b98d4795225e226cf5fc796f7903b7d901f5abce8a5c89fbd4"
+    },
+    {
+      "path": "docs/PRODUTO.md",
+      "bytes": 1393,
+      "sha256": "2321da91ee5094cdd09fde0b74527d8c8cb6d949a185d7f2b33c23ac44dcd4a9"
+    },
+    {
+      "path": "docs/REFERENCIAS.md",
+      "bytes": 1261,
+      "sha256": "81c2c644187359f9d5cf19833d8cae837092a742f4d56d7068f3f9883207407e"
+    },
+    {
+      "path": "docs/REQUISITOS.md",
+      "bytes": 10691,
+      "sha256": "2f42e308377ddcbf62975e062e9f60a6a89b63a2176b979c0a1ba065672e7a53"
+    }
+  ]
+}

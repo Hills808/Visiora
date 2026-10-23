@@ -1,0 +1,20 @@
+{
+  "protocol_sha256": "1687c15c4a80769c66a37392fe583649203b22dd76d44577514f2d113a0d7d3b",
+  "development_sha256": "bade0fd31c76e4e20dcf38dd0814c699f37983a10f36fdff87a6813cad4acabb",
+  "chosen": {
+    "places_probability": 0.3,
+    "places_family_margin": 0.15,
+    "samples": 96,
+    "accepted": 37,
+    "correct_family": 37,
+    "wrong_family": 0,
+    "abstained": 59,
+    "precision_when_accepted": 1.0,
+    "coverage": 0.3854166666666667,
+    "accepted_strict_raw_correct": 30,
+    "raw_top1_family_correct": 54
+  },
+  "at_unix": 1792289890.0977979,
+  "confirmation_evaluated": false,
+  "confirmation_selection_opened": false
+}

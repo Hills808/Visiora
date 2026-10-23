@@ -1,0 +1,90 @@
+[
+  {
+    "name": "typescript",
+    "version": "7.0.2",
+    "license": "Apache-2.0",
+    "url": "https://registry.npmjs.org/typescript/-/typescript-7.0.2.tgz",
+    "integrity": "sha512-8FYau96o3NKOhbjKi/qNvG/W5jhzxkbdm5sj9AbZ/5T5sWqn3hJgLfGx27sRKZWTvyzCP8dLRBTf5tBTSRVUNA==",
+    "bytes": 2497498,
+    "dependencies": {
+      "@typescript/typescript-aix-ppc64": "7.0.2",
+      "@typescript/typescript-linux-arm": "7.0.2",
+      "@typescript/typescript-linux-x64": "7.0.2",
+      "@typescript/typescript-sunos-x64": "7.0.2",
+      "@typescript/typescript-win32-x64": "7.0.2",
+      "@typescript/typescript-darwin-x64": "7.0.2",
+      "@typescript/typescript-netbsd-x64": "7.0.2",
+      "@typescript/typescript-freebsd-x64": "7.0.2",
+      "@typescript/typescript-linux-arm64": "7.0.2",
+      "@typescript/typescript-linux-ppc64": "7.0.2",
+      "@typescript/typescript-linux-s390x": "7.0.2",
+      "@typescript/typescript-openbsd-x64": "7.0.2",
+      "@typescript/typescript-win32-arm64": "7.0.2",
+      "@typescript/typescript-darwin-arm64": "7.0.2",
+      "@typescript/typescript-netbsd-arm64": "7.0.2",
+      "@typescript/typescript-freebsd-arm64": "7.0.2",
+      "@typescript/typescript-linux-loong64": "7.0.2",
+      "@typescript/typescript-linux-riscv64": "7.0.2",
+      "@typescript/typescript-openbsd-arm64": "7.0.2",
+      "@typescript/typescript-linux-mips64el": "7.0.2"
+    },
+    "optionalDependencies": {
+      "@typescript/typescript-aix-ppc64": "7.0.2",
+      "@typescript/typescript-linux-arm": "7.0.2",
+      "@typescript/typescript-linux-x64": "7.0.2",
+      "@typescript/typescript-sunos-x64": "7.0.2",
+      "@typescript/typescript-win32-x64": "7.0.2",
+      "@typescript/typescript-darwin-x64": "7.0.2",
+      "@typescript/typescript-netbsd-x64": "7.0.2",
+      "@typescript/typescript-freebsd-x64": "7.0.2",
+      "@typescript/typescript-linux-arm64": "7.0.2",
+      "@typescript/typescript-linux-ppc64": "7.0.2",
+      "@typescript/typescript-linux-s390x": "7.0.2",
+      "@typescript/typescript-openbsd-x64": "7.0.2",
+      "@typescript/typescript-win32-arm64": "7.0.2",
+      "@typescript/typescript-darwin-arm64": "7.0.2",
+      "@typescript/typescript-netbsd-arm64": "7.0.2",
+      "@typescript/typescript-freebsd-arm64": "7.0.2",
+      "@typescript/typescript-linux-loong64": "7.0.2",
+      "@typescript/typescript-linux-riscv64": "7.0.2",
+      "@typescript/typescript-openbsd-arm64": "7.0.2",
+      "@typescript/typescript-linux-mips64el": "7.0.2"
+    },
+    "localFile": "typescript-7.0.2.tgz"
+  },
+  {
+    "name": "@typescript/typescript-win32-x64",
+    "version": "7.0.2",
+    "license": "Apache-2.0",
+    "url": "https://registry.npmjs.org/@typescript/typescript-win32-x64/-/typescript-win32-x64-7.0.2.tgz",
+    "integrity": "sha512-0BQ3HkAHHlKLSp1qRvf3SUhGpGsDuhB/jgFw75guyqbxJqEaS0Cw/VFO8i2nHglJUzQCRtMMR/IBAKE3ETMC4g==",
+    "bytes": 28365027,
+    "localFile": "typescript-typescript-win32-x64-7.0.2.tgz"
+  },
+  {
+    "name": "prettier",
+    "version": "3.6.2",
+    "license": "MIT",
+    "url": "https://registry.npmjs.org/prettier/-/prettier-3.6.2.tgz",
+    "integrity": "sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==",
+    "bytes": 8458264,
+    "localFile": "prettier-3.6.2.tgz"
+  },
+  {
+    "name": "onnxruntime-web",
+    "version": "1.30.0",
+    "license": "MIT",
+    "url": "https://registry.npmjs.org/onnxruntime-web/-/onnxruntime-web-1.30.0.tgz",
+    "integrity": "sha512-q0y+JrrtukXSzsBWEMccVfqX25LRmosXHF+CaRJmg8pZClzcV7svNc4rKY3jL02Vb7QmRMDs1SigqR4CXAfKYQ==",
+    "bytes": 144618540,
+    "dependencies": {
+      "long": "^5.2.3",
+      "platform": "^1.3.6",
+      "protobufjs": "^7.2.4",
+      "flatbuffers": "^25.1.24",
+      "guid-typescript": "^1.0.9",
+      "onnxruntime-common": "1.30.0"
+    },
+    "localFile": "onnxruntime-web-1.30.0.tgz"
+  }
+]

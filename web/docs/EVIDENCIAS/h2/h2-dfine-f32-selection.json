@@ -1,0 +1,30 @@
+{
+  "protocolSha256": "693b613a302867cac9336b4a0d0b37fa6c93c2a6d25819d3f824e83404ef031d",
+  "developmentSha256": "ac59697ba2813520855575a25c5e0c13336eb4b6bfa4db310c5cd5be70dd5f77",
+  "selection": {
+    "person": {
+      "threshold": 0.6,
+      "tp": 64,
+      "fp": 4,
+      "fn": 38,
+      "precision": 0.9411764705882353,
+      "recall": 0.6274509803921569
+    },
+    "chair": {
+      "threshold": 0.7,
+      "tp": 20,
+      "fp": 2,
+      "fn": 57,
+      "precision": 0.9090909090909091,
+      "recall": 0.2597402597402597
+    },
+    "bed": {
+      "threshold": 0.8,
+      "tp": 8,
+      "fp": 0,
+      "fn": 5,
+      "precision": 1.0,
+      "recall": 0.6153846153846154
+    }
+  }
+}

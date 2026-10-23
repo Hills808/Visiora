@@ -1,0 +1,170 @@
+Local ZIP: 160732507 bytes; 78 files
+{"built":true,"files":74}
+✔ CA-F1/F2/F7: six scenes, 12 seeds, five simulated minutes remain quiet after briefing (949.7353ms)
+✔ CA-F3: eight exact fixed directional prefixes (0.2526ms)
+✔ CA-P6: depth provenance, frame, finite value and uncertainty are all mandatory (0.188ms)
+✔ CA-P6: entity without scale is retained with direction, no fabricated distance (1.1589ms)
+✔ CA-D4: stale, duplicated, out-of-order and future observations are rejected (0.1555ms)
+✔ CA-F4: stable repeated observations do not create duplicate identities (0.4466ms)
+✔ CA-F4: two separated chairs stay two entities (0.2306ms)
+✔ CA-F4: new relevant entity is narrated, unchanged item is not repeated (0.4313ms)
+✔ CA-F4: 61 percent does not repeat; 60 percent is a material approach (0.5584ms)
+✔ CA-F4: explicit repeat is allowed and unknown object name is handled (0.4704ms)
+✔ CA-F5: all channels including explicit queries are blocked above 15 deg/s (0.3604ms)
+✔ CA-F5: boundary at 15 deg/s is accepted after settle, visual motion also blocks (0.2818ms)
+✔ CA-F5: rotation invalidates confirmation and enforces settling after rotation (0.2918ms)
+✔ CA-F6: planning does not mark spoken; drop re-plans current facts (0.2685ms)
+✔ CA-F6: expired unstarted speech cannot be confirmed and is re-planned (0.2924ms)
+✔ CA-F6: a completed long utterance is acknowledged if it began before its TTL (0.3767ms)
+✔ CA-F7/F8: entire lexicon has consistent forms and bounded per-sector language (0.536ms)
+✔ CA-F8: Portuguese number and alias forms (0.2193ms)
+✔ CA-F9: uncertain room is not confidently named, sufficient evidence stabilizes (0.1457ms)
+✔ CA-F9: even a confirmed bed never decides the type of place (0.3167ms)
+✔ CA-P5: scripted person approach is noticed with metric input; pure yaw is not approach (0.4481ms)
+✔ CA-P5: alert interrupts pending lower priority speech only with material metric evidence (0.2453ms)
+✔ memory outside FOV is labeled old; dynamic memory expires (0.4119ms)
+✔ missing object and empty front response never assert a clear path (0.2104ms)
+✔ geometry wraps at 180 degrees and converts calibrated FOV symmetrically (0.134ms)
+✔ distance quantization is honest for unknown and extremes (0.0763ms)
+✔ world ignores unsupported and weak detections and supports reset (0.8934ms)
+✔ grouping never mixes sectors and plural distances refer to nearest member (0.1303ms)
+✔ essential mode suppresses low-importance automatic novelty, explicit queries still work (0.3878ms)
+✔ auto narration can be disabled for screen reader controlled output (0.1678ms)
+✔ configuration covers the documented maximum thresholds (0.0665ms)
+✔ CA-F6: text output may be repeated without confirming that any entity was spoken (0.6565ms)
+✔ CA-F9: duplicate, stale and unsupported scene samples cannot establish a place (0.1184ms)
+✔ CA-F1/F6/F9: a late scene is announced once and interrupted output is replanned (0.3751ms)
+✔ CA-F6/F9: speaking an object answer does not mark the current place as spoken (0.2383ms)
+✔ CA-F5/D4/F9: independent scene results reject pre-turn, future and stale captures (0.2295ms)
+✔ CA-H1/H2: two consumers and JPEG share one camera, ID/time and full-frame geometry (6.6174ms)
+✔ CA-H1: new source frames only, no repeated observation ({"fallback":false}) (1.1427ms)
+✔ CA-H1: new source frames only, no repeated observation ({"fallback":true}) (0.7749ms)
+✔ CA-H1: new source frames only, no repeated observation ({"fallback":true,"quality":false}) (0.5271ms)
+✔ CA-H2: retained frame handles and frozen old frames cannot produce new evidence (1.4758ms)
+✔ CA-H9: stopping before delayed permission resolves releases its late stream (0.5007ms)
+✔ CA-H9: stop during play or JPEG clears resources and rejects late capture (2.8393ms)
+✔ CA-H9: track ended stops capture; a stop inside a subscriber halts delivery to others (0.8296ms)
+✔ CA-H2: SnapshotCamera needs new frames after a freeze before declaring stable again (3.9582ms)
+✔ CA-F1/L1/H2: first frame and continuous motion can produce snapshots without settling (9.2297ms)
+✔ one detector cannot verify a person, even with duplicate boxes (2.5035ms)
+✔ two detectors may recover a person Nano missed; other objects retain Nano evidence (2.729ms)
+✔ complete-link clusters do not merge a chain of incompatible person boxes (0.3878ms)
+✔ global cap is applied after verification, with all mapped Nano objects available (3.9402ms)
+✔ product person composition reproduces the 30 frozen independent confirmation outputs (13.8467ms)
+✔ S decoder uses its own 640px grid and raw BGR input contract (37.0448ms)
+✔ two whole-image models can agree on a broad family, including Sig third place (3.4354ms)
+✔ scene disagreement, weak support, reject winner and small family margin all abstain (6.8463ms)
+✔ Places catalog preserves exact index order and does not invent namespace equivalences (4.4182ms)
+✔ Places uses RGB ImageNet normalization on the same whole-frame pixels (5.9974ms)
+✔ CA-H1: single in-flight, no copy/queue while busy; next offer uses the latest frame (13.0354ms)
+✔ CA-H2: expired, future, duplicate, out-of-order and other-session offers never copy pixels (1.7645ms)
+✔ CA-H2: a slow valid result is discarded at the original 3 s boundary (2.5698ms)
+✔ CA-H2: mismatched provenance, transform, source or invalid box cannot become evidence (4.6124ms)
+✔ CA-H9: stop aborts the in-flight job and late success never enters the next session (1.0592ms)
+✔ CA-H9: worker and pixel-copy failures stop once and expose no provider text (1.8928ms)
+✔ CA-H1/H9: watchdog aborts stalled perception, without retry or accumulating work (2.072ms)
+✔ CA-H9: numerical latency samples remain bounded for a long session (20.3632ms)
+✔ CA-H1/H9: worker adapter transfers pixel ownership and cancellation rejects pending work (4.7732ms)
+✔ CA-F2/F7: one direction per sector, preserving uncertainty and maximum three items (4.8238ms)
+✔ CA-F3/F4/P6: broad view change offers aged scene only once, without acknowledging omitted objects (0.8707ms)
+✔ CA-F1/L3: activation analyzes once; five static minutes with noise, twelve seeds, do not spend again (145.7785ms)
+✔ CA-F5/D4/L3: no queue, no dispatch without a fresh frame or while busy, cadence, accumulated change and explicit pause (0.6305ms)
+✔ CA-L1: localized image changes can schedule without a large global mean change (0.2991ms)
+✔ CA-F2/F3/F4/F6/P6: automatic descriptions acknowledge only completed speech and announce new references (1.0836ms)
+✔ CA-F4/F7/L4: changed person count and direction are described; snapshots stay age-qualified and bounded (0.7613ms)
+✔ CA-F4/P6: losing all visible references is qualified once; returning references can be announced again (0.478ms)
+✔ CA-F9: a different room reintroduces its visible references instead of applying the old room memory (0.3344ms)
+✔ CA-F4/P6: a person no longer identified is announced once even with unchanged furniture; return is new evidence (0.9904ms)
+✔ CA-F4/F9: broad structural change reorients the same room; uniform lighting is not a new room (4.4367ms)
+✔ CA-L1/F5: moderate localized and accumulated slow changes trigger a capture without global motion (1.7493ms)
+✔ CA-L3/D4: only one delayed recovery; repeated failure pauses; success resets streak and stop cancels retry (0.4386ms)
+(node:5528) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ CA-L3: transaction prevents duplicate, concurrent and over-budget dispatch (10.8264ms)
+✔ CA-L3: restart/multiple connections preserve uncertain spend and single pending request (68.7719ms)
+✔ CA-L3: missing usage retains full reservation; zero budget blocks and throttling persists (1.9111ms)
+(node:4908) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ CA-L2: real HTTP, same origin and CSRF enforced; no images stored or secret returned (207.5878ms)
+✔ CA-L2/L3: disabled configuration, missing consent and insufficient quota never dispatch (43.2321ms)
+✔ CA-L1/L2: oversized body, invalid JPEG, dimensions and injected fields rejected before provider (21.1788ms)
+{"event":"visiora_analysis_failure","requestId":"00000000-0000-4000-a000-000000000001","code":"internal"}
+✔ CA-L3: simultaneous requests dispatch once; uncertain failure keeps reservation and no retry (17.5587ms)
+✔ CA-L2: service worker uses explicit asset allow-list, never API responses (1.414ms)
+(node:2980) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ CA-L1/L2: verify provider model exactly; missing/invalid IDs are not copied from the requested model (1.8514ms)
+✔ CA-L1/L3: real HTTP gateway records each returned model before accepting or rejecting evidence (204.9832ms)
+✔ CA-L1/L2: refused/incomplete/error/malformed responses also record only model metadata (2.4635ms)
+✔ CA-L2/L3: failed durable model audit blocks delivery; fake and transport failures cannot claim a model (0.74ms)
+✔ CA-L3: opening an existing ledger preserves spending, pending records and historical lack of model evidence (233.6543ms)
+(node:21872) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ CA-L2/L3: transport failure categories are safe, persist without response bodies and keep the full reservation (22.4785ms)
+✔ CA-L3/D4: client permits bounded recovery only for known temporary failures; cancel rejects late responses (9.7141ms)
+(node:18360) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ CA-L1: open scene/items accepted without catalog hints; original stamp required (5.6945ms)
+✔ CA-L1/P6: malformed boxes, hallucinated references, extra depth, HTML and duplicate IDs rejected (1.1636ms)
+✔ CA-L4: old/generation-mismatched/reordered results do not enter snapshot memory (0.7634ms)
+✔ CA-L1/L4: a new question on the same fresh frame preserves age and rejects replay or altered frame stamps (2.0277ms)
+✔ CA-F2/F3/F6/P6/L4: local rendering, camera direction, no distance, explicit age and completed repeat (0.723ms)
+✔ CA-L1: find/ahead/where accept open vocabulary; no box means no directional speech (0.6828ms)
+✔ CA-L1: refusal, incomplete and malformed Responses payload are explicit failures (0.5187ms)
+✔ CA-L2: provider fixes model/endpoint, sends pixels, disables storage and tools; no retries (7.9372ms)
+✔ CA-L3: default configuration cannot make paid calls; malformed budgets fail closed (0.7331ms)
+✔ CA-L4: canceled client response cannot be adopted; only one active request (2.6437ms)
+✔ CA-F7/F8: source/age qualification fits word limits; long open labels do not overflow speech (0.6697ms)
+✔ queued current object description cannot start after the object disappears (4.7939ms)
+✔ queued directions are re-evaluated after an object changes sector (1.8361ms)
+✔ a place withdrawn before voice starts is replanned as uncertainty (0.6437ms)
+✔ explicit old-memory answers remain labelled and can start (0.6935ms)
+✔ object evidence retains its actual capture frame; diagnostics omit images and descriptions (1.8002ms)
+✔ whole-image RGB preprocessing has exact channel order, range and size (6.9743ms)
+✔ uniform obscured frames are rejected without inventing a place (6.9053ms)
+✔ whole-image classifier accepts a supported embedding and preserves frame provenance (0.6052ms)
+✔ ambiguous image embeddings and explicit reject candidates abstain (0.2221ms)
+✔ invalid model output cannot become a spoken place (0.3564ms)
+✔ model parts reconstruct exact bytes, with checksums and progress (22.6926ms)
+✔ tampered parts, unsafe paths, failed requests and invalid sizes fail explicitly (3.9852ms)
+✔ CA-S3: remote and non-Brazilian voices are excluded (3.2653ms)
+✔ CA-F6: speaker confirms only after onend, planning/start do not mark completed (1.5331ms)
+✔ CA-F6: late callbacks after cancellation cannot confirm a new utterance (0.2922ms)
+✔ expired speech is dropped before synthesis (0.2018ms)
+✔ missing voice surfaces a clear error and never substitutes a remote voice (0.4271ms)
+✔ speech start rejection cancels the utterance; errors return facts to planner (0.3736ms)
+✔ CA-S4: history is opt-in and disabled by default (3.1023ms)
+✔ preferences accept only documented values and persist locally (0.4249ms)
+✔ corrupted and oversized storage is reported, never swallowed (0.5392ms)
+✔ history is bounded and does not contain frames (2.4877ms)
+✔ CA-S4: delete removes owned preferences/history, preserves unrelated storage (0.3634ms)
+✔ model contract: 80 COCO labels, unsupported door is never fabricated (1.6138ms)
+✔ released checkpoint uses raw BGR, not obsolete ImageNet normalization (15.3875ms)
+✔ decode handles grid/stride, confidence, clipping and per-class suppression (7.682ms)
+✔ intersection-over-union is invariant for identical and disjoint boxes (0.3156ms)
+ℹ tests 131
+ℹ suites 0
+ℹ pass 131
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1154.2516
+ℹ start of coverage report
+ℹ ---------------------------------------------------------------------
+ℹ file                 | line % | branch % | funcs % | uncovered lines
+ℹ ---------------------------------------------------------------------
+ℹ dist                 |        |          |         | 
+ℹ  brain               |        |          |         | 
+ℹ   brain.js           |  98.59 |    97.32 |   93.94 | 55-56 68-69
+ℹ   geometry.js        | 100.00 |   100.00 |  100.00 | 
+ℹ   lexicon.js         | 100.00 |   100.00 |  100.00 | 
+ℹ   realizer.js        |  98.61 |    95.83 |  100.00 | 61
+ℹ   scene.js           | 100.00 |    96.67 |  100.00 | 
+ℹ   snapshot-speech.js | 100.00 |    94.74 |  100.00 | 
+ℹ   visual-memory.js   |  98.77 |    95.45 |   95.45 | 21-22 123
+ℹ   world.js           |  97.93 |    98.36 |   90.00 | 97-99
+ℹ ---------------------------------------------------------------------
+ℹ all files            |  98.85 |    96.72 |   96.33 | 
+ℹ ---------------------------------------------------------------------
+ℹ end of coverage report

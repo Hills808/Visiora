@@ -1,0 +1,37 @@
+{
+  "scope": "Base técnica local, câmera/voz/API simuladas; nenhum gasto de API.",
+  "runtime": "v24.11.0",
+  "platform": "win32",
+  "architecture": "x64",
+  "osRelease": "10.0.26200",
+  "cpu": "Intel(R) Core(TM) i7-10700F CPU @ 2.90GHz",
+  "logicalCpus": 16,
+  "ramBytes": 25634594816,
+  "checks": [
+    {
+      "name": "baseline-types",
+      "code": 0,
+      "elapsedMs": 268
+    },
+    {
+      "name": "baseline-lint",
+      "code": 0,
+      "elapsedMs": 3173
+    },
+    {
+      "name": "baseline-simulator",
+      "code": 0,
+      "elapsedMs": 112
+    },
+    {
+      "name": "baseline-luna-e2e",
+      "code": 0,
+      "elapsedMs": 16294
+    },
+    {
+      "name": "baseline-continuity-e2e",
+      "code": 0,
+      "elapsedMs": 14144
+    }
+  ]
+}

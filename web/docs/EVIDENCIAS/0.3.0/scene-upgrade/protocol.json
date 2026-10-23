@@ -1,0 +1,67 @@
+{
+  "input_selection_sha256": "c2b0cb37ccfd2b8f682ff3fe1ca32aca0c0a4bd65f75a17fbd578bb38d2dfcd2",
+  "embedding_sha256": "79e6e68e003271fc0ba71e1fc2fac953169bb6c70f6aa2919d072ada439d2600",
+  "text_encoder": "Existing frozen q4 text embeddings, 88 candidates, unchanged",
+  "model_repository": "onnx-community/siglip2-base-patch16-224-ONNX",
+  "model_revision": "ba1f3b0843f24bc5417d38e19c37b287d719b2f4",
+  "license": "Original Google model Apache-2.0; ONNX repository links to original and has no separate license field",
+  "preprocessing": "Whole RGB image warped to 224x224, PIL bilinear, x/127.5-1, CHW; unchanged",
+  "minimums": [
+    0.12,
+    0.14,
+    0.16,
+    0.18,
+    0.2,
+    0.22,
+    0.24,
+    0.26,
+    0.28
+  ],
+  "margins": [
+    0.005,
+    0.01,
+    0.015,
+    0.02,
+    0.025,
+    0.03,
+    0.04
+  ],
+  "selection_policy": "Strict labels: >=90% development precision among >=10 accepted. Within each variant maximize correct accepted, precision, stricter margin, stricter minimum. Across variants maximize correct accepted, precision, then smaller bytes. Freeze chosen variant and thresholds before running any confirmation input.",
+  "development_scope": "96 public images indices0..11, includes previous research test photos; not independent validation",
+  "confirmation_scope": "40 next original-photo-hash samples indices12..16, never used for this selection",
+  "coarse_families": {
+    "bedroom": [
+      "bedroom",
+      "bedchamber",
+      "childs_room",
+      "dorm_room",
+      "hotel_room",
+      "nursery"
+    ],
+    "classroom": [
+      "classroom",
+      "kindergarden_classroom",
+      "lecture_room"
+    ],
+    "office": [
+      "office",
+      "home_office",
+      "office_cubicles"
+    ],
+    "kitchen": [
+      "kitchen",
+      "restaurant_kitchen",
+      "galley"
+    ],
+    "restaurant": [
+      "restaurant",
+      "restaurant_patio",
+      "fastfood_restaurant"
+    ]
+  },
+  "coarse_policy": "Families only reported separately, never used to select model, thresholds, or modify ranking margin",
+  "runtime": "1.23.2",
+  "provider": "CPUExecutionProvider",
+  "threads": 4,
+  "fp16_optimization": "Basic graph optimization: default optimization failed on ORT1.23.2 with a SimplifiedLayerNormFusion cast-reference initialization error; recorded in precision-run-initial-error.log before any successful prediction"
+}

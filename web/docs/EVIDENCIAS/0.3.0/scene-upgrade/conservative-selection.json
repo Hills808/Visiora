@@ -1,0 +1,322 @@
+[
+  {
+    "split": "conservative_confirmation",
+    "index": 17,
+    "expected": "living_room",
+    "source_archive": "train",
+    "source_file": "livingroom/indoor_0224_jpg.rf.1fe7402abc418ade6430adacc57bb8d8.jpg",
+    "sha256": "773f1fba7e6c575d46cf8b1f2bd3b628b434d763410ce2b6571fca9d481b832a"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 18,
+    "expected": "living_room",
+    "source_archive": "train",
+    "source_file": "livingroom/int759_jpg.rf.c93d716fc5e39dadc7fbd24cc940baf7.jpg",
+    "sha256": "75c12a52ff0b0ab7c8b99d901676d468a0d907172c64cdc0555951d091fca038"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 19,
+    "expected": "living_room",
+    "source_archive": "train",
+    "source_file": "livingroom/int233_jpg.rf.6d9b8bf7235a099ad7ff64fb6521e8d1.jpg",
+    "sha256": "49970cdcbed72d7dd81fc7df311239f19e69a1c5c7453a3026b76a487d8a2184"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 20,
+    "expected": "living_room",
+    "source_archive": "train",
+    "source_file": "livingroom/room366_jpg.rf.0b34435294c8c6910d1637901aba4f63.jpg",
+    "sha256": "58ff5f12e1e4057984af42452f72a01e87d0825c7dadb1c7fe4384d0945e7afb"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 21,
+    "expected": "living_room",
+    "source_archive": "train",
+    "source_file": "livingroom/IPEN_jpg.rf.882c7a4f2927f7dfdf278d774c7b038b.jpg",
+    "sha256": "ea479f20b7e2385cadac0386c6466c0248f58a0b7db3406363e5befb916363a9"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 17,
+    "expected": "bedroom",
+    "source_archive": "valid",
+    "source_file": "bedroom/indoor_0190_jpg.rf.f36b037e6878cb7e07393f6c5f4f1998.jpg",
+    "sha256": "9d6a36823028b350413a7c0466bca245f4538508dc7c5d1fe416ec5ea68361d8"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 18,
+    "expected": "bedroom",
+    "source_archive": "valid",
+    "source_file": "bedroom/chambre_double_jpg.rf.7c0d09f4ec08ccfa92734fc6f1e26bb7.jpg",
+    "sha256": "cd5d2900a6b00034613fd0a4143c3413be48d668c4b90c9063351f0db8e6e9bc"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 19,
+    "expected": "bedroom",
+    "source_archive": "valid",
+    "source_file": "bedroom/StrongccL_T_jpg.rf.fea0c350478b287da26d982422e00a13.jpg",
+    "sha256": "49d8df5a39f03f32cdeb1658b58506fdbf73b0567d817fbba056ed41c9fd5783"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 20,
+    "expected": "bedroom",
+    "source_archive": "valid",
+    "source_file": "bedroom/room241_jpg.rf.53247e2454e3bd3ca912fa0cb7cf13cb.jpg",
+    "sha256": "0b76f25d5b4087afb441b4b20246e08c73e3bbb285db997a476d3a70d87c1c3d"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 21,
+    "expected": "bedroom",
+    "source_archive": "valid",
+    "source_file": "bedroom/indoor_0167_jpg.rf.154b47ea74c0218f017b374da49cc7b5.jpg",
+    "sha256": "0f62673fc5c44ab4fd8033815f3e317edc07f9baf727ec0ab0a82e09e32c6a5b"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 17,
+    "expected": "kitchen",
+    "source_archive": "train",
+    "source_file": "kitchen/N364039_jpg.rf.f38392e270ddcfbcd73ea8edcef0d5da.jpg",
+    "sha256": "72f09c25d78651e157bd0803437a892de4a4f28f940bb2b5615fdff1d6eb55f8"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 18,
+    "expected": "kitchen",
+    "source_archive": "train",
+    "source_file": "kitchen/cdMC1154_jpg.rf.b2f2a6b1de1bee19288cb93de7da442c.jpg",
+    "sha256": "a5ff112bcd878dfed21a9c4529fe551f36244060ef7d2c755d95f25228d20b4f"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 19,
+    "expected": "kitchen",
+    "source_archive": "train",
+    "source_file": "kitchen/cdMC1139_jpg.rf.1b882b3070c8de3d4ea09bbbb7bc0fbe.jpg",
+    "sha256": "1f64763739c3a56be242f64f3a1b2e155d47d30382514363dd99a023b2718c5f"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 20,
+    "expected": "kitchen",
+    "source_archive": "train",
+    "source_file": "kitchen/cdMC1198_jpg.rf.5773883ab26fe5989b136fab9206dea4.jpg",
+    "sha256": "4646c4a7ec99ddc3a0dfae64d10f3f94e7fdd7f46dd2aa7cceb9f0701b923c58"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 21,
+    "expected": "kitchen",
+    "source_archive": "train",
+    "source_file": "kitchen/N364002_jpg.rf.1a00cb80bcf8fba6a0a0225528ccdeb2.jpg",
+    "sha256": "f892476277e5d90fde18b162cfd71149f9164c909de6233c99fbd5596caf6647"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 17,
+    "expected": "bathroom",
+    "source_archive": "valid",
+    "source_file": "bathroom/b12_jpg.rf.b6296cf784588168acf5fb1d057fb19b.jpg",
+    "sha256": "b5be94555c4e3868eef02b43815169f65b2b97b4d4b6d22e0131807475ba20a0"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 18,
+    "expected": "bathroom",
+    "source_archive": "valid",
+    "source_file": "bathroom/room431_jpg.rf.b120e40e7b6d9e5073e3e2f500851957.jpg",
+    "sha256": "03321e320627026aa0b48d528fc0b9161afea5cfae677dd52c736c46a23c8f7f"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 19,
+    "expected": "bathroom",
+    "source_archive": "valid",
+    "source_file": "bathroom/14_master_bathroom_jl_jpg.rf.11e98514a918d0eacd55f78146bb8c46.jpg",
+    "sha256": "6745bc29b10284f5111e7d8fff2694854ec4f1440413a303523db81ba0ef349b"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 20,
+    "expected": "bathroom",
+    "source_archive": "valid",
+    "source_file": "bathroom/indoor_0432_jpg.rf.7e4bb81e6cc1f246325c69b44f90db62.jpg",
+    "sha256": "3322d2817c668f8db8b3911ad55a58e02bf84a246641123bb839292044eb58ae"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 21,
+    "expected": "bathroom",
+    "source_archive": "valid",
+    "source_file": "bathroom/indoor_0363_jpg.rf.e345cdd10067d47c3efb8d11f0798176.jpg",
+    "sha256": "ccfaf97b39c3867f66f6c1c8de417ba918d054008883388e47859899fb70c329"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 17,
+    "expected": "office",
+    "source_archive": "train",
+    "source_file": "office/ins9_jpg.rf.396d8836025b574a1d97888f60cf74f3.jpg",
+    "sha256": "a758dc4ab62f50d869c68150bc878ca34a4c80ab978d301667f7b0a7428379bf"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 18,
+    "expected": "office",
+    "source_archive": "train",
+    "source_file": "office/o3_jpg.rf.2e0405b302c23e1f4a19a5fae23eda1a.jpg",
+    "sha256": "8c8aaa2e62a57f116619c42b2438f1adb825a1e84cea77ed91bb4b70fd264002"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 19,
+    "expected": "office",
+    "source_archive": "train",
+    "source_file": "office/homeoff011_jpg.rf.fdb5da19b6b7c7f0a2c6ebb4bc673a08.jpg",
+    "sha256": "13c7a020ea3cc378dd8e5ce8d71d45a9ba4ac43978dbf139ab390e1eb4774913"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 20,
+    "expected": "office",
+    "source_archive": "train",
+    "source_file": "office/neutbbl-t_jpg.rf.9814bc08be4d468f01c139a1b1e3c25d.jpg",
+    "sha256": "049aee6399ff0227b5b95619bcc69ac20957fa3ecc3e14ca60dbc5cd0418d018"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 21,
+    "expected": "office",
+    "source_archive": "train",
+    "source_file": "office/eagle_office_jpg.rf.22ca536924511aadcec361ae398ad908.jpg",
+    "sha256": "746caa5450e9017d960d2d94d95377a41e57a08623877c55cf3ef5bc941f6a4d"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 17,
+    "expected": "classroom",
+    "source_archive": "train",
+    "source_file": "classroom/fouarre_classroom_02_jpg.rf.daf290f2a9953f4738f3c28eb24f7b40.jpg",
+    "sha256": "2f026d74d7c50318f0779a34199af005ef966129b42b7751c81af3d63943f489"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 18,
+    "expected": "classroom",
+    "source_archive": "train",
+    "source_file": "classroom/image17_jpg.rf.801ea67b8a2b4b0d157675f609ba6ac8.jpg",
+    "sha256": "e5b649d7a50e8a6c1a8f745abbb22e12590f62c0cfe07eb593b35b51415864a7"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 19,
+    "expected": "classroom",
+    "source_archive": "train",
+    "source_file": "classroom/classroom12_jpg.rf.083478e8f71596f611e7f07a8b2a0383.jpg",
+    "sha256": "c3aff1c9967a0dee63ab766d791e411eda1e54fd49b5a260a7757dec2308065b"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 20,
+    "expected": "classroom",
+    "source_archive": "train",
+    "source_file": "classroom/Laura_Lander_SMART_Classroom_jpg.rf.2f0d2e751926ce0a1f89beef1dcd4aff.jpg",
+    "sha256": "c4c9e3eee311a98067c3098b24424cc0e7aac1d78dd06814bf53dbc42f0f2b45"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 21,
+    "expected": "classroom",
+    "source_archive": "valid",
+    "source_file": "classroom/classroom_006_jpg.rf.c7ecef68038504724c5cd4ed1ce022aa.jpg",
+    "sha256": "706c330c93e7307b60a6aee2c6a596d22ec6672d9f126de38847f4a4bfeb7c22"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 17,
+    "expected": "restaurant",
+    "source_archive": "train",
+    "source_file": "restaurant/restaurante_17_05_altavista_jpg.rf.b378353e0b58a5a2046e70f0b5e84b32.jpg",
+    "sha256": "134badbacae39253a36381f3b30c35a22e47007665afc5bcba7c7a9453aabdd3"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 18,
+    "expected": "restaurant",
+    "source_archive": "train",
+    "source_file": "restaurant/restaurante_27_14_altavista_jpg.rf.a216e9f7cb8a9a3a30bdabd2c8d22418.jpg",
+    "sha256": "fcb227f0f7ffec48d163b95c8e99cc18d9314e64a8d63cd2a9eac3b7c82e8afe"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 19,
+    "expected": "restaurant",
+    "source_archive": "train",
+    "source_file": "restaurant/restaurant_23_05_altavista_jpg.rf.931345f28cacba69e660f954fb93e20d.jpg",
+    "sha256": "5c74ea9262a24390043a259e1843607244a89e3e25dbf4a1db83e24d949c88af"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 20,
+    "expected": "restaurant",
+    "source_archive": "train",
+    "source_file": "restaurant/restaurante_41_05_altavista_jpg.rf.2ffd93d78eb8b6a7c813d0e6b0038ccb.jpg",
+    "sha256": "a7ce42704428cf3ea2143b2d573cb65ff5a6ad2f9dce6d44e12e096b6654e0c9"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 21,
+    "expected": "restaurant",
+    "source_archive": "train",
+    "source_file": "restaurant/restaurant_07_17_altavista_jpg.rf.1c1f3c8b4949415390c9045706e6745c.jpg",
+    "sha256": "3216849a30457fc2e1035b9b4b18ef4eeb4c11259c0200dffb7a101cfc641e76"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 17,
+    "expected": "corridor",
+    "source_archive": "train",
+    "source_file": "corridor/p1010089_c_jpg.rf.947c8822214f823aecbe5897c70c7928.jpg",
+    "sha256": "83e7d96d423601204c99bed94dafd5dee797f3daca43f10251c4685209837283"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 18,
+    "expected": "corridor",
+    "source_archive": "valid",
+    "source_file": "corridor/c13_jpg.rf.aa93d130686de9ebf424711a121c4fbe.jpg",
+    "sha256": "ea264bfb0fb81ca2a06ef6af1c31bdbb08384b98fb3bedc7d376eed5b885cefd"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 19,
+    "expected": "corridor",
+    "source_archive": "train",
+    "source_file": "corridor/indoor_0233_jpg.rf.aa184b68b90e5c3cd61dc0e834a1c336.jpg",
+    "sha256": "46572bc67a8ec171b2ddd16f958d5be0989342e23c69141b8f8e4332335278e9"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 20,
+    "expected": "corridor",
+    "source_archive": "valid",
+    "source_file": "corridor/PASILLO223_jpg.rf.b229ca284360ea5185f8fbc7919c7127.jpg",
+    "sha256": "d4e79a4381fe6d8c01b3e37f06ea8c1a3f98c85d057ca3101764abe37f695c12"
+  },
+  {
+    "split": "conservative_confirmation",
+    "index": 21,
+    "expected": "corridor",
+    "source_archive": "train",
+    "source_file": "corridor/n190094_jpg.rf.e5acba1473471d11a7447c5a97090817.jpg",
+    "sha256": "6deba0d4919564a1a7c85601230d6208ecdb244b11524ead542bb9107fb57c8e"
+  }
+]

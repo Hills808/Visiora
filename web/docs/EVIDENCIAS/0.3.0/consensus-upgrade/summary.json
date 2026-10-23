@@ -1,0 +1,705 @@
+{
+  "protocolSHA256": "8be3d0a75e6724f3a1b74bb2fdd238d985191293ee3d023a2fb9d0594804e120",
+  "rawResultsSHA256": "c8e8e83c47c2e0870262b907b5418fbd06a37590658f9b3d2906069b76353556",
+  "partitions": {
+    "development60-exploratory": {
+      "imageCount": 60,
+      "summary": {
+        "person": {
+          "tp": 68,
+          "fp": 2,
+          "fn": 34,
+          "gt": 102,
+          "precision": 0.9714285714285714,
+          "recall": 0.6666666666666666,
+          "ignoredCrowd": 4,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0
+        },
+        "chair": {
+          "tp": 15,
+          "fp": 4,
+          "fn": 62,
+          "gt": 77,
+          "precision": 0.7894736842105263,
+          "recall": 0.19480519480519481,
+          "ignoredCrowd": 3,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0
+        },
+        "bed": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "gt": 13,
+          "precision": 0.8,
+          "recall": 0.6153846153846154,
+          "ignoredCrowd": 0,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0
+        }
+      },
+      "nanoBaseline": {
+        "person": {
+          "tp": 58,
+          "fp": 2,
+          "fn": 44,
+          "gt": 102,
+          "precision": 0.9666666666666667,
+          "recall": 0.5686274509803921,
+          "ignoredCrowd": 3,
+          "negativeImages": 36,
+          "negativeImagesWithFalseDetection": 0
+        },
+        "chair": {
+          "tp": 8,
+          "fp": 0,
+          "fn": 69,
+          "gt": 77,
+          "precision": 1.0,
+          "recall": 0.1038961038961039,
+          "ignoredCrowd": 0,
+          "negativeImages": 33,
+          "negativeImagesWithFalseDetection": 0
+        },
+        "bed": {
+          "tp": 7,
+          "fp": 1,
+          "fn": 6,
+          "gt": 13,
+          "precision": 0.875,
+          "recall": 0.5384615384615384,
+          "ignoredCrowd": 0,
+          "negativeImages": 47,
+          "negativeImagesWithFalseDetection": 0
+        }
+      },
+      "notWorseAllClassPrecisionRecall": false,
+      "anyStrictGain": true
+    },
+    "priorConfirmation30-exploratory": {
+      "imageCount": 30,
+      "summary": {
+        "person": {
+          "tp": 34,
+          "fp": 0,
+          "fn": 20,
+          "gt": 54,
+          "precision": 1.0,
+          "recall": 0.6296296296296297,
+          "ignoredCrowd": 0,
+          "negativeImages": 18,
+          "negativeImagesWithFalseDetection": 0
+        },
+        "chair": {
+          "tp": 9,
+          "fp": 3,
+          "fn": 13,
+          "gt": 22,
+          "precision": 0.75,
+          "recall": 0.4090909090909091,
+          "ignoredCrowd": 0,
+          "negativeImages": 16,
+          "negativeImagesWithFalseDetection": 2
+        },
+        "bed": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 2,
+          "gt": 7,
+          "precision": 1.0,
+          "recall": 0.7142857142857143,
+          "ignoredCrowd": 0,
+          "negativeImages": 23,
+          "negativeImagesWithFalseDetection": 0
+        }
+      },
+      "nanoBaseline": {
+        "person": {
+          "tp": 27,
+          "fp": 3,
+          "fn": 27,
+          "gt": 54,
+          "precision": 0.9,
+          "recall": 0.5,
+          "ignoredCrowd": 0,
+          "negativeImages": 18,
+          "negativeImagesWithFalseDetection": 1
+        },
+        "chair": {
+          "tp": 7,
+          "fp": 2,
+          "fn": 15,
+          "gt": 22,
+          "precision": 0.7777777777777778,
+          "recall": 0.3181818181818182,
+          "ignoredCrowd": 0,
+          "negativeImages": 16,
+          "negativeImagesWithFalseDetection": 1
+        },
+        "bed": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 4,
+          "gt": 7,
+          "precision": 1.0,
+          "recall": 0.42857142857142855,
+          "ignoredCrowd": 0,
+          "negativeImages": 23,
+          "negativeImagesWithFalseDetection": 0
+        }
+      },
+      "notWorseAllClassPrecisionRecall": false,
+      "anyStrictGain": true
+    }
+  },
+  "gatePassed": false,
+  "new30DownloadedOrInferred": false,
+  "parametersChangedAfterResults": false,
+  "privateImageUsed": false,
+  "productFilesChanged": false,
+  "falsePositiveExamples": {
+    "development60-exploratory": [
+      {
+        "id": 366199,
+        "class": "bed",
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "gt": 1,
+        "falsePositiveBoxes": [
+          {
+            "class": "bed",
+            "box": [
+              3.5570394075833836,
+              11.253533986898569,
+              636.4128971099854,
+              421.99275306554944
+            ],
+            "score": 0.7955728769302368,
+            "votes": 2,
+            "members": [
+              {
+                "class": "bed",
+                "score": 0.7999979853630066,
+                "box": [
+                  2.3310279846191406,
+                  19.445914268493652,
+                  640.0,
+                  425.693076133728
+                ],
+                "head": "s",
+                "sourceIndex": 0
+              },
+              {
+                "class": "bed",
+                "score": 0.791147768497467,
+                "box": [
+                  4.7830508305476265,
+                  3.0611537053034854,
+                  632.8257942199707,
+                  418.2924299973708
+                ],
+                "head": "nano",
+                "sourceIndex": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 51738,
+        "class": "chair",
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "gt": 1,
+        "falsePositiveBoxes": [
+          {
+            "class": "chair",
+            "box": [
+              76.42085030674934,
+              161.08165257252182,
+              218.27432404343898,
+              288.71282854905496
+            ],
+            "score": 0.6459208428859711,
+            "votes": 2,
+            "members": [
+              {
+                "class": "chair",
+                "score": 0.7714858651161194,
+                "box": [
+                  75.82283020019531,
+                  159.30843697144437,
+                  220.53501239189737,
+                  289.64380461436053
+                ],
+                "head": "tiny",
+                "sourceIndex": 1
+              },
+              {
+                "class": "chair",
+                "score": 0.5203558206558228,
+                "box": [
+                  77.01887041330338,
+                  162.85486817359924,
+                  216.01363569498062,
+                  287.7818524837494
+                ],
+                "head": "s",
+                "sourceIndex": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 551815,
+        "class": "bed",
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "gt": 1,
+        "falsePositiveBoxes": [
+          {
+            "class": "bed",
+            "box": [
+              0.0,
+              96.52250084510217,
+              639.1705204890325,
+              478.2028479942909
+            ],
+            "score": 0.6941146850585938,
+            "votes": 2,
+            "members": [
+              {
+                "class": "bed",
+                "score": 0.7403573393821716,
+                "box": [
+                  0.0,
+                  105.561340038593,
+                  638.3410409780649,
+                  479.31528384868915
+                ],
+                "head": "tiny",
+                "sourceIndex": 0
+              },
+              {
+                "class": "bed",
+                "score": 0.6478720307350159,
+                "box": [
+                  0.0,
+                  87.48366165161133,
+                  640.0,
+                  477.0904121398926
+                ],
+                "head": "s",
+                "sourceIndex": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 570456,
+        "class": "chair",
+        "tp": 0,
+        "fp": 1,
+        "fn": 3,
+        "gt": 3,
+        "falsePositiveBoxes": [
+          {
+            "class": "chair",
+            "box": [
+              294.1053072856023,
+              289.6960414739756,
+              436.56241248204157,
+              431.20107100560114
+            ],
+            "score": 0.6017205715179443,
+            "votes": 2,
+            "members": [
+              {
+                "class": "chair",
+                "score": 0.7475095987319946,
+                "box": [
+                  295.14287757873535,
+                  288.80012702941895,
+                  433.6923770904541,
+                  430.5632495880127
+                ],
+                "head": "s",
+                "sourceIndex": 0
+              },
+              {
+                "class": "chair",
+                "score": 0.45593154430389404,
+                "box": [
+                  293.0677369924692,
+                  290.59195591853216,
+                  439.43244787362903,
+                  431.8388924231896
+                ],
+                "head": "tiny",
+                "sourceIndex": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 170670,
+        "class": "chair",
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "gt": 2,
+        "falsePositiveBoxes": [
+          {
+            "class": "chair",
+            "box": [
+              517.6754349928635,
+              38.3477629331442,
+              639.3882983281062,
+              201.61406284112195
+            ],
+            "score": 0.6279734075069427,
+            "votes": 2,
+            "members": [
+              {
+                "class": "chair",
+                "score": 0.7390504479408264,
+                "box": [
+                  520.3912734985352,
+                  39.61189126968384,
+                  639.3091430664062,
+                  188.2778458595276
+                ],
+                "head": "s",
+                "sourceIndex": 1
+              },
+              {
+                "class": "chair",
+                "score": 0.5168963670730591,
+                "box": [
+                  514.959596487192,
+                  37.08363459660457,
+                  639.4674535898062,
+                  214.95027982271634
+                ],
+                "head": "tiny",
+                "sourceIndex": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 136355,
+        "class": "chair",
+        "tp": 1,
+        "fp": 1,
+        "fn": 2,
+        "gt": 3,
+        "falsePositiveBoxes": [
+          {
+            "class": "chair",
+            "box": [
+              305.0776862547948,
+              240.47626917178815,
+              409.7193761422084,
+              425.2617673140306
+            ],
+            "score": 0.7655881345272064,
+            "votes": 2,
+            "members": [
+              {
+                "class": "chair",
+                "score": 0.8519877195358276,
+                "box": [
+                  291.71680879592896,
+                  243.727068901062,
+                  411.4453167915344,
+                  427.0
+                ],
+                "head": "s",
+                "sourceIndex": 0
+              },
+              {
+                "class": "chair",
+                "score": 0.6791885495185852,
+                "box": [
+                  318.4385637136606,
+                  237.22546944251425,
+                  407.9934354928823,
+                  423.52353462806116
+                ],
+                "head": "tiny",
+                "sourceIndex": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 144003,
+        "class": "person",
+        "tp": 4,
+        "fp": 1,
+        "fn": 2,
+        "gt": 6,
+        "falsePositiveBoxes": [
+          {
+            "class": "person",
+            "box": [
+              247.12620578133144,
+              0.7261299743102148,
+              342.43782821756145,
+              98.42981587235744
+            ],
+            "score": 0.5334243923425674,
+            "votes": 2,
+            "members": [
+              {
+                "class": "person",
+                "score": 0.5801419615745544,
+                "box": [
+                  263.86439949274063,
+                  0.5170240998268127,
+                  342.2665134072304,
+                  92.73842126131058
+                ],
+                "head": "s",
+                "sourceIndex": 4
+              },
+              {
+                "class": "person",
+                "score": 0.48670682311058044,
+                "box": [
+                  230.38801206992224,
+                  0.9352358487936167,
+                  342.6091430278925,
+                  104.12121048340431
+                ],
+                "head": "tiny",
+                "sourceIndex": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 162092,
+        "class": "person",
+        "tp": 9,
+        "fp": 1,
+        "fn": 2,
+        "gt": 11,
+        "falsePositiveBoxes": [
+          {
+            "class": "person",
+            "box": [
+              483.0903920393724,
+              49.123468307348396,
+              587.0220969273494,
+              180.71994434870206
+            ],
+            "score": 0.6948453485965729,
+            "votes": 2,
+            "members": [
+              {
+                "class": "person",
+                "score": 0.7330055236816406,
+                "box": [
+                  483.0002861022949,
+                  48.88420820236206,
+                  588.5340309143066,
+                  181.87326765060425
+                ],
+                "head": "s",
+                "sourceIndex": 5
+              },
+              {
+                "class": "person",
+                "score": 0.6566851735115051,
+                "box": [
+                  483.18049797644983,
+                  49.36272841233473,
+                  585.5101629403921,
+                  179.56662104679987
+                ],
+                "head": "tiny",
+                "sourceIndex": 6
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "priorConfirmation30-exploratory": [
+      {
+        "id": 368900,
+        "class": "chair",
+        "tp": 1,
+        "fp": 1,
+        "fn": 0,
+        "gt": 1,
+        "falsePositiveBoxes": [
+          {
+            "class": "chair",
+            "box": [
+              455.04270595159284,
+              360.09369141016253,
+              626.8000959005111,
+              479.0185395265237
+            ],
+            "score": 0.6361509164174398,
+            "votes": 3,
+            "members": [
+              {
+                "class": "chair",
+                "score": 0.7550117373466492,
+                "box": [
+                  455.4330244064331,
+                  358.2190990447998,
+                  626.1724653244019,
+                  479.85217094421387
+                ],
+                "head": "s",
+                "sourceIndex": 0
+              },
+              {
+                "class": "chair",
+                "score": 0.5888774991035461,
+                "box": [
+                  457.01412787804236,
+                  360.8582958808312,
+                  624.682983985314,
+                  479.2334695962759
+                ],
+                "head": "tiny",
+                "sourceIndex": 1
+              },
+              {
+                "class": "chair",
+                "score": 0.564563512802124,
+                "box": [
+                  452.6809655703031,
+                  361.2036793048565,
+                  629.5448383918175,
+                  477.96997803908124
+                ],
+                "head": "nano",
+                "sourceIndex": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 78915,
+        "class": "chair",
+        "tp": 0,
+        "fp": 1,
+        "fn": 0,
+        "gt": 0,
+        "falsePositiveBoxes": [
+          {
+            "class": "chair",
+            "box": [
+              405.0875785900996,
+              19.285049456816452,
+              455.935666341048,
+              57.61135279215299
+            ],
+            "score": 0.6848784983158112,
+            "votes": 2,
+            "members": [
+              {
+                "class": "chair",
+                "score": 0.7707094550132751,
+                "box": [
+                  405.83593463897705,
+                  19.44534158706665,
+                  455.83499240875244,
+                  55.543264865875244
+                ],
+                "head": "s",
+                "sourceIndex": 11
+              },
+              {
+                "class": "chair",
+                "score": 0.5990475416183472,
+                "box": [
+                  404.33922254122217,
+                  19.124757326566254,
+                  456.03634027334357,
+                  59.67944071843074
+                ],
+                "head": "tiny",
+                "sourceIndex": 5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 172877,
+        "class": "chair",
+        "tp": 0,
+        "fp": 1,
+        "fn": 0,
+        "gt": 0,
+        "falsePositiveBoxes": [
+          {
+            "class": "chair",
+            "box": [
+              0.0,
+              286.2803969750038,
+              148.37721208425668,
+              476.8148624713604
+            ],
+            "score": 0.759320080280304,
+            "votes": 2,
+            "members": [
+              {
+                "class": "chair",
+                "score": 0.7987589836120605,
+                "box": [
+                  0.0,
+                  285.6000461578369,
+                  147.66846084594727,
+                  478.93584632873535
+                ],
+                "head": "s",
+                "sourceIndex": 1
+              },
+              {
+                "class": "chair",
+                "score": 0.7198811769485474,
+                "box": [
+                  0.0,
+                  286.9607477921706,
+                  149.0859633225661,
+                  474.6938786139855
+                ],
+                "head": "nano",
+                "sourceIndex": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "limitations": [
+    "Archived head detections contain only person/chair/bed after the original global mapped-class cap30 per head.",
+    "Consensus cap30 is among retained three targets, and does not reproduce competition from all80 classes in a generic product implementation; results cannot establish all-class consensus quality.",
+    "Original classes, model bytes, annotations and scores remain unchanged.",
+    "Shared model errors may agree; consensus does not guarantee correctness.",
+    "No private image, product change, paid API, or new model inference.",
+    "No new latency/memory/endurance measurement; three-head inference would add computation."
+  ],
+  "conclusion": "Fixed two-of-three consensus increased recall but failed the predeclared precision/recall gate across all3classes. In particular chair FP increased and precision fell in both partitions versusNano.50. Stop: no new30, no threshold grid, no further variants."
+}

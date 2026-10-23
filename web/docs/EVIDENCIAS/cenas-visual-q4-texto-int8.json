@@ -1,0 +1,2080 @@
+{
+  "scope": "Exploratory public MIT Indoor Scenes-derived image sample, 8 classes. Not Brazilian, not independent of unknown pretraining overlap. Candidates/thresholds frozen from development only.",
+  "dataset": "keremberke/indoor-scene-classification",
+  "dataset_revision": "030dcb9ec61c436299b1df10d90ae1cbe1d1b401",
+  "samples_not_redistributed": true,
+  "runtime": "1.23.2",
+  "provider": "CPUExecutionProvider",
+  "threads": 4,
+  "load_ms": 267.8344999985711,
+  "thresholds": {
+    "minimum": 0.12,
+    "margin": 0.02,
+    "accepted": 4,
+    "correct": 4,
+    "precision": 1.0
+  },
+  "records": [
+    {
+      "split": "valid",
+      "expected": "living_room",
+      "source_archive": "test",
+      "source_file": "livingroom/room333_jpg.rf.28ac37cb145b0c71e4d805f07e8c81fb.jpg",
+      "source_sha256": "c2621bcd9f9756b01fd4357c32c9dd980d217b6c53aaed9e821e9aaa4ffe7494",
+      "local": "valid-living_room-0.jpg",
+      "top": "living_room",
+      "similarity": 0.12497109174728394,
+      "margin": 0.0034588053822517395,
+      "runner": "tv_studio",
+      "inference_ms": 160.21879999971134,
+      "top5": [
+        {
+          "category": "living_room",
+          "similarity": 0.12497109174728394
+        },
+        {
+          "category": "tv_studio",
+          "similarity": 0.1215122863650322
+        },
+        {
+          "category": "game_room",
+          "similarity": 0.11670233309268951
+        },
+        {
+          "category": "waiting_room",
+          "similarity": 0.10416729003190994
+        },
+        {
+          "category": "garage",
+          "similarity": 0.09724211692810059
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "valid",
+      "expected": "living_room",
+      "source_archive": "train",
+      "source_file": "livingroom/easyst016_jpg.rf.d44a45b50ae6d627879ce115f73895c7.jpg",
+      "source_sha256": "1209be7db91227307b13d4df94b8b747450ade0b9f6720119dd1a19005fdb58e",
+      "local": "valid-living_room-1.jpg",
+      "top": "living_room",
+      "similarity": 0.12448659539222717,
+      "margin": 0.032472655177116394,
+      "runner": "dining_room",
+      "inference_ms": 157.29079999800888,
+      "top5": [
+        {
+          "category": "living_room",
+          "similarity": 0.12448659539222717
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.09201394021511078
+        },
+        {
+          "category": "bedroom",
+          "similarity": 0.08926746249198914
+        },
+        {
+          "category": "waiting_room",
+          "similarity": 0.0886097103357315
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.08507052063941956
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "living_room",
+      "source_archive": "test",
+      "source_file": "livingroom/roomscan26_jpg.rf.36c75d77b1eb2528d8dd1e7ab98bb03d.jpg",
+      "source_sha256": "d55ed282a48dfb3bdb251b6febbdeca0ca383a85f2bf5a91607833bc4de375e8",
+      "local": "test-living_room-0.jpg",
+      "top": "living_room",
+      "similarity": 0.13270866870880127,
+      "margin": 0.026478543877601624,
+      "runner": "waiting_room",
+      "inference_ms": 157.5182999986282,
+      "top5": [
+        {
+          "category": "living_room",
+          "similarity": 0.13270866870880127
+        },
+        {
+          "category": "waiting_room",
+          "similarity": 0.10623012483119965
+        },
+        {
+          "category": "reject_blur",
+          "similarity": 0.10249502956867218
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.09592350572347641
+        },
+        {
+          "category": "reject_closeup",
+          "similarity": 0.09451767802238464
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "living_room",
+      "source_archive": "train",
+      "source_file": "livingroom/dsc3101_jpg.rf.8b11108aa8936cf80e95082d8f99ea4b.jpg",
+      "source_sha256": "db88c3d6806c625be792c467e43db22397bd9142385886503160a0ba64a61058",
+      "local": "test-living_room-1.jpg",
+      "top": "living_room",
+      "similarity": 0.12178933620452881,
+      "margin": 0.01609186828136444,
+      "runner": "dining_room",
+      "inference_ms": 144.27900000009686,
+      "top5": [
+        {
+          "category": "living_room",
+          "similarity": 0.12178933620452881
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.10569746792316437
+        },
+        {
+          "category": "waiting_room",
+          "similarity": 0.10395466536283493
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.09749996662139893
+        },
+        {
+          "category": "reception",
+          "similarity": 0.09729702770709991
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "living_room",
+      "source_archive": "train",
+      "source_file": "livingroom/imagnifyingglass_jpg.rf.f0f754d9b1cc09b2c364d1d835de2fc0.jpg",
+      "source_sha256": "4caeed80dadbfc854ff32a5ff562f15379dea3a2784748453b75162915af145c",
+      "local": "test-living_room-2.jpg",
+      "top": "living_room",
+      "similarity": 0.12238386273384094,
+      "margin": 0.03274325281381607,
+      "runner": "lobby",
+      "inference_ms": 162.67239999797312,
+      "top5": [
+        {
+          "category": "living_room",
+          "similarity": 0.12238386273384094
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.08964060992002487
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.08863214403390884
+        },
+        {
+          "category": "waiting_room",
+          "similarity": 0.08695568889379501
+        },
+        {
+          "category": "reject_closeup",
+          "similarity": 0.08591140061616898
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "living_room",
+      "source_archive": "train",
+      "source_file": "livingroom/c_salon27_jpg.rf.165b1ba5877d4786a113df212ab67d36.jpg",
+      "source_sha256": "61545a55dd7d79600fd0b9a60ae7bb19ec742b2c48b8ac2a10b6560b893d3656",
+      "local": "test-living_room-3.jpg",
+      "top": "living_room",
+      "similarity": 0.12984395027160645,
+      "margin": 0.021183669567108154,
+      "runner": "game_room",
+      "inference_ms": 148.80249999987427,
+      "top5": [
+        {
+          "category": "living_room",
+          "similarity": 0.12984395027160645
+        },
+        {
+          "category": "game_room",
+          "similarity": 0.10866028070449829
+        },
+        {
+          "category": "tv_studio",
+          "similarity": 0.09876686334609985
+        },
+        {
+          "category": "waiting_room",
+          "similarity": 0.09141163527965546
+        },
+        {
+          "category": "bedroom",
+          "similarity": 0.09061220288276672
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "living_room",
+      "source_archive": "train",
+      "source_file": "livingroom/fw_97_6_2287_26_l_jpg.rf.802a78c345cbeba05bd94818be7a90b7.jpg",
+      "source_sha256": "21f7861c3550bd3d68ac70be3fe741047c7279f266b1f864c033c70f2ad315bd",
+      "local": "test-living_room-4.jpg",
+      "top": "living_room",
+      "similarity": 0.13473232090473175,
+      "margin": 0.009290099143981934,
+      "runner": "dining_room",
+      "inference_ms": 134.6988000004785,
+      "top5": [
+        {
+          "category": "living_room",
+          "similarity": 0.13473232090473175
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.12544222176074982
+        },
+        {
+          "category": "game_room",
+          "similarity": 0.10202427208423615
+        },
+        {
+          "category": "waiting_room",
+          "similarity": 0.09900306165218353
+        },
+        {
+          "category": "music_studio",
+          "similarity": 0.0976189449429512
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "valid",
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/indoor_0537_jpg.rf.63ef7ed27d015a1bb174f6418b3242ea.jpg",
+      "source_sha256": "7a584550dd529e434496606b9872ffd6fa6c0c8d990ebb8be34ee20d4f7a4b51",
+      "local": "valid-bedroom-0.jpg",
+      "top": "bedroom",
+      "similarity": 0.1262049525976181,
+      "margin": 0.026949837803840637,
+      "runner": "children_room",
+      "inference_ms": 144.4658000000345,
+      "top5": [
+        {
+          "category": "bedroom",
+          "similarity": 0.1262049525976181
+        },
+        {
+          "category": "children_room",
+          "similarity": 0.09925511479377747
+        },
+        {
+          "category": "living_room",
+          "similarity": 0.0911506861448288
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.08405210077762604
+        },
+        {
+          "category": "game_room",
+          "similarity": 0.08380966633558273
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "valid",
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/IMG_1247_jpg.rf.6095ea796f305b69e747fe8323924601.jpg",
+      "source_sha256": "fcd124d31f7b46f0b33b453d2153a75a3388b85792468da770d5a9dc10079db5",
+      "local": "valid-bedroom-1.jpg",
+      "top": "bedroom",
+      "similarity": 0.11315228044986725,
+      "margin": 0.032805293798446655,
+      "runner": "lobby",
+      "inference_ms": 146.54309999968973,
+      "top5": [
+        {
+          "category": "bedroom",
+          "similarity": 0.11315228044986725
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.0803469866514206
+        },
+        {
+          "category": "reject_dark",
+          "similarity": 0.079360231757164
+        },
+        {
+          "category": "children_room",
+          "similarity": 0.07895912975072861
+        },
+        {
+          "category": "reject_wall",
+          "similarity": 0.07067322731018066
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/int479_jpg.rf.748bfba76014246131c1d36da0986d24.jpg",
+      "source_sha256": "3107da7021e0151f49ef99324991df544ad426a972d14fb7b676f5b3822f87fe",
+      "local": "test-bedroom-0.jpg",
+      "top": "bedroom",
+      "similarity": 0.1203279197216034,
+      "margin": 0.03301410377025604,
+      "runner": "children_room",
+      "inference_ms": 152.1969999994326,
+      "top5": [
+        {
+          "category": "bedroom",
+          "similarity": 0.1203279197216034
+        },
+        {
+          "category": "children_room",
+          "similarity": 0.08731381595134735
+        },
+        {
+          "category": "living_room",
+          "similarity": 0.0793096274137497
+        },
+        {
+          "category": "balcony",
+          "similarity": 0.07835398614406586
+        },
+        {
+          "category": "forest",
+          "similarity": 0.07712071388959885
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/int610_jpg.rf.0329d4a0004b07a2a86327b65b29784a.jpg",
+      "source_sha256": "48c13637cac78c0b235a61bc9ba1c96fc53058bb8addb4c9a11f3bb16458eeb5",
+      "local": "test-bedroom-1.jpg",
+      "top": "art_studio",
+      "similarity": 0.13107606768608093,
+      "margin": 0.010542184114456177,
+      "runner": "museum",
+      "inference_ms": 131.1628000003111,
+      "top5": [
+        {
+          "category": "art_studio",
+          "similarity": 0.13107606768608093
+        },
+        {
+          "category": "museum",
+          "similarity": 0.12053388357162476
+        },
+        {
+          "category": "living_room",
+          "similarity": 0.11295267939567566
+        },
+        {
+          "category": "music_studio",
+          "similarity": 0.11073824763298035
+        },
+        {
+          "category": "waiting_room",
+          "similarity": 0.1103762611746788
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/dsc01901_jpg.rf.0d6fae54380cbe10b2fc828b64056db2.jpg",
+      "source_sha256": "0402bea6eec1bd7042ebd530678fee7bba735d9fa015b851e9a347d1f65dc03c",
+      "local": "test-bedroom-2.jpg",
+      "top": "bedroom",
+      "similarity": 0.11015274375677109,
+      "margin": 0.018812187016010284,
+      "runner": "hospital_room",
+      "inference_ms": 128.0938000018068,
+      "top5": [
+        {
+          "category": "bedroom",
+          "similarity": 0.11015274375677109
+        },
+        {
+          "category": "hospital_room",
+          "similarity": 0.0913405567407608
+        },
+        {
+          "category": "children_room",
+          "similarity": 0.08255530893802643
+        },
+        {
+          "category": "balcony",
+          "similarity": 0.07668086886405945
+        },
+        {
+          "category": "living_room",
+          "similarity": 0.07180831581354141
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/int704_jpg.rf.596de3cac1eb71cc0231ce2c3d0f8156.jpg",
+      "source_sha256": "2fb0ec8c0d32433e038696d216080b1666b34946117d7962efa29b958914f660",
+      "local": "test-bedroom-3.jpg",
+      "top": "bedroom",
+      "similarity": 0.1253466010093689,
+      "margin": 0.02014429122209549,
+      "runner": "hospital_room",
+      "inference_ms": 134.9198999996588,
+      "top5": [
+        {
+          "category": "bedroom",
+          "similarity": 0.1253466010093689
+        },
+        {
+          "category": "hospital_room",
+          "similarity": 0.10520230978727341
+        },
+        {
+          "category": "children_room",
+          "similarity": 0.10088643431663513
+        },
+        {
+          "category": "waiting_room",
+          "similarity": 0.08832892030477524
+        },
+        {
+          "category": "reject_closeup",
+          "similarity": 0.08800338208675385
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/indoor_0578_jpg.rf.34b74f8cac11252226814b6c2f2e296f.jpg",
+      "source_sha256": "6497c2babb996b6c313ec3c5d40a6f0beb62e8b2ed6129356a735c8e471c0306",
+      "local": "test-bedroom-4.jpg",
+      "top": "bedroom",
+      "similarity": 0.13414683938026428,
+      "margin": 0.0038659274578094482,
+      "runner": "children_room",
+      "inference_ms": 130.59330000032787,
+      "top5": [
+        {
+          "category": "bedroom",
+          "similarity": 0.13414683938026428
+        },
+        {
+          "category": "children_room",
+          "similarity": 0.13028091192245483
+        },
+        {
+          "category": "game_room",
+          "similarity": 0.1194663941860199
+        },
+        {
+          "category": "living_room",
+          "similarity": 0.11757268756628036
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.11096974462270737
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "valid",
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/img_0014_jpg.rf.12c180b4720b065c467dde051c0750a4.jpg",
+      "source_sha256": "585b0c08947a3981a2dc56c6903c56a9bf450583a683c5a8f46f265ed1f55c10",
+      "local": "valid-kitchen-0.jpg",
+      "top": "kitchen",
+      "similarity": 0.12120230495929718,
+      "margin": 0.021504543721675873,
+      "runner": "pantry",
+      "inference_ms": 136.8890999983705,
+      "top5": [
+        {
+          "category": "kitchen",
+          "similarity": 0.12120230495929718
+        },
+        {
+          "category": "pantry",
+          "similarity": 0.09969776123762131
+        },
+        {
+          "category": "restaurant_kitchen",
+          "similarity": 0.08953975886106491
+        },
+        {
+          "category": "laundry",
+          "similarity": 0.08635489642620087
+        },
+        {
+          "category": "bathroom",
+          "similarity": 0.07474204897880554
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "valid",
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/D55b_jpg.rf.0aca973479e41cbef8006c2550d5e818.jpg",
+      "source_sha256": "d6c8a524080d73d0926fc5ba9adbf252fc989771be3354705049644c503a59a1",
+      "local": "valid-kitchen-1.jpg",
+      "top": "kitchen",
+      "similarity": 0.1267879754304886,
+      "margin": 0.015678614377975464,
+      "runner": "pantry",
+      "inference_ms": 128.93170000097598,
+      "top5": [
+        {
+          "category": "kitchen",
+          "similarity": 0.1267879754304886
+        },
+        {
+          "category": "pantry",
+          "similarity": 0.11110936105251312
+        },
+        {
+          "category": "wine_cellar",
+          "similarity": 0.10044343024492264
+        },
+        {
+          "category": "restaurant_kitchen",
+          "similarity": 0.09430088102817535
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.08436454832553864
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/int396_jpg.rf.b579b1be80865e652dcc376c6312edaa.jpg",
+      "source_sha256": "218311f1de5ac01a7f0cc58fc645c956cef11b27f6ce9a28fba81e9102d573fe",
+      "local": "test-kitchen-0.jpg",
+      "top": "kitchen",
+      "similarity": 0.12705519795417786,
+      "margin": 0.020816899836063385,
+      "runner": "pantry",
+      "inference_ms": 149.5037000022421,
+      "top5": [
+        {
+          "category": "kitchen",
+          "similarity": 0.12705519795417786
+        },
+        {
+          "category": "pantry",
+          "similarity": 0.10623829811811447
+        },
+        {
+          "category": "restaurant_kitchen",
+          "similarity": 0.08738196641206741
+        },
+        {
+          "category": "closet",
+          "similarity": 0.07687779515981674
+        },
+        {
+          "category": "laundry",
+          "similarity": 0.07377438992261887
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/IMG_2433_jpg.rf.3398e39e2d070f0a3496ea7484023682.jpg",
+      "source_sha256": "673f33bf16fc1f5343d86619bd73952f233ba79498061ccdc22988810b711423",
+      "local": "test-kitchen-1.jpg",
+      "top": "kitchen",
+      "similarity": 0.11368902772665024,
+      "margin": 0.009049423038959503,
+      "runner": "laundry",
+      "inference_ms": 132.0166999976209,
+      "top5": [
+        {
+          "category": "kitchen",
+          "similarity": 0.11368902772665024
+        },
+        {
+          "category": "laundry",
+          "similarity": 0.10463960468769073
+        },
+        {
+          "category": "restaurant_kitchen",
+          "similarity": 0.09616263955831528
+        },
+        {
+          "category": "laundromat",
+          "similarity": 0.09612657129764557
+        },
+        {
+          "category": "pantry",
+          "similarity": 0.0955801010131836
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/room343_jpg.rf.34d4abd4aafdf2a5df6b4b77d1001c50.jpg",
+      "source_sha256": "3d2f2f0b4acd863300b5d589e0bd17f06d8b753329d1562e2abe482a2d8995a1",
+      "local": "test-kitchen-2.jpg",
+      "top": "living_room",
+      "similarity": 0.11234303563833237,
+      "margin": 0.009399011731147766,
+      "runner": "reception",
+      "inference_ms": 139.83340000049793,
+      "top5": [
+        {
+          "category": "living_room",
+          "similarity": 0.11234303563833237
+        },
+        {
+          "category": "reception",
+          "similarity": 0.1029440239071846
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.1024262011051178
+        },
+        {
+          "category": "kitchen",
+          "similarity": 0.10220610350370407
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.09922115504741669
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/LR_to_BR_jpg.rf.789e9907608bc5c3cfb3b3ac5c4fc722.jpg",
+      "source_sha256": "70a0d489bb6736f008610378d327607be7a9fa448700dd77c676bdc96322e3f8",
+      "local": "test-kitchen-3.jpg",
+      "top": "kitchen",
+      "similarity": 0.113927461206913,
+      "margin": 0.0004632696509361267,
+      "runner": "living_room",
+      "inference_ms": 127.48650000139605,
+      "top5": [
+        {
+          "category": "kitchen",
+          "similarity": 0.113927461206913
+        },
+        {
+          "category": "living_room",
+          "similarity": 0.11346419155597687
+        },
+        {
+          "category": "game_room",
+          "similarity": 0.09365321695804596
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.09336211532354355
+        },
+        {
+          "category": "pantry",
+          "similarity": 0.09103461354970932
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "kitchen",
+      "source_archive": "test",
+      "source_file": "kitchen/int446_jpg.rf.e3800f64e4e9d1fb6bdd03a5db4fa189.jpg",
+      "source_sha256": "3adaaec454d4408e0ffb4525569cb2d9718417b7ac3108c87f3a6193e32b96d4",
+      "local": "test-kitchen-4.jpg",
+      "top": "kitchen",
+      "similarity": 0.12766079604625702,
+      "margin": 0.01062978059053421,
+      "runner": "pantry",
+      "inference_ms": 132.81039999856148,
+      "top5": [
+        {
+          "category": "kitchen",
+          "similarity": 0.12766079604625702
+        },
+        {
+          "category": "pantry",
+          "similarity": 0.11703101545572281
+        },
+        {
+          "category": "restaurant_kitchen",
+          "similarity": 0.09937888383865356
+        },
+        {
+          "category": "bathroom",
+          "similarity": 0.08759927749633789
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.08751051872968674
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "valid",
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/IMG_2332_jpg.rf.1036cf838da719d1d65b5ad14add5d78.jpg",
+      "source_sha256": "84933a5aaf2d38c3236bdc52571bedd61e045ba5cf419f8a6de65fcb26b95085",
+      "local": "valid-bathroom-0.jpg",
+      "top": "bathroom",
+      "similarity": 0.11878854036331177,
+      "margin": 0.04745703935623169,
+      "runner": "lobby",
+      "inference_ms": 129.4205999984115,
+      "top5": [
+        {
+          "category": "bathroom",
+          "similarity": 0.11878854036331177
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.07133150100708008
+        },
+        {
+          "category": "bedroom",
+          "similarity": 0.06523239612579346
+        },
+        {
+          "category": "reject_dark",
+          "similarity": 0.062286149710416794
+        },
+        {
+          "category": "reception",
+          "similarity": 0.06126951426267624
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "valid",
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/dsc3101_jpg.rf.a894b50d9bf522f5365ce00bc810c93e.jpg",
+      "source_sha256": "db88c3d6806c625be792c467e43db22397bd9142385886503160a0ba64a61058",
+      "local": "valid-bathroom-1.jpg",
+      "top": "living_room",
+      "similarity": 0.12178933620452881,
+      "margin": 0.01609186828136444,
+      "runner": "dining_room",
+      "inference_ms": 126.51449999975739,
+      "top5": [
+        {
+          "category": "living_room",
+          "similarity": 0.12178933620452881
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.10569746792316437
+        },
+        {
+          "category": "waiting_room",
+          "similarity": 0.10395466536283493
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.09749996662139893
+        },
+        {
+          "category": "reception",
+          "similarity": 0.09729702770709991
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/indoor_0242_jpg.rf.aa82012d161799847c17b808848ad840.jpg",
+      "source_sha256": "2e0e731e1b36007f4d16f7d6a78bf153c7d8a75318188eb8b038a2584415e0c4",
+      "local": "test-bathroom-0.jpg",
+      "top": "bathroom",
+      "similarity": 0.11742110550403595,
+      "margin": 0.03980560600757599,
+      "runner": "locker_room",
+      "inference_ms": 136.9604999999865,
+      "top5": [
+        {
+          "category": "bathroom",
+          "similarity": 0.11742110550403595
+        },
+        {
+          "category": "locker_room",
+          "similarity": 0.07761549949645996
+        },
+        {
+          "category": "laundry",
+          "similarity": 0.07048969715833664
+        },
+        {
+          "category": "stairwell",
+          "similarity": 0.06708038598299026
+        },
+        {
+          "category": "corridor",
+          "similarity": 0.06681220233440399
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/bath288_jpg.rf.5704d30199cde754f4c54e9f27c72edd.jpg",
+      "source_sha256": "278a717e40314cdd4816ea491a343697463f9e61752f62ea787e9f7a569c77a8",
+      "local": "test-bathroom-1.jpg",
+      "top": "bathroom",
+      "similarity": 0.13158835470676422,
+      "margin": 0.04980403184890747,
+      "runner": "kitchen",
+      "inference_ms": 128.38629999896511,
+      "top5": [
+        {
+          "category": "bathroom",
+          "similarity": 0.13158835470676422
+        },
+        {
+          "category": "kitchen",
+          "similarity": 0.08178432285785675
+        },
+        {
+          "category": "bedroom",
+          "similarity": 0.07842922955751419
+        },
+        {
+          "category": "reject_dark",
+          "similarity": 0.07816098630428314
+        },
+        {
+          "category": "laundry",
+          "similarity": 0.07656683772802353
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/room322_jpg.rf.9387c3437945dc546539dbaa56eadddb.jpg",
+      "source_sha256": "d13c0e2caee3f553f26712eb79479fbf693fad512af2ed20c4a0d09f4079bc7e",
+      "local": "test-bathroom-2.jpg",
+      "top": "bathroom",
+      "similarity": 0.13140611350536346,
+      "margin": 0.04980982840061188,
+      "runner": "bedroom",
+      "inference_ms": 134.6769999981916,
+      "top5": [
+        {
+          "category": "bathroom",
+          "similarity": 0.13140611350536346
+        },
+        {
+          "category": "bedroom",
+          "similarity": 0.08159628510475159
+        },
+        {
+          "category": "kitchen",
+          "similarity": 0.07817471027374268
+        },
+        {
+          "category": "laundry",
+          "similarity": 0.07803559303283691
+        },
+        {
+          "category": "living_room",
+          "similarity": 0.07049588114023209
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/IMG_3736_jpg.rf.32a4d97160484c82b5e8bf27e8d1ab08.jpg",
+      "source_sha256": "647e0dba6d6f283d9a9d438fbae463171ade3e357f5de02bb73868dcd91217d5",
+      "local": "test-bathroom-3.jpg",
+      "top": "bathroom",
+      "similarity": 0.1304088830947876,
+      "margin": 0.05547779053449631,
+      "runner": "bedroom",
+      "inference_ms": 133.72119999985443,
+      "top5": [
+        {
+          "category": "bathroom",
+          "similarity": 0.1304088830947876
+        },
+        {
+          "category": "bedroom",
+          "similarity": 0.07493109256029129
+        },
+        {
+          "category": "kitchen",
+          "similarity": 0.07321316003799438
+        },
+        {
+          "category": "locker_room",
+          "similarity": 0.0726357251405716
+        },
+        {
+          "category": "laundry",
+          "similarity": 0.07141338288784027
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/bath287_jpg.rf.3c5f3e5b64a8af410f6d96eafe9f3c4f.jpg",
+      "source_sha256": "715fbd70867ee349b842272cef0119e7b2719903f4269e19de633ad829dba34a",
+      "local": "test-bathroom-4.jpg",
+      "top": "bathroom",
+      "similarity": 0.12782496213912964,
+      "margin": 0.04096219688653946,
+      "runner": "bedroom",
+      "inference_ms": 138.68169999841484,
+      "top5": [
+        {
+          "category": "bathroom",
+          "similarity": 0.12782496213912964
+        },
+        {
+          "category": "bedroom",
+          "similarity": 0.08686276525259018
+        },
+        {
+          "category": "reject_wall",
+          "similarity": 0.08126875758171082
+        },
+        {
+          "category": "kitchen",
+          "similarity": 0.07601816952228546
+        },
+        {
+          "category": "closet",
+          "similarity": 0.0734543651342392
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "valid",
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/webP1010001_jpg.rf.aea61b16fe7c33ecb60ab1cd4145aae2.jpg",
+      "source_sha256": "3e6fae4a2fba5977dc04dd56834b69f916daa122bcff6fbec39fbe669047b5d5",
+      "local": "valid-office-0.jpg",
+      "top": "office",
+      "similarity": 0.12136714160442352,
+      "margin": 0.012109428644180298,
+      "runner": "meeting_room",
+      "inference_ms": 130.4463999986183,
+      "top5": [
+        {
+          "category": "office",
+          "similarity": 0.12136714160442352
+        },
+        {
+          "category": "meeting_room",
+          "similarity": 0.10925771296024323
+        },
+        {
+          "category": "reception",
+          "similarity": 0.10407380014657974
+        },
+        {
+          "category": "waiting_room",
+          "similarity": 0.08969679474830627
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.07346230745315552
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "valid",
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/room263_jpg.rf.7fc56b7e6c5a5faf751946e23384a872.jpg",
+      "source_sha256": "d84a10e8ae1d7a343eb2cc381ded7a420492b592e8fb1652a9956617f5a6b6bb",
+      "local": "valid-office-1.jpg",
+      "top": "office",
+      "similarity": 0.1367919147014618,
+      "margin": 0.020176470279693604,
+      "runner": "computer_room",
+      "inference_ms": 129.81159999981173,
+      "top5": [
+        {
+          "category": "office",
+          "similarity": 0.1367919147014618
+        },
+        {
+          "category": "computer_room",
+          "similarity": 0.11661544442176819
+        },
+        {
+          "category": "tv_studio",
+          "similarity": 0.11041601747274399
+        },
+        {
+          "category": "waiting_room",
+          "similarity": 0.10357651859521866
+        },
+        {
+          "category": "game_room",
+          "similarity": 0.1028200015425682
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/despacho1_400_jpg.rf.6ae04e0173ccf74261d8b3c36d79b113.jpg",
+      "source_sha256": "88a9044d25e2ad2b6ba1efa5d5cc09ee6c031d5b61b662b718628f4810b54f0d",
+      "local": "test-office-0.jpg",
+      "top": "office",
+      "similarity": 0.11619638651609421,
+      "margin": 0.013432271778583527,
+      "runner": "computer_room",
+      "inference_ms": 132.98399999985122,
+      "top5": [
+        {
+          "category": "office",
+          "similarity": 0.11619638651609421
+        },
+        {
+          "category": "computer_room",
+          "similarity": 0.10276411473751068
+        },
+        {
+          "category": "clinic",
+          "similarity": 0.1023465096950531
+        },
+        {
+          "category": "library",
+          "similarity": 0.09703166782855988
+        },
+        {
+          "category": "reception",
+          "similarity": 0.09510676562786102
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/homeoff005_jpg.rf.19f2d0925a07bcaceccd47ecc0b90e1e.jpg",
+      "source_sha256": "bccc9b47fad917f22aa6ac35c1c5dae90df91232cc3d04094fa7ab8a2b2a1bab",
+      "local": "test-office-1.jpg",
+      "top": "children_room",
+      "similarity": 0.12587517499923706,
+      "margin": 0.021150343120098114,
+      "runner": "bedroom",
+      "inference_ms": 127.58559999929275,
+      "top5": [
+        {
+          "category": "children_room",
+          "similarity": 0.12587517499923706
+        },
+        {
+          "category": "bedroom",
+          "similarity": 0.10472483187913895
+        },
+        {
+          "category": "closet",
+          "similarity": 0.09905082732439041
+        },
+        {
+          "category": "nursery",
+          "similarity": 0.09899766743183136
+        },
+        {
+          "category": "living_room",
+          "similarity": 0.09482909739017487
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/room12_jpg.rf.46ab008c0b8de11343bb5f71ada9cd57.jpg",
+      "source_sha256": "7e406edc1cf0bef1d8886c6dff0cf8ff0469859fa47200c227abbee3a3d76811",
+      "local": "test-office-2.jpg",
+      "top": "office",
+      "similarity": 0.11506320536136627,
+      "margin": 0.004697233438491821,
+      "runner": "reception",
+      "inference_ms": 142.77800000127172,
+      "top5": [
+        {
+          "category": "office",
+          "similarity": 0.11506320536136627
+        },
+        {
+          "category": "reception",
+          "similarity": 0.11036597192287445
+        },
+        {
+          "category": "library",
+          "similarity": 0.10746381431818008
+        },
+        {
+          "category": "waiting_room",
+          "similarity": 0.10149967670440674
+        },
+        {
+          "category": "meeting_room",
+          "similarity": 0.09956613183021545
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/int281_jpg.rf.9c0c7af368da9466debd4abbd3fe6abf.jpg",
+      "source_sha256": "98d17bfa80950dae9012ba99b75f9da658a00c03b10b0b2d6f5905b5ef6e6db3",
+      "local": "test-office-3.jpg",
+      "top": "computer_room",
+      "similarity": 0.15451014041900635,
+      "margin": 0.020236313343048096,
+      "runner": "office",
+      "inference_ms": 137.6836999988882,
+      "top5": [
+        {
+          "category": "computer_room",
+          "similarity": 0.15451014041900635
+        },
+        {
+          "category": "office",
+          "similarity": 0.13427382707595825
+        },
+        {
+          "category": "classroom",
+          "similarity": 0.11476600170135498
+        },
+        {
+          "category": "workshop",
+          "similarity": 0.10357079654932022
+        },
+        {
+          "category": "laboratory",
+          "similarity": 0.10156475007534027
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/indoor_0148_jpg.rf.fd9767e03034829f1dd0549eb2b3dcf0.jpg",
+      "source_sha256": "1cbb2491e51d001103bb776d5e5aeabf41e4f6298de6dd6ab3ac80ac841956ba",
+      "local": "test-office-4.jpg",
+      "top": "computer_room",
+      "similarity": 0.1042635440826416,
+      "margin": 0.005594901740550995,
+      "runner": "office",
+      "inference_ms": 145.66710000144667,
+      "top5": [
+        {
+          "category": "computer_room",
+          "similarity": 0.1042635440826416
+        },
+        {
+          "category": "office",
+          "similarity": 0.0986686423420906
+        },
+        {
+          "category": "tv_studio",
+          "similarity": 0.08680503815412521
+        },
+        {
+          "category": "music_studio",
+          "similarity": 0.08646396547555923
+        },
+        {
+          "category": "reception",
+          "similarity": 0.08364524692296982
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "valid",
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/web_lalemant_jpg.rf.8a1a9be842653930b14794050565dbef.jpg",
+      "source_sha256": "511190df3464eed163eac19ae486d2c03e64e71bb835207f5109144c60b29cf4",
+      "local": "valid-classroom-0.jpg",
+      "top": "auditorium",
+      "similarity": 0.14762578904628754,
+      "margin": 0.007842972874641418,
+      "runner": "classroom",
+      "inference_ms": 183.4402999993472,
+      "top5": [
+        {
+          "category": "auditorium",
+          "similarity": 0.14762578904628754
+        },
+        {
+          "category": "classroom",
+          "similarity": 0.13978281617164612
+        },
+        {
+          "category": "concert_hall",
+          "similarity": 0.1228548213839531
+        },
+        {
+          "category": "meeting_room",
+          "similarity": 0.12275584787130356
+        },
+        {
+          "category": "cinema",
+          "similarity": 0.11190736293792725
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "valid",
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/position_room_jpg.rf.28158b9b708c09432ee8829cd5d4b3c9.jpg",
+      "source_sha256": "0ae150147a4aff8a719d781fba4ad97bb83f71dea1d82a43889ad3714696e3d9",
+      "local": "valid-classroom-1.jpg",
+      "top": "classroom",
+      "similarity": 0.13706421852111816,
+      "margin": 0.015379942953586578,
+      "runner": "meeting_room",
+      "inference_ms": 130.78820000009728,
+      "top5": [
+        {
+          "category": "classroom",
+          "similarity": 0.13706421852111816
+        },
+        {
+          "category": "meeting_room",
+          "similarity": 0.12168427556753159
+        },
+        {
+          "category": "computer_room",
+          "similarity": 0.10834400355815887
+        },
+        {
+          "category": "locker_room",
+          "similarity": 0.10795539617538452
+        },
+        {
+          "category": "auditorium",
+          "similarity": 0.10740114003419876
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/classroom03_jpg.rf.d6a966d27d235fae0d67ffbd14914dfc.jpg",
+      "source_sha256": "6a04e51dce79d3bc2b65a71ce7fd961d8cac58f19e76ab644c0fd834d0b7a044",
+      "local": "test-classroom-0.jpg",
+      "top": "kindergarten",
+      "similarity": 0.15306951105594635,
+      "margin": 0.023165985941886902,
+      "runner": "classroom",
+      "inference_ms": 140.0616999999329,
+      "top5": [
+        {
+          "category": "kindergarten",
+          "similarity": 0.15306951105594635
+        },
+        {
+          "category": "classroom",
+          "similarity": 0.12990352511405945
+        },
+        {
+          "category": "children_room",
+          "similarity": 0.10517241805791855
+        },
+        {
+          "category": "nursery",
+          "similarity": 0.10249335318803787
+        },
+        {
+          "category": "game_room",
+          "similarity": 0.09935933351516724
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/classroom02_jpg.rf.66ae8e730c84255fd971793651c26afd.jpg",
+      "source_sha256": "c5e77ee6507cd7d4fc486628471f4d90fd010a8d82916b333ef6c7133df15b0b",
+      "local": "test-classroom-1.jpg",
+      "top": "classroom",
+      "similarity": 0.14842504262924194,
+      "margin": 0.0034867078065872192,
+      "runner": "kindergarten",
+      "inference_ms": 133.743799997319,
+      "top5": [
+        {
+          "category": "classroom",
+          "similarity": 0.14842504262924194
+        },
+        {
+          "category": "kindergarten",
+          "similarity": 0.14493833482265472
+        },
+        {
+          "category": "computer_room",
+          "similarity": 0.11650756001472473
+        },
+        {
+          "category": "locker_room",
+          "similarity": 0.10092170536518097
+        },
+        {
+          "category": "library",
+          "similarity": 0.10076862573623657
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/classroom2_jpg.rf.9ce7e7b7a3583545f29aa99a1d6bc990.jpg",
+      "source_sha256": "f692c2ee7b19115fe9b17dc9c83ade86c3e54c19465ce956aafd3d524a07046b",
+      "local": "test-classroom-2.jpg",
+      "top": "classroom",
+      "similarity": 0.1481950730085373,
+      "margin": 0.03304649889469147,
+      "runner": "kindergarten",
+      "inference_ms": 145.07699999739998,
+      "top5": [
+        {
+          "category": "classroom",
+          "similarity": 0.1481950730085373
+        },
+        {
+          "category": "kindergarten",
+          "similarity": 0.11514857411384583
+        },
+        {
+          "category": "auditorium",
+          "similarity": 0.11391386389732361
+        },
+        {
+          "category": "meeting_room",
+          "similarity": 0.10475781559944153
+        },
+        {
+          "category": "computer_room",
+          "similarity": 0.10379309952259064
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "classroom",
+      "source_archive": "valid",
+      "source_file": "classroom/IMG_2226_jpg.rf.efde965898255bd26a6ac687324922ae.jpg",
+      "source_sha256": "8d92b24229c3a78990925955f26e1c8a50a240a71e5aa1f00c5e4ce48af1fb05",
+      "local": "test-classroom-3.jpg",
+      "top": "kindergarten",
+      "similarity": 0.15081249177455902,
+      "margin": 0.005795076489448547,
+      "runner": "classroom",
+      "inference_ms": 194.59500000084518,
+      "top5": [
+        {
+          "category": "kindergarten",
+          "similarity": 0.15081249177455902
+        },
+        {
+          "category": "classroom",
+          "similarity": 0.14501741528511047
+        },
+        {
+          "category": "workshop",
+          "similarity": 0.1058560311794281
+        },
+        {
+          "category": "library",
+          "similarity": 0.09505559504032135
+        },
+        {
+          "category": "game_room",
+          "similarity": 0.09346664696931839
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "classroom",
+      "source_archive": "valid",
+      "source_file": "classroom/sala_convegni_jpg.rf.60f99968441a2b54cb35aece5b96de48.jpg",
+      "source_sha256": "89fee8b398ef6ac08d8147ca6423bff6928385af170e8305959d51e840f8e86b",
+      "local": "test-classroom-4.jpg",
+      "top": "classroom",
+      "similarity": 0.14247705042362213,
+      "margin": 0.011627435684204102,
+      "runner": "auditorium",
+      "inference_ms": 131.75780000165105,
+      "top5": [
+        {
+          "category": "classroom",
+          "similarity": 0.14247705042362213
+        },
+        {
+          "category": "auditorium",
+          "similarity": 0.13084961473941803
+        },
+        {
+          "category": "computer_room",
+          "similarity": 0.11719979345798492
+        },
+        {
+          "category": "meeting_room",
+          "similarity": 0.11134845018386841
+        },
+        {
+          "category": "kindergarten",
+          "similarity": 0.10839808732271194
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "valid",
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/restaurante_24_20_altavista_jpg.rf.bde5d8d2d827e0e64cf3ea2b3c8e0d52.jpg",
+      "source_sha256": "058313f74cfc96dfff4b145f258f9ccd680c01751581f72ab892bc1e5c9f5cff",
+      "local": "valid-restaurant-0.jpg",
+      "top": "restaurant",
+      "similarity": 0.12343136966228485,
+      "margin": 0.00872136652469635,
+      "runner": "dining_room",
+      "inference_ms": 129.34279999899445,
+      "top5": [
+        {
+          "category": "restaurant",
+          "similarity": 0.12343136966228485
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.1147100031375885
+        },
+        {
+          "category": "cafe",
+          "similarity": 0.1029793992638588
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.09365054965019226
+        },
+        {
+          "category": "restaurant_kitchen",
+          "similarity": 0.08715115487575531
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "valid",
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/restaurante_31_18_altavista_jpg.rf.c89ce2d4200ac73bafe0054021bf8ba9.jpg",
+      "source_sha256": "e990b721ac1a01dff1ac4ef2d6fe135a347cb8c59a1af3f74ca80229a30c883e",
+      "local": "valid-restaurant-1.jpg",
+      "top": "restaurant",
+      "similarity": 0.128702312707901,
+      "margin": 0.019666947424411774,
+      "runner": "dining_room",
+      "inference_ms": 143.9237000013236,
+      "top5": [
+        {
+          "category": "restaurant",
+          "similarity": 0.128702312707901
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.10903536528348923
+        },
+        {
+          "category": "cafe",
+          "similarity": 0.09864838421344757
+        },
+        {
+          "category": "restaurant_kitchen",
+          "similarity": 0.09577086567878723
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.0934704840183258
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/060630_imaginaire_salle_4_jpg.rf.c55d511ca2dc2a48d3657ba685c7e78e.jpg",
+      "source_sha256": "520993e82b19f91294162db3a55c12414ae33a951911fee13b89a8ad9f01ded4",
+      "local": "test-restaurant-0.jpg",
+      "top": "restaurant",
+      "similarity": 0.12745660543441772,
+      "margin": 0.004376456141471863,
+      "runner": "dining_room",
+      "inference_ms": 150.4573000020173,
+      "top5": [
+        {
+          "category": "restaurant",
+          "similarity": 0.12745660543441772
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.12308014929294586
+        },
+        {
+          "category": "wine_cellar",
+          "similarity": 0.11892010271549225
+        },
+        {
+          "category": "cafe",
+          "similarity": 0.1052962988615036
+        },
+        {
+          "category": "restaurant_kitchen",
+          "similarity": 0.0987103134393692
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/image010_jpg.rf.4b98cf0f89600cffef6f8797af3390af.jpg",
+      "source_sha256": "a65ff3de8e1f80cd62b74f885c655fe4c75c075cbd67e2a93506a8106e9707a5",
+      "local": "test-restaurant-1.jpg",
+      "top": "restaurant",
+      "similarity": 0.12485137581825256,
+      "margin": 0.008359462022781372,
+      "runner": "dining_room",
+      "inference_ms": 138.50349999847822,
+      "top5": [
+        {
+          "category": "restaurant",
+          "similarity": 0.12485137581825256
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.11649191379547119
+        },
+        {
+          "category": "cafe",
+          "similarity": 0.10264032334089279
+        },
+        {
+          "category": "restaurant_kitchen",
+          "similarity": 0.08715935051441193
+        },
+        {
+          "category": "wine_cellar",
+          "similarity": 0.0862903743982315
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/bistro_11_16_altavista_jpg.rf.39083737edd63702ae5ff5557c24fe6f.jpg",
+      "source_sha256": "4e43a9d249830371a0854c35ebfd322d9444a99340b149f843f64696516a9353",
+      "local": "test-restaurant-2.jpg",
+      "top": "restaurant",
+      "similarity": 0.12409070134162903,
+      "margin": 0.007088705897331238,
+      "runner": "dining_room",
+      "inference_ms": 130.1432999971439,
+      "top5": [
+        {
+          "category": "restaurant",
+          "similarity": 0.12409070134162903
+        },
+        {
+          "category": "dining_room",
+          "similarity": 0.11700199544429779
+        },
+        {
+          "category": "cafe",
+          "similarity": 0.11317943036556244
+        },
+        {
+          "category": "restaurant_kitchen",
+          "similarity": 0.0990341529250145
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.0980428010225296
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/redr_jpg.rf.22d6f45fc73995f489d24417cbe599cb.jpg",
+      "source_sha256": "bb78e5a7b5069f4c11bbe7c67679396a02d27b4908e2159aab9cf40ed8823101",
+      "local": "test-restaurant-3.jpg",
+      "top": "dining_room",
+      "similarity": 0.12497951835393906,
+      "margin": 0.015556767582893372,
+      "runner": "restaurant",
+      "inference_ms": 129.55240000155754,
+      "top5": [
+        {
+          "category": "dining_room",
+          "similarity": 0.12497951835393906
+        },
+        {
+          "category": "restaurant",
+          "similarity": 0.10942275077104568
+        },
+        {
+          "category": "meeting_room",
+          "similarity": 0.08640900999307632
+        },
+        {
+          "category": "restaurant_kitchen",
+          "similarity": 0.08550862222909927
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.07851871103048325
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/room264_jpg.rf.5a6204acf5dd4949ab8a14aa1a2be314.jpg",
+      "source_sha256": "e6141fbcfb64fbe5ce883080d63cd4477e9a1417f7650952f575530d17ab923a",
+      "local": "test-restaurant-4.jpg",
+      "top": "dining_room",
+      "similarity": 0.1319931447505951,
+      "margin": 0.01174444705247879,
+      "runner": "restaurant",
+      "inference_ms": 137.47260000309325,
+      "top5": [
+        {
+          "category": "dining_room",
+          "similarity": 0.1319931447505951
+        },
+        {
+          "category": "restaurant",
+          "similarity": 0.1202486976981163
+        },
+        {
+          "category": "cafe",
+          "similarity": 0.09751762449741364
+        },
+        {
+          "category": "meeting_room",
+          "similarity": 0.09540513157844543
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.09451094269752502
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "valid",
+      "expected": "corridor",
+      "source_archive": "train",
+      "source_file": "corridor/lobby48_jpg.rf.a622d9edc757ade9d435dac2a0a6afbe.jpg",
+      "source_sha256": "632f94bcc70671793072fd6581193ae971ebe1287083407b30f126d43858b37a",
+      "local": "valid-corridor-0.jpg",
+      "top": "church",
+      "similarity": 0.12164516001939774,
+      "margin": 0.00038214772939682007,
+      "runner": "corridor",
+      "inference_ms": 131.31670000075246,
+      "top5": [
+        {
+          "category": "church",
+          "similarity": 0.12164516001939774
+        },
+        {
+          "category": "corridor",
+          "similarity": 0.12126301229000092
+        },
+        {
+          "category": "waiting_room",
+          "similarity": 0.11064520478248596
+        },
+        {
+          "category": "library",
+          "similarity": 0.1099855825304985
+        },
+        {
+          "category": "reception",
+          "similarity": 0.10502411425113678
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "valid",
+      "expected": "corridor",
+      "source_archive": "train",
+      "source_file": "corridor/Corridor_to_2nd_floor_jpg.rf.ced8a9454b8ccdf18a0048723453d4cc.jpg",
+      "source_sha256": "697999dfa8869be9880dd92e23073af7dd245ae6a06effc5e7dbbb93fcaf68e3",
+      "local": "valid-corridor-1.jpg",
+      "top": "stairwell",
+      "similarity": 0.11825782060623169,
+      "margin": 0.015827864408493042,
+      "runner": "art_studio",
+      "inference_ms": 136.3576000003377,
+      "top5": [
+        {
+          "category": "stairwell",
+          "similarity": 0.11825782060623169
+        },
+        {
+          "category": "art_studio",
+          "similarity": 0.10242995619773865
+        },
+        {
+          "category": "corridor",
+          "similarity": 0.09858199208974838
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.08993998914957047
+        },
+        {
+          "category": "reception",
+          "similarity": 0.0859975814819336
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "split": "test",
+      "expected": "corridor",
+      "source_archive": "train",
+      "source_file": "corridor/hallway004_jpg.rf.4b6539d1c172d8390c6b63449e06d9a3.jpg",
+      "source_sha256": "2436395e166747e30fdd23b6715c9e2055b85e9f4a144bad7d93019edd8f5a09",
+      "local": "test-corridor-0.jpg",
+      "top": "corridor",
+      "similarity": 0.15425603091716766,
+      "margin": 0.021402612328529358,
+      "runner": "elevator",
+      "inference_ms": 131.06790000165347,
+      "top5": [
+        {
+          "category": "corridor",
+          "similarity": 0.15425603091716766
+        },
+        {
+          "category": "elevator",
+          "similarity": 0.1328534185886383
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.12347149848937988
+        },
+        {
+          "category": "locker_room",
+          "similarity": 0.11164316534996033
+        },
+        {
+          "category": "hospital_room",
+          "similarity": 0.11011729389429092
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "corridor",
+      "source_archive": "valid",
+      "source_file": "corridor/CORRIDOR13_jpg.rf.19110b8ea6aa717476759ad9c16fd45a.jpg",
+      "source_sha256": "10ab3d9a0a17d5fe378d7a1ddfaec8684ce80d33a940e9c3d0f0b9d802ea565f",
+      "local": "test-corridor-1.jpg",
+      "top": "corridor",
+      "similarity": 0.15277636051177979,
+      "margin": 0.04423105716705322,
+      "runner": "lobby",
+      "inference_ms": 138.29880000048433,
+      "top5": [
+        {
+          "category": "corridor",
+          "similarity": 0.15277636051177979
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.10854530334472656
+        },
+        {
+          "category": "closet",
+          "similarity": 0.10613363981246948
+        },
+        {
+          "category": "elevator",
+          "similarity": 0.09812963008880615
+        },
+        {
+          "category": "reject_wall",
+          "similarity": 0.09550552070140839
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "corridor",
+      "source_archive": "valid",
+      "source_file": "corridor/pasillo01_p_jpg.rf.83b478fe01ce1ed5ae24c9fe040be40f.jpg",
+      "source_sha256": "a7b43b3753a86e9e34acfaf71381e4c95b5e75cd6640021c6c31ed5d627d1a0a",
+      "local": "test-corridor-2.jpg",
+      "top": "corridor",
+      "similarity": 0.16177161037921906,
+      "margin": 0.03507314622402191,
+      "runner": "hospital_room",
+      "inference_ms": 130.6165999994846,
+      "top5": [
+        {
+          "category": "corridor",
+          "similarity": 0.16177161037921906
+        },
+        {
+          "category": "hospital_room",
+          "similarity": 0.12669846415519714
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.12389931827783585
+        },
+        {
+          "category": "clinic",
+          "similarity": 0.11406376957893372
+        },
+        {
+          "category": "elevator",
+          "similarity": 0.11388763040304184
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "corridor",
+      "source_archive": "valid",
+      "source_file": "corridor/couloir_ch1_5e_jpg.rf.2b22fbf1273b42a66014259fa169cc78.jpg",
+      "source_sha256": "6d708c6e8b2f99c29fad0cf0715fa3fa484455edbcc584b28447aa4614df098a",
+      "local": "test-corridor-3.jpg",
+      "top": "corridor",
+      "similarity": 0.1473112404346466,
+      "margin": 0.021317243576049805,
+      "runner": "lobby",
+      "inference_ms": 129.7115000015765,
+      "top5": [
+        {
+          "category": "corridor",
+          "similarity": 0.1473112404346466
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.1259939968585968
+        },
+        {
+          "category": "office",
+          "similarity": 0.11481084674596786
+        },
+        {
+          "category": "reception",
+          "similarity": 0.11421181261539459
+        },
+        {
+          "category": "locker_room",
+          "similarity": 0.11201075464487076
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "split": "test",
+      "expected": "corridor",
+      "source_archive": "train",
+      "source_file": "corridor/ins31_jpg.rf.8e22d8f18ff6133ec77e05bc7b278830.jpg",
+      "source_sha256": "a72d3c15806e0dfb06b2cf5b0a9ca2e62de75d6fbdd9b2b217184e7ec61a076b",
+      "local": "test-corridor-4.jpg",
+      "top": "corridor",
+      "similarity": 0.1379488706588745,
+      "margin": 0.02306412160396576,
+      "runner": "lobby",
+      "inference_ms": 130.61309999829973,
+      "top5": [
+        {
+          "category": "corridor",
+          "similarity": 0.1379488706588745
+        },
+        {
+          "category": "lobby",
+          "similarity": 0.11488474905490875
+        },
+        {
+          "category": "locker_room",
+          "similarity": 0.10031835734844208
+        },
+        {
+          "category": "closet",
+          "similarity": 0.09930315613746643
+        },
+        {
+          "category": "elevator",
+          "similarity": 0.09564478695392609
+        }
+      ],
+      "accepted": true
+    }
+  ],
+  "negatives": [
+    {
+      "name": "black",
+      "top": "reject_dark",
+      "similarity": 0.11149056255817413,
+      "margin": 0.014750547707080841
+    },
+    {
+      "name": "white",
+      "top": "reject_wall",
+      "similarity": 0.10315028578042984,
+      "margin": 0.018388621509075165
+    },
+    {
+      "name": "severe_blur",
+      "top": "reject_blur",
+      "similarity": 0.12260982394218445,
+      "margin": 0.018398918211460114
+    }
+  ],
+  "valid": {
+    "samples": 16,
+    "top1_correct": 12,
+    "accepted": 4,
+    "correct_accepted": 4,
+    "wrong_accepted": 0,
+    "abstained": 12,
+    "precision_when_accepted": 1.0,
+    "coverage": 0.25
+  },
+  "test": {
+    "samples": 40,
+    "top1_correct": 31,
+    "accepted": 19,
+    "correct_accepted": 16,
+    "wrong_accepted": 3,
+    "abstained": 21,
+    "precision_when_accepted": 0.8421052631578947,
+    "coverage": 0.475
+  },
+  "latency_ms": {
+    "p50": 134.80935000006866,
+    "p95": 160.83219999927678,
+    "scope": "visual encoder only, excludes camera/speech/network"
+  }
+}

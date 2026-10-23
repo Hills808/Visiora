@@ -1,0 +1,334 @@
+{
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+  "ortWeb": "1.30.0 bundled",
+  "provider": "wasm",
+  "threads": 1,
+  "policy": "Fixed2of3 person only, Nano non-person unchanged score.50, globalNMS/cap30",
+  "transport": "Same-origin QA static fixture, SW blocked, JPEG decoded before measured frame",
+  "resize": "Product-style canvas low bilinear, floor-dimensions top-left letterbox114; rawBGR float32. This does not assert pixel identity with native OpenCV.",
+  "warmupPerHead": 1,
+  "loadMs": {
+    "nano": 506.6000000014901,
+    "tiny": 306.70000000298023,
+    "s": 522.6000000014901
+  },
+  "warmup": [
+    {
+      "head": "nano",
+      "inferenceMs": 86.69999999552965,
+      "finite": true
+    },
+    {
+      "head": "tiny",
+      "inferenceMs": 250.39999999850988,
+      "finite": true
+    },
+    {
+      "head": "s",
+      "inferenceMs": 968.2000000029802,
+      "finite": true
+    }
+  ],
+  "frames": [
+    {
+      "id": 226592,
+      "source": [
+        640,
+        480
+      ],
+      "heads": [
+        {
+          "head": "nano",
+          "size": 416,
+          "resize": [
+            416,
+            312
+          ],
+          "preprocessMs": 3.8000000044703484,
+          "inferenceMs": 73.19999999552965,
+          "decodeMs": 0.7000000029802322,
+          "allMappedBeforeCap": 1,
+          "outputShape": [
+            1,
+            3549,
+            85
+          ]
+        },
+        {
+          "head": "tiny",
+          "size": 416,
+          "resize": [
+            416,
+            312
+          ],
+          "preprocessMs": 4.899999998509884,
+          "inferenceMs": 253.89999999850988,
+          "decodeMs": 0.20000000298023224,
+          "allMappedBeforeCap": 1,
+          "outputShape": [
+            1,
+            3549,
+            85
+          ]
+        },
+        {
+          "head": "s",
+          "size": 640,
+          "resize": [
+            640,
+            480
+          ],
+          "preprocessMs": 7.5,
+          "inferenceMs": 990.6000000014901,
+          "decodeMs": 0.29999999701976776,
+          "allMappedBeforeCap": 1,
+          "outputShape": [
+            1,
+            8400,
+            85
+          ]
+        }
+      ],
+      "compositionMs": 0.20000000298023224,
+      "fullFrameWarmMs": 1335.3000000044703,
+      "wouldMeetBrain3000Ms": true,
+      "baseline": [
+        {
+          "class": "bed",
+          "classId": 59,
+          "score": 0.8833946695537804,
+          "box": [
+            41.52437481220746,
+            42.72692010992636,
+            635.861242957474,
+            467.28836215419625
+          ],
+          "anchorIndex": 3438
+        }
+      ],
+      "pipeline": [
+        {
+          "class": "bed",
+          "classId": 59,
+          "score": 0.8833946695537804,
+          "box": [
+            41.52437481220746,
+            42.72692010992636,
+            635.861242957474,
+            467.28836215419625
+          ],
+          "anchorIndex": 3438
+        }
+      ]
+    },
+    {
+      "id": 249550,
+      "source": [
+        415,
+        625
+      ],
+      "heads": [
+        {
+          "head": "nano",
+          "size": 416,
+          "resize": [
+            276,
+            416
+          ],
+          "preprocessMs": 5.5,
+          "inferenceMs": 70.39999999850988,
+          "decodeMs": 0.10000000149011612,
+          "allMappedBeforeCap": 2,
+          "outputShape": [
+            1,
+            3549,
+            85
+          ]
+        },
+        {
+          "head": "tiny",
+          "size": 416,
+          "resize": [
+            276,
+            416
+          ],
+          "preprocessMs": 5.5,
+          "inferenceMs": 250,
+          "decodeMs": 0.09999999403953552,
+          "allMappedBeforeCap": 2,
+          "outputShape": [
+            1,
+            3549,
+            85
+          ]
+        },
+        {
+          "head": "s",
+          "size": 640,
+          "resize": [
+            424,
+            640
+          ],
+          "preprocessMs": 8.100000001490116,
+          "inferenceMs": 972.1000000014901,
+          "decodeMs": 0.20000000298023224,
+          "allMappedBeforeCap": 2,
+          "outputShape": [
+            1,
+            8400,
+            85
+          ]
+        }
+      ],
+      "compositionMs": 0,
+      "fullFrameWarmMs": 1312,
+      "wouldMeetBrain3000Ms": true,
+      "baseline": [
+        {
+          "class": "bed",
+          "classId": 59,
+          "score": 0.8851225480191545,
+          "box": [
+            0.6804825336504694,
+            191.22355660254067,
+            257.18278801502333,
+            624.005125695386
+          ],
+          "anchorIndex": 3473
+        },
+        {
+          "class": "pottedPlant",
+          "classId": 58,
+          "score": 0.704189871142205,
+          "box": [
+            307.09086144973486,
+            223.3682641794133,
+            385.34336349511346,
+            377.06721600945167
+          ],
+          "anchorIndex": 3031
+        }
+      ],
+      "pipeline": [
+        {
+          "class": "bed",
+          "classId": 59,
+          "score": 0.8851225480191545,
+          "box": [
+            0.6804825336504694,
+            191.22355660254067,
+            257.18278801502333,
+            624.005125695386
+          ],
+          "anchorIndex": 3473
+        },
+        {
+          "class": "pottedPlant",
+          "classId": 58,
+          "score": 0.704189871142205,
+          "box": [
+            307.09086144973486,
+            223.3682641794133,
+            385.34336349511346,
+            377.06721600945167
+          ],
+          "anchorIndex": 3031
+        }
+      ]
+    },
+    {
+      "id": 235399,
+      "source": [
+        500,
+        375
+      ],
+      "heads": [
+        {
+          "head": "nano",
+          "size": 416,
+          "resize": [
+            416,
+            312
+          ],
+          "preprocessMs": 6,
+          "inferenceMs": 69.79999999701977,
+          "decodeMs": 0.20000000298023224,
+          "allMappedBeforeCap": 1,
+          "outputShape": [
+            1,
+            3549,
+            85
+          ]
+        },
+        {
+          "head": "tiny",
+          "size": 416,
+          "resize": [
+            416,
+            312
+          ],
+          "preprocessMs": 4.0999999940395355,
+          "inferenceMs": 247.80000000447035,
+          "decodeMs": 0.10000000149011612,
+          "allMappedBeforeCap": 2,
+          "outputShape": [
+            1,
+            3549,
+            85
+          ]
+        },
+        {
+          "head": "s",
+          "size": 640,
+          "resize": [
+            640,
+            480
+          ],
+          "preprocessMs": 9.099999994039536,
+          "inferenceMs": 980.6000000014901,
+          "decodeMs": 0.30000000447034836,
+          "allMappedBeforeCap": 1,
+          "outputShape": [
+            1,
+            8400,
+            85
+          ]
+        }
+      ],
+      "compositionMs": 0,
+      "fullFrameWarmMs": 1318,
+      "wouldMeetBrain3000Ms": true,
+      "baseline": [
+        {
+          "class": "dog",
+          "classId": 16,
+          "score": 0.8439379942682024,
+          "box": [
+            157.2770473272977,
+            225.952745361516,
+            270.40802087655504,
+            322.7232823399352
+          ],
+          "anchorIndex": 3078
+        }
+      ],
+      "pipeline": [
+        {
+          "class": "dog",
+          "classId": 16,
+          "score": 0.8439379942682024,
+          "box": [
+            157.2770473272977,
+            225.952745361516,
+            270.40802087655504,
+            322.7232823399352
+          ],
+          "anchorIndex": 3078
+        }
+      ]
+    }
+  ],
+  "latencyGatePassed": true,
+  "timingCaveat": "3warm fixture frames only, shared machine; no live camera, scenesmodel, speaker, transfer or endurance, not general latency guarantee",
+  "pageErrors": []
+}

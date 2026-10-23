@@ -1,0 +1,4460 @@
+{
+  "model": "Places365 ResNet18",
+  "runtime": "1.23.2",
+  "threads": 4,
+  "preprocessing": "Same as previous failed comparison: warp RGB to256x256, PIL bilinear, crop center224, ImageNet normalization",
+  "groups": {
+    "bedroom": [
+      "bedroom",
+      "bedchamber",
+      "childs_room",
+      "dorm_room",
+      "hotel_room",
+      "nursery"
+    ],
+    "classroom": [
+      "classroom",
+      "kindergarden_classroom",
+      "lecture_room"
+    ],
+    "office": [
+      "office",
+      "home_office",
+      "office_cubicles"
+    ],
+    "kitchen": [
+      "kitchen",
+      "restaurant_kitchen",
+      "galley"
+    ],
+    "restaurant": [
+      "restaurant",
+      "restaurant_patio",
+      "fastfood_restaurant"
+    ]
+  },
+  "adoption_policy": ">=90% precision among >=10 accepted development samples; unchanged",
+  "eligible_policy_count": 0,
+  "adoption_passed": false,
+  "best_precision_with_at_least10": {
+    "score": 0.7,
+    "margin": 0.3,
+    "samples": 96,
+    "raw_top1_correct": 55,
+    "accepted": 19,
+    "correct": 16,
+    "wrong": 3,
+    "abstained": 77,
+    "precision_when_accepted": 0.8421052631578947,
+    "coverage": 0.19791666666666666
+  },
+  "maximum_correct_with_at_least10": {
+    "score": 0.2,
+    "margin": 0.05,
+    "samples": 96,
+    "raw_top1_correct": 55,
+    "accepted": 83,
+    "correct": 51,
+    "wrong": 32,
+    "abstained": 13,
+    "precision_when_accepted": 0.6144578313253012,
+    "coverage": 0.8645833333333334
+  },
+  "grid": [
+    {
+      "score": 0.2,
+      "margin": 0.05,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 83,
+      "correct": 51,
+      "wrong": 32,
+      "abstained": 13,
+      "precision_when_accepted": 0.6144578313253012,
+      "coverage": 0.8645833333333334
+    },
+    {
+      "score": 0.2,
+      "margin": 0.1,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 76,
+      "correct": 49,
+      "wrong": 27,
+      "abstained": 20,
+      "precision_when_accepted": 0.6447368421052632,
+      "coverage": 0.7916666666666666
+    },
+    {
+      "score": 0.2,
+      "margin": 0.15,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 68,
+      "correct": 45,
+      "wrong": 23,
+      "abstained": 28,
+      "precision_when_accepted": 0.6617647058823529,
+      "coverage": 0.7083333333333334
+    },
+    {
+      "score": 0.2,
+      "margin": 0.2,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 66,
+      "correct": 44,
+      "wrong": 22,
+      "abstained": 30,
+      "precision_when_accepted": 0.6666666666666666,
+      "coverage": 0.6875
+    },
+    {
+      "score": 0.2,
+      "margin": 0.25,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 62,
+      "correct": 42,
+      "wrong": 20,
+      "abstained": 34,
+      "precision_when_accepted": 0.6774193548387096,
+      "coverage": 0.6458333333333334
+    },
+    {
+      "score": 0.2,
+      "margin": 0.3,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 55,
+      "correct": 39,
+      "wrong": 16,
+      "abstained": 41,
+      "precision_when_accepted": 0.7090909090909091,
+      "coverage": 0.5729166666666666
+    },
+    {
+      "score": 0.25,
+      "margin": 0.05,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 79,
+      "correct": 49,
+      "wrong": 30,
+      "abstained": 17,
+      "precision_when_accepted": 0.620253164556962,
+      "coverage": 0.8229166666666666
+    },
+    {
+      "score": 0.25,
+      "margin": 0.1,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 75,
+      "correct": 49,
+      "wrong": 26,
+      "abstained": 21,
+      "precision_when_accepted": 0.6533333333333333,
+      "coverage": 0.78125
+    },
+    {
+      "score": 0.25,
+      "margin": 0.15,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 68,
+      "correct": 45,
+      "wrong": 23,
+      "abstained": 28,
+      "precision_when_accepted": 0.6617647058823529,
+      "coverage": 0.7083333333333334
+    },
+    {
+      "score": 0.25,
+      "margin": 0.2,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 66,
+      "correct": 44,
+      "wrong": 22,
+      "abstained": 30,
+      "precision_when_accepted": 0.6666666666666666,
+      "coverage": 0.6875
+    },
+    {
+      "score": 0.25,
+      "margin": 0.25,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 62,
+      "correct": 42,
+      "wrong": 20,
+      "abstained": 34,
+      "precision_when_accepted": 0.6774193548387096,
+      "coverage": 0.6458333333333334
+    },
+    {
+      "score": 0.25,
+      "margin": 0.3,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 55,
+      "correct": 39,
+      "wrong": 16,
+      "abstained": 41,
+      "precision_when_accepted": 0.7090909090909091,
+      "coverage": 0.5729166666666666
+    },
+    {
+      "score": 0.3,
+      "margin": 0.05,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 74,
+      "correct": 47,
+      "wrong": 27,
+      "abstained": 22,
+      "precision_when_accepted": 0.6351351351351351,
+      "coverage": 0.7708333333333334
+    },
+    {
+      "score": 0.3,
+      "margin": 0.1,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 72,
+      "correct": 47,
+      "wrong": 25,
+      "abstained": 24,
+      "precision_when_accepted": 0.6527777777777778,
+      "coverage": 0.75
+    },
+    {
+      "score": 0.3,
+      "margin": 0.15,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 67,
+      "correct": 44,
+      "wrong": 23,
+      "abstained": 29,
+      "precision_when_accepted": 0.6567164179104478,
+      "coverage": 0.6979166666666666
+    },
+    {
+      "score": 0.3,
+      "margin": 0.2,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 66,
+      "correct": 44,
+      "wrong": 22,
+      "abstained": 30,
+      "precision_when_accepted": 0.6666666666666666,
+      "coverage": 0.6875
+    },
+    {
+      "score": 0.3,
+      "margin": 0.25,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 62,
+      "correct": 42,
+      "wrong": 20,
+      "abstained": 34,
+      "precision_when_accepted": 0.6774193548387096,
+      "coverage": 0.6458333333333334
+    },
+    {
+      "score": 0.3,
+      "margin": 0.3,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 55,
+      "correct": 39,
+      "wrong": 16,
+      "abstained": 41,
+      "precision_when_accepted": 0.7090909090909091,
+      "coverage": 0.5729166666666666
+    },
+    {
+      "score": 0.35,
+      "margin": 0.05,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 68,
+      "correct": 44,
+      "wrong": 24,
+      "abstained": 28,
+      "precision_when_accepted": 0.6470588235294118,
+      "coverage": 0.7083333333333334
+    },
+    {
+      "score": 0.35,
+      "margin": 0.1,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 66,
+      "correct": 44,
+      "wrong": 22,
+      "abstained": 30,
+      "precision_when_accepted": 0.6666666666666666,
+      "coverage": 0.6875
+    },
+    {
+      "score": 0.35,
+      "margin": 0.15,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 63,
+      "correct": 42,
+      "wrong": 21,
+      "abstained": 33,
+      "precision_when_accepted": 0.6666666666666666,
+      "coverage": 0.65625
+    },
+    {
+      "score": 0.35,
+      "margin": 0.2,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 63,
+      "correct": 42,
+      "wrong": 21,
+      "abstained": 33,
+      "precision_when_accepted": 0.6666666666666666,
+      "coverage": 0.65625
+    },
+    {
+      "score": 0.35,
+      "margin": 0.25,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 61,
+      "correct": 42,
+      "wrong": 19,
+      "abstained": 35,
+      "precision_when_accepted": 0.6885245901639344,
+      "coverage": 0.6354166666666666
+    },
+    {
+      "score": 0.35,
+      "margin": 0.3,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 55,
+      "correct": 39,
+      "wrong": 16,
+      "abstained": 41,
+      "precision_when_accepted": 0.7090909090909091,
+      "coverage": 0.5729166666666666
+    },
+    {
+      "score": 0.4,
+      "margin": 0.05,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 63,
+      "correct": 42,
+      "wrong": 21,
+      "abstained": 33,
+      "precision_when_accepted": 0.6666666666666666,
+      "coverage": 0.65625
+    },
+    {
+      "score": 0.4,
+      "margin": 0.1,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 63,
+      "correct": 42,
+      "wrong": 21,
+      "abstained": 33,
+      "precision_when_accepted": 0.6666666666666666,
+      "coverage": 0.65625
+    },
+    {
+      "score": 0.4,
+      "margin": 0.15,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 61,
+      "correct": 41,
+      "wrong": 20,
+      "abstained": 35,
+      "precision_when_accepted": 0.6721311475409836,
+      "coverage": 0.6354166666666666
+    },
+    {
+      "score": 0.4,
+      "margin": 0.2,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 61,
+      "correct": 41,
+      "wrong": 20,
+      "abstained": 35,
+      "precision_when_accepted": 0.6721311475409836,
+      "coverage": 0.6354166666666666
+    },
+    {
+      "score": 0.4,
+      "margin": 0.25,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 60,
+      "correct": 41,
+      "wrong": 19,
+      "abstained": 36,
+      "precision_when_accepted": 0.6833333333333333,
+      "coverage": 0.625
+    },
+    {
+      "score": 0.4,
+      "margin": 0.3,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 55,
+      "correct": 39,
+      "wrong": 16,
+      "abstained": 41,
+      "precision_when_accepted": 0.7090909090909091,
+      "coverage": 0.5729166666666666
+    },
+    {
+      "score": 0.45,
+      "margin": 0.05,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 54,
+      "correct": 38,
+      "wrong": 16,
+      "abstained": 42,
+      "precision_when_accepted": 0.7037037037037037,
+      "coverage": 0.5625
+    },
+    {
+      "score": 0.45,
+      "margin": 0.1,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 54,
+      "correct": 38,
+      "wrong": 16,
+      "abstained": 42,
+      "precision_when_accepted": 0.7037037037037037,
+      "coverage": 0.5625
+    },
+    {
+      "score": 0.45,
+      "margin": 0.15,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 54,
+      "correct": 38,
+      "wrong": 16,
+      "abstained": 42,
+      "precision_when_accepted": 0.7037037037037037,
+      "coverage": 0.5625
+    },
+    {
+      "score": 0.45,
+      "margin": 0.2,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 54,
+      "correct": 38,
+      "wrong": 16,
+      "abstained": 42,
+      "precision_when_accepted": 0.7037037037037037,
+      "coverage": 0.5625
+    },
+    {
+      "score": 0.45,
+      "margin": 0.25,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 53,
+      "correct": 38,
+      "wrong": 15,
+      "abstained": 43,
+      "precision_when_accepted": 0.7169811320754716,
+      "coverage": 0.5520833333333334
+    },
+    {
+      "score": 0.45,
+      "margin": 0.3,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 51,
+      "correct": 37,
+      "wrong": 14,
+      "abstained": 45,
+      "precision_when_accepted": 0.7254901960784313,
+      "coverage": 0.53125
+    },
+    {
+      "score": 0.5,
+      "margin": 0.05,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 49,
+      "correct": 34,
+      "wrong": 15,
+      "abstained": 47,
+      "precision_when_accepted": 0.6938775510204082,
+      "coverage": 0.5104166666666666
+    },
+    {
+      "score": 0.5,
+      "margin": 0.1,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 49,
+      "correct": 34,
+      "wrong": 15,
+      "abstained": 47,
+      "precision_when_accepted": 0.6938775510204082,
+      "coverage": 0.5104166666666666
+    },
+    {
+      "score": 0.5,
+      "margin": 0.15,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 49,
+      "correct": 34,
+      "wrong": 15,
+      "abstained": 47,
+      "precision_when_accepted": 0.6938775510204082,
+      "coverage": 0.5104166666666666
+    },
+    {
+      "score": 0.5,
+      "margin": 0.2,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 49,
+      "correct": 34,
+      "wrong": 15,
+      "abstained": 47,
+      "precision_when_accepted": 0.6938775510204082,
+      "coverage": 0.5104166666666666
+    },
+    {
+      "score": 0.5,
+      "margin": 0.25,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 48,
+      "correct": 34,
+      "wrong": 14,
+      "abstained": 48,
+      "precision_when_accepted": 0.7083333333333334,
+      "coverage": 0.5
+    },
+    {
+      "score": 0.5,
+      "margin": 0.3,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 46,
+      "correct": 33,
+      "wrong": 13,
+      "abstained": 50,
+      "precision_when_accepted": 0.717391304347826,
+      "coverage": 0.4791666666666667
+    },
+    {
+      "score": 0.55,
+      "margin": 0.05,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 44,
+      "correct": 31,
+      "wrong": 13,
+      "abstained": 52,
+      "precision_when_accepted": 0.7045454545454546,
+      "coverage": 0.4583333333333333
+    },
+    {
+      "score": 0.55,
+      "margin": 0.1,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 44,
+      "correct": 31,
+      "wrong": 13,
+      "abstained": 52,
+      "precision_when_accepted": 0.7045454545454546,
+      "coverage": 0.4583333333333333
+    },
+    {
+      "score": 0.55,
+      "margin": 0.15,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 44,
+      "correct": 31,
+      "wrong": 13,
+      "abstained": 52,
+      "precision_when_accepted": 0.7045454545454546,
+      "coverage": 0.4583333333333333
+    },
+    {
+      "score": 0.55,
+      "margin": 0.2,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 44,
+      "correct": 31,
+      "wrong": 13,
+      "abstained": 52,
+      "precision_when_accepted": 0.7045454545454546,
+      "coverage": 0.4583333333333333
+    },
+    {
+      "score": 0.55,
+      "margin": 0.25,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 43,
+      "correct": 31,
+      "wrong": 12,
+      "abstained": 53,
+      "precision_when_accepted": 0.7209302325581395,
+      "coverage": 0.4479166666666667
+    },
+    {
+      "score": 0.55,
+      "margin": 0.3,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 43,
+      "correct": 31,
+      "wrong": 12,
+      "abstained": 53,
+      "precision_when_accepted": 0.7209302325581395,
+      "coverage": 0.4479166666666667
+    },
+    {
+      "score": 0.6,
+      "margin": 0.05,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 40,
+      "correct": 30,
+      "wrong": 10,
+      "abstained": 56,
+      "precision_when_accepted": 0.75,
+      "coverage": 0.4166666666666667
+    },
+    {
+      "score": 0.6,
+      "margin": 0.1,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 40,
+      "correct": 30,
+      "wrong": 10,
+      "abstained": 56,
+      "precision_when_accepted": 0.75,
+      "coverage": 0.4166666666666667
+    },
+    {
+      "score": 0.6,
+      "margin": 0.15,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 40,
+      "correct": 30,
+      "wrong": 10,
+      "abstained": 56,
+      "precision_when_accepted": 0.75,
+      "coverage": 0.4166666666666667
+    },
+    {
+      "score": 0.6,
+      "margin": 0.2,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 40,
+      "correct": 30,
+      "wrong": 10,
+      "abstained": 56,
+      "precision_when_accepted": 0.75,
+      "coverage": 0.4166666666666667
+    },
+    {
+      "score": 0.6,
+      "margin": 0.25,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 39,
+      "correct": 30,
+      "wrong": 9,
+      "abstained": 57,
+      "precision_when_accepted": 0.7692307692307693,
+      "coverage": 0.40625
+    },
+    {
+      "score": 0.6,
+      "margin": 0.3,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 39,
+      "correct": 30,
+      "wrong": 9,
+      "abstained": 57,
+      "precision_when_accepted": 0.7692307692307693,
+      "coverage": 0.40625
+    },
+    {
+      "score": 0.65,
+      "margin": 0.05,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 24,
+      "correct": 19,
+      "wrong": 5,
+      "abstained": 72,
+      "precision_when_accepted": 0.7916666666666666,
+      "coverage": 0.25
+    },
+    {
+      "score": 0.65,
+      "margin": 0.1,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 24,
+      "correct": 19,
+      "wrong": 5,
+      "abstained": 72,
+      "precision_when_accepted": 0.7916666666666666,
+      "coverage": 0.25
+    },
+    {
+      "score": 0.65,
+      "margin": 0.15,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 24,
+      "correct": 19,
+      "wrong": 5,
+      "abstained": 72,
+      "precision_when_accepted": 0.7916666666666666,
+      "coverage": 0.25
+    },
+    {
+      "score": 0.65,
+      "margin": 0.2,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 24,
+      "correct": 19,
+      "wrong": 5,
+      "abstained": 72,
+      "precision_when_accepted": 0.7916666666666666,
+      "coverage": 0.25
+    },
+    {
+      "score": 0.65,
+      "margin": 0.25,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 24,
+      "correct": 19,
+      "wrong": 5,
+      "abstained": 72,
+      "precision_when_accepted": 0.7916666666666666,
+      "coverage": 0.25
+    },
+    {
+      "score": 0.65,
+      "margin": 0.3,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 24,
+      "correct": 19,
+      "wrong": 5,
+      "abstained": 72,
+      "precision_when_accepted": 0.7916666666666666,
+      "coverage": 0.25
+    },
+    {
+      "score": 0.7,
+      "margin": 0.05,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 19,
+      "correct": 16,
+      "wrong": 3,
+      "abstained": 77,
+      "precision_when_accepted": 0.8421052631578947,
+      "coverage": 0.19791666666666666
+    },
+    {
+      "score": 0.7,
+      "margin": 0.1,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 19,
+      "correct": 16,
+      "wrong": 3,
+      "abstained": 77,
+      "precision_when_accepted": 0.8421052631578947,
+      "coverage": 0.19791666666666666
+    },
+    {
+      "score": 0.7,
+      "margin": 0.15,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 19,
+      "correct": 16,
+      "wrong": 3,
+      "abstained": 77,
+      "precision_when_accepted": 0.8421052631578947,
+      "coverage": 0.19791666666666666
+    },
+    {
+      "score": 0.7,
+      "margin": 0.2,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 19,
+      "correct": 16,
+      "wrong": 3,
+      "abstained": 77,
+      "precision_when_accepted": 0.8421052631578947,
+      "coverage": 0.19791666666666666
+    },
+    {
+      "score": 0.7,
+      "margin": 0.25,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 19,
+      "correct": 16,
+      "wrong": 3,
+      "abstained": 77,
+      "precision_when_accepted": 0.8421052631578947,
+      "coverage": 0.19791666666666666
+    },
+    {
+      "score": 0.7,
+      "margin": 0.3,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 19,
+      "correct": 16,
+      "wrong": 3,
+      "abstained": 77,
+      "precision_when_accepted": 0.8421052631578947,
+      "coverage": 0.19791666666666666
+    },
+    {
+      "score": 0.75,
+      "margin": 0.05,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 15,
+      "correct": 12,
+      "wrong": 3,
+      "abstained": 81,
+      "precision_when_accepted": 0.8,
+      "coverage": 0.15625
+    },
+    {
+      "score": 0.75,
+      "margin": 0.1,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 15,
+      "correct": 12,
+      "wrong": 3,
+      "abstained": 81,
+      "precision_when_accepted": 0.8,
+      "coverage": 0.15625
+    },
+    {
+      "score": 0.75,
+      "margin": 0.15,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 15,
+      "correct": 12,
+      "wrong": 3,
+      "abstained": 81,
+      "precision_when_accepted": 0.8,
+      "coverage": 0.15625
+    },
+    {
+      "score": 0.75,
+      "margin": 0.2,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 15,
+      "correct": 12,
+      "wrong": 3,
+      "abstained": 81,
+      "precision_when_accepted": 0.8,
+      "coverage": 0.15625
+    },
+    {
+      "score": 0.75,
+      "margin": 0.25,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 15,
+      "correct": 12,
+      "wrong": 3,
+      "abstained": 81,
+      "precision_when_accepted": 0.8,
+      "coverage": 0.15625
+    },
+    {
+      "score": 0.75,
+      "margin": 0.3,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 15,
+      "correct": 12,
+      "wrong": 3,
+      "abstained": 81,
+      "precision_when_accepted": 0.8,
+      "coverage": 0.15625
+    },
+    {
+      "score": 0.8,
+      "margin": 0.05,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 13,
+      "correct": 10,
+      "wrong": 3,
+      "abstained": 83,
+      "precision_when_accepted": 0.7692307692307693,
+      "coverage": 0.13541666666666666
+    },
+    {
+      "score": 0.8,
+      "margin": 0.1,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 13,
+      "correct": 10,
+      "wrong": 3,
+      "abstained": 83,
+      "precision_when_accepted": 0.7692307692307693,
+      "coverage": 0.13541666666666666
+    },
+    {
+      "score": 0.8,
+      "margin": 0.15,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 13,
+      "correct": 10,
+      "wrong": 3,
+      "abstained": 83,
+      "precision_when_accepted": 0.7692307692307693,
+      "coverage": 0.13541666666666666
+    },
+    {
+      "score": 0.8,
+      "margin": 0.2,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 13,
+      "correct": 10,
+      "wrong": 3,
+      "abstained": 83,
+      "precision_when_accepted": 0.7692307692307693,
+      "coverage": 0.13541666666666666
+    },
+    {
+      "score": 0.8,
+      "margin": 0.25,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 13,
+      "correct": 10,
+      "wrong": 3,
+      "abstained": 83,
+      "precision_when_accepted": 0.7692307692307693,
+      "coverage": 0.13541666666666666
+    },
+    {
+      "score": 0.8,
+      "margin": 0.3,
+      "samples": 96,
+      "raw_top1_correct": 55,
+      "accepted": 13,
+      "correct": 10,
+      "wrong": 3,
+      "abstained": 83,
+      "precision_when_accepted": 0.7692307692307693,
+      "coverage": 0.13541666666666666
+    }
+  ],
+  "records": [
+    {
+      "split": "development",
+      "index": 0,
+      "expected": "living_room",
+      "source_archive": "test",
+      "source_file": "livingroom/room333_jpg.rf.28ac37cb145b0c71e4d805f07e8c81fb.jpg",
+      "sha256": "c2621bcd9f9756b01fd4357c32c9dd980d217b6c53aaed9e821e9aaa4ffe7494",
+      "category": "living_room",
+      "raw_category": "living_room",
+      "score": 0.619787335395813,
+      "margin": 0.506050169467926,
+      "runner": "television_room",
+      "inference_ms": 8.783599994785618,
+      "top5": [
+        {
+          "category": "living_room",
+          "score": 0.619787335395813
+        },
+        {
+          "category": "television_room",
+          "score": 0.11373718082904816
+        },
+        {
+          "category": "waiting_room",
+          "score": 0.06281480938196182
+        },
+        {
+          "category": "recreation_room",
+          "score": 0.042875416576862335
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.029864829033613205
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 1,
+      "expected": "living_room",
+      "source_archive": "train",
+      "source_file": "livingroom/easyst016_jpg.rf.d44a45b50ae6d627879ce115f73895c7.jpg",
+      "sha256": "1209be7db91227307b13d4df94b8b747450ade0b9f6720119dd1a19005fdb58e",
+      "category": "bow_window_indoor",
+      "raw_category": "bow_window/indoor",
+      "score": 0.3328348696231842,
+      "margin": 0.1309826374053955,
+      "runner": "living_room",
+      "inference_ms": 8.254799999122042,
+      "top5": [
+        {
+          "category": "bow_window/indoor",
+          "score": 0.3328348696231842
+        },
+        {
+          "category": "living_room",
+          "score": 0.2018522322177887
+        },
+        {
+          "category": "artists_loft",
+          "score": 0.14736928045749664
+        },
+        {
+          "category": "hotel_room",
+          "score": 0.08711579442024231
+        },
+        {
+          "category": "bedchamber",
+          "score": 0.03198694810271263
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 2,
+      "expected": "living_room",
+      "source_archive": "test",
+      "source_file": "livingroom/roomscan26_jpg.rf.36c75d77b1eb2528d8dd1e7ab98bb03d.jpg",
+      "sha256": "d55ed282a48dfb3bdb251b6febbdeca0ca383a85f2bf5a91607833bc4de375e8",
+      "category": "bedroom",
+      "raw_category": "hotel_room",
+      "score": 0.21245123445987701,
+      "margin": 0.013466447591781616,
+      "runner": "waiting_room",
+      "inference_ms": 9.844299995165784,
+      "top5": [
+        {
+          "category": "hotel_room",
+          "score": 0.21245123445987701
+        },
+        {
+          "category": "waiting_room",
+          "score": 0.1989847868680954
+        },
+        {
+          "category": "lobby",
+          "score": 0.14579755067825317
+        },
+        {
+          "category": "living_room",
+          "score": 0.11620336025953293
+        },
+        {
+          "category": "alcove",
+          "score": 0.035722292959690094
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 3,
+      "expected": "living_room",
+      "source_archive": "train",
+      "source_file": "livingroom/dsc3101_jpg.rf.8b11108aa8936cf80e95082d8f99ea4b.jpg",
+      "sha256": "db88c3d6806c625be792c467e43db22397bd9142385886503160a0ba64a61058",
+      "category": "living_room",
+      "raw_category": "living_room",
+      "score": 0.1843356043100357,
+      "margin": 0.07906006276607513,
+      "runner": "dining_room",
+      "inference_ms": 8.724600003915839,
+      "top5": [
+        {
+          "category": "living_room",
+          "score": 0.1843356043100357
+        },
+        {
+          "category": "dining_room",
+          "score": 0.10527554154396057
+        },
+        {
+          "category": "waiting_room",
+          "score": 0.09510888904333115
+        },
+        {
+          "category": "artists_loft",
+          "score": 0.0895138680934906
+        },
+        {
+          "category": "television_room",
+          "score": 0.0776081457734108
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 4,
+      "expected": "living_room",
+      "source_archive": "train",
+      "source_file": "livingroom/imagnifyingglass_jpg.rf.f0f754d9b1cc09b2c364d1d835de2fc0.jpg",
+      "sha256": "4caeed80dadbfc854ff32a5ff562f15379dea3a2784748453b75162915af145c",
+      "category": "living_room",
+      "raw_category": "living_room",
+      "score": 0.801175057888031,
+      "margin": 0.7584428787231445,
+      "runner": "bedroom",
+      "inference_ms": 12.030199999571778,
+      "top5": [
+        {
+          "category": "living_room",
+          "score": 0.801175057888031
+        },
+        {
+          "category": "bedchamber",
+          "score": 0.042732201516628265
+        },
+        {
+          "category": "lobby",
+          "score": 0.03723002225160599
+        },
+        {
+          "category": "throne_room",
+          "score": 0.01964561454951763
+        },
+        {
+          "category": "dining_room",
+          "score": 0.017276259139180183
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 5,
+      "expected": "living_room",
+      "source_archive": "train",
+      "source_file": "livingroom/c_salon27_jpg.rf.165b1ba5877d4786a113df212ab67d36.jpg",
+      "sha256": "61545a55dd7d79600fd0b9a60ae7bb19ec742b2c48b8ac2a10b6560b893d3656",
+      "category": "television_room",
+      "raw_category": "television_room",
+      "score": 0.2776111364364624,
+      "margin": 0.07772819697856903,
+      "runner": "living_room",
+      "inference_ms": 9.149599994998425,
+      "top5": [
+        {
+          "category": "television_room",
+          "score": 0.2776111364364624
+        },
+        {
+          "category": "living_room",
+          "score": 0.19988293945789337
+        },
+        {
+          "category": "waiting_room",
+          "score": 0.18099714815616608
+        },
+        {
+          "category": "balcony/interior",
+          "score": 0.04593721032142639
+        },
+        {
+          "category": "recreation_room",
+          "score": 0.042994383722543716
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 6,
+      "expected": "living_room",
+      "source_archive": "train",
+      "source_file": "livingroom/fw_97_6_2287_26_l_jpg.rf.802a78c345cbeba05bd94818be7a90b7.jpg",
+      "sha256": "21f7861c3550bd3d68ac70be3fe741047c7279f266b1f864c033c70f2ad315bd",
+      "category": "living_room",
+      "raw_category": "living_room",
+      "score": 0.17811723053455353,
+      "margin": 0.006232991814613342,
+      "runner": "television_room",
+      "inference_ms": 13.794600003166124,
+      "top5": [
+        {
+          "category": "living_room",
+          "score": 0.17811723053455353
+        },
+        {
+          "category": "television_room",
+          "score": 0.17188423871994019
+        },
+        {
+          "category": "home_theater",
+          "score": 0.1425274908542633
+        },
+        {
+          "category": "waiting_room",
+          "score": 0.03764014318585396
+        },
+        {
+          "category": "locker_room",
+          "score": 0.03681385889649391
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 7,
+      "expected": "living_room",
+      "source_archive": "train",
+      "source_file": "livingroom/graceland_piano_32_4_jpg.rf.372e33ce310d42e54d8c64b212fa7a2d.jpg",
+      "sha256": "6331e7e7fea7856d3acadaa413b85da24fe2eac14588dd55dd81c42ac4b257b3",
+      "category": "recreation_room",
+      "raw_category": "recreation_room",
+      "score": 0.33898282051086426,
+      "margin": 0.2848227024078369,
+      "runner": "bedroom",
+      "inference_ms": 14.046100004634354,
+      "top5": [
+        {
+          "category": "recreation_room",
+          "score": 0.33898282051086426
+        },
+        {
+          "category": "childs_room",
+          "score": 0.05416013300418854
+        },
+        {
+          "category": "carrousel",
+          "score": 0.052440959960222244
+        },
+        {
+          "category": "playroom",
+          "score": 0.033120494335889816
+        },
+        {
+          "category": "waiting_room",
+          "score": 0.026977306231856346
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 8,
+      "expected": "living_room",
+      "source_archive": "train",
+      "source_file": "livingroom/N190082_jpg.rf.b22d89eb19f2562c8bb0b75630d911ff.jpg",
+      "sha256": "02d895a8884b7c46e1340a14724a7239063734575e687f69bf00ada277eafa16",
+      "category": "television_room",
+      "raw_category": "television_room",
+      "score": 0.2605779469013214,
+      "margin": 0.023553773760795593,
+      "runner": "living_room",
+      "inference_ms": 13.931900000898167,
+      "top5": [
+        {
+          "category": "television_room",
+          "score": 0.2605779469013214
+        },
+        {
+          "category": "living_room",
+          "score": 0.23702417314052582
+        },
+        {
+          "category": "bow_window/indoor",
+          "score": 0.09072847664356232
+        },
+        {
+          "category": "waiting_room",
+          "score": 0.0801900178194046
+        },
+        {
+          "category": "dining_room",
+          "score": 0.06818397343158722
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 9,
+      "expected": "living_room",
+      "source_archive": "train",
+      "source_file": "livingroom/coffee_table_living_room_jpg.rf.f7c19009b2bc16c4b47b1f2075e1c091.jpg",
+      "sha256": "5bffe3fd4899d1167a3ef2a0356873187ea4307e053fad0c6d8d4dea1689beb1",
+      "category": "living_room",
+      "raw_category": "living_room",
+      "score": 0.2990480959415436,
+      "margin": 0.18076422810554504,
+      "runner": "waiting_room",
+      "inference_ms": 10.295300002326258,
+      "top5": [
+        {
+          "category": "living_room",
+          "score": 0.2990480959415436
+        },
+        {
+          "category": "waiting_room",
+          "score": 0.11828386783599854
+        },
+        {
+          "category": "artists_loft",
+          "score": 0.0954369530081749
+        },
+        {
+          "category": "dining_room",
+          "score": 0.06451142579317093
+        },
+        {
+          "category": "museum/indoor",
+          "score": 0.058234937489032745
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 10,
+      "expected": "living_room",
+      "source_archive": "train",
+      "source_file": "livingroom/masterbed9_jpg.rf.f14006f4deace877fc940fe66bdb04b6.jpg",
+      "sha256": "2397203e03392aaf83baa470c6eb5eab063a5384a0b3f022cbfc0f950958fc18",
+      "category": "living_room",
+      "raw_category": "living_room",
+      "score": 0.2825925648212433,
+      "margin": 0.1339074820280075,
+      "runner": "bow_window_indoor",
+      "inference_ms": 8.00840000010794,
+      "top5": [
+        {
+          "category": "living_room",
+          "score": 0.2825925648212433
+        },
+        {
+          "category": "bow_window/indoor",
+          "score": 0.14868508279323578
+        },
+        {
+          "category": "entrance_hall",
+          "score": 0.14856575429439545
+        },
+        {
+          "category": "dining_room",
+          "score": 0.06142672523856163
+        },
+        {
+          "category": "artists_loft",
+          "score": 0.0560137964785099
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 11,
+      "expected": "living_room",
+      "source_archive": "test",
+      "source_file": "livingroom/int680_jpg.rf.963e3c849d08a9794ebcd0da00fb944f.jpg",
+      "sha256": "8a5f1957b42027d7d80e7d967b0b152fa47261538af2c95c2d27705b21a43dc7",
+      "category": "waiting_room",
+      "raw_category": "waiting_room",
+      "score": 0.47510474920272827,
+      "margin": 0.04329103231430054,
+      "runner": "living_room",
+      "inference_ms": 8.766000006289687,
+      "top5": [
+        {
+          "category": "waiting_room",
+          "score": 0.47510474920272827
+        },
+        {
+          "category": "living_room",
+          "score": 0.43181371688842773
+        },
+        {
+          "category": "television_room",
+          "score": 0.03076147474348545
+        },
+        {
+          "category": "recreation_room",
+          "score": 0.013503440655767918
+        },
+        {
+          "category": "hotel_room",
+          "score": 0.010454950854182243
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 0,
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/indoor_0537_jpg.rf.63ef7ed27d015a1bb174f6418b3242ea.jpg",
+      "sha256": "7a584550dd529e434496606b9872ffd6fa6c0c8d990ebb8be34ee20d4f7a4b51",
+      "category": "bedroom",
+      "raw_category": "bedroom",
+      "score": 0.3953562378883362,
+      "margin": 0.28823626041412354,
+      "runner": "bow_window_indoor",
+      "inference_ms": 8.0692999981693,
+      "top5": [
+        {
+          "category": "bedroom",
+          "score": 0.3953562378883362
+        },
+        {
+          "category": "bow_window/indoor",
+          "score": 0.10711999237537384
+        },
+        {
+          "category": "hotel_room",
+          "score": 0.10408191382884979
+        },
+        {
+          "category": "television_room",
+          "score": 0.09909587353467941
+        },
+        {
+          "category": "bedchamber",
+          "score": 0.09631320089101791
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 1,
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/IMG_1247_jpg.rf.6095ea796f305b69e747fe8323924601.jpg",
+      "sha256": "fcd124d31f7b46f0b33b453d2153a75a3388b85792468da770d5a9dc10079db5",
+      "category": "bedroom",
+      "raw_category": "hotel_room",
+      "score": 0.6911079287528992,
+      "margin": 0.6815475821495056,
+      "runner": "berth",
+      "inference_ms": 8.783299999777228,
+      "top5": [
+        {
+          "category": "hotel_room",
+          "score": 0.6911079287528992
+        },
+        {
+          "category": "bedroom",
+          "score": 0.2688736021518707
+        },
+        {
+          "category": "bedchamber",
+          "score": 0.024872541427612305
+        },
+        {
+          "category": "berth",
+          "score": 0.00956034567207098
+        },
+        {
+          "category": "youth_hostel",
+          "score": 0.0027612759731709957
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 2,
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/int479_jpg.rf.748bfba76014246131c1d36da0986d24.jpg",
+      "sha256": "3107da7021e0151f49ef99324991df544ad426a972d14fb7b676f5b3822f87fe",
+      "category": "bedroom",
+      "raw_category": "bedroom",
+      "score": 0.24718497693538666,
+      "margin": 0.061852023005485535,
+      "runner": "attic",
+      "inference_ms": 10.993299998517614,
+      "top5": [
+        {
+          "category": "bedroom",
+          "score": 0.24718497693538666
+        },
+        {
+          "category": "bedchamber",
+          "score": 0.22323955595493317
+        },
+        {
+          "category": "attic",
+          "score": 0.18533295392990112
+        },
+        {
+          "category": "alcove",
+          "score": 0.0864642858505249
+        },
+        {
+          "category": "cabin/outdoor",
+          "score": 0.02675538882613182
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 3,
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/int610_jpg.rf.0329d4a0004b07a2a86327b65b29784a.jpg",
+      "sha256": "48c13637cac78c0b235a61bc9ba1c96fc53058bb8addb4c9a11f3bb16458eeb5",
+      "category": "beauty_salon",
+      "raw_category": "beauty_salon",
+      "score": 0.5454042553901672,
+      "margin": 0.2678244411945343,
+      "runner": "artists_loft",
+      "inference_ms": 12.16769999882672,
+      "top5": [
+        {
+          "category": "beauty_salon",
+          "score": 0.5454042553901672
+        },
+        {
+          "category": "artists_loft",
+          "score": 0.27757981419563293
+        },
+        {
+          "category": "art_gallery",
+          "score": 0.03171326592564583
+        },
+        {
+          "category": "art_studio",
+          "score": 0.019083939492702484
+        },
+        {
+          "category": "living_room",
+          "score": 0.013664609752595425
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 4,
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/dsc01901_jpg.rf.0d6fae54380cbe10b2fc828b64056db2.jpg",
+      "sha256": "0402bea6eec1bd7042ebd530678fee7bba735d9fa015b851e9a347d1f65dc03c",
+      "category": "berth",
+      "raw_category": "berth",
+      "score": 0.6124314069747925,
+      "margin": 0.4746209979057312,
+      "runner": "youth_hostel",
+      "inference_ms": 13.126199999533128,
+      "top5": [
+        {
+          "category": "berth",
+          "score": 0.6124314069747925
+        },
+        {
+          "category": "youth_hostel",
+          "score": 0.13781039416790009
+        },
+        {
+          "category": "dorm_room",
+          "score": 0.12686394155025482
+        },
+        {
+          "category": "bedroom",
+          "score": 0.045884452760219574
+        },
+        {
+          "category": "hospital_room",
+          "score": 0.04517963528633118
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 5,
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/int704_jpg.rf.596de3cac1eb71cc0231ce2c3d0f8156.jpg",
+      "sha256": "2fb0ec8c0d32433e038696d216080b1666b34946117d7962efa29b958914f660",
+      "category": "bedroom",
+      "raw_category": "hotel_room",
+      "score": 0.44634461402893066,
+      "margin": 0.4146905541419983,
+      "runner": "youth_hostel",
+      "inference_ms": 8.038899999519344,
+      "top5": [
+        {
+          "category": "hotel_room",
+          "score": 0.44634461402893066
+        },
+        {
+          "category": "bedroom",
+          "score": 0.39325177669525146
+        },
+        {
+          "category": "bedchamber",
+          "score": 0.051372457295656204
+        },
+        {
+          "category": "youth_hostel",
+          "score": 0.03165405988693237
+        },
+        {
+          "category": "berth",
+          "score": 0.026226023212075233
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 6,
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/indoor_0578_jpg.rf.34b74f8cac11252226814b6c2f2e296f.jpg",
+      "sha256": "6497c2babb996b6c313ec3c5d40a6f0beb62e8b2ed6129356a735c8e471c0306",
+      "category": "dining_room",
+      "raw_category": "dining_room",
+      "score": 0.42811182141304016,
+      "margin": 0.36242949962615967,
+      "runner": "restaurant",
+      "inference_ms": 8.415000003878959,
+      "top5": [
+        {
+          "category": "dining_room",
+          "score": 0.42811182141304016
+        },
+        {
+          "category": "restaurant",
+          "score": 0.0656823217868805
+        },
+        {
+          "category": "dining_hall",
+          "score": 0.06313668191432953
+        },
+        {
+          "category": "kitchen",
+          "score": 0.049585454165935516
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.031796883791685104
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 7,
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/8_cuarto_jpg.rf.eb8ba44f741369891894848bdd7d8413.jpg",
+      "sha256": "bd98a3de2c5a5f43696d0281cd6adbd605d3bfe655eb392ada83eab515885cc2",
+      "category": "bedroom",
+      "raw_category": "bedroom",
+      "score": 0.301837295293808,
+      "margin": 0.20998705923557281,
+      "runner": "alcove",
+      "inference_ms": 8.77589999436168,
+      "top5": [
+        {
+          "category": "bedroom",
+          "score": 0.301837295293808
+        },
+        {
+          "category": "dorm_room",
+          "score": 0.20978543162345886
+        },
+        {
+          "category": "alcove",
+          "score": 0.09185023605823517
+        },
+        {
+          "category": "living_room",
+          "score": 0.08233825862407684
+        },
+        {
+          "category": "hotel_room",
+          "score": 0.0784103125333786
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 8,
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/indoor_0171_jpg.rf.57ef0b0d97b468eda6b88d60e553edf0.jpg",
+      "sha256": "68a3840f8adc0dbd1007683cf2a585bc40b240db7fd26f38acd99ad2e1d12f6e",
+      "category": "bedroom",
+      "raw_category": "dorm_room",
+      "score": 0.1939399093389511,
+      "margin": 0.011105164885520935,
+      "runner": "wet_bar",
+      "inference_ms": 8.049800002481788,
+      "top5": [
+        {
+          "category": "dorm_room",
+          "score": 0.1939399093389511
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.18283474445343018
+        },
+        {
+          "category": "closet",
+          "score": 0.10001964122056961
+        },
+        {
+          "category": "home_office",
+          "score": 0.09127802401781082
+        },
+        {
+          "category": "bedroom",
+          "score": 0.05494486913084984
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 9,
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/indoor_0268_jpg.rf.d0eeb1febc09908ffc1c87e75fd7b637.jpg",
+      "sha256": "9531ee54977afdee5e31afb2d14fa38da8f91339758f202cdba839631a90da66",
+      "category": "bedroom",
+      "raw_category": "bedroom",
+      "score": 0.3320191502571106,
+      "margin": 0.20618444681167603,
+      "runner": "youth_hostel",
+      "inference_ms": 11.002799998095725,
+      "top5": [
+        {
+          "category": "bedroom",
+          "score": 0.3320191502571106
+        },
+        {
+          "category": "dorm_room",
+          "score": 0.2597898840904236
+        },
+        {
+          "category": "youth_hostel",
+          "score": 0.12583470344543457
+        },
+        {
+          "category": "hotel_room",
+          "score": 0.08737438172101974
+        },
+        {
+          "category": "bedchamber",
+          "score": 0.07646410167217255
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 10,
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/int259_jpg.rf.14a86ec999833e5e0154ec9b775bda81.jpg",
+      "sha256": "781f43262af26da478bfa8136fa3a888d21f42f9c98b37483252e3c75bde5c8b",
+      "category": "bedroom",
+      "raw_category": "childs_room",
+      "score": 0.42970290780067444,
+      "margin": 0.4277389347553253,
+      "runner": "alcove",
+      "inference_ms": 10.538199996517505,
+      "top5": [
+        {
+          "category": "childs_room",
+          "score": 0.42970290780067444
+        },
+        {
+          "category": "bedroom",
+          "score": 0.350746750831604
+        },
+        {
+          "category": "bedchamber",
+          "score": 0.19751739501953125
+        },
+        {
+          "category": "nursery",
+          "score": 0.010251597501337528
+        },
+        {
+          "category": "hotel_room",
+          "score": 0.007080962415784597
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 11,
+      "expected": "bedroom",
+      "source_archive": "valid",
+      "source_file": "bedroom/cdMC1196_jpg.rf.177ebd3d399a8d5d360b70ab48b07b0a.jpg",
+      "sha256": "26d43eee14d4108ff646b9102241d55f975fa50b9bab6c93593ea43839399819",
+      "category": "fabric_store",
+      "raw_category": "fabric_store",
+      "score": 0.8338994383811951,
+      "margin": 0.7701960802078247,
+      "runner": "clothing_store",
+      "inference_ms": 13.593300005595665,
+      "top5": [
+        {
+          "category": "fabric_store",
+          "score": 0.8338994383811951
+        },
+        {
+          "category": "clothing_store",
+          "score": 0.06370335072278976
+        },
+        {
+          "category": "storage_room",
+          "score": 0.02569129876792431
+        },
+        {
+          "category": "flea_market/indoor",
+          "score": 0.021331805735826492
+        },
+        {
+          "category": "closet",
+          "score": 0.013538027182221413
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 0,
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/img_0014_jpg.rf.12c180b4720b065c467dde051c0750a4.jpg",
+      "sha256": "585b0c08947a3981a2dc56c6903c56a9bf450583a683c5a8f46f265ed1f55c10",
+      "category": "kitchen",
+      "raw_category": "kitchen",
+      "score": 0.6852631568908691,
+      "margin": 0.5668918490409851,
+      "runner": "utility_room",
+      "inference_ms": 11.140800001157913,
+      "top5": [
+        {
+          "category": "kitchen",
+          "score": 0.6852631568908691
+        },
+        {
+          "category": "utility_room",
+          "score": 0.11837130784988403
+        },
+        {
+          "category": "galley",
+          "score": 0.063470259308815
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.04643366485834122
+        },
+        {
+          "category": "restaurant_kitchen",
+          "score": 0.04563711956143379
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 1,
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/D55b_jpg.rf.0aca973479e41cbef8006c2550d5e818.jpg",
+      "sha256": "d6c8a524080d73d0926fc5ba9adbf252fc989771be3354705049644c503a59a1",
+      "category": "wet_bar",
+      "raw_category": "wet_bar",
+      "score": 0.6154776811599731,
+      "margin": 0.35041770339012146,
+      "runner": "kitchen",
+      "inference_ms": 7.810700000845827,
+      "top5": [
+        {
+          "category": "wet_bar",
+          "score": 0.6154776811599731
+        },
+        {
+          "category": "kitchen",
+          "score": 0.2650599777698517
+        },
+        {
+          "category": "galley",
+          "score": 0.06314529478549957
+        },
+        {
+          "category": "basement",
+          "score": 0.012838131748139858
+        },
+        {
+          "category": "reception",
+          "score": 0.010682925581932068
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 2,
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/int396_jpg.rf.b579b1be80865e652dcc376c6312edaa.jpg",
+      "sha256": "218311f1de5ac01a7f0cc58fc645c956cef11b27f6ce9a28fba81e9102d573fe",
+      "category": "kitchen",
+      "raw_category": "kitchen",
+      "score": 0.5343000292778015,
+      "margin": 0.3531191945075989,
+      "runner": "pantry",
+      "inference_ms": 8.894999999029096,
+      "top5": [
+        {
+          "category": "kitchen",
+          "score": 0.5343000292778015
+        },
+        {
+          "category": "pantry",
+          "score": 0.18118084967136383
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.09802219271659851
+        },
+        {
+          "category": "utility_room",
+          "score": 0.05103232339024544
+        },
+        {
+          "category": "galley",
+          "score": 0.040645793080329895
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 3,
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/IMG_2433_jpg.rf.3398e39e2d070f0a3496ea7484023682.jpg",
+      "sha256": "673f33bf16fc1f5343d86619bd73952f233ba79498061ccdc22988810b711423",
+      "category": "utility_room",
+      "raw_category": "utility_room",
+      "score": 0.5991495251655579,
+      "margin": 0.30552297830581665,
+      "runner": "laundromat",
+      "inference_ms": 8.123500003421213,
+      "top5": [
+        {
+          "category": "utility_room",
+          "score": 0.5991495251655579
+        },
+        {
+          "category": "laundromat",
+          "score": 0.2936265468597412
+        },
+        {
+          "category": "kitchen",
+          "score": 0.03555760905146599
+        },
+        {
+          "category": "galley",
+          "score": 0.024070728570222855
+        },
+        {
+          "category": "bathroom",
+          "score": 0.0062751988880336285
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 4,
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/room343_jpg.rf.34d4abd4aafdf2a5df6b4b77d1001c50.jpg",
+      "sha256": "3d2f2f0b4acd863300b5d589e0bd17f06d8b753329d1562e2abe482a2d8995a1",
+      "category": "entrance_hall",
+      "raw_category": "entrance_hall",
+      "score": 0.28315189480781555,
+      "margin": 0.05441397428512573,
+      "runner": "garage_indoor",
+      "inference_ms": 8.094199998595286,
+      "top5": [
+        {
+          "category": "entrance_hall",
+          "score": 0.28315189480781555
+        },
+        {
+          "category": "garage/indoor",
+          "score": 0.22873792052268982
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.10324529558420181
+        },
+        {
+          "category": "basement",
+          "score": 0.061074692755937576
+        },
+        {
+          "category": "artists_loft",
+          "score": 0.0567142590880394
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 5,
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/LR_to_BR_jpg.rf.789e9907608bc5c3cfb3b3ac5c4fc722.jpg",
+      "sha256": "70a0d489bb6736f008610378d327607be7a9fa448700dd77c676bdc96322e3f8",
+      "category": "wet_bar",
+      "raw_category": "wet_bar",
+      "score": 0.6532699465751648,
+      "margin": 0.5382823944091797,
+      "runner": "kitchen",
+      "inference_ms": 9.131899998465087,
+      "top5": [
+        {
+          "category": "wet_bar",
+          "score": 0.6532699465751648
+        },
+        {
+          "category": "kitchen",
+          "score": 0.1149875596165657
+        },
+        {
+          "category": "alcove",
+          "score": 0.08588558435440063
+        },
+        {
+          "category": "dining_room",
+          "score": 0.05432286113500595
+        },
+        {
+          "category": "galley",
+          "score": 0.016092900186777115
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 6,
+      "expected": "kitchen",
+      "source_archive": "test",
+      "source_file": "kitchen/int446_jpg.rf.e3800f64e4e9d1fb6bdd03a5db4fa189.jpg",
+      "sha256": "3adaaec454d4408e0ffb4525569cb2d9718417b7ac3108c87f3a6193e32b96d4",
+      "category": "kitchen",
+      "raw_category": "kitchen",
+      "score": 0.5270601511001587,
+      "margin": 0.2534100115299225,
+      "runner": "wet_bar",
+      "inference_ms": 7.893200003309175,
+      "top5": [
+        {
+          "category": "kitchen",
+          "score": 0.5270601511001587
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.2736501395702362
+        },
+        {
+          "category": "galley",
+          "score": 0.13144712150096893
+        },
+        {
+          "category": "restaurant_kitchen",
+          "score": 0.021114761009812355
+        },
+        {
+          "category": "utility_room",
+          "score": 0.013222972862422466
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 7,
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/apto_flavia_015_jpg.rf.99aabb0cb5cccd1260b0149578f57178.jpg",
+      "sha256": "ac0725230658962f9fe37154417e3d6b4b924d2cc899458823cd876b912c2005",
+      "category": "kitchen",
+      "raw_category": "kitchen",
+      "score": 0.3502422869205475,
+      "margin": 0.12925158441066742,
+      "runner": "wet_bar",
+      "inference_ms": 10.535900000832044,
+      "top5": [
+        {
+          "category": "kitchen",
+          "score": 0.3502422869205475
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.22099070250988007
+        },
+        {
+          "category": "alcove",
+          "score": 0.11147348582744598
+        },
+        {
+          "category": "dining_room",
+          "score": 0.085577592253685
+        },
+        {
+          "category": "bathroom",
+          "score": 0.03716929629445076
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 8,
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/int681_jpg.rf.2ca97b9a409b7010eaf2bbbff773e976.jpg",
+      "sha256": "10b1a63d6f3568f443eb98dd5ef0bec4561c58d8c21c55c4bdd2e95d3ab954f3",
+      "category": "locker_room",
+      "raw_category": "locker_room",
+      "score": 0.8248533010482788,
+      "margin": 0.6857707500457764,
+      "runner": "elevator_lobby",
+      "inference_ms": 11.27969999652123,
+      "top5": [
+        {
+          "category": "locker_room",
+          "score": 0.8248533010482788
+        },
+        {
+          "category": "elevator_lobby",
+          "score": 0.13908253610134125
+        },
+        {
+          "category": "elevator/door",
+          "score": 0.015428198501467705
+        },
+        {
+          "category": "closet",
+          "score": 0.003028527367860079
+        },
+        {
+          "category": "youth_hostel",
+          "score": 0.0021006374154239893
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 9,
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/kitchen099_jpg.rf.739e30a34fc51270e79213d176913ef9.jpg",
+      "sha256": "3de38f277af0294de41eeacfca70dbc17f87e385a6284c223cf5f7dff6f9fd5d",
+      "category": "dining_room",
+      "raw_category": "dining_room",
+      "score": 0.4307951331138611,
+      "margin": 0.3025130331516266,
+      "runner": "kitchen",
+      "inference_ms": 8.415299998887349,
+      "top5": [
+        {
+          "category": "dining_room",
+          "score": 0.4307951331138611
+        },
+        {
+          "category": "kitchen",
+          "score": 0.1282820999622345
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.10954272747039795
+        },
+        {
+          "category": "dining_hall",
+          "score": 0.08173787593841553
+        },
+        {
+          "category": "banquet_hall",
+          "score": 0.032186079770326614
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 10,
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/N364016_jpg.rf.e8c9a6abf30e2b9708d4b229ac3db41b.jpg",
+      "sha256": "1cfda0f469cbdca09bf716d681299183987364ee43ead5c383ea1ba4666a34a2",
+      "category": "closet",
+      "raw_category": "closet",
+      "score": 0.20375508069992065,
+      "margin": 0.13018235564231873,
+      "runner": "clean_room",
+      "inference_ms": 8.534499997040257,
+      "top5": [
+        {
+          "category": "closet",
+          "score": 0.20375508069992065
+        },
+        {
+          "category": "clean_room",
+          "score": 0.07357271760702133
+        },
+        {
+          "category": "server_room",
+          "score": 0.06862472742795944
+        },
+        {
+          "category": "alcove",
+          "score": 0.06695956736803055
+        },
+        {
+          "category": "kitchen",
+          "score": 0.06237367168068886
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 11,
+      "expected": "kitchen",
+      "source_archive": "train",
+      "source_file": "kitchen/cdMC1174_jpg.rf.19827a5aabb1fb66988e6e434e9e7a7a.jpg",
+      "sha256": "f8e4ac8a39b5b17654d5cd3b9134a649089cd6ecbc519bebf5610477d7757aac",
+      "category": "kitchen",
+      "raw_category": "kitchen",
+      "score": 0.6019363403320312,
+      "margin": 0.46455803513526917,
+      "runner": "wet_bar",
+      "inference_ms": 8.13170000037644,
+      "top5": [
+        {
+          "category": "kitchen",
+          "score": 0.6019363403320312
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.13737830519676208
+        },
+        {
+          "category": "galley",
+          "score": 0.10827844589948654
+        },
+        {
+          "category": "restaurant_kitchen",
+          "score": 0.06195734068751335
+        },
+        {
+          "category": "pantry",
+          "score": 0.02166738174855709
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 0,
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/IMG_2332_jpg.rf.1036cf838da719d1d65b5ad14add5d78.jpg",
+      "sha256": "84933a5aaf2d38c3236bdc52571bedd61e045ba5cf419f8a6de65fcb26b95085",
+      "category": "bathroom",
+      "raw_category": "bathroom",
+      "score": 0.7723259329795837,
+      "margin": 0.6341146230697632,
+      "runner": "shower",
+      "inference_ms": 9.866200001852121,
+      "top5": [
+        {
+          "category": "bathroom",
+          "score": 0.7723259329795837
+        },
+        {
+          "category": "shower",
+          "score": 0.13821128010749817
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.02923831343650818
+        },
+        {
+          "category": "sauna",
+          "score": 0.019231120124459267
+        },
+        {
+          "category": "utility_room",
+          "score": 0.010969032533466816
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 1,
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/dsc3101_jpg.rf.a894b50d9bf522f5365ce00bc810c93e.jpg",
+      "sha256": "db88c3d6806c625be792c467e43db22397bd9142385886503160a0ba64a61058",
+      "category": "living_room",
+      "raw_category": "living_room",
+      "score": 0.1843356043100357,
+      "margin": 0.07906006276607513,
+      "runner": "dining_room",
+      "inference_ms": 13.404500001342967,
+      "top5": [
+        {
+          "category": "living_room",
+          "score": 0.1843356043100357
+        },
+        {
+          "category": "dining_room",
+          "score": 0.10527554154396057
+        },
+        {
+          "category": "waiting_room",
+          "score": 0.09510888904333115
+        },
+        {
+          "category": "artists_loft",
+          "score": 0.0895138680934906
+        },
+        {
+          "category": "television_room",
+          "score": 0.0776081457734108
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 2,
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/indoor_0242_jpg.rf.aa82012d161799847c17b808848ad840.jpg",
+      "sha256": "2e0e731e1b36007f4d16f7d6a78bf153c7d8a75318188eb8b038a2584415e0c4",
+      "category": "shower",
+      "raw_category": "shower",
+      "score": 0.6178840398788452,
+      "margin": 0.23852106928825378,
+      "runner": "bathroom",
+      "inference_ms": 8.304700000735465,
+      "top5": [
+        {
+          "category": "shower",
+          "score": 0.6178840398788452
+        },
+        {
+          "category": "bathroom",
+          "score": 0.37936297059059143
+        },
+        {
+          "category": "utility_room",
+          "score": 0.0006169792613945901
+        },
+        {
+          "category": "dressing_room",
+          "score": 0.0002960689889732748
+        },
+        {
+          "category": "closet",
+          "score": 0.0002261162590002641
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 3,
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/bath288_jpg.rf.5704d30199cde754f4c54e9f27c72edd.jpg",
+      "sha256": "278a717e40314cdd4816ea491a343697463f9e61752f62ea787e9f7a569c77a8",
+      "category": "jacuzzi_indoor",
+      "raw_category": "jacuzzi/indoor",
+      "score": 0.4167323112487793,
+      "margin": 0.14352041482925415,
+      "runner": "bathroom",
+      "inference_ms": 8.488500003295485,
+      "top5": [
+        {
+          "category": "jacuzzi/indoor",
+          "score": 0.4167323112487793
+        },
+        {
+          "category": "bathroom",
+          "score": 0.27321189641952515
+        },
+        {
+          "category": "shower",
+          "score": 0.16384468972682953
+        },
+        {
+          "category": "bow_window/indoor",
+          "score": 0.08560039848089218
+        },
+        {
+          "category": "sauna",
+          "score": 0.015567981638014317
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 4,
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/room322_jpg.rf.9387c3437945dc546539dbaa56eadddb.jpg",
+      "sha256": "d13c0e2caee3f553f26712eb79479fbf693fad512af2ed20c4a0d09f4079bc7e",
+      "category": "bathroom",
+      "raw_category": "bathroom",
+      "score": 0.20537595450878143,
+      "margin": 0.0812932476401329,
+      "runner": "bow_window_indoor",
+      "inference_ms": 9.419599999091588,
+      "top5": [
+        {
+          "category": "bathroom",
+          "score": 0.20537595450878143
+        },
+        {
+          "category": "bow_window/indoor",
+          "score": 0.12408270686864853
+        },
+        {
+          "category": "childs_room",
+          "score": 0.11497224122285843
+        },
+        {
+          "category": "utility_room",
+          "score": 0.09924618899822235
+        },
+        {
+          "category": "alcove",
+          "score": 0.05584973841905594
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 5,
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/IMG_3736_jpg.rf.32a4d97160484c82b5e8bf27e8d1ab08.jpg",
+      "sha256": "647e0dba6d6f283d9a9d438fbae463171ade3e357f5de02bb73868dcd91217d5",
+      "category": "bathroom",
+      "raw_category": "bathroom",
+      "score": 0.9697348475456238,
+      "margin": 0.9448401927947998,
+      "runner": "shower",
+      "inference_ms": 8.493599998473655,
+      "top5": [
+        {
+          "category": "bathroom",
+          "score": 0.9697348475456238
+        },
+        {
+          "category": "shower",
+          "score": 0.024894651025533676
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.0015473332023248076
+        },
+        {
+          "category": "jacuzzi/indoor",
+          "score": 0.0011064314749091864
+        },
+        {
+          "category": "utility_room",
+          "score": 0.0007383465999737382
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 6,
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/bath287_jpg.rf.3c5f3e5b64a8af410f6d96eafe9f3c4f.jpg",
+      "sha256": "715fbd70867ee349b842272cef0119e7b2719903f4269e19de633ad829dba34a",
+      "category": "bathroom",
+      "raw_category": "bathroom",
+      "score": 0.6141599416732788,
+      "margin": 0.4093230664730072,
+      "runner": "jacuzzi_indoor",
+      "inference_ms": 8.336099999723956,
+      "top5": [
+        {
+          "category": "bathroom",
+          "score": 0.6141599416732788
+        },
+        {
+          "category": "jacuzzi/indoor",
+          "score": 0.2048368752002716
+        },
+        {
+          "category": "shower",
+          "score": 0.15455293655395508
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.014900286681950092
+        },
+        {
+          "category": "utility_room",
+          "score": 0.003131961217150092
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 7,
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/IMG_9647_jpg.rf.b037561bca0e8c48cb1098a75a53d8dd.jpg",
+      "sha256": "4040b6e67528024598c1c12e39f665767f5f325bcd63236768eaf922bb134abf",
+      "category": "bathroom",
+      "raw_category": "bathroom",
+      "score": 0.9714246988296509,
+      "margin": 0.9509082436561584,
+      "runner": "shower",
+      "inference_ms": 9.70200000301702,
+      "top5": [
+        {
+          "category": "bathroom",
+          "score": 0.9714246988296509
+        },
+        {
+          "category": "shower",
+          "score": 0.020516442134976387
+        },
+        {
+          "category": "utility_room",
+          "score": 0.0018718780484050512
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.0015291670570150018
+        },
+        {
+          "category": "dressing_room",
+          "score": 0.0010755393886938691
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 8,
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/IMG_2335_jpg.rf.9a7f4d3b3dc1a1eec02b6f6ee20f32c4.jpg",
+      "sha256": "7f4edb0231d12cba86e816118dfe89c80a8b270ad5aecee4e2b8143e0b564da1",
+      "category": "bathroom",
+      "raw_category": "bathroom",
+      "score": 0.9774854183197021,
+      "margin": 0.9568416476249695,
+      "runner": "shower",
+      "inference_ms": 8.416800003033131,
+      "top5": [
+        {
+          "category": "bathroom",
+          "score": 0.9774854183197021
+        },
+        {
+          "category": "shower",
+          "score": 0.020643793046474457
+        },
+        {
+          "category": "utility_room",
+          "score": 0.0008377160993404686
+        },
+        {
+          "category": "jail_cell",
+          "score": 0.0004285634495317936
+        },
+        {
+          "category": "jacuzzi/indoor",
+          "score": 0.00017320021288469434
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 9,
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/indoor_0196_jpg.rf.dd7dd16229150a48459de28c901a45bc.jpg",
+      "sha256": "5196cdff06e4e2648dd357eb4c22261c84b4de9dfdc1c7eca43584cb9a4eb0a1",
+      "category": "bathroom",
+      "raw_category": "bathroom",
+      "score": 0.31587234139442444,
+      "margin": 0.133260115981102,
+      "runner": "shower",
+      "inference_ms": 8.508300001267344,
+      "top5": [
+        {
+          "category": "bathroom",
+          "score": 0.31587234139442444
+        },
+        {
+          "category": "shower",
+          "score": 0.18261222541332245
+        },
+        {
+          "category": "jacuzzi/indoor",
+          "score": 0.13769599795341492
+        },
+        {
+          "category": "boat_deck",
+          "score": 0.04885740578174591
+        },
+        {
+          "category": "beauty_salon",
+          "score": 0.041519563645124435
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 10,
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/bath31_jpg.rf.63b594f3207b557c3a36b54a88f546c0.jpg",
+      "sha256": "76defd5a2e06d070e0e0dc7634790f96c0a4ff9888a9a6a918fc8b9eae2e25e0",
+      "category": "wet_bar",
+      "raw_category": "wet_bar",
+      "score": 0.8658831715583801,
+      "margin": 0.8287113308906555,
+      "runner": "kitchen",
+      "inference_ms": 8.672299998579547,
+      "top5": [
+        {
+          "category": "wet_bar",
+          "score": 0.8658831715583801
+        },
+        {
+          "category": "kitchen",
+          "score": 0.03717181831598282
+        },
+        {
+          "category": "bathroom",
+          "score": 0.014014450833201408
+        },
+        {
+          "category": "entrance_hall",
+          "score": 0.013022714294493198
+        },
+        {
+          "category": "pantry",
+          "score": 0.012969977222383022
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 11,
+      "expected": "bathroom",
+      "source_archive": "valid",
+      "source_file": "bathroom/IMG_0999_jpg.rf.36a11f7e39c312929f4d6fcd758563de.jpg",
+      "sha256": "f073d8f4c9499ad82a3636c850fc6efe63a3cba113f2a8099742bd73cd1458b9",
+      "category": "sauna",
+      "raw_category": "sauna",
+      "score": 0.48634499311447144,
+      "margin": 0.04461142420768738,
+      "runner": "bathroom",
+      "inference_ms": 9.737200001836754,
+      "top5": [
+        {
+          "category": "sauna",
+          "score": 0.48634499311447144
+        },
+        {
+          "category": "bathroom",
+          "score": 0.44173356890678406
+        },
+        {
+          "category": "shower",
+          "score": 0.052200764417648315
+        },
+        {
+          "category": "jail_cell",
+          "score": 0.009324728511273861
+        },
+        {
+          "category": "utility_room",
+          "score": 0.004500294104218483
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 0,
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/webP1010001_jpg.rf.aea61b16fe7c33ecb60ab1cd4145aae2.jpg",
+      "sha256": "3e6fae4a2fba5977dc04dd56834b69f916daa122bcff6fbec39fbe669047b5d5",
+      "category": "conference_room",
+      "raw_category": "conference_room",
+      "score": 0.566058337688446,
+      "margin": 0.40359073877334595,
+      "runner": "office",
+      "inference_ms": 9.19160000194097,
+      "top5": [
+        {
+          "category": "conference_room",
+          "score": 0.566058337688446
+        },
+        {
+          "category": "office",
+          "score": 0.1624675989151001
+        },
+        {
+          "category": "home_office",
+          "score": 0.042131345719099045
+        },
+        {
+          "category": "reception",
+          "score": 0.028985319659113884
+        },
+        {
+          "category": "waiting_room",
+          "score": 0.02787654474377632
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 1,
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/room263_jpg.rf.7fc56b7e6c5a5faf751946e23384a872.jpg",
+      "sha256": "d84a10e8ae1d7a343eb2cc381ded7a420492b592e8fb1652a9956617f5a6b6bb",
+      "category": "office",
+      "raw_category": "home_office",
+      "score": 0.6393224000930786,
+      "margin": 0.5914399027824402,
+      "runner": "computer_room",
+      "inference_ms": 9.272199997212738,
+      "top5": [
+        {
+          "category": "home_office",
+          "score": 0.6393224000930786
+        },
+        {
+          "category": "office",
+          "score": 0.1647268533706665
+        },
+        {
+          "category": "computer_room",
+          "score": 0.04788250848650932
+        },
+        {
+          "category": "dorm_room",
+          "score": 0.030530454590916634
+        },
+        {
+          "category": "office_cubicles",
+          "score": 0.015491985715925694
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 2,
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/despacho1_400_jpg.rf.6ae04e0173ccf74261d8b3c36d79b113.jpg",
+      "sha256": "88a9044d25e2ad2b6ba1efa5d5cc09ee6c031d5b61b662b718628f4810b54f0d",
+      "category": "office",
+      "raw_category": "home_office",
+      "score": 0.6065145134925842,
+      "margin": 0.5904687643051147,
+      "runner": "computer_room",
+      "inference_ms": 8.573500002967194,
+      "top5": [
+        {
+          "category": "home_office",
+          "score": 0.6065145134925842
+        },
+        {
+          "category": "office",
+          "score": 0.30713924765586853
+        },
+        {
+          "category": "office_cubicles",
+          "score": 0.0502200722694397
+        },
+        {
+          "category": "computer_room",
+          "score": 0.01604575850069523
+        },
+        {
+          "category": "library/indoor",
+          "score": 0.00504534924402833
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 3,
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/homeoff005_jpg.rf.19f2d0925a07bcaceccd47ecc0b90e1e.jpg",
+      "sha256": "bccc9b47fad917f22aa6ac35c1c5dae90df91232cc3d04094fa7ab8a2b2a1bab",
+      "category": "office",
+      "raw_category": "home_office",
+      "score": 0.20457403361797333,
+      "margin": 0.04636283218860626,
+      "runner": "bedroom",
+      "inference_ms": 10.893200000282377,
+      "top5": [
+        {
+          "category": "home_office",
+          "score": 0.20457403361797333
+        },
+        {
+          "category": "dorm_room",
+          "score": 0.15821120142936707
+        },
+        {
+          "category": "living_room",
+          "score": 0.12960147857666016
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.10440301150083542
+        },
+        {
+          "category": "childs_room",
+          "score": 0.07605186104774475
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 4,
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/room12_jpg.rf.46ab008c0b8de11343bb5f71ada9cd57.jpg",
+      "sha256": "7e406edc1cf0bef1d8886c6dff0cf8ff0469859fa47200c227abbee3a3d76811",
+      "category": "office",
+      "raw_category": "home_office",
+      "score": 0.4030667245388031,
+      "margin": 0.25976109504699707,
+      "runner": "wet_bar",
+      "inference_ms": 8.33250000141561,
+      "top5": [
+        {
+          "category": "home_office",
+          "score": 0.4030667245388031
+        },
+        {
+          "category": "wet_bar",
+          "score": 0.14330562949180603
+        },
+        {
+          "category": "office",
+          "score": 0.09793933480978012
+        },
+        {
+          "category": "library/indoor",
+          "score": 0.09636732935905457
+        },
+        {
+          "category": "recreation_room",
+          "score": 0.027755364775657654
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 5,
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/int281_jpg.rf.9c0c7af368da9466debd4abbd3fe6abf.jpg",
+      "sha256": "98d17bfa80950dae9012ba99b75f9da658a00c03b10b0b2d6f5905b5ef6e6db3",
+      "category": "office",
+      "raw_category": "office_cubicles",
+      "score": 0.6013000011444092,
+      "margin": 0.3942878842353821,
+      "runner": "computer_room",
+      "inference_ms": 8.861499998602085,
+      "top5": [
+        {
+          "category": "office_cubicles",
+          "score": 0.6013000011444092
+        },
+        {
+          "category": "computer_room",
+          "score": 0.2070121169090271
+        },
+        {
+          "category": "office",
+          "score": 0.05905384197831154
+        },
+        {
+          "category": "lecture_room",
+          "score": 0.05181233957409859
+        },
+        {
+          "category": "conference_room",
+          "score": 0.037294622510671616
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 6,
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/indoor_0148_jpg.rf.fd9767e03034829f1dd0549eb2b3dcf0.jpg",
+      "sha256": "1cbb2491e51d001103bb776d5e5aeabf41e4f6298de6dd6ab3ac80ac841956ba",
+      "category": "office",
+      "raw_category": "home_office",
+      "score": 0.4031171500682831,
+      "margin": 0.10054323077201843,
+      "runner": "dining_room",
+      "inference_ms": 10.227300001133699,
+      "top5": [
+        {
+          "category": "home_office",
+          "score": 0.4031171500682831
+        },
+        {
+          "category": "dining_room",
+          "score": 0.30257391929626465
+        },
+        {
+          "category": "office",
+          "score": 0.054077960550785065
+        },
+        {
+          "category": "recreation_room",
+          "score": 0.023693501949310303
+        },
+        {
+          "category": "computer_room",
+          "score": 0.022172963246703148
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 7,
+      "expected": "office",
+      "source_archive": "test",
+      "source_file": "office/ins2_jpg.rf.df13a8c33b86adfe16f2c04f711f61d7.jpg",
+      "sha256": "653bece7f9f3c436398d5da64a9e84ea7da8ac5c744fd70e2be95f83e44f2699",
+      "category": "office",
+      "raw_category": "office",
+      "score": 0.45026102662086487,
+      "margin": 0.3636936843395233,
+      "runner": "computer_room",
+      "inference_ms": 14.039900001080241,
+      "top5": [
+        {
+          "category": "office",
+          "score": 0.45026102662086487
+        },
+        {
+          "category": "office_cubicles",
+          "score": 0.3018844723701477
+        },
+        {
+          "category": "home_office",
+          "score": 0.14966171979904175
+        },
+        {
+          "category": "computer_room",
+          "score": 0.08656734973192215
+        },
+        {
+          "category": "conference_room",
+          "score": 0.0024129182565957308
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 8,
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/n457048_jpg.rf.8b9c0da7449b8045cb001231bb0046d0.jpg",
+      "sha256": "2ec6b96d78569af3480f95764f9d3ddcaea129dcf799c5ab306c7ca40a57d201",
+      "category": "waiting_room",
+      "raw_category": "waiting_room",
+      "score": 0.42884135246276855,
+      "margin": 0.26601284742355347,
+      "runner": "office",
+      "inference_ms": 9.03969999490073,
+      "top5": [
+        {
+          "category": "waiting_room",
+          "score": 0.42884135246276855
+        },
+        {
+          "category": "office",
+          "score": 0.1628285050392151
+        },
+        {
+          "category": "conference_room",
+          "score": 0.14187629520893097
+        },
+        {
+          "category": "home_office",
+          "score": 0.03921936824917793
+        },
+        {
+          "category": "living_room",
+          "score": 0.030099255964159966
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 9,
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/room472_jpg.rf.3cae572ed3854cd11e2c9ef6605a8b95.jpg",
+      "sha256": "f0cab6e9f3c4f5e29e8a49bff6647ee9e4ec872d1bb611827c1bf388404850c2",
+      "category": "office",
+      "raw_category": "home_office",
+      "score": 0.5040757060050964,
+      "margin": 0.4628162682056427,
+      "runner": "bedroom",
+      "inference_ms": 9.140799993474502,
+      "top5": [
+        {
+          "category": "home_office",
+          "score": 0.5040757060050964
+        },
+        {
+          "category": "office",
+          "score": 0.3365665078163147
+        },
+        {
+          "category": "dorm_room",
+          "score": 0.04125943407416344
+        },
+        {
+          "category": "office_cubicles",
+          "score": 0.03556612506508827
+        },
+        {
+          "category": "computer_room",
+          "score": 0.028302617371082306
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 10,
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/despacho3_400_jpg.rf.d73af4ca9f2992eb4e5a38b62075400a.jpg",
+      "sha256": "37bcb0839e1da5225d85494825ba9a86b2014863052692af9c3970fc6ddd5adb",
+      "category": "office",
+      "raw_category": "office_cubicles",
+      "score": 0.582128643989563,
+      "margin": 0.5734949707984924,
+      "runner": "computer_room",
+      "inference_ms": 8.088700000371318,
+      "top5": [
+        {
+          "category": "office_cubicles",
+          "score": 0.582128643989563
+        },
+        {
+          "category": "office",
+          "score": 0.3246387243270874
+        },
+        {
+          "category": "home_office",
+          "score": 0.08304574340581894
+        },
+        {
+          "category": "computer_room",
+          "score": 0.008633674122393131
+        },
+        {
+          "category": "biology_laboratory",
+          "score": 0.00035864810342900455
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 11,
+      "expected": "office",
+      "source_archive": "train",
+      "source_file": "office/homeoff009_jpg.rf.3a8262763d9363d613a73b641cf99a00.jpg",
+      "sha256": "d84c4643a85535430fefbd70a6bfcf304069211904e2be7c4e7811886380c909",
+      "category": "office",
+      "raw_category": "home_office",
+      "score": 0.628227710723877,
+      "margin": 0.6259608864784241,
+      "runner": "computer_room",
+      "inference_ms": 8.535999993910082,
+      "top5": [
+        {
+          "category": "home_office",
+          "score": 0.628227710723877
+        },
+        {
+          "category": "office",
+          "score": 0.31353551149368286
+        },
+        {
+          "category": "office_cubicles",
+          "score": 0.04542766138911247
+        },
+        {
+          "category": "computer_room",
+          "score": 0.002266810741275549
+        },
+        {
+          "category": "reception",
+          "score": 0.001747814123518765
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 0,
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/web_lalemant_jpg.rf.8a1a9be842653930b14794050565dbef.jpg",
+      "sha256": "511190df3464eed163eac19ae486d2c03e64e71bb835207f5109144c60b29cf4",
+      "category": "classroom",
+      "raw_category": "lecture_room",
+      "score": 0.8585101366043091,
+      "margin": 0.8328662514686584,
+      "runner": "auditorium",
+      "inference_ms": 8.965999993961304,
+      "top5": [
+        {
+          "category": "lecture_room",
+          "score": 0.8585101366043091
+        },
+        {
+          "category": "classroom",
+          "score": 0.0863419696688652
+        },
+        {
+          "category": "auditorium",
+          "score": 0.02564389631152153
+        },
+        {
+          "category": "conference_center",
+          "score": 0.0161289032548666
+        },
+        {
+          "category": "movie_theater/indoor",
+          "score": 0.008268684148788452
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 1,
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/position_room_jpg.rf.28158b9b708c09432ee8829cd5d4b3c9.jpg",
+      "sha256": "0ae150147a4aff8a719d781fba4ad97bb83f71dea1d82a43889ad3714696e3d9",
+      "category": "classroom",
+      "raw_category": "lecture_room",
+      "score": 0.4540410339832306,
+      "margin": 0.3423992395401001,
+      "runner": "conference_room",
+      "inference_ms": 8.093900003586896,
+      "top5": [
+        {
+          "category": "lecture_room",
+          "score": 0.4540410339832306
+        },
+        {
+          "category": "classroom",
+          "score": 0.39272475242614746
+        },
+        {
+          "category": "conference_room",
+          "score": 0.1116417944431305
+        },
+        {
+          "category": "conference_center",
+          "score": 0.02042379043996334
+        },
+        {
+          "category": "computer_room",
+          "score": 0.008097345009446144
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 2,
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/classroom03_jpg.rf.d6a966d27d235fae0d67ffbd14914dfc.jpg",
+      "sha256": "6a04e51dce79d3bc2b65a71ce7fd961d8cac58f19e76ab644c0fd834d0b7a044",
+      "category": "classroom",
+      "raw_category": "kindergarden_classroom",
+      "score": 0.6090021133422852,
+      "margin": 0.586545467376709,
+      "runner": "playroom",
+      "inference_ms": 13.471700003719889,
+      "top5": [
+        {
+          "category": "kindergarden_classroom",
+          "score": 0.6090021133422852
+        },
+        {
+          "category": "classroom",
+          "score": 0.337902694940567
+        },
+        {
+          "category": "playroom",
+          "score": 0.02245665155351162
+        },
+        {
+          "category": "art_school",
+          "score": 0.009248839691281319
+        },
+        {
+          "category": "lecture_room",
+          "score": 0.0038736192509531975
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 3,
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/classroom02_jpg.rf.66ae8e730c84255fd971793651c26afd.jpg",
+      "sha256": "c5e77ee6507cd7d4fc486628471f4d90fd010a8d82916b333ef6c7133df15b0b",
+      "category": "classroom",
+      "raw_category": "classroom",
+      "score": 0.49179521203041077,
+      "margin": 0.44683682918548584,
+      "runner": "library_indoor",
+      "inference_ms": 12.304299998504575,
+      "top5": [
+        {
+          "category": "classroom",
+          "score": 0.49179521203041077
+        },
+        {
+          "category": "kindergarden_classroom",
+          "score": 0.3679882287979126
+        },
+        {
+          "category": "library/indoor",
+          "score": 0.04495836794376373
+        },
+        {
+          "category": "lecture_room",
+          "score": 0.021132422611117363
+        },
+        {
+          "category": "cafeteria",
+          "score": 0.01981908269226551
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 4,
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/classroom2_jpg.rf.9ce7e7b7a3583545f29aa99a1d6bc990.jpg",
+      "sha256": "f692c2ee7b19115fe9b17dc9c83ade86c3e54c19465ce956aafd3d524a07046b",
+      "category": "classroom",
+      "raw_category": "classroom",
+      "score": 0.8325527906417847,
+      "margin": 0.8283443450927734,
+      "runner": "dining_hall",
+      "inference_ms": 13.852300005964935,
+      "top5": [
+        {
+          "category": "classroom",
+          "score": 0.8325527906417847
+        },
+        {
+          "category": "lecture_room",
+          "score": 0.14970986545085907
+        },
+        {
+          "category": "dining_hall",
+          "score": 0.004208462778478861
+        },
+        {
+          "category": "kindergarden_classroom",
+          "score": 0.0037218406796455383
+        },
+        {
+          "category": "cafeteria",
+          "score": 0.002830703277140856
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 5,
+      "expected": "classroom",
+      "source_archive": "valid",
+      "source_file": "classroom/IMG_2226_jpg.rf.efde965898255bd26a6ac687324922ae.jpg",
+      "sha256": "8d92b24229c3a78990925955f26e1c8a50a240a71e5aa1f00c5e4ce48af1fb05",
+      "category": "classroom",
+      "raw_category": "kindergarden_classroom",
+      "score": 0.4683668613433838,
+      "margin": 0.42313265800476074,
+      "runner": "art_studio",
+      "inference_ms": 11.895100004039705,
+      "top5": [
+        {
+          "category": "kindergarden_classroom",
+          "score": 0.4683668613433838
+        },
+        {
+          "category": "classroom",
+          "score": 0.33422908186912537
+        },
+        {
+          "category": "art_studio",
+          "score": 0.04523419588804245
+        },
+        {
+          "category": "storage_room",
+          "score": 0.04406338557600975
+        },
+        {
+          "category": "art_school",
+          "score": 0.039260294288396835
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 6,
+      "expected": "classroom",
+      "source_archive": "valid",
+      "source_file": "classroom/sala_convegni_jpg.rf.60f99968441a2b54cb35aece5b96de48.jpg",
+      "sha256": "89fee8b398ef6ac08d8147ca6423bff6928385af170e8305959d51e840f8e86b",
+      "category": "classroom",
+      "raw_category": "lecture_room",
+      "score": 0.6232854127883911,
+      "margin": 0.5412558913230896,
+      "runner": "conference_room",
+      "inference_ms": 8.20910000038566,
+      "top5": [
+        {
+          "category": "lecture_room",
+          "score": 0.6232854127883911
+        },
+        {
+          "category": "classroom",
+          "score": 0.19448845088481903
+        },
+        {
+          "category": "conference_room",
+          "score": 0.08202950656414032
+        },
+        {
+          "category": "conference_center",
+          "score": 0.05020373687148094
+        },
+        {
+          "category": "auditorium",
+          "score": 0.023686809465289116
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 7,
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/Tour_Franco_Classroom157_Side_rdax_90_jpg.rf.e0d91f7d738e91f553ba97ec992a0394.jpg",
+      "sha256": "afb315c74d9cb817579f44469e71cdda1ac8d1ca41cbeec01047ed8ba4104013",
+      "category": "classroom",
+      "raw_category": "classroom",
+      "score": 0.74178147315979,
+      "margin": 0.7392996549606323,
+      "runner": "conference_center",
+      "inference_ms": 8.068499999353662,
+      "top5": [
+        {
+          "category": "classroom",
+          "score": 0.74178147315979
+        },
+        {
+          "category": "lecture_room",
+          "score": 0.2493748664855957
+        },
+        {
+          "category": "conference_center",
+          "score": 0.0024818098172545433
+        },
+        {
+          "category": "library/indoor",
+          "score": 0.0015479621943086386
+        },
+        {
+          "category": "computer_room",
+          "score": 0.0014731594128534198
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 8,
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/img_0007_jpg.rf.3babdde2e0fcbbb68108c21b87a2a82d.jpg",
+      "sha256": "fda1f92f33afae2c55532969c44f30fd1611c1a6fa776240f75589708f87844d",
+      "category": "classroom",
+      "raw_category": "kindergarden_classroom",
+      "score": 0.7168567776679993,
+      "margin": 0.6207348108291626,
+      "runner": "art_school",
+      "inference_ms": 8.01139999384759,
+      "top5": [
+        {
+          "category": "kindergarden_classroom",
+          "score": 0.7168567776679993
+        },
+        {
+          "category": "classroom",
+          "score": 0.14284482598304749
+        },
+        {
+          "category": "art_school",
+          "score": 0.09612195193767548
+        },
+        {
+          "category": "art_studio",
+          "score": 0.020720556378364563
+        },
+        {
+          "category": "library/indoor",
+          "score": 0.004794113337993622
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 9,
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/file_279474_23340_jpg.rf.d9544036c221a560bbe7beab8bfdd5da.jpg",
+      "sha256": "cb449e9c47e875b726bc173bf8381b92b81f350631d383cecc6bcbb4259b4286",
+      "category": "classroom",
+      "raw_category": "classroom",
+      "score": 0.7885470986366272,
+      "margin": 0.7820163369178772,
+      "runner": "conference_center",
+      "inference_ms": 13.579099999333266,
+      "top5": [
+        {
+          "category": "classroom",
+          "score": 0.7885470986366272
+        },
+        {
+          "category": "lecture_room",
+          "score": 0.17625412344932556
+        },
+        {
+          "category": "conference_center",
+          "score": 0.006530779413878918
+        },
+        {
+          "category": "waiting_room",
+          "score": 0.005554029252380133
+        },
+        {
+          "category": "auditorium",
+          "score": 0.004456900991499424
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 10,
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/classroom_full_jpg.rf.37fa4e3139847afef1aa37e943c24311.jpg",
+      "sha256": "82b2036f92dcb9990ac821fcc8805b1155676c254927ab6a4c597d85a09f8b35",
+      "category": "classroom",
+      "raw_category": "classroom",
+      "score": 0.6048550009727478,
+      "margin": 0.562259316444397,
+      "runner": "library_indoor",
+      "inference_ms": 11.854099997435696,
+      "top5": [
+        {
+          "category": "classroom",
+          "score": 0.6048550009727478
+        },
+        {
+          "category": "kindergarden_classroom",
+          "score": 0.13033190369606018
+        },
+        {
+          "category": "lecture_room",
+          "score": 0.11693631857633591
+        },
+        {
+          "category": "library/indoor",
+          "score": 0.04259566217660904
+        },
+        {
+          "category": "dining_hall",
+          "score": 0.03366822004318237
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 11,
+      "expected": "classroom",
+      "source_archive": "train",
+      "source_file": "classroom/sala_aula_jpg.rf.370573c01352f915c8605349ccc43bbf.jpg",
+      "sha256": "405000fe6d667b13ab1b86608b5b8b5063bd7037c4250e284983b01c449070da",
+      "category": "classroom",
+      "raw_category": "classroom",
+      "score": 0.6980438232421875,
+      "margin": 0.6389742493629456,
+      "runner": "art_school",
+      "inference_ms": 8.298699998704251,
+      "top5": [
+        {
+          "category": "classroom",
+          "score": 0.6980438232421875
+        },
+        {
+          "category": "kindergarden_classroom",
+          "score": 0.22842608392238617
+        },
+        {
+          "category": "art_school",
+          "score": 0.059069547802209854
+        },
+        {
+          "category": "lecture_room",
+          "score": 0.007999775931239128
+        },
+        {
+          "category": "art_studio",
+          "score": 0.003208642592653632
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 0,
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/restaurante_24_20_altavista_jpg.rf.bde5d8d2d827e0e64cf3ea2b3c8e0d52.jpg",
+      "sha256": "058313f74cfc96dfff4b145f258f9ccd680c01751581f72ab892bc1e5c9f5cff",
+      "category": "dining_hall",
+      "raw_category": "dining_hall",
+      "score": 0.337311714887619,
+      "margin": 0.023085445165634155,
+      "runner": "banquet_hall",
+      "inference_ms": 8.099099999526516,
+      "top5": [
+        {
+          "category": "dining_hall",
+          "score": 0.337311714887619
+        },
+        {
+          "category": "banquet_hall",
+          "score": 0.31422626972198486
+        },
+        {
+          "category": "restaurant",
+          "score": 0.15020954608917236
+        },
+        {
+          "category": "dining_room",
+          "score": 0.08283840864896774
+        },
+        {
+          "category": "cafeteria",
+          "score": 0.0337548702955246
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 1,
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/restaurante_31_18_altavista_jpg.rf.c89ce2d4200ac73bafe0054021bf8ba9.jpg",
+      "sha256": "e990b721ac1a01dff1ac4ef2d6fe135a347cb8c59a1af3f74ca80229a30c883e",
+      "category": "dining_hall",
+      "raw_category": "dining_hall",
+      "score": 0.3642261028289795,
+      "margin": 0.0827626883983612,
+      "runner": "banquet_hall",
+      "inference_ms": 8.271200000308454,
+      "top5": [
+        {
+          "category": "dining_hall",
+          "score": 0.3642261028289795
+        },
+        {
+          "category": "banquet_hall",
+          "score": 0.2814634144306183
+        },
+        {
+          "category": "restaurant",
+          "score": 0.1297994703054428
+        },
+        {
+          "category": "dining_room",
+          "score": 0.07018723338842392
+        },
+        {
+          "category": "cafeteria",
+          "score": 0.06341245025396347
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 2,
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/060630_imaginaire_salle_4_jpg.rf.c55d511ca2dc2a48d3657ba685c7e78e.jpg",
+      "sha256": "520993e82b19f91294162db3a55c12414ae33a951911fee13b89a8ad9f01ded4",
+      "category": "dining_hall",
+      "raw_category": "dining_hall",
+      "score": 0.2211247682571411,
+      "margin": 0.08469182252883911,
+      "runner": "dining_room",
+      "inference_ms": 11.336499999742955,
+      "top5": [
+        {
+          "category": "dining_hall",
+          "score": 0.2211247682571411
+        },
+        {
+          "category": "dining_room",
+          "score": 0.136432945728302
+        },
+        {
+          "category": "restaurant",
+          "score": 0.1336052566766739
+        },
+        {
+          "category": "artists_loft",
+          "score": 0.057093314826488495
+        },
+        {
+          "category": "coffee_shop",
+          "score": 0.047496043145656586
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 3,
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/image010_jpg.rf.4b98cf0f89600cffef6f8797af3390af.jpg",
+      "sha256": "a65ff3de8e1f80cd62b74f885c655fe4c75c075cbd67e2a93506a8106e9707a5",
+      "category": "banquet_hall",
+      "raw_category": "banquet_hall",
+      "score": 0.5429635643959045,
+      "margin": 0.334175169467926,
+      "runner": "dining_hall",
+      "inference_ms": 8.269400001154281,
+      "top5": [
+        {
+          "category": "banquet_hall",
+          "score": 0.5429635643959045
+        },
+        {
+          "category": "dining_hall",
+          "score": 0.2087884098291397
+        },
+        {
+          "category": "restaurant",
+          "score": 0.08281025290489197
+        },
+        {
+          "category": "dining_room",
+          "score": 0.05946236476302147
+        },
+        {
+          "category": "cafeteria",
+          "score": 0.05002541467547417
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 4,
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/bistro_11_16_altavista_jpg.rf.39083737edd63702ae5ff5557c24fe6f.jpg",
+      "sha256": "4e43a9d249830371a0854c35ebfd322d9444a99340b149f843f64696516a9353",
+      "category": "dining_hall",
+      "raw_category": "dining_hall",
+      "score": 0.4172983467578888,
+      "margin": 0.2847495675086975,
+      "runner": "sushi_bar",
+      "inference_ms": 13.668400002643466,
+      "top5": [
+        {
+          "category": "dining_hall",
+          "score": 0.4172983467578888
+        },
+        {
+          "category": "sushi_bar",
+          "score": 0.13254879415035248
+        },
+        {
+          "category": "cafeteria",
+          "score": 0.09695645421743393
+        },
+        {
+          "category": "restaurant",
+          "score": 0.09095465391874313
+        },
+        {
+          "category": "fastfood_restaurant",
+          "score": 0.062388692051172256
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 5,
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/redr_jpg.rf.22d6f45fc73995f489d24417cbe599cb.jpg",
+      "sha256": "bb78e5a7b5069f4c11bbe7c67679396a02d27b4908e2159aab9cf40ed8823101",
+      "category": "banquet_hall",
+      "raw_category": "banquet_hall",
+      "score": 0.6328354477882385,
+      "margin": 0.41492074728012085,
+      "runner": "dining_hall",
+      "inference_ms": 13.881600003514905,
+      "top5": [
+        {
+          "category": "banquet_hall",
+          "score": 0.6328354477882385
+        },
+        {
+          "category": "dining_hall",
+          "score": 0.21791468560695648
+        },
+        {
+          "category": "restaurant",
+          "score": 0.039932895451784134
+        },
+        {
+          "category": "dining_room",
+          "score": 0.03254248946905136
+        },
+        {
+          "category": "ballroom",
+          "score": 0.03049405664205551
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 6,
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/room264_jpg.rf.5a6204acf5dd4949ab8a14aa1a2be314.jpg",
+      "sha256": "e6141fbcfb64fbe5ce883080d63cd4477e9a1417f7650952f575530d17ab923a",
+      "category": "dining_hall",
+      "raw_category": "dining_hall",
+      "score": 0.32489025592803955,
+      "margin": 0.0493503212928772,
+      "runner": "restaurant",
+      "inference_ms": 8.024800001294352,
+      "top5": [
+        {
+          "category": "dining_hall",
+          "score": 0.32489025592803955
+        },
+        {
+          "category": "restaurant",
+          "score": 0.27553993463516235
+        },
+        {
+          "category": "banquet_hall",
+          "score": 0.1710602194070816
+        },
+        {
+          "category": "dining_room",
+          "score": 0.07148484885692596
+        },
+        {
+          "category": "cafeteria",
+          "score": 0.055668219923973083
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 7,
+      "expected": "restaurant",
+      "source_archive": "test",
+      "source_file": "restaurant/restaurante_37_13_altavista_jpg.rf.c94bc75d35ed727a9dfc3df7969752fc.jpg",
+      "sha256": "0152e19ee3151b3f7f57e4a41f482aafe01e90201a6296cbeeffbaf0279cbee6",
+      "category": "banquet_hall",
+      "raw_category": "banquet_hall",
+      "score": 0.36246728897094727,
+      "margin": 0.0792417824268341,
+      "runner": "dining_hall",
+      "inference_ms": 8.310099998197984,
+      "top5": [
+        {
+          "category": "banquet_hall",
+          "score": 0.36246728897094727
+        },
+        {
+          "category": "dining_hall",
+          "score": 0.28322550654411316
+        },
+        {
+          "category": "restaurant",
+          "score": 0.08873532712459564
+        },
+        {
+          "category": "dining_room",
+          "score": 0.07834877073764801
+        },
+        {
+          "category": "ballroom",
+          "score": 0.044043444097042084
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 8,
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/dining_room_jpg.rf.9dc8e4f0c914cd8ffe399d058cd0937f.jpg",
+      "sha256": "0f9d40eff432bbac79a866cd76fc2827c988d93d1cb8dbe27f061cbacf58d4e2",
+      "category": "banquet_hall",
+      "raw_category": "banquet_hall",
+      "score": 0.2518867552280426,
+      "margin": 0.030797496438026428,
+      "runner": "dining_hall",
+      "inference_ms": 8.827399993606377,
+      "top5": [
+        {
+          "category": "banquet_hall",
+          "score": 0.2518867552280426
+        },
+        {
+          "category": "dining_hall",
+          "score": 0.22108925879001617
+        },
+        {
+          "category": "food_court",
+          "score": 0.17155183851718903
+        },
+        {
+          "category": "cafeteria",
+          "score": 0.0858813002705574
+        },
+        {
+          "category": "restaurant",
+          "score": 0.08414056897163391
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 9,
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/Photo_136_jpg.rf.33a7839273bb1844606c99a0edb60ac1.jpg",
+      "sha256": "90a75544ab970ff94c82345fe3d04f0dfded516bb78fdc07a9afb6cb24a1adc0",
+      "category": "banquet_hall",
+      "raw_category": "banquet_hall",
+      "score": 0.5962158441543579,
+      "margin": 0.4667578935623169,
+      "runner": "restaurant",
+      "inference_ms": 8.322599998791702,
+      "top5": [
+        {
+          "category": "banquet_hall",
+          "score": 0.5962158441543579
+        },
+        {
+          "category": "restaurant",
+          "score": 0.1294579654932022
+        },
+        {
+          "category": "dining_hall",
+          "score": 0.07423575222492218
+        },
+        {
+          "category": "restaurant_patio",
+          "score": 0.06657509505748749
+        },
+        {
+          "category": "dining_room",
+          "score": 0.03986869379878044
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 10,
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/food_Bistro_450_jpg.rf.72abe0d1b16e0e0ca32e7ad23730d7c2.jpg",
+      "sha256": "69f935d006eb36c0cd85d9994b5d1bb591349bb64aa438fd71331bb94669c060",
+      "category": "banquet_hall",
+      "raw_category": "banquet_hall",
+      "score": 0.3090335428714752,
+      "margin": 0.04214680194854736,
+      "runner": "dining_hall",
+      "inference_ms": 8.003299997653812,
+      "top5": [
+        {
+          "category": "banquet_hall",
+          "score": 0.3090335428714752
+        },
+        {
+          "category": "dining_hall",
+          "score": 0.26688674092292786
+        },
+        {
+          "category": "restaurant",
+          "score": 0.23265711963176727
+        },
+        {
+          "category": "cafeteria",
+          "score": 0.07130318135023117
+        },
+        {
+          "category": "food_court",
+          "score": 0.026833312585949898
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 11,
+      "expected": "restaurant",
+      "source_archive": "train",
+      "source_file": "restaurant/room261_jpg.rf.df02352e458b4a070fff8cc9b3155cb9.jpg",
+      "sha256": "fee00eba0ecc4c5d4c815d13625109237cebce571725468f8d6eea53c3daf2aa",
+      "category": "banquet_hall",
+      "raw_category": "banquet_hall",
+      "score": 0.38091716170310974,
+      "margin": 0.22961364686489105,
+      "runner": "dining_hall",
+      "inference_ms": 8.055999998759944,
+      "top5": [
+        {
+          "category": "banquet_hall",
+          "score": 0.38091716170310974
+        },
+        {
+          "category": "dining_hall",
+          "score": 0.1513035148382187
+        },
+        {
+          "category": "restaurant",
+          "score": 0.11192634701728821
+        },
+        {
+          "category": "conference_room",
+          "score": 0.07723436504602432
+        },
+        {
+          "category": "conference_center",
+          "score": 0.07128699868917465
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 0,
+      "expected": "corridor",
+      "source_archive": "train",
+      "source_file": "corridor/lobby48_jpg.rf.a622d9edc757ade9d435dac2a0a6afbe.jpg",
+      "sha256": "632f94bcc70671793072fd6581193ae971ebe1287083407b30f126d43858b37a",
+      "category": "entrance_hall",
+      "raw_category": "entrance_hall",
+      "score": 0.34165236353874207,
+      "margin": 0.15296031534671783,
+      "runner": "alcove",
+      "inference_ms": 8.11220000468893,
+      "top5": [
+        {
+          "category": "entrance_hall",
+          "score": 0.34165236353874207
+        },
+        {
+          "category": "alcove",
+          "score": 0.18869204819202423
+        },
+        {
+          "category": "arch",
+          "score": 0.08683563023805618
+        },
+        {
+          "category": "corridor",
+          "score": 0.06409674882888794
+        },
+        {
+          "category": "church/indoor",
+          "score": 0.04022384434938431
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 1,
+      "expected": "corridor",
+      "source_archive": "train",
+      "source_file": "corridor/Corridor_to_2nd_floor_jpg.rf.ced8a9454b8ccdf18a0048723453d4cc.jpg",
+      "sha256": "697999dfa8869be9880dd92e23073af7dd245ae6a06effc5e7dbbb93fcaf68e3",
+      "category": "staircase",
+      "raw_category": "staircase",
+      "score": 0.4513489305973053,
+      "margin": 0.3073504567146301,
+      "runner": "mezzanine",
+      "inference_ms": 8.18220000655856,
+      "top5": [
+        {
+          "category": "staircase",
+          "score": 0.4513489305973053
+        },
+        {
+          "category": "mezzanine",
+          "score": 0.14399848878383636
+        },
+        {
+          "category": "artists_loft",
+          "score": 0.09911983460187912
+        },
+        {
+          "category": "nursery",
+          "score": 0.07272082567214966
+        },
+        {
+          "category": "entrance_hall",
+          "score": 0.025144493207335472
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 2,
+      "expected": "corridor",
+      "source_archive": "train",
+      "source_file": "corridor/hallway004_jpg.rf.4b6539d1c172d8390c6b63449e06d9a3.jpg",
+      "sha256": "2436395e166747e30fdd23b6715c9e2055b85e9f4a144bad7d93019edd8f5a09",
+      "category": "corridor",
+      "raw_category": "corridor",
+      "score": 0.6159580945968628,
+      "margin": 0.4084528088569641,
+      "runner": "clean_room",
+      "inference_ms": 8.901900000637397,
+      "top5": [
+        {
+          "category": "corridor",
+          "score": 0.6159580945968628
+        },
+        {
+          "category": "clean_room",
+          "score": 0.2075052708387375
+        },
+        {
+          "category": "locker_room",
+          "score": 0.04184673726558685
+        },
+        {
+          "category": "hospital_room",
+          "score": 0.0337345190346241
+        },
+        {
+          "category": "basement",
+          "score": 0.02338859997689724
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 3,
+      "expected": "corridor",
+      "source_archive": "valid",
+      "source_file": "corridor/CORRIDOR13_jpg.rf.19110b8ea6aa717476759ad9c16fd45a.jpg",
+      "sha256": "10ab3d9a0a17d5fe378d7a1ddfaec8684ce80d33a940e9c3d0f0b9d802ea565f",
+      "category": "corridor",
+      "raw_category": "corridor",
+      "score": 0.9810178279876709,
+      "margin": 0.9758569598197937,
+      "runner": "art_gallery",
+      "inference_ms": 8.186500002921093,
+      "top5": [
+        {
+          "category": "corridor",
+          "score": 0.9810178279876709
+        },
+        {
+          "category": "art_gallery",
+          "score": 0.005160841625183821
+        },
+        {
+          "category": "basement",
+          "score": 0.004847935866564512
+        },
+        {
+          "category": "artists_loft",
+          "score": 0.0023322177585214376
+        },
+        {
+          "category": "elevator_lobby",
+          "score": 0.002014070749282837
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 4,
+      "expected": "corridor",
+      "source_archive": "valid",
+      "source_file": "corridor/pasillo01_p_jpg.rf.83b478fe01ce1ed5ae24c9fe040be40f.jpg",
+      "sha256": "a7b43b3753a86e9e34acfaf71381e4c95b5e75cd6640021c6c31ed5d627d1a0a",
+      "category": "corridor",
+      "raw_category": "corridor",
+      "score": 0.9702517986297607,
+      "margin": 0.9605222940444946,
+      "runner": "elevator_lobby",
+      "inference_ms": 8.176200004527345,
+      "top5": [
+        {
+          "category": "corridor",
+          "score": 0.9702517986297607
+        },
+        {
+          "category": "elevator_lobby",
+          "score": 0.009729490615427494
+        },
+        {
+          "category": "jail_cell",
+          "score": 0.004451521206647158
+        },
+        {
+          "category": "hospital_room",
+          "score": 0.0035471911542117596
+        },
+        {
+          "category": "basement",
+          "score": 0.003154232632368803
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 5,
+      "expected": "corridor",
+      "source_archive": "valid",
+      "source_file": "corridor/couloir_ch1_5e_jpg.rf.2b22fbf1273b42a66014259fa169cc78.jpg",
+      "sha256": "6d708c6e8b2f99c29fad0cf0715fa3fa484455edbcc584b28447aa4614df098a",
+      "category": "corridor",
+      "raw_category": "corridor",
+      "score": 0.7182953357696533,
+      "margin": 0.5425152778625488,
+      "runner": "elevator_lobby",
+      "inference_ms": 9.201900000334717,
+      "top5": [
+        {
+          "category": "corridor",
+          "score": 0.7182953357696533
+        },
+        {
+          "category": "elevator_lobby",
+          "score": 0.17578008770942688
+        },
+        {
+          "category": "office_cubicles",
+          "score": 0.022224679589271545
+        },
+        {
+          "category": "lobby",
+          "score": 0.021564187481999397
+        },
+        {
+          "category": "arcade",
+          "score": 0.010124169290065765
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 6,
+      "expected": "corridor",
+      "source_archive": "train",
+      "source_file": "corridor/ins31_jpg.rf.8e22d8f18ff6133ec77e05bc7b278830.jpg",
+      "sha256": "a72d3c15806e0dfb06b2cf5b0a9ca2e62de75d6fbdd9b2b217184e7ec61a076b",
+      "category": "elevator_lobby",
+      "raw_category": "elevator_lobby",
+      "score": 0.6973734498023987,
+      "margin": 0.450872004032135,
+      "runner": "corridor",
+      "inference_ms": 8.090399998764042,
+      "top5": [
+        {
+          "category": "elevator_lobby",
+          "score": 0.6973734498023987
+        },
+        {
+          "category": "corridor",
+          "score": 0.24650143086910248
+        },
+        {
+          "category": "elevator/door",
+          "score": 0.01604892872273922
+        },
+        {
+          "category": "lobby",
+          "score": 0.015761764720082283
+        },
+        {
+          "category": "basement",
+          "score": 0.005063763819634914
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 7,
+      "expected": "corridor",
+      "source_archive": "train",
+      "source_file": "corridor/img_0005_jpg.rf.669112f0ba18ead67e9f2bc2ef07426e.jpg",
+      "sha256": "379e32aa37d1c260f7c3a00b5eca68155c4b23e97be366270ae0b8deb2629b20",
+      "category": "corridor",
+      "raw_category": "corridor",
+      "score": 0.964836597442627,
+      "margin": 0.9555522203445435,
+      "runner": "basement",
+      "inference_ms": 8.116799996059854,
+      "top5": [
+        {
+          "category": "corridor",
+          "score": 0.964836597442627
+        },
+        {
+          "category": "basement",
+          "score": 0.009284398518502712
+        },
+        {
+          "category": "closet",
+          "score": 0.005871606525033712
+        },
+        {
+          "category": "elevator_lobby",
+          "score": 0.0050026667304337025
+        },
+        {
+          "category": "elevator/door",
+          "score": 0.0036026672460138798
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 8,
+      "expected": "corridor",
+      "source_archive": "train",
+      "source_file": "corridor/fnacc_corridor_jpg.rf.c11b5530a31a3e34055b001084ead451.jpg",
+      "sha256": "1e3c28cd4a11d26311cffae452f6a9bb0bedd467639d9a43d893b13ac64eaca2",
+      "category": "elevator_lobby",
+      "raw_category": "elevator_lobby",
+      "score": 0.6366193890571594,
+      "margin": 0.4963303804397583,
+      "runner": "corridor",
+      "inference_ms": 8.0108999973163,
+      "top5": [
+        {
+          "category": "elevator_lobby",
+          "score": 0.6366193890571594
+        },
+        {
+          "category": "corridor",
+          "score": 0.14028900861740112
+        },
+        {
+          "category": "reception",
+          "score": 0.09234748035669327
+        },
+        {
+          "category": "lobby",
+          "score": 0.06967724114656448
+        },
+        {
+          "category": "office_cubicles",
+          "score": 0.010466261766850948
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 9,
+      "expected": "corridor",
+      "source_archive": "train",
+      "source_file": "corridor/hallway006_jpg.rf.6940c35111a8b0bf27985feac03ccea3.jpg",
+      "sha256": "10ce0f4ee457663d9628bbddfb80be334ea8257ec4667301748453a045904c80",
+      "category": "corridor",
+      "raw_category": "corridor",
+      "score": 0.9233013391494751,
+      "margin": 0.888592004776001,
+      "runner": "entrance_hall",
+      "inference_ms": 7.8985000000102445,
+      "top5": [
+        {
+          "category": "corridor",
+          "score": 0.9233013391494751
+        },
+        {
+          "category": "entrance_hall",
+          "score": 0.03470934182405472
+        },
+        {
+          "category": "bow_window/indoor",
+          "score": 0.00628365995362401
+        },
+        {
+          "category": "staircase",
+          "score": 0.0056965891271829605
+        },
+        {
+          "category": "jail_cell",
+          "score": 0.00533771887421608
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 10,
+      "expected": "corridor",
+      "source_archive": "train",
+      "source_file": "corridor/corridor45_jpg.rf.45200c670aa83873b1d2fa1331d5f765.jpg",
+      "sha256": "676edd5148d4315a6fd72d5db7699f65db1567661de91639a74d56c51020e2f1",
+      "category": "corridor",
+      "raw_category": "corridor",
+      "score": 0.7098533511161804,
+      "margin": 0.45299801230430603,
+      "runner": "elevator_lobby",
+      "inference_ms": 8.101400002487935,
+      "top5": [
+        {
+          "category": "corridor",
+          "score": 0.7098533511161804
+        },
+        {
+          "category": "elevator_lobby",
+          "score": 0.2568553388118744
+        },
+        {
+          "category": "elevator/door",
+          "score": 0.017533602192997932
+        },
+        {
+          "category": "lobby",
+          "score": 0.004615422338247299
+        },
+        {
+          "category": "basement",
+          "score": 0.002942597959190607
+        }
+      ]
+    },
+    {
+      "split": "development",
+      "index": 11,
+      "expected": "corridor",
+      "source_archive": "valid",
+      "source_file": "corridor/7th_floor_security_and_photo_hall_jpg.rf.ef8d789fb694a45ee1fbb379f540f9cf.jpg",
+      "sha256": "34cffe6303ea9ce5cfe13b68741c04dd4e794448e38660cf8d134810cb0310b1",
+      "category": "locker_room",
+      "raw_category": "locker_room",
+      "score": 0.2944329082965851,
+      "margin": 0.13414950668811798,
+      "runner": "corridor",
+      "inference_ms": 8.9185999968322,
+      "top5": [
+        {
+          "category": "locker_room",
+          "score": 0.2944329082965851
+        },
+        {
+          "category": "corridor",
+          "score": 0.1602834016084671
+        },
+        {
+          "category": "elevator_lobby",
+          "score": 0.14167656004428864
+        },
+        {
+          "category": "art_gallery",
+          "score": 0.13545545935630798
+        },
+        {
+          "category": "artists_loft",
+          "score": 0.03774043917655945
+        }
+      ]
+    }
+  ],
+  "scope": "Development only. 40 new confirmation samples deliberately not run in this audit. Source annotations and unknown pretraining overlap limit conclusions."
+}
