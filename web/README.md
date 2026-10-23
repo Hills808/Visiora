@@ -1,3 +1,11 @@
+## Demonstração remota temporária — sala de aula (23/10/2026)
+
+Para usar o **Luna real** pelo notebook ou celular sem instalar o servidor nesses aparelhos, há um iniciador para Windows: `tools/apresentacao-luna.ps1`. Ele abre um **Cloudflare Quick Tunnel HTTPS** protegido por e-mail e roda o gateway local na **mesma origem pública**; deve ser executado no computador que já tem `.env` e `.runtime/luna-budget.sqlite`. O computador permanece ligado e conectado à internet durante a sessão. O link `chatgpt.site` anterior continua estático, sem Luna.
+
+**Preparação:** pare o gateway atual (Ctrl+C), instale `cloudflared` 2026.9.3+ com `winget install --id Cloudflare.cloudflared -e` e atualize o checkout para a `main`. Na pasta `web` execute `npm run build`, depois `powershell -ExecutionPolicy Bypass -File tools/apresentacao-luna.ps1 -Email seu-email@exemplo.com`. Copie a URL `https://...trycloudflare.com` exibida na segunda janela e cole no prompt. Acesse essa URL no notebook ou celular, autentique-se pelo código recebido no e-mail, dê consentimento à câmera e teste `/api/vision/status`. O orçamento e a chave permanecem no gateway original; **não rode outra instância paga**.
+
+**Limitações:** requer PC ligado, internet, e-mails acessíveis no notebook, túnel sujeito à disponibilidade da Cloudflare e provedor; não é produção nem garante estabilidade da apresentação. O iniciador foi revisado por leitura de código, **não executado neste ambiente**. Veja `docs/EVIDENCIAS/LUNA-TUNEL-APRESENTACAO-2026-10-23.md`. Se precisar de maior confiabilidade, leve o pacote portátil Windows preparado anteriormente.
+
 ## Luna pela internet — implantação privada (em preparação)
 
 A hospedagem pública atual `https://visiora-ambiente.hills808.chatgpt.site` é **estática** e não oferece Luna. Há uma opção de implantação em endereço HTTPS próprio, com autenticação, chave somente no servidor e orçamento SQLite persistente: [guia de implantação](deploy/README.md). **Não foi implantada nem testada ao vivo.** Não divulgue um endereço como funcionando com Luna até confirmar as etapas do guia.
