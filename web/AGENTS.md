@@ -142,3 +142,7 @@ Leia `docs/EVIDENCIAS/H2-PERCEPCAO-LOCAL-2026-10-23.md` e `docs/EVIDENCIAS/CENAS
 ## Diagnóstico da sessão real — ADR-036 (23/10/2026)
 
 O arquivo `visiora-diagnosticov.json` mostrou 2 envios Luna, 1 aceito e 1 entrega, mas foi exportado depois da parada; `paused=true` não prova falha. Leia `docs/EVIDENCIAS/LUNA-DIAGNOSTICO-2026-10-23.md`. A revisão registra motivo da parada, análise pendente e escopo dos contadores, sem imagens/textos. Ainda falta reteste real; não atribuir o segundo envio a crédito ou expiração sem evidência.
+
+## Luna hospedado — ADR-039 (23/10/2026)
+
+`hosting/luna/` contém o Site privado para celular. Leia `docs/EVIDENCIAS/LUNA-CELULAR-HOSPEDADO-2026-10-23.md` e `hosting/luna/README-HOSPEDAGEM.md`. No clone GitHub, prepare o cliente com `node hosting/luna/scripts/prepare-web.mjs` antes do build hospedado. O Site usa D1 compartilhado entre aparelhos e segredo no servidor; o gateway SQLite local está desativado para não duplicar o teto de US$ 2/dia. Não reative ambos com tetos integrais. O Site público continua local. Testes fake não comprovam câmera/voz física, cobrança, precisão ou uso por pessoas cegas.

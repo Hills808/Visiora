@@ -523,3 +523,13 @@ Não testado: API/fatura/painel reais, virada física do relógio, outros PCs/SO
 **Runtime:** Node.js 24.22.1 LTS Windows x64, publicado em [arquivo oficial](https://nodejs.org/en/download/archive/v24.22.1) e verificado com `SHASUMS256.txt`; ZIP oficial Windows x64 em torno de 38 MB. Licença MIT e avisos de terceiros incluídos em `licenses/Node.js-LICENSE.txt`, conforme [licença oficial](https://github.com/nodejs/node/blob/v24.22.1/LICENSE). Requer Windows x64 ou emulação x64; alternativa é instalar Node.js 24 no notebook e clonar o repositório, com mais etapas e downloads. Não há modelo novo nem mudança da tarifa/limite Luna.
 
 **Evidência:** [LUNA-NOTEBOOK-2026-10-23.md](EVIDENCIAS/LUNA-NOTEBOOK-2026-10-23.md), CA-L4/CA-E3/CA-E4. A extração e o gateway foram ensaiados neste PC com backend fake e credencial fictícia; nenhuma chamada paga foi feita. Webcam, voz, rede e API no notebook ainda dependem de ensaio físico.
+
+## ADR-039 — Luna hospedado para celular (23/10/2026)
+
+**Contexto:** o ZIP portátil da ADR-038 não atende ao teste pelo celular. O Site público da ADR-037 é estático e não pode guardar uma chave da OpenAI.
+
+**Decisão:** criar um segundo Site, privado para a conta proprietária, com o mesmo aplicativo e uma API Luna em Cloudflare Workers. As rotas exigem identidade, origem correta, CSRF e consentimento. D1 centraliza o orçamento entre aparelhos, guardando apenas metadados de gasto e modelo, nunca imagens ou descrições. A chave fica como segredo do Site. O gateway local foi parado e seu teto zerado antes de ativar US$ 2/dia no Site, pois os ledgers não se comunicam. A versão privada omite os pesos locais e oferece apenas Luna; a versão pública mantém o modo local. Alternativas de expor a chave ao navegador ou abrir um proxy sem autenticação foram rejeitadas pelo risco de cobrança por terceiros.
+
+**Dependências do starter verificadas no registro npm em 23/10/2026:** Next 16.3.4 (MIT, 184.740.295 bytes descompactados, Node ≥20.9), Vinext 1.0.0-beta.5 (MIT, 5.127.059 bytes, Node ≥22), Wrangler 4.92.0 (MIT ou Apache-2.0, 16.607.203 bytes, Node ≥22), Drizzle ORM 0.45.2 (Apache-2.0, 10.420.427 bytes). A alternativa Worker ESM simples não empacota os assets estáticos deste aplicativo sem adaptar o pipeline.
+
+**Evidência e limites:** [LUNA-CELULAR-HOSPEDADO-2026-10-23.md](EVIDENCIAS/LUNA-CELULAR-HOSPEDADO-2026-10-23.md), CA-E4/L4/S4. O Site autenticado mostrou Luna configurado; requisição anônima recebeu 401. Testes fake cobriram contrato e controles. Nenhuma imagem real foi enviada pelo agente; webcam, áudio, faturamento e uso físico no celular ainda não foram medidos.
