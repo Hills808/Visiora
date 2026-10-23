@@ -1,4 +1,9 @@
-import { launchTestBrowser, createTestContext, installTestVoice } from './helpers.mjs';
+import {
+  launchTestBrowser,
+  createTestContext,
+  installTestVoice,
+  auditAccessibility,
+} from './helpers.mjs';
 import { mkdir, writeFile, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
@@ -30,16 +35,10 @@ try {
   assert.equal(await page.title(), 'Visiora — Seu espaço, em palavras');
   assert.equal(await page.locator('html').getAttribute('lang'), 'pt-BR');
   await page.screenshot({ path: `${out}/desktop-idle.png`, fullPage: true });
-  for (const width of [390, 1440]) {
-    await page.setViewportSize({ width, height: 1000 });
-    assert.equal(
-      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
-      true,
-    );
-  }
+  result.axeByViewport = await auditAccessibility(page);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({ path: `${out}/mobile-idle.png`, fullPage: true });
-  result.cases.push('initial page, language and desktop/mobile overflow');
+  result.cases.push('initial page, language, desktop/mobile overflow and 44px controls');
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.click('#demo');
   await page.waitForFunction(() =>
@@ -149,22 +148,18 @@ try {
   result.cases.push(
     'reader text output, explicit repetition and Escape stop; no real screen reader',
   );
-  const axePath = path.resolve('artifacts/packages/axe.min.js');
-  try {
-    const script = await readFile(axePath, 'utf8');
-    await page.addScriptTag({ content: script });
-    const axe = await page.evaluate(() => window.axe.run(document));
-    result.axe = axe.violations.map((v) => ({
-      id: v.id,
-      impact: v.impact,
-      nodes: v.nodes.map((n) => n.target),
-    }));
-    assert.equal(result.axe.filter((v) => ['serious', 'critical'].includes(v.impact)).length, 0);
-    result.cases.push('axe no serious/critical violations in idle desktop state');
-  } catch (error) {
-    if (error.code === 'ENOENT') result.axe = 'not available';
-    else throw error;
-  }
+  if (!fixtureMode)
+    await page.addScriptTag({
+      content: await readFile(path.resolve('node_modules/axe-core/axe.min.js'), 'utf8'),
+    });
+  const axe = await page.evaluate(() => window.axe.run(document));
+  result.axe = axe.violations.map((v) => ({
+    id: v.id,
+    impact: v.impact,
+    nodes: v.nodes.map((n) => n.target),
+  }));
+  assert.equal(result.axe.filter((v) => ['serious', 'critical'].includes(v.impact)).length, 0);
+  result.cases.push('axe no serious/critical violations in idle desktop state');
   await context.close();
   result.passed = true;
 } catch (error) {

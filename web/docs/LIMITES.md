@@ -1,5 +1,7 @@
 ## Verificação automática (23/10/2026)
 
+O ensaio de interface em Chrome com câmera artificial passou em desktop e largura móvel para alvos de botão/select ≥44 px, axe sem violações sérias/críticas e regra automatizada de contraste reforçado. Isso não substitui NVDA, VoiceOver, TalkBack, aparelho físico nem testes com pessoas cegas. [Evidência](EVIDENCIAS/ACESSIBILIDADE-2026-10-23.md).
+
 O retorno automático à CPU após erro ou demora da GPU durante a sessão passou em teste simulado CA-H7. A falha física da GPU, o tempo de reinicialização e a qualidade da observação após a troca não foram medidos. [Evidência](EVIDENCIAS/GPU-RECUPERACAO-2026-10-23.md).
 
 Os dois modelos de ambiente passaram a usar WebGPU após aquecimento, com CPU de reserva. Em vídeo público simulado por 60 segundos, 34 respostas de ambiente tiveram p50 191 ms e p95 249 ms desde a captura; 248 respostas de objetos tiveram p50 80 ms e p95 221 ms. Isso não mede captura até fala, webcam física, uso prolongado nem outros aparelhos. A precisão continua dependente de avaliação humana. [Evidência](EVIDENCIAS/CENAS-GPU-2026-10-23.md).

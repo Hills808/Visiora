@@ -1,5 +1,7 @@
 ## Verificação contínua — ADR-031 (23/10/2026)
 
+O E2E `tests/e2e/smoke.mjs` e o gate de CI `npm run test:a11y` usam a mesma rotina para verificar botões e selects visíveis com pelo menos 44 px em 390/1440 px, além de axe-core 4.14.0 nas duas larguras. A dependência de teste é local e não entra no pacote do aplicativo. O CI instala somente Chromium headless e não usa câmera ou imagens privadas. A regra automatizada de contraste reforçado segue WCAG AAA e não mede todos os cenários de tema, zoom, leitor de tela ou dispositivo real. [Evidência](EVIDENCIAS/ACESSIBILIDADE-2026-10-23.md).
+
 O workflow de GitHub Actions em `.github/workflows/visiora-web.yml` executa o projeto em `web/` com Node 24 e Python 3.11. Instala pelo `package-lock.json`, roda build e testes Node, checagem estrita de tipos, lint e seis transcrições simuladas. Não usa `.env`, chave ou imagens privadas; E2E de navegador com fixture pública e ensaios físicos são gates separados. [Evidência](EVIDENCIAS/CI-2026-10-23.md).
 
 ## Execução local de objetos — ADR-030 (23/10/2026)

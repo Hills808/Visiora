@@ -1,6 +1,57 @@
 import { chromium } from '../../node_modules/playwright-core/index.mjs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import assert from 'node:assert/strict';
+
+export async function auditAccessibility(page) {
+  const script = await readFile(path.resolve('node_modules/axe-core/axe.min.js'), 'utf8');
+  await page.addScriptTag({ content: script });
+  const results = [];
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 1000 });
+    assert.equal(
+      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+      true,
+    );
+    const smallControls = await page.evaluate(() =>
+      [...document.querySelectorAll('button, select')]
+        .filter((element) => {
+          const rect = element.getBoundingClientRect();
+          const style = getComputedStyle(element);
+          return rect.width > 0 && rect.height > 0 && style.visibility !== 'hidden';
+        })
+        .filter((element) => {
+          const rect = element.getBoundingClientRect();
+          return rect.width < 44 || rect.height < 44;
+        })
+        .map((element) => ({
+          id: element.id,
+          text: element.textContent.trim().slice(0, 40),
+          width: Math.round(element.getBoundingClientRect().width),
+          height: Math.round(element.getBoundingClientRect().height),
+        })),
+    );
+    assert.deepEqual(smallControls, [], `Controls smaller than 44px at ${width}px`);
+    const axe = await page.evaluate(() => window.axe.run(document));
+    const violations = axe.violations
+      .filter((violation) => ['serious', 'critical'].includes(violation.impact))
+      .map((violation) => ({
+        id: violation.id,
+        nodes: violation.nodes.map((node) => node.target),
+      }));
+    assert.deepEqual(violations, [], `axe serious/critical at ${width}px`);
+    const enhanced = await page.evaluate(() =>
+      window.axe.run(document, { runOnly: { type: 'rule', values: ['color-contrast-enhanced'] } }),
+    );
+    const enhancedContrast = enhanced.violations.map((violation) => ({
+      id: violation.id,
+      nodes: violation.nodes.map((node) => node.target),
+    }));
+    assert.deepEqual(enhancedContrast, [], `Enhanced contrast violations at ${width}px`);
+    results.push({ width, violations, enhancedContrast });
+  }
+  return results;
+}
 
 export async function launchTestBrowser(video, extraArgs = []) {
   return chromium.launch({
