@@ -19,7 +19,14 @@ const result = spawnSync(process.execPath, ['node_modules/typescript/bin/tsc'], 
 });
 if (result.status !== 0) process.exit(result.status ?? 1);
 await mkdir('dist', { recursive: true });
-await cp('public', 'dist', { recursive: true });
+const modelRoot = path.resolve(root, 'public/models');
+await cp('public', 'dist', {
+  recursive: true,
+  // Hosted Luna builds omit local model weights; the default local build is unchanged.
+  filter: (source) =>
+    process.env.VISIORA_HOSTED_LUNA_ONLY !== '1' ||
+    (path.resolve(source) !== modelRoot && !path.resolve(source).startsWith(modelRoot + path.sep)),
+});
 await mkdir('dist/vendor', { recursive: true });
 for (const name of [
   'ort.wasm.min.mjs',

@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#12252b" />
+    <meta
+      name="description"
+      content="Conheça o ambiente por descrições curtas em português. Você escolhe como analisar e ouvir."
+    />
+    <title>Visiora — Seu espaço, em palavras</title>
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Ir para o conteúdo</a>
+    <svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <symbol id="i-scan" viewBox="0 0 24 24">
+          <path
+            d="M8 3H4a1 1 0 0 0-1 1v4m13-5h4a1 1 0 0 1 1 1v4M3 16v4a1 1 0 0 0 1 1h4m8 0h4a1 1 0 0 0 1-1v-4M7 12a5 5 0 0 1 10 0 5 5 0 0 1-10 0Z"
+          />
+          <circle cx="12" cy="12" r="1" />
+        </symbol>
+        <symbol id="i-camera" viewBox="0 0 24 24">
+          <path
+            d="m8 5 1-2h6l1 2h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
+          />
+          <circle cx="12" cy="12" r="4" />
+        </symbol>
+        <symbol id="i-map" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <circle cx="12" cy="12" r="5" />
+          <path d="m12 3 0 9 6-6M12 12l-2 3h4Z" />
+        </symbol>
+        <symbol id="i-history" viewBox="0 0 24 24">
+          <path d="M3 11a9 9 0 1 1 3 8M3 4v7h7m2-4v6l4 2" />
+        </symbol>
+        <symbol id="i-help" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M9.5 8a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4m0 4h.01" />
+        </symbol>
+        <symbol id="i-settings" viewBox="0 0 24 24">
+          <path d="M4 7h16M4 17h16" />
+          <circle cx="8" cy="7" r="3" />
+          <circle cx="16" cy="17" r="3" />
+        </symbol>
+        <symbol id="i-volume" viewBox="0 0 24 24">
+          <path
+            d="M4 9v6h4l5 4V5L8 9Zm13-1a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"
+          />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="m7 14 5-5 5 5M12 9v10M7 4h10" />
+        </symbol>
+        <symbol id="i-repeat" viewBox="0 0 24 24">
+          <path d="M3 11a9 9 0 1 1 3 8M3 4v7h7" />
+        </symbol>
+        <symbol id="i-search" viewBox="0 0 24 24">
+          <circle cx="10" cy="10" r="6" />
+          <path d="m15 15 6 6" />
+        </symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24">
+          <path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Zm-4 9 3 3 5-6" />
+        </symbol>
+        <symbol id="i-close" viewBox="0 0 24 24">
+          <path d="m6 6 12 12M6 18 18 6" />
+        </symbol>
+        <symbol id="i-play" viewBox="0 0 24 24">
+          <path d="m8 5 11 7-11 7Z" />
+        </symbol>
+        <symbol id="i-stop" viewBox="0 0 24 24">
+          <rect x="5" y="5" width="14" height="14" rx="2" />
+        </symbol>
+        <symbol id="i-download" viewBox="0 0 24 24">
+          <path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5" />
+        </symbol>
+      </defs>
+    </svg>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navegação principal">
+        <a class="brand" href="/" aria-label="Visiora, início"
+          ><img src="/icon.svg" alt="" width="42" height="42" /><span
+            >visiora<span class="brand-dot">.</span></span
+          ></a
+        >
+        <p class="sidebar-caption">SEU ESPAÇO, EM PALAVRAS</p>
+        <nav>
+          <button
+            class="nav-item active"
+            data-page="ambient"
+            aria-current="page"
+          >
+            <svg class="icon"><use href="#i-scan" /></svg>Ambientação
+          </button>
+          <button class="nav-item" data-page="environment">
+            <svg class="icon"><use href="#i-map" /></svg>Meu ambiente<span
+              id="nav-count"
+              class="nav-count"
+              >0</span
+            >
+          </button>
+          <button class="nav-item" data-page="history">
+            <svg class="icon"><use href="#i-history" /></svg>Histórico
+          </button>
+          <button class="nav-item" data-page="help">
+            <svg class="icon"><use href="#i-help" /></svg>Ajuda e limites
+          </button>
+        </nav>
+        <div class="sidebar-bottom">
+          <span class="version">VISIORA · 0.3</span>
+        </div>
+      </aside>
+      <div class="workspace">
+        <header class="topbar">
+          <span class="breadcrumb" id="page-label">Ambientação</span>
+          <div class="topbar-actions">
+            <span class="local-badge" id="processing-badge"
+              ><span class="dot"></span>Selecione o modo de análise</span
+            ><button
+              class="button subtle"
+              id="settings-open"
+              aria-label="Abrir ajustes"
+            >
+              <svg class="icon"><use href="#i-settings" /></svg
+              ><span>Ajustes</span>
+            </button>
+          </div>
+        </header>
+        <main id="main" tabindex="-1">
+          <section class="view" id="page-ambient" aria-labelledby="heading">
+            <div class="page-heading">
+              <div>
+                <h1 id="heading">Seu ambiente, em palavras.</h1>
+                <p class="intro">Aponte a câmera e ouça o que está ao redor.</p>
+              </div>
+              <div class="evaluation-badge">
+                <span></span>Protótipo em avaliação
+              </div>
+            </div>
+            <div class="session-grid">
+              <section
+                class="card camera-card"
+                aria-labelledby="camera-heading"
+              >
+                <div class="card-heading">
+                  <h2 id="camera-heading">
+                    <svg class="icon"><use href="#i-camera" /></svg>Olhar ao
+                    redor
+                  </h2>
+                  <span id="source-badge" class="chip">Câmera desligada</span>
+                </div>
+                <div class="perception-settings">
+                  <div class="analysis-row">
+                    <label for="perception-provider">Análise</label
+                    ><select
+                      id="perception-provider"
+                      aria-describedby="luna-config"
+                    >
+                      <option value="luna">
+                        Luna 6 · capturas automáticas
+                      </option>
+                    </select>
+                  </div>
+                  <p id="luna-config" class="field-hint" role="status">
+                    Verificando configuração do Luna…
+                  </p>
+
+                  <label class="cloud-consent"
+                    ><input type="checkbox" id="cloud-consent" /><span
+                      >Autorizo enviar capturas à OpenAI ao iniciar e após
+                      mudanças, com cobrança dentro do limite. Posso parar ou
+                      desmarcar para interromper novos envios. O provedor pode
+                      reter imagens.</span
+                    ></label
+                  >
+                </div>
+                <div class="camera-controls">
+                  <button class="button primary" id="start">
+                    <svg class="icon"><use href="#i-play" /></svg
+                    ><span>Iniciar ambientação</span></button
+                  ><button class="button outline" id="demo">
+                    <svg class="icon"><use href="#i-map" /></svg
+                    ><span>Experimentar demonstração</span>
+                  </button>
+                </div>
+                <div class="camera-viewport" id="viewport">
+                  <video
+                    id="camera"
+                    autoplay
+                    muted
+                    playsinline
+                    aria-label="Prévia da câmera, sem espelhamento"
+                    hidden
+                  ></video>
+                  <div class="camera-empty" id="camera-empty">
+                    <div class="scan-art" aria-hidden="true">
+                      <div class="scan-center">
+                        <svg><use href="#i-camera" /></svg>
+                      </div>
+                    </div>
+                    <strong id="preview-title">Um novo ponto de vista</strong>
+                    <p id="preview-hint">
+                      Inicie a câmera ou explore uma cena de demonstração.
+                    </p>
+                  </div>
+                  <div id="demo-map" class="demo-map" hidden>
+                    <svg
+                      id="radar"
+                      viewBox="0 0 500 290"
+                      role="img"
+                      aria-label="Mapa ilustrativo da cena simulada; consulte também a lista de referências"
+                    ></svg
+                    ><span class="demo-watermark"
+                      >CENA SIMULADA · NÃO USA A CÂMERA</span
+                    >
+                  </div>
+                </div>
+                <details class="analysis-details">
+                  <summary>Como funciona a análise</summary>
+                  <p>
+                    Luna analisa ao iniciar e após mudanças relevantes, com pelo
+                    menos 4,5 segundos entre envios. Uma falha temporária
+                    permite uma nova captura após 15 segundos, dentro do
+                    orçamento. As descrições podem atrasar ou perder mudanças.
+                    Direções são relativas à câmera, sem distância medida.
+                    Portas e aberturas não garantem saída ou caminho livre.
+                  </p>
+                </details>
+                <div class="camera-foot">
+                  <span class="status-dot" id="status-dot"></span
+                  ><span id="status" role="status"
+                    >Tudo pronto para começar</span
+                  >
+                </div>
+              </section>
+              <section
+                class="card narration-card"
+                aria-labelledby="narration-heading"
+              >
+                <div class="card-heading">
+                  <h2 id="narration-heading">
+                    <svg class="icon"><use href="#i-volume" /></svg>Sua
+                    ambientação
+                  </h2>
+                  <span id="speech-state" class="small-state">Em pausa</span>
+                </div>
+                <div class="narration-content">
+                  <p id="caption" class="caption">
+                    Uma descrição para entender o seu espaço.
+                  </p>
+                  <p id="caption-age" class="field-hint"></p>
+                  <p id="capture-state" class="field-hint" hidden></p>
+                  <p class="narration-note" id="narration-note">
+                    As descrições aparecem aqui. O Visiora fica em silêncio
+                    quando nada relevante muda.
+                  </p>
+                  <div class="audio-wave" aria-hidden="true">
+                    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
+                    ><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
+                    ><i></i><i></i><i></i>
+                  </div>
+                </div>
+                <div class="narration-bottom">
+                  <button class="button subtle" id="mute" aria-pressed="false">
+                    <svg class="icon"><use href="#i-volume" /></svg
+                    ><span>Pausar voz</span></button
+                  ><button
+                    class="speed-button"
+                    id="speed"
+                    aria-label="Velocidade da voz: 1 vez"
+                  >
+                    1×
+                  </button>
+                </div>
+              </section>
+            </div>
+            <div id="demo-options" class="demo-options card" hidden>
+              <div>
+                <strong>Explore uma cena</strong
+                ><span>Objetos e distâncias são simulados.</span>
+              </div>
+              <label class="sr-only" for="scenario">Cena de demonstração</label
+              ><select id="scenario">
+                <option value="sala">Sala de estar</option>
+                <option value="quarto">Quarto</option>
+                <option value="aula">Sala de aula</option>
+                <option value="restaurante">Restaurante</option>
+                <option value="corredor">Corredor</option>
+                <option value="banheiro">Banheiro</option></select
+              ><button class="button outline" id="demo-turn">
+                Girar 45° na cena
+              </button>
+            </div>
+            <section class="explore-section" aria-labelledby="explore-heading">
+              <div class="section-title">
+                <h2 id="explore-heading">Perguntas opcionais</h2>
+                <span>Você escolhe quando ouvir.</span>
+              </div>
+              <div class="quick-actions">
+                <button class="quick-action" data-ask="ahead" disabled>
+                  <span class="action-icon"
+                    ><svg class="icon"><use href="#i-arrow" /></svg></span
+                  ><strong>À minha frente</strong><kbd>F</kbd></button
+                ><button class="quick-action" data-ask="describe" disabled>
+                  <span class="action-icon"
+                    ><svg class="icon"><use href="#i-scan" /></svg></span
+                  ><strong>Descrever ambiente</strong><kbd>D</kbd></button
+                ><button class="quick-action" id="search-open" disabled>
+                  <span class="action-icon"
+                    ><svg class="icon"><use href="#i-search" /></svg></span
+                  ><strong>Procurar objeto</strong><kbd>P</kbd></button
+                ><button class="quick-action" data-ask="repeat" disabled>
+                  <span class="action-icon"
+                    ><svg class="icon"><use href="#i-repeat" /></svg></span
+                  ><strong>Ouvir novamente</strong><kbd>R</kbd>
+                </button>
+              </div>
+            </section>
+            <details class="environment-details" id="environment-details">
+              <summary>
+                <span>Detalhes do ambiente</span>
+                <span class="detail-hint"
+                  >Contexto e referências reconhecidas</span
+                >
+              </summary>
+              <section class="card scene-card" aria-labelledby="scene-heading">
+                <div class="card-heading">
+                  <h2 id="scene-heading">Reconhecer o ambiente</h2>
+                  <span class="chip" id="scene-source">Sem sessão ativa</span>
+                </div>
+                <div class="scene-summary">
+                  <p class="scene-title" id="scene-place">Que lugar é este?</p>
+                  <p class="field-hint" id="scene-note" role="status">
+                    Inicie a câmera para analisar o ambiente pela imagem
+                    inteira.
+                  </p>
+                  <div class="scene-actions">
+                    <button class="button outline" data-ask="where" disabled>
+                      Ouvir sobre este lugar</button
+                    ><button class="button outline" id="scene-retry" hidden>
+                      Tentar reconhecimento novamente
+                    </button>
+                  </div>
+                </div>
+              </section>
+              <section
+                class="card references-card"
+                aria-labelledby="references-heading"
+              >
+                <div class="card-heading">
+                  <h2 id="references-heading">
+                    Referências do ambiente
+                    <span id="reference-count" class="count">0</span>
+                  </h2>
+                  <button class="text-button" data-go="environment">
+                    Ver meu ambiente <span aria-hidden="true">↗</span>
+                  </button>
+                </div>
+                <div id="references" class="reference-list">
+                  <p class="empty-note">
+                    As referências reconhecidas vão aparecer aqui, com direção e
+                    informações disponíveis.
+                  </p>
+                </div>
+              </section>
+            </details>
+            <div class="quiet-note">
+              <svg class="icon"><use href="#i-help" /></svg>
+              <p>
+                Pode errar. Não garante caminho livre nem substitui bengala ou
+                cão-guia.
+              </p>
+              <button class="text-button" data-go="help">
+                Conhecer os limites
+              </button>
+            </div>
+          </section>
+          <section
+            class="view"
+            id="page-environment"
+            aria-labelledby="environment-heading"
+            hidden
+          >
+            <div class="page-heading compact">
+              <div>
+                <p class="eyebrow">REFERÊNCIAS DA SESSÃO</p>
+                <h1 id="environment-heading">Meu ambiente</h1>
+                <p class="intro">
+                  Uma lista em palavras do que foi reconhecido. Informações
+                  antigas são sinalizadas.
+                </p>
+              </div>
+            </div>
+            <div class="card page-panel">
+              <div class="card-heading">
+                <h2>Ao seu redor</h2>
+                <span class="chip" id="environment-source"
+                  >Sem sessão ativa</span
+                >
+              </div>
+              <div id="environment-list" class="environment-list">
+                <p class="empty-note">
+                  Inicie a câmera ou uma demonstração para conhecer as
+                  referências.
+                </p>
+              </div>
+            </div>
+            <div class="info-panel">
+              <svg class="icon"><use href="#i-map" /></svg>
+              <p>
+                No modo câmera, as direções são relativas ao enquadramento. Sem
+                sensores confiáveis, não há mapa de 360°. A detecção atual não
+                mede distância.
+              </p>
+            </div>
+            <button class="button outline" data-go="ambient">
+              Voltar à ambientação
+            </button>
+          </section>
+          <section
+            class="view"
+            id="page-history"
+            aria-labelledby="history-heading"
+            hidden
+          >
+            <div class="page-heading compact">
+              <div>
+                <p class="eyebrow">SÓ NESTE APARELHO</p>
+                <h1 id="history-heading">Suas descrições</h1>
+                <p class="intro">
+                  Consulte o que você escolheu guardar. Nenhuma imagem é salva.
+                </p>
+              </div>
+            </div>
+            <div class="card page-panel">
+              <div class="card-heading">
+                <h2>Histórico local</h2>
+                <button class="text-button" id="history-enable">
+                  Configurar histórico
+                </button>
+              </div>
+              <div id="history-list" class="history-list"></div>
+            </div>
+            <div class="info-panel">
+              <svg class="icon"><use href="#i-shield" /></svg>
+              <p>
+                O histórico começa desligado. Se ativado, guarda até 50
+                descrições neste navegador. Apague quando quiser nos ajustes.
+              </p>
+            </div>
+          </section>
+          <section
+            class="view"
+            id="page-help"
+            aria-labelledby="help-heading"
+            hidden
+          >
+            <div class="page-heading compact">
+              <div>
+                <p class="eyebrow">PARA USAR COM CONTEXTO</p>
+                <h1 id="help-heading">Um começo tranquilo</h1>
+                <p class="intro">
+                  Como usar, o que esperar e o que ainda estamos avaliando.
+                </p>
+              </div>
+            </div>
+            <div class="help-grid">
+              <article class="card help-card">
+                <span class="step-number">01</span>
+                <h2>Escolha como ouvir</h2>
+                <p>
+                  Em Ajustes, selecione uma voz local pt-BR ou o seu leitor de
+                  tela. No leitor de tela, o Luna publica também as descrições
+                  automáticas; o modo local usa perguntas sob demanda para
+                  evitar duas vozes falando juntas.
+                </p>
+              </article>
+              <article class="card help-card">
+                <span class="step-number">02</span>
+                <h2>Inicie a ambientação</h2>
+                <p>
+                  Toque em Iniciar ambientação e permita a câmera. O Luna começa
+                  com o primeiro quadro disponível. No modo local, mantenha o
+                  aparelho estável durante a descrição. Não é necessário
+                  conceder acesso ao microfone.
+                </p>
+              </article>
+              <article class="card help-card">
+                <span class="step-number">03</span>
+                <h2>Pergunte no seu tempo</h2>
+                <p>
+                  O Luna analisa ao iniciar e após mudanças; os botões são
+                  opcionais. Não reconhecer algo não significa que o local está
+                  vazio ou livre. Aponte a câmera para outra área; a próxima
+                  análise usará uma captura recente, sem exigir que você pare.
+                </p>
+              </article>
+            </div>
+            <section class="card help-limits">
+              <h2>Movimento e atualidade</h2>
+              <p>
+                O Luna descreve capturas anteriores. Ao mudar o enquadramento,
+                as posições antigas são retiradas e uma imagem recente é
+                analisada quando o serviço e o orçamento permitem. Se a cena
+                mudar antes das respostas, o sistema informa essa limitação.
+              </p>
+              <p>
+                Uma descrição não indica onde pisar, se há obstáculos atuais ou
+                se um caminho está livre. Ainda não há percepção local contínua
+                no modo Luna. A avaliação de utilidade em deslocamento está em
+                andamento; não houve teste com pessoas cegas caminhando.
+              </p>
+            </section>
+            <section class="card help-limits">
+              <h2>Limites que você precisa conhecer</h2>
+              <p>
+                No Luna, a voz prioriza novidades visíveis e agrupa itens por
+                direção. As posições valem para a captura indicada: uma mudança
+                ampla do enquadramento as retira, e posições expiradas deixam a
+                lista. Não identificar alguém numa captura não significa que a
+                pessoa saiu do local. A utilidade dessas falas ainda precisa ser
+                avaliada com pessoas cegas e profissionais de Orientação e
+                Mobilidade.
+              </p>
+              <ul>
+                <li>
+                  Protótipo em avaliação. Ainda não foi testado com pessoas
+                  cegas ou com baixa visão.
+                </li>
+                <li>
+                  Não é um sistema de navegação segura e não substitui bengala,
+                  cão-guia ou orientação profissional.
+                </li>
+                <li>
+                  O detector atual reconhece um conjunto limitado de objetos.
+                  Não reconhece portas, degraus, buracos ou vidro de forma
+                  confiável.
+                </li>
+                <li>
+                  Dois modelos comparam a imagem inteira, com 34 tipos de lugar
+                  compatíveis. O catálogo é limitado: não reconhece qualquer
+                  ambiente nem produz descrição aberta. Pode errar ou dizer que
+                  não sabe, mesmo com a câmera funcionando.
+                </li>
+                <li>
+                  Em 40 novas imagens públicas: 16 respostas corretas, 1 errada
+                  e 23 dúvidas. O ganho foi pequeno e não é um teste de
+                  ambientes brasileiros. Cadeiras ainda são frequentemente
+                  omitidas. A experiência no seu aparelho pode variar.
+                </li>
+                <li>
+                  No modo câmera, não há profundidade métrica: nenhuma distância
+                  em passos é anunciada. Na demonstração, as distâncias são
+                  simuladas.
+                </li>
+                <li>
+                  A direção acompanha o enquadramento. Sem sensor autorizado,
+                  não conhece a direção do corpo e não mantém mapa 360°.
+                </li>
+                <li>
+                  Uma cadeira detectada não é necessariamente uma cadeira vazia.
+                  Uma pessoa detectada não é identificada.
+                </li>
+                <li>
+                  Voz, contraste e comportamento precisam de avaliação com
+                  usuários e leitores de tela reais.
+                </li>
+              </ul>
+            </section>
+            <div class="help-grid two">
+              <section class="card help-card">
+                <h2>Seus dados e o modo de análise</h2>
+                <p>
+                  No modo local, a visão roda neste aparelho. No modo Luna,
+                  análises automáticas e perguntas opcionais enviam capturas à
+                  OpenAI após sua autorização e podem gerar cobrança. Não
+                  gravamos imagens no aplicativo. Não há microfone nem
+                  telemetria implementados. O provedor pode reter dados:
+                  store:false não significa retenção zero. Desativar o
+                  consentimento impede novos envios, mas não cancela uma
+                  cobrança já iniciada.
+                </p>
+                <p>
+                  Esta versão usa Luna pela internet. Para usar os modelos
+                  locais, abra a
+                  <a href="https://visiora-ambiente.hills808.chatgpt.site/"
+                    >versão pública local</a
+                  >.
+                </p>
+                <button class="button outline" id="offline" hidden>
+                  Preparar uso offline
+                </button>
+                <p id="offline-state" class="field-hint" role="status" hidden>
+                  O modo offline ainda não foi preparado neste aparelho.
+                </p>
+                <button
+                  class="text-button download-link"
+                  id="local-download"
+                  hidden
+                >
+                  <svg class="icon"><use href="#i-download" /></svg>Baixar
+                  versão para usar localmente
+                </button>
+                <p id="download-state" class="field-hint" role="status" hidden>
+                  O pacote completo inclui os modelos para uso local e exige
+                  Node.js 24 ou superior.
+                </p>
+              </section>
+              <section class="card help-card">
+                <h2>Atalhos de teclado</h2>
+                <dl class="shortcuts">
+                  <div>
+                    <dt>Iniciar ou parar</dt>
+                    <dd><kbd>Espaço</kbd></dd>
+                  </div>
+                  <div>
+                    <dt>À minha frente</dt>
+                    <dd><kbd>F</kbd></dd>
+                  </div>
+                  <div>
+                    <dt>Descrever ambiente</dt>
+                    <dd><kbd>D</kbd></dd>
+                  </div>
+                  <div>
+                    <dt>Procurar objeto</dt>
+                    <dd><kbd>P</kbd></dd>
+                  </div>
+                  <div>
+                    <dt>Repetir descrição</dt>
+                    <dd><kbd>R</kbd></dd>
+                  </div>
+                  <div>
+                    <dt>Parar a sessão</dt>
+                    <dd><kbd>Esc</kbd></dd>
+                  </div>
+                </dl>
+                <p class="field-hint">
+                  Atalhos não são acionados enquanto você escreve ou usa um
+                  controle.
+                </p>
+              </section>
+            </div>
+            <details class="card technical">
+              <summary>Informações técnicas e licenças</summary>
+              <p>
+                YOLOX Nano, Tiny e S, exportação 0.1.1rc0, licença Apache-2.0.
+                ONNX Runtime Web 1.30.0, licença MIT. SigLIP2 base patch16-224,
+                conversão ONNX q4, licença Apache-2.0. Places365 ResNet18: pesos
+                CC BY sem versão indicada pelos autores; código MIT. Objetos
+                usam WebGPU quando disponível, com retorno à CPU/WebAssembly; os
+                modelos de ambiente usam WebAssembly. fflate 0.8.3, MIT, monta o
+                pacote local. Qualidade em ambientes brasileiros ainda não
+                medida.
+              </p>
+              <p>
+                <a href="/licenses/YOLOX.txt">Licença do YOLOX</a> ·
+                <a href="/licenses/YOLOX-NOTICE.txt">Origem dos detectores</a> ·
+                <a href="/licenses/ONNX-Runtime.txt">Licença do runtime</a> ·
+                <a href="/licenses/SigLIP2.txt">Licença do SigLIP2</a> ·
+                <a href="/licenses/SigLIP2-NOTICE.txt"
+                  >Origem do modelo de ambientes</a
+                >
+                ·
+                <a href="/licenses/Places365-NOTICE.txt"
+                  >Créditos e licença dos pesos Places365</a
+                >
+                ·
+                <a href="/licenses/Places365-code.txt"
+                  >Licença do código Places365</a
+                >
+                ·
+                <a href="/licenses/fflate.txt">Licença do pacote local</a>
+              </p>
+              <button class="button outline" id="export-diagnostics">
+                Exportar diagnóstico local
+              </button>
+              <p class="field-hint">
+                Inclui contagens e tempos desta sessão. Não inclui imagens ou
+                descrições.
+              </p>
+            </details>
+          </section>
+          <footer class="footer">
+            <span>visiora.</span>
+            <p>Mais contexto. Menos interrupções.</p>
+            <span class="footer-local"
+              ><svg class="icon"><use href="#i-shield" /></svg>Teste privado com
+              Luna</span
+            >
+          </footer>
+        </main>
+      </div>
+    </div>
+    <dialog id="settings" aria-labelledby="settings-title">
+      <form method="dialog" class="dialog-body" id="settings-form">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">DO SEU JEITO</p>
+            <h2 id="settings-title">Ajustes do Visiora</h2>
+          </div>
+          <button
+            class="icon-button"
+            value="cancel"
+            aria-label="Fechar ajustes"
+          >
+            <svg class="icon"><use href="#i-close" /></svg>
+          </button>
+        </div>
+        <div class="settings-grid">
+          <label
+            >Como ouvir<select id="output">
+              <option value="voice">Voz local do Visiora</option>
+              <option value="reader">Meu leitor de tela</option></select
+            ><span class="field-hint"
+              >No leitor de tela, use os botões para pedir descrições.</span
+            ></label
+          ><label
+            >Voz em português do Brasil<select id="voice">
+              <option value="">Procurando vozes locais…</option></select
+            ><span class="field-hint" id="voice-note"
+              >Somente vozes identificadas como locais são listadas.</span
+            ></label
+          ><label
+            >Velocidade da fala<select id="rate">
+              <option value="0.8">0,8× · mais devagar</option>
+              <option value="1">1× · padrão</option>
+              <option value="1.2">1,2× · mais rápido</option>
+              <option value="1.5">1,5× · rápido</option>
+            </select></label
+          ><label
+            >Quantidade de informação<select id="verbosity">
+              <option value="essential">Só o essencial</option>
+              <option value="balanced">Equilibrado</option>
+              <option value="detailed">Mais referências</option>
+            </select></label
+          ><label
+            >Aparência<select id="theme">
+              <option value="light">Claro</option>
+              <option value="dark">Escuro</option>
+            </select></label
+          ><label class="checkbox-label"
+            ><input type="checkbox" id="large-text" /><span
+              >Texto maior<span class="field-hint"
+                >Aumenta o texto sem mudar o zoom do navegador.</span
+              ></span
+            ></label
+          ><label class="checkbox-label"
+            ><input type="checkbox" id="economy" /><span
+              >Economizar processamento<span class="field-hint"
+                >Reduz a frequência de análise da câmera.</span
+              ></span
+            ></label
+          ><label class="checkbox-label"
+            ><input type="checkbox" id="keep-history" /><span
+              >Guardar descrições neste aparelho<span class="field-hint"
+                >Opcional. Até 50 descrições, sem imagens.</span
+              ></span
+            ></label
+          >
+        </div>
+        <details class="data-controls">
+          <summary>Giros da câmera · experimental</summary>
+          <p>
+            Opcional no Luna: usa o sensor do aparelho para retirar posições
+            antigas ao girar a câmera. Não detecta caminhada, obstáculos ou
+            distância. Leituras ficam só em memória.
+          </p>
+          <button
+            type="button"
+            class="button outline"
+            id="motion-toggle"
+            aria-pressed="false"
+          >
+            Ativar leitura de giros
+          </button>
+          <p id="motion-status" class="field-hint" role="status">
+            Desligada. Pode exigir permissão do navegador.
+          </p>
+        </details>
+        <div class="dialog-actions">
+          <button type="button" class="button outline" id="test-voice">
+            Testar voz</button
+          ><button type="submit" class="button primary" value="save">
+            Salvar ajustes
+          </button>
+        </div>
+        <details class="data-controls">
+          <summary>Dados e diagnósticos</summary>
+          <p>
+            Apaga preferências, descrições guardadas e arquivos preparados para
+            uso offline. A sessão atual será encerrada.
+          </p>
+          <button type="button" class="button danger" id="clear-open">
+            Apagar meus dados
+          </button>
+        </details>
+      </form>
+    </dialog>
+    <dialog id="search-dialog" aria-labelledby="search-title">
+      <form method="dialog" class="dialog-body" id="search-form">
+        <div class="dialog-heading">
+          <h2 id="search-title">Qual objeto você procura?</h2>
+          <button class="icon-button" value="cancel" aria-label="Fechar busca">
+            <svg class="icon"><use href="#i-close" /></svg>
+          </button>
+        </div>
+        <label for="search-input">Nome do objeto</label
+        ><input
+          id="search-input"
+          type="search"
+          placeholder="Ex.: cadeira, mesa, pessoa"
+          maxlength="60"
+          autocomplete="off"
+        />
+        <p class="field-hint">
+          No Luna, a busca analisa uma nova imagem e pode gerar cobrança. No
+          modo local, consulta a sessão. Ela não direciona seu deslocamento.
+        </p>
+        <button class="button primary" type="submit" value="search">
+          Consultar objeto
+        </button>
+      </form>
+    </dialog>
+    <dialog id="clear-dialog" aria-labelledby="clear-title">
+      <div class="dialog-body">
+        <h2 id="clear-title">Apagar os dados do Visiora?</h2>
+        <p>
+          Preferências, descrições guardadas e arquivos offline serão apagados
+          deste navegador.
+        </p>
+        <div class="dialog-actions">
+          <button class="button outline" id="clear-cancel">Cancelar</button
+          ><button class="button danger" id="clear-confirm">
+            Apagar dados
+          </button>
+        </div>
+      </div>
+    </dialog>
+    <div
+      id="screen-reader"
+      class="sr-only"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+    <div id="toast" class="toast" role="status" hidden></div>
+  </body>
+</html>

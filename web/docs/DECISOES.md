@@ -1,4 +1,31 @@
+## ADR-045 — atualidade durante movimento e alvo iPhone (24/10/2026)
+
+O usuário definiu iPhone com câmera traseira como alvo principal. Capturas Luna chegam com atraso e não sustentam orientação de passos. Corrigir primeiro continuidade e honestidade: a invalidação A→B→A conserva uma substituta pendente; o automático descarta posições de vista perdida e não ocupa a voz com contexto antigo antes da substituta. Manual/Repetir conservam linguagem histórica. Setores Luna são relativos à câmera, no passado, com idade explícita; o modo local mantém seu contrato original.
+
+Acrescentar leitura opcional de `DeviceMotionEvent.rotationRate`, desligada por padrão e pedida diretamente por botão em Ajustes. A norma W3C define graus/s e exige contexto seguro/ativação explícita para permissões: https://www.w3.org/TR/orientation-event/. A norma dos três eixos evita confundir retrato/paisagem com heading corporal; duas leituras distintas >=15 graus/s, separadas por no máximo 250 ms, retiram posições. Valores são hipóteses de engenharia, não limites medidos. Sem leituras recentes (1,5 s), informar indisponibilidade; não deduzir estabilidade. Listeners só durante Luna em primeiro plano, leituras não são persistidas, permissão não é guardada pelo app após recarregar. Não mede caminhada, translação, profundidade ou obstáculos. Sem dependência/modelo novo; alternativa sem sensor conserva mudanças de pixels e as mesmas limitações.
+
+Separar diagnóstico local de captura→resposta, preparação→início e captura→início/conclusão por callbacks, distinguindo voz/texto e percepção fake. Não inferir audibilidade. Cancelamento voluntário não confirma entrega nem bloqueia a sessão. Expiração antes do início segue uma recuperação após 15 s e pausa na segunda expiração; giro não contorna recuperação, consentimento, single-flight, cadência ou orçamento. Aviso único após duas vistas perdidas e estado consultável tornam o silêncio compreensível.
+
+Não ativar fala híbrida nem trocar modelo antes dos gates H2/H3, agora medidos no iPhone alvo. API para contexto lento + percepção local rápida é a arquitetura a avaliar, não uma capacidade entregue nesta revisão. Não alterar validade de 10 s, cotas, ledger ou chave; zero chamadas pagas nesta revisão. [Evidência e pendências CA-F3/F4/F5/F6/P6/D4/A1/E1/E5/L3/L4 e metas CA-H*](EVIDENCIAS/MOVIMENTO-IPHONE-2026-10-24.md). [Protocolo](AVALIACAO-MOVIMENTO.md).
+
 # Decisões — Visiora
+
+## ADR-044 — interface orientada à ambientação (24/10/2026)
+
+O usuário pediu um visual profissional e menos poluído. Referências oficiais Be My Eyes, Seeing AI e Lookout orientaram a hierarquia: iniciar com consentimento, acompanhar a descrição e acessar perguntas/detalhes quando necessário. Refatorar o CSS existente e a estrutura de apresentação, sem novo framework, ativos externos ou mudanças no provedor. A prévia vem depois do início para que a ação principal apareça mais cedo no celular; autorização de nuvem aparece somente no modo Luna. Detalhes recolhidos abrem automaticamente em falha local. Preservar teclado, contraste, temas, texto ampliado, estado da sessão e limites. Alternativa de criar uma tela de marketing e mais cartões rejeitada por afastar a tarefa principal. [Referências, orquestração e evidência CA-A1/A3/E1/L4](EVIDENCIAS/REDESIGN-VISUAL-2026-10-24.md). Avaliação humana continua pendente.
+
+## ADR-043 — transporte e encerramento da Luna hospedada (24/10/2026)
+
+O diagnóstico hospedado confirmou TypeError em `redirect: 'error'`, antes do envio. Usar `manual` e recusar 3xx sem encaminhar a chave. O GET de metadados passou a HTTP 200; duas análises com câmera retornaram modelo `gpt-6-luna`, `verified`, e a interface completou o ciclo de fala. Um terceiro POST cancelado ao parar a câmera deixou a reserva pendente. Reter a mesma Promise com `ctx.waitUntil` permite concluir a contabilidade após desconexão, dentro do prazo da plataforma. Reconciliação administrativa explícita por ID, identidade/Origin/CSRF e idade mínima de cinco minutos converte pending antigo em uncertain sem reduzir valor, apagar histórico ou permitir reenvio duplicado. Não há recuperação automática nem inferência de custo zero. O Site permanece restrito ao proprietário; rever autorização administrativa antes de compartilhá-lo. Dez testes com workerd/D1 e checagens de tipos/lint passaram. [Evidência CA-L4/E1](EVIDENCIAS/LUNA-CONEXAO-WORKER-2026-10-24.md). Sem novo modelo/dependência/teto; audibilidade, precisão e aceite humano não foram medidos.
+
+## ADR-042 — diagnóstico seguro do erro da Luna hospedada (23/10/2026)
+
+**Contexto:** após o site privado indicar "Luna configurado", uma sessão real com webcam registrou falha temporária, uma tentativa de recuperação e pausa. Os dois avisos do navegador eram genéricos. Status pronto confirma presença de configuração e ledger, mas não comprova sucesso da chamada externa. Não temos o HTTP do upstream nem logs da sessão para atribuir causa.
+
+**Decisão:** conservar na API e no ledger apenas o código sanitizado `provider-http-5xx` quando a OpenAI ou a borda responde HTTP 5xx; manter separados `provider-network`, `provider-timeout` e `not-configured`. O cliente preserva o código do backend para a tela e o diagnóstico; uma resposta HTTP 503 em HTML da borda vira `gateway-unavailable` sem mostrar HTML. A recuperação automática continua limitada a uma captura nova por falha temporária conhecida e ao teto vigente. Nada de payload da OpenAI, imagem, chave ou cabeçalhos nos erros.
+
+**Alternativas:** liberar chamadas de diagnóstico pagas ou reiniciar o ledger automaticamente, rejeitadas por custo e rastreabilidade. A origem exata da falha só será conhecida com um reteste da versão publicada e o código capturado. A alteração por si só não confirma funcionamento real da API nem resolve uma indisponibilidade externa.
+
 
 Consulta às fontes oficiais: 17/10/2026. Estado inicial da Fase 0: **propostas para revisão**; adoções posteriores nas ADRs 008–013. Os números das ADRs 001–005 são publicados por terceiros; as medições próprias posteriores estão identificadas nas ADRs 009 e 012. NM = não medido nesta sessão; NI = não informado/confirmado na fonte consultada. Versão de biblioteca não identifica sozinha o checkpoint.
 
@@ -552,3 +579,13 @@ Não testado: API/fatura/painel reais, virada física do relógio, outros PCs/SO
 **Alternativas:** implantar servidor Linux permanente (ADR-039), ainda sem infraestrutura; pacote portátil Windows, preferível quando não é possível manter o PC de origem conectado.
 
 **Limites:** Cloudflare Quick Tunnel é uma solução de demonstração, com endereço efêmero e sem garantia de disponibilidade. Primeira configuração, autenticação, origem, câmera, áudio, limite e conectividade ainda exigem teste físico. Não há prova de funcionamento real nesta alteração; nenhuma API paga foi chamada. Fonte: documentação oficial https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/.
+
+## ADR-041 — Site privado Luna com orçamento centralizado (23/10/2026)
+
+**Contexto:** o endereço público estático não fornece `/api/vision/status` nem `/api/vision/analyze`; o cliente recebia HTML em vez de JSON. O pacote portátil e o túnel da ADR-040 dependem de um computador ligado. A solução de servidor Caddy da ADR-039 permanece uma alternativa de implantação.
+
+**Decisão:** publicar um segundo Site, privado para a conta proprietária, com o mesmo aplicativo e uma API Luna em Cloudflare Workers. As rotas exigem identidade, origem correta, CSRF e consentimento. D1 centraliza o orçamento entre aparelhos, guardando metadados de gasto e modelo, nunca imagens ou descrições. A chave fica como segredo do Site. A versão privada omite os pesos locais e oferece apenas Luna; a versão pública mantém o modo local e aponta para o Luna privado. O gateway local foi parado e desativado antes da ativação hospedada, pois os ledgers não se comunicam. O limite hospedado é US$ 10 em 23/10/2026 e US$ 2 por dia depois, no fuso de São Paulo.
+
+**Dependências do starter verificadas no registro npm em 23/10/2026:** Next 16.3.4 (MIT, 184.740.295 bytes descompactados, Node ≥20.9), Vinext 1.0.0-beta.5 (MIT, 5.127.059 bytes, Node ≥22), Wrangler 4.92.0 (MIT ou Apache-2.0, 16.607.203 bytes, Node ≥22), Drizzle ORM 0.45.2 (Apache-2.0, 10.420.427 bytes). A alternativa Worker ESM simples não empacota os assets estáticos deste aplicativo sem adaptar o pipeline.
+
+**Evidência e limites:** [LUNA-CELULAR-HOSPEDADO-2026-10-23.md](EVIDENCIAS/LUNA-CELULAR-HOSPEDADO-2026-10-23.md), CA-E4/L4/S4. O Site autenticado mostrou Luna configurado; requisição anônima recebeu 401. Testes fake cobriram contrato e controles. Nenhuma imagem real foi enviada pelo agente; webcam, áudio, faturamento e uso físico no celular ainda não foram medidos. O teto D1 não cobre uso do gateway local.

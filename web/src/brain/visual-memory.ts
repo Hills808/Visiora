@@ -77,8 +77,8 @@ export class VisualMemory {
     const { evidence: e, stamp: s } = result;
     if (s.intent === 'where')
       return e.scene
-        ? `O ambiente parece ${e.scene.label}.`
-        : 'Não tenho certeza de que lugar é este.';
+        ? `O ambiente parecia ${e.scene.label}.`
+        : 'Não identifiquei o lugar nesta captura.';
     let items = e.observations.filter((i) => i.kind !== 'text' && i.box);
     if (s.intent === 'find')
       items = items.filter((i) =>
@@ -91,8 +91,8 @@ export class VisualMemory {
     const prefix =
       s.intent === 'describe'
         ? e.scene
-          ? `O ambiente parece ${e.scene.label}. `
-          : 'Não tenho certeza de que lugar é este. '
+          ? `O ambiente parecia ${e.scene.label}. `
+          : 'Não identifiquei o lugar nesta captura. '
         : '';
     const sentences: SnapshotPhrase[] = [];
     const budget =

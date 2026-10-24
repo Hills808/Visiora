@@ -5,6 +5,7 @@ import type { Question, Utterance } from './brain/types.js';
 import { Speaker } from './output/speaker.js';
 import { Camera, type VisionResult } from './vision/camera.js';
 import { OnlineSession, type OnlineStopReason } from './vision/online-session.js';
+import { browserMotionHost, MotionInput } from './vision/motion-input.js';
 import type { SceneStatus } from './vision/scene-model.js';
 import type { SceneAnalysis } from './vision/scene.js';
 import {
@@ -96,6 +97,9 @@ function configure(): void {
 }
 function setMode(next: Mode): void {
   mode = next;
+  motion.setRunning(next === 'luna' && !document.hidden);
+  renderMotion();
+  show('capture-state', next === 'luna');
   const active = next === 'demo' || next === 'camera' || next === 'luna';
   el<HTMLSelectElement>('perception-provider').disabled = runningMode(next);
   text(
@@ -119,7 +123,7 @@ function setMode(next: Mode): void {
       : next === 'luna'
         ? online.simulated
           ? 'Simulador de integração'
-          : 'Luna · acompanhamento automático'
+          : 'Luna · análise por capturas'
         : next === 'camera'
           ? 'Câmera local'
           : next === 'loading'
@@ -155,6 +159,8 @@ function setMode(next: Mode): void {
   renderScene();
 }
 function renderScene(): void {
+  if (mode === 'camera' && sceneState === 'error')
+    el<HTMLDetailsElement>('environment-details').open = true;
   if (mode === 'luna') {
     text(
       'scene-source',
@@ -163,7 +169,7 @@ function renderScene(): void {
     text(
       'scene-place',
       online.place
-        ? `Hipótese na imagem: ${online.place}`
+        ? `Na captura analisada, o ambiente parecia ${online.place}`
         : 'Aguardando a primeira análise do lugar',
     );
     text(
@@ -368,6 +374,16 @@ const camera = new Camera(
 );
 configure();
 
+// Keep the cloud authorization beside the action only when it is relevant.
+function syncAnalysisControls(): void {
+  const cloud = el<HTMLSelectElement>('perception-provider').value === 'luna';
+  const label = el<HTMLInputElement>('cloud-consent').closest('label');
+  if (label) label.hidden = !cloud;
+  show('luna-config', cloud);
+}
+el('perception-provider').addEventListener('change', syncAnalysisControls);
+syncAnalysisControls();
+
 function runningMode(next: Mode): boolean {
   return next !== 'idle';
 }
@@ -390,13 +406,21 @@ const online = new OnlineSession(el<HTMLVideoElement>('camera'), {
         : 'O acompanhamento foi pausado por uma falha na análise. Pare e inicie novamente após verificar o problema.';
   },
 });
+const motion = new MotionInput(browserMotionHost(), () => online.observeCameraRotation());
+function renderMotion(): void {
+  const button = el<HTMLButtonElement>('motion-toggle');
+  button.textContent = motion.enabled ? 'Desativar leitura de giros' : 'Ativar leitura de giros';
+  button.setAttribute('aria-pressed', String(motion.enabled));
+  button.disabled = motion.requesting;
+  if (el('motion-status').textContent !== motion.status) text('motion-status', motion.status);
+}
 void online.refresh();
 function presentOnline(utterance: Utterance): void {
   text('caption', utterance.text);
   text('caption-age', 'Descrição de uma captura; não é uma visão contínua.');
   renderScene();
   if (preferences.output === 'reader' || muted || voiceUnavailable) {
-    if (online.canStart(utterance.id)) {
+    if (online.canStart(utterance.id, 'text')) {
       if (preferences.output === 'reader') text('screen-reader', utterance.text);
       const completed = online.showText(utterance.id);
       text('speech-state', 'Descrição em texto');
@@ -419,8 +443,12 @@ function presentOnline(utterance: Utterance): void {
         }
         text('speech-state', 'Em silêncio');
       },
-      drop: () => text('speech-state', 'Descrição interrompida; aguardando atualização da vista'),
+      drop: () => {
+        online.interrupted(utterance.id);
+        text('speech-state', 'Descrição interrompida; aguardando atualização da vista');
+      },
       error: (message) => {
+        online.interrupted(utterance.id);
         voiceUnavailable = true;
         configure();
         notice(message);
@@ -443,7 +471,7 @@ async function startCamera(): Promise<void> {
       await online.start();
       if (attempt !== generation) return;
       setMode('luna');
-      text('caption', 'Analisando o ambiente. A câmera continua acompanhando as mudanças.');
+      text('caption', 'Preparando a primeira análise por captura.');
       text('status', 'Acompanhamento automático: analisa no início e quando o enquadramento muda.');
       initialTextPending = false;
       if (!speaker.voices().length && preferences.output === 'voice') {
@@ -522,6 +550,7 @@ function ask(question: Question, arg = ''): void {
   }
 }
 function tick(): void {
+  renderMotion();
   if (mode === 'luna') {
     if (
       onlineNotice &&
@@ -556,9 +585,14 @@ function tick(): void {
           },
           now,
         );
+      } else if (preferences.output === 'reader') {
+        text('screen-reader', message);
+      } else {
+        notice(message);
       }
     }
     online.tick();
+    text('capture-state', online.feedbackState);
     renderScene();
     if (online.capturedAt !== null)
       text(
@@ -678,6 +712,15 @@ function openSettings(): void {
   el<HTMLDialogElement>('settings').showModal();
 }
 el('settings-open').addEventListener('click', openSettings);
+el('motion-toggle').addEventListener('click', () => {
+  if (motion.enabled) motion.disable();
+  else {
+    const permission = motion.enable();
+    renderMotion();
+    void permission.then(renderMotion);
+  }
+  renderMotion();
+});
 el('history-enable').addEventListener('click', openSettings);
 el<HTMLFormElement>('settings-form').addEventListener('submit', (event) => {
   if ((event as SubmitEvent).submitter?.getAttribute('value') !== 'save') return;
@@ -790,6 +833,7 @@ el('clear-open').addEventListener('click', () => el<HTMLDialogElement>('clear-di
 el('clear-cancel').addEventListener('click', () => el<HTMLDialogElement>('clear-dialog').close());
 el('clear-confirm').addEventListener('click', async () => {
   stop('Ambientação parada. A câmera está desligada.', 'data-cleared');
+  motion.disable();
   try {
     await clearData(localStorage);
     preferences = { ...DEFAULTS };
@@ -828,6 +872,7 @@ el('export-diagnostics').addEventListener('click', () => {
     sceneRejectedFrames: metrics.sceneRejectedFrames,
     recognitionProvenance: recognitionTrace.snapshot(),
     onlineContinuity: online.diagnostics(),
+    cameraRotation: motion.diagnostics(),
   };
   if (diagnosticUrl) URL.revokeObjectURL(diagnosticUrl);
   diagnosticUrl = URL.createObjectURL(
@@ -869,6 +914,7 @@ document.addEventListener('visibilitychange', () => {
     stop('Sessão parada porque a página ficou em segundo plano.', 'background');
 });
 window.addEventListener('pagehide', () => {
+  motion.setRunning(false);
   camera.stop();
   online.stop('pagehide');
   localDownloadWorker?.terminate();

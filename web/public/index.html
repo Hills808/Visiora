@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#12252b" />
     <meta
       name="description"
-      content="Conheça o ambiente ao seu redor por descrições curtas em português. Câmera e processamento locais, no seu ritmo."
+      content="Conheça o ambiente por descrições curtas em português. Você escolhe como analisar e ouvir."
     />
     <title>Visiora — Seu espaço, em palavras</title>
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
@@ -95,22 +95,11 @@
             <svg class="icon"><use href="#i-help" /></svg>Ajuda e limites
           </button>
         </nav>
-        <div class="sidebar-bottom">
-          <div class="privacy-mark">
-            <svg class="icon"><use href="#i-shield" /></svg>
-            <div>
-              <strong>Você escolhe como analisar.</strong>
-              <p>Luna envia imagens com sua autorização. O modo local usa este aparelho.</p>
-            </div>
-          </div>
-          <span class="version">VISIORA · VERSÃO 0.3</span>
-        </div>
+        <div class="sidebar-bottom"><span class="version">VISIORA · 0.3</span></div>
       </aside>
       <div class="workspace">
         <header class="topbar">
-          <span class="breadcrumb"
-            >Meu espaço <span>/</span> <strong id="page-label">Ambientação</strong></span
-          >
+          <span class="breadcrumb" id="page-label">Ambientação</span>
           <div class="topbar-actions">
             <span class="local-badge" id="processing-badge"
               ><span class="dot"></span>Selecione o modo de análise</span
@@ -123,9 +112,8 @@
           <section class="view" id="page-ambient" aria-labelledby="heading">
             <div class="page-heading">
               <div>
-                <p class="eyebrow">UM POUCO MAIS DE CONTEXTO</p>
-                <h1 id="heading">Seu ambiente.<br /><span>No seu ritmo.</span></h1>
-                <p class="intro">Entenda o que está ao redor, com descrições curtas em voz.</p>
+                <h1 id="heading">Seu ambiente, em palavras.</h1>
+                <p class="intro">Aponte a câmera e ouça o que está ao redor.</p>
               </div>
               <div class="evaluation-badge"><span></span>Protótipo em avaliação</div>
             </div>
@@ -138,29 +126,33 @@
                   <span id="source-badge" class="chip">Câmera desligada</span>
                 </div>
                 <div class="perception-settings">
-                  <label for="perception-provider">Análise do ambiente</label>
-                  <select id="perception-provider" aria-describedby="luna-config">
-                    <option value="local">Modelos locais · sem API paga</option>
-                    <option value="luna">Luna 6 · acompanhamento automático</option>
-                  </select>
+                  <div class="analysis-row">
+                    <label for="perception-provider">Análise</label
+                    ><select id="perception-provider" aria-describedby="luna-config">
+                      <option value="local">Modelos locais · sem API paga</option>
+                      <option value="luna">Luna 6 · capturas automáticas</option>
+                    </select>
+                  </div>
                   <p id="luna-config" class="field-hint" role="status">
                     Verificando configuração do Luna…
                   </p>
+
                   <label class="cloud-consent"
-                    ><input type="checkbox" id="cloud-consent" />
-                    <span
-                      >Autorizo enviar imagens da câmera à OpenAI automaticamente ao iniciar e após
-                      mudanças relevantes, com cobrança dentro do limite configurado. Posso parar ou
-                      desmarcar para impedir novos envios. O provedor pode reter imagens.</span
-                    >
-                  </label>
-                  <p class="field-hint">
-                    Analisa desde o primeiro quadro, mesmo com movimento, com intervalo mínimo de
-                    4,5 segundos entre envios. Após falha temporária, tenta uma nova captura uma
-                    vez, depois de 15 segundos, dentro do orçamento. Descreve capturas: pode atrasar
-                    ou perder mudanças. Direção relativa à câmera, sem distância medida. Portas e
-                    aberturas não garantem uma saída ou caminho livre.
-                  </p>
+                    ><input type="checkbox" id="cloud-consent" /><span
+                      >Autorizo enviar capturas à OpenAI ao iniciar e após mudanças, com cobrança
+                      dentro do limite. Posso parar ou desmarcar para interromper novos envios. O
+                      provedor pode reter imagens.</span
+                    ></label
+                  >
+                </div>
+                <div class="camera-controls">
+                  <button class="button primary" id="start">
+                    <svg class="icon"><use href="#i-play" /></svg
+                    ><span>Iniciar ambientação</span></button
+                  ><button class="button outline" id="demo">
+                    <svg class="icon"><use href="#i-map" /></svg
+                    ><span>Experimentar demonstração</span>
+                  </button>
                 </div>
                 <div class="camera-viewport" id="viewport">
                   <video
@@ -173,14 +165,9 @@
                   ></video>
                   <div class="camera-empty" id="camera-empty">
                     <div class="scan-art" aria-hidden="true">
-                      <div class="scan-ring ring-outer"></div>
-                      <div class="scan-ring ring-inner"></div>
                       <div class="scan-center">
-                        <svg><use href="#i-scan" /></svg>
+                        <svg><use href="#i-camera" /></svg>
                       </div>
-                      <span class="scan-dot dot-a"></span><span class="scan-dot dot-b"></span
-                      ><span class="scan-corner corner-a"></span
-                      ><span class="scan-corner corner-b"></span>
                     </div>
                     <strong id="preview-title">Um novo ponto de vista</strong>
                     <p id="preview-hint">Inicie a câmera ou explore uma cena de demonstração.</p>
@@ -194,18 +181,18 @@
                     ></svg
                     ><span class="demo-watermark">CENA SIMULADA · NÃO USA A CÂMERA</span>
                   </div>
-                  <div class="video-corner top-left" aria-hidden="true"></div>
-                  <div class="video-corner bottom-right" aria-hidden="true"></div>
                 </div>
-                <div class="camera-controls">
-                  <button class="button primary" id="start">
-                    <svg class="icon"><use href="#i-play" /></svg
-                    ><span>Iniciar ambientação</span></button
-                  ><button class="button outline" id="demo">
-                    <svg class="icon"><use href="#i-map" /></svg
-                    ><span>Experimentar demonstração</span>
-                  </button>
-                </div>
+                <details class="analysis-details">
+                  <summary>Como funciona a análise</summary>
+                  <p>
+                    Os modelos locais processam imagens neste aparelho. No modo Luna, a análise usa
+                    a OpenAI após autorização. Luna analisa ao iniciar e após mudanças relevantes,
+                    com pelo menos 4,5 segundos entre envios. Uma falha temporária permite uma nova
+                    captura após 15 segundos, dentro do orçamento. As descrições podem atrasar ou
+                    perder mudanças. Direções são relativas à câmera, sem distância medida. Portas e
+                    aberturas não garantem saída ou caminho livre.
+                  </p>
+                </details>
                 <div class="camera-foot">
                   <span class="status-dot" id="status-dot"></span
                   ><span id="status" role="status">Tudo pronto para começar</span>
@@ -219,9 +206,9 @@
                   <span id="speech-state" class="small-state">Em pausa</span>
                 </div>
                 <div class="narration-content">
-                  <span class="quote-symbol" aria-hidden="true">“</span>
-                  <p id="caption" class="caption">Vamos conhecer<br />o que está ao redor?</p>
+                  <p id="caption" class="caption">Uma descrição para entender o seu espaço.</p>
                   <p id="caption-age" class="field-hint"></p>
+                  <p id="capture-state" class="field-hint" hidden></p>
                   <p class="narration-note" id="narration-note">
                     As descrições aparecem aqui. O Visiora fica em silêncio quando nada relevante
                     muda.
@@ -263,67 +250,66 @@
                 <button class="quick-action" data-ask="ahead" disabled>
                   <span class="action-icon"
                     ><svg class="icon"><use href="#i-arrow" /></svg></span
-                  ><strong>À minha frente</strong><span>Referências logo à frente</span
-                  ><kbd>F</kbd></button
+                  ><strong>À minha frente</strong><kbd>F</kbd></button
                 ><button class="quick-action" data-ask="describe" disabled>
                   <span class="action-icon"
                     ><svg class="icon"><use href="#i-scan" /></svg></span
-                  ><strong>Descrever ambiente</strong><span>Uma visão geral do espaço</span
-                  ><kbd>D</kbd></button
+                  ><strong>Descrever ambiente</strong><kbd>D</kbd></button
                 ><button class="quick-action" id="search-open" disabled>
                   <span class="action-icon"
                     ><svg class="icon"><use href="#i-search" /></svg></span
-                  ><strong>Procurar objeto</strong><span>Consultar uma referência</span
-                  ><kbd>P</kbd></button
+                  ><strong>Procurar objeto</strong><kbd>P</kbd></button
                 ><button class="quick-action" data-ask="repeat" disabled>
                   <span class="action-icon"
                     ><svg class="icon"><use href="#i-repeat" /></svg></span
-                  ><strong>Ouvir novamente</strong><span>Repetir a última descrição</span
-                  ><kbd>R</kbd>
+                  ><strong>Ouvir novamente</strong><kbd>R</kbd>
                 </button>
               </div>
             </section>
-            <section class="card scene-card" aria-labelledby="scene-heading">
-              <div class="card-heading">
-                <h2 id="scene-heading">Reconhecer o ambiente</h2>
-                <span class="chip" id="scene-source">Sem sessão ativa</span>
-              </div>
-              <div class="scene-summary">
-                <p class="scene-title" id="scene-place">Que lugar é este?</p>
-                <p class="field-hint" id="scene-note" role="status">
-                  Inicie a câmera para analisar o ambiente pela imagem inteira.
-                </p>
-                <div class="scene-actions">
-                  <button class="button outline" data-ask="where" disabled>
-                    Ouvir sobre este lugar</button
-                  ><button class="button outline" id="scene-retry" hidden>
-                    Tentar reconhecimento novamente
+            <details class="environment-details" id="environment-details">
+              <summary>
+                <span>Detalhes do ambiente</span>
+                <span class="detail-hint">Contexto e referências reconhecidas</span>
+              </summary>
+              <section class="card scene-card" aria-labelledby="scene-heading">
+                <div class="card-heading">
+                  <h2 id="scene-heading">Reconhecer o ambiente</h2>
+                  <span class="chip" id="scene-source">Sem sessão ativa</span>
+                </div>
+                <div class="scene-summary">
+                  <p class="scene-title" id="scene-place">Que lugar é este?</p>
+                  <p class="field-hint" id="scene-note" role="status">
+                    Inicie a câmera para analisar o ambiente pela imagem inteira.
+                  </p>
+                  <div class="scene-actions">
+                    <button class="button outline" data-ask="where" disabled>
+                      Ouvir sobre este lugar</button
+                    ><button class="button outline" id="scene-retry" hidden>
+                      Tentar reconhecimento novamente
+                    </button>
+                  </div>
+                </div>
+              </section>
+              <section class="card references-card" aria-labelledby="references-heading">
+                <div class="card-heading">
+                  <h2 id="references-heading">
+                    Referências do ambiente <span id="reference-count" class="count">0</span>
+                  </h2>
+                  <button class="text-button" data-go="environment">
+                    Ver meu ambiente <span aria-hidden="true">↗</span>
                   </button>
                 </div>
-              </div>
-            </section>
-            <section class="card references-card" aria-labelledby="references-heading">
-              <div class="card-heading">
-                <h2 id="references-heading">
-                  Referências do ambiente <span id="reference-count" class="count">0</span>
-                </h2>
-                <button class="text-button" data-go="environment">
-                  Ver meu ambiente <span aria-hidden="true">↗</span>
-                </button>
-              </div>
-              <div id="references" class="reference-list">
-                <p class="empty-note">
-                  As referências reconhecidas vão aparecer aqui, com direção e informações
-                  disponíveis.
-                </p>
-              </div>
-            </section>
+                <div id="references" class="reference-list">
+                  <p class="empty-note">
+                    As referências reconhecidas vão aparecer aqui, com direção e informações
+                    disponíveis.
+                  </p>
+                </div>
+              </section>
+            </details>
             <div class="quiet-note">
               <svg class="icon"><use href="#i-help" /></svg>
-              <p>
-                Uma ajuda para entender o espaço. Não substitui bengala ou cão-guia e não garante
-                caminho livre.
-              </p>
+              <p>Pode errar. Não garante caminho livre nem substitui bengala ou cão-guia.</p>
               <button class="text-button" data-go="help">Conhecer os limites</button>
             </div>
           </section>
@@ -417,6 +403,20 @@
                 </p>
               </article>
             </div>
+            <section class="card help-limits">
+              <h2>Movimento e atualidade</h2>
+              <p>
+                O Luna descreve capturas anteriores. Ao mudar o enquadramento, as posições antigas
+                são retiradas e uma imagem recente é analisada quando o serviço e o orçamento
+                permitem. Se a cena mudar antes das respostas, o sistema informa essa limitação.
+              </p>
+              <p>
+                Uma descrição não indica onde pisar, se há obstáculos atuais ou se um caminho está
+                livre. Não há reconhecimento local contínuo de objetos no modo Luna. A avaliação de
+                utilidade em deslocamento está em andamento; não houve teste com pessoas cegas
+                caminhando.
+              </p>
+            </section>
             <section class="card help-limits">
               <h2>Limites que você precisa conhecer</h2>
               <p>
@@ -629,6 +629,19 @@
             ></label
           >
         </div>
+        <details class="data-controls">
+          <summary>Giros da câmera · experimental</summary>
+          <p>
+            Opcional no Luna: usa o sensor do aparelho para retirar posições antigas ao girar a
+            câmera. Não detecta caminhada, obstáculos ou distância. Leituras ficam só em memória.
+          </p>
+          <button type="button" class="button outline" id="motion-toggle" aria-pressed="false">
+            Ativar leitura de giros
+          </button>
+          <p id="motion-status" class="field-hint" role="status">
+            Desligada. Pode exigir permissão do navegador.
+          </p>
+        </details>
         <div class="dialog-actions">
           <button type="button" class="button outline" id="test-voice">Testar voz</button
           ><button type="submit" class="button primary" value="save">Salvar ajustes</button>

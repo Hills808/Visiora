@@ -90,15 +90,29 @@ export class LunaClient {
           504: 'O serviço demorou demais para responder.',
           422: 'Não foi possível concluir a análise da imagem.',
         };
-        const failure = (await response.json()) as { error?: unknown };
+        // The edge may return HTML for its own 503 errors. Never display raw error bodies.
+        const failure = (await response.json().catch(() => null)) as { error?: unknown } | null;
+        const raw = failure?.error;
+        const code = typeof raw === 'string' &&
+          /^(provider-[a-z-]+|provider-http-5\d{2}|model-unconfirmed|not-configured|ledger|model-audit|pricing|budget|rate|busy|csrf|origin|auth|consent|internal)$/.test(raw)
+          ? raw : response.status === 503 && failure === null
+            ? 'gateway-unavailable' : `http-${response.status}`;
         const transient =
           (response.status === 503 &&
-            ['provider-network', 'provider-unavailable'].includes(String(failure.error))) ||
-          (response.status === 504 && failure.error === 'provider-timeout');
+            (['provider-network', 'provider-unavailable', 'gateway-unavailable'].includes(code) ||
+              /^provider-http-5\d{2}$/.test(code))) ||
+          (response.status === 504 && code === 'provider-timeout');
+        const explanation = code === 'provider-network'
+          ? 'O servidor não conseguiu acessar a OpenAI.'
+          : /^provider-http-5\d{2}$/.test(code)
+            ? `O provedor retornou HTTP ${code.slice(-3)}.`
+            : code === 'not-configured'
+              ? 'A configuração da Luna no servidor está indisponível.'
+              : messages[response.status] ?? 'Não foi possível concluir a análise.';
         throw new AnalysisError(
-          messages[response.status] ?? 'Não foi possível concluir a análise.',
+          `${explanation} (código: ${code})`,
           transient,
-          `http-${response.status}`,
+          code,
         );
       }
       return parseResult(await response.json(), stamp);

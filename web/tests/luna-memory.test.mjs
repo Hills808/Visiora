@@ -3,7 +3,35 @@ import assert from 'node:assert/strict';
 import { VisualMemory } from '../dist/brain/visual-memory.js';
 import { CONFIG } from '../dist/config.js';
 import { SnapshotView } from '../dist/vision/snapshot-view.js';
+import { CAPTURE_DIRECTIONS, snapshotSpeech } from '../dist/brain/snapshot-speech.js';
 import { item, snapshot, deliver, memoryTranscripts } from './fixtures/memory-scenarios.mjs';
+
+test('CA-L4/F3: a six-second snapshot and a one-minute replay keep past tense and camera-relative directions', () => {
+  const memory = new VisualMemory();
+  const result = snapshot(1, [item('cadeira', { bearing: 30 })], { at: 0 });
+  assert.equal(memory.accept(result, 6000, 1), true);
+  const utterance = memory.utterance(6000, false, true);
+  assert.match(utterance.text, /capturada há 6 segundos:.*O ambiente parecia/);
+  assert.match(utterance.text, /À frente, à direita da câmera, havia uma cadeira/);
+  assert.doesNotMatch(utterance.text, /À sua|Atrás de você|há uma|talvez haja|ambiente parece/);
+  assert.equal(memory.complete(utterance.id, 7000), true);
+  memory.forgetDirections();
+  const replay = memory.utterance(60000, true);
+  assert.match(replay.text, /capturada há 60 segundos/);
+  assert.match(replay.text, /da câmera, havia uma cadeira/);
+  assert.doesNotMatch(replay.text, /À sua|há uma|caminho livre/);
+});
+
+test('CA-F3/F7: snapshot sectors use a fixed historical phrase without changing the local lexicon', () => {
+  for (const [sector, direction] of Object.entries(CAPTURE_DIRECTIONS)) {
+    const text = snapshotSpeech([
+      { sector, noun: 'uma cadeira', mode: 'present' },
+      { sector, noun: 'uma mesa', mode: 'uncertain' },
+    ]);
+    assert.equal(text, `${direction}, havia uma cadeira; talvez houvesse uma mesa.`);
+    assert.ok(text.split(/\s+/).length <= CONFIG.speech.maxWords);
+  }
+});
 
 test('CA-F3/F4/F7: visible novelty precedes absence; no old direction is assigned to a missing person', () => {
   const memory = new VisualMemory(),
@@ -12,7 +40,7 @@ test('CA-F3/F4/F7: visible novelty precedes absence; no old direction is assigne
   const next = deliver(memory, snapshot(2, [chair, item('mesa', { bearing: 30 })]));
   assert.match(
     next.text,
-    /À sua frente, à direita, há uma mesa\. Não identifiquei pessoas nesta captura\./,
+    /À frente, à direita da câmera, havia uma mesa\. Não identifiquei pessoas nesta captura\./,
   );
   assert.doesNotMatch(next.text, /à esquerda|saiu|sumiu|passos|metros/);
   assert.ok(next.text.split(/\s+/).length <= CONFIG.speech.maxWords);
@@ -28,7 +56,7 @@ test('CA-F4/F7: current confirmed references precede hypotheses, with at most th
       item('mesa'),
     ]),
   );
-  assert.match(output.text, /há uma cadeira, uma pessoa e uma mesa/);
+  assert.match(output.text, /havia uma cadeira, uma pessoa e uma mesa/);
   assert.doesNotMatch(output.text, /cama|talvez/);
 });
 test('CA-F7: a long useful novelty fits the exact source/age budget before any absence', () => {
@@ -38,7 +66,7 @@ test('CA-F7: a long useful novelty fits the exact source/age budget before any a
     memory,
     snapshot(2, [item('passagem com placa de saída', { bearing: -30, uncertain: true })]),
   );
-  assert.match(output.text, /talvez haja uma passagem com placa de saída/);
+  assert.match(output.text, /talvez houvesse uma passagem com placa de saída/);
   assert.doesNotMatch(output.text, /cadeira/);
   assert.ok(output.text.split(/\s+/).length <= CONFIG.speech.maxWords);
   assert.equal(
@@ -62,7 +90,7 @@ test('CA-F4: box noise across a sector edge stays silent until a material sector
   );
   assert.ok(results[0]);
   assert.deepEqual(results.slice(1, 4), [null, null, null]);
-  assert.match(results[4].text, /À sua frente, à direita/);
+  assert.match(results[4].text, /À frente, à direita da câmera/);
 });
 test('CA-F1/F4: five minutes of fresh identical references and label case/spacing noise stay silent', () => {
   const memory = new VisualMemory();
@@ -89,9 +117,9 @@ test('CA-F4: uncertainty flicker does not repeat a known reference; later confir
   const uncertain = new VisualMemory();
   assert.match(
     deliver(uncertain, snapshot(1, [item('cadeira', { uncertain: true })])).text,
-    /talvez haja/,
+    /talvez houvesse/,
   );
-  assert.match(deliver(uncertain, snapshot(2, [item('cadeira')])).text, /há uma cadeira/);
+  assert.match(deliver(uncertain, snapshot(2, [item('cadeira')])).text, /havia uma cadeira/);
   assert.equal(deliver(uncertain, snapshot(3, [item('cadeira')])), null);
 });
 test('CA-F9/F4: place-name oscillation does not repeat briefings; two distinct recent captures confirm a change', () => {
@@ -130,7 +158,7 @@ test('CA-F4/L4: an old unseen reference expires without an irrelevant absence re
   assert.equal(deliver(memory, snapshot(2, [chair], { at: 40000 })), null);
   assert.match(
     deliver(memory, snapshot(3, [chair, item('pessoa', { kind: 'person' })], { at: 45000 })).text,
-    /há uma pessoa/,
+    /havia uma pessoa/,
   );
 });
 test('CA-F6/L4: withdrawing a view rejects late completion and does not turn omitted objects into delivered facts', () => {
@@ -142,7 +170,7 @@ test('CA-F6/L4: withdrawing a view rejects late completion and does not turn omi
   assert.equal(memory.utterance(5000, true), null);
   const context = memory.utterance(5000, false, true);
   assert.match(context.text, /O ambiente parecia escritório/);
-  assert.doesNotMatch(context.text, /cadeira|À sua/);
+  assert.doesNotMatch(context.text, /cadeira|câmera/);
   memory.complete(context.id, 5100);
   assert.match(deliver(memory, snapshot(2, [chair])).text, /cadeira/);
 });

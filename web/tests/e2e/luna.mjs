@@ -102,6 +102,7 @@ try {
     return diagnostic.onlineContinuity;
   }
   await page.goto(base);
+  await page.selectOption('#perception-provider', 'luna');
   await page.waitForFunction(() =>
     document.querySelector('#luna-config').textContent.includes('Simulador'),
   );
@@ -114,6 +115,7 @@ try {
     await page.locator('#caption').innerText(),
     /Simulação de análise.*capturada há.*laboratório de cerâmica.*torno de cerâmica/s,
   );
+  await page.locator('.environment-details > summary').click();
   assert.match(await page.locator('#references').innerText(), /torno de cerâmica/);
   assert.equal(calls, 1);
   assert.equal(
@@ -164,7 +166,7 @@ try {
   assert.equal(calls, 3);
   assert.match(
     await page.locator('#caption').innerText(),
-    /talvez haja uma passagem com placa de saída/,
+    /talvez houvesse uma passagem com placa de saída/,
   );
   assert.doesNotMatch(
     await page.locator('#caption').innerText(),

@@ -1,3 +1,19 @@
+## Movimento no iPhone — revisão ADR-045
+
+No [Luna privado](https://visiora-luna-hills808.hills808.chatgpt.site/), a descrição identifica o tempo da captura e posições relativas à câmera. A mudança de vista exige captura nova mesmo quando o enquadramento volta. Em **Ajustes → Giros da câmera · experimental**, a leitura opcional retira posições após giro detectado; começa desligada, exige permissão no iPhone e funciona só durante Luna em primeiro plano. O estado informa quando faltam leituras. Sem câmera/voz física ou caminhada avaliadas nesta revisão: não usar o protótipo para decidir onde pisar. Para o primeiro ensaio, permanecer parado e movimentar apenas a câmera num ambiente conhecido.
+
+Ajuda permite exportar diagnóstico com tempos da resposta/início/conclusão e motivos de retirada, sem imagens nem textos. Voz/texto e percepção fake são separados; callbacks não provam que houve som. [Resultados e limites](docs/EVIDENCIAS/MOVIMENTO-IPHONE-2026-10-24.md) · [Protocolo antes de avançar percepção](docs/AVALIACAO-MOVIMENTO.md).
+
+## Versão web atual — 24/10/2026
+
+[Abrir Visiora com Luna](https://visiora-luna-hills808.hills808.chatgpt.site/) (acesso privado) · [Modo local público](https://visiora-ambiente.hills808.chatgpt.site/).
+
+A interface usa uma ação principal, descrição em destaque e detalhes expansíveis. No modo Luna, autorize as capturas antes de iniciar. Perguntas são opcionais. Ajustes preservam voz/leitor de tela, tema e texto ampliado. O orçamento hospedado é centralizado, US$ 2/dia; não há chave no navegador. Não rode outro gateway pago em paralelo, pois o ledger local é separado. [Referências e verificação do visual](docs/EVIDENCIAS/REDESIGN-VISUAL-2026-10-24.md).
+
+As orientações de túnel e implantação própria abaixo são alternativas/histórico; o Site privado já tem gateway publicado. O Visiora permanece um protótipo em avaliação, sem aceite com pessoas cegas.
+
+---
+
 ## Demonstração remota temporária — sala de aula (23/10/2026)
 
 Para usar o **Luna real** pelo notebook ou celular sem instalar o servidor nesses aparelhos, há um iniciador para Windows: `tools/apresentacao-luna.ps1`. Ele abre um **Cloudflare Quick Tunnel HTTPS** protegido por e-mail e roda o gateway local na **mesma origem pública**; deve ser executado no computador que já tem `.env` e `.runtime/luna-budget.sqlite`. O computador permanece ligado e conectado à internet durante a sessão. O link `chatgpt.site` anterior continua estático, sem Luna.
