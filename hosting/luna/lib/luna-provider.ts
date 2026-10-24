@@ -26,7 +26,9 @@ async function boundedText(response: Response): Promise<string> {
 function providerError(status: number): LunaError {
   if (status === 429) return new LunaError(429, 'provider-limit');
   if (status === 401 || status === 403) return new LunaError(401, 'provider-auth');
-  if (status >= 500) return new LunaError(503, 'provider-unavailable');
+  // Keep the upstream HTTP status without exposing response content or headers.
+  // Cloudflare 520/53x, OpenAI 500/503 and a network fetch error need distinct diagnostics.
+  if (status >= 500 && status <= 599) return new LunaError(503, `provider-http-${status}`);
   return new LunaError(422, 'provider-request');
 }
 
