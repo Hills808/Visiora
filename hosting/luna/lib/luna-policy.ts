@@ -5,6 +5,8 @@ export const POLICY = Object.freeze({
   pricingRevision: '2026-10-23',
   // User-authorized maximum. The configured hosted amount can be lower.
   maxDailyMicros: 2_000_000,
+  presentationDay: '2026-10-23',
+  presentationDailyMicros: 10_000_000,
   // Conservative per-request hold until actual usage is known.
   reservationMicros: 300_000,
   maxOutputTokens: 1_200,
@@ -29,10 +31,12 @@ export function budgetDay(at: number): string {
   return `${parts.year}-${parts.month}-${parts.day}`;
 }
 
-export function dailyLimit(raw: string | undefined): number {
+export function dailyLimit(raw: string | undefined, at = Date.now()): number {
   if (!raw || !/^\d+(\.\d{1,6})?$/.test(raw)) return 0;
   const micros = Math.round(Number(raw) * 1_000_000);
-  return Number.isSafeInteger(micros) && micros <= POLICY.maxDailyMicros ? micros : 0;
+  if (!Number.isSafeInteger(micros) || micros > POLICY.maxDailyMicros) return 0;
+  return micros > 0 && budgetDay(at) === POLICY.presentationDay
+    ? POLICY.presentationDailyMicros : micros;
 }
 
 export function hostedReady(env: Cloudflare.Env): boolean {

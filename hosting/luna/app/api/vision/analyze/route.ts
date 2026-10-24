@@ -21,8 +21,9 @@ export async function POST(request: Request): Promise<Response> {
         .bind(csrf, user, Date.now()).first() : null;
     if (!token) throw new LunaError(403, 'csrf');
     const { stamp, bytes } = await readImage(request);
-    await reserve(env.DB, stamp.requestId, fake ? 0 : dailyLimit(env.VISIORA_DAILY_USD),
-      fake ? 0 : POLICY.reservationMicros, Date.now());
+    const now = Date.now();
+    await reserve(env.DB, stamp.requestId, fake ? 0 : dailyLimit(env.VISIORA_DAILY_USD, now),
+      fake ? 0 : POLICY.reservationMicros, now);
     reserved = stamp.requestId;
     const result = fake ? fakeAnalysis() : await analyzeImage(bytes, stamp, env.OPENAI_API_KEY!,
       (model) => recordModel(env.DB!, reserved!, model));
