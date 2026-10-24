@@ -14,12 +14,26 @@ export const POLICY = Object.freeze({
   requestsPerMinute: 15,
   cooldownMs: 4000,
   budgetTimeZone: 'America/Sao_Paulo', // The authorized daily allowance follows the user's calendar, not the host timezone.
-  maxDailyMicros: 2000000, // US$2/day authorized by the user; no cumulative US$2 pilot cap.
+  maxDailyMicros: 2000000, // Default: US$2/day. The exception below expires at Sao Paulo midnight.
+  presentationDay: '2026-10-23', // One-day classroom demonstration expressly authorized by the user.
+  presentationDailyMicros: 10000000, // US$10 TOTAL for that calendar day, including prior charges.
   // Conservative reservation: entire 1.05M context at long-context cache-write rate,
   // plus capped output, plus 10% regional premium. Standard tier only. USD in micros.
   reservationMicros: 300000,
   pricingRevision: '2026-10-18',
 });
+function publicOrigin(value = '') {
+  if (!value) return '';
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    throw new Error('Origem pública inválida.');
+  }
+  if (url.protocol !== 'https:' || url.origin !== value || !/^[a-z0-9.-]+$/i.test(url.hostname))
+    throw new Error('A origem pública deve ser uma origem HTTPS exata, sem caminho ou barra final.');
+  return url.origin;
+}
 function money(value = '0') {
   if (!/^\d+(\.\d{1,6})?$/.test(value))
     throw new Error('Orçamento inválido; use USD com ponto decimal.');
@@ -42,7 +56,10 @@ export function loadConfig(env = process.env) {
   return {
     provider,
     daily,
+    presentationDay: POLICY.presentationDay,
+    presentationDaily: daily > 0 ? POLICY.presentationDailyMicros : 0,
     port,
+    publicOrigin: publicOrigin(env.VISIORA_PUBLIC_ORIGIN),
     ready,
     apiKey: env.OPENAI_API_KEY || '',
     root: path.resolve('dist'),

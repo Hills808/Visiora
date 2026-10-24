@@ -1,0 +1,12 @@
+.git/
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+.runtime/
+artifacts/
+test-output/
+*.log
+deploy/auth.caddy
+deploy/.env

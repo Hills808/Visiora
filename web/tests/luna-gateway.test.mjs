@@ -188,3 +188,43 @@ test('CA-L2: service worker uses explicit asset allow-list, never API responses'
   assert.match(sw, /ASSETS.includes\(asset\)/);
   assert.match(sw, /method !== 'GET'/);
 });
+
+test('CA-L2: HTTPS público exige origem exata, CSRF e consentimento', async () => {
+  assert.throws(
+    () => loadConfig({ VISIORA_PROVIDER: 'fake', VISIORA_PUBLIC_ORIGIN: 'http://visiora.example' }),
+    /HTTPS/,
+  );
+  assert.throws(
+    () => loadConfig({ VISIORA_PROVIDER: 'fake', VISIORA_PUBLIC_ORIGIN: 'https://visiora.example/' }),
+    /HTTPS/,
+  );
+  assert.throws(
+    () => loadConfig({ VISIORA_PROVIDER: 'fake', VISIORA_PUBLIC_ORIGIN: 'https://*.example' }),
+    /inválida|HTTPS/,
+  );
+  const config = loadConfig({
+    VISIORA_PROVIDER: 'fake',
+    VISIORA_PUBLIC_ORIGIN: 'https://visiora.example',
+  });
+  assert.equal(config.publicOrigin, 'https://visiora.example');
+  const g = await setup({ publicOrigin: config.publicOrigin });
+  try {
+    assert.equal((await g.post()).status, 403);
+    assert.equal(
+      (await g.post({ headers: { Origin: 'https://attacker.example' } })).status,
+      403,
+    );
+    assert.equal(
+      (await g.post({
+        headers: { Origin: 'https://visiora.example', 'X-Visiora-CSRF': 'bad' },
+      })).status,
+      403,
+    );
+    assert.equal(
+      (await g.post({ headers: { Origin: 'https://visiora.example' } })).status,
+      200,
+    );
+  } finally {
+    await g.close();
+  }
+});

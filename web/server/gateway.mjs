@@ -132,7 +132,7 @@ export function createGateway(
         const port = server.address()?.port;
         if (host !== `127.0.0.1:${port}` && host !== `localhost:${port}`)
           throw new GatewayError(403, 'host');
-        const origin = `http://${host}`,
+        const origin = config.publicOrigin || `http://${host}`,
           url = new URL(req.url, origin);
         if (url.pathname.startsWith('/api/')) {
           if (req.headers.origin && req.headers.origin !== origin)

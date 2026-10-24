@@ -524,12 +524,41 @@ Não testado: API/fatura/painel reais, virada física do relógio, outros PCs/SO
 
 **Evidência:** [LUNA-NOTEBOOK-2026-10-23.md](EVIDENCIAS/LUNA-NOTEBOOK-2026-10-23.md), CA-L4/CA-E3/CA-E4. A extração e o gateway foram ensaiados neste PC com backend fake e credencial fictícia; nenhuma chamada paga foi feita. Webcam, voz, rede e API no notebook ainda dependem de ensaio físico.
 
-## ADR-039 — Luna hospedado para celular (23/10/2026)
 
-**Contexto:** o ZIP portátil da ADR-038 não atende ao teste pelo celular. O Site público da ADR-037 é estático e não pode guardar uma chave da OpenAI.
+## ADR-037 — Limite excepcional na apresentação de sala de aula (23/10/2026)
 
-**Decisão:** criar um segundo Site, privado para a conta proprietária, com o mesmo aplicativo e uma API Luna em Cloudflare Workers. As rotas exigem identidade, origem correta, CSRF e consentimento. D1 centraliza o orçamento entre aparelhos, guardando apenas metadados de gasto e modelo, nunca imagens ou descrições. A chave fica como segredo do Site. O gateway local foi parado e seu teto zerado antes de ativar US$ 2/dia no Site, pois os ledgers não se comunicam. A versão privada omite os pesos locais e oferece apenas Luna; a versão pública mantém o modo local. Alternativas de expor a chave ao navegador ou abrir um proxy sem autenticação foram rejeitadas pelo risco de cobrança por terceiros.
+**Contexto:** o usuário autorizou explicitamente aumentar o teto de Luna de US$ 2 para **US$ 10 apenas em 23/10/2026**, para a primeira demonstração em sala de aula. O piloto usa ledger SQLite local e reservas conservadoras por requisição.
+
+**Decisão:** manter `VISIORA_DAILY_USD` e o teto padrão em US$ 2, com exceção limitada em `server/config.mjs` ao dia local `2026-10-23` em `America/Sao_Paulo`. Quando o gateway está habilitado com orçamento positivo, `Budget.reserve` escolhe US$ 10 para esse dia e US$ 2 para qualquer outro. A escolha ocorre a cada reserva, independentemente de reinício. Os US$ 10 são o total do dia, incluindo reservas já registradas; após 00h de 24/10 o histórico não é apagado e não existe reembolso de solicitações incertas. Configuração desativada continua desativada. Mantidos consentimento, CSRF, modelo, precificação, cooldown, proteção contra chamadas paralelas e segredo exclusivo de servidor.
+
+**Alternativas rejeitadas:** editar `.env` para 10 e aumentar globalmente o teto (permitiria continuar com US$ 10 amanhã se o servidor permanecesse ligado); zerar SQLite ao chegar no orçamento (poderia superar a autorização e perder auditoria); aumentar a cota da API remotamente sem controle no código (não protege do orçamento local).
+
+**Consequências/limitações:** atualizar os arquivos no servidor e reiniciar para carregar a versão nova; o endpoint não está publicado de forma autenticada na internet. O controle é uma estimativa/reserva local, não limite garantido na plataforma OpenAI. Qualquer erro de rede, 429 do provedor, tempo limite ou expiração da fala ainda pode pausar a sessão. Verificar com testes de relógio controlado e sem chamadas pagas. Evidência: `docs/EVIDENCIAS/LUNA-LIMITE-APRESENTACAO-2026-10-23.md`.
+
+## ADR-039 — preparação para Luna hospedado com origem única (23/10/2026)
+
+**Contexto:** o Site público é estático e não possui `/api/vision/*`. O usuário precisa acessar o Luna no navegador de outros aparelhos sem expor a chave ou liberar consultas anônimas.
+
+**Decisão:** preparar implantação alternativa em servidor Linux de instância única: frontend e gateway Node no mesmo endereço, TLS e HTTP Basic aplicados pelo Caddy a todas as rotas; Node limitado ao loopback compartilhado e Host interno fixo, `VISIORA_PUBLIC_ORIGIN` HTTPS exata; CSRF/consentimento preservados. SQLite persistente em um único volume. Node.js 24.22.1 (MIT; alternativa: Node 26 após revalidação) e Caddy 2.11.7 (Apache-2.0; alternativa: Nginx + Certbot), publicados nos repositórios oficiais. Não há modelo de visão novo.
+
+**Limites:** esta implementação não migra o Site chatgpt.site automaticamente nem cria infraestrutura. Exige servidor e domínio, configuração privada de autenticação/chave e validação física. CI de testes do gateway é diferente de validação de HTTPS/Docker/câmera/voz. Persistência e único processo são pré-requisitos de orçamento, cuja estimativa não constitui hard cap do faturamento OpenAI. Não publicar sem gates; nenhuma chamada paga ou chave foi configurada.
+
+## ADR-040 — contingência HTTPS para apresentação remota (23/10/2026)
+
+**Contexto:** o usuário integrou as mudanças à main, porém o host `chatgpt.site` permanece estático sem gateway. A apresentação ocorrerá fora do computador que guarda a chave e o ledger.
+
+**Decisão:** oferecer, além do pacote Windows local, um script opcional de Quick Tunnel protegido por e-mail (`cloudflared` 2026.9.3+), com TLS na borda e conexão originada no PC que já executa o Luna. O CLI reescreve Host para loopback, enquanto `VISIORA_PUBLIC_ORIGIN` guarda exatamente a origem HTTPS do túnel para o CSRF. O script verifica .env, ledger e build, recusa porta 8080 ocupada e encerra o túnel ao fechar. A opção não cria novo ledger nem migra a chave. A proteção por e-mail da Cloudflare é necessária; não usar túnel anônimo para um backend pago.
+
+**Alternativas:** implantar servidor Linux permanente (ADR-039), ainda sem infraestrutura; pacote portátil Windows, preferível quando não é possível manter o PC de origem conectado.
+
+**Limites:** Cloudflare Quick Tunnel é uma solução de demonstração, com endereço efêmero e sem garantia de disponibilidade. Primeira configuração, autenticação, origem, câmera, áudio, limite e conectividade ainda exigem teste físico. Não há prova de funcionamento real nesta alteração; nenhuma API paga foi chamada. Fonte: documentação oficial https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/.
+
+## ADR-041 — Site privado Luna com orçamento centralizado (23/10/2026)
+
+**Contexto:** o endereço público estático não fornece `/api/vision/status` nem `/api/vision/analyze`; o cliente recebia HTML em vez de JSON. O pacote portátil e o túnel da ADR-040 dependem de um computador ligado. A solução de servidor Caddy da ADR-039 permanece uma alternativa de implantação.
+
+**Decisão:** publicar um segundo Site, privado para a conta proprietária, com o mesmo aplicativo e uma API Luna em Cloudflare Workers. As rotas exigem identidade, origem correta, CSRF e consentimento. D1 centraliza o orçamento entre aparelhos, guardando metadados de gasto e modelo, nunca imagens ou descrições. A chave fica como segredo do Site. A versão privada omite os pesos locais e oferece apenas Luna; a versão pública mantém o modo local e aponta para o Luna privado. O gateway local foi parado e desativado antes da ativação hospedada, pois os ledgers não se comunicam. O limite hospedado é US$ 10 em 23/10/2026 e US$ 2 por dia depois, no fuso de São Paulo.
 
 **Dependências do starter verificadas no registro npm em 23/10/2026:** Next 16.3.4 (MIT, 184.740.295 bytes descompactados, Node ≥20.9), Vinext 1.0.0-beta.5 (MIT, 5.127.059 bytes, Node ≥22), Wrangler 4.92.0 (MIT ou Apache-2.0, 16.607.203 bytes, Node ≥22), Drizzle ORM 0.45.2 (Apache-2.0, 10.420.427 bytes). A alternativa Worker ESM simples não empacota os assets estáticos deste aplicativo sem adaptar o pipeline.
 
-**Evidência e limites:** [LUNA-CELULAR-HOSPEDADO-2026-10-23.md](EVIDENCIAS/LUNA-CELULAR-HOSPEDADO-2026-10-23.md), CA-E4/L4/S4. O Site autenticado mostrou Luna configurado; requisição anônima recebeu 401. Testes fake cobriram contrato e controles. Nenhuma imagem real foi enviada pelo agente; webcam, áudio, faturamento e uso físico no celular ainda não foram medidos.
+**Evidência e limites:** [LUNA-CELULAR-HOSPEDADO-2026-10-23.md](EVIDENCIAS/LUNA-CELULAR-HOSPEDADO-2026-10-23.md), CA-E4/L4/S4. O Site autenticado mostrou Luna configurado; requisição anônima recebeu 401. Testes fake cobriram contrato e controles. Nenhuma imagem real foi enviada pelo agente; webcam, áudio, faturamento e uso físico no celular ainda não foram medidos. O teto D1 não cobre uso do gateway local.
