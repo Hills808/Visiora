@@ -18,7 +18,7 @@ Dez testes de política/conexão/runtime/ciclo de vida passaram, além de tipage
 
 ## Publicação e reconciliação concluídas
 
-Versão final de código `ccbe28ccabd5df79bc899ee7880c12506d63209f`, deployment `appgdep_6adc50b75de88191adc50a4c2d32730d`, `succeeded`. URL: https://visiora-luna-hills808.hills808.chatgpt.site. POST administrativo autenticado retornou HTTP 200, `state=uncertain`, `reservationPreserved=true`. Nova leitura do D1 confirmou **zero pending**, duas consultas complete/verified e uma uncertain/operator-reconciled de 24/10, com as 11 reservas anteriores intactas. Total conservador registrado em 24/10: US$ 0,301808, dos quais US$ 0,30 são reserva incerta, não cobrança comprovada. O teto permanece US$ 2 no fuso de São Paulo. A câmera foi encerrada.
+Versão final de código `dcbe28ccabd5df79bc899ee7880c12506d63209f`, deployment `appgdep_6adc50b75de88191adc50a4c2d32730d`, `succeeded`. URL: https://visiora-luna-hills808.hills808.chatgpt.site. POST administrativo autenticado retornou HTTP 200, `state=uncertain`, `reservationPreserved=true`. Nova leitura do D1 confirmou **zero pending**, duas consultas complete/verified e uma uncertain/operator-reconciled de 24/10, com as 11 reservas anteriores intactas. Total conservador registrado em 24/10: US$ 0,301808, dos quais US$ 0,30 são reserva incerta, não cobrança comprovada. O teto permanece US$ 2 no fuso de São Paulo. A câmera foi encerrada.
 
 Revisão independente por segundo agente GPT-6.1 Sol: sem bloqueador no transporte; recomendou teste no CI e reconciliação por ID sem reduzir valores, ambos implementados. O CLI pago de orquestração não foi executado. A API do produto devolveu `gpt-6-luna`; não confundir com o modelo dos agentes de desenvolvimento.
 
