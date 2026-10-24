@@ -94,7 +94,7 @@ export class LunaClient {
         const failure = (await response.json().catch(() => null)) as { error?: unknown } | null;
         const raw = failure?.error;
         const code = typeof raw === 'string' &&
-          /^(provider-[a-z-]+|provider-http-5\d{2}|not-configured|ledger|model-audit|pricing|budget|rate|busy|csrf|origin|auth|consent|internal)$/.test(raw)
+          /^(provider-[a-z-]+|provider-http-5\d{2}|model-unconfirmed|not-configured|ledger|model-audit|pricing|budget|rate|busy|csrf|origin|auth|consent|internal)$/.test(raw)
           ? raw : response.status === 503 && failure === null
             ? 'gateway-unavailable' : `http-${response.status}`;
         const transient =
