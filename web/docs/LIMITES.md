@@ -1,3 +1,9 @@
+## iPhone e uso com movimento — ADR-045 (24/10/2026)
+
+O alvo escolhido é Safari no iPhone, com câmera traseira. A preferência pela câmera traseira é uma solicitação ao navegador, não seleção garantida da lente. Ainda não houve ensaio físico desse alvo nem VoiceOver nesta revisão. A Luna descreve capturas passadas, com idade e setores relativos à câmera; isso não informa a posição atual da pessoa, onde pisar ou a existência de caminho livre. Movimento contínuo pode invalidar todas as respostas e produzir silêncio espacial, acompanhado de aviso deduplicado. Não há detector local contínuo de objetos no modo Luna.
+
+A leitura opcional de giros em Ajustes começa desligada e depende de HTTPS, permissão e leituras efetivas do navegador. Autorização não comprova disponibilidade do sensor. Ela retira posições antigas, mas não detecta caminhada, translação, obstáculos, profundidade ou todos os movimentos; seus limiares não foram calibrados no iPhone. Ao parar/sair do primeiro plano a escuta é removida. O diagnóstico exporta somente estados/contagens e tempos, sem leituras brutas; callbacks de saída não comprovam áudio audível nem compreensão. Os fakes verificam lógica; não verificam qualidade visual, câmera/voz física, bateria ou utilidade humana. [Evidência](EVIDENCIAS/MOVIMENTO-IPHONE-2026-10-24.md).
+
 ## Conexão Luna hospedada — 24/10/2026 (ADR-043)
 
 **Revisão visual ADR-044:** textos e opções foram reorganizados, com detalhes expansíveis. O aviso essencial de segurança continua na tela principal, e falhas locais abrem o contexto para recuperação. Testes automatizados de contraste, alvos e teclado não substituem avaliação com pessoas cegas ou leitores de tela reais. [Escopo da revisão](EVIDENCIAS/REDESIGN-VISUAL-2026-10-24.md).

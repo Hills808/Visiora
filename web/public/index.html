@@ -130,7 +130,7 @@
                     <label for="perception-provider">Análise</label
                     ><select id="perception-provider" aria-describedby="luna-config">
                       <option value="local">Modelos locais · sem API paga</option>
-                      <option value="luna">Luna 6 · acompanhamento automático</option>
+                      <option value="luna">Luna 6 · capturas automáticas</option>
                     </select>
                   </div>
                   <p id="luna-config" class="field-hint" role="status">
@@ -208,6 +208,7 @@
                 <div class="narration-content">
                   <p id="caption" class="caption">Uma descrição para entender o seu espaço.</p>
                   <p id="caption-age" class="field-hint"></p>
+                  <p id="capture-state" class="field-hint" hidden></p>
                   <p class="narration-note" id="narration-note">
                     As descrições aparecem aqui. O Visiora fica em silêncio quando nada relevante
                     muda.
@@ -402,6 +403,20 @@
                 </p>
               </article>
             </div>
+            <section class="card help-limits">
+              <h2>Movimento e atualidade</h2>
+              <p>
+                O Luna descreve capturas anteriores. Ao mudar o enquadramento, as posições antigas
+                são retiradas e uma imagem recente é analisada quando o serviço e o orçamento
+                permitem. Se a cena mudar antes das respostas, o sistema informa essa limitação.
+              </p>
+              <p>
+                Uma descrição não indica onde pisar, se há obstáculos atuais ou se um caminho está
+                livre. Não há reconhecimento local contínuo de objetos no modo Luna. A avaliação de
+                utilidade em deslocamento está em andamento; não houve teste com pessoas cegas
+                caminhando.
+              </p>
+            </section>
             <section class="card help-limits">
               <h2>Limites que você precisa conhecer</h2>
               <p>
@@ -614,6 +629,19 @@
             ></label
           >
         </div>
+        <details class="data-controls">
+          <summary>Giros da câmera · experimental</summary>
+          <p>
+            Opcional no Luna: usa o sensor do aparelho para retirar posições antigas ao girar a
+            câmera. Não detecta caminhada, obstáculos ou distância. Leituras ficam só em memória.
+          </p>
+          <button type="button" class="button outline" id="motion-toggle" aria-pressed="false">
+            Ativar leitura de giros
+          </button>
+          <p id="motion-status" class="field-hint" role="status">
+            Desligada. Pode exigir permissão do navegador.
+          </p>
+        </details>
         <div class="dialog-actions">
           <button type="button" class="button outline" id="test-voice">Testar voz</button
           ><button type="submit" class="button primary" value="save">Salvar ajustes</button>

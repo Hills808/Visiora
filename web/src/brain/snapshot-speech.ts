@@ -1,5 +1,16 @@
-import { DIRECTIONS } from './geometry.js';
 import type { Sector } from './types.js';
+
+/** Fixed image-relative sectors. They never describe the user's current body pose. */
+export const CAPTURE_DIRECTIONS: Record<Sector, string> = {
+  front: 'À frente da câmera',
+  frontRight: 'À frente, à direita da câmera',
+  right: 'À direita da câmera',
+  backRight: 'Atrás, à direita da câmera',
+  back: 'Atrás da câmera',
+  backLeft: 'Atrás, à esquerda da câmera',
+  left: 'À esquerda da câmera',
+  frontLeft: 'À frente, à esquerda da câmera',
+};
 
 export interface SnapshotPhrase {
   sector: Sector | null;
@@ -27,11 +38,11 @@ export function snapshotSpeech(phrases: readonly SnapshotPhrase[]): string {
       const uncertain = group.filter((p) => p.mode === 'uncertain').map((p) => p.noun);
       const absent = group.filter((p) => p.mode === 'absent').map((p) => p.noun);
       const clauses = [
-        certain.length ? `há ${join(certain)}` : '',
-        uncertain.length ? `talvez haja ${join(uncertain)}` : '',
+        certain.length ? `havia ${join(certain)}` : '',
+        uncertain.length ? `talvez houvesse ${join(uncertain)}` : '',
         ...absent,
       ].filter(Boolean);
-      return `${DIRECTIONS[sector]}, ${clauses.join('; ')}.`;
+      return `${CAPTURE_DIRECTIONS[sector]}, ${clauses.join('; ')}.`;
     })
     .join(' ');
 }

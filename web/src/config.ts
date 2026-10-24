@@ -2,7 +2,7 @@
 export const CONFIG = Object.freeze({
   version: '0.3.0',
   online: {
-    deliveryPolicyRevision: 'adr-029', // Exported in diagnostics to identify the local Luna build after cache updates.
+    deliveryPolicyRevision: 'adr-045', // Exported in diagnostics to identify the local Luna build after cache updates.
     snapshotMaxAgeMs: 10000, // Explicitly aged snapshots only; never inserted into the live World.
     imageMaxSide: 1280,
     jpegQuality: 0.85,
@@ -23,6 +23,7 @@ export const CONFIG = Object.freeze({
     autoStructureDelta: 0.06, // Ignore a uniform brightness/color offset when deciding that the view changed broadly.
     recoveryDelayMs: 15000,
     maxRecoveryAttempts: 1, // At most one fresh, budgeted capture after a transient failure; never an unbounded retry.
+    obsoleteNoticeAfter: 2, // One capability notice after consecutive lost views, until a fresh description is delivered.
     autoMemoryLimit: 128, // Bound acknowledged label/sector groups during one session.
     snapshotRequestMemoryLimit: 16, // Bound replay IDs per frame; above the gateway's 15 requests/minute ceiling.
     referenceMemoryMs: 30000, // Drop unobserved discourse references; this never extends snapshot validity.
@@ -31,6 +32,12 @@ export const CONFIG = Object.freeze({
     sceneConfirmationGapMs: 30000, // Widely separated captures cannot accumulate scene confirmation.
   },
   motion: { maxYawRate: 15, settleMs: 1200, sensorStaleMs: 1500 }, // deg/s; settle before describing
+  cameraRotation: {
+    minRateDegPerSecond: 15, // Experimental camera rotation threshold, not body heading or walking detection.
+    confirmations: 2, // Reject isolated sensor spikes; no position is restored by a later low reading.
+    maxGapMs: 250, // Only adjacent distinct readings confirm rotation; long pauses reset confirmation.
+    staleMs: 1500, // Report absent/expired readings honestly; no sensor implies no extra invalidation.
+  },
   speech: {
     briefingMs: 3800,
     gapMs: 2400,

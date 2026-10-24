@@ -166,7 +166,7 @@ try {
   assert.equal(calls, 3);
   assert.match(
     await page.locator('#caption').innerText(),
-    /talvez haja uma passagem com placa de saída/,
+    /talvez houvesse uma passagem com placa de saída/,
   );
   assert.doesNotMatch(
     await page.locator('#caption').innerText(),

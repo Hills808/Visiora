@@ -1,3 +1,9 @@
+## Movimento no iPhone — revisão ADR-045
+
+No [Luna privado](https://visiora-luna-hills808.hills808.chatgpt.site/), a descrição identifica o tempo da captura e posições relativas à câmera. A mudança de vista exige captura nova mesmo quando o enquadramento volta. Em **Ajustes → Giros da câmera · experimental**, a leitura opcional retira posições após giro detectado; começa desligada, exige permissão no iPhone e funciona só durante Luna em primeiro plano. O estado informa quando faltam leituras. Sem câmera/voz física ou caminhada avaliadas nesta revisão: não usar o protótipo para decidir onde pisar. Para o primeiro ensaio, permanecer parado e movimentar apenas a câmera num ambiente conhecido.
+
+Ajuda permite exportar diagnóstico com tempos da resposta/início/conclusão e motivos de retirada, sem imagens nem textos. Voz/texto e percepção fake são separados; callbacks não provam que houve som. [Resultados e limites](docs/EVIDENCIAS/MOVIMENTO-IPHONE-2026-10-24.md) · [Protocolo antes de avançar percepção](docs/AVALIACAO-MOVIMENTO.md).
+
 ## Versão web atual — 24/10/2026
 
 [Abrir Visiora com Luna](https://visiora-luna-hills808.hills808.chatgpt.site/) (acesso privado) · [Modo local público](https://visiora-ambiente.hills808.chatgpt.site/).

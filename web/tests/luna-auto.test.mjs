@@ -1,10 +1,11 @@
-import test from 'node:test';
+﻿import test from 'node:test';
 import assert from 'node:assert/strict';
 import { AutoAnalysis } from '../dist/vision/auto-analysis.js';
 import { VisualMemory } from '../dist/brain/visual-memory.js';
 import { CONFIG } from '../dist/config.js';
 import { compareViews } from '../dist/vision/view-change.js';
 import { snapshotSpeech } from '../dist/brain/snapshot-speech.js';
+import { SnapshotView } from '../dist/vision/snapshot-view.js';
 import { OnlineSession } from '../dist/vision/online-session.js';
 
 function result(frame = 1, label = 'porta aberta') {
@@ -57,9 +58,9 @@ test('CA-F2/F7: one direction per sector, preserving uncertainty and maximum thr
     const utterance = memory.utterance(1500, false, automatic);
     assert.match(
       utterance.text,
-      /À sua frente, há uma janela com veneziana, uma pessoa e uma cama\./,
+      /À frente da câmera, havia uma janela com veneziana, uma pessoa e uma cama\./,
     );
-    assert.equal(utterance.text.match(/À sua frente/g).length, 1);
+    assert.equal(utterance.text.match(/À frente da câmera/g).length, 1);
     assert.doesNotMatch(utterance.text, /mesa/);
     assert.ok(utterance.text.split(/\s+/).length <= CONFIG.speech.briefingWords);
   }
@@ -69,7 +70,7 @@ test('CA-F2/F7: one direction per sector, preserving uncertainty and maximum thr
       { sector: 'front', noun: 'uma cama', mode: 'uncertain' },
       { sector: 'frontRight', noun: 'uma janela', mode: 'present' },
     ]),
-    'À sua frente, há uma pessoa; talvez haja uma cama. À sua frente, à direita, há uma janela.',
+    'À frente da câmera, havia uma pessoa; talvez houvesse uma cama. À frente, à direita da câmera, havia uma janela.',
   );
 });
 
@@ -221,14 +222,7 @@ test('CA-F6/L4: Luna speech that never started expires into one budgeted recover
   session.withdrawDirections();
   assert.equal(canceled, 1);
   assert.equal(session.current, null);
-  const originalDocument = globalThis.document;
-  globalThis.document = { querySelector: () => null };
-  try {
-    session.waiting = null; // The regular tick takes this pending presentation first.
-    session.present(false, true, false);
-  } finally {
-    globalThis.document = originalDocument;
-  }
+  assert.equal(session.waiting, null); // Recovery is scheduled once when the delivery expires.
   assert.equal(session.automatic.isPaused, false);
   assert.equal(session.automatic.recovering, true);
   assert.equal(session.counts.recoveries, 1);
@@ -277,7 +271,7 @@ test('CA-F2/F3/F4/F6/P6: automatic descriptions acknowledge only completed speec
   memory.accept(result(), 1500, 1);
   const first = memory.utterance(1500, false, true);
   assert.match(first.text, /escritório.*porta aberta/s);
-  assert.match(first.text, /À sua frente, à direita/);
+  assert.match(first.text, /À frente, à direita da câmera/);
   assert.doesNotMatch(first.text, /passos|metros|saída segura|caminho livre/);
   assert.ok(memory.utterance(1600, false, true)); // Not yet acknowledged.
   const finished = memory.utterance(1700, false, true);
@@ -325,7 +319,7 @@ test('CA-F4/F7/L4: changed person count and direction are described; snapshots s
   moved.stamp.capturedAtMs = 3000;
   moved.evidence.observations.forEach((item) => (item.box.x = 0.05));
   memory.accept(moved, 3500, 1);
-  assert.match(memory.utterance(3500, false, true).text, /À sua frente, à esquerda/);
+  assert.match(memory.utterance(3500, false, true).text, /À frente, à esquerda da câmera/);
 });
 test('CA-F4/P6: losing all visible references is qualified once; returning references can be announced again', () => {
   const memory = new VisualMemory();
@@ -386,7 +380,7 @@ test('CA-F4/P6: a person no longer identified is announced once even with unchan
   first.stamp.frameId = 4;
   first.stamp.capturedAtMs = 4000;
   memory.accept(first, 4500, 1);
-  assert.match(memory.utterance(4500, false, true).text, /há uma pessoa/);
+  assert.match(memory.utterance(4500, false, true).text, /havia uma pessoa/);
 });
 
 test('CA-F4/F9: broad structural change reorients the same room; uniform lighting is not a new room', () => {
@@ -444,4 +438,214 @@ test('CA-L3/D4: only one delayed recovery; repeated failure pauses; success rese
   assert.equal(auto.due(200000, view, true, false), false);
   auto.reset();
   assert.equal(auto.failed(201000, false), false); // Budget, consent, model/contract errors never retry.
+});
+
+test('CA-F4/L3: delivered A, broad B, return A still requires one replacement at cadence; small view change preserves result', () => {
+  const session = Object.create(OnlineSession.prototype);
+  const baseline = Array(32 * 24 * 3).fill(0.5);
+  const broad = baseline.map((n, i) => n + (Math.floor(i / 3) % 2 ? 0.3 : -0.3));
+  const auto = new AutoAnalysis();
+  auto.dispatched(0, baseline);
+  auto.delivered();
+  let forgotten = 0;
+  session.automatic = auto;
+  session.camera = { signature: baseline };
+  session.memory = { forgetDirections: () => forgotten++ };
+  session.clearReferences = () => {};
+  session.resultView = new SnapshotView(baseline);
+  session.observeViews();
+  session.camera.signature = baseline.map((n) => n + 0.01);
+  session.observeViews();
+  assert.equal(session.resultView.valid, true);
+  assert.equal(forgotten, 0);
+  session.camera.signature = broad;
+  session.observeViews();
+  session.camera.signature = baseline;
+  session.observeViews();
+  assert.equal(session.resultView.valid, false);
+  assert.equal(forgotten, 1);
+  const gap = CONFIG.online.autoIntervalMs;
+  assert.equal(auto.due(gap - 1, baseline, true, false), false);
+  assert.equal(auto.due(gap, baseline, true, false), true);
+  auto.dispatched(gap, baseline);
+  assert.equal(auto.due(gap * 2, baseline, true, false), false);
+  auto.invalidate();
+  auto.failed(gap * 2, true);
+  assert.equal(auto.due(gap * 2 + CONFIG.online.recoveryDelayMs - 1, baseline, true, false), false);
+  auto.pause();
+  assert.equal(auto.due(100000, baseline, true, false), false);
+});
+
+test('CA-F4/L4: automatic invalid view skips historical speech; manual context and Repeat remain available', () => {
+  const session = Object.create(OnlineSession.prototype);
+  session.running = true;
+  session.camera = { ready: true };
+  session.resultView = { valid: false };
+  session.automatic = new AutoAnalysis();
+  session.automatic.dispatched(0, [0]);
+  let prepared = 0,
+    presented = 0;
+  session.memory = {
+    pendingCapturedAt: performance.now(),
+    utterance: () => {
+      prepared++;
+      return { id: 'test', expiresAt: performance.now() + 5000 };
+    },
+  };
+  session.hooks = { canAnalyze: () => true, present: () => presented++ };
+  session.clearReferences = () => {};
+  const previous = globalThis.document;
+  globalThis.document = { querySelector: () => null };
+  try {
+    session.present(false, true);
+    assert.equal(prepared, 0);
+    assert.equal(presented, 0);
+    assert.equal(session.automatic.due(CONFIG.online.autoIntervalMs, [0], true, false), true);
+    session.present(false, false);
+    session.present(true, false);
+    assert.equal(presented, 2);
+  } finally {
+    globalThis.document = previous;
+  }
+});
+
+test('CA-L4/F4: obsolete notice is short and deduplicated; only fresh delivered content clears the streak', () => {
+  const session = Object.create(OnlineSession.prototype);
+  const notices = [];
+  session.hooks = { announce: (value) => notices.push(value) };
+  session.unusableResponses = 0;
+  session.sceneNoticeAnnounced = false;
+  for (let i = 0; i < CONFIG.online.obsoleteNoticeAfter + 2; i++) session.noteUnusableResponse();
+  assert.equal(notices.length, 1);
+  assert.ok(notices[0].split(/\s+/).length <= CONFIG.speech.maxWords);
+  assert.doesNotMatch(notices[0], /vou|nova captura|caminho livre/i);
+  session.observeViews = () => {};
+  session.withdrawDirections = () => {};
+  session.running = true;
+  session.generation = 1;
+  session.memory = { complete: () => true };
+  session.counts = { delivered: 0 };
+  session.automatic = new AutoAnalysis();
+  function deliver(repeat, contextOnly) {
+    session.current = {
+      id: 'one',
+      started: true,
+      generation: 1,
+      repeat,
+      contextOnly,
+      startedAtMs: null,
+    };
+    assert.equal(session.complete('one'), true);
+  }
+  deliver(true, false);
+  assert.ok(session.unusableResponses > 0);
+  deliver(false, true);
+  assert.ok(session.unusableResponses > 0);
+  deliver(false, false);
+  assert.equal(session.unusableResponses, 0);
+  assert.equal(session.sceneNoticeAnnounced, false);
+});
+
+test('CA-L3/L4: late voice start followed by UI drop respects delayed recovery and pauses after second expiration', () => {
+  const session = Object.create(OnlineSession.prototype);
+  const now = performance.now();
+  session.running = true;
+  session.generation = 1;
+  session.camera = { ready: true, signature: [0.5] };
+  session.automatic = new AutoAnalysis();
+  session.counts = { obsolete: 0, recoveries: 0 };
+  session.clearReferences = () => {};
+  session.observeViews = () => {};
+  session.hooks = {
+    cancelSpeech: () => session.interrupted('late'),
+    message: () => {},
+    announce: () => {},
+  };
+  const output = () => ({
+    id: 'late',
+    generation: 1,
+    started: false,
+    repeat: false,
+    contextOnly: false,
+    capturedAtMs: now - 6000,
+    expiresAt: now - 500,
+    view: { valid: true },
+    automatic: true,
+  });
+  session.automatic.dispatched(now - 6000, [0.5]);
+  session.current = output();
+  assert.equal(session.canStart('late'), false);
+  session.interrupted('late');
+  assert.equal(session.current, null);
+  assert.equal(session.automatic.recovering, true);
+  assert.equal(
+    session.automatic.due(now + CONFIG.online.recoveryDelayMs - 1, [0.5], true, false),
+    false,
+  );
+  assert.equal(session.counts.recoveries, 1);
+  session.automatic.dispatched(now + CONFIG.online.recoveryDelayMs, [0.5]);
+  session.automatic.succeeded();
+  session.current = output();
+  assert.equal(session.canStart('late'), false);
+  session.interrupted('late');
+  assert.equal(session.automatic.isPaused, true);
+  assert.equal(session.automatic.due(now + 99999, [0.5], true, false), false);
+  assert.equal(session.counts.recoveries, 1);
+});
+
+test('CA-F6/L3: historical output without a start callback expires without buying a replacement', () => {
+  for (const [repeat, contextOnly] of [
+    [true, false],
+    [false, true],
+  ]) {
+    const session = Object.create(OnlineSession.prototype);
+    const now = performance.now();
+    session.automatic = new AutoAnalysis();
+    session.automatic.dispatched(now - 6000, [0.5]);
+    session.current = {
+      id: 'history',
+      repeat,
+      contextOnly,
+      started: false,
+      startedAtMs: null,
+      expiresAt: now - 1,
+    };
+    session.hooks = { cancelSpeech: () => session.interrupted('history') };
+    session.withdrawDirections();
+    assert.equal(session.current, null);
+    assert.equal(session.waiting, null);
+    assert.equal(session.automatic.isPaused, false);
+    assert.equal(session.automatic.due(now, [0.5], true, false), false);
+  }
+});
+test('CA-L3/L4: completing historical output cannot renew the single fresh-expiration recovery', () => {
+  for (const [repeat, contextOnly] of [
+    [true, false],
+    [false, true],
+  ]) {
+    const session = Object.create(OnlineSession.prototype);
+    const now = performance.now();
+    session.running = true;
+    session.generation = 1;
+    session.observeViews = () => {};
+    session.withdrawDirections = () => {};
+    session.memory = { complete: () => true };
+    session.counts = { delivered: 0 };
+    session.automatic = new AutoAnalysis();
+    session.automatic.dispatched(now, [0.5]);
+    assert.equal(session.automatic.expiredSnapshot(now), true);
+    session.current = {
+      id: 'history',
+      repeat,
+      contextOnly,
+      started: true,
+      generation: 1,
+      startedAtMs: null,
+    };
+    assert.equal(session.complete('history'), true);
+    session.automatic.dispatched(now + CONFIG.online.recoveryDelayMs, [0.5]);
+    session.automatic.succeeded();
+    assert.equal(session.automatic.expiredSnapshot(now + CONFIG.online.recoveryDelayMs), false);
+    assert.equal(session.automatic.isPaused, true);
+  }
 });

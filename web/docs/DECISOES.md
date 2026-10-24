@@ -1,3 +1,13 @@
+## ADR-045 — atualidade durante movimento e alvo iPhone (24/10/2026)
+
+O usuário definiu iPhone com câmera traseira como alvo principal. Capturas Luna chegam com atraso e não sustentam orientação de passos. Corrigir primeiro continuidade e honestidade: a invalidação A→B→A conserva uma substituta pendente; o automático descarta posições de vista perdida e não ocupa a voz com contexto antigo antes da substituta. Manual/Repetir conservam linguagem histórica. Setores Luna são relativos à câmera, no passado, com idade explícita; o modo local mantém seu contrato original.
+
+Acrescentar leitura opcional de `DeviceMotionEvent.rotationRate`, desligada por padrão e pedida diretamente por botão em Ajustes. A norma W3C define graus/s e exige contexto seguro/ativação explícita para permissões: https://www.w3.org/TR/orientation-event/. A norma dos três eixos evita confundir retrato/paisagem com heading corporal; duas leituras distintas >=15 graus/s, separadas por no máximo 250 ms, retiram posições. Valores são hipóteses de engenharia, não limites medidos. Sem leituras recentes (1,5 s), informar indisponibilidade; não deduzir estabilidade. Listeners só durante Luna em primeiro plano, leituras não são persistidas, permissão não é guardada pelo app após recarregar. Não mede caminhada, translação, profundidade ou obstáculos. Sem dependência/modelo novo; alternativa sem sensor conserva mudanças de pixels e as mesmas limitações.
+
+Separar diagnóstico local de captura→resposta, preparação→início e captura→início/conclusão por callbacks, distinguindo voz/texto e percepção fake. Não inferir audibilidade. Cancelamento voluntário não confirma entrega nem bloqueia a sessão. Expiração antes do início segue uma recuperação após 15 s e pausa na segunda expiração; giro não contorna recuperação, consentimento, single-flight, cadência ou orçamento. Aviso único após duas vistas perdidas e estado consultável tornam o silêncio compreensível.
+
+Não ativar fala híbrida nem trocar modelo antes dos gates H2/H3, agora medidos no iPhone alvo. API para contexto lento + percepção local rápida é a arquitetura a avaliar, não uma capacidade entregue nesta revisão. Não alterar validade de 10 s, cotas, ledger ou chave; zero chamadas pagas nesta revisão. [Evidência e pendências CA-F3/F4/F5/F6/P6/D4/A1/E1/E5/L3/L4 e metas CA-H*](EVIDENCIAS/MOVIMENTO-IPHONE-2026-10-24.md). [Protocolo](AVALIACAO-MOVIMENTO.md).
+
 # Decisões — Visiora
 
 ## ADR-044 — interface orientada à ambientação (24/10/2026)

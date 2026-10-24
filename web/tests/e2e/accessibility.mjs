@@ -35,6 +35,8 @@ try {
     await page.locator('.analysis-details > summary').click();
     const expanded = await auditAccessibility(page);
     await page.click('#settings-open');
+    await page.getByText('Giros da câmera · experimental', { exact: true }).click();
+    const motionSettings = await auditAccessibility(page);
     await page.selectOption('#theme', 'dark');
     await page.check('#large-text');
     await page.click('#settings-form button[value=save]');
@@ -46,6 +48,7 @@ try {
         viewports,
         expanded,
         darkLarge,
+        motionSettings,
         keyboardDisclosure: true,
         screenshots: 'artifacts/visual-redesign',
       }),

@@ -1,3 +1,9 @@
+## Movimento e atualidade — ADR-045 (24/10/2026)
+
+`SnapshotView` tem invalidação irreversível por mudança ampla de imagem ou giro confirmado do aparelho. `OnlineSession` conserva necessidade de substituta sem restaurar posições quando a imagem retorna. Saída interrompida é abandonada sem confirmação; início expirado entra na recuperação limitada. `OnlineTiming` guarda amostras numéricas limitadas por sessão e separa callbacks de voz e publicação em texto.
+
+`MotionInput` é uma entrada opcional local, sem biblioteca: botão em Ajustes solicita permissão no gesto, e escuta `devicemotion` apenas na sessão Luna visível. `CameraRotationGuard` interpreta a norma de rotationRate; não calcula direção corporal, deslocamento ou distância. O indicador distingue autorização de recebimento recente. Sem sensor, o fluxo de imagem permanece disponível, sem tratar ausência como estabilidade. Captura traseira já usa `facingMode: {ideal: 'environment'}`; o navegador decide a lente e ainda exige teste no iPhone. Luna permanece por snapshots; não há detector de objetos contínuo ativo nesse modo. [Evidência](EVIDENCIAS/MOVIMENTO-IPHONE-2026-10-24.md).
+
 ## Transporte e contabilidade hospedados — ADR-043 (24/10/2026)
 
 **Interface ADR-044:** a camada de apresentação usa o mesmo HTML/CSS e módulos de sessão. Controles de nuvem acompanham a seleção do modo; a seção de contexto/referências é expansível e se abre em erro do reconhecimento local. Essas escolhas não alteram percepção, narrativa, API ou orçamento. [Evidência](EVIDENCIAS/REDESIGN-VISUAL-2026-10-24.md).

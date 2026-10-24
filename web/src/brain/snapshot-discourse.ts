@@ -149,8 +149,8 @@ export class SnapshotDiscourse {
     }
     const prefix = orientation
       ? result.evidence.scene
-        ? `${newView && !sceneChanged ? 'Neste enquadramento, o ambiente' : 'O ambiente'} parece ${result.evidence.scene.label}. `
-        : 'Não tenho certeza de que lugar é este. '
+        ? `${newView && !sceneChanged ? 'Neste enquadramento, o ambiente' : 'O ambiente'} parecia ${result.evidence.scene.label}. `
+        : 'Não identifiquei o lugar nesta captura. '
       : '';
     if (orientation) acknowledgment.scene = sceneLabel;
     const groups = snapshotGroups(result);
