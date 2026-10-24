@@ -97,6 +97,7 @@ try {
     HTMLAnchorElement.prototype.click = function () {}; // Capture diagnostics blob without native download.
   });
   await page.goto(base);
+  await page.selectOption('#perception-provider', 'luna');
   await page.waitForFunction(() =>
     document.querySelector('#luna-config').textContent.includes('Simulador'),
   );

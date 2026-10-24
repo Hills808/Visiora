@@ -1,5 +1,7 @@
 ## Transporte e contabilidade hospedados — ADR-043 (24/10/2026)
 
+**Interface ADR-044:** a camada de apresentação usa o mesmo HTML/CSS e módulos de sessão. Controles de nuvem acompanham a seleção do modo; a seção de contexto/referências é expansível e se abre em erro do reconhecimento local. Essas escolhas não alteram percepção, narrativa, API ou orçamento. [Evidência](EVIDENCIAS/REDESIGN-VISUAL-2026-10-24.md).
+
 O gateway usa fetch com `redirect: 'manual'` e rejeita 3xx sem reenviar credenciais. `/api/vision/connection` exige identidade e consulta somente metadados do modelo. O Worker registra a mesma Promise do POST de análise em `ctx.waitUntil` para tentar concluir a contabilidade após desconexão. `/api/vision/reconcile` é um POST administrativo autenticado, com Origin/CSRF, ID específico e aceite explícito da reserva incerta; mantém o valor integral. Depende do Site restrito ao proprietário. Testes executam provedor e reconciliação reais no workerd/D1 local, com rede externa substituída. [Evidência CA-L4/E1](EVIDENCIAS/LUNA-CONEXAO-WORKER-2026-10-24.md).
 
 ## Verificação contínua — ADR-031 (23/10/2026)

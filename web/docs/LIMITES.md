@@ -1,5 +1,7 @@
 ## Conexão Luna hospedada — 24/10/2026 (ADR-043)
 
+**Revisão visual ADR-044:** textos e opções foram reorganizados, com detalhes expansíveis. O aviso essencial de segurança continua na tela principal, e falhas locais abrem o contexto para recuperação. Testes automatizados de contraste, alvos e teclado não substituem avaliação com pessoas cegas ou leitores de tela reais. [Escopo da revisão](EVIDENCIAS/REDESIGN-VISUAL-2026-10-24.md).
+
 Corrigida a opção de redirecionamento incompatível com a hospedagem. O diagnóstico retornou HTTP 200 e duas análises reais concluíram com `gpt-6-luna` confirmado. A interface completou o ciclo de fala; audibilidade e precisão não foram medidas independentemente. A desconexão pode ocorrer com chamada já cobrável: o servidor tenta concluir o registro e, se falhar, preserva a reserva integral. Reconciliação é administrativa e explícita; não zera gasto. O teto voltou a US$ 2/dia. [Evidência](EVIDENCIAS/LUNA-CONEXAO-WORKER-2026-10-24.md).
 
 ## Exceção para apresentação — 23/10/2026 (ADR-037)

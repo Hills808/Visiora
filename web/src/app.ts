@@ -155,6 +155,8 @@ function setMode(next: Mode): void {
   renderScene();
 }
 function renderScene(): void {
+  if (mode === 'camera' && sceneState === 'error')
+    el<HTMLDetailsElement>('environment-details').open = true;
   if (mode === 'luna') {
     text(
       'scene-source',
@@ -367,6 +369,16 @@ const camera = new Camera(
   receiveScene,
 );
 configure();
+
+// Keep the cloud authorization beside the action only when it is relevant.
+function syncAnalysisControls(): void {
+  const cloud = el<HTMLSelectElement>('perception-provider').value === 'luna';
+  const label = el<HTMLInputElement>('cloud-consent').closest('label');
+  if (label) label.hidden = !cloud;
+  show('luna-config', cloud);
+}
+el('perception-provider').addEventListener('change', syncAnalysisControls);
+syncAnalysisControls();
 
 function runningMode(next: Mode): boolean {
   return next !== 'idle';
