@@ -4,6 +4,7 @@ import schema from '../web/schemas/visual-evidence-v1.json';
 import { validEvidence, type VisualEvidence, type CaptureStamp } from '../web/src/perception/evidence';
 import { LunaError } from './luna-budget';
 import { POLICY } from './luna-policy';
+import { providerFailure } from './luna-provider-errors';
 
 async function boundedText(response: Response): Promise<string> {
   if (!response.body) throw new LunaError(422, 'invalid-response');
@@ -24,12 +25,8 @@ async function boundedText(response: Response): Promise<string> {
 }
 
 function providerError(status: number): LunaError {
-  if (status === 429) return new LunaError(429, 'provider-limit');
-  if (status === 401 || status === 403) return new LunaError(401, 'provider-auth');
-  // Keep the upstream HTTP status without exposing response content or headers.
-  // Cloudflare 520/53x, OpenAI 500/503 and a network fetch error need distinct diagnostics.
-  if (status >= 500 && status <= 599) return new LunaError(503, `provider-http-${status}`);
-  return new LunaError(422, 'provider-request');
+  const failure = providerFailure(status);
+  return new LunaError(failure.status, failure.code);
 }
 
 export async function analyzeImage(image: Uint8Array, stamp: CaptureStamp, apiKey: string,
