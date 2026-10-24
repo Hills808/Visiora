@@ -8,15 +8,18 @@
           "properties": {
             "label": {
               "type": "string",
-              "maxLength": 60
+              "maxLength": 60,
+              "minLength": 1
             },
             "support": {
               "type": "array",
               "items": {
                 "type": "string",
-                "maxLength": 24
+                "maxLength": 24,
+                "pattern": "^[a-z0-9-]{1,24}$"
               },
-              "maxItems": 12
+              "maxItems": 12,
+              "minItems": 1
             }
           },
           "required": ["label", "support"],
@@ -34,7 +37,8 @@
         "properties": {
           "id": {
             "type": "string",
-            "maxLength": 24
+            "maxLength": 24,
+            "pattern": "^[a-z0-9-]{1,24}$"
           },
           "kind": {
             "type": "string",
@@ -42,7 +46,9 @@
           },
           "label": {
             "type": "string",
-            "maxLength": 60
+            "maxLength": 60,
+            "minLength": 1,
+            "description": "Sintagma nominal curto, sem espaços no início/fim, HTML, instruções ou pontuação final. Unicode NFC."
           },
           "uncertain": {
             "type": "boolean"
@@ -64,13 +70,13 @@
                   },
                   "width": {
                     "type": "number",
-                    "minimum": 0,
-                    "maximum": 1
+                    "maximum": 1,
+                    "exclusiveMinimum": 0
                   },
                   "height": {
                     "type": "number",
-                    "minimum": 0,
-                    "maximum": 1
+                    "maximum": 1,
+                    "exclusiveMinimum": 0
                   }
                 },
                 "required": ["x", "y", "width", "height"],
@@ -79,7 +85,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "x,y são canto superior esquerdo; x+width e y+height devem ser <=1. Se não localizável, null. Nunca trocar centro por canto."
           },
           "article": {
             "type": "string",
@@ -98,15 +105,18 @@
         "properties": {
           "subject": {
             "type": "string",
-            "maxLength": 24
+            "maxLength": 24,
+            "pattern": "^[a-z0-9-]{1,24}$"
           },
           "object": {
             "type": "string",
-            "maxLength": 24
+            "maxLength": 24,
+            "pattern": "^[a-z0-9-]{1,24}$"
           },
           "description": {
             "type": "string",
-            "maxLength": 100
+            "maxLength": 100,
+            "minLength": 1
           }
         },
         "required": ["subject", "object", "description"],
@@ -118,7 +128,8 @@
       "type": "array",
       "items": {
         "type": "string",
-        "maxLength": 160
+        "maxLength": 160,
+        "minLength": 1
       },
       "maxItems": 6
     }

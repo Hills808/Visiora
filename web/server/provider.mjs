@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { POLICY } from './config.mjs';
 import { GatewayError } from './budget.mjs';
-import { validEvidence } from '../dist/perception/evidence.js';
+import { prepareEvidence } from '../dist/perception/evidence.js';
 import { inspectResponseModel } from './response-model.mjs';
 const prompt = await readFile(new URL('../prompts/luna-vision-v1.md', import.meta.url), 'utf8');
 const schema = JSON.parse(
@@ -40,8 +40,10 @@ export function responseEvidence(data) {
   } catch {
     throw new GatewayError(422, 'invalid-json');
   }
-  if (!validEvidence(evidence)) throw new GatewayError(422, 'invalid-evidence');
-  return evidence;
+  const prepared = prepareEvidence(evidence);
+  if (!prepared.ok) throw new GatewayError(422, `invalid-evidence-${prepared.reason}`);
+  if (prepared.adjustments.length) console.info(JSON.stringify({ event: 'visual-evidence-normalized', adjustments: prepared.adjustments }));
+  return prepared.evidence;
 }
 export function createProvider(config, fetcher = fetch, recordModel = () => {}) {
   return async (image, stamp) => {

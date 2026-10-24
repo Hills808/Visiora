@@ -1,3 +1,7 @@
+## ADR-047 — alinhar contrato Luna sem corrigir geometria por suposição (24/10/2026)
+
+Duas consultas reais retornaram `invalid-evidence` com modelo verificado, mas o cliente mostrava somente HTTP 422. A resposta privada não é retida; não é possível atribuir essas duas falhas a um campo específico. Corrigir divergências reproduzíveis entre esquema e validador: normalização conservadora de representação, IDs opacos com referências verificadas, esquema/prompt mais estritos e motivos categóricos fechados. Manter recusa de geometria/tipos/referências inválidos, sem descartar objetos ou transformar posição inválida em desconhecida. Alternativa de relaxar validação ou repetir automaticamente foi rejeitada por risco de fala incorreta e gasto repetido. Sem nova dependência, modelo, cota, chave ou modificação do ledger. Reservas incertas reais preservadas. A documentação oficial de Structured Outputs confirma suporte às restrições usadas: https://developers.openai.com/api/docs/guides/structured-outputs . [Evidência, testes e pendências](EVIDENCIAS/LUNA-CONTRATO-422-2026-10-24.md), CA-L1/L2/L3/L4. Reteste real pendente.
+
 **Compatibilidade por capacidade (orientação do usuário, 24/10/2026):** não exigir modelo de aparelho ou versão específica de sistema. Detectar recursos efetivos, tentar GPU com aquecimento real e usar CPU quando suportada; capacidade ausente é informada. Números de uma máquina são evidência de ensaio, não requisito ou promessa para os demais aparelhos.
 
 ## ADR-046 — percepção contínua observacional e memória temporal (24/10/2026)

@@ -124,3 +124,7 @@ O iniciador `tools/apresentacao-luna.ps1` usa o `cloudflared` atualizado com aut
 ## Luna privado hospedado — ADR-041 (23/10/2026)
 
 O Site privado funciona por HTTPS, exige login na conta proprietária e deixa o consentimento de nuvem desmarcado inicialmente. A chave da API fica no servidor. D1 controla US$ 10 no dia 23/10/2026 e US$ 2 por dia depois para aparelhos conectados a esse Site. D1 não sincroniza com o SQLite do gateway local; executar ambos pode ultrapassar o limite pretendido. Solicitações pendentes/incertas conservam reserva até revisão. O Site privado não inclui pesos dos modelos locais nem funciona offline. No celular, câmera, voz pt-BR, leitor de tela, custo real, estabilidade e precisão ainda não foram ensaiados. Não é ferramenta de navegação segura e não substitui bengala nem cão-guia.
+
+## Resposta recusada — ADR-047
+
+Mesmo com Luna configurado, uma resposta pode falhar na validação e pausar o acompanhamento. A interface mostra o motivo categórico; não tenta corrigir uma posição impossível nem repetir chamadas pagas de contrato. Formatação equivalente é normalizada, sem comprovar a qualidade do reconhecimento. As duas falhas reais não guardaram os campos originais; reteste com câmera/voz real segue pendente. Pessoa detectada sem caixa é uma pendência narrativa separada, documentada na [evidência](EVIDENCIAS/LUNA-CONTRATO-422-2026-10-24.md).

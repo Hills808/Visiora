@@ -1,7 +1,7 @@
 export const POLICY = Object.freeze({
   model: 'gpt-6-luna',
   endpoint: 'https://api.openai.com/v1/responses',
-  promptVersion: 'visual-v1.1-auto',
+  promptVersion: 'visual-v1.2-contract',
   pricingRevision: '2026-10-23',
   // User-authorized maximum. The configured hosted amount can be lower.
   maxDailyMicros: 2_000_000,

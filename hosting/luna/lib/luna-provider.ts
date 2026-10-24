@@ -1,7 +1,7 @@
 import { Buffer } from 'node:buffer';
 import prompt from '../web/prompts/luna-vision-v1.md?raw';
 import schema from '../web/schemas/visual-evidence-v1.json';
-import { validEvidence, type VisualEvidence, type CaptureStamp } from '../web/src/perception/evidence';
+import { prepareEvidence, type VisualEvidence, type CaptureStamp } from '../web/src/perception/evidence';
 import { LunaError } from './luna-budget';
 import { POLICY } from './luna-policy';
 import { providerFailure } from './luna-provider-errors';
@@ -81,8 +81,10 @@ export async function analyzeImage(image: Uint8Array, stamp: CaptureStamp, apiKe
   } catch {
     throw new LunaError(422, 'invalid-json');
   }
-  if (!validEvidence(evidence)) throw new LunaError(422, 'invalid-evidence');
-  return { evidence, usage: data.usage };
+  const prepared = prepareEvidence(evidence);
+  if (!prepared.ok) throw new LunaError(422, `invalid-evidence-${prepared.reason}`);
+  if (prepared.adjustments.length) console.info(JSON.stringify({ event: 'visual-evidence-normalized', adjustments: prepared.adjustments }));
+  return { evidence: prepared.evidence, usage: data.usage };
 }
 
 export function fakeAnalysis(): { evidence: VisualEvidence; usage: { input_tokens: number; output_tokens: number }; model: string } {

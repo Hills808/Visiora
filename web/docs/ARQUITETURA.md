@@ -115,3 +115,7 @@ O pacote portátil Luna para Windows x64 usa os mesmos `dist/`, `server/`, `prom
 ## Luna hospedado privado — ADR-039 (23/10/2026)
 
 `hosting/luna/` monta uma variante do mesmo cliente web sem pesos locais e publica `/api/vision/status` e `/api/vision/analyze` no Worker do Site privado. O despacho da hospedagem exige login; as rotas exigem identidade, origem, token CSRF e consentimento antes de aceitar JPEG. O Worker chama a Responses API com `store:false`, confere o identificador `gpt-6-luna` devolvido e valida a evidência estruturada. D1 mantém apenas ID, horário, dia de São Paulo, reserva/custo, estado, uso e modelo; nenhuma imagem ou fala. Uma inserção SQL condicional faz a reserva de modo atômico entre aparelhos. Reserva incerta permanece até revisão manual. O modo público local e o gateway Node/SQLite continuam em código separado; o gateway local está desativado enquanto o Site usa o teto de US$ 2/dia. [Evidência](EVIDENCIAS/LUNA-CELULAR-HOSPEDADO-2026-10-23.md).
+
+## Contrato Luna — ADR-047
+
+`prepareEvidence` é compartilhado pelos provedores Node e Worker: normaliza apenas representação, preserva a geometria e valida referências originais antes de renomear IDs. O JSON Schema restringe campos e o validador faz verificações semânticas adicionais. Erros categóricos fechados chegam ao cliente sem texto do provedor; reserva incerta não é liberada. [Evidência](EVIDENCIAS/LUNA-CONTRATO-422-2026-10-24.md).

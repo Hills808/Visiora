@@ -2,7 +2,7 @@
 export const CONFIG = Object.freeze({
   version: '0.3.0',
   online: {
-    deliveryPolicyRevision: 'adr-046', // Exported in diagnostics to identify the local Luna build after cache updates.
+    deliveryPolicyRevision: 'adr-047', // Exported in diagnostics to identify the local Luna build after cache updates.
     snapshotMaxAgeMs: 10000, // Explicitly aged snapshots only; never inserted into the live World.
     imageMaxSide: 1280,
     jpegQuality: 0.85,

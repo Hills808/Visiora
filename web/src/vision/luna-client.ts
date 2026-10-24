@@ -1,5 +1,68 @@
-import { parseResult, type AnalysisResult, type CaptureStamp } from '../perception/evidence.js';
+import {
+  EVIDENCE_ISSUES,
+  parseResult,
+  type AnalysisResult,
+  type CaptureStamp,
+  type EvidenceIssue,
+} from '../perception/evidence.js';
 import { CONFIG } from '../config.js';
+
+// Gateway contract only: never turn provider prose or arbitrary suffixes into UI/diagnostics.
+const EVIDENCE_FAILURE_MESSAGES: Readonly<Record<EvidenceIssue, string>> = Object.freeze({
+  structure: 'A análise recebida tem uma estrutura incompatível.',
+  'limitations-format': 'A análise recebida trouxe limitações em formato inválido.',
+  'observation-format': 'Uma observação recebida tem formato inválido.',
+  'enum-type': 'Uma observação recebida trouxe uma categoria inválida.',
+  'label-format': 'Um nome recebido na análise tem formato inválido.',
+  'id-format': 'Uma referência interna da análise tem formato inválido.',
+  'duplicate-id': 'A análise recebida repetiu uma referência interna.',
+  'box-format': 'Uma posição recebida na análise tem formato inválido.',
+  'box-empty': 'Uma posição recebida na análise está vazia.',
+  'box-bounds': 'Uma posição recebida na análise ultrapassa os limites da imagem.',
+  'scene-format': 'O contexto de ambiente recebido tem formato inválido.',
+  'scene-support-empty': 'O contexto de ambiente recebido veio sem observações de apoio.',
+  'scene-support-reference': 'O contexto de ambiente recebido aponta para uma observação ausente.',
+  'relation-format': 'Uma relação entre observações recebida tem formato inválido.',
+  'relation-reference': 'Uma relação recebida aponta para uma observação ausente.',
+  'relation-self': 'Uma relação recebida aponta para a própria observação.',
+});
+const RESPONSE_FAILURE_MESSAGES: Readonly<Record<string, string>> = Object.freeze({
+  ...Object.fromEntries(
+    EVIDENCE_ISSUES.map((reason) => [
+      `invalid-evidence-${reason}`,
+      EVIDENCE_FAILURE_MESSAGES[reason],
+    ]),
+  ),
+  empty: 'O provedor não enviou uma resposta para a análise.',
+  'too-large': 'A resposta do provedor excedeu o tamanho permitido.',
+  incomplete: 'O provedor devolveu uma análise incompleta.',
+  refused: 'O provedor recusou analisar esta captura.',
+  'invalid-json': 'A resposta do provedor não pôde ser lida no formato esperado.',
+  'invalid-evidence': 'A análise recebida não corresponde ao formato de observações esperado.',
+  'invalid-response': 'O provedor devolveu uma resposta inválida para a análise.',
+});
+const GATEWAY_FAILURE_CODES = new Set([
+  ...Object.keys(RESPONSE_FAILURE_MESSAGES),
+  'provider-network',
+  'provider-unavailable',
+  'provider-timeout',
+  'provider-limit',
+  'provider-auth',
+  'provider-request',
+  'model-unconfirmed',
+  'not-configured',
+  'ledger',
+  'model-audit',
+  'pricing',
+  'budget',
+  'rate',
+  'busy',
+  'csrf',
+  'origin',
+  'auth',
+  'consent',
+  'internal',
+]);
 export interface GatewayStatus {
   ready: boolean;
   provider: 'luna' | 'fake';
@@ -93,27 +156,28 @@ export class LunaClient {
         // The edge may return HTML for its own 503 errors. Never display raw error bodies.
         const failure = (await response.json().catch(() => null)) as { error?: unknown } | null;
         const raw = failure?.error;
-        const code = typeof raw === 'string' &&
-          /^(provider-[a-z-]+|provider-http-5\d{2}|model-unconfirmed|not-configured|ledger|model-audit|pricing|budget|rate|busy|csrf|origin|auth|consent|internal)$/.test(raw)
-          ? raw : response.status === 503 && failure === null
-            ? 'gateway-unavailable' : `http-${response.status}`;
+        const code =
+          typeof raw === 'string' &&
+          (GATEWAY_FAILURE_CODES.has(raw) || /^provider-http-5\d{2}$/.test(raw))
+            ? raw
+            : response.status === 503 && failure === null
+              ? 'gateway-unavailable'
+              : `http-${response.status}`;
         const transient =
           (response.status === 503 &&
             (['provider-network', 'provider-unavailable', 'gateway-unavailable'].includes(code) ||
               /^provider-http-5\d{2}$/.test(code))) ||
           (response.status === 504 && code === 'provider-timeout');
-        const explanation = code === 'provider-network'
-          ? 'O servidor não conseguiu acessar a OpenAI.'
-          : /^provider-http-5\d{2}$/.test(code)
-            ? `O provedor retornou HTTP ${code.slice(-3)}.`
-            : code === 'not-configured'
-              ? 'A configuração da Luna no servidor está indisponível.'
-              : messages[response.status] ?? 'Não foi possível concluir a análise.';
-        throw new AnalysisError(
-          `${explanation} (código: ${code})`,
-          transient,
-          code,
-        );
+        const explanation = Object.hasOwn(RESPONSE_FAILURE_MESSAGES, code)
+          ? RESPONSE_FAILURE_MESSAGES[code]
+          : code === 'provider-network'
+            ? 'O servidor não conseguiu acessar a OpenAI.'
+            : /^provider-http-5\d{2}$/.test(code)
+              ? `O provedor retornou HTTP ${code.slice(-3)}.`
+              : code === 'not-configured'
+                ? 'A configuração da Luna no servidor está indisponível.'
+                : (messages[response.status] ?? 'Não foi possível concluir a análise.');
+        throw new AnalysisError(`${explanation} (código: ${code})`, transient, code);
       }
       return parseResult(await response.json(), stamp);
     } catch (error) {

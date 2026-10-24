@@ -150,3 +150,7 @@ O arquivo `visiora-diagnosticov.json` mostrou 2 envios Luna, 1 aceito e 1 entreg
 ## Observador contínuo — ADR-046 (24/10/2026)
 
 Ler docs/EVIDENCIAS/PERCEPCAO-CONTINUA-2026-10-24.md. O usuário autorizou implementar percepção contínua, atraso e memória. YoloxAdapter real opcional + LocalPipeline + TrackMemory funcionam durante Luna, somente observações/diagnósticos. Sem fala local ou gatilhos pagos antes de qualidade H2/H3. Carga paralela, fila zero, cancelamento, revisão de vista no despacho e saída de memória não biométrica. Site privado inclui três pesos de objetos; não inicializa ambientes. Novos testes: node tests/e2e/continuous-real.mjs e --cpu; vídeo definido por VISIORA_QA_VIDEO, API fake, não .env. iPhone/qualidade temporal/voz humana continuam pendentes. Não generalizar números do PC nem usar confirmações temporais como acurácia.
+
+## Contrato Luna — ADR-047 (24/10/2026)
+
+Ler docs/EVIDENCIAS/LUNA-CONTRATO-422-2026-10-24.md. prepareEvidence normaliza somente representação; não recorta/descarta caixas ou inventa referências. Erros semânticos têm lista fechada, sem retry pago. Reservas incertas e teto preservados. 227 testes unitários, 11 hosted e 12 E2E fake; reteste real pendente. Pessoa box:null e falsa ausência é pendência separada.

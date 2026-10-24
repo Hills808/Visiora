@@ -82,6 +82,47 @@ test('CA-L4: actual workerd accepts metadata and inference fetch options; redire
   } finally { await mf.dispose(); }
 });
 
+test('CA-L1/L4: workerd normalizes representation only and preserves precise semantic refusals', async () => {
+  const generated = {
+    scene: { label: ' escrito\u0301rio ', support: ['Object_1'] },
+    observations: [{ id: 'Object_1', kind: 'object', article: 'uma', label: ' cadeira ',
+      uncertain: false, box: { x: 0.1, y: 0.2, width: 0.2, height: 0.5 } }],
+    relations: [], limitations: ['Pouca luz.'],
+  };
+  let value = structuredClone(generated);
+  const mf = new Miniflare({ modules: await modules(), compatibilityDate: '2026-05-15',
+    compatibilityFlags: ['nodejs_compat'], cf: false,
+    outboundService: async request => {
+      const payload = await request.json();
+      const contract = payload.text.format.schema.properties;
+      assert.equal(contract.observations.items.properties.box.anyOf[0].properties.width.exclusiveMinimum, 0);
+      assert.equal(contract.scene.anyOf[0].properties.support.minItems, 1);
+      return Response.json({ model: 'gpt-6-luna', status: 'completed',
+        output: [{ type: 'message', content: [{ type: 'output_text', text: JSON.stringify(value) }] }],
+        usage: { input_tokens: 10, output_tokens: 10 } });
+    } });
+  try {
+    const accepted = await mf.dispatchFetch('http://localhost/analyze');
+    assert.equal(accepted.status, 200);
+    const result = await accepted.json();
+    assert.equal(result.evidence.scene.label, 'escritório');
+    assert.deepEqual(result.evidence.scene.support, ['o1']);
+    assert.deepEqual(result.evidence.observations[0].box, generated.observations[0].box);
+    assert.deepEqual(result.evidence.limitations, ['Pouca luz']);
+    for (const [mutate, reason] of [
+      [v => v.observations[0].box.x = 0.9, 'box-bounds'],
+      [v => v.observations[0].box.width = 0, 'box-empty'],
+      [v => v.scene.support = ['o1'], 'scene-support-reference'],
+      [v => v.observations[0].kind = ['person'], 'enum-type'],
+    ]) {
+      value = structuredClone(generated); mutate(value);
+      const rejected = await mf.dispatchFetch('http://localhost/analyze');
+      assert.equal(rejected.status, 422);
+      assert.deepEqual(await rejected.json(), { error: `invalid-evidence-${reason}` });
+    }
+  } finally { await mf.dispose(); }
+});
+
 test('explicit reconciliation checks auth/origin/CSRF/age and preserves the entire hold and duplicate ID', async () => {
   const mf = new Miniflare({ modules: await modules(), compatibilityDate: '2026-05-15',
     compatibilityFlags: ['nodejs_compat'], cf: false, d1Databases: ['DB'],

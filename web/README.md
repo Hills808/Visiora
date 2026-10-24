@@ -1,3 +1,7 @@
+## Correção de contrato Luna — ADR-047
+
+O servidor aceita diferenças equivalentes de formatação e informa um motivo específico quando a resposta não atende ao contrato. Uma posição inválida continua bloqueada. Se ocorrer pausa, anote o código e pare/inicie após conferir a causa. [Testes e limites](docs/EVIDENCIAS/LUNA-CONTRATO-422-2026-10-24.md); reteste real ainda pendente.
+
 ## Percepção contínua e memória — ADR-046
 
 No [Luna privado](https://visiora-luna-hills808.hills808.chatgpt.site/), selecione **Ajustes → Percepção local contínua · experimental → Acompanhar objetos neste aparelho**. A opção vale só nesta página e começa desligada. Ao iniciar Luna, o observador baixa cerca de 60 MB de modelos e usa a mesma câmera, em paralelo à análise e à voz. A carga não bloqueia a primeira captura Luna. Desative se houver aquecimento ou lentidão.

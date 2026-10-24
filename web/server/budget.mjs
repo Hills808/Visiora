@@ -3,6 +3,7 @@ import { mkdirSync } from 'node:fs';
 import path from 'node:path';
 import { POLICY } from './config.mjs';
 import { budgetWindow } from './budget-day.mjs';
+import { EVIDENCE_ISSUES } from '../dist/perception/evidence.js';
 export class GatewayError extends Error {
   constructor(status, code) {
     super(code);
@@ -27,6 +28,7 @@ const failureCodes = new Set([
   'refused',
   'invalid-json',
   'invalid-evidence',
+  ...EVIDENCE_ISSUES.map((reason) => `invalid-evidence-${reason}`),
   'invalid-response',
   'model-unconfirmed',
   'pricing',
