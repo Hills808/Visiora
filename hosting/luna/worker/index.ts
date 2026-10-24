@@ -1,6 +1,7 @@
 import handler from "vinext/server/fetch-handler";
 import { runWithConnectorBinding } from "../lib/connector-context";
 import type { ConnectorBinding } from "../lib/connector-contract.mjs";
+import { retainAnalysis } from "../lib/luna-lifecycle";
 
 const worker = {
   fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
@@ -23,7 +24,9 @@ const worker = {
         },
       };
     }
-    return runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx));
+    const response = Promise.resolve(runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx)));
+    // Closing the camera/browser must not cancel settlement of an already reserved call.
+    return retainAnalysis(request, response, ctx);
   },
 };
 

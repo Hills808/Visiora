@@ -18,6 +18,8 @@ export const POLICY = Object.freeze({
   requestsPerMinute: 15,
   cooldownMs: 4_000,
   csrfLifetimeMs: 60 * 60_000,
+  // Explicit operator reconciliation only; never auto-refund a possibly billed request.
+  reconciliationMinAgeMs: 5 * 60_000,
   budgetTimeZone: 'America/Sao_Paulo',
 });
 

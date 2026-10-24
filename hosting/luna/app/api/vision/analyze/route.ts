@@ -1,6 +1,6 @@
 import { env } from 'cloudflare:workers';
 import { complete, LunaError, recordModel, reserve, uncertain } from '../../../../lib/luna-budget';
-import { errorResponse, json, readImage, requireIdentity, requireSameOrigin } from '../../../../lib/luna-http';
+import { errorResponse, json, readImage, requireCsrf, requireIdentity, requireSameOrigin } from '../../../../lib/luna-http';
 import { dailyLimit, hostedReady, POLICY } from '../../../../lib/luna-policy';
 import { analyzeImage, fakeAnalysis } from '../../../../lib/luna-provider';
 
@@ -15,11 +15,7 @@ export async function POST(request: Request): Promise<Response> {
     const fake = env.VISIORA_PROVIDER === 'fake';
     if (!fake && request.headers.get('x-visiora-consent') !== 'cloud-v3-continuity')
       throw new LunaError(403, 'consent');
-    const csrf = request.headers.get('x-visiora-csrf');
-    const token = csrf && /^[a-f0-9]{64}$/.test(csrf)
-      ? await env.DB.prepare('SELECT token FROM csrf_tokens WHERE token = ? AND user_id = ? AND expires_at >= ?')
-        .bind(csrf, user, Date.now()).first() : null;
-    if (!token) throw new LunaError(403, 'csrf');
+    await requireCsrf(request, env.DB, user);
     const { stamp, bytes } = await readImage(request);
     const now = Date.now();
     await reserve(env.DB, stamp.requestId, fake ? 0 : dailyLimit(env.VISIORA_DAILY_USD, now),

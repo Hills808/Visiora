@@ -20,6 +20,14 @@ export function requireIdentity(request: Request): string {
   return user;
 }
 
+export async function requireCsrf(request: Request, db: D1Database, user: string): Promise<void> {
+  const csrf = request.headers.get('x-visiora-csrf');
+  const token = csrf && /^[a-f0-9]{64}$/.test(csrf)
+    ? await db.prepare('SELECT token FROM csrf_tokens WHERE token = ? AND user_id = ? AND expires_at >= ?')
+      .bind(csrf, user, Date.now()).first() : null;
+  if (!token) throw new LunaError(403, 'csrf');
+}
+
 export function requireSameOrigin(request: Request): void {
   const origin = new URL(request.url).origin;
   if (request.headers.get('origin') !== origin || request.headers.get('sec-fetch-site') === 'cross-site')

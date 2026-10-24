@@ -37,7 +37,8 @@ export async function analyzeImage(image: Uint8Array, stamp: CaptureStamp, apiKe
   try {
     response = await fetch(POLICY.endpoint, {
       method: 'POST',
-      redirect: 'error',
+      // Workerd supports manual/follow only. Never follow redirects with the key.
+      redirect: 'manual',
       signal: AbortSignal.timeout(POLICY.timeoutMs),
       headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({

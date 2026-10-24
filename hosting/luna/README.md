@@ -1,5 +1,9 @@
 # vinext-starter
 
+## Visiora Luna: diagnóstico de conexão
+
+`/api/vision/connection` exige identidade autenticada e consulta somente GET de metadados do modelo na OpenAI. Não usa câmera nem gera inferência paga; devolve HTTP e erro de transporte sanitizado. Configuração presente em `/api/vision/status` não prova conectividade. O runtime hospedado aceita `redirect: 'manual'`, e o gateway não segue redirecionamentos com a chave. A regressão `node --test tests/hosted-workerd.test.mjs` executa os módulos reais no motor workerd com upstream artificial, sem rede externa.
+
 A clean full-stack starter running on [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and Drizzle support.
 
 ## Prerequisites

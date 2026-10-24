@@ -1,3 +1,7 @@
+## Transporte e contabilidade hospedados — ADR-043 (24/10/2026)
+
+O gateway usa fetch com `redirect: 'manual'` e rejeita 3xx sem reenviar credenciais. `/api/vision/connection` exige identidade e consulta somente metadados do modelo. O Worker registra a mesma Promise do POST de análise em `ctx.waitUntil` para tentar concluir a contabilidade após desconexão. `/api/vision/reconcile` é um POST administrativo autenticado, com Origin/CSRF, ID específico e aceite explícito da reserva incerta; mantém o valor integral. Depende do Site restrito ao proprietário. Testes executam provedor e reconciliação reais no workerd/D1 local, com rede externa substituída. [Evidência CA-L4/E1](EVIDENCIAS/LUNA-CONEXAO-WORKER-2026-10-24.md).
+
 ## Verificação contínua — ADR-031 (23/10/2026)
 
 O diagnóstico de `OnlineSession` preserva contagens da última sessão Luna após `stop()`. ADR-036 acrescenta `sessionEnd` com motivo categórico e se havia análise pendente antes do cancelamento. O app identifica no JSON que `errors`/`speechCompleted` cobrem a vida da página, enquanto `onlineContinuity` cobre a sessão Luna atual ou anterior. Nenhum pixel, descrição ou resposta bruta é incluído. [Evidência](EVIDENCIAS/LUNA-DIAGNOSTICO-2026-10-23.md).

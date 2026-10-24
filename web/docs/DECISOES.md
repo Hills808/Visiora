@@ -1,5 +1,9 @@
 # Decisões — Visiora
 
+## ADR-043 — transporte e encerramento da Luna hospedada (24/10/2026)
+
+O diagnóstico hospedado confirmou TypeError em `redirect: 'error'`, antes do envio. Usar `manual` e recusar 3xx sem encaminhar a chave. O GET de metadados passou a HTTP 200; duas análises com câmera retornaram modelo `gpt-6-luna`, `verified`, e a interface completou o ciclo de fala. Um terceiro POST cancelado ao parar a câmera deixou a reserva pendente. Reter a mesma Promise com `ctx.waitUntil` permite concluir a contabilidade após desconexão, dentro do prazo da plataforma. Reconciliação administrativa explícita por ID, identidade/Origin/CSRF e idade mínima de cinco minutos converte pending antigo em uncertain sem reduzir valor, apagar histórico ou permitir reenvio duplicado. Não há recuperação automática nem inferência de custo zero. O Site permanece restrito ao proprietário; rever autorização administrativa antes de compartilhá-lo. Dez testes com workerd/D1 e checagens de tipos/lint passaram. [Evidência CA-L4/E1](EVIDENCIAS/LUNA-CONEXAO-WORKER-2026-10-24.md). Sem novo modelo/dependência/teto; audibilidade, precisão e aceite humano não foram medidos.
+
 ## ADR-042 — diagnóstico seguro do erro da Luna hospedada (23/10/2026)
 
 **Contexto:** após o site privado indicar "Luna configurado", uma sessão real com webcam registrou falha temporária, uma tentativa de recuperação e pausa. Os dois avisos do navegador eram genéricos. Status pronto confirma presença de configuração e ledger, mas não comprova sucesso da chamada externa. Não temos o HTTP do upstream nem logs da sessão para atribuir causa.
