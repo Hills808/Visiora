@@ -26,3 +26,15 @@ Foi publicada uma nova versão do site público que oferece um link acessível �
 O gateway hospedado privado recebeu a mesma exceção de orçamento da apresentação: US$ 10 no dia 23/10 em `America/Sao_Paulo`, incluindo gastos anteriores desse dia, e US$ 2 a partir de 24/10. O ambiente continua configurado com `VISIORA_DAILY_USD=2`; a exceção depende da data no servidor. O teste `tests/hosted-policy.test.mjs` cobriu as duas fronteiras de meia-noite, zero e valor inválido. Build, tipos e lint da hospedagem passaram. Os dois deploys Sites retornaram `succeeded`.
 
 O consentimento ficou desmarcado e a câmera não foi iniciada pelo agente; portanto, ainda não há evidência de resposta real do Luna, áudio no notebook/celular, fatura ou desempenho na sala de aula. O controle D1 é do Site privado e não compartilha o ledger SQLite do gateway local; mantenha uma única implantação Luna ativa para evitar dois tetos independentes.
+
+
+## Correção da instalação do CI — 23/10/2026
+
+Critérios relacionados: CA-E4 (disponibilidade de execução entre aparelhos) e CA-L4 (gateway Luna).
+O CI do PR #15 falhava no `npm ci` da hospedagem porque o lockfile omitira as dependências transitivas `@emnapi/core@1.10.0` e `@emnapi/runtime@1.10.0` exigidas por `@rolldown/binding-wasm32-wasi`.
+O lockfile recebeu apenas as entradas aninhadas com versões, URLs e integridades verificáveis; nenhuma dependência principal, segredo ou limite de gasto foi alterado.
+A execução [40052354611](https://github.com/Hills808/Visiora/actions/runs/40052354611) concluiu os jobs `verify` e `hosted-luna` com sucesso após a correção.
+A partir da revisão seguinte, o job hospedado também roda `tests/hosted-policy.test.mjs` para verificar a virada de US$ 10 (23/10) para US$ 2 (24/10) pelo fuso de São Paulo.
+A execução [40052437468](https://github.com/Hills808/Visiora/actions/runs/40052437468) concluiu instalação, build, tipos, lint e teste de orçamento do job hospedado com sucesso; o job web independente ainda estava em execução no momento deste registro.
+
+**Sem ensaio novo:** webcam física, fala audível, requisição paga Luna, consumo medido na fatura, autenticação por celular e sessão de pessoa cega permanecem pendentes.
