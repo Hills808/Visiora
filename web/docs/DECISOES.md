@@ -1,5 +1,14 @@
 # Decisões — Visiora
 
+## ADR-042 — diagnóstico seguro do erro da Luna hospedada (23/10/2026)
+
+**Contexto:** após o site privado indicar "Luna configurado", uma sessão real com webcam registrou falha temporária, uma tentativa de recuperação e pausa. Os dois avisos do navegador eram genéricos. Status pronto confirma presença de configuração e ledger, mas não comprova sucesso da chamada externa. Não temos o HTTP do upstream nem logs da sessão para atribuir causa.
+
+**Decisão:** conservar na API e no ledger apenas o código sanitizado `provider-http-5xx` quando a OpenAI ou a borda responde HTTP 5xx; manter separados `provider-network`, `provider-timeout` e `not-configured`. O cliente preserva o código do backend para a tela e o diagnóstico; uma resposta HTTP 503 em HTML da borda vira `gateway-unavailable` sem mostrar HTML. A recuperação automática continua limitada a uma captura nova por falha temporária conhecida e ao teto vigente. Nada de payload da OpenAI, imagem, chave ou cabeçalhos nos erros.
+
+**Alternativas:** liberar chamadas de diagnóstico pagas ou reiniciar o ledger automaticamente, rejeitadas por custo e rastreabilidade. A origem exata da falha só será conhecida com um reteste da versão publicada e o código capturado. A alteração por si só não confirma funcionamento real da API nem resolve uma indisponibilidade externa.
+
+
 Consulta às fontes oficiais: 17/10/2026. Estado inicial da Fase 0: **propostas para revisão**; adoções posteriores nas ADRs 008–013. Os números das ADRs 001–005 são publicados por terceiros; as medições próprias posteriores estão identificadas nas ADRs 009 e 012. NM = não medido nesta sessão; NI = não informado/confirmado na fonte consultada. Versão de biblioteca não identifica sozinha o checkpoint.
 
 ## ADR-000 — escopo desta entrega e Sites
