@@ -74,3 +74,5 @@ jobs:
         run: npm run build
       - name: Check types and lint
         run: node node_modules/typescript/bin/tsc --noEmit && npm run lint
+      - name: Verify hosted daily budget policy
+        run: node --test tests/hosted-policy.test.mjs
