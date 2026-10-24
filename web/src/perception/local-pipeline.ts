@@ -1,6 +1,7 @@
 import { CONFIG } from '../config.js';
 import { plainLabel } from './evidence.js';
 import type { FrameAccess, LocalFrame, LocalPerceptionAdapter, LocalResult } from './frame.js';
+import { LocalFrameDiscardedError, localInputSize } from './frame.js';
 
 const sameFields = (actual: object, expected: object): boolean =>
   Object.keys(actual).length === Object.keys(expected).length &&
@@ -54,6 +55,11 @@ export class LocalPipeline {
   private counts = { dispatched: 0, accepted: 0, busySkipped: 0, stale: 0, invalid: 0, errors: 0 };
   private latencyMs: number[] = [];
   private failed = false;
+  private discarded = 0;
+  private errorReason: 'none' | 'timeout' | 'contract' | 'processing' = 'none';
+  get busy(): boolean {
+    return this.pending !== null;
+  }
   constructor(
     private generation: number,
     private adapter: LocalPerceptionAdapter,
@@ -64,6 +70,8 @@ export class LocalPipeline {
   diagnostics(): object {
     return {
       ...this.counts,
+      discarded: this.discarded,
+      errorReason: this.errorReason,
       state: this.failed
         ? 'error'
         : !this.active
@@ -99,15 +107,19 @@ export class LocalPipeline {
     void this.process(frame, controller);
   }
   private async process(access: FrameAccess, controller: AbortController): Promise<void> {
-    const timer = setTimeout(() => controller.abort(), CONFIG.vision.inferenceTimeoutMs);
+    const timer = this.adapter.managesInferenceTimeout
+      ? null
+      : setTimeout(() => controller.abort(), CONFIG.vision.inferenceTimeoutMs);
     try {
-      const frame = access.pixels(this.adapter.input.width, this.adapter.input.height);
+      const size = localInputSize(access.stamp, this.adapter.input);
+      const frame = access.pixels(size.width, size.height);
       this.counts.dispatched++;
       const result = await this.adapter.analyze(frame, controller.signal);
       if (!this.active || this.pending !== controller) return;
       if (controller.signal.aborted) throw new Error('Local inference timed out');
       if (!validLocalResult(result, frame, this.adapter)) {
         this.counts.invalid++;
+        this.errorReason = 'contract';
         throw new Error('Invalid local result');
       }
       const age = this.now() - frame.stamp.capturedAtMs;
@@ -120,15 +132,21 @@ export class LocalPipeline {
       this.latencyMs.push(age);
       if (this.latencyMs.length > CONFIG.ui.diagnosticSamples) this.latencyMs.shift();
       this.onResult(result);
-    } catch {
+    } catch (error) {
+      if (error instanceof LocalFrameDiscardedError && !controller.signal.aborted) {
+        this.discarded++;
+        return;
+      }
       if (this.active && this.pending === controller) {
+        if (controller.signal.aborted) this.errorReason = 'timeout';
+        else if (this.errorReason === 'none') this.errorReason = 'processing';
         this.counts.errors++;
         this.failed = true;
         this.stop();
         this.onFailure();
       }
     } finally {
-      clearTimeout(timer);
+      if (timer !== null) clearTimeout(timer);
       if (this.pending === controller) this.pending = null;
     }
   }

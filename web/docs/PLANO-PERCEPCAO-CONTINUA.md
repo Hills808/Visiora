@@ -1,3 +1,9 @@
+**Compatibilidade por capacidade (orientação do usuário, 24/10/2026):** não exigir modelo de aparelho ou versão específica de sistema. Detectar recursos efetivos, tentar GPU com aquecimento real e usar CPU quando suportada; capacidade ausente é informada. Números de uma máquina são evidência de ensaio, não requisito ou promessa para os demais aparelhos.
+
+## Fatia observacional implementada — ADR-046 (24/10/2026)
+
+Detector real YOLOX Nano/Tiny/S opcional ligado à captura compartilhada; inicia em paralelo e continua durante API/voz, com fila zero. Memória temporal no cérebro distingue candidato/confirmado/oculto e invalida geometria após mudança de vista/giro. Resultados aparecem em painel separado e métricas, sem fala local ou gatilhos pagos. Benchmark com vídeo público mede execução GPU/CPU no PC; não aprova qualidade temporal ou iPhone. H2/H3 e CA-A4/A5 permanecem abertos no que depende de dados anotados e pessoas. [Resultados](EVIDENCIAS/PERCEPCAO-CONTINUA-2026-10-24.md).
+
 **H2 parcial (23/10/2026):** [ADR-030 e medição](EVIDENCIAS/H2-PERCEPCAO-LOCAL-2026-10-23.md) aceleraram o worker YOLOX existente com WebGPU e retorno à CPU na inicialização. RF-DETR e D-FINE não passaram o gate de qualidade de cadeira; nenhum detector novo foi adotado. Ambiente permanece WASM; faltam RAM, carga sustentada, perda de GPU, outros perfis, webcam/voz e conjunto brasileiro. H2/H3 não liberam fala híbrida local no Luna.
 
 ## Memória e comunicação revisadas (19/10/2026)

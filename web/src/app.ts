@@ -1,6 +1,8 @@
 import { CONFIG } from './config.js';
 import { RecognitionTrace } from './diagnostics.js';
 import { Brain } from './brain/brain.js';
+import { LEX } from './brain/lexicon.js';
+import { CAPTURE_DIRECTIONS } from './brain/snapshot-speech.js';
 import type { Question, Utterance } from './brain/types.js';
 import { Speaker } from './output/speaker.js';
 import { Camera, type VisionResult } from './vision/camera.js';
@@ -380,6 +382,8 @@ function syncAnalysisControls(): void {
   const label = el<HTMLInputElement>('cloud-consent').closest('label');
   if (label) label.hidden = !cloud;
   show('luna-config', cloud);
+  show('local-observer-settings', cloud);
+  show('local-observer-panel', cloud);
 }
 el('perception-provider').addEventListener('change', syncAnalysisControls);
 syncAnalysisControls();
@@ -407,6 +411,46 @@ const online = new OnlineSession(el<HTMLVideoElement>('camera'), {
   },
 });
 const motion = new MotionInput(browserMotionHost(), () => online.observeCameraRotation());
+let localRenderKey = '';
+function renderContinuous(): void {
+  text('local-observer-state', online.localStatus);
+  text('local-observer-status', online.localStatus);
+  const tracks = online.localTracks;
+  const key = JSON.stringify(
+    tracks.map((track) => [
+      track.id,
+      track.state,
+      track.sector,
+      Math.floor((performance.now() - track.lastObservedAt) / 1000),
+    ]),
+  );
+  text(
+    'local-observer-count',
+    String(tracks.filter((track) => track.state === 'confirmed').length),
+  );
+  if (key === localRenderKey) return;
+  localRenderKey = key;
+  const rows = tracks.map((track) => {
+    const row = document.createElement('p');
+    const name = LEX[track.label]?.name ?? track.label;
+    const age = Math.max(0, Math.floor((performance.now() - track.lastObservedAt) / 1000));
+    const state =
+      track.state === 'confirmed'
+        ? 'associação confirmada em quadros distintos'
+        : track.state === 'occluded'
+          ? 'não confirmado nesta imagem; posição retirada'
+          : 'candidato, aguardando novos quadros';
+    row.textContent = `${name} — ${track.sector ? CAPTURE_DIRECTIONS[track.sector] + ' — ' : ''}${state} — observado há ${age} s.`;
+    return row;
+  });
+  if (!rows.length) {
+    const row = document.createElement('p');
+    row.textContent =
+      'Sem referências locais recentes. Isso não garante ausência de objetos ou caminho livre.';
+    rows.push(row);
+  }
+  el('local-tracks').replaceChildren(...rows);
+}
 function renderMotion(): void {
   const button = el<HTMLButtonElement>('motion-toggle');
   button.textContent = motion.enabled ? 'Desativar leitura de giros' : 'Ativar leitura de giros';
@@ -551,6 +595,7 @@ function ask(question: Question, arg = ''): void {
 }
 function tick(): void {
   renderMotion();
+  renderContinuous();
   if (mode === 'luna') {
     if (
       onlineNotice &&
@@ -712,6 +757,10 @@ function openSettings(): void {
   el<HTMLDialogElement>('settings').showModal();
 }
 el('settings-open').addEventListener('click', openSettings);
+el('local-observer').addEventListener('change', () => {
+  online.setLocalEnabled(el<HTMLInputElement>('local-observer').checked);
+  renderContinuous();
+});
 el('motion-toggle').addEventListener('click', () => {
   if (motion.enabled) motion.disable();
   else {
@@ -834,6 +883,8 @@ el('clear-cancel').addEventListener('click', () => el<HTMLDialogElement>('clear-
 el('clear-confirm').addEventListener('click', async () => {
   stop('Ambientação parada. A câmera está desligada.', 'data-cleared');
   motion.disable();
+  online.setLocalEnabled(false);
+  el<HTMLInputElement>('local-observer').checked = false;
   try {
     await clearData(localStorage);
     preferences = { ...DEFAULTS };

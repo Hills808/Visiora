@@ -34,7 +34,11 @@ try {
     assert.equal(await page.locator('#scene-place').isVisible(), true);
     await page.locator('.analysis-details > summary').click();
     const expanded = await auditAccessibility(page);
+    await page.selectOption('#perception-provider', 'luna');
+    await page.locator('#local-observer-panel > summary').click();
+    const observerPanel = await auditAccessibility(page);
     await page.click('#settings-open');
+    await page.getByText('Percepção local contínua · experimental', { exact: true }).click();
     await page.getByText('Giros da câmera · experimental', { exact: true }).click();
     const motionSettings = await auditAccessibility(page);
     await page.selectOption('#theme', 'dark');
@@ -49,6 +53,7 @@ try {
         expanded,
         darkLarge,
         motionSettings,
+        observerPanel,
         keyboardDisclosure: true,
         screenshots: 'artifacts/visual-redesign',
       }),

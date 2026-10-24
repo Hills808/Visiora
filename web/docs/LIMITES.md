@@ -1,3 +1,13 @@
+## Percepção local contínua experimental — ADR-046 (24/10/2026)
+
+No modo Luna, Ajustes permite ativar um observador local de objetos. É opcional, desligado por padrão e pode baixar cerca de 60 MB de pesos mais runtime. Trabalha durante análise/voz Luna, mas gera somente lista observacional separada, sem falas locais ou gatilhos pagos. O modo local anterior e a narração Luna permanecem independentes. As afirmações históricas abaixo de que Luna não possui detector descrevem versões anteriores.
+
+Associação entre quadros é geométrica e temporária, não identidade de pessoas ou mapa do mundo. Três detecções podem confirmar o mesmo erro; escore não é probabilidade de acerto. Desfoque, iluminação, translação da câmera, cruzamentos, objetos pequenos e oclusão podem causar perdas ou associações incorretas. Giro confirmado/mudança ampla apagam posições, mas ausência de giro não prova que a câmera está parada. Sem profundidade, distância, aproximação métrica ou detecção confiável de degrau/vidro.
+
+O teste real usa modelos reais em vídeo público reproduzido como câmera, com API/voz simuladas. Mede execução no PC, sem validar qualidade temporal, áudio ou uso humano. Na CPU observada, o atraso excedeu a meta CA-D1. iPhone/Safari físico, Android, bateria, aquecimento, VoiceOver/TalkBack, webcam física e 30 minutos permanecem pendentes. WebGPU é escolhido por capacidade efetiva e pode retornar à CPU; não inferir compatibilidade pelo nome do aparelho. Referência de plataforma: https://webkit.org/blog/17333/webkit-features-in-safari-26-0/ .
+
+Não habilitar fala híbrida nem anunciar apoio confiável à caminhada sem os gates de qualidade/atualidade e avaliação humana. O protótipo não orienta passos ou garante caminho livre. [Resultados e escopo](EVIDENCIAS/PERCEPCAO-CONTINUA-2026-10-24.md).
+
 ## iPhone e uso com movimento — ADR-045 (24/10/2026)
 
 O alvo escolhido é Safari no iPhone, com câmera traseira. A preferência pela câmera traseira é uma solicitação ao navegador, não seleção garantida da lente. Ainda não houve ensaio físico desse alvo nem VoiceOver nesta revisão. A Luna descreve capturas passadas, com idade e setores relativos à câmera; isso não informa a posição atual da pessoa, onde pisar ou a existência de caminho livre. Movimento contínuo pode invalidar todas as respostas e produzir silêncio espacial, acompanhado de aviso deduplicado. Não há detector local contínuo de objetos no modo Luna.

@@ -420,16 +420,29 @@ try {
   release();
   hold = false;
   await page.waitForFunction(() => typeof window.__startVoice === 'function');
+  await page.evaluate(() => {
+    // Keep the original callback: a later recovery notice may replace the harness's current voice.
+    window.__expiredVoice = {
+      start: window.__startVoice,
+      end: window.__endVoice,
+      queuedAt: window.__queuedVoiceAt,
+    };
+  });
   await page.waitForFunction(
-    (ttl) => performance.now() - window.__queuedVoiceAt >= ttl,
+    (ttl) => performance.now() - window.__expiredVoice.queuedAt >= ttl,
     CONFIG.speech.answerTtlMs + CONFIG.ui.tickMs,
   );
   await page.evaluate(() => {
-    window.__startVoice();
-    window.__endVoice?.();
+    window.__expiredVoice.start();
+    window.__expiredVoice.end?.();
   });
   assert.equal(await page.evaluate(() => window.__spoken.length), 0);
   assert.equal(await page.evaluate(() => window.__canceled.length), 1);
+  assert.equal(
+    await page.evaluate(() => window.__testOnlineSession.diagnostics().recovering),
+    true,
+  );
+  assert.equal(await page.evaluate(() => window.__analysisRequests.length), 1);
   report.cases.push(
     'A voice callback delayed beyond the delivery TTL is rejected before audio and cannot acknowledge delivery',
   );

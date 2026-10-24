@@ -319,6 +319,30 @@
                 </button>
               </div>
             </section>
+            <details
+              class="environment-details"
+              id="local-observer-panel"
+              hidden
+            >
+              <summary>
+                Percepção local experimental
+                <span id="local-observer-count">0</span>
+              </summary>
+              <div class="scene-summary">
+                <p id="local-observer-state" class="field-hint">
+                  Desligada. Ative em Ajustes.
+                </p>
+                <p>
+                  Observações separadas das capturas Luna, relativas à câmera e
+                  sujeitas a erro. Associação entre imagens não identifica
+                  pessoas nem mede distância. A fala local aguarda avaliação de
+                  qualidade.
+                </p>
+                <div id="local-tracks">
+                  <p>Sem referências locais recentes.</p>
+                </div>
+              </div>
+            </details>
             <details class="environment-details" id="environment-details">
               <summary>
                 <span>Detalhes do ambiente</span>
@@ -761,6 +785,22 @@
             ></label
           >
         </div>
+        <details class="data-controls" id="local-observer-settings" hidden>
+          <summary>Percepção local contínua · experimental</summary>
+          <label class="checkbox-label"
+            ><input type="checkbox" id="local-observer" /><span
+              >Acompanhar objetos neste aparelho<span class="field-hint"
+                >Baixa cerca de 60 MB de modelos ao ativar uma sessão Luna. Pode
+                aumentar consumo e aquecimento. Continua enquanto o Luna analisa
+                ou fala; observações aparecem em detalhes, sem falas locais
+                automáticas.</span
+              ></span
+            ></label
+          >
+          <p id="local-observer-status" class="field-hint">
+            Desligada. Esta opção vale somente nesta página.
+          </p>
+        </details>
         <details class="data-controls">
           <summary>Giros da câmera · experimental</summary>
           <p>

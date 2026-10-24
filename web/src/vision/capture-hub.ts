@@ -8,7 +8,7 @@ export class CaptureHub {
   private frameId = 0;
   private latest: FrameStamp | null = null;
   private canvas = document.createElement('canvas');
-  private derivative = document.createElement('canvas');
+  private derivatives = new Map<string, HTMLCanvasElement>();
   private subscribers = new Set<(frame: FrameAccess) => void>();
   private callbackId: number | null = null;
   private backend: 'video-frame' | 'animation-frame' = 'animation-frame';
@@ -119,8 +119,10 @@ export class CaptureHub {
       height = this.video.videoHeight;
     if (!width || !height) return;
     const ratio = Math.min(1, CONFIG.online.imageMaxSide / Math.max(width, height));
-    this.canvas.width = Math.round(width * ratio);
-    this.canvas.height = Math.round(height * ratio);
+    const targetWidth = Math.round(width * ratio),
+      targetHeight = Math.round(height * ratio);
+    if (this.canvas.width !== targetWidth) this.canvas.width = targetWidth;
+    if (this.canvas.height !== targetHeight) this.canvas.height = targetHeight;
     const context = this.canvas.getContext('2d');
     if (!context) {
       ended();
@@ -158,9 +160,21 @@ export class CaptureHub {
       ![width, height].every((n) => Number.isInteger(n) && n > 0 && n <= CONFIG.online.imageMaxSide)
     )
       throw new Error('Dimensões de percepção não suportadas.');
-    this.derivative.width = width;
-    this.derivative.height = height;
-    const context = this.derivative.getContext('2d', { willReadFrequently: true });
+    const key = `${width}x${height}`;
+    let derivative = this.derivatives.get(key);
+    if (!derivative) {
+      if (this.derivatives.size >= CONFIG.continuous.derivativeCanvases) {
+        const first = this.derivatives.keys().next().value!;
+        const expired = this.derivatives.get(first)!;
+        expired.width = expired.height = 0;
+        this.derivatives.delete(first);
+      }
+      derivative = document.createElement('canvas');
+      derivative.width = width;
+      derivative.height = height;
+      this.derivatives.set(key, derivative);
+    }
+    const context = derivative.getContext('2d', { willReadFrequently: true });
     if (!context) throw new Error('Processamento de imagem indisponível.');
     context.drawImage(this.canvas, 0, 0, width, height);
     return {
@@ -197,9 +211,10 @@ export class CaptureHub {
     this.latest = null;
     this.lastMediaTime = this.lastCopyAt = -Infinity;
     this.lastDecoded = -1;
-    for (const canvas of [this.canvas, this.derivative]) {
+    for (const canvas of [this.canvas, ...this.derivatives.values()]) {
       canvas.width = 0;
       canvas.height = 0;
     }
+    this.derivatives.clear();
   }
 }

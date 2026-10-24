@@ -1,3 +1,9 @@
+**Compatibilidade por capacidade (orientação do usuário, 24/10/2026):** não exigir modelo de aparelho ou versão específica de sistema. Detectar recursos efetivos, tentar GPU com aquecimento real e usar CPU quando suportada; capacidade ausente é informada. Números de uma máquina são evidência de ensaio, não requisito ou promessa para os demais aparelhos.
+
+## Implementação observacional H2/H3 — ADR-046 (24/10/2026)
+
+Autorizados os itens percepção contínua, menor atraso e memória no movimento. Uma fatia integrada oferece detector real opcional durante Luna, carga paralela, processamento sem fila, diagnóstico de atraso e associação temporal no cérebro. Resultados locais são apresentados separadamente e não alimentam fala ou chamadas Luna. H2/H3 têm implementação de engenharia e medição exploratória, mas ainda não aprovação de qualidade temporal ou de aparelho móvel. O objetivo de caminhada permanece em pesquisa; esta revisão não libera orientação de passos. [Evidência](EVIDENCIAS/PERCEPCAO-CONTINUA-2026-10-24.md).
+
 ## Prioridade atual — movimento no iPhone (ADR-045, 24/10/2026)
 
 Alvo indicado pelo usuário: iPhone com câmera traseira. A primeira fatia corrige continuidade de capturas, linguagem temporal, retirada de posições por giro opcional e diagnóstico de atraso; não libera orientação de caminhada. O objetivo de direção relativa ao usuário exige correspondência câmera/corpo ainda não medida. No Luna, registrar explicitamente o referencial da câmera e a captura passada até existir evidência para essa correspondência. Modo local e seus critérios permanecem.

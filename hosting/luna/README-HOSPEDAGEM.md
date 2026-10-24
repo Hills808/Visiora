@@ -10,7 +10,7 @@ Esta implantação privada reúne o build web existente e um gateway Luna em Clo
 - Um pedido pendente bloqueia os demais, inclusive após a meia-noite. É preciso reconciliar no ledger uma falha incerta antes de liberar novas chamadas.
 - O orçamento hospedado é compartilhado entre os aparelhos que usam este Site, mas não com um gateway local SQLite. Desligue o gateway local antes de habilitar o teto hospedado para não ultrapassar o limite total autorizado.
 - A alternativa `VISIORA_PROVIDER=fake` é apenas para testes locais, sem chamada paga.
-- Esta página privada oferece apenas Luna; os pesos dos modelos locais foram excluídos do build (cerca de 10 MB no ZIP local gerado). A versão pública separada mantém o modo local.
+- Esta página privada oferece Luna e um observador local experimental opcional. O build inclui os três pesos YOLOX (cerca de 60 MB) e seus manifests, sem SigLIP2/Places365. A opção começa desligada e só inicializa ao ser ativada em uma sessão Luna. A versão pública separada mantém o modo local.
 
 ## Testes
 

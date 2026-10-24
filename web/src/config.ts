@@ -2,7 +2,7 @@
 export const CONFIG = Object.freeze({
   version: '0.3.0',
   online: {
-    deliveryPolicyRevision: 'adr-045', // Exported in diagnostics to identify the local Luna build after cache updates.
+    deliveryPolicyRevision: 'adr-046', // Exported in diagnostics to identify the local Luna build after cache updates.
     snapshotMaxAgeMs: 10000, // Explicitly aged snapshots only; never inserted into the live World.
     imageMaxSide: 1280,
     jpegQuality: 0.85,
@@ -37,6 +37,16 @@ export const CONFIG = Object.freeze({
     confirmations: 2, // Reject isolated sensor spikes; no position is restored by a later low reading.
     maxGapMs: 250, // Only adjacent distinct readings confirm rotation; long pauses reset confirmation.
     staleMs: 1500, // Report absent/expired readings honestly; no sensor implies no extra invalidation.
+  },
+  continuous: {
+    minHits: 3, // Independent accepted frames, not duplicate frames or model votes; experimental association only.
+    minIou: 0.3, // Conservative image overlap association; ambiguous crossings suspend association.
+    maxGapMs: 2500, // Slow CPU observations cannot accumulate confirmation across longer gaps.
+    maxAgeMs: 3000, // Local observations never extend the existing three-second evidence window.
+    retentionMs: 5000, // Brief occlusion memory has no current direction and expires without claiming departure.
+    maxTracks: 30, // Bound session-local associations; never persistent identities.
+    sectorHysteresisDegrees: 5, // Ignore small image-box jitter; not calibrated body heading.
+    derivativeCanvases: 2, // Retain RGB and detector resize surfaces only; no image history or frame queue.
   },
   speech: {
     briefingMs: 3800,
@@ -118,6 +128,7 @@ export const CONFIG = Object.freeze({
     minScore: 0.45,
     nms: 0.45,
     maxDetections: 30,
+    statusMaxChars: 512, // Bound worker status/protocol strings; never accept arbitrary provider payloads.
     workerTimeoutMs: 180000, // First access also downloads the two local person-verification models.
     inferenceTimeoutMs: 10000,
   },

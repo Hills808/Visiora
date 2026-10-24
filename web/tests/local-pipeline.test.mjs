@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { LocalPipeline } from '../dist/perception/local-pipeline.js';
 import { WorkerLocalAdapter } from '../dist/perception/worker-adapter.js';
 import { CONFIG } from '../dist/config.js';
+import { LocalFrameDiscardedError } from '../dist/perception/frame.js';
 
 const flush = () => new Promise(setImmediate);
 const source = { id: 'test-local', revision: '1', simulated: true };
@@ -220,6 +221,22 @@ test('CA-H9: numerical latency samples remain bounded for a long session', async
     await flush();
   }
   assert.equal(f.pipeline.diagnostics().latencyMs.length, CONFIG.ui.diagnosticSamples);
+  f.pipeline.stop();
+});
+
+test('CA-H7: discarded GPU frame keeps pipeline alive and releases busy slot for a new frame', async () => {
+  const f = fixture();
+  f.adapter.analyze = () => Promise.reject(new LocalFrameDiscardedError('GPU frame discarded'));
+  f.pipeline.offer(frame(1));
+  assert.equal(f.pipeline.busy, true);
+  await flush();
+  assert.equal(f.pipeline.busy, false);
+  assert.equal(f.pipeline.diagnostics().discarded, 1);
+  assert.deepEqual(f.status(), { disposed: 0, failed: 0 });
+  f.adapter.analyze = async (input) => result(input);
+  f.pipeline.offer(frame(2));
+  await flush();
+  assert.equal(f.accepted[0].stamp.frameId, 2);
   f.pipeline.stop();
 });
 

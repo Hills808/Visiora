@@ -3,6 +3,7 @@ import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
 import path from 'node:path';
+import { includeLunaModel } from './model-profile.mjs';
 const root = await realpath('.');
 const { version } = JSON.parse(await readFile('package.json', 'utf8'));
 const output = path.resolve(root, 'dist');
@@ -22,10 +23,12 @@ await mkdir('dist', { recursive: true });
 const modelRoot = path.resolve(root, 'public/models');
 await cp('public', 'dist', {
   recursive: true,
-  // Hosted Luna builds omit local model weights; the default local build is unchanged.
+  // Luna's optional observer needs object weights only; omit whole-image scene models.
   filter: (source) =>
     process.env.VISIORA_HOSTED_LUNA_ONLY !== '1' ||
-    (path.resolve(source) !== modelRoot && !path.resolve(source).startsWith(modelRoot + path.sep)),
+    (path.resolve(source) !== modelRoot &&
+      !path.resolve(source).startsWith(modelRoot + path.sep)) ||
+    includeLunaModel(path.relative(modelRoot, path.resolve(source))),
 });
 await mkdir('dist/vendor', { recursive: true });
 for (const name of [

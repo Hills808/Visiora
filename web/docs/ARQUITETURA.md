@@ -1,3 +1,11 @@
+## Observador contínuo — ADR-046 (24/10/2026)
+
+OnlineSession delega a `ContinuousPerception`, cuja ativação é explícita em Ajustes. CaptureHub fornece o mesmo quadro ao snapshot Luna e ao observador, sem abrir outro stream. YoloxAdapter inicia o worker existente de objetos em paralelo, prepara letterboxes proporcionais e transfere buffers. LocalPipeline reserva antes da cópia e ignora ofertas enquanto ocupado; não há fila. A carga inicial não usa o prazo de inferência. Falha local retira a capacidade local e não muda o estado financeiro ou a voz Luna.
+
+No cérebro, TrackMemory mantém associações efêmeras, fonte/tempo e revisão de vista. Uma revisão vinculada ao despacho evita aceitar caixas anteriores ao giro ou à mudança ampla. Oclusão não é saída física, associação não é identidade e imagem maior não é aproximação métrica. O painel textual separa candidatos, associações confirmadas e oclusões; apenas observações locais recentes têm setor relativo à câmera. A memória não entra no narrador Luna nem renova seu snapshot.
+
+O build hospedado inclui somente YOLOX Nano/Tiny/S, seus manifests/partes e o runtime existente. Nenhum modelo de ambientes é inicializado no observador. Diagnóstico guarda contadores e tempos limitados e separados por CPU/GPU; não grava pixels ou conteúdo visual. [Evidência e diagrama do fluxo](EVIDENCIAS/PERCEPCAO-CONTINUA-2026-10-24.md).
+
 ## Movimento e atualidade — ADR-045 (24/10/2026)
 
 `SnapshotView` tem invalidação irreversível por mudança ampla de imagem ou giro confirmado do aparelho. `OnlineSession` conserva necessidade de substituta sem restaurar posições quando a imagem retorna. Saída interrompida é abandonada sem confirmação; início expirado entra na recuperação limitada. `OnlineTiming` guarda amostras numéricas limitadas por sessão e separa callbacks de voz e publicação em texto.

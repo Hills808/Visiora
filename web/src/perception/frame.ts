@@ -47,7 +47,24 @@ export interface LocalResult {
 /** One stateless inference. Temporal association and speech belong to the brain. */
 export interface LocalPerceptionAdapter {
   readonly source: LocalSource;
-  readonly input: { width: number; height: number };
+  readonly input: { width: number; height: number; preserveAspectRatio?: boolean };
+  /** Worker transport owns the inference watchdog so GPU recovery can discard, not abort. */
+  readonly managesInferenceTimeout?: boolean;
   analyze(frame: LocalFrame, signal: AbortSignal): Promise<LocalResult>;
   dispose(): void;
+}
+
+/** A failed GPU frame is discarded while the independent worker initializes on CPU. */
+export class LocalFrameDiscardedError extends Error {}
+
+export function localInputSize(
+  stamp: Pick<FrameStamp, 'width' | 'height'>,
+  input: LocalPerceptionAdapter['input'],
+): { width: number; height: number } {
+  if (!input.preserveAspectRatio) return { width: input.width, height: input.height };
+  const ratio = Math.min(input.width / stamp.width, input.height / stamp.height);
+  return {
+    width: Math.max(1, Math.floor(stamp.width * ratio)),
+    height: Math.max(1, Math.floor(stamp.height * ratio)),
+  };
 }

@@ -10,7 +10,8 @@ import { SnapshotCamera } from './snapshot-camera.js';
 import { AutoAnalysis } from './auto-analysis.js';
 import { compareViews } from './view-change.js';
 import { SnapshotView } from './snapshot-view.js';
-import { LocalPipeline } from '../perception/local-pipeline.js';
+import { ContinuousPerception } from '../perception/continuous.js';
+import { YoloxAdapter } from '../perception/yolox-adapter.js';
 import type { LocalPerceptionAdapter } from '../perception/frame.js';
 
 interface Hooks {
@@ -37,7 +38,7 @@ export class OnlineSession {
   private client = new LunaClient();
   private memory = new VisualMemory();
   private camera: SnapshotCamera;
-  private local: LocalPipeline | null = null;
+  private continuous: ContinuousPerception;
   private status: GatewayStatus | null = null;
   private generation = 0;
   private running = false;
@@ -73,7 +74,7 @@ export class OnlineSession {
       paused: this.automatic.isPaused,
       recovering: this.automatic.recovering,
       capture: this.camera.hub.diagnostics(),
-      local: this.local?.diagnostics() ?? { state: 'disabled', reason: 'model-not-selected' },
+      local: this.continuous.diagnostics(),
     };
   }
   private current: {
@@ -93,8 +94,19 @@ export class OnlineSession {
   constructor(
     video: HTMLVideoElement,
     private hooks: Hooks,
-    private localFactory?: () => LocalPerceptionAdapter,
+    localFactory?: () => LocalPerceptionAdapter,
   ) {
+    this.continuous = new ContinuousPerception(
+      localFactory
+        ? async () => localFactory()
+        : (signal, status) => YoloxAdapter.create(signal, status),
+      () => performance.now(),
+      () =>
+        this.hooks.announce(
+          'A percepção local não está disponível. Confira também o estado da análise Luna.',
+        ),
+    );
+    if (localFactory) this.continuous.setEnabled(true);
     this.camera = new SnapshotCamera(
       video,
       () => undefined, // Pixel motion is not measured body rotation; it must not starve analysis.
@@ -103,7 +115,7 @@ export class OnlineSession {
     this.camera.hub.subscribe((frame) => {
       this.observeViews();
       this.withdrawDirections();
-      this.local?.offer(frame);
+      this.continuous.offer(frame, this.camera.signature);
     });
     el<HTMLInputElement>('cloud-consent').addEventListener('change', () => {
       if (
@@ -123,6 +135,18 @@ export class OnlineSession {
   }
   get place(): string {
     return this.memory.snapshot?.evidence.scene?.label ?? '';
+  }
+  setLocalEnabled(enabled: boolean): void {
+    this.continuous.setEnabled(enabled);
+  }
+  get localEnabled(): boolean {
+    return this.continuous.enabledNow;
+  }
+  get localStatus(): string {
+    return this.continuous.feedback;
+  }
+  get localTracks() {
+    return this.continuous.snapshot();
   }
   get capturedAt(): number | null {
     return this.displayedAt;
@@ -155,24 +179,7 @@ export class OnlineSession {
     this.referencesVisible = false;
     this.automatic.reset();
     try {
-      this.local?.stop();
-      this.local = this.localFactory
-        ? new LocalPipeline(
-            generation,
-            this.localFactory(),
-            () => {
-              // H1 checks transport. No local facts feed speech before the H2/H3 quality gate.
-            },
-            () => {
-              this.hooks.message(
-                'Acompanhamento local indisponível. A análise por capturas continua.',
-              );
-              this.hooks.announce(
-                'Acompanhamento local indisponível. A análise por capturas continua.',
-              );
-            },
-          )
-        : null;
+      this.continuous.start(generation);
       await this.camera.start(generation);
     } catch (error) {
       this.stop('start-failed');
@@ -188,7 +195,7 @@ export class OnlineSession {
     this.current = null;
     this.waiting = null;
     this.client.cancel();
-    this.local?.stop();
+    this.continuous.stop();
     this.camera.stop();
     this.memory.clear();
     this.analyzedView = [];
@@ -530,6 +537,7 @@ export class OnlineSession {
    */
   observeCameraRotation(): void {
     if (!this.running) return;
+    this.continuous?.rotated();
     this.observeViews(true);
     this.withdrawDirections();
   }

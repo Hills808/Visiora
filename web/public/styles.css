@@ -1158,11 +1158,11 @@ summary {
   cursor: pointer;
   font-weight: 600;
 }
-.environment-details {
+:is(.environment-details, .local-observer-panel) {
   margin-top: 24px;
   border-top: 1px solid var(--line);
 }
-.environment-details > summary {
+:is(.environment-details, .local-observer-panel) > summary {
   padding-block: 14px;
   font-size: 15px;
 }
@@ -1173,7 +1173,7 @@ summary {
   font-weight: 400;
   color: var(--muted);
 }
-.environment-details[open] > summary {
+:is(.environment-details, .local-observer-panel)[open] > summary {
   margin-bottom: 4px;
 }
 .cloud-consent {

@@ -1,3 +1,11 @@
+## Percepção contínua e memória — ADR-046
+
+No [Luna privado](https://visiora-luna-hills808.hills808.chatgpt.site/), selecione **Ajustes → Percepção local contínua · experimental → Acompanhar objetos neste aparelho**. A opção vale só nesta página e começa desligada. Ao iniciar Luna, o observador baixa cerca de 60 MB de modelos e usa a mesma câmera, em paralelo à análise e à voz. A carga não bloqueia a primeira captura Luna. Desative se houver aquecimento ou lentidão.
+
+Abra **Percepção local experimental** para consultar observações recentes, candidatos e associações temporárias. Elas são relativas à câmera, podem errar e não representam identidades, distâncias ou caminho livre. A fala continua baseada nas capturas Luna; fala híbrida aguarda qualidade temporal medida. O diagnóstico exportado não inclui rótulos, caixas ou imagens. [Evidências e limites](docs/EVIDENCIAS/PERCEPCAO-CONTINUA-2026-10-24.md).
+
+Teste de transporte/execução real: após build e preparação do vídeo de QA, `node tests/e2e/continuous-real.mjs` (GPU quando disponível) e `node tests/e2e/continuous-real.mjs --cpu`. `VISIORA_QA_VIDEO` aceita caminho de vídeo Y4M público/consentido; sem ele usa a foto pública dog.y4m e mede só carga/atraso. Usa API fake e SQLite em memória, nunca .env; não valida câmera/voz reais ou reconhecimento. Não usar frames privados sem autorização. H1 fake continua em `node tests/e2e/hybrid-capture.mjs`.
+
 ## Movimento no iPhone — revisão ADR-045
 
 No [Luna privado](https://visiora-luna-hills808.hills808.chatgpt.site/), a descrição identifica o tempo da captura e posições relativas à câmera. A mudança de vista exige captura nova mesmo quando o enquadramento volta. Em **Ajustes → Giros da câmera · experimental**, a leitura opcional retira posições após giro detectado; começa desligada, exige permissão no iPhone e funciona só durante Luna em primeiro plano. O estado informa quando faltam leituras. Sem câmera/voz física ou caminhada avaliadas nesta revisão: não usar o protótipo para decidir onde pisar. Para o primeiro ensaio, permanecer parado e movimentar apenas a câmera num ambiente conhecido.

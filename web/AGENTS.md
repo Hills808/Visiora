@@ -146,3 +146,7 @@ O arquivo `visiora-diagnosticov.json` mostrou 2 envios Luna, 1 aceito e 1 entreg
 ## Luna hospedado — ADR-039 (23/10/2026)
 
 `hosting/luna/` contém o Site privado para celular. Leia `docs/EVIDENCIAS/LUNA-CELULAR-HOSPEDADO-2026-10-23.md` e `hosting/luna/README-HOSPEDAGEM.md`. No clone GitHub, prepare o cliente com `node hosting/luna/scripts/prepare-web.mjs` antes do build hospedado. O Site usa D1 compartilhado entre aparelhos e segredo no servidor; o gateway SQLite local está desativado para não duplicar o teto de US$ 2/dia. Não reative ambos com tetos integrais. O Site público continua local. Testes fake não comprovam câmera/voz física, cobrança, precisão ou uso por pessoas cegas.
+
+## Observador contínuo — ADR-046 (24/10/2026)
+
+Ler docs/EVIDENCIAS/PERCEPCAO-CONTINUA-2026-10-24.md. O usuário autorizou implementar percepção contínua, atraso e memória. YoloxAdapter real opcional + LocalPipeline + TrackMemory funcionam durante Luna, somente observações/diagnósticos. Sem fala local ou gatilhos pagos antes de qualidade H2/H3. Carga paralela, fila zero, cancelamento, revisão de vista no despacho e saída de memória não biométrica. Site privado inclui três pesos de objetos; não inicializa ambientes. Novos testes: node tests/e2e/continuous-real.mjs e --cpu; vídeo definido por VISIORA_QA_VIDEO, API fake, não .env. iPhone/qualidade temporal/voz humana continuam pendentes. Não generalizar números do PC nem usar confirmações temporais como acurácia.

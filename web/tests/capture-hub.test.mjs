@@ -2,6 +2,34 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { CaptureHub } from '../dist/vision/capture-hub.js';
 import { SnapshotCamera } from '../dist/vision/snapshot-camera.js';
+import { CONFIG } from '../dist/config.js';
+
+test('CA-H1/H9: resize surfaces are bounded and reused while pixel contents and timestamps stay fresh', async (t) => {
+  const f = setup(t);
+  const observations = [];
+  f.hub.subscribe((frame) => {
+    const rgb = frame.pixels(32, 24);
+    const detector = frame.pixels(640, 480);
+    observations.push([
+      frame.stamp.frameId,
+      new Uint8Array(rgb.rgba)[0],
+      new Uint8Array(detector.rgba)[0],
+    ]);
+  });
+  await f.hub.start(1);
+  for (let i = 1; i <= 10; i++) {
+    f.pixels(i);
+    f.emit(i * 250, i);
+  }
+  assert.equal(f.canvases.length, 1 + CONFIG.continuous.derivativeCanvases);
+  assert.equal(observations.length, 10);
+  assert.deepEqual(
+    observations.map((row) => row.slice(1)),
+    Array.from({ length: 10 }, (_, i) => [i + 1, i + 1]),
+  );
+  f.hub.stop();
+  assert.ok(f.canvases.every((canvas) => canvas.width === 0 && canvas.height === 0));
+});
 
 function setup(
   t,
