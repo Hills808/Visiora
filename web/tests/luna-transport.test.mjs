@@ -77,6 +77,8 @@ test('CA-L3/D4: client permits bounded recovery only for known temporary failure
     for (const [http, error, transient] of [
       [503, 'provider-network', true],
       [503, 'provider-unavailable', true],
+      [503, 'provider-http-520', true],
+      [503, 'provider-http-503', true],
       [504, 'provider-timeout', true],
       [503, 'not-configured', false],
       [503, 'model-audit', false],
@@ -92,10 +94,18 @@ test('CA-L3/D4: client permits bounded recovery only for known temporary failure
       };
       await assert.rejects(
         client.analyze(new Blob(['test']), stamp, status, true),
-        (value) => value instanceof AnalysisError && value.transient === transient,
+        (value) => value instanceof AnalysisError && value.transient === transient && value.code === error,
       );
       assert.equal(calls, 1); // Client never retries on its own.
     }
+    globalThis.fetch = async () => new Response('<html>PRIVATE EDGE ERROR</html>', {
+      status: 503, headers: { 'content-type': 'text/html' },
+    });
+    await assert.rejects(
+      client.analyze(new Blob(['test']), stamp, status, true),
+      (value) => value instanceof AnalysisError && value.code === 'gateway-unavailable' &&
+        value.transient && !value.message.includes('PRIVATE'),
+    );
     globalThis.fetch = async () => {
       throw new TypeError('PRIVATE NETWORK');
     };

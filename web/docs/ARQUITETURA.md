@@ -1,3 +1,23 @@
+## Observador contínuo — ADR-046 (24/10/2026)
+
+OnlineSession delega a `ContinuousPerception`, cuja ativação é explícita em Ajustes. CaptureHub fornece o mesmo quadro ao snapshot Luna e ao observador, sem abrir outro stream. YoloxAdapter inicia o worker existente de objetos em paralelo, prepara letterboxes proporcionais e transfere buffers. LocalPipeline reserva antes da cópia e ignora ofertas enquanto ocupado; não há fila. A carga inicial não usa o prazo de inferência. Falha local retira a capacidade local e não muda o estado financeiro ou a voz Luna.
+
+No cérebro, TrackMemory mantém associações efêmeras, fonte/tempo e revisão de vista. Uma revisão vinculada ao despacho evita aceitar caixas anteriores ao giro ou à mudança ampla. Oclusão não é saída física, associação não é identidade e imagem maior não é aproximação métrica. O painel textual separa candidatos, associações confirmadas e oclusões; apenas observações locais recentes têm setor relativo à câmera. A memória não entra no narrador Luna nem renova seu snapshot.
+
+O build hospedado inclui somente YOLOX Nano/Tiny/S, seus manifests/partes e o runtime existente. Nenhum modelo de ambientes é inicializado no observador. Diagnóstico guarda contadores e tempos limitados e separados por CPU/GPU; não grava pixels ou conteúdo visual. [Evidência e diagrama do fluxo](EVIDENCIAS/PERCEPCAO-CONTINUA-2026-10-24.md).
+
+## Movimento e atualidade — ADR-045 (24/10/2026)
+
+`SnapshotView` tem invalidação irreversível por mudança ampla de imagem ou giro confirmado do aparelho. `OnlineSession` conserva necessidade de substituta sem restaurar posições quando a imagem retorna. Saída interrompida é abandonada sem confirmação; início expirado entra na recuperação limitada. `OnlineTiming` guarda amostras numéricas limitadas por sessão e separa callbacks de voz e publicação em texto.
+
+`MotionInput` é uma entrada opcional local, sem biblioteca: botão em Ajustes solicita permissão no gesto, e escuta `devicemotion` apenas na sessão Luna visível. `CameraRotationGuard` interpreta a norma de rotationRate; não calcula direção corporal, deslocamento ou distância. O indicador distingue autorização de recebimento recente. Sem sensor, o fluxo de imagem permanece disponível, sem tratar ausência como estabilidade. Captura traseira já usa `facingMode: {ideal: 'environment'}`; o navegador decide a lente e ainda exige teste no iPhone. Luna permanece por snapshots; não há detector de objetos contínuo ativo nesse modo. [Evidência](EVIDENCIAS/MOVIMENTO-IPHONE-2026-10-24.md).
+
+## Transporte e contabilidade hospedados — ADR-043 (24/10/2026)
+
+**Interface ADR-044:** a camada de apresentação usa o mesmo HTML/CSS e módulos de sessão. Controles de nuvem acompanham a seleção do modo; a seção de contexto/referências é expansível e se abre em erro do reconhecimento local. Essas escolhas não alteram percepção, narrativa, API ou orçamento. [Evidência](EVIDENCIAS/REDESIGN-VISUAL-2026-10-24.md).
+
+O gateway usa fetch com `redirect: 'manual'` e rejeita 3xx sem reenviar credenciais. `/api/vision/connection` exige identidade e consulta somente metadados do modelo. O Worker registra a mesma Promise do POST de análise em `ctx.waitUntil` para tentar concluir a contabilidade após desconexão. `/api/vision/reconcile` é um POST administrativo autenticado, com Origin/CSRF, ID específico e aceite explícito da reserva incerta; mantém o valor integral. Depende do Site restrito ao proprietário. Testes executam provedor e reconciliação reais no workerd/D1 local, com rede externa substituída. [Evidência CA-L4/E1](EVIDENCIAS/LUNA-CONEXAO-WORKER-2026-10-24.md).
+
 ## Verificação contínua — ADR-031 (23/10/2026)
 
 O diagnóstico de `OnlineSession` preserva contagens da última sessão Luna após `stop()`. ADR-036 acrescenta `sessionEnd` com motivo categórico e se havia análise pendente antes do cancelamento. O app identifica no JSON que `errors`/`speechCompleted` cobrem a vida da página, enquanto `onlineContinuity` cobre a sessão Luna atual ou anterior. Nenhum pixel, descrição ou resposta bruta é incluído. [Evidência](EVIDENCIAS/LUNA-DIAGNOSTICO-2026-10-23.md).
@@ -92,3 +112,22 @@ O site público serve apenas os arquivos estáticos de `dist` por HTTPS. A câme
 Para respeitar o limite de 25 MiB por arquivo do host, o build grava o runtime WebAssembly asyncify como gzip e um manifesto com bytes/SHA-256. Os dois workers o descomprimem e verificam antes de chamar o ONNX Runtime. O pacote local e o cache offline incluem esses arquivos compactados.
 
 O pacote portátil Luna para Windows x64 usa os mesmos `dist/`, `server/`, `prompts/` e `schemas/` e acrescenta um Node.js oficial com hash verificado. O gateway continua em loopback com SQLite local. `.env` e `.runtime/luna-budget.sqlite` são transferidos separadamente pelo proprietário, fora do ZIP e do Git; o preflight exige Luna pronto e teto de US$ 2/dia. Não existe sincronização de orçamento entre dois gateways ativos.
+## Luna hospedado privado — ADR-039 (23/10/2026)
+
+`hosting/luna/` monta uma variante do mesmo cliente web sem pesos locais e publica `/api/vision/status` e `/api/vision/analyze` no Worker do Site privado. O despacho da hospedagem exige login; as rotas exigem identidade, origem, token CSRF e consentimento antes de aceitar JPEG. O Worker chama a Responses API com `store:false`, confere o identificador `gpt-6-luna` devolvido e valida a evidência estruturada. D1 mantém apenas ID, horário, dia de São Paulo, reserva/custo, estado, uso e modelo; nenhuma imagem ou fala. Uma inserção SQL condicional faz a reserva de modo atômico entre aparelhos. Reserva incerta permanece até revisão manual. O modo público local e o gateway Node/SQLite continuam em código separado; o gateway local está desativado enquanto o Site usa o teto de US$ 2/dia. [Evidência](EVIDENCIAS/LUNA-CELULAR-HOSPEDADO-2026-10-23.md).
+
+## Contrato Luna — ADR-047
+
+`prepareEvidence` é compartilhado pelos provedores Node e Worker: normaliza apenas representação, preserva a geometria e valida referências originais antes de renomear IDs. O JSON Schema restringe campos e o validador faz verificações semânticas adicionais. Erros categóricos fechados chegam ao cliente sem texto do provedor; reserva incerta não é liberada. [Evidência](EVIDENCIAS/LUNA-CONTRATO-422-2026-10-24.md).
+
+## Continuidade da memória linguística — ADR-048
+
+SnapshotDiscourse separa orientação, correção de cena, presença sem localização e ausências candidatas. A confirmação exige capturas distintas e intervalo configurado; o histórico não renova a validade do snapshot. O plano suprime somente equivalências explícitas e inequívocas na mesma geometria, sem tracking de identidade. Uma correção de lugar não limpa as referências entregues. Estado de ausência acompanha o limite e a limpeza da memória. [Evidência](EVIDENCIAS/CONTINUIDADE-SEM-REPETICAO-2026-10-25.md).
+
+## Perfis Luna e tempos por etapa — ADR-049
+
+SnapshotSpeechProfile é escolhido pela preferência atual via hook de OnlineSession. VisualMemory e SnapshotDiscourse partilham limites e selecionam grupos completos. O replay conserva texto/limite da entrega anterior. OnlineSession liga a resposta aceita à preparação/início; OnlineTiming guarda intervalos numéricos responseToPreparation e responseToStart separados de preparationToStart. Sem mudar modelo, captura, validade ou orçamento. [Evidência](EVIDENCIAS/FALA-CURTA-ESPERA-2026-10-25.md).
+
+## Captura e disponibilidade — ADR-050
+
+CaptureHub mantém uma operação JPEG cancelável, prazo de 2 s e ID/tempo original; SnapshotCamera/OnlineSession preservam o contrato e verificam idade antes do despacho. CaptureError usa vocabulário fechado. O diagnóstico separa contadores de preparo e base de frescor do vídeo; imagens nunca são registradas. LocalPipeline encerra espera ao abort independentemente do adaptador, consumindo término tardio. acceptsFrames é uma indisponibilidade temporária opcional e sem fila; YOLOX só o usa durante recuperação. [Evidência](EVIDENCIAS/CAPTURA-RESILIENTE-2026-10-25.md).

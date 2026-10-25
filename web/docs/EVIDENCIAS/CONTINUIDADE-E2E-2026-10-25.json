@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "scope": "Loopback HTTP; synthetic public-video camera, controlled local voice, fake provider evidence and simulated five-minute clock. No OpenAI calls, physical camera, walking or human acceptance claim.",
+  "cases": [
+    "CA-F4/L4: initial briefing acknowledges table, chair and person before repetition checks",
+    "CA-F1/F4/L4: five simulated minutes, 60 changed-pixel captures, alternating IDs/uncertainty and one-frame omissions never repeat delivered objects; confirmed place correction is isolated",
+    "CA-F4: a genuinely new window is spoken without repeating known references",
+    "CA-F4: explicit Repeat speaks again from delivered memory without another API request",
+    "CA-F4/L4: Stop/Start creates a fresh briefing and resets session linguistic memory",
+    "CA-F4/L4: broad structural change with substantially shifted positions permits a new-view briefing instead of suppressing references forever"
+  ],
+  "errors": [],
+  "outsideLoopback": [],
+  "transcript": [
+    "Simulação de análise. Na imagem capturada há 1 segundo: O ambiente parecia sala. À frente da câmera, havia uma mesa, uma cadeira e uma pessoa.",
+    "Simulação de análise. Na imagem capturada há 1 segundo: O ambiente parecia biblioteca.",
+    "Simulação de análise. Na imagem capturada há 1 segundo: À frente da câmera, talvez houvesse uma janela.",
+    "Simulação de análise. Na imagem capturada há 1 segundo: À frente da câmera, talvez houvesse uma janela.",
+    "Simulação de análise. Na imagem capturada há 1 segundo: O ambiente parecia sala. À frente da câmera, havia uma mesa, uma cadeira e uma pessoa.",
+    "Simulação de análise. Na imagem capturada há 1 segundo: Neste enquadramento, o ambiente parecia sala. À frente, à esquerda da câmera, talvez houvesse uma mesa e uma pessoa. À frente, à direita da câmera, talvez houvesse uma cadeira giratória."
+  ],
+  "fiveMinutes": {
+    "simulatedMs": 323918,
+    "analyzedSnapshots": 61,
+    "speechCount": 2,
+    "objectRepeatsAfterBriefing": 0
+  },
+  "calls": 64
+}

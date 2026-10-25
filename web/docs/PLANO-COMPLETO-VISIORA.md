@@ -1,3 +1,19 @@
+## Continuidade de fala — ADR-048 (25/10/2026)
+
+A correção preserva memória linguística durante oscilações de nome/quantidade e omissões isoladas, separa presença sem direção e contém renomeações do lugar. Não muda validade espacial ou libera fala híbrida. [Evidências simuladas e pendências](EVIDENCIAS/CONTINUIDADE-SEM-REPETICAO-2026-10-25.md).
+
+**Compatibilidade por capacidade (orientação do usuário, 24/10/2026):** não exigir modelo de aparelho ou versão específica de sistema. Detectar recursos efetivos, tentar GPU com aquecimento real e usar CPU quando suportada; capacidade ausente é informada. Números de uma máquina são evidência de ensaio, não requisito ou promessa para os demais aparelhos.
+
+## Implementação observacional H2/H3 — ADR-046 (24/10/2026)
+
+Autorizados os itens percepção contínua, menor atraso e memória no movimento. Uma fatia integrada oferece detector real opcional durante Luna, carga paralela, processamento sem fila, diagnóstico de atraso e associação temporal no cérebro. Resultados locais são apresentados separadamente e não alimentam fala ou chamadas Luna. H2/H3 têm implementação de engenharia e medição exploratória, mas ainda não aprovação de qualidade temporal ou de aparelho móvel. O objetivo de caminhada permanece em pesquisa; esta revisão não libera orientação de passos. [Evidência](EVIDENCIAS/PERCEPCAO-CONTINUA-2026-10-24.md).
+
+## Prioridade atual — movimento no iPhone (ADR-045, 24/10/2026)
+
+Alvo indicado pelo usuário: iPhone com câmera traseira. A primeira fatia corrige continuidade de capturas, linguagem temporal, retirada de posições por giro opcional e diagnóstico de atraso; não libera orientação de caminhada. O objetivo de direção relativa ao usuário exige correspondência câmera/corpo ainda não medida. No Luna, registrar explicitamente o referencial da câmera e a captura passada até existir evidência para essa correspondência. Modo local e seus critérios permanecem.
+
+Próxima evolução H2/H3: benchmark temporal anotado no iPhone (Safari, rede/bateria/aquecimento, câmera real e VoiceOver), cobrindo referências de interesse e omissões; só ativar eventos locais/fala híbrida após os gates documentados. Sem modelos novos ou inferência paga apenas para testar. [Protocolo de avaliação estacionária e clipes](AVALIACAO-MOVIMENTO.md), [evidência desta fatia](EVIDENCIAS/MOVIMENTO-IPHONE-2026-10-24.md). CA-A4/A5 continuam pendentes.
+
 ## Exceção para apresentação — 23/10/2026 (ADR-037)
 
 Por autorização do usuário, o teto de reserva do **Luna** no piloto com servidor configurado foi elevado para **US$ 10 no dia 23/10/2026**, no fuso `America/Sao_Paulo`. Esse valor inclui as reservas e os gastos já computados no dia: não é crédito adicional. Às 00h de **24/10/2026**, retorna automaticamente ao teto normal de **US$ 2/dia**, mesmo sem reiniciar o processo. A configuração `VISIORA_DAILY_USD` continua limitada a 2; a exceção só atua com o Luna previamente habilitado e orçamento normal positivo. Histórico, reservas incertas, chave e consentimento permanecem intactos. Para usar o código novo, atualizar o checkout local e **reiniciar o gateway** antes da apresentação. Isso não altera cotas ou faturamento do provedor e não resolve timeout, rede, credenciais ou falhas de voz. O link público estático ainda não oferece Luna. Evidência e roteiro: [EVIDENCIAS/LUNA-LIMITE-APRESENTACAO-2026-10-23.md](EVIDENCIAS/LUNA-LIMITE-APRESENTACAO-2026-10-23.md).

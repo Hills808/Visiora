@@ -1,4 +1,5 @@
 import { CONFIG } from '../config.js';
+import { CaptureError } from './capture-error.js';
 import type { FrameAccess } from '../perception/frame.js';
 import { CaptureHub } from './capture-hub.js';
 
@@ -76,8 +77,7 @@ export class SnapshotCamera {
     if (!this.ready) throw new Error('Aguardando o primeiro quadro recente da câmera.');
     const epoch = this.epoch;
     const { image, stamp } = await this.hub.jpeg();
-    if (epoch !== this.epoch || !this.ready)
-      throw new Error('A captura foi cancelada ou a câmera deixou de fornecer quadros recentes.');
+    if (epoch !== this.epoch || !this.ready) throw new CaptureError('capture-canceled');
     return {
       image,
       frameId: stamp.frameId,

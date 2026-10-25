@@ -1,3 +1,25 @@
+## Percepção local contínua experimental — ADR-046 (24/10/2026)
+
+No modo Luna, Ajustes permite ativar um observador local de objetos. É opcional, desligado por padrão e pode baixar cerca de 60 MB de pesos mais runtime. Trabalha durante análise/voz Luna, mas gera somente lista observacional separada, sem falas locais ou gatilhos pagos. O modo local anterior e a narração Luna permanecem independentes. As afirmações históricas abaixo de que Luna não possui detector descrevem versões anteriores.
+
+Associação entre quadros é geométrica e temporária, não identidade de pessoas ou mapa do mundo. Três detecções podem confirmar o mesmo erro; escore não é probabilidade de acerto. Desfoque, iluminação, translação da câmera, cruzamentos, objetos pequenos e oclusão podem causar perdas ou associações incorretas. Giro confirmado/mudança ampla apagam posições, mas ausência de giro não prova que a câmera está parada. Sem profundidade, distância, aproximação métrica ou detecção confiável de degrau/vidro.
+
+O teste real usa modelos reais em vídeo público reproduzido como câmera, com API/voz simuladas. Mede execução no PC, sem validar qualidade temporal, áudio ou uso humano. Na CPU observada, o atraso excedeu a meta CA-D1. iPhone/Safari físico, Android, bateria, aquecimento, VoiceOver/TalkBack, webcam física e 30 minutos permanecem pendentes. WebGPU é escolhido por capacidade efetiva e pode retornar à CPU; não inferir compatibilidade pelo nome do aparelho. Referência de plataforma: https://webkit.org/blog/17333/webkit-features-in-safari-26-0/ .
+
+Não habilitar fala híbrida nem anunciar apoio confiável à caminhada sem os gates de qualidade/atualidade e avaliação humana. O protótipo não orienta passos ou garante caminho livre. [Resultados e escopo](EVIDENCIAS/PERCEPCAO-CONTINUA-2026-10-24.md).
+
+## iPhone e uso com movimento — ADR-045 (24/10/2026)
+
+O alvo escolhido é Safari no iPhone, com câmera traseira. A preferência pela câmera traseira é uma solicitação ao navegador, não seleção garantida da lente. Ainda não houve ensaio físico desse alvo nem VoiceOver nesta revisão. A Luna descreve capturas passadas, com idade e setores relativos à câmera; isso não informa a posição atual da pessoa, onde pisar ou a existência de caminho livre. Movimento contínuo pode invalidar todas as respostas e produzir silêncio espacial, acompanhado de aviso deduplicado. Não há detector local contínuo de objetos no modo Luna.
+
+A leitura opcional de giros em Ajustes começa desligada e depende de HTTPS, permissão e leituras efetivas do navegador. Autorização não comprova disponibilidade do sensor. Ela retira posições antigas, mas não detecta caminhada, translação, obstáculos, profundidade ou todos os movimentos; seus limiares não foram calibrados no iPhone. Ao parar/sair do primeiro plano a escuta é removida. O diagnóstico exporta somente estados/contagens e tempos, sem leituras brutas; callbacks de saída não comprovam áudio audível nem compreensão. Os fakes verificam lógica; não verificam qualidade visual, câmera/voz física, bateria ou utilidade humana. [Evidência](EVIDENCIAS/MOVIMENTO-IPHONE-2026-10-24.md).
+
+## Conexão Luna hospedada — 24/10/2026 (ADR-043)
+
+**Revisão visual ADR-044:** textos e opções foram reorganizados, com detalhes expansíveis. O aviso essencial de segurança continua na tela principal, e falhas locais abrem o contexto para recuperação. Testes automatizados de contraste, alvos e teclado não substituem avaliação com pessoas cegas ou leitores de tela reais. [Escopo da revisão](EVIDENCIAS/REDESIGN-VISUAL-2026-10-24.md).
+
+Corrigida a opção de redirecionamento incompatível com a hospedagem. O diagnóstico retornou HTTP 200 e duas análises reais concluíram com `gpt-6-luna` confirmado. A interface completou o ciclo de fala; audibilidade e precisão não foram medidas independentemente. A desconexão pode ocorrer com chamada já cobrável: o servidor tenta concluir o registro e, se falhar, preserva a reserva integral. Reconciliação é administrativa e explícita; não zera gasto. O teto voltou a US$ 2/dia. [Evidência](EVIDENCIAS/LUNA-CONEXAO-WORKER-2026-10-24.md).
+
 ## Exceção para apresentação — 23/10/2026 (ADR-037)
 
 Por autorização do usuário, o teto de reserva do **Luna** no piloto com servidor configurado foi elevado para **US$ 10 no dia 23/10/2026**, no fuso `America/Sao_Paulo`. Esse valor inclui as reservas e os gastos já computados no dia: não é crédito adicional. Às 00h de **24/10/2026**, retorna automaticamente ao teto normal de **US$ 2/dia**, mesmo sem reiniciar o processo. A configuração `VISIORA_DAILY_USD` continua limitada a 2; a exceção só atua com o Luna previamente habilitado e orçamento normal positivo. Histórico, reservas incertas, chave e consentimento permanecem intactos. Para usar o código novo, atualizar o checkout local e **reiniciar o gateway** antes da apresentação. Isso não altera cotas ou faturamento do provedor e não resolve timeout, rede, credenciais ou falhas de voz. O link público estático ainda não oferece Luna. Evidência e roteiro: [EVIDENCIAS/LUNA-LIMITE-APRESENTACAO-2026-10-23.md](EVIDENCIAS/LUNA-LIMITE-APRESENTACAO-2026-10-23.md).
@@ -98,3 +120,23 @@ Existe uma configuração de implantação HTTPS com autenticação pelo Caddy p
 ## Link temporário protegido para apresentação — ADR-040 (23/10/2026)
 
 O iniciador `tools/apresentacao-luna.ps1` usa o `cloudflared` atualizado com autenticação por e-mail, túnel HTTPS temporário e cabeçalho Host interno `127.0.0.1:8080`. O navegador deve acessar somente a origem HTTPS exibida no terminal. A chave e a base SQLite permanecem no computador local; este deve ficar ligado, com internet, sem outro gateway consumindo o orçamento. O endereço muda a cada execução; o tunelamento não altera o site `chatgpt.site`. Não foram medidos disponibilidade, autenticação em dispositivo físico, webcam, latência, custo real nem voz no túnel; deve ser considerado contingência experimental, sem promessa de continuidade durante a apresentação.
+
+## Luna privado hospedado — ADR-041 (23/10/2026)
+
+O Site privado funciona por HTTPS, exige login na conta proprietária e deixa o consentimento de nuvem desmarcado inicialmente. A chave da API fica no servidor. D1 controla US$ 10 no dia 23/10/2026 e US$ 2 por dia depois para aparelhos conectados a esse Site. D1 não sincroniza com o SQLite do gateway local; executar ambos pode ultrapassar o limite pretendido. Solicitações pendentes/incertas conservam reserva até revisão. O Site privado não inclui pesos dos modelos locais nem funciona offline. No celular, câmera, voz pt-BR, leitor de tela, custo real, estabilidade e precisão ainda não foram ensaiados. Não é ferramenta de navegação segura e não substitui bengala nem cão-guia.
+
+## Resposta recusada — ADR-047
+
+Mesmo com Luna configurado, uma resposta pode falhar na validação e pausar o acompanhamento. A interface mostra o motivo categórico; não tenta corrigir uma posição impossível nem repetir chamadas pagas de contrato. Formatação equivalente é normalizada, sem comprovar a qualidade do reconhecimento. As duas falhas reais não guardaram os campos originais; reteste com câmera/voz real segue pendente. Pessoa detectada sem caixa é uma pendência narrativa separada, documentada na [evidência](EVIDENCIAS/LUNA-CONTRATO-422-2026-10-24.md).
+
+## Silêncio e oscilações — ADR-048
+
+Análises recentes podem mudar os rótulos sem mudança real. O automático contém correções do lugar e aguarda confirmação antes de dizer que não identificou algo. Isso pode atrasar uma não identificação verdadeira. Variantes linguísticas fora da lista explícita e uma vista amplamente alterada ainda podem gerar nova narração. A memória não garante identidade, contagem física nem posições atuais. O teste de cinco minutos usa relógio e respostas simulados; falta reteste real. [Evidência](EVIDENCIAS/CONTINUIDADE-SEM-REPETICAO-2026-10-25.md).
+
+## Fala curta — ADR-049
+
+Uma fala mais curta pode omitir referências que não cabem; não são marcadas como faladas. Essencial prioriza foco central da câmera, sem classificar perigo ou garantir utilidade. Menos palavras não demonstra análise da API mais rápida. Os tempos do diagnóstico são callbacks/texto do navegador, sem prova de áudio audível. Falta reteste físico e com usuários. [Evidência](EVIDENCIAS/FALA-CURTA-ESPERA-2026-10-25.md).
+
+## Continuidade sob carga — ADR-050
+
+Uma imagem que não é preparada em 2 s ou fica antiga é descartada antes do envio. A recuperação é limitada e pode pausar em aparelho sobrecarregado. O fallback mediaTime não comprova que pixels mudaram nem giro físico; câmera real ainda exige teste. Cancelar a espera não interrompe necessariamente a codificação interna do navegador. GPU/CPU foram ensaiadas neste PC com imagem pública estática, sem provar qualidade temporal, bateria ou desempenho móvel. [Evidência](EVIDENCIAS/CAPTURA-RESILIENTE-2026-10-25.md).

@@ -1,14 +1,18 @@
+import { CAPTURE_DIRECTIONS } from '../brain/snapshot-speech.js';
+import { OnlineTiming, type DeliveryChannel } from './online-timing.js';
 import { VisualMemory } from '../brain/visual-memory.js';
-import type { Question, Utterance } from '../brain/types.js';
+import type { Question, Utterance, Verbosity } from '../brain/types.js';
 import { CONFIG } from '../config.js';
-import { bearingFromX, DIRECTIONS, sectorOf } from '../brain/geometry.js';
+import { bearingFromX, sectorOf } from '../brain/geometry.js';
 import { el, text } from '../ui/render.js';
 import { AnalysisError, gatewayStatus, LunaClient, type GatewayStatus } from './luna-client.js';
 import { SnapshotCamera } from './snapshot-camera.js';
+import { CaptureError } from './capture-error.js';
 import { AutoAnalysis } from './auto-analysis.js';
 import { compareViews } from './view-change.js';
 import { SnapshotView } from './snapshot-view.js';
-import { LocalPipeline } from '../perception/local-pipeline.js';
+import { ContinuousPerception } from '../perception/continuous.js';
+import { YoloxAdapter } from '../perception/yolox-adapter.js';
 import type { LocalPerceptionAdapter } from '../perception/frame.js';
 
 interface Hooks {
@@ -17,6 +21,7 @@ interface Hooks {
   cancelSpeech(): void;
   ended(): void;
   canAnalyze(): boolean;
+  verbosity?(): Verbosity;
   announce(message: string): void;
 }
 export type OnlineStopReason =
@@ -28,10 +33,15 @@ export type OnlineStopReason =
   | 'data-cleared'
   | 'mode-switch';
 export class OnlineSession {
+  private timing = new OnlineTiming();
+  private respondedAtMs: number | undefined;
+  private cameraRotationInvalidations = 0;
+  private unusableResponses = 0;
+  private sceneNoticeAnnounced = false;
   private client = new LunaClient();
   private memory = new VisualMemory();
   private camera: SnapshotCamera;
-  private local: LocalPipeline | null = null;
+  private continuous: ContinuousPerception;
   private status: GatewayStatus | null = null;
   private generation = 0;
   private running = false;
@@ -57,6 +67,9 @@ export class OnlineSession {
     return {
       deliveryPolicy: CONFIG.online.deliveryPolicyRevision,
       ...this.counts,
+      timing: this.timing.diagnostics(),
+      cameraRotationInvalidations: this.cameraRotationInvalidations,
+      unusableResponses: this.unusableResponses,
       lastError: this.lastError,
       sessionEnd: this.sessionEnd,
       running: this.running,
@@ -64,7 +77,7 @@ export class OnlineSession {
       paused: this.automatic.isPaused,
       recovering: this.automatic.recovering,
       capture: this.camera.hub.diagnostics(),
-      local: this.local?.diagnostics() ?? { state: 'disabled', reason: 'model-not-selected' },
+      local: this.continuous.diagnostics(),
     };
   }
   private current: {
@@ -77,12 +90,27 @@ export class OnlineSession {
     expiresAt: number;
     started: boolean;
     startedAtMs: number | null;
+    preparedAtMs: number;
+    respondedAtMs: number | undefined;
+    channel: DeliveryChannel;
+    automatic: boolean;
   } | null = null;
   constructor(
     video: HTMLVideoElement,
     private hooks: Hooks,
-    private localFactory?: () => LocalPerceptionAdapter,
+    localFactory?: () => LocalPerceptionAdapter,
   ) {
+    this.continuous = new ContinuousPerception(
+      localFactory
+        ? async () => localFactory()
+        : (signal, status) => YoloxAdapter.create(signal, status),
+      () => performance.now(),
+      () =>
+        this.hooks.announce(
+          'A percepção local não está disponível. Confira também o estado da análise Luna.',
+        ),
+    );
+    if (localFactory) this.continuous.setEnabled(true);
     this.camera = new SnapshotCamera(
       video,
       () => undefined, // Pixel motion is not measured body rotation; it must not starve analysis.
@@ -91,7 +119,7 @@ export class OnlineSession {
     this.camera.hub.subscribe((frame) => {
       this.observeViews();
       this.withdrawDirections();
-      this.local?.offer(frame);
+      this.continuous.offer(frame, this.camera.signature);
     });
     el<HTMLInputElement>('cloud-consent').addEventListener('change', () => {
       if (
@@ -112,6 +140,18 @@ export class OnlineSession {
   get place(): string {
     return this.memory.snapshot?.evidence.scene?.label ?? '';
   }
+  setLocalEnabled(enabled: boolean): void {
+    this.continuous.setEnabled(enabled);
+  }
+  get localEnabled(): boolean {
+    return this.continuous.enabledNow;
+  }
+  get localStatus(): string {
+    return this.continuous.feedback;
+  }
+  get localTracks() {
+    return this.continuous.snapshot();
+  }
   get capturedAt(): number | null {
     return this.displayedAt;
   }
@@ -131,6 +171,11 @@ export class OnlineSession {
       delivered: 0,
       recoveries: 0,
     };
+    this.timing = new OnlineTiming();
+    this.respondedAtMs = undefined;
+    this.cameraRotationInvalidations = 0;
+    this.unusableResponses = 0;
+    this.sceneNoticeAnnounced = false;
     this.lastError = null;
     this.sessionEnd = null;
     this.analyzedView = [];
@@ -139,24 +184,7 @@ export class OnlineSession {
     this.referencesVisible = false;
     this.automatic.reset();
     try {
-      this.local?.stop();
-      this.local = this.localFactory
-        ? new LocalPipeline(
-            generation,
-            this.localFactory(),
-            () => {
-              // H1 checks transport. No local facts feed speech before the H2/H3 quality gate.
-            },
-            () => {
-              this.hooks.message(
-                'Acompanhamento local indisponível. A análise por capturas continua.',
-              );
-              this.hooks.announce(
-                'Acompanhamento local indisponível. A análise por capturas continua.',
-              );
-            },
-          )
-        : null;
+      this.continuous.start(generation);
       await this.camera.start(generation);
     } catch (error) {
       this.stop('start-failed');
@@ -165,13 +193,14 @@ export class OnlineSession {
   }
   stop(reason: OnlineStopReason = 'user'): void {
     if (this.running || this.pending) this.sessionEnd = { reason, pendingAtStop: this.pending };
+    if (this.current || this.pending || this.waiting) this.timing?.withdrew('cancellation');
     this.generation++;
     this.running = false;
     this.pending = false;
     this.current = null;
     this.waiting = null;
     this.client.cancel();
-    this.local?.stop();
+    this.continuous.stop();
     this.camera.stop();
     this.memory.clear();
     this.analyzedView = [];
@@ -208,9 +237,9 @@ export class OnlineSession {
         const row = document.createElement('p');
         const label = item.kind === 'person' ? 'pessoa' : item.label;
         const direction = item.box
-          ? DIRECTIONS[sectorOf(bearingFromX(item.box.x + item.box.width / 2))]
+          ? CAPTURE_DIRECTIONS[sectorOf(bearingFromX(item.box.x + item.box.width / 2))]
           : 'sem posição estimada';
-        row.textContent = `${label}${item.uncertain ? ' (incerto)' : ''} — ${direction} na imagem — captura analisada, pode ter mudado`;
+        row.textContent = `${label}${item.uncertain ? ' (incerto)' : ''} — ${direction} na captura passada — pode ter mudado`;
         list.append(row);
       }
       if (!items.length) {
@@ -243,7 +272,7 @@ export class OnlineSession {
         performance.now(),
         this.camera.signature,
         this.camera.ready,
-        this.pending || !this.hooks.canAnalyze(),
+        this.pending || Boolean(this.current) || !this.hooks.canAnalyze(),
       )
     )
       void this.ask('describe', '', true);
@@ -252,14 +281,26 @@ export class OnlineSession {
     return this.running && this.camera.ready;
   }
   get feedbackState(): string {
-    return this.automatic.recovering
-      ? 'Aguardando nova captura'
-      : this.automatic.isPaused
-        ? 'Acompanhamento pausado'
-        : 'Acompanhamento ativo';
+    if (!this.running) return 'Acompanhamento parado';
+    if (this.automatic.isPaused) return 'Acompanhamento pausado';
+    if (this.automatic.recovering) return 'Recuperando; aguardando nova captura';
+    if (this.pending) return 'Analisando uma captura';
+    if (this.current || this.waiting || !this.hooks.canAnalyze())
+      return 'Aguardando saída da descrição';
+    if (this.unusableResponses >= CONFIG.online.obsoleteNoticeAfter)
+      return 'A cena mudou antes da análise; sem descrição recente';
+    const snapshot = this.memory.snapshot;
+    if (
+      !this.resultView?.valid ||
+      !snapshot ||
+      performance.now() - snapshot.stamp.capturedAtMs > CONFIG.online.snapshotMaxAgeMs
+    )
+      return 'Sem descrição recente; aguardando captura';
+    return 'Captura analisada; aguardando mudança relevante';
   }
   async ask(question: Question, term = '', automatic = false): Promise<void> {
     if (!this.running) return;
+    if (automatic && (this.current || this.waiting || !this.hooks.canAnalyze())) return;
     if (this.pending) {
       this.hooks.message('Aguarde a análise em andamento.');
       return;
@@ -268,8 +309,9 @@ export class OnlineSession {
       this.hooks.message('Aguardando o primeiro quadro recente da câmera.');
       return;
     }
-    this.hooks.cancelSpeech();
+    if (this.current) this.timing?.withdrew('cancellation');
     this.current = null;
+    this.hooks.cancelSpeech();
     this.waiting = null;
     if (question === 'repeat') {
       this.present(true);
@@ -286,6 +328,9 @@ export class OnlineSession {
       this.pendingView = view;
       const capture = await this.camera.capture();
       if (!this.running || generation !== this.generation) return;
+      const captureAge = performance.now() - capture.capturedAtMs;
+      if (captureAge < 0 || captureAge > CONFIG.capture.maxFrameAgeMs)
+        throw new CaptureError('capture-stale');
       this.automatic.dispatched(performance.now(), signature);
       this.counts.dispatched++;
       dispatched = true;
@@ -306,8 +351,12 @@ export class OnlineSession {
         el<HTMLInputElement>('cloud-consent').checked,
       );
       if (!result || generation !== this.generation || !this.running) return;
+      const respondedAt = performance.now();
+      this.timing?.responded(capture.capturedAtMs, respondedAt, this.simulated);
       view.observe(this.camera.signature);
       if (!this.memory.accept(result, performance.now(), generation)) {
+        if (performance.now() - capture.capturedAtMs > CONFIG.online.snapshotMaxAgeMs)
+          this.timing?.withdrew('expiration');
         throw new AnalysisError(
           'A resposta chegou tarde demais para descrever esta captura.',
           true,
@@ -315,6 +364,7 @@ export class OnlineSession {
         );
       }
       if (!view.valid) this.memory.forgetDirections();
+      this.respondedAtMs = respondedAt;
       this.counts.accepted++;
       this.analyzedView = signature;
       this.resultView = view;
@@ -323,17 +373,25 @@ export class OnlineSession {
       const changedView = !view.valid;
       if (changedView) {
         this.counts.obsolete++;
+        this.timing?.withdrew('view');
         this.automatic.invalidate();
         this.clearReferences();
-      } else this.render();
-      this.present(false, automatic, newView);
+      } else {
+        this.render();
+      }
+      if (changedView && automatic) this.noteUnusableResponse();
+      else this.present(false, automatic, newView);
       this.hooks.message(
         changedView
-          ? 'O enquadramento mudou durante a análise. Mantive apenas o contexto da captura; a próxima análise usará uma imagem recente.'
-          : 'Acompanhamento ativo. Captura analisada; aguardando mudança relevante para o próximo envio.',
+          ? 'A cena mudou antes da análise; sem descrição recente. A próxima análise usará uma nova captura.'
+          : 'Captura analisada; aguardando mudança relevante para o próximo envio.',
       );
-    } catch (error) {
-      if (!dispatched && !this.camera.ready) return;
+    } catch (caught) {
+      const error =
+        caught instanceof CaptureError
+          ? new AnalysisError(caught.message, caught.transient, caught.code)
+          : caught;
+      if (!dispatched && !this.camera.ready && !(caught instanceof CaptureError)) return;
       if (generation === this.generation && this.running) {
         this.lastError = error instanceof AnalysisError ? error.code : 'analysis-invalid';
         const recovering = this.automatic.failed(
@@ -373,9 +431,21 @@ export class OnlineSession {
       this.waiting = { repeat, automatic, newView };
       return;
     }
+    // Automatic historical context must not occupy the output before a replacement capture.
+    if (automatic && !repeat && this.resultView?.valid === false) {
+      this.automatic.invalidate();
+      return;
+    }
     const now = performance.now(),
       contextOnly = !repeat && this.resultView?.valid === false,
-      utterance = this.memory.utterance(now, repeat, automatic, newView, contextOnly);
+      utterance = this.memory.utterance(
+        now,
+        repeat,
+        automatic,
+        newView,
+        contextOnly,
+        this.hooks.verbosity?.() ?? 'balanced',
+      );
     if (contextOnly) this.clearReferences();
     if (!utterance) {
       if (automatic) this.counts.silent++;
@@ -384,19 +454,7 @@ export class OnlineSession {
         this.memory.snapshot &&
         now - this.memory.snapshot.stamp.capturedAtMs > CONFIG.online.snapshotMaxAgeMs
       ) {
-        this.lastError = 'speech-expired';
-        if (this.automatic.expiredSnapshot(now)) {
-          this.counts.recoveries++;
-          const seconds = CONFIG.online.recoveryDelayMs / 1000;
-          const message = `A descrição não começou a tempo. Vou tentar uma captura recente em ${seconds} segundos, dentro do orçamento.`;
-          this.hooks.message(message);
-          this.hooks.announce(message);
-        } else {
-          const message =
-            'A descrição não começou a tempo em duas capturas. O acompanhamento foi pausado.';
-          this.hooks.message(message);
-          this.hooks.announce(message);
-        }
+        this.expiredDelivery(now);
       }
       if (!automatic) this.hooks.message('Ainda não há uma descrição concluída para repetir.');
       return;
@@ -411,11 +469,15 @@ export class OnlineSession {
       expiresAt: utterance.expiresAt,
       started: false,
       startedAtMs: null,
+      preparedAtMs: now,
+      respondedAtMs: this.respondedAtMs,
+      channel: 'voice',
+      automatic,
     };
     this.displayedAt = this.memory.pendingCapturedAt;
     this.hooks.present(utterance);
   }
-  canStart(id: string): boolean {
+  canStart(id: string, channel: DeliveryChannel = 'voice'): boolean {
     this.observeViews();
     this.withdrawDirections();
     const value = this.current;
@@ -429,8 +491,21 @@ export class OnlineSession {
         (value.repeat || performance.now() - value.capturedAtMs <= CONFIG.online.snapshotMaxAgeMs),
     );
     if (accepted && value) {
+      if (!value.started) {
+        const now = performance.now();
+        this.timing?.started(
+          value.capturedAtMs,
+          value.preparedAtMs,
+          now,
+          channel,
+          this.simulated,
+          value.repeat,
+          value.respondedAtMs,
+        );
+        value.startedAtMs = now;
+        value.channel = channel;
+      }
       value.started = true;
-      value.startedAtMs ??= performance.now();
     }
     return accepted;
   }
@@ -445,8 +520,20 @@ export class OnlineSession {
     ) {
       const completed = this.memory.complete(id, performance.now());
       if (completed) {
+        if (this.current.startedAtMs !== null)
+          this.timing?.completed(
+            this.current.startedAtMs,
+            performance.now(),
+            this.current.channel,
+            this.simulated,
+            this.current.repeat,
+          );
+        if (!this.current.repeat && !this.current.contextOnly) {
+          this.unusableResponses = 0;
+          this.sceneNoticeAnnounced = false;
+          this.automatic.delivered();
+        }
         this.counts.delivered++;
-        this.automatic.delivered();
         this.lastError = null;
       }
       this.current = null;
@@ -454,22 +541,96 @@ export class OnlineSession {
     }
     return false;
   }
+  /** Output cancellation never acknowledges content; stale callbacks cannot retire a new delivery. */
+  interrupted(id: string): void {
+    if (this.current?.id !== id) return;
+    this.current = null;
+    this.waiting = null;
+    this.timing?.withdrew('cancellation');
+    this.automatic.invalidate();
+  }
   showText(id: string): boolean {
-    if (this.canStart(id)) {
+    if (this.canStart(id, 'text')) {
       return this.complete(id);
     }
     return false;
   }
-  private observeViews(): void {
-    this.pendingView?.observe(this.camera.signature);
-    if (this.resultView?.observe(this.camera.signature)) {
+  /** Called only after an opted-in device rotation detector confirms rotation.
+   * Retires captures, not the session: fresh captures still use the existing cadence/gates.
+   */
+  observeCameraRotation(): void {
+    if (!this.running) return;
+    this.continuous?.rotated();
+    this.observeViews(true);
+    this.withdrawDirections();
+  }
+  private observeViews(cameraRotation = false): void {
+    const pendingChanged = cameraRotation
+      ? this.pendingView?.invalidate()
+      : this.pendingView?.observe(this.camera.signature);
+    const resultChanged = cameraRotation
+      ? this.resultView?.invalidate()
+      : this.resultView?.observe(this.camera.signature);
+    if (cameraRotation && (pendingChanged || resultChanged)) {
+      this.cameraRotationInvalidations++;
+      this.automatic.invalidate();
+    }
+    if (resultChanged) {
       this.memory.forgetDirections();
+      this.automatic.invalidate();
+      this.timing?.withdrew('view');
       this.clearReferences();
+    }
+  }
+  private noteUnusableResponse(): void {
+    this.unusableResponses++;
+    if (this.unusableResponses >= CONFIG.online.obsoleteNoticeAfter && !this.sceneNoticeAnnounced) {
+      this.sceneNoticeAnnounced = true;
+      this.hooks.announce('A cena mudou antes da análise. Ainda não há descrição recente.');
+    }
+  }
+  private expiredDelivery(now: number): void {
+    this.timing?.withdrew('expiration');
+    this.lastError = 'speech-expired';
+    if (this.automatic.expiredSnapshot(now)) {
+      this.counts.recoveries++;
+      const seconds = CONFIG.online.recoveryDelayMs / 1000;
+      const message = `A descrição não começou a tempo. Vou tentar uma captura recente em ${seconds} segundos, dentro do orçamento.`;
+      this.hooks.message(message);
+      this.hooks.announce(message);
+    } else {
+      const message =
+        'A descrição não começou a tempo em duas capturas. O acompanhamento foi pausado.';
+      this.hooks.message(message);
+      this.hooks.announce(message);
     }
   }
   private withdrawDirections(): void {
     const value = this.current;
     const now = performance.now();
+    if (value && !value.started && (value.repeat || value.contextOnly) && now >= value.expiresAt) {
+      this.current = null;
+      this.waiting = null;
+      this.timing?.withdrew('expiration');
+      this.hooks.cancelSpeech();
+      return;
+    }
+    if (
+      value &&
+      !value.started &&
+      !value.repeat &&
+      !value.contextOnly &&
+      value.view?.valid !== false &&
+      (now >= value.expiresAt || now - value.capturedAtMs > CONFIG.online.snapshotMaxAgeMs)
+    ) {
+      this.current = null;
+      this.waiting = null;
+      this.counts.obsolete++;
+      this.clearReferences();
+      this.expiredDelivery(now);
+      this.hooks.cancelSpeech();
+      return;
+    }
     if (
       value?.startedAtMs !== null &&
       value?.startedAtMs !== undefined &&
@@ -478,6 +639,7 @@ export class OnlineSession {
       this.current = null;
       this.waiting = null;
       this.automatic.pause();
+      this.timing?.withdrew('cancellation');
       this.lastError = 'speech-timeout';
       this.clearReferences();
       this.hooks.cancelSpeech();
@@ -496,7 +658,10 @@ export class OnlineSession {
     )
       return;
     this.current = null;
-    this.waiting = { repeat: false, automatic: true, newView: false };
+    this.waiting =
+      value.view?.valid === false && value.automatic
+        ? null
+        : { repeat: false, automatic: value.automatic ?? true, newView: false };
     this.counts.obsolete++;
     this.automatic.invalidate();
     this.clearReferences();

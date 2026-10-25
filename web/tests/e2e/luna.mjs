@@ -4,6 +4,7 @@ import path from 'node:path';
 import { createGateway } from '../../server/gateway.mjs';
 import { loadConfig } from '../../server/config.mjs';
 import { Budget } from '../../server/budget.mjs';
+import { responseEvidence } from '../../server/provider.mjs';
 import { launchTestBrowser, installTestVoice } from './helpers.mjs';
 const evidence = {
   scene: { label: 'laboratório de cerâmica', support: ['a'] },
@@ -34,7 +35,18 @@ const server = createGateway(config, {
     calls++;
     if (fail) throw new Error('Simulated provider failure');
     if (hold) await new Promise((resolve) => (release = resolve));
-    return { evidence: currentEvidence, usage: null };
+    return {
+      evidence: responseEvidence({
+        status: 'completed',
+        output: [
+          {
+            type: 'message',
+            content: [{ type: 'output_text', text: JSON.stringify(currentEvidence) }],
+          },
+        ],
+      }),
+      usage: null,
+    };
   },
 });
 await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
@@ -102,6 +114,7 @@ try {
     return diagnostic.onlineContinuity;
   }
   await page.goto(base);
+  await page.selectOption('#perception-provider', 'luna');
   await page.waitForFunction(() =>
     document.querySelector('#luna-config').textContent.includes('Simulador'),
   );
@@ -114,6 +127,7 @@ try {
     await page.locator('#caption').innerText(),
     /Simulação de análise.*capturada há.*laboratório de cerâmica.*torno de cerâmica/s,
   );
+  await page.locator('.environment-details > summary').click();
   assert.match(await page.locator('#references').innerText(), /torno de cerâmica/);
   assert.equal(calls, 1);
   assert.equal(
@@ -164,7 +178,7 @@ try {
   assert.equal(calls, 3);
   assert.match(
     await page.locator('#caption').innerText(),
-    /talvez haja uma passagem com placa de saída/,
+    /talvez houvesse uma passagem com placa de saída/,
   );
   assert.doesNotMatch(
     await page.locator('#caption').innerText(),
@@ -281,6 +295,56 @@ try {
     requests.every((url) => new URL(url).origin === base),
     true,
   );
+  fail = false;
+  for (const invalidBox of [false, true]) {
+    now += 60000;
+    currentEvidence = structuredClone(evidence);
+    currentEvidence.observations[0].id = 'Object_1';
+    currentEvidence.observations[0].label = ' torno de cerâmica ';
+    currentEvidence.scene.support = ['Object_1'];
+    currentEvidence.limitations = ['Pouca luz.'];
+    if (invalidBox) currentEvidence.observations[0].box.x = 0.99;
+    const contractContext = await browser.newContext({
+      permissions: ['camera'],
+      serviceWorkers: 'block',
+    });
+    try {
+      const contractPage = await contractContext.newPage();
+      contractPage.setDefaultTimeout(15000);
+      contractPage.on('pageerror', (error) => report.errors.push(error.message));
+      await installTestVoice(contractPage);
+      await contractPage.goto(base);
+      await contractPage.selectOption('#perception-provider', 'luna');
+      await contractPage.waitForFunction(() =>
+        document.querySelector('#luna-config').textContent.includes('Simulador'),
+      );
+      const before = calls;
+      await contractPage.click('#start');
+      if (invalidBox) {
+        await contractPage.waitForFunction(() =>
+          document.querySelector('#status').textContent.includes('invalid-evidence-box-bounds'),
+        );
+        assert.match(await contractPage.locator('#status').innerText(), /pausado/);
+        assert.doesNotMatch(
+          await contractPage.locator('#caption').innerText(),
+          /torno de cerâmica/,
+        );
+        report.cases.push(
+          'HTTP 422 preserves safe box-bounds reason and blocks invalid positional speech',
+        );
+      } else {
+        await contractPage.waitForFunction(() => window.__spoken.length === 1);
+        assert.match(await contractPage.locator('#caption').innerText(), /torno de cerâmica/);
+        report.cases.push(
+          'Equivalent whitespace, auxiliary punctuation and opaque IDs complete camera-to-voice through the real HTTP contract',
+        );
+      }
+      assert.equal(calls, before + 1);
+      await contractPage.click('#start');
+    } finally {
+      await contractContext.close();
+    }
+  }
 } finally {
   // Always release the owned fake provider on a failed assertion.
   release?.();

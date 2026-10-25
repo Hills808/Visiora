@@ -63,6 +63,15 @@ try {
   const requests = [];
   page.on('request', (request) => requests.push(request.url()));
   await page.addInitScript(() => {
+    localStorage.clear(); // Independent scenarios in this disposable test browser context.
+    window.__motionPermissionRequests = 0;
+    Object.defineProperty(DeviceMotionEvent, 'requestPermission', {
+      configurable: true,
+      value: () => {
+        window.__motionPermissionRequests++;
+        return Promise.resolve('granted');
+      },
+    });
     window.__samples = 0;
     window.__pattern = 'moving';
     window.__sampledPattern = null;
@@ -148,12 +157,22 @@ try {
       notifyCall = resolve;
     });
     await page.goto(base);
+    await page.selectOption('#perception-provider', 'luna');
+    await page.locator('.environment-details > summary').click();
     await page.waitForFunction(() =>
       document.querySelector('#luna-config').textContent.includes('Simulador'),
     );
     await page.evaluate((value) => {
       window.__holdVoice = value;
     }, holdVoice);
+    await page.evaluate(async () => {
+      const { OnlineSession } = await import('/vision/online-session.js');
+      const original = OnlineSession.prototype.start;
+      OnlineSession.prototype.start = function (...args) {
+        window.__testOnlineSession = this;
+        return original.apply(this, args);
+      };
+    });
     await page.click('#start');
     await called;
   }
@@ -173,8 +192,11 @@ try {
     window.__endVoice();
   });
   const first = await page.locator('#caption').innerText();
-  assert.match(first, /À sua frente, há uma janela com veneziana, uma pessoa e uma cama\./);
-  assert.equal(first.match(/À sua frente/g).length, 1);
+  assert.match(
+    first,
+    /À frente da câmera, havia uma janela com veneziana, uma pessoa e uma cama\./,
+  );
+  assert.equal(first.match(/À frente da câmera/g).length, 1);
   assert.ok(first.split(/\s+/).length <= CONFIG.speech.briefingWords);
   report.cases.push(
     'First fresh frame starts analysis before the old settling window, despite continuous synthetic motion',
@@ -207,21 +229,21 @@ try {
   await page.waitForFunction(() => window.__sampledPattern === 'broad');
   release();
   hold = false;
-  await page.waitForFunction(() => window.__spoken.length === 1);
-  const contextOnly = await page.locator('#caption').innerText();
-  assert.match(contextOnly, /capturada há.*O ambiente parecia quarto\./);
-  assert.doesNotMatch(contextOnly, /À sua|janela|pessoa|cama/);
-  assert.equal(await page.locator('#reference-count').innerText(), '0');
-  report.cases.push(
-    'Broad view change during API preserves only historical scene context and removes old object positions',
+  await page.waitForFunction(() =>
+    document.querySelector('#status').textContent.includes('cena mudou'),
   );
-  await page.waitForFunction(() => window.__spoken.length === 2);
+  assert.equal(await page.evaluate(() => window.__spoken.length), 0);
+  assert.equal(await page.locator('#reference-count').innerText(), '0');
+  await page.waitForFunction(() => window.__spoken.length === 1);
   assert.match(
     await page.locator('#caption').innerText(),
     /janela com veneziana, uma pessoa e uma cama/,
   );
+  const replacement = await page.evaluate(() => window.__analysisRequests);
+  assert.equal(replacement.length, 2);
+  assert.ok(replacement[1].at - replacement[0].at >= CONFIG.online.autoIntervalMs);
   report.cases.push(
-    'Next fresh snapshot can describe objects omitted from context-only speech, without a stability pause',
+    'Invalid automatic response remains silent; a fresh replacement describes the new view at cadence',
   );
   report.transcripts.push(await page.evaluate(() => window.__spoken));
   await page.click('#start');
@@ -233,17 +255,16 @@ try {
   await page.evaluate(() => {
     window.__pattern = 'broad';
   });
-  await page.waitForFunction(() => window.__started.length === 2);
-  assert.equal(await page.evaluate(() => window.__canceled.length), 1);
+  await page.waitForFunction(() => window.__canceled.length === 1);
   assert.equal(await page.evaluate(() => window.__spoken.length), 0);
-  assert.match(await page.locator('#caption').innerText(), /O ambiente parecia quarto/);
+  assert.equal(await page.evaluate(() => window.__started.length), 1);
   await page.evaluate(() => {
     window.__holdVoice = false;
-    window.__endVoice();
   });
-  assert.equal(await page.evaluate(() => window.__spoken.length), 1);
+  await page.waitForFunction(() => window.__spoken.length === 1);
+  assert.match(await page.locator('#caption').innerText(), /janela com veneziana/);
   report.cases.push(
-    'Broad change during speech cancels directional output once; only completed historical context is acknowledged',
+    'Broad change cancels directional speech once and waits for a replacement, without historical speech',
   );
   report.transcripts.push(await page.evaluate(() => window.__spoken));
   await page.click('#start');
@@ -258,13 +279,138 @@ try {
   await page.waitForFunction(() => window.__sampledPattern === 'moving');
   release();
   hold = false;
+  await page.waitForFunction(() =>
+    document.querySelector('#status').textContent.includes('cena mudou'),
+  );
+  assert.equal(await page.evaluate(() => window.__spoken.length), 0);
   await page.waitForFunction(() => window.__spoken.length === 1);
-  assert.match(await page.locator('#caption').innerText(), /O ambiente parecia quarto/);
-  assert.doesNotMatch(await page.locator('#caption').innerText(), /janela|pessoa|cama|À sua/);
+  assert.match(await page.locator('#caption').innerText(), /janela com veneziana/);
   report.cases.push(
-    'A broad change and return during API cannot revive the positions of that earlier capture',
+    'A to B to A during API cannot revive old positions and receives one fresh replacement',
   );
   report.transcripts.push(await page.evaluate(() => window.__spoken));
+  // After a completed delivery, broad change and return must also request a replacement.
+  const deliveredCalls = await page.evaluate(() => window.__analysisRequests.length);
+  hold = true;
+  await page.evaluate(() => {
+    window.__pattern = 'broad';
+  });
+  await page.waitForFunction(() => window.__sampledPattern === 'broad');
+  await page.evaluate(() => {
+    window.__pattern = 'moving';
+  });
+  await page.waitForFunction(() => window.__sampledPattern === 'moving');
+  await page.waitForFunction((n) => window.__analysisRequests.length > n, deliveredCalls);
+  const afterDelivery = await page.evaluate(() => window.__analysisRequests);
+  assert.ok(afterDelivery.at(-1).at - afterDelivery.at(-2).at >= CONFIG.online.autoIntervalMs);
+  report.cases.push(
+    'A to B to A after completed delivery still dispatches a replacement at cadence',
+  );
+  release();
+  hold = false;
+  await page.click('#start');
+
+  await start(false);
+  assert.equal(await page.evaluate(() => window.__motionPermissionRequests), 0);
+  await page.click('#settings-open');
+  await page.getByText('Giros da câmera · experimental', { exact: true }).click();
+  await page.click('#motion-toggle');
+  assert.equal(await page.evaluate(() => window.__motionPermissionRequests), 1);
+  await page.getByRole('button', { name: 'Fechar ajustes', exact: true }).click();
+  for (let i = 0; i < 2; i++)
+    await page.evaluate(() =>
+      window.dispatchEvent(
+        new DeviceMotionEvent('devicemotion', {
+          rotationRate: { alpha: 25, beta: 0, gamma: 0 },
+        }),
+      ),
+    );
+  release();
+  hold = false;
+  await page.waitForFunction(() =>
+    document.querySelector('#status').textContent.includes('cena mudou'),
+  );
+  assert.equal(await page.evaluate(() => window.__spoken.length), 0);
+  assert.equal(await page.locator('#reference-count').innerText(), '0');
+  await page.waitForFunction(() => window.__spoken.length === 1);
+  const rotationRequests = await page.evaluate(() => window.__analysisRequests);
+  assert.equal(rotationRequests.length, 2);
+  assert.ok(rotationRequests[1].at - rotationRequests[0].at >= CONFIG.online.autoIntervalMs);
+  assert.equal(
+    await page.evaluate(() => window.__testOnlineSession.diagnostics().cameraRotationInvalidations),
+    1,
+  );
+  report.cases.push(
+    'Opt-in settings button requests permission only on click; synthetic sensor rotation during API replaces once at cadence',
+  );
+  await page.click('#start');
+  await page.evaluate(() =>
+    window.dispatchEvent(
+      new DeviceMotionEvent('devicemotion', {
+        rotationRate: { alpha: 25, beta: 0, gamma: 0 },
+      }),
+    ),
+  );
+  assert.equal(
+    await page.evaluate(() => window.__testOnlineSession.diagnostics().cameraRotationInvalidations),
+    1,
+  );
+
+  await start(true);
+  release();
+  hold = false;
+  await page.waitForFunction(() => window.__started.length === 1);
+  await page.evaluate(() => {
+    window.__holdVoice = false;
+    window.__testOnlineSession.observeCameraRotation();
+    window.__testOnlineSession.observeCameraRotation();
+  });
+  await page.waitForFunction(() => window.__canceled.length === 1);
+  await page.waitForFunction(() => window.__spoken.length === 1);
+  assert.match(await page.locator('#caption').innerText(), /janela com veneziana/);
+  report.cases.push(
+    'Confirmed device rotation cancels current speech idempotently; new capture can speak after rotation stops',
+  );
+  await page.click('#start');
+
+  await start(true);
+  release();
+  hold = false;
+  await page.waitForFunction(() => window.__started.length === 1);
+  await page.click('#settings-open');
+  assert.equal(await page.evaluate(() => window.__canceled.length), 1);
+  assert.equal(await page.evaluate(() => window.__testOnlineSession.diagnostics().delivered), 0);
+  await page.evaluate(() => {
+    window.__holdVoice = false;
+  });
+  await page.getByRole('button', { name: 'Fechar ajustes', exact: true }).click();
+  await page.waitForFunction(() => window.__spoken.length === 1);
+  assert.equal(await page.evaluate(() => window.__testOnlineSession.diagnostics().paused), false);
+  report.cases.push(
+    'Opening settings cancels without acknowledgment; closing settings permits a fresh replacement without timeout',
+  );
+  await page.click('#start');
+
+  await start(false);
+  await page.click('#settings-open');
+  await page.selectOption('#output', 'reader');
+  await page.getByRole('button', { name: 'Salvar ajustes', exact: true }).click();
+  release();
+  hold = false;
+  await page.waitForFunction(() => window.__testOnlineSession.diagnostics().delivered === 1);
+  const readerTiming = await page.evaluate(() => window.__testOnlineSession.diagnostics().timing);
+  assert.equal(readerTiming.captureToStart[0].channel, 'text');
+  assert.equal(await page.evaluate(() => window.__spoken.length), 0);
+  await page.evaluate(() => {
+    window.__testOnlineSession.noteUnusableResponse();
+    window.__testOnlineSession.noteUnusableResponse();
+  });
+  await page.waitForFunction(() =>
+    document.querySelector('#screen-reader').textContent.includes('Ainda não há descrição recente'),
+  );
+  report.cases.push(
+    'Reader UI records text rather than voice and exposes the deduplicated obsolete-scene notice',
+  );
   await page.click('#start');
 
   await start(true);
@@ -274,16 +420,29 @@ try {
   release();
   hold = false;
   await page.waitForFunction(() => typeof window.__startVoice === 'function');
+  await page.evaluate(() => {
+    // Keep the original callback: a later recovery notice may replace the harness's current voice.
+    window.__expiredVoice = {
+      start: window.__startVoice,
+      end: window.__endVoice,
+      queuedAt: window.__queuedVoiceAt,
+    };
+  });
   await page.waitForFunction(
-    (ttl) => performance.now() - window.__queuedVoiceAt >= ttl,
+    (ttl) => performance.now() - window.__expiredVoice.queuedAt >= ttl,
     CONFIG.speech.answerTtlMs + CONFIG.ui.tickMs,
   );
   await page.evaluate(() => {
-    window.__startVoice();
-    window.__endVoice?.();
+    window.__expiredVoice.start();
+    window.__expiredVoice.end?.();
   });
   assert.equal(await page.evaluate(() => window.__spoken.length), 0);
   assert.equal(await page.evaluate(() => window.__canceled.length), 1);
+  assert.equal(
+    await page.evaluate(() => window.__testOnlineSession.diagnostics().recovering),
+    true,
+  );
+  assert.equal(await page.evaluate(() => window.__analysisRequests.length), 1);
   report.cases.push(
     'A voice callback delayed beyond the delivery TTL is rejected before audio and cannot acknowledge delivery',
   );

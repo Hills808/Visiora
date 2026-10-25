@@ -2,7 +2,12 @@
 export const CONFIG = Object.freeze({
   version: '0.3.0',
   online: {
-    deliveryPolicyRevision: 'adr-029', // Exported in diagnostics to identify the local Luna build after cache updates.
+    deliveryPolicyRevision: 'adr-050', // Exported in diagnostics to identify the local Luna build after cache updates.
+    speechProfiles: {
+      essential: { briefingWords: 25, updateWords: 25, maxItems: 1 },
+      balanced: { briefingWords: 32, updateWords: 25, maxItems: 3 },
+      detailed: { briefingWords: 45, updateWords: 25, maxItems: 3 },
+    }, // Word limits include source/age/direction; select complete groups, never truncate a label.
     snapshotMaxAgeMs: 10000, // Explicitly aged snapshots only; never inserted into the live World.
     imageMaxSide: 1280,
     jpegQuality: 0.85,
@@ -23,14 +28,40 @@ export const CONFIG = Object.freeze({
     autoStructureDelta: 0.06, // Ignore a uniform brightness/color offset when deciding that the view changed broadly.
     recoveryDelayMs: 15000,
     maxRecoveryAttempts: 1, // At most one fresh, budgeted capture after a transient failure; never an unbounded retry.
+    obsoleteNoticeAfter: 2, // One capability notice after consecutive lost views, until a fresh description is delivered.
     autoMemoryLimit: 128, // Bound acknowledged label/sector groups during one session.
     snapshotRequestMemoryLimit: 16, // Bound replay IDs per frame; above the gateway's 15 requests/minute ceiling.
+    missingConfirmationFrames: 3, // Model omissions need distinct recent captures, not a single missing box.
+    missingConfirmationSpanMs: 9000, // At least two minimum-cadence gaps before an automatic non-identification.
+    discourseLabelOverlap: 0.7, // Equivalent named refinements require strong same-view box overlap and unique matching.
+    sceneCorrectionsPerView: 1, // A place hypothesis may be corrected once automatically; further renaming requires a new view or request.
+    discourseLabelFamilies: [
+      ['cadeira', 'cadeira gamer', 'cadeira de escritorio', 'cadeira giratoria'],
+      ['janela', 'janela com persiana', 'janela com veneziana'],
+      ['armario', 'armario espelhado', 'armario com espelho'],
+    ], // Explicit linguistic refinements only; wheelchair and other unknown labels remain distinct.
     referenceMemoryMs: 30000, // Drop unobserved discourse references; this never extends snapshot validity.
     sectorHysteresisDegrees: 5, // Ignore small box jitter across sector edges; a hypothesis pending human evaluation.
     sceneConfirmationFrames: 2, // Require distinct captures before renaming a place in the same view.
     sceneConfirmationGapMs: 30000, // Widely separated captures cannot accumulate scene confirmation.
   },
   motion: { maxYawRate: 15, settleMs: 1200, sensorStaleMs: 1500 }, // deg/s; settle before describing
+  cameraRotation: {
+    minRateDegPerSecond: 15, // Experimental camera rotation threshold, not body heading or walking detection.
+    confirmations: 2, // Reject isolated sensor spikes; no position is restored by a later low reading.
+    maxGapMs: 250, // Only adjacent distinct readings confirm rotation; long pauses reset confirmation.
+    staleMs: 1500, // Report absent/expired readings honestly; no sensor implies no extra invalidation.
+  },
+  continuous: {
+    minHits: 3, // Independent accepted frames, not duplicate frames or model votes; experimental association only.
+    minIou: 0.3, // Conservative image overlap association; ambiguous crossings suspend association.
+    maxGapMs: 2500, // Slow CPU observations cannot accumulate confirmation across longer gaps.
+    maxAgeMs: 3000, // Local observations never extend the existing three-second evidence window.
+    retentionMs: 5000, // Brief occlusion memory has no current direction and expires without claiming departure.
+    maxTracks: 30, // Bound session-local associations; never persistent identities.
+    sectorHysteresisDegrees: 5, // Ignore small image-box jitter; not calibrated body heading.
+    derivativeCanvases: 2, // Retain RGB and detector resize surfaces only; no image history or frame queue.
+  },
   speech: {
     briefingMs: 3800,
     gapMs: 2400,
@@ -95,6 +126,7 @@ export const CONFIG = Object.freeze({
     fps: 5,
     economyFps: 2,
     maxFrameAgeMs: 3000,
+    jpegTimeoutMs: 2000, // Bound JPEG preparation before dispatch; do not spend the snapshot window or API budget encoding indefinitely.
     futureToleranceMs: 100,
     maxInFlight: 1,
     motionSampleStride: 128,
@@ -111,6 +143,7 @@ export const CONFIG = Object.freeze({
     minScore: 0.45,
     nms: 0.45,
     maxDetections: 30,
+    statusMaxChars: 512, // Bound worker status/protocol strings; never accept arbitrary provider payloads.
     workerTimeoutMs: 180000, // First access also downloads the two local person-verification models.
     inferenceTimeoutMs: 10000,
   },

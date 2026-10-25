@@ -1,5 +1,9 @@
 # Referências e o que foi adotado
 
+## Hierarquia da interface — 24/10/2026
+
+[Be My Eyes](https://support.bemyeyes.com/hc/en-us/articles/360005528557-Getting-started-with-Be-My-Eyes), [Seeing AI](https://www.seeingai.com/ios) e [Google Lookout](https://support.google.com/accessibility/android/answer/9031274?hl=pt-BR): adotadas ação principal evidente, perguntas secundárias e separação entre tarefa e configuração. Não copiamos marca, recursos não implementados ou alegações de precisão/segurança. [Análise e escolhas](EVIDENCIAS/REDESIGN-VISUAL-2026-10-24.md).
+
 ## Avaliação de memória e comunicação — 19/10/2026
 
 [W3C/WAI: Involving Users in Evaluating Web Accessibility](https://www.w3.org/WAI/test-evaluate/involving-users/), consultado nesta data. Adotado no [protocolo MC-01](AVALIACAO-MEMORIA-COMUNICACAO.md): participação de usuários na avaliação, diversidade de experiência e explicitação do alcance, combinadas à avaliação de conformidade. Isso não comprova utilidade do Visiora nem valida suas prioridades e limiares de fala. **Nenhuma sessão humana foi realizada.** O&M e pessoas cegas ainda precisam avaliar as escolhas. [Evidência técnica, hipóteses e limites](EVIDENCIAS/MEMORIA-COMUNICACAO.md).

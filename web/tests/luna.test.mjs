@@ -117,7 +117,7 @@ test('CA-F2/F3/F6/P6/L4: local rendering, camera direction, no distance, explici
   assert.match(spoken.text, /capturada há 4 segundos/);
   assert.match(spoken.text, /laboratório de cerâmica/);
   assert.match(spoken.text, /torno de cerâmica/);
-  assert.match(spoken.text, /À sua frente, à esquerda/);
+  assert.match(spoken.text, /À frente, à esquerda da câmera/);
   assert.doesNotMatch(spoken.text, /passos|metros/);
   assert.deepEqual(spoken.facts, []); // Not inserted into live World.
   memory.complete('other');
@@ -141,7 +141,7 @@ test('CA-L1: find/ahead/where accept open vocabulary; no box means no directiona
   const r = result();
   r.evidence.observations.forEach((i) => (i.box = null));
   memory.accept(r, 1500, 1);
-  assert.doesNotMatch(memory.utterance(1500).text, /há torno|há uma pessoa/);
+  assert.doesNotMatch(memory.utterance(1500).text, /havia torno|havia uma pessoa/);
 });
 test('CA-L1: refusal, incomplete and malformed Responses payload are explicit failures', () => {
   for (const data of [

@@ -142,3 +142,27 @@ Leia `docs/EVIDENCIAS/H2-PERCEPCAO-LOCAL-2026-10-23.md` e `docs/EVIDENCIAS/CENAS
 ## Diagnóstico da sessão real — ADR-036 (23/10/2026)
 
 O arquivo `visiora-diagnosticov.json` mostrou 2 envios Luna, 1 aceito e 1 entrega, mas foi exportado depois da parada; `paused=true` não prova falha. Leia `docs/EVIDENCIAS/LUNA-DIAGNOSTICO-2026-10-23.md`. A revisão registra motivo da parada, análise pendente e escopo dos contadores, sem imagens/textos. Ainda falta reteste real; não atribuir o segundo envio a crédito ou expiração sem evidência.
+
+## Luna hospedado — ADR-039 (23/10/2026)
+
+`hosting/luna/` contém o Site privado para celular. Leia `docs/EVIDENCIAS/LUNA-CELULAR-HOSPEDADO-2026-10-23.md` e `hosting/luna/README-HOSPEDAGEM.md`. No clone GitHub, prepare o cliente com `node hosting/luna/scripts/prepare-web.mjs` antes do build hospedado. O Site usa D1 compartilhado entre aparelhos e segredo no servidor; o gateway SQLite local está desativado para não duplicar o teto de US$ 2/dia. Não reative ambos com tetos integrais. O Site público continua local. Testes fake não comprovam câmera/voz física, cobrança, precisão ou uso por pessoas cegas.
+
+## Observador contínuo — ADR-046 (24/10/2026)
+
+Ler docs/EVIDENCIAS/PERCEPCAO-CONTINUA-2026-10-24.md. O usuário autorizou implementar percepção contínua, atraso e memória. YoloxAdapter real opcional + LocalPipeline + TrackMemory funcionam durante Luna, somente observações/diagnósticos. Sem fala local ou gatilhos pagos antes de qualidade H2/H3. Carga paralela, fila zero, cancelamento, revisão de vista no despacho e saída de memória não biométrica. Site privado inclui três pesos de objetos; não inicializa ambientes. Novos testes: node tests/e2e/continuous-real.mjs e --cpu; vídeo definido por VISIORA_QA_VIDEO, API fake, não .env. iPhone/qualidade temporal/voz humana continuam pendentes. Não generalizar números do PC nem usar confirmações temporais como acurácia.
+
+## Contrato Luna — ADR-047 (24/10/2026)
+
+Ler docs/EVIDENCIAS/LUNA-CONTRATO-422-2026-10-24.md. prepareEvidence normaliza somente representação; não recorta/descarta caixas ou inventa referências. Erros semânticos têm lista fechada, sem retry pago. Reservas incertas e teto preservados. 227 testes unitários, 11 hosted e 12 E2E fake; reteste real pendente. Pessoa box:null e falsa ausência é pendência separada.
+
+## Continuidade sem repetição — ADR-048 (25/10/2026)
+
+Leia docs/EVIDENCIAS/CONTINUIDADE-SEM-REPETICAO-2026-10-25.md. Lugar confirmado não reorienta objetos; omissão isolada/box:null não apaga presença. Ausência exige3capturas/9s; equivalência de rótulo limitada, geométrica e um-para-um. Não ampliar10s de snapshot nem alterar agenda/orçamento. Teste novo: node tests/e2e/luna-repetition.mjs, cinco minutos simulados. Testes não aprovam caminhada ou precisão.
+
+## Perfis e espera Luna — ADR-049 (25/10/2026)
+
+Ler docs/EVIDENCIAS/FALA-CURTA-ESPERA-2026-10-25.md. Preferência controla grupos completos e limites de 25/32/45 palavras no briefing; atualizações de 25 palavras. Omitido não é dito; Repeat conserva entrega e idade. Diagnóstico separa resposta→preparação/início de preparação→início, sem conteúdo. Não ampliar validade nem agenda paga. Novo teste: node tests/e2e/luna-verbosity.mjs. Não alegar ganho real de API/áudio/caminhada por teste fake.
+
+## Captura resiliente — ADR-050 (25/10/2026)
+
+Ler docs/EVIDENCIAS/CAPTURA-RESILIENTE-2026-10-25.md. JPEG single-flight, cancelável, 2 s de prazo e 3 s de idade antes da API; uma recuperação existente após 15 s, sem reserva na falha de preparo. Contador zero usa mediaTime explícito. Pipeline libera espera ao abort; acceptsFrames=false só temporário, sem esconder falha definitiva. Sem reduzir verificadores ou liberar fala híbrida. Novo E2E: node tests/e2e/luna-capture.mjs. GPU/CPU com detector real e vídeo estático não provam qualidade temporal/caminhada.

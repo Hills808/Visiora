@@ -7,9 +7,13 @@ export class SnapshotView {
   get valid(): boolean {
     return this.usable;
   }
-  observe(signature: readonly number[]): boolean {
-    if (!this.usable || !compareViews(this.signature, signature).broad) return false;
+  invalidate(): boolean {
+    if (!this.usable) return false;
     this.usable = false;
     return true;
+  }
+  observe(signature: readonly number[]): boolean {
+    if (!this.usable || !compareViews(this.signature, signature).broad) return false;
+    return this.invalidate();
   }
 }

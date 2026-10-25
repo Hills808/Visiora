@@ -116,6 +116,8 @@ async function open({ fallback = false, consent = false } = {}) {
     { fallback },
   );
   await page.goto(base);
+  await page.selectOption('#perception-provider', 'luna');
+  await page.locator('.environment-details > summary').click();
   await page.waitForFunction(() =>
     document.querySelector('#luna-config').textContent.includes('Simulador'),
   );

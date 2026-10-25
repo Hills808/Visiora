@@ -33,6 +33,7 @@ try {
   await installTestVoice(page);
   await captureGeneratedBlobs(page);
   await page.goto(base);
+  await page.locator('.environment-details > summary').click();
   await page.selectOption('#perception-provider', 'local');
   await page.click('#start');
   await page.waitForFunction(

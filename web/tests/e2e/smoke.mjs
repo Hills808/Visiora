@@ -45,6 +45,7 @@ try {
     document.querySelector('#caption').textContent.includes('Parece uma sala de estar.'),
   );
   assert.match(await page.locator('#source-badge').innerText(), /simulada/);
+  await page.locator('.environment-details > summary').click();
   assert.ok(Number(await page.locator('#reference-count').innerText()) > 0);
   await page.screenshot({ path: `${out}/desktop-demo.png`, fullPage: true });
   assert.doesNotMatch(

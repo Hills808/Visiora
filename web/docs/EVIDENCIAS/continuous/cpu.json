@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "cpuRequested": true,
+  "scope": "Real YOLOX Nano/Tiny/S, loopback fake API, video camera and controlled voice. No paid API, physical camera, accuracy, identity, walking or human acceptance claim.",
+  "fixture": "external-qa-video",
+  "limitation": "Static image video measures transport/inference latency only; temporal video without independent annotation does not establish tracking quality.",
+  "cases": [
+    "CA-H1: initial Luna dispatch occurs while real local worker initialization is gated; opt-in defaults off",
+    "CA-H1: real local inference continues for at least four accepted frames while controlled speech remains active",
+    "CA-H1/H2: one camera, zero local frame queue and at least four accepted real detector frames during 12 s pending fake API",
+    "CA-H9: disable cancels initialization and prevents late ready/results",
+    "CA-H9: stop cancels initialization and prevents late ready/results",
+    "CA-H9: consent cancels initialization and prevents late ready/results"
+  ],
+  "errors": [],
+  "requestsOutsideLoopback": [],
+  "browser": "156.0.8078.47",
+  "initialization": {
+    "firstLunaAtMs": 747.4000000003725,
+    "modelReadyAtMs": 4108
+  },
+  "voiceHold": {
+    "accepted": 4,
+    "elapsedMs": 5661.699999999255
+  },
+  "apiHold": {
+    "elapsedMs": 12046.700000001118,
+    "accepted": 8,
+    "busySkipped": 77,
+    "pendingFrames": 0,
+    "cameraRequests": 1
+  },
+  "metrics": {
+    "provider": "wasm",
+    "initializationMs": {
+      "samples": 1,
+      "p50": 3681,
+      "p95": 3681,
+      "max": 3681
+    },
+    "inferenceMs": {
+      "samples": 15,
+      "p50": 1347.2000000011176,
+      "p95": 1391.699999999255,
+      "max": 1391.699999999255
+    },
+    "inferenceBasis": "aggregate; inferenceByProvider groups worker results by their reported backend",
+    "inferenceByProvider": {
+      "webgpu": {
+        "samples": 0,
+        "p50": null,
+        "p95": null,
+        "max": null
+      },
+      "wasm": {
+        "samples": 15,
+        "p50": 1347.2000000011176,
+        "p95": 1391.699999999255,
+        "max": 1391.699999999255
+      }
+    },
+    "preparationMs": {
+      "samples": 16,
+      "p50": 1.599999999627471,
+      "p95": 2.5,
+      "max": 2.5
+    },
+    "captureToResultMs": {
+      "samples": 15,
+      "p50": 1351.699999999255,
+      "p95": 1397.0999999996275,
+      "max": 1397.0999999996275
+    },
+    "acceptedCaptureToResultMs": {
+      "samples": 15,
+      "p50": 1351.699999999255,
+      "p95": 1397.2000000011176,
+      "max": 1397.2000000011176
+    },
+    "dispatchFrameDelta": {
+      "samples": 15,
+      "p50": 6,
+      "p95": 6,
+      "max": 6
+    },
+    "dispatchCaptureDeltaMs": {
+      "samples": 15,
+      "p50": 1402.199999999255,
+      "p95": 1583.4000000003725,
+      "max": 1583.4000000003725
+    },
+    "accepted": 15,
+    "stale": 0,
+    "errors": 0,
+    "confirmedTracks": 4
+  },
+  "apiCalls": 5
+}

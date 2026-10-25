@@ -3,6 +3,7 @@ import type { AnalysisResult, VisualItem } from '../perception/evidence.js';
 import { angularDistance, bearingFromX, sectorOf, SECTORS } from './geometry.js';
 import { snapshotSpeech, type SnapshotPhrase } from './snapshot-speech.js';
 import type { Sector } from './types.js';
+import { snapshotProfile, type SnapshotSpeechProfile } from './snapshot-profile.js';
 
 export const normalizeVisual = (value: string): string =>
   value.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().trim().replace(/\s+/g, ' ');
@@ -25,6 +26,7 @@ export interface SnapshotDelivery {
   clearReferences: boolean;
   removedKeys: string[];
   orientation: boolean;
+  sceneCorrection: boolean;
 }
 export interface SnapshotPlan {
   text: string;
@@ -39,10 +41,13 @@ export function snapshotGroups(
   for (const item of observations) {
     if (!item.box || item.kind === 'text') continue;
     const sector = sectorOf(bearingFromX(item.box.x + item.box.width / 2));
-    const key = `${concept(item)}:${sector}:${item.uncertain}`;
+    const key = `${concept(item)}:${sector}`;
     const group = groups.get(key);
-    if (group) group.count++;
-    else groups.set(key, { key, item, count: 1, sector, seenAt: result.stamp.capturedAtMs });
+    if (group) {
+      group.count++;
+      // Mixed certainty must not split one quantity into two repeated announcements.
+      if (item.uncertain && !group.item.uncertain) group.item = { ...group.item, uncertain: true };
+    } else groups.set(key, { key, item, count: 1, sector, seenAt: result.stamp.capturedAtMs });
   }
   return [...groups.values()];
 }
@@ -59,32 +64,75 @@ export function snapshotItem(group: SnapshotGroup): SnapshotPhrase {
         : `${count > 1 ? 'mais de ' : ''}${item.article} ${item.label}`,
   };
 }
+/** Shared manual/automatic focus policy; no semantic risk inference. */
+export function orderedSnapshotGroups(
+  groups: readonly SnapshotGroup[],
+  profile: SnapshotSpeechProfile,
+): SnapshotGroup[] {
+  return [...groups].sort(
+    (a, b) =>
+      Number(a.item.uncertain) - Number(b.item.uncertain) ||
+      (profile.maxItems === 1
+        ? Math.abs(bearingFromX(a.item.box!.x + a.item.box!.width / 2)) -
+          Math.abs(bearingFromX(b.item.box!.x + b.item.box!.width / 2))
+        : 0),
+  );
+}
 /** Delivery memory is linguistic, not tracking or a map of current positions. */
 export class SnapshotDiscourse {
   private announced = new Map<string, SpokenGroup>();
   private scene: string | null = null;
   private revision = 0;
   private needsOrientation = true;
+  private sceneCorrections = 0;
+  private missing = new Map<
+    string,
+    { frame: number; firstAt: number; lastAt: number; count: number }
+  >();
   private candidate: { label: string; count: number; frame: number; at: number } | null = null;
   clear(): void {
     this.announced.clear();
     this.scene = null;
     this.candidate = null;
     this.needsOrientation = true;
+    this.sceneCorrections = 0;
+    this.missing.clear();
     this.revision++;
   }
   forgetDirections(): void {
     this.announced.clear();
     this.needsOrientation = true;
     this.candidate = null;
+    this.sceneCorrections = 0;
+    this.missing.clear();
     this.revision++;
   }
   observe(result: AnalysisResult): void {
     const groups = snapshotGroups(result),
       at = result.stamp.capturedAtMs;
     for (const [key, old] of this.announced) {
-      if (groups.some((group) => this.sameReference(old, group))) old.seenAt = at;
-      else if (at - old.seenAt > CONFIG.online.referenceMemoryMs) this.announced.delete(key);
+      // Presence and position differ: an identified person with box:null is not an absence.
+      const present =
+        result.evidence.observations.some(
+          (item) => item.kind !== 'text' && concept(item) === concept(old.item),
+        ) || groups.some((group) => this.sameReference(old, group));
+      if (present) {
+        old.seenAt = at;
+        this.missing.delete(key);
+      } else if (at - old.seenAt > CONFIG.online.referenceMemoryMs) {
+        this.announced.delete(key);
+        this.missing.delete(key);
+      } else {
+        const previous = this.missing.get(key);
+        if (previous?.frame === result.stamp.frameId) continue;
+        const consecutive = previous && at - previous.lastAt <= CONFIG.online.referenceMemoryMs;
+        this.missing.set(key, {
+          frame: result.stamp.frameId,
+          firstAt: consecutive ? previous.firstAt : at,
+          lastAt: at,
+          count: consecutive ? previous.count + 1 : 1,
+        });
+      }
     }
     const label = normalizeVisual(result.evidence.scene?.label ?? ''),
       candidate = this.candidate;
@@ -102,8 +150,23 @@ export class SnapshotDiscourse {
   private sameReference(old: SnapshotGroup, current: SnapshotGroup): boolean {
     const spokenCount = (group: SnapshotGroup): number =>
       group.item.kind === 'person' ? group.count : Math.min(2, group.count);
-    if (concept(old.item) !== concept(current.item) || spokenCount(old) !== spokenCount(current))
-      return false;
+    // A lower count alone is not new presence; do not alternate one/two-person announcements.
+    if (spokenCount(old) < spokenCount(current)) return false;
+    if (concept(old.item) !== concept(current.item)) {
+      if (old.item.kind !== 'object' || current.item.kind !== 'object') return false;
+      const before = normalizeVisual(old.item.label),
+        after = normalizeVisual(current.item.label);
+      const family = CONFIG.online.discourseLabelFamilies.some(
+        (labels) => labels.includes(before) && labels.includes(after),
+      );
+      const a = old.item.box!,
+        b = current.item.box!;
+      const intersection =
+        Math.max(0, Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x)) *
+        Math.max(0, Math.min(a.y + a.height, b.y + b.height) - Math.max(a.y, b.y));
+      const union = a.width * a.height + b.width * b.height - intersection;
+      if (!family || intersection / union < CONFIG.online.discourseLabelOverlap) return false;
+    }
     if (old.sector === current.sector) return true;
     const bearing = bearingFromX(current.item.box!.x + current.item.box!.width / 2);
     const halfSector = 360 / CONFIG.space.sectors / 2;
@@ -117,17 +180,19 @@ export class SnapshotDiscourse {
     prefixWords: number,
     newView = false,
     contextOnly = false,
+    profile: SnapshotSpeechProfile = snapshotProfile(),
   ): SnapshotPlan | null {
     const sceneLabel = normalizeVisual(result.evidence.scene?.label ?? '');
     const sceneChanged =
       sceneLabel !== this.scene &&
+      this.sceneCorrections < CONFIG.online.sceneCorrectionsPerView &&
       (this.scene === null ||
         newView ||
         (sceneLabel !== '' &&
           (this.scene === '' ||
             (this.candidate?.label === sceneLabel &&
               this.candidate.count >= CONFIG.online.sceneConfirmationFrames))));
-    const orientation = this.needsOrientation || newView || sceneChanged;
+    const orientation = this.needsOrientation || newView;
     const acknowledgment: SnapshotDelivery = {
       revision: this.revision,
       scene: null,
@@ -135,6 +200,7 @@ export class SnapshotDiscourse {
       clearReferences: false,
       removedKeys: [],
       orientation,
+      sceneCorrection: sceneChanged && !orientation,
     };
     if (contextOnly) {
       if (!result.evidence.scene || sceneLabel === this.scene) return null;
@@ -147,30 +213,45 @@ export class SnapshotDiscourse {
         briefing: false,
       };
     }
-    const prefix = orientation
-      ? result.evidence.scene
-        ? `${newView && !sceneChanged ? 'Neste enquadramento, o ambiente' : 'O ambiente'} parece ${result.evidence.scene.label}. `
-        : 'Não tenho certeza de que lugar é este. '
-      : '';
-    if (orientation) acknowledgment.scene = sceneLabel;
+    const prefix =
+      orientation || sceneChanged
+        ? result.evidence.scene
+          ? `${newView && !sceneChanged ? 'Neste enquadramento, o ambiente' : 'O ambiente'} parecia ${result.evidence.scene.label}. `
+          : 'Não identifiquei o lugar nesta captura. '
+        : '';
+    if (orientation || sceneChanged) acknowledgment.scene = sceneLabel;
     const groups = snapshotGroups(result);
     const phrases: SnapshotPhrase[] = [];
-    const budget =
-      (orientation ? CONFIG.speech.briefingWords : CONFIG.speech.maxWords) - prefixWords;
+    const budget = (orientation ? profile.briefingWords : profile.updateWords) - prefixWords;
     const append = (phrase: SnapshotPhrase): boolean => {
       if (
-        phrases.length >= CONFIG.speech.maxItems ||
+        phrases.length >= profile.maxItems ||
         (prefix + snapshotSpeech([...phrases, phrase])).trim().split(/\s+/).length > budget
       )
         return false;
       phrases.push(phrase);
       return true;
     };
+    const known = [...this.announced.values()];
+    const matches = new Map(
+      groups.map((group) => {
+        const compatible = known.filter((old) => this.sameReference(old, group));
+        const exact = compatible.filter((old) => concept(old.item) === concept(group.item));
+        return [group, exact.length ? exact : compatible];
+      }),
+    );
+    // Only a unique one-to-one refinement can suppress speech; ambiguous groups remain eligible.
+    const previousFor = (group: SnapshotGroup): SpokenGroup | undefined => {
+      const candidates = matches.get(group)!;
+      if (candidates.length !== 1) return undefined;
+      const old = candidates[0]!;
+      return groups.filter((current) => matches.get(current)!.includes(old)).length === 1
+        ? old
+        : undefined;
+    };
     // Preserve the provider's usefulness order inside each certainty tier; never guess roles from names.
-    for (const group of [...groups].sort(
-      (a, b) => Number(a.item.uncertain) - Number(b.item.uncertain),
-    )) {
-      const old = [...this.announced.values()].find((value) => this.sameReference(value, group));
+    for (const group of orderedSnapshotGroups(groups, profile)) {
+      const old = previousFor(group);
       if (!orientation && old && (!old.item.uncertain || group.item.uncertain)) continue;
       if (append(snapshotItem(group))) {
         acknowledgment.items.push(group);
@@ -183,10 +264,15 @@ export class SnapshotDiscourse {
             acknowledgment.removedKeys.push(previous.key);
       }
     }
-    const missing = [...this.announced.values()].filter(
-      (old) => !groups.some((group) => concept(old.item) === concept(group.item)),
-    );
-    if (!orientation && !groups.length && missing.length) {
+    const missing = known.filter((old) => {
+      const absence = this.missing.get(old.key);
+      return (
+        absence &&
+        absence.count >= CONFIG.online.missingConfirmationFrames &&
+        result.stamp.capturedAtMs - absence.firstAt >= CONFIG.online.missingConfirmationSpanMs
+      );
+    });
+    if (!orientation && !groups.length && missing.length && missing.length === known.length) {
       acknowledgment.clearReferences = true;
       append({
         sector: null,
@@ -227,16 +313,34 @@ export class SnapshotDiscourse {
   }
   complete(delivery: SnapshotDelivery, at: number): boolean {
     if (delivery.revision !== this.revision) return false;
-    if (delivery.clearReferences) this.announced.clear();
+    if (delivery.clearReferences) {
+      this.announced.clear();
+      this.missing.clear();
+    }
     if (delivery.scene !== null) {
-      if (delivery.scene !== this.scene || delivery.orientation) this.announced.clear();
+      if (delivery.orientation) {
+        this.announced.clear();
+        this.missing.clear();
+      }
       this.scene = delivery.scene;
     }
-    if (delivery.orientation) this.needsOrientation = false;
-    for (const key of delivery.removedKeys) this.announced.delete(key);
-    for (const group of delivery.items) this.announced.set(group.key, { ...group, spokenAt: at });
-    while (this.announced.size > CONFIG.online.autoMemoryLimit)
-      this.announced.delete(this.announced.keys().next().value!);
+    if (delivery.orientation) {
+      this.needsOrientation = false;
+      this.sceneCorrections = 0;
+    } else if (delivery.sceneCorrection) this.sceneCorrections++;
+    for (const key of delivery.removedKeys) {
+      this.announced.delete(key);
+      this.missing.delete(key);
+    }
+    for (const group of delivery.items) {
+      this.announced.set(group.key, { ...group, spokenAt: at });
+      this.missing.delete(group.key);
+    }
+    while (this.announced.size > CONFIG.online.autoMemoryLimit) {
+      const key = this.announced.keys().next().value!;
+      this.announced.delete(key);
+      this.missing.delete(key);
+    }
     return true;
   }
 }

@@ -1,3 +1,43 @@
+## Continuidade da captura — ADR-050
+
+O preparo da imagem tem prazo e cancelamento; imagens que envelhecem antes do envio são bloqueadas. O acompanhamento trata contador de vídeo indisponível, encerra inferência travada e evita cópia de quadros durante recuperação da GPU. Erros temporários usam a recuperação limitada existente. [Testes e limites](docs/EVIDENCIAS/CAPTURA-RESILIENTE-2026-10-25.md); percepção local continua experimental e sem fala híbrida.
+
+## Fala mais curta — ADR-049
+
+Ajustes → Quantidade de informação agora controla também o Luna: Só o essencial seleciona uma referência por fala; Equilibrado encurta o briefing; Mais referências mantém o limite anterior. Sem recortar nomes, retirar idade/direção ou confirmar itens omitidos. O diagnóstico separa análise e espera da fala. [Evidências e limites](docs/EVIDENCIAS/FALA-CURTA-ESPERA-2026-10-25.md).
+
+## Continuidade de fala — ADR-048
+
+O automático preserva o que já foi falado durante omissões isoladas e pequenas variações. Corrigir o nome do lugar não repete os objetos; uma pessoa sem posição não é tratada como ausente. Novidades, mudança de direção/vista e pedidos explícitos permanecem elegíveis. [Testes e limites](docs/EVIDENCIAS/CONTINUIDADE-SEM-REPETICAO-2026-10-25.md).
+
+## Correção de contrato Luna — ADR-047
+
+O servidor aceita diferenças equivalentes de formatação e informa um motivo específico quando a resposta não atende ao contrato. Uma posição inválida continua bloqueada. Se ocorrer pausa, anote o código e pare/inicie após conferir a causa. [Testes e limites](docs/EVIDENCIAS/LUNA-CONTRATO-422-2026-10-24.md); reteste real ainda pendente.
+
+## Percepção contínua e memória — ADR-046
+
+No [Luna privado](https://visiora-luna-hills808.hills808.chatgpt.site/), selecione **Ajustes → Percepção local contínua · experimental → Acompanhar objetos neste aparelho**. A opção vale só nesta página e começa desligada. Ao iniciar Luna, o observador baixa cerca de 60 MB de modelos e usa a mesma câmera, em paralelo à análise e à voz. A carga não bloqueia a primeira captura Luna. Desative se houver aquecimento ou lentidão.
+
+Abra **Percepção local experimental** para consultar observações recentes, candidatos e associações temporárias. Elas são relativas à câmera, podem errar e não representam identidades, distâncias ou caminho livre. A fala continua baseada nas capturas Luna; fala híbrida aguarda qualidade temporal medida. O diagnóstico exportado não inclui rótulos, caixas ou imagens. [Evidências e limites](docs/EVIDENCIAS/PERCEPCAO-CONTINUA-2026-10-24.md).
+
+Teste de transporte/execução real: após build e preparação do vídeo de QA, `node tests/e2e/continuous-real.mjs` (GPU quando disponível) e `node tests/e2e/continuous-real.mjs --cpu`. `VISIORA_QA_VIDEO` aceita caminho de vídeo Y4M público/consentido; sem ele usa a foto pública dog.y4m e mede só carga/atraso. Usa API fake e SQLite em memória, nunca .env; não valida câmera/voz reais ou reconhecimento. Não usar frames privados sem autorização. H1 fake continua em `node tests/e2e/hybrid-capture.mjs`.
+
+## Movimento no iPhone — revisão ADR-045
+
+No [Luna privado](https://visiora-luna-hills808.hills808.chatgpt.site/), a descrição identifica o tempo da captura e posições relativas à câmera. A mudança de vista exige captura nova mesmo quando o enquadramento volta. Em **Ajustes → Giros da câmera · experimental**, a leitura opcional retira posições após giro detectado; começa desligada, exige permissão no iPhone e funciona só durante Luna em primeiro plano. O estado informa quando faltam leituras. Sem câmera/voz física ou caminhada avaliadas nesta revisão: não usar o protótipo para decidir onde pisar. Para o primeiro ensaio, permanecer parado e movimentar apenas a câmera num ambiente conhecido.
+
+Ajuda permite exportar diagnóstico com tempos da resposta/início/conclusão e motivos de retirada, sem imagens nem textos. Voz/texto e percepção fake são separados; callbacks não provam que houve som. [Resultados e limites](docs/EVIDENCIAS/MOVIMENTO-IPHONE-2026-10-24.md) · [Protocolo antes de avançar percepção](docs/AVALIACAO-MOVIMENTO.md).
+
+## Versão web atual — 24/10/2026
+
+[Abrir Visiora com Luna](https://visiora-luna-hills808.hills808.chatgpt.site/) (acesso privado) · [Modo local público](https://visiora-ambiente.hills808.chatgpt.site/).
+
+A interface usa uma ação principal, descrição em destaque e detalhes expansíveis. No modo Luna, autorize as capturas antes de iniciar. Perguntas são opcionais. Ajustes preservam voz/leitor de tela, tema e texto ampliado. O orçamento hospedado é centralizado, US$ 2/dia; não há chave no navegador. Não rode outro gateway pago em paralelo, pois o ledger local é separado. [Referências e verificação do visual](docs/EVIDENCIAS/REDESIGN-VISUAL-2026-10-24.md).
+
+As orientações de túnel e implantação própria abaixo são alternativas/histórico; o Site privado já tem gateway publicado. O Visiora permanece um protótipo em avaliação, sem aceite com pessoas cegas.
+
+---
+
 ## Demonstração remota temporária — sala de aula (23/10/2026)
 
 Para usar o **Luna real** pelo notebook ou celular sem instalar o servidor nesses aparelhos, há um iniciador para Windows: `tools/apresentacao-luna.ps1`. Ele abre um **Cloudflare Quick Tunnel HTTPS** protegido por e-mail e roda o gateway local na **mesma origem pública**; deve ser executado no computador que já tem `.env` e `.runtime/luna-budget.sqlite`. O computador permanece ligado e conectado à internet durante a sessão. O link `chatgpt.site` anterior continua estático, sem Luna.

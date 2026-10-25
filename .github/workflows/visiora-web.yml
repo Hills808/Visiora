@@ -5,10 +5,12 @@ on:
     paths:
       - '.github/workflows/visiora-web.yml'
       - 'web/**'
+      - 'hosting/luna/**'
   pull_request:
     paths:
       - '.github/workflows/visiora-web.yml'
       - 'web/**'
+      - 'hosting/luna/**'
 
 permissions:
   contents: read
@@ -45,3 +47,32 @@ jobs:
         run: node node_modules/playwright-core/cli.js install --with-deps --only-shell chromium
       - name: Accessibility audit in browser
         run: npm run test:a11y
+  hosted-luna:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hosting/luna
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: |
+            hosting/luna/package-lock.json
+            web/package-lock.json
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.11'
+      - name: Stage Luna-only client
+        run: node scripts/prepare-web.mjs
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund && npm ci --prefix web --no-audit --no-fund
+      - name: Build hosted artifact
+        run: npm run build
+      - name: Check types and lint
+        run: node node_modules/typescript/bin/tsc --noEmit && npm run lint
+      - name: Verify hosted daily budget policy
+        run: node --test tests/hosted-policy.test.mjs tests/hosted-connection.test.mjs tests/hosted-workerd.test.mjs tests/hosted-lifecycle.test.mjs

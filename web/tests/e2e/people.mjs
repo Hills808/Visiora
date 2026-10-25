@@ -26,6 +26,7 @@ try {
   await installTestVoice(page);
   await captureGeneratedBlobs(page);
   await page.goto(base);
+  await page.locator('.environment-details > summary').click();
   await page.selectOption('#perception-provider', 'local');
   await page.click('#start');
   await page.waitForFunction(
@@ -82,6 +83,7 @@ try {
   await installTestVoice(cpuPage);
   await captureGeneratedBlobs(cpuPage);
   await cpuPage.goto(base);
+  await cpuPage.locator('.environment-details > summary').click();
   await cpuPage.selectOption('#perception-provider', 'local');
   await cpuPage.click('#start');
   await cpuPage.waitForFunction(

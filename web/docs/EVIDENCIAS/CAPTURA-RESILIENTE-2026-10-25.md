@@ -1,0 +1,25 @@
+# Captura recente e continuidade sob falha — ADR-050 (25/10/2026)
+
+Critérios: CA-H1/H2/H7/H9, instrumentação parcial CA-H6 e CA-L3/L4. Próxima fatia de responsividade autorizada pelo usuário. Sem novo modelo, pesos, biblioteca, imagem privada ou API paga. Não libera fala híbrida nem encerra gates de qualidade H2/H3.
+
+## Falhas reproduzidas e correções
+
+1. O timestamp da câmera atual podia estar recente enquanto o JPEG original envelhecia. O preparo agora preserva o ID/horário original, rejeita idade negativa/maior que 3 s e tem prazo de 2 s configurado. Há uma preparação em voo e nenhuma fila. Parar encerra a promessa imediatamente; callback antigo não resolve nem cancela uma preparação nova. Contadores de uma sessão cancelada não entram na próxima. Uma segunda checagem de idade imediatamente antes da API bloqueia dados antigos mesmo se o produtor violar o contrato.
+2. Falha local de preparo ganha código fechado, sem texto do navegador. Timeout/captura antiga/imagem vazia permitem a recuperação já existente: uma captura nova após 15 s; segunda falha consecutiva pausa. Não libera chamada sem reserva nem muda quota/cadência/preço. O primeiro preparo com falha não chega à API e não faz reserva. Arquivo grande, indisponibilidade e concorrência não são repetidos indefinidamente.
+3. Um browser com API de qualidade de vídeo presente, mas totalVideoFrames sempre zero, parava após o primeiro quadro no fallback de animação. Zero/contador inválido passa a usar mediaTime crescente, já usado quando a API não existe. Contador positivo continua rejeitando quadro repetido. Diagnóstico registra a base presented-frames/decoded-frames/media-time, sem afirmar que o fallback temporal mede novos pixels ou detecta movimento físico.
+4. O watchdog do pipeline apenas abortava o sinal; um adaptador que ignorasse abort mantinha inFlight=1 indefinidamente. A espera lógica agora termina independentemente da cooperação. Stop não gera falha falsa; resolução/rejeição tardia é consumida e descartada. O watchdog próprio do YOLOX e seu retorno GPU→CPU permanecem.
+5. Durante inicialização de CPU após falha da GPU, eram copiados pixels para depois descartá-los. O contrato opcional acceptsFrames evita cópia e reserva de operação temporariamente. Não acumula frames: CPU pronta exige oferta nova. Falha definitiva volta a analyze e é anunciada, em vez de ser mascarada como indisponibilidade temporária. unavailableSkipped conta só essas ofertas, sem imagens.
+
+O JPEG cancelado pode continuar sendo codificado internamente pelo navegador até o callback nativo; a aplicação não pode interromper essa função, mas encerra sua espera e ignora o retorno. Da mesma forma, dispose/cancelamento não substituem a cooperação de um backend arbitrário para liberar seus próprios recursos; o adaptador real termina o worker. Não descrever o cancelamento lógico como prova de ausência de RAM residual do navegador.
+
+## Evidências executadas
+
+- npm test: 264/264, tipos e lint passaram. Casos de deadline, stop/restart, callback antigo, geometria/idade, contador zero, adaptador não cooperativo, retomada e falha definitiva da CPU. Nenhum sleep para corrida; prazos testados com relógio controlado.
+- node tests/e2e/luna-capture.mjs: 4 cenários em Chrome com vídeo público como câmera, API/voz artificiais e HTTP real loopback. Timeout/retorno tardio, parada, captura envelhecida antes de reservar e contador zero. Duas chamadas ao fake no total; zero chamadas nos caminhos de falha/parada, zero erro de página.
+- node tests/e2e/continuous-real.mjs e --cpu: seis cenários por backend, YOLOX Nano/Tiny/S real, mesma câmera, nenhuma fila e inicialização/voz/API independentes. Durante12s de API fake pendente, houve 44 resultados aceitos em GPU e 8 em CPU neste PC. São observações de execução sobre vídeo de imagem pública estática, não detecção temporal anotada nem frames/s de câmera. O resultado conserva todas as medições e limitações.
+- Regressão node tests/e2e/luna-movement.mjs: 13 cenários passaram. Simulador local executado; memória idêntica ao JSONL versionado da ADR-049. Não há mudança esperada de transcrição normal.
+- Auditoria Sol reproduziu o travamento do watchdog, congelamento do contador zero e cópias na recuperação. Sol implementou e testou o pipeline/adaptador; coordenador integrou captura, erros, E2E, revisão e publicação. Sem revisão final independente Astra nesta fatia.
+
+## Limites e pendências
+
+Não testado: nova sessão paga, câmera/voz física, Safari/iPhone/Android físico, contador zero em aparelho real, perda física de GPU, qualidade temporal anotada, 30 min da versão atual, RAM/bateria/aquecimento ou pessoas cegas/O&M. O prazo de 2 s é hipótese de engenharia; aparelhos sobrecarregados podem pausar e precisam de ensaio. Não houve aumento de precisão demonstrado, nova garantia de atraso da API ou habilitação de navegação/fala híbrida. CA-H3/H4/H6/H11 e CA-A4/A5 continuam abertos no que depende de qualidade/dados/aparelhos/pessoas. Próxima prioridade: conjunto temporal independente e teste físico controlado para decidir quais eventos locais podem chegar à fala.

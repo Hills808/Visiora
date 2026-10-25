@@ -4,7 +4,7 @@ export const POLICY = Object.freeze({
   // Only the exact documented response alias is accepted; new snapshots require review.
   maxModelIdLength: 128,
   endpoint: 'https://api.openai.com/v1/responses',
-  promptVersion: 'visual-v1.1-auto',
+  promptVersion: 'visual-v1.2-contract',
   maxOutputTokens: 1200,
   timeoutMs: 12000,
   maxBodyBytes: 1050000,
