@@ -4,6 +4,7 @@ import { YoloxAdapter, validYoloxDetections } from '../dist/perception/yolox-ada
 import { localInputSize, LocalFrameDiscardedError } from '../dist/perception/frame.js';
 import { prepareYolox, YoloxPreparer } from '../dist/perception/yolox-preparation.js';
 import { CONFIG } from '../dist/config.js';
+import { LocalPipeline } from '../dist/perception/local-pipeline.js';
 
 const flush = () => new Promise(setImmediate);
 function frame(width = 640, height = 480, frameId = 1) {
@@ -219,6 +220,7 @@ test('CA-H7/H9: runtime GPU failure discards frame, initializes CPU once indepen
   const failed = adapter.analyze(frame(), new AbortController().signal);
   workers[0].emit({ type: 'error', message: 'device lost' });
   await assert.rejects(failed, LocalFrameDiscardedError);
+  assert.equal(adapter.acceptsFrames, false);
   assert.equal(workers[0].terminated, true);
   assert.deepEqual(workers[1].sent[0], { type: 'init', forceCpu: true });
   await assert.rejects(
@@ -227,6 +229,7 @@ test('CA-H7/H9: runtime GPU failure discards frame, initializes CPU once indepen
   );
   workers[1].ready('wasm');
   await flush();
+  assert.equal(adapter.acceptsFrames, true);
   const next = adapter.analyze(frame(640, 480, 2), new AbortController().signal);
   workers[1].emit({
     type: 'result',
@@ -243,4 +246,81 @@ test('CA-H7/H9: runtime GPU failure discards frame, initializes CPU once indepen
   await assert.rejects(cpuFailed, /failed/);
   assert.equal(workers.length, 2);
   adapter.dispose();
+});
+
+test('CA-H1/H7/H9: recovery skips pixel copies; CPU readiness resumes fresh frames and init failure remains visible', async (t) => {
+  const { workers } = browser(t);
+  for (const outcome of ['ready', 'error']) {
+    const pending = YoloxAdapter.create(new AbortController().signal);
+    const gpu = workers.at(-1);
+    gpu.ready();
+    const adapter = await pending;
+    let copied = 0,
+      failures = 0;
+    const accepted = [];
+    const pipeline = new LocalPipeline(
+      1,
+      adapter,
+      (result) => accepted.push(result),
+      () => failures++,
+      () => 100,
+    );
+    t.after(() => pipeline.stop());
+    const access = (id) => ({
+      stamp: { ...frame(1, 1, id).stamp, width: 640, height: 480 },
+      pixels() {
+        copied++;
+        return frame(640, 480, id);
+      },
+    });
+    pipeline.offer(access(1));
+    gpu.emit({ type: 'error', message: 'GPU lost' });
+    await flush();
+    assert.equal(adapter.acceptsFrames, false);
+    const cpu = workers.at(-1);
+    for (let id = 2; id <= 26; id++)
+      pipeline.offer({
+        stamp: access(id).stamp,
+        pixels() {
+          assert.fail('CPU initialization copied pixels');
+        },
+      });
+    assert.equal(copied, 1);
+    assert.equal(pipeline.diagnostics().unavailableSkipped, 25);
+    assert.equal(pipeline.diagnostics().pendingFrames, 0);
+    assert.equal(pipeline.diagnostics().discarded, 1);
+    if (outcome === 'ready') cpu.ready('wasm');
+    else cpu.emit({ type: 'error', message: 'CPU initialization failed' });
+    await flush();
+    assert.equal(
+      adapter.acceptsFrames,
+      true,
+      'Definitive failures must reach analyze instead of skipping forever',
+    );
+    assert.equal(copied, 1, 'Recovery completion does not replay an old frame');
+    pipeline.offer(access(27));
+    if (outcome === 'ready') {
+      cpu.emit({
+        type: 'result',
+        frameId: 27,
+        capturedAtMs: 100,
+        provider: 'wasm',
+        latencyMs: 10,
+        detections: [],
+      });
+      await flush();
+      assert.deepEqual(
+        accepted.map((result) => result.stamp.frameId),
+        [27],
+      );
+      assert.equal(failures, 0);
+    } else {
+      await flush();
+      assert.equal(pipeline.diagnostics().state, 'error');
+      assert.equal(failures, 1);
+      assert.equal(accepted.length, 0);
+    }
+    assert.equal(copied, 2);
+    pipeline.stop();
+  }
 });

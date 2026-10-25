@@ -136,3 +136,7 @@ Análises recentes podem mudar os rótulos sem mudança real. O automático cont
 ## Fala curta — ADR-049
 
 Uma fala mais curta pode omitir referências que não cabem; não são marcadas como faladas. Essencial prioriza foco central da câmera, sem classificar perigo ou garantir utilidade. Menos palavras não demonstra análise da API mais rápida. Os tempos do diagnóstico são callbacks/texto do navegador, sem prova de áudio audível. Falta reteste físico e com usuários. [Evidência](EVIDENCIAS/FALA-CURTA-ESPERA-2026-10-25.md).
+
+## Continuidade sob carga — ADR-050
+
+Uma imagem que não é preparada em 2 s ou fica antiga é descartada antes do envio. A recuperação é limitada e pode pausar em aparelho sobrecarregado. O fallback mediaTime não comprova que pixels mudaram nem giro físico; câmera real ainda exige teste. Cancelar a espera não interrompe necessariamente a codificação interna do navegador. GPU/CPU foram ensaiadas neste PC com imagem pública estática, sem provar qualidade temporal, bateria ou desempenho móvel. [Evidência](EVIDENCIAS/CAPTURA-RESILIENTE-2026-10-25.md).

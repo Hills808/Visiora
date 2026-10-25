@@ -7,6 +7,7 @@ import { bearingFromX, sectorOf } from '../brain/geometry.js';
 import { el, text } from '../ui/render.js';
 import { AnalysisError, gatewayStatus, LunaClient, type GatewayStatus } from './luna-client.js';
 import { SnapshotCamera } from './snapshot-camera.js';
+import { CaptureError } from './capture-error.js';
 import { AutoAnalysis } from './auto-analysis.js';
 import { compareViews } from './view-change.js';
 import { SnapshotView } from './snapshot-view.js';
@@ -327,6 +328,9 @@ export class OnlineSession {
       this.pendingView = view;
       const capture = await this.camera.capture();
       if (!this.running || generation !== this.generation) return;
+      const captureAge = performance.now() - capture.capturedAtMs;
+      if (captureAge < 0 || captureAge > CONFIG.capture.maxFrameAgeMs)
+        throw new CaptureError('capture-stale');
       this.automatic.dispatched(performance.now(), signature);
       this.counts.dispatched++;
       dispatched = true;
@@ -382,8 +386,12 @@ export class OnlineSession {
           ? 'A cena mudou antes da análise; sem descrição recente. A próxima análise usará uma nova captura.'
           : 'Captura analisada; aguardando mudança relevante para o próximo envio.',
       );
-    } catch (error) {
-      if (!dispatched && !this.camera.ready) return;
+    } catch (caught) {
+      const error =
+        caught instanceof CaptureError
+          ? new AnalysisError(caught.message, caught.transient, caught.code)
+          : caught;
+      if (!dispatched && !this.camera.ready && !(caught instanceof CaptureError)) return;
       if (generation === this.generation && this.running) {
         this.lastError = error instanceof AnalysisError ? error.code : 'analysis-invalid';
         const recovering = this.automatic.failed(

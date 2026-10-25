@@ -74,6 +74,9 @@ export class YoloxAdapter implements LocalPerceptionAdapter {
   private preparationMs: number[] = [];
   private runtimeErrors = 0;
   private constructor(private onStatus?: (status: string) => void) {}
+  get acceptsFrames(): boolean {
+    return !this.recovering;
+  }
 
   static async create(
     signal: AbortSignal,

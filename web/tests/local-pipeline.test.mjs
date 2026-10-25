@@ -34,7 +34,7 @@ const result = (input) => ({
   source: { ...source },
   observations: [],
 });
-function fixture() {
+function fixture({ ignoresAbort = false, managesInferenceTimeout = false } = {}) {
   let now = 100,
     resolve,
     reject,
@@ -46,13 +46,15 @@ function fixture() {
   const adapter = {
     source,
     input: { width: 32, height: 24 },
+    managesInferenceTimeout,
     analyze(input, signal) {
       inputs.push(input.stamp);
       pendingFrame = input;
       return new Promise((yes, no) => {
         resolve = yes;
         reject = no;
-        signal.addEventListener('abort', () => no(new Error('aborted')), { once: true });
+        if (!ignoresAbort)
+          signal.addEventListener('abort', () => no(new Error('aborted')), { once: true });
       });
     },
     dispose() {
@@ -224,6 +226,73 @@ test('CA-H9: numerical latency samples remain bounded for a long session', async
   f.pipeline.stop();
 });
 
+test('CA-H1/H9: watchdog settles ignored abort once and consumes late success or rejection', async (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  for (const late of ['resolve', 'reject']) {
+    const f = fixture({ ignoresAbort: true });
+    f.pipeline.offer(frame(1));
+    assert.equal(f.pipeline.busy, true);
+    t.mock.timers.tick(CONFIG.vision.inferenceTimeoutMs);
+    await flush();
+    assert.deepEqual(f.status(), { disposed: 1, failed: 1 });
+    assert.equal(f.pipeline.busy, false);
+    assert.equal(f.pipeline.diagnostics().inFlight, 0);
+    assert.equal(f.pipeline.diagnostics().errorReason, 'timeout');
+    assert.equal(f.pipeline.diagnostics().errors, 1);
+    assert.equal(f.pipeline.diagnostics().state, 'error');
+    const beforeLate = f.pipeline.diagnostics();
+    f[late]();
+    await flush();
+    assert.deepEqual(f.pipeline.diagnostics(), beforeLate);
+    assert.deepEqual(f.accepted, []);
+    f.pipeline.offer({
+      ...frame(2),
+      pixels() {
+        assert.fail('timed out pipeline copied another frame');
+      },
+    });
+    f.pipeline.stop();
+    assert.deepEqual(f.status(), { disposed: 1, failed: 1 });
+  }
+});
+
+test('CA-H9: user stop cancels ignored-abort work without a false timeout or late delivery', async (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  for (const late of ['resolve', 'reject']) {
+    const f = fixture({ ignoresAbort: true });
+    f.pipeline.offer(frame(1));
+    f.pipeline.stop();
+    await flush();
+    assert.equal(f.pipeline.busy, false);
+    assert.equal(f.pipeline.diagnostics().state, 'stopped');
+    assert.equal(f.pipeline.diagnostics().errorReason, 'none');
+    assert.equal(f.pipeline.diagnostics().errors, 0);
+    assert.deepEqual(f.status(), { disposed: 1, failed: 0 });
+    t.mock.timers.tick(CONFIG.vision.inferenceTimeoutMs * 2);
+    f[late]();
+    await flush();
+    assert.deepEqual(f.accepted, []);
+    assert.equal(f.pipeline.diagnostics().errors, 0);
+    assert.deepEqual(f.status(), { disposed: 1, failed: 0 });
+  }
+});
+
+test('CA-H7/H9: adapter-owned watchdog remains independent from the pipeline timeout', async (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const f = fixture({ ignoresAbort: true, managesInferenceTimeout: true });
+  f.pipeline.offer(frame(1));
+  t.mock.timers.tick(CONFIG.vision.inferenceTimeoutMs * 2);
+  await flush();
+  assert.equal(f.pipeline.busy, true);
+  assert.deepEqual(f.status(), { disposed: 0, failed: 0 });
+  f.resolve();
+  await flush();
+  assert.equal(f.pipeline.busy, false);
+  assert.equal(f.accepted.length, 1);
+  f.pipeline.stop();
+  assert.deepEqual(f.status(), { disposed: 1, failed: 0 });
+});
+
 test('CA-H7: discarded GPU frame keeps pipeline alive and releases busy slot for a new frame', async () => {
   const f = fixture();
   f.adapter.analyze = () => Promise.reject(new LocalFrameDiscardedError('GPU frame discarded'));
@@ -237,6 +306,34 @@ test('CA-H7: discarded GPU frame keeps pipeline alive and releases busy slot for
   f.pipeline.offer(frame(2));
   await flush();
   assert.equal(f.accepted[0].stamp.frameId, 2);
+  f.pipeline.stop();
+});
+
+test('CA-H1/H7: temporary unavailability skips copies with no queue and resumes only on a new offer', async () => {
+  const f = fixture();
+  f.adapter.acceptsFrames = false;
+  for (let id = 1; id <= 25; id++)
+    f.pipeline.offer({
+      ...frame(id),
+      pixels() {
+        assert.fail('unavailable backend copied pixels');
+      },
+    });
+  assert.equal(f.pipeline.diagnostics().unavailableSkipped, 25);
+  assert.equal(f.pipeline.diagnostics().dispatched, 0);
+  assert.equal(f.pipeline.diagnostics().pendingFrames, 0);
+  assert.equal(f.pipeline.busy, false);
+  assert.deepEqual(f.status(), { disposed: 0, failed: 0 });
+  f.adapter.acceptsFrames = true;
+  await flush();
+  assert.equal(f.inputs.length, 0, 'Availability does not enqueue or replay an earlier frame');
+  f.pipeline.offer(frame(26));
+  f.resolve();
+  await flush();
+  assert.deepEqual(
+    f.accepted.map((value) => value.stamp.frameId),
+    [26],
+  );
   f.pipeline.stop();
 });
 

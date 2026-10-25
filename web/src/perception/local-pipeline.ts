@@ -9,6 +9,43 @@ const sameFields = (actual: object, expected: object): boolean =>
     ([key, value]) => (actual as Record<string, unknown>)[key] === value,
   );
 
+/** Cancel the logical wait even when the backend does not cooperate with abort. */
+function abortableAnalysis(
+  adapter: LocalPerceptionAdapter,
+  frame: LocalFrame,
+  signal: AbortSignal,
+): Promise<LocalResult> {
+  return new Promise((resolve, reject) => {
+    const cleanup = (): void => signal.removeEventListener('abort', abort);
+    const abort = (): void => {
+      cleanup();
+      reject(new Error('Local inference canceled'));
+    };
+    if (signal.aborted) {
+      abort();
+      return;
+    }
+    signal.addEventListener('abort', abort, { once: true });
+    try {
+      // Both handlers stay attached after cancellation: late rejection is consumed,
+      // and late success cannot settle the already canceled logical operation.
+      adapter.analyze(frame, signal).then(
+        (result) => {
+          cleanup();
+          resolve(result);
+        },
+        (error: unknown) => {
+          cleanup();
+          reject(error);
+        },
+      );
+    } catch (error) {
+      cleanup();
+      reject(error);
+    }
+  });
+}
+
 export function validLocalResult(
   value: LocalResult,
   frame: LocalFrame,
@@ -52,7 +89,15 @@ export class LocalPipeline {
   private pending: AbortController | null = null;
   private lastOfferedId = 0;
   private lastAcceptedId = 0;
-  private counts = { dispatched: 0, accepted: 0, busySkipped: 0, stale: 0, invalid: 0, errors: 0 };
+  private counts = {
+    dispatched: 0,
+    accepted: 0,
+    busySkipped: 0,
+    unavailableSkipped: 0,
+    stale: 0,
+    invalid: 0,
+    errors: 0,
+  };
   private latencyMs: number[] = [];
   private failed = false;
   private discarded = 0;
@@ -102,6 +147,10 @@ export class LocalPipeline {
       this.counts.busySkipped++;
       return;
     }
+    if (this.adapter.acceptsFrames === false) {
+      this.counts.unavailableSkipped++;
+      return;
+    }
     const controller = new AbortController();
     this.pending = controller;
     void this.process(frame, controller);
@@ -114,7 +163,7 @@ export class LocalPipeline {
       const size = localInputSize(access.stamp, this.adapter.input);
       const frame = access.pixels(size.width, size.height);
       this.counts.dispatched++;
-      const result = await this.adapter.analyze(frame, controller.signal);
+      const result = await abortableAnalysis(this.adapter, frame, controller.signal);
       if (!this.active || this.pending !== controller) return;
       if (controller.signal.aborted) throw new Error('Local inference timed out');
       if (!validLocalResult(result, frame, this.adapter)) {

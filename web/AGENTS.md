@@ -162,3 +162,7 @@ Leia docs/EVIDENCIAS/CONTINUIDADE-SEM-REPETICAO-2026-10-25.md. Lugar confirmado 
 ## Perfis e espera Luna — ADR-049 (25/10/2026)
 
 Ler docs/EVIDENCIAS/FALA-CURTA-ESPERA-2026-10-25.md. Preferência controla grupos completos e limites de 25/32/45 palavras no briefing; atualizações de 25 palavras. Omitido não é dito; Repeat conserva entrega e idade. Diagnóstico separa resposta→preparação/início de preparação→início, sem conteúdo. Não ampliar validade nem agenda paga. Novo teste: node tests/e2e/luna-verbosity.mjs. Não alegar ganho real de API/áudio/caminhada por teste fake.
+
+## Captura resiliente — ADR-050 (25/10/2026)
+
+Ler docs/EVIDENCIAS/CAPTURA-RESILIENTE-2026-10-25.md. JPEG single-flight, cancelável, 2 s de prazo e 3 s de idade antes da API; uma recuperação existente após 15 s, sem reserva na falha de preparo. Contador zero usa mediaTime explícito. Pipeline libera espera ao abort; acceptsFrames=false só temporário, sem esconder falha definitiva. Sem reduzir verificadores ou liberar fala híbrida. Novo E2E: node tests/e2e/luna-capture.mjs. GPU/CPU com detector real e vídeo estático não provam qualidade temporal/caminhada.

@@ -50,6 +50,8 @@ export interface LocalPerceptionAdapter {
   readonly input: { width: number; height: number; preserveAspectRatio?: boolean };
   /** Worker transport owns the inference watchdog so GPU recovery can discard, not abort. */
   readonly managesInferenceTimeout?: boolean;
+  /** False only during temporary backend preparation: skip pixels, never queue a frame. */
+  readonly acceptsFrames?: boolean;
   analyze(frame: LocalFrame, signal: AbortSignal): Promise<LocalResult>;
   dispose(): void;
 }

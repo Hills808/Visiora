@@ -163,6 +163,7 @@ function setup(
     permit: () => permit(),
     play: () => play(),
     blob: () => blob(new Blob(['jpeg'])),
+    blobCallback: () => blob,
     end: () => frameCallbacks.get(tracks.at(-1))(),
     status: () => ({ requested, stopped, canceled, ended }),
   };
@@ -214,7 +215,7 @@ test('CA-H2: retained frame handles and frozen old frames cannot produce new evi
   assert.throws(() => old.pixels(32, 24), /expirado/);
   f.clock(3401);
   assert.equal(f.hub.fresh, false);
-  await assert.rejects(f.hub.jpeg(), /recente/);
+  await assert.rejects(f.hub.jpeg(), { code: 'capture-stale' });
 });
 
 test('CA-H9: stopping before delayed permission resolves releases its late stream', async (t) => {
@@ -309,4 +310,104 @@ test('CA-F1/L1/H2: first frame and continuous motion can produce snapshots witho
     assert.equal(result.frameId, frame);
     assert.equal(result.capturedAtMs, frame * 200);
   }
+});
+
+test('CA-H2/L3: JPEG retains its original timestamp and cannot become fresh because the camera advanced', async (t) => {
+  const f = setup(t);
+  await f.hub.start(1);
+  f.emit(200, 1);
+  const pending = f.hub.jpeg();
+  f.emit(CONFIG.capture.maxFrameAgeMs + 201, 2); // The camera is fresh; the encoded image is not.
+  assert.equal(f.hub.fresh, true);
+  f.blob();
+  await assert.rejects(pending, { code: 'capture-stale' });
+  assert.equal(f.hub.diagnostics().jpeg.stale, 1);
+  assert.equal(f.hub.diagnostics().jpeg.completed, 0);
+  const fresh = f.hub.jpeg();
+  f.blob();
+  assert.equal((await fresh).stamp.frameId, 2);
+});
+
+test('CA-H9/D4: hung JPEG ends at its deadline; late callback cannot resolve a newer preparation', async (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const f = setup(t);
+  await f.hub.start(1);
+  f.emit(200, 1);
+  const pending = f.hub.jpeg();
+  const oldCallback = f.blobCallback();
+  const rejected = assert.rejects(pending, { code: 'capture-timeout' });
+  t.mock.timers.tick(CONFIG.capture.jpegTimeoutMs);
+  await rejected;
+  assert.equal(f.hub.diagnostics().jpeg.inFlight, 0);
+  assert.equal(f.hub.diagnostics().jpeg.timeouts, 1);
+  f.emit(500, 2);
+  const fresh = f.hub.jpeg();
+  oldCallback(new Blob(['old pixels']));
+  assert.equal(f.hub.diagnostics().jpeg.inFlight, 1);
+  f.blob();
+  assert.equal((await fresh).stamp.frameId, 2);
+  assert.equal(f.hub.diagnostics().jpeg.completed, 1);
+});
+
+test('CA-H9: stop settles preparation before its callback and previous cancellation does not enter a new session', async (t) => {
+  const f = setup(t);
+  await f.hub.start(1);
+  f.emit(200, 1);
+  const pending = f.hub.jpeg();
+  const oldCallback = f.blobCallback();
+  const rejected = assert.rejects(pending, { code: 'capture-canceled' });
+  f.hub.stop();
+  await f.hub.start(2);
+  await rejected;
+  assert.deepEqual(f.hub.diagnostics().jpeg, {
+    requested: 0,
+    completed: 0,
+    canceled: 0,
+    timeouts: 0,
+    stale: 0,
+    failed: 0,
+    inFlight: 0,
+  });
+  f.emit(400, 2);
+  const fresh = f.hub.jpeg();
+  oldCallback(new Blob(['old pixels']));
+  assert.equal(f.hub.diagnostics().jpeg.inFlight, 1);
+  f.blob();
+  assert.equal((await fresh).stamp.sessionGeneration, 2);
+});
+
+test('CA-H1/H9: no concurrent JPEG queue and synchronous encoder errors settle without leaking data', async (t) => {
+  const f = setup(t);
+  await f.hub.start(1);
+  f.emit(200, 1);
+  const pending = f.hub.jpeg();
+  await assert.rejects(f.hub.jpeg(), { code: 'capture-busy' });
+  f.blob();
+  await pending;
+  f.canvases[0].toBlob = () => {
+    throw new Error('private browser exception');
+  };
+  await assert.rejects(
+    f.hub.jpeg(),
+    (error) => error.code === 'capture-unavailable' && !error.message.includes('private'),
+  );
+  assert.equal(f.hub.diagnostics().jpeg.inFlight, 0);
+  assert.equal(f.hub.diagnostics().jpeg.failed, 1);
+  assert.doesNotMatch(JSON.stringify(f.hub.diagnostics()), /pixels|private|blob|label/i);
+});
+
+test('CA-H1/H6: a permanent zero quality counter uses advancing media time without freezing after the first frame', async (t) => {
+  const f = setup(t, { fallback: true });
+  await f.hub.start(1);
+  for (let frame = 1; frame <= 20; frame++) f.emit(frame * 200, 0);
+  assert.equal(f.hub.diagnostics().frames, 20);
+  assert.equal(f.hub.diagnostics().frameBasis, 'media-time');
+  assert.equal(f.hub.fresh, true);
+  f.emit(4000, 0);
+  assert.equal(f.hub.diagnostics().frames, 20);
+  f.video.paused = true;
+  f.emit(4200, 0);
+  assert.equal(f.hub.diagnostics().frames, 20);
+  f.hub.stop();
+  assert.equal(f.hub.diagnostics().frameBasis, 'waiting');
 });

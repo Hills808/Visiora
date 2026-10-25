@@ -127,3 +127,7 @@ SnapshotDiscourse separa orientação, correção de cena, presença sem localiz
 ## Perfis Luna e tempos por etapa — ADR-049
 
 SnapshotSpeechProfile é escolhido pela preferência atual via hook de OnlineSession. VisualMemory e SnapshotDiscourse partilham limites e selecionam grupos completos. O replay conserva texto/limite da entrega anterior. OnlineSession liga a resposta aceita à preparação/início; OnlineTiming guarda intervalos numéricos responseToPreparation e responseToStart separados de preparationToStart. Sem mudar modelo, captura, validade ou orçamento. [Evidência](EVIDENCIAS/FALA-CURTA-ESPERA-2026-10-25.md).
+
+## Captura e disponibilidade — ADR-050
+
+CaptureHub mantém uma operação JPEG cancelável, prazo de 2 s e ID/tempo original; SnapshotCamera/OnlineSession preservam o contrato e verificam idade antes do despacho. CaptureError usa vocabulário fechado. O diagnóstico separa contadores de preparo e base de frescor do vídeo; imagens nunca são registradas. LocalPipeline encerra espera ao abort independentemente do adaptador, consumindo término tardio. acceptsFrames é uma indisponibilidade temporária opcional e sem fila; YOLOX só o usa durante recuperação. [Evidência](EVIDENCIAS/CAPTURA-RESILIENTE-2026-10-25.md).

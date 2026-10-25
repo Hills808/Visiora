@@ -2,7 +2,7 @@
 export const CONFIG = Object.freeze({
   version: '0.3.0',
   online: {
-    deliveryPolicyRevision: 'adr-049', // Exported in diagnostics to identify the local Luna build after cache updates.
+    deliveryPolicyRevision: 'adr-050', // Exported in diagnostics to identify the local Luna build after cache updates.
     speechProfiles: {
       essential: { briefingWords: 25, updateWords: 25, maxItems: 1 },
       balanced: { briefingWords: 32, updateWords: 25, maxItems: 3 },
@@ -126,6 +126,7 @@ export const CONFIG = Object.freeze({
     fps: 5,
     economyFps: 2,
     maxFrameAgeMs: 3000,
+    jpegTimeoutMs: 2000, // Bound JPEG preparation before dispatch; do not spend the snapshot window or API budget encoding indefinitely.
     futureToleranceMs: 100,
     maxInFlight: 1,
     motionSampleStride: 128,

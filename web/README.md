@@ -1,3 +1,7 @@
+## Continuidade da captura — ADR-050
+
+O preparo da imagem tem prazo e cancelamento; imagens que envelhecem antes do envio são bloqueadas. O acompanhamento trata contador de vídeo indisponível, encerra inferência travada e evita cópia de quadros durante recuperação da GPU. Erros temporários usam a recuperação limitada existente. [Testes e limites](docs/EVIDENCIAS/CAPTURA-RESILIENTE-2026-10-25.md); percepção local continua experimental e sem fala híbrida.
+
 ## Fala mais curta — ADR-049
 
 Ajustes → Quantidade de informação agora controla também o Luna: Só o essencial seleciona uma referência por fala; Equilibrado encurta o briefing; Mais referências mantém o limite anterior. Sem recortar nomes, retirar idade/direção ou confirmar itens omitidos. O diagnóstico separa análise e espera da fala. [Evidências e limites](docs/EVIDENCIAS/FALA-CURTA-ESPERA-2026-10-25.md).
