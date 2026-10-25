@@ -48,7 +48,10 @@ export function memoryTranscripts() {
     for (const [i, frame] of frames.entries()) {
       const utterance = deliver(
         memory,
-        snapshot(i + 1, frame.items, { scene: frame.scene ?? 'escritório' }),
+        snapshot(i + 1, frame.items, {
+          scene: frame.scene ?? 'escritório',
+          at: frame.at ?? (i + 1) * 4500,
+        }),
         frame,
       );
       transcript.push({ frame: i + 1, text: utterance?.text ?? null });
@@ -61,6 +64,26 @@ export function memoryTranscripts() {
     { items: [chair, person] },
     { items: [chair, item('mesa', { bearing: 30 })] },
     { items: [chair, item('mesa', { bearing: 30 })] },
+  ]);
+  scenario('omissao-pontual-e-caixa-ausente', [
+    { items: [chair, person] },
+    { items: [chair] },
+    { items: [chair, person] },
+    { items: [chair, { ...person, box: null }] },
+    { items: [chair, person] },
+  ]);
+  scenario(
+    'rotulo-qualificado-na-mesma-caixa',
+    ['cadeira', 'cadeira gamer', 'cadeira de escritório', 'cadeira'].map((label) => ({
+      items: [item(label)],
+    })),
+  );
+  scenario('ausencia-confirmada', [
+    { items: [chair, person] },
+    { items: [chair] },
+    { items: [chair] },
+    { items: [chair] },
+    { items: [chair, person] },
   ]);
   scenario(
     'oscilacao-de-setor',

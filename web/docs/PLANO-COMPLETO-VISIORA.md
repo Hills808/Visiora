@@ -1,3 +1,7 @@
+## Continuidade de fala — ADR-048 (25/10/2026)
+
+A correção preserva memória linguística durante oscilações de nome/quantidade e omissões isoladas, separa presença sem direção e contém renomeações do lugar. Não muda validade espacial ou libera fala híbrida. [Evidências simuladas e pendências](EVIDENCIAS/CONTINUIDADE-SEM-REPETICAO-2026-10-25.md).
+
 **Compatibilidade por capacidade (orientação do usuário, 24/10/2026):** não exigir modelo de aparelho ou versão específica de sistema. Detectar recursos efetivos, tentar GPU com aquecimento real e usar CPU quando suportada; capacidade ausente é informada. Números de uma máquina são evidência de ensaio, não requisito ou promessa para os demais aparelhos.
 
 ## Implementação observacional H2/H3 — ADR-046 (24/10/2026)

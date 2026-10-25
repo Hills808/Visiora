@@ -321,43 +321,50 @@ test('CA-F4/F7/L4: changed person count and direction are described; snapshots s
   memory.accept(moved, 3500, 1);
   assert.match(memory.utterance(3500, false, true).text, /À frente, à esquerda da câmera/);
 });
-test('CA-F4/P6: losing all visible references is qualified once; returning references can be announced again', () => {
+test('CA-F4/P6: sustained missing references are qualified once; isolated omissions stay silent', () => {
   const memory = new VisualMemory();
   memory.accept(result(), 1500, 1);
-  const first = memory.utterance(1500, false, true);
-  memory.complete(first.id);
-  const empty = result(2);
-  empty.evidence.observations = [];
-  empty.evidence.scene = null;
-  memory.accept(empty, 2500, 1);
-  const missing = memory.utterance(2500, false, true);
-  assert.match(missing.text, /Não confirmei as referências anteriores nesta captura/);
-  assert.doesNotMatch(missing.text, /caminho livre|saiu|sumiu/);
-  memory.complete(missing.id);
-  const stillEmpty = structuredClone(empty);
-  stillEmpty.stamp.frameId = 3;
-  stillEmpty.stamp.capturedAtMs = 3000;
-  memory.accept(stillEmpty, 3500, 1);
-  assert.equal(memory.utterance(3500, false, true), null);
-  memory.accept(result(4), 4500, 1);
-  assert.match(memory.utterance(4500, false, true).text, /porta aberta/);
+  memory.complete(memory.utterance(1500, false, true).id);
+  for (const [frame, at] of [
+    [2, 2000],
+    [3, 6500],
+    [4, 11000],
+  ]) {
+    const empty = result(frame);
+    empty.stamp.capturedAtMs = at;
+    empty.evidence.observations = [];
+    empty.evidence.scene = null;
+    memory.accept(empty, at + 100, 1);
+    const output = memory.utterance(at + 100, false, true);
+    if (frame < 4) assert.equal(output, null);
+    else {
+      assert.match(output.text, /Não confirmei as referências anteriores nesta captura/);
+      assert.doesNotMatch(output.text, /caminho livre|saiu|sumiu/);
+      memory.complete(output.id, at + 200);
+    }
+  }
+  const returned = result(5);
+  returned.stamp.capturedAtMs = 16000;
+  memory.accept(returned, 16100, 1);
+  assert.match(memory.utterance(16100, false, true).text, /porta aberta/);
 });
-test('CA-F9: a confirmed place change in the same view reintroduces its references', () => {
+test('CA-F9/F4: a confirmed place change in the same view preserves delivered references', () => {
   const memory = new VisualMemory();
   memory.accept(result(), 1500, 1);
-  const first = memory.utterance(1500, false, true);
-  memory.complete(first.id);
-  const second = result(2);
-  second.evidence.scene.label = 'biblioteca';
-  memory.accept(second, 2500, 1);
-  assert.equal(memory.utterance(2500, false, true), null);
-  const third = result(3);
-  third.evidence.scene.label = 'biblioteca';
-  memory.accept(third, 3500, 1);
-  assert.match(memory.utterance(3500, false, true).text, /biblioteca.*porta aberta/s);
+  memory.complete(memory.utterance(1500, false, true).id);
+  for (const frame of [2, 3]) {
+    const changed = result(frame);
+    changed.evidence.scene.label = 'biblioteca';
+    memory.accept(changed, frame * 1000 + 500, 1);
+    const output = memory.utterance(frame * 1000 + 500, false, true);
+    if (frame === 2) assert.equal(output, null);
+    else {
+      assert.match(output.text, /biblioteca/);
+      assert.doesNotMatch(output.text, /porta aberta/);
+    }
+  }
 });
-
-test('CA-F4/P6: a person no longer identified is announced once even with unchanged furniture; return is new evidence', () => {
+test('CA-F4/P6: sustained person non-identification is qualified, not inferred from one missing capture', () => {
   const memory = new VisualMemory();
   const first = result();
   first.evidence.observations.push({
@@ -369,18 +376,27 @@ test('CA-F4/P6: a person no longer identified is announced once even with unchan
   });
   memory.accept(first, 1500, 1);
   memory.complete(memory.utterance(1500, false, true).id);
-  memory.accept(result(2), 2500, 1);
-  const absent = memory.utterance(2500, false, true);
-  assert.match(absent.text, /Não identifiquei pessoas nesta captura/);
-  assert.doesNotMatch(absent.text, /saiu|sumiu|passos|caminho livre/);
-  assert.ok(memory.utterance(2600, false, true)); // Interrupted speech is not acknowledged.
-  memory.complete(memory.utterance(2700, false, true).id);
-  memory.accept(result(3), 3500, 1);
-  assert.equal(memory.utterance(3500, false, true), null);
-  first.stamp.frameId = 4;
-  first.stamp.capturedAtMs = 4000;
-  memory.accept(first, 4500, 1);
-  assert.match(memory.utterance(4500, false, true).text, /havia uma pessoa/);
+  for (const [frame, at] of [
+    [2, 2000],
+    [3, 6500],
+    [4, 11000],
+  ]) {
+    const next = result(frame);
+    next.stamp.capturedAtMs = at;
+    memory.accept(next, at + 100, 1);
+    const absent = memory.utterance(at + 100, false, true);
+    if (frame < 4) assert.equal(absent, null);
+    else {
+      assert.match(absent.text, /Não identifiquei pessoas nesta captura/);
+      assert.doesNotMatch(absent.text, /saiu|sumiu|passos|caminho livre/);
+      assert.ok(memory.utterance(at + 200, false, true));
+      memory.complete(memory.utterance(at + 300, false, true).id, at + 400);
+    }
+  }
+  first.stamp.frameId = 5;
+  first.stamp.capturedAtMs = 16000;
+  memory.accept(first, 16100, 1);
+  assert.match(memory.utterance(16100, false, true).text, /havia uma pessoa/);
 });
 
 test('CA-F4/F9: broad structural change reorients the same room; uniform lighting is not a new room', () => {

@@ -1,3 +1,7 @@
+## Continuidade de fala — ADR-048
+
+O automático preserva o que já foi falado durante omissões isoladas e pequenas variações. Corrigir o nome do lugar não repete os objetos; uma pessoa sem posição não é tratada como ausente. Novidades, mudança de direção/vista e pedidos explícitos permanecem elegíveis. [Testes e limites](docs/EVIDENCIAS/CONTINUIDADE-SEM-REPETICAO-2026-10-25.md).
+
 ## Correção de contrato Luna — ADR-047
 
 O servidor aceita diferenças equivalentes de formatação e informa um motivo específico quando a resposta não atende ao contrato. Uma posição inválida continua bloqueada. Se ocorrer pausa, anote o código e pare/inicie após conferir a causa. [Testes e limites](docs/EVIDENCIAS/LUNA-CONTRATO-422-2026-10-24.md); reteste real ainda pendente.

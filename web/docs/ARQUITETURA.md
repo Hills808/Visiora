@@ -119,3 +119,7 @@ O pacote portátil Luna para Windows x64 usa os mesmos `dist/`, `server/`, `prom
 ## Contrato Luna — ADR-047
 
 `prepareEvidence` é compartilhado pelos provedores Node e Worker: normaliza apenas representação, preserva a geometria e valida referências originais antes de renomear IDs. O JSON Schema restringe campos e o validador faz verificações semânticas adicionais. Erros categóricos fechados chegam ao cliente sem texto do provedor; reserva incerta não é liberada. [Evidência](EVIDENCIAS/LUNA-CONTRATO-422-2026-10-24.md).
+
+## Continuidade da memória linguística — ADR-048
+
+SnapshotDiscourse separa orientação, correção de cena, presença sem localização e ausências candidatas. A confirmação exige capturas distintas e intervalo configurado; o histórico não renova a validade do snapshot. O plano suprime somente equivalências explícitas e inequívocas na mesma geometria, sem tracking de identidade. Uma correção de lugar não limpa as referências entregues. Estado de ausência acompanha o limite e a limpeza da memória. [Evidência](EVIDENCIAS/CONTINUIDADE-SEM-REPETICAO-2026-10-25.md).

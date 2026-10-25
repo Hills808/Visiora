@@ -2,7 +2,7 @@
 export const CONFIG = Object.freeze({
   version: '0.3.0',
   online: {
-    deliveryPolicyRevision: 'adr-047', // Exported in diagnostics to identify the local Luna build after cache updates.
+    deliveryPolicyRevision: 'adr-048', // Exported in diagnostics to identify the local Luna build after cache updates.
     snapshotMaxAgeMs: 10000, // Explicitly aged snapshots only; never inserted into the live World.
     imageMaxSide: 1280,
     jpegQuality: 0.85,
@@ -26,6 +26,15 @@ export const CONFIG = Object.freeze({
     obsoleteNoticeAfter: 2, // One capability notice after consecutive lost views, until a fresh description is delivered.
     autoMemoryLimit: 128, // Bound acknowledged label/sector groups during one session.
     snapshotRequestMemoryLimit: 16, // Bound replay IDs per frame; above the gateway's 15 requests/minute ceiling.
+    missingConfirmationFrames: 3, // Model omissions need distinct recent captures, not a single missing box.
+    missingConfirmationSpanMs: 9000, // At least two minimum-cadence gaps before an automatic non-identification.
+    discourseLabelOverlap: 0.7, // Equivalent named refinements require strong same-view box overlap and unique matching.
+    sceneCorrectionsPerView: 1, // A place hypothesis may be corrected once automatically; further renaming requires a new view or request.
+    discourseLabelFamilies: [
+      ['cadeira', 'cadeira gamer', 'cadeira de escritorio', 'cadeira giratoria'],
+      ['janela', 'janela com persiana', 'janela com veneziana'],
+      ['armario', 'armario espelhado', 'armario com espelho'],
+    ], // Explicit linguistic refinements only; wheelchair and other unknown labels remain distinct.
     referenceMemoryMs: 30000, // Drop unobserved discourse references; this never extends snapshot validity.
     sectorHysteresisDegrees: 5, // Ignore small box jitter across sector edges; a hypothesis pending human evaluation.
     sceneConfirmationFrames: 2, // Require distinct captures before renaming a place in the same view.

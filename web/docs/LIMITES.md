@@ -128,3 +128,7 @@ O Site privado funciona por HTTPS, exige login na conta proprietária e deixa o 
 ## Resposta recusada — ADR-047
 
 Mesmo com Luna configurado, uma resposta pode falhar na validação e pausar o acompanhamento. A interface mostra o motivo categórico; não tenta corrigir uma posição impossível nem repetir chamadas pagas de contrato. Formatação equivalente é normalizada, sem comprovar a qualidade do reconhecimento. As duas falhas reais não guardaram os campos originais; reteste com câmera/voz real segue pendente. Pessoa detectada sem caixa é uma pendência narrativa separada, documentada na [evidência](EVIDENCIAS/LUNA-CONTRATO-422-2026-10-24.md).
+
+## Silêncio e oscilações — ADR-048
+
+Análises recentes podem mudar os rótulos sem mudança real. O automático contém correções do lugar e aguarda confirmação antes de dizer que não identificou algo. Isso pode atrasar uma não identificação verdadeira. Variantes linguísticas fora da lista explícita e uma vista amplamente alterada ainda podem gerar nova narração. A memória não garante identidade, contagem física nem posições atuais. O teste de cinco minutos usa relógio e respostas simulados; falta reteste real. [Evidência](EVIDENCIAS/CONTINUIDADE-SEM-REPETICAO-2026-10-25.md).

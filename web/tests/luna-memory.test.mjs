@@ -38,11 +38,8 @@ test('CA-F3/F4/F7: visible novelty precedes absence; no old direction is assigne
     chair = item('cadeira');
   deliver(memory, snapshot(1, [chair, item('pessoa', { kind: 'person', bearing: -30 })]));
   const next = deliver(memory, snapshot(2, [chair, item('mesa', { bearing: 30 })]));
-  assert.match(
-    next.text,
-    /À frente, à direita da câmera, havia uma mesa\. Não identifiquei pessoas nesta captura\./,
-  );
-  assert.doesNotMatch(next.text, /à esquerda|saiu|sumiu|passos|metros/);
+  assert.match(next.text, /À frente, à direita da câmera, havia uma mesa\./);
+  assert.doesNotMatch(next.text, /pessoas|à esquerda|saiu|sumiu|passos|metros/);
   assert.ok(next.text.split(/\s+/).length <= CONFIG.speech.maxWords);
 });
 test('CA-F4/F7: current confirmed references precede hypotheses, with at most three items', () => {
@@ -209,4 +206,141 @@ test('CA-L4/H2: broad change followed by matching pixels cannot revive an earlie
   const lighting = new SnapshotView(baseline);
   assert.equal(lighting.observe(baseline.map((n) => n + 0.2)), false);
   assert.equal(lighting.valid, true);
+});
+
+test('CA-F1/F4/F9: correcting the place preserves delivered objects and bounds repeated renaming', () => {
+  const memory = new VisualMemory(),
+    chair = item('cadeira');
+  deliver(memory, snapshot(1, [chair]));
+  assert.equal(deliver(memory, snapshot(2, [chair], { scene: 'biblioteca' })), null);
+  const corrected = deliver(memory, snapshot(3, [chair], { scene: 'biblioteca' }));
+  assert.match(corrected.text, /biblioteca/);
+  assert.doesNotMatch(corrected.text, /cadeira/);
+  for (let frame = 4; frame < 12; frame++)
+    assert.equal(deliver(memory, snapshot(frame, [chair], { scene: 'sala' })), null);
+  assert.match(deliver(memory, snapshot(12, [chair, item('janela')])).text, /janela/);
+});
+
+test('CA-F1/F4/L4: isolated omissions and missing boxes do not erase delivered presence or invent old positions', () => {
+  const memory = new VisualMemory(),
+    chair = item('cadeira'),
+    person = item('pessoa', { kind: 'person' });
+  deliver(memory, snapshot(1, [chair, person]));
+  assert.equal(deliver(memory, snapshot(2, [chair])), null);
+  assert.equal(deliver(memory, snapshot(3, [chair, person])), null);
+  assert.equal(deliver(memory, snapshot(4, [chair, { ...person, box: null }])), null);
+  assert.equal(deliver(memory, snapshot(5, [chair, person])), null);
+  const manual = snapshot(6, [{ ...person, box: null }]);
+  assert.equal(memory.accept(manual, manual.stamp.capturedAtMs + 100, 1), true);
+  assert.doesNotMatch(
+    memory.utterance(manual.stamp.capturedAtMs + 100).text,
+    /havia uma pessoa|pessoas nesta/,
+  );
+});
+
+test('CA-F4/F6: absence requires distinct recent captures over the configured span and actual delivery', () => {
+  const memory = new VisualMemory(),
+    chair = item('cadeira'),
+    person = item('pessoa', { kind: 'person' });
+  deliver(memory, snapshot(1, [chair, person]));
+  assert.equal(deliver(memory, snapshot(2, [chair])), null);
+  assert.equal(deliver(memory, snapshot(3, [chair])), null);
+  const absence = deliver(memory, snapshot(4, [chair]), { complete: false });
+  assert.match(absence.text, /Não identifiquei pessoas nesta captura/);
+  assert.doesNotMatch(absence.text, /saiu|sumiu|da câmera/);
+  const again = memory.utterance(18500, false, true);
+  assert.match(again.text, /Não identifiquei pessoas/);
+  assert.equal(memory.complete(again.id, 18600), true);
+  assert.equal(deliver(memory, snapshot(5, [chair])), null);
+  assert.match(deliver(memory, snapshot(6, [chair, person])).text, /havia uma pessoa/);
+});
+
+test('CA-F1/F4: bounded qualified labels are silent only with strong unique geometric overlap', () => {
+  const memory = new VisualMemory();
+  deliver(memory, snapshot(1, [item('cadeira')]));
+  assert.equal(deliver(memory, snapshot(2, [item('cadeira gamer')])), null);
+  assert.equal(deliver(memory, snapshot(3, [item('cadeira de escritório')])), null);
+  assert.match(deliver(memory, snapshot(4, [item('cadeira de rodas')])).text, /cadeira de rodas/);
+  const shifted = new VisualMemory();
+  deliver(shifted, snapshot(1, [item('cadeira')]));
+  assert.match(
+    deliver(shifted, snapshot(2, [item('cadeira gamer', { bearing: 10 })])).text,
+    /cadeira gamer/,
+  );
+  const ambiguous = new VisualMemory();
+  deliver(ambiguous, snapshot(1, [item('cadeira')]));
+  assert.match(
+    deliver(ambiguous, snapshot(2, [item('cadeira'), item('cadeira gamer')])).text,
+    /cadeira gamer/,
+  );
+  assert.equal(deliver(ambiguous, snapshot(3, [item('cadeira'), item('cadeira gamer')])), null);
+});
+
+test('CA-F1/F4: lower person counts do not reset delivered quantity; additional presence remains news', () => {
+  const memory = new VisualMemory(),
+    person = item('pessoa', { kind: 'person' });
+  deliver(memory, snapshot(1, [person]));
+  assert.match(deliver(memory, snapshot(2, [person, person])).text, /2 pessoas/);
+  for (let frame = 3; frame < 20; frame++)
+    assert.equal(deliver(memory, snapshot(frame, frame % 2 ? [person] : [person, person])), null);
+  assert.match(deliver(memory, snapshot(20, [person, person, person])).text, /3 pessoas/);
+});
+
+test('CA-F1/F4: five-minute stationary variation preserves silence after one place correction and explicit replay works', () => {
+  const memory = new VisualMemory(),
+    person = item('pessoa', { kind: 'person' });
+  let outputs = [];
+  for (let frame = 1; frame <= 61; frame++) {
+    const observations = [item(frame % 2 ? 'cadeira gamer' : 'cadeira de escritório')];
+    if (frame % 3 !== 0) observations.push(frame % 4 === 0 ? { ...person, box: null } : person);
+    const output = deliver(
+      memory,
+      snapshot(frame, observations, {
+        at: frame * 5000,
+        scene: frame < 4 ? 'escritório' : Math.floor(frame / 3) % 2 ? 'sala' : 'quarto',
+      }),
+    );
+    if (output) outputs.push(output.text);
+  }
+  assert.equal(outputs.length, 2);
+  assert.match(outputs[0], /cadeira/);
+  assert.doesNotMatch(outputs[1], /cadeira|pessoa/);
+  assert.match(memory.utterance(310000, true).text, /capturada há/);
+});
+
+test('CA-F6/L4: same-frame questions cannot confirm absence or acknowledge an interrupted correction', () => {
+  const memory = new VisualMemory(),
+    chair = item('cadeira'),
+    person = item('pessoa', { kind: 'person' });
+  deliver(memory, snapshot(1, [chair, person]));
+  const missing = snapshot(2, [chair]);
+  for (let question = 0; question < 4; question++) {
+    const query = structuredClone(missing);
+    query.stamp.requestId += `-${question}`;
+    assert.equal(memory.accept(query, query.stamp.capturedAtMs + 500, 1), true);
+    assert.equal(memory.utterance(query.stamp.capturedAtMs + 500, false, true), null);
+  }
+  assert.equal(deliver(memory, snapshot(3, [chair, person])), null);
+  const correction = snapshot(4, [chair, person], { scene: 'sala' });
+  assert.equal(deliver(memory, correction), null);
+  const pending = deliver(memory, snapshot(5, [chair, person], { scene: 'sala' }), {
+    complete: false,
+  });
+  assert.match(pending.text, /sala/);
+  const retry = memory.utterance(23000, false, true);
+  assert.match(retry.text, /sala/);
+  assert.equal(memory.complete(pending.id, 23100), false);
+  assert.equal(memory.complete(retry.id, 23200), true);
+  assert.equal(deliver(memory, snapshot(6, [chair, person], { scene: 'sala' })), null);
+});
+
+test('CA-F1/F4: mixed certainty within a known person quantity does not split and repeat the group', () => {
+  const memory = new VisualMemory(),
+    person = item('pessoa', { kind: 'person' });
+  deliver(memory, snapshot(1, [person, person]));
+  for (let frame = 2; frame < 10; frame++)
+    assert.equal(
+      deliver(memory, snapshot(frame, [person, { ...person, uncertain: frame % 2 === 0 }])),
+      null,
+    );
 });

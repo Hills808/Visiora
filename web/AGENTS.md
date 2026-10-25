@@ -154,3 +154,7 @@ Ler docs/EVIDENCIAS/PERCEPCAO-CONTINUA-2026-10-24.md. O usuário autorizou imple
 ## Contrato Luna — ADR-047 (24/10/2026)
 
 Ler docs/EVIDENCIAS/LUNA-CONTRATO-422-2026-10-24.md. prepareEvidence normaliza somente representação; não recorta/descarta caixas ou inventa referências. Erros semânticos têm lista fechada, sem retry pago. Reservas incertas e teto preservados. 227 testes unitários, 11 hosted e 12 E2E fake; reteste real pendente. Pessoa box:null e falsa ausência é pendência separada.
+
+## Continuidade sem repetição — ADR-048 (25/10/2026)
+
+Leia docs/EVIDENCIAS/CONTINUIDADE-SEM-REPETICAO-2026-10-25.md. Lugar confirmado não reorienta objetos; omissão isolada/box:null não apaga presença. Ausência exige3capturas/9s; equivalência de rótulo limitada, geométrica e um-para-um. Não ampliar10s de snapshot nem alterar agenda/orçamento. Teste novo: node tests/e2e/luna-repetition.mjs, cinco minutos simulados. Testes não aprovam caminhada ou precisão.
