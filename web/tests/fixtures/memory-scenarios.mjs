@@ -36,7 +36,14 @@ export function snapshot(frame, observations, { at = frame * 4500, scene = 'escr
 export function deliver(memory, result, options = {}) {
   const now = result.stamp.capturedAtMs + 500;
   if (!memory.accept(result, now, 1)) throw new Error('Invalid fixture chronology');
-  const utterance = memory.utterance(now, false, true, options.newView ?? false);
+  const utterance = memory.utterance(
+    now,
+    false,
+    true,
+    options.newView ?? false,
+    false,
+    options.verbosity ?? 'balanced',
+  );
   if (utterance && options.complete !== false) memory.complete(utterance.id, now + 100);
   return utterance;
 }

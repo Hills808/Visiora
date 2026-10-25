@@ -132,3 +132,7 @@ Mesmo com Luna configurado, uma resposta pode falhar na validação e pausar o a
 ## Silêncio e oscilações — ADR-048
 
 Análises recentes podem mudar os rótulos sem mudança real. O automático contém correções do lugar e aguarda confirmação antes de dizer que não identificou algo. Isso pode atrasar uma não identificação verdadeira. Variantes linguísticas fora da lista explícita e uma vista amplamente alterada ainda podem gerar nova narração. A memória não garante identidade, contagem física nem posições atuais. O teste de cinco minutos usa relógio e respostas simulados; falta reteste real. [Evidência](EVIDENCIAS/CONTINUIDADE-SEM-REPETICAO-2026-10-25.md).
+
+## Fala curta — ADR-049
+
+Uma fala mais curta pode omitir referências que não cabem; não são marcadas como faladas. Essencial prioriza foco central da câmera, sem classificar perigo ou garantir utilidade. Menos palavras não demonstra análise da API mais rápida. Os tempos do diagnóstico são callbacks/texto do navegador, sem prova de áudio audível. Falta reteste físico e com usuários. [Evidência](EVIDENCIAS/FALA-CURTA-ESPERA-2026-10-25.md).

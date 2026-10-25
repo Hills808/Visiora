@@ -3,6 +3,7 @@ import type { AnalysisResult, VisualItem } from '../perception/evidence.js';
 import { angularDistance, bearingFromX, sectorOf, SECTORS } from './geometry.js';
 import { snapshotSpeech, type SnapshotPhrase } from './snapshot-speech.js';
 import type { Sector } from './types.js';
+import { snapshotProfile, type SnapshotSpeechProfile } from './snapshot-profile.js';
 
 export const normalizeVisual = (value: string): string =>
   value.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().trim().replace(/\s+/g, ' ');
@@ -62,6 +63,20 @@ export function snapshotItem(group: SnapshotGroup): SnapshotPhrase {
           : 'uma pessoa'
         : `${count > 1 ? 'mais de ' : ''}${item.article} ${item.label}`,
   };
+}
+/** Shared manual/automatic focus policy; no semantic risk inference. */
+export function orderedSnapshotGroups(
+  groups: readonly SnapshotGroup[],
+  profile: SnapshotSpeechProfile,
+): SnapshotGroup[] {
+  return [...groups].sort(
+    (a, b) =>
+      Number(a.item.uncertain) - Number(b.item.uncertain) ||
+      (profile.maxItems === 1
+        ? Math.abs(bearingFromX(a.item.box!.x + a.item.box!.width / 2)) -
+          Math.abs(bearingFromX(b.item.box!.x + b.item.box!.width / 2))
+        : 0),
+  );
 }
 /** Delivery memory is linguistic, not tracking or a map of current positions. */
 export class SnapshotDiscourse {
@@ -165,6 +180,7 @@ export class SnapshotDiscourse {
     prefixWords: number,
     newView = false,
     contextOnly = false,
+    profile: SnapshotSpeechProfile = snapshotProfile(),
   ): SnapshotPlan | null {
     const sceneLabel = normalizeVisual(result.evidence.scene?.label ?? '');
     const sceneChanged =
@@ -206,11 +222,10 @@ export class SnapshotDiscourse {
     if (orientation || sceneChanged) acknowledgment.scene = sceneLabel;
     const groups = snapshotGroups(result);
     const phrases: SnapshotPhrase[] = [];
-    const budget =
-      (orientation ? CONFIG.speech.briefingWords : CONFIG.speech.maxWords) - prefixWords;
+    const budget = (orientation ? profile.briefingWords : profile.updateWords) - prefixWords;
     const append = (phrase: SnapshotPhrase): boolean => {
       if (
-        phrases.length >= CONFIG.speech.maxItems ||
+        phrases.length >= profile.maxItems ||
         (prefix + snapshotSpeech([...phrases, phrase])).trim().split(/\s+/).length > budget
       )
         return false;
@@ -235,9 +250,7 @@ export class SnapshotDiscourse {
         : undefined;
     };
     // Preserve the provider's usefulness order inside each certainty tier; never guess roles from names.
-    for (const group of [...groups].sort(
-      (a, b) => Number(a.item.uncertain) - Number(b.item.uncertain),
-    )) {
+    for (const group of orderedSnapshotGroups(groups, profile)) {
       const old = previousFor(group);
       if (!orientation && old && (!old.item.uncertain || group.item.uncertain)) continue;
       if (append(snapshotItem(group))) {

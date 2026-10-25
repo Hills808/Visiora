@@ -1,3 +1,7 @@
+## Fala mais curta — ADR-049
+
+Ajustes → Quantidade de informação agora controla também o Luna: Só o essencial seleciona uma referência por fala; Equilibrado encurta o briefing; Mais referências mantém o limite anterior. Sem recortar nomes, retirar idade/direção ou confirmar itens omitidos. O diagnóstico separa análise e espera da fala. [Evidências e limites](docs/EVIDENCIAS/FALA-CURTA-ESPERA-2026-10-25.md).
+
 ## Continuidade de fala — ADR-048
 
 O automático preserva o que já foi falado durante omissões isoladas e pequenas variações. Corrigir o nome do lugar não repete os objetos; uma pessoa sem posição não é tratada como ausente. Novidades, mudança de direção/vista e pedidos explícitos permanecem elegíveis. [Testes e limites](docs/EVIDENCIAS/CONTINUIDADE-SEM-REPETICAO-2026-10-25.md).

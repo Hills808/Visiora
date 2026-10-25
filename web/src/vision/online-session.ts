@@ -1,7 +1,7 @@
 import { CAPTURE_DIRECTIONS } from '../brain/snapshot-speech.js';
 import { OnlineTiming, type DeliveryChannel } from './online-timing.js';
 import { VisualMemory } from '../brain/visual-memory.js';
-import type { Question, Utterance } from '../brain/types.js';
+import type { Question, Utterance, Verbosity } from '../brain/types.js';
 import { CONFIG } from '../config.js';
 import { bearingFromX, sectorOf } from '../brain/geometry.js';
 import { el, text } from '../ui/render.js';
@@ -20,6 +20,7 @@ interface Hooks {
   cancelSpeech(): void;
   ended(): void;
   canAnalyze(): boolean;
+  verbosity?(): Verbosity;
   announce(message: string): void;
 }
 export type OnlineStopReason =
@@ -32,6 +33,7 @@ export type OnlineStopReason =
   | 'mode-switch';
 export class OnlineSession {
   private timing = new OnlineTiming();
+  private respondedAtMs: number | undefined;
   private cameraRotationInvalidations = 0;
   private unusableResponses = 0;
   private sceneNoticeAnnounced = false;
@@ -88,6 +90,7 @@ export class OnlineSession {
     started: boolean;
     startedAtMs: number | null;
     preparedAtMs: number;
+    respondedAtMs: number | undefined;
     channel: DeliveryChannel;
     automatic: boolean;
   } | null = null;
@@ -168,6 +171,7 @@ export class OnlineSession {
       recoveries: 0,
     };
     this.timing = new OnlineTiming();
+    this.respondedAtMs = undefined;
     this.cameraRotationInvalidations = 0;
     this.unusableResponses = 0;
     this.sceneNoticeAnnounced = false;
@@ -343,7 +347,8 @@ export class OnlineSession {
         el<HTMLInputElement>('cloud-consent').checked,
       );
       if (!result || generation !== this.generation || !this.running) return;
-      this.timing?.responded(capture.capturedAtMs, performance.now(), this.simulated);
+      const respondedAt = performance.now();
+      this.timing?.responded(capture.capturedAtMs, respondedAt, this.simulated);
       view.observe(this.camera.signature);
       if (!this.memory.accept(result, performance.now(), generation)) {
         if (performance.now() - capture.capturedAtMs > CONFIG.online.snapshotMaxAgeMs)
@@ -355,6 +360,7 @@ export class OnlineSession {
         );
       }
       if (!view.valid) this.memory.forgetDirections();
+      this.respondedAtMs = respondedAt;
       this.counts.accepted++;
       this.analyzedView = signature;
       this.resultView = view;
@@ -424,7 +430,14 @@ export class OnlineSession {
     }
     const now = performance.now(),
       contextOnly = !repeat && this.resultView?.valid === false,
-      utterance = this.memory.utterance(now, repeat, automatic, newView, contextOnly);
+      utterance = this.memory.utterance(
+        now,
+        repeat,
+        automatic,
+        newView,
+        contextOnly,
+        this.hooks.verbosity?.() ?? 'balanced',
+      );
     if (contextOnly) this.clearReferences();
     if (!utterance) {
       if (automatic) this.counts.silent++;
@@ -449,6 +462,7 @@ export class OnlineSession {
       started: false,
       startedAtMs: null,
       preparedAtMs: now,
+      respondedAtMs: this.respondedAtMs,
       channel: 'voice',
       automatic,
     };
@@ -478,6 +492,7 @@ export class OnlineSession {
           channel,
           this.simulated,
           value.repeat,
+          value.respondedAtMs,
         );
         value.startedAtMs = now;
         value.channel = channel;

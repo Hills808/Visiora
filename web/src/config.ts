@@ -2,7 +2,12 @@
 export const CONFIG = Object.freeze({
   version: '0.3.0',
   online: {
-    deliveryPolicyRevision: 'adr-048', // Exported in diagnostics to identify the local Luna build after cache updates.
+    deliveryPolicyRevision: 'adr-049', // Exported in diagnostics to identify the local Luna build after cache updates.
+    speechProfiles: {
+      essential: { briefingWords: 25, updateWords: 25, maxItems: 1 },
+      balanced: { briefingWords: 32, updateWords: 25, maxItems: 3 },
+      detailed: { briefingWords: 45, updateWords: 25, maxItems: 3 },
+    }, // Word limits include source/age/direction; select complete groups, never truncate a label.
     snapshotMaxAgeMs: 10000, // Explicitly aged snapshots only; never inserted into the live World.
     imageMaxSide: 1280,
     jpegQuality: 0.85,

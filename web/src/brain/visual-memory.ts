@@ -5,11 +5,13 @@ import type { AnalysisResult } from '../perception/evidence.js';
 import {
   SnapshotDiscourse,
   snapshotGroups,
+  orderedSnapshotGroups,
   snapshotItem,
   normalizeVisual as normalize,
   type SnapshotDelivery,
 } from './snapshot-discourse.js';
-import type { Utterance } from './types.js';
+import type { Utterance, Verbosity } from './types.js';
+import { snapshotProfile, type SnapshotSpeechProfile } from './snapshot-profile.js';
 /** On-demand snapshots, deliberately separate from the live World and its closed local lexicon. */
 export class VisualMemory {
   private result: AnalysisResult | null = null;
@@ -73,7 +75,11 @@ export class VisualMemory {
     this.discourse.forgetDirections();
     this.pending = null;
   }
-  private body(result: AnalysisResult, prefixWords: number): string {
+  private body(
+    result: AnalysisResult,
+    prefixWords: number,
+    profile: SnapshotSpeechProfile,
+  ): string {
     const { evidence: e, stamp: s } = result;
     if (s.intent === 'where')
       return e.scene
@@ -96,13 +102,11 @@ export class VisualMemory {
         : '';
     const sentences: SnapshotPhrase[] = [];
     const budget =
-      (s.intent === 'describe' ? CONFIG.speech.briefingWords : CONFIG.speech.maxWords) -
-      prefixWords;
-    for (const group of snapshotGroups(result, items)) {
+      (s.intent === 'describe' ? profile.briefingWords : profile.updateWords) - prefixWords;
+    for (const group of orderedSnapshotGroups(snapshotGroups(result, items), profile)) {
       const sentence = snapshotItem(group);
       const candidate = (prefix + snapshotSpeech([...sentences, sentence])).trim();
-      if (sentences.length >= CONFIG.speech.maxItems || candidate.split(/\s+/).length > budget)
-        continue;
+      if (sentences.length >= profile.maxItems || candidate.split(/\s+/).length > budget) continue;
       sentences.push(sentence);
     }
     return (
@@ -117,6 +121,7 @@ export class VisualMemory {
     automatic = false,
     newView = false,
     contextOnly = false,
+    verbosity: Verbosity = 'balanced',
   ): Utterance | null {
     const result = repeat ? this.last?.result : this.result;
     if (!result) return null;
@@ -127,8 +132,11 @@ export class VisualMemory {
     const seconds = Math.max(1, Math.ceil(age / 1000));
     const prefix = `${label}Na imagem capturada há ${seconds} ${seconds === 1 ? 'segundo' : 'segundos'}: `;
     const prefixWords = prefix.trim().split(/\s+/).length;
+    const profile = snapshotProfile(verbosity);
     const automaticResult =
-      automatic && !repeat ? this.discourse.plan(result, prefixWords, newView, contextOnly) : null;
+      automatic && !repeat
+        ? this.discourse.plan(result, prefixWords, newView, contextOnly, profile)
+        : null;
     if (contextOnly && !automatic && !repeat && !result.evidence.scene) return null;
     if (automatic && !repeat && !automaticResult) return null;
     const body = repeat
@@ -137,18 +145,18 @@ export class VisualMemory {
         ? automaticResult.text
         : contextOnly
           ? 'O ambiente parecia ' + result.evidence.scene!.label + '.'
-          : this.body(result, prefixWords);
+          : this.body(result, prefixWords, profile);
     const id = `visual-${++this.serial}`;
     let outputBody = body;
     const maxWords = repeat
       ? this.last!.maxWords
       : automatic
         ? automaticResult!.briefing
-          ? CONFIG.speech.briefingWords
-          : CONFIG.speech.maxWords
+          ? profile.briefingWords
+          : profile.updateWords
         : result.stamp.intent === 'describe'
-          ? CONFIG.speech.briefingWords
-          : CONFIG.speech.maxWords;
+          ? profile.briefingWords
+          : profile.updateWords;
     if ((prefix + body).trim().split(/\s+/).length > maxWords)
       outputBody = 'Não obtive referências curtas para esta resposta.';
     const text = prefix + outputBody;

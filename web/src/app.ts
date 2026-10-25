@@ -392,6 +392,7 @@ function runningMode(next: Mode): boolean {
   return next !== 'idle';
 }
 const online = new OnlineSession(el<HTMLVideoElement>('camera'), {
+  verbosity: () => preferences.verbosity,
   message: (value) => {
     text('status', value);
   },

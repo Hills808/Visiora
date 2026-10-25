@@ -123,3 +123,7 @@ O pacote portátil Luna para Windows x64 usa os mesmos `dist/`, `server/`, `prom
 ## Continuidade da memória linguística — ADR-048
 
 SnapshotDiscourse separa orientação, correção de cena, presença sem localização e ausências candidatas. A confirmação exige capturas distintas e intervalo configurado; o histórico não renova a validade do snapshot. O plano suprime somente equivalências explícitas e inequívocas na mesma geometria, sem tracking de identidade. Uma correção de lugar não limpa as referências entregues. Estado de ausência acompanha o limite e a limpeza da memória. [Evidência](EVIDENCIAS/CONTINUIDADE-SEM-REPETICAO-2026-10-25.md).
+
+## Perfis Luna e tempos por etapa — ADR-049
+
+SnapshotSpeechProfile é escolhido pela preferência atual via hook de OnlineSession. VisualMemory e SnapshotDiscourse partilham limites e selecionam grupos completos. O replay conserva texto/limite da entrega anterior. OnlineSession liga a resposta aceita à preparação/início; OnlineTiming guarda intervalos numéricos responseToPreparation e responseToStart separados de preparationToStart. Sem mudar modelo, captura, validade ou orçamento. [Evidência](EVIDENCIAS/FALA-CURTA-ESPERA-2026-10-25.md).

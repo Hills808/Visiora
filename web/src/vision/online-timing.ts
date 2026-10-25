@@ -8,6 +8,8 @@ export class OnlineTiming {
   private response: Sample[] = [];
   private preparationStart: Sample[] = [];
   private captureStart: Sample[] = [];
+  private responsePreparation: Sample[] = [];
+  private responseStart: Sample[] = [];
   private completion: Sample[] = [];
   private withdrawals = { view: 0, expiration: 0, cancellation: 0 };
   constructor(private readonly limit = CONFIG.ui.diagnosticSamples) {}
@@ -31,10 +33,20 @@ export class OnlineTiming {
     channel: DeliveryChannel,
     simulated: boolean,
     repeat: boolean,
+    respondedAt?: number,
   ): void {
     if (repeat) return;
     this.add(this.preparationStart, now - preparedAt, simulated, channel);
     this.add(this.captureStart, now - capturedAt, simulated, channel);
+    if (
+      respondedAt !== undefined &&
+      Number.isFinite(respondedAt) &&
+      respondedAt <= preparedAt &&
+      preparedAt <= now
+    ) {
+      this.add(this.responsePreparation, preparedAt - respondedAt, simulated, channel);
+      this.add(this.responseStart, now - respondedAt, simulated, channel);
+    }
   }
   completed(
     startedAt: number,
@@ -81,11 +93,15 @@ export class OnlineTiming {
         captureToResponse: this.summary(this.response),
         preparationToStart: this.summary(this.preparationStart),
         captureToStart: this.summary(this.captureStart),
+        responseToPreparation: this.summary(this.responsePreparation),
+        responseToStart: this.summary(this.responseStart),
         startToCompletion: this.summary(this.completion),
       },
       captureToResponse: this.response.slice(),
       preparationToStart: this.preparationStart.slice(),
       captureToStart: this.captureStart.slice(),
+      responseToPreparation: this.responsePreparation.slice(),
+      responseToStart: this.responseStart.slice(),
       startToCompletion: this.completion.slice(),
       withdrawals: { ...this.withdrawals },
     };

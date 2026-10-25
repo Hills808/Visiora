@@ -158,3 +158,7 @@ Ler docs/EVIDENCIAS/LUNA-CONTRATO-422-2026-10-24.md. prepareEvidence normaliza s
 ## Continuidade sem repetição — ADR-048 (25/10/2026)
 
 Leia docs/EVIDENCIAS/CONTINUIDADE-SEM-REPETICAO-2026-10-25.md. Lugar confirmado não reorienta objetos; omissão isolada/box:null não apaga presença. Ausência exige3capturas/9s; equivalência de rótulo limitada, geométrica e um-para-um. Não ampliar10s de snapshot nem alterar agenda/orçamento. Teste novo: node tests/e2e/luna-repetition.mjs, cinco minutos simulados. Testes não aprovam caminhada ou precisão.
+
+## Perfis e espera Luna — ADR-049 (25/10/2026)
+
+Ler docs/EVIDENCIAS/FALA-CURTA-ESPERA-2026-10-25.md. Preferência controla grupos completos e limites de 25/32/45 palavras no briefing; atualizações de 25 palavras. Omitido não é dito; Repeat conserva entrega e idade. Diagnóstico separa resposta→preparação/início de preparação→início, sem conteúdo. Não ampliar validade nem agenda paga. Novo teste: node tests/e2e/luna-verbosity.mjs. Não alegar ganho real de API/áudio/caminhada por teste fake.

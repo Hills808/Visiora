@@ -88,3 +88,21 @@ test('CA-D3/L4: session text delivery records text callbacks once; explicit Repe
   assert.equal(data.startToCompletion.length, 1);
   assert.equal(data.startToCompletion[0].channel, 'text');
 });
+
+test('CA-D1/D3/L4: post-response waiting is measured separately from voice startup and preserves repeat exclusion', () => {
+  const timing = new OnlineTiming();
+  timing.responded(1000, 6000, false);
+  timing.started(1000, 7600, 7650, 'voice', false, false, 6000);
+  const d = timing.diagnostics();
+  assert.equal(d.captureToResponse[0].milliseconds, 5000);
+  assert.equal(d.responseToPreparation[0].milliseconds, 1600);
+  assert.equal(d.preparationToStart[0].milliseconds, 50);
+  assert.equal(d.responseToStart[0].milliseconds, 1650);
+  assert.equal(d.captureToStart[0].milliseconds, 6650);
+  timing.started(1000, 9000, 9050, 'voice', false, true, 6000);
+  assert.equal(timing.diagnostics().responseToStart.length, 1);
+  for (const response of [undefined, NaN, Infinity, 10000])
+    timing.started(1000, 8000, 8100, 'voice', false, false, response);
+  assert.equal(timing.diagnostics().responseToStart.length, 1);
+  assert.doesNotMatch(JSON.stringify(d), /cadeira|requestId|label|image/);
+});

@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "scope": "Loopback HTTP, public video as camera, fake API and controlled voice; word counts are not acoustic latency.",
+  "cases": [
+    "essential",
+    "balanced",
+    "detailed",
+    "waiting"
+  ],
+  "profiles": [
+    {
+      "profile": "essential",
+      "words": 20,
+      "text": "Simulação de análise. Na imagem capturada há 1 segundo: O ambiente parecia sala. À frente da câmera, havia uma cadeira."
+    },
+    {
+      "profile": "balanced",
+      "words": 29,
+      "text": "Simulação de análise. Na imagem capturada há 1 segundo: O ambiente parecia sala. À frente, à esquerda da câmera, havia uma mesa. À frente da câmera, havia uma cadeira."
+    },
+    {
+      "profile": "detailed",
+      "words": 38,
+      "text": "Simulação de análise. Na imagem capturada há 1 segundo: O ambiente parecia sala. À frente, à esquerda da câmera, havia uma mesa. À frente da câmera, havia uma cadeira. À frente, à direita da câmera, havia uma pessoa."
+    }
+  ],
+  "errors": [],
+  "waiting": {
+    "responseToPreparationMs": 1709,
+    "responseToStartMs": 1709,
+    "preparationToStartMs": 0
+  },
+  "calls": 4
+}
